@@ -1,0 +1,23 @@
+# Obsidian device-specific state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspace.json.bak
+
+# OS/editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Temporary/test files
+AGY_WRITE_TEST.md
+
+# Local secrets / credentials
+.env
+.env.*
+!.env.example
+
+# Temporary generated files
+*.tmp
+*.temp

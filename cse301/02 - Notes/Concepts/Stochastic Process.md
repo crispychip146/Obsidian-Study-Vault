@@ -117,8 +117,8 @@ In CSE301 examinations:
 
 ## Prerequisites
 
-- [[Random Variable]]
-- [[Conditional Probability]]
+- [[Random Variables and Probability Distributions|Random Variable]]
+- [[Conditional Probability and Independence|Conditional Probability]]
 
 ---
 

@@ -138,7 +138,7 @@ Thus, $P_{00}^4 = 0.5749$.
 ## Prerequisites
 
 - [[Markov Chain]]
-- [[Conditional Probability]]
+- [[Conditional Probability and Independence|Conditional Probability]]
 
 ---
 

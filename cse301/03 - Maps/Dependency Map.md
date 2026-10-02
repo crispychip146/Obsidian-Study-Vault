@@ -4,113 +4,132 @@ This map outlines conceptual prerequisites, core dependencies, and learning path
 
 ---
 
-## Visual Dependency Graph
+## High-Level Visual Architecture
 
 ```mermaid
 flowchart TD
-    %% Foundational Probability
-    RV["Random Variable"]
-    CP["Conditional Probability"]
+    %% Module 1: Counting & Axioms
+    COUNT["Combinatorics & Counting Principles"]
+    AXIOM["Probability Axioms & Naive Probability"]
+    INCEXC["Inclusion-Exclusion Principle"]
     
-    %% Foundations of Stochastic Processes
-    SP["Stochastic Process"]
-    RV --> SP
-    CP --> SP
+    COUNT --> AXIOM
+    AXIOM --> INCEXC
     
-    %% Core Markov Chain Concepts
-    MC["Markov Chain"]
-    SP --> MC
-    CP --> MC
+    %% Module 2: Random Variables & Distributions
+    RV["Random Variables & Distributions<br/>(CDF, Expectation, Variance)"]
+    DISC["Discrete Distributions<br/>(Binomial, Poisson, Geom)"]
+    CONT["Continuous Distributions<br/>(Normal, Exp, Gamma)"]
+    JOINT["Joint & Marginal Distributions"]
+    COV["Covariance & Correlation"]
+    LOTUS["LOTUS"]
+    MGF["Moment Generating Functions"]
     
-    %% Multi-step & Classification
-    CK["Chapman-Kolmogorov Equations"]
-    MC --> CK
+    AXIOM --> RV
+    RV --> DISC
+    RV --> CONT
+    RV --> JOINT
+    JOINT --> COV
+    RV --> LOTUS
+    LOTUS --> MGF
     
-    CS["Classification of States in Markov Chains"]
-    MC --> CS
-    CK -.->|Transitivity Proof| CS
+    %% Module 3: Conditional Probability & Conditioning
+    COND["Conditional Probability & Independence"]
+    BAYESR["Law of Total Probability & Bayes' Rule"]
+    CEXP["Conditional Expectation"]
+    ADAM["Adam's Law (Total Expectation)"]
+    EVE["Eve's Law (Total Variance)"]
     
-    %% Long-Run Behavior
-    SLD["Stationary & Limiting Distributions"]
-    CS --> SLD
-    MC --> SLD
+    AXIOM --> COND
+    COND --> BAYESR
+    RV --> CEXP
+    CEXP --> ADAM
+    CEXP --> EVE
     
-    %% Applications & Formulas
-    GRF["Gambler's Ruin Formula"]
-    MC --> GRF
-    CS -.->|Absorbing & Transient| GRF
+    %% Module 4: Probability Bounds
+    MARKOV["Markov Inequality"]
+    CHEB["Chebyshev Inequality"]
+    CHERN["Chernoff Bound"]
+    CSJ["Cauchy-Schwarz & Jensen"]
     
-    %% Examples
-    WF["Weather Forecasting Example"]
-    MC --> WF
-    CK --> WF
-    SLD --> WF
+    RV --> MARKOV
+    MARKOV --> CHEB
+    MGF --> CHERN
+    RV --> CSJ
     
-    HOS["Higher-Order State Weather Prediction"]
-    MC --> HOS
-    CK --> HOS
+    %% Module 5: Limit Theorems
+    LLN["Law of Large Numbers<br/>(WLLN & SLLN)"]
+    CLT["Central Limit Theorem"]
     
-    HW["Hardy-Weinberg Law Example"]
-    MC --> HW
-    SLD --> HW
+    CHEB --> LLN
+    MGF --> CLT
+    CLT --> LLN
     
-    %% Problems
-    P_GR["Problem: Patty & Max Gambler's Ruin"]
-    GRF --> P_GR
+    %% Downstream Connections: Inference, Bayes, Testing, Markov, Queues
+    PE["Point Estimation<br/>(Bias, SE, MSE)"]
+    MLE["Maximum Likelihood Estimation"]
+    BAYES["Bayesian Inference & MAP"]
+    HT["Hypothesis Testing Framework"]
+    MC["Markov Chains & Stochastic Processes"]
+    QT["Queueing Systems & M/M/1"]
     
-    P_WF["Problem: Four-Day Weather Forecast"]
-    CK --> P_WF
-    WF --> P_WF
-    
-    P_RP["Problem: Rain Prediction Two Days Ahead"]
-    HOS --> P_RP
-    CK --> P_RP
-    
-    P_SC["Problem: State Communication & Irreducibility"]
-    CS --> P_SC
-    
-    P_CC["Problem: Communicating Classes & Absorbing States"]
-    CS --> P_CC
+    RV --> PE
+    CLT --> PE
+    DISC & CONT --> MLE
+    BAYESR --> BAYES
+    CLT --> HT
+    COND --> MC
+    CONT & MC --> QT
 ```
 
 ---
 
-## Detailed Prerequisite Chains
+## Detailed Learning Pathways
 
-### 1. Markov Chains Pathway
-1. `[[Random Variable]]` + `[[Conditional Probability]]`
-   $$\downarrow$$
-2. `[[Stochastic Process]]`
-   $$\downarrow$$
-3. `[[Markov Chain]]`
-   - Defines one-step transition matrix $P$ and row-stochasticity.
-   $$\downarrow$$
-4. `[[Chapman-Kolmogorov Equations]]`
-   - Proves $P^{(n)} = P^n$ and establishes transitivity of reachability.
-   $$\downarrow$$
-5. `[[Classification of States in Markov Chains]]`
-   - Establishes accessibility, communicating classes, irreducibility, periodicity, recurrence, and transience.
-   $$\downarrow$$
-6. `[[Stationary and Limiting Distributions in Markov Chains]]`
-   - Balance equations $\pi P = \pi$, ergodic theorem conditions, difference between stationary and limiting distributions.
+### Pathway 0: Foundations of Probability, Conditioning, and Limit Theorems
+1. `[[Combinatorics and Counting Principles]]` + `[[Probability Axioms and Naive Probability]]` $\to$ `[[Inclusion-Exclusion Principle]]` (Naive probability, sample spaces, and union bounds).
+2. `[[Random Variables and Probability Distributions]]` $\to$ `[[Discrete Probability Distributions]]` & `[[Continuous Probability Distributions]]` (Distribution stories, PMF/PDF, moments).
+3. `[[Joint and Marginal Distributions]]` $\to$ `[[Covariance and Correlation]]` (Multivariate interactions, independence vs uncorrelatedness).
+4. `[[Conditional Probability and Independence]]` $\to$ `[[Law of Total Probability and Bayes' Rule]]` (Conditioning and belief revision).
+5. `[[Conditional Expectation]]` $\to$ `[[Adam's Law (Law of Total Expectation)]]` & `[[Eve's Law (Law of Total Variance)]]` (Tower property, compound sums, ANOVA decomposition).
+6. `[[Markov Inequality]]` $\to$ `[[Chebyshev Inequality]]` $\to$ `[[Chernoff Bound]]` (Moment-based concentration inequalities).
+7. `[[Moment Generating Functions]]` $\to$ `[[Central Limit Theorem]]` & `[[Law of Large Numbers]]` (Asymptotic convergence in distribution and probability).
 
-### 2. Random Walk and Gambler's Ruin Pathway
-1. `[[Markov Chain]]` (Absorbing barriers at $0$ and $N$)
-   $$\downarrow$$
-2. `[[Classification of States in Markov Chains]]` (States $0, N$ are absorbing; $\{1, \dots, N-1\}$ are transient)
-   $$\downarrow$$
-3. `[[Gambler's Ruin Formula]]` (Second-order difference equation solved via telescoping geometric sequence)
-   $$\downarrow$$
-4. `[[Problem — Patty and Max Gambler's Ruin]]`
+### Pathway 1: Statistical Inference & Point Estimation
 
----
+1. `[[Random Variables and Probability Distributions|Probability Foundations]]` $\to$ `[[Point Estimation]]` (Defines estimators as random variables, bias, and standard error).
+2. `[[Point Estimation]]` $\to$ `[[Bias-Variance Decomposition]]` (Proves $\text{MSE} = \text{bias}^2 + \text{Var}$).
+3. `[[Bias-Variance Decomposition]]` $\to$ `[[Estimator Consistency and Convergence]]` (Establishes consistency criteria and quadratic mean convergence).
+4. `[[Point Estimation]]` + Central Limit Theorem $\to$ `[[Confidence Intervals and Confidence Sets]]` (Frequentist coverage vs. subjective certainty).
+5. `[[Confidence Intervals and Confidence Sets]]` $\to$ `[[Normal-Based Large-Sample Confidence Interval]]` (Standard Wald-type $z$-intervals).
 
-## Application and Problem Mapping
+### Pathway 2: Maximum Likelihood Estimation
+1. Calculus & Joint Likelihood $\to$ `[[Likelihood and Score Equations]]` (Score function, Fisher information, curvature).
+2. `[[Point Estimation]]` + `[[Likelihood and Score Equations]]` $\to$ `[[Maximum Likelihood Estimation]]` (Definition, equivariance, asymptotic normality).
+3. `[[Maximum Likelihood Estimation]]` $\to$ `[[Normal Distribution Parameter MLE Derivation Example]]` (Derives Gaussian MLE and downward bias of sample variance).
+4. `[[Maximum Likelihood Estimation]]` $\to$ `[[Uniform Distribution Non-Regular MLE Example]]` (Non-regular parameter-dependent boundary maximization).
 
-| Knowledge Note | Directly Tested / Applied By |
-|---|---|
-| `[[Markov Chain]]` | `[[Weather Forecasting Markov Chain Example]]`, `[[Problem — Four-Day Weather Forecast]]` |
-| `[[Chapman-Kolmogorov Equations]]` | `[[Problem — Four-Day Weather Forecast]]`, `[[Problem — Rain Prediction Two Days Ahead]]` |
-| `[[Classification of States in Markov Chains]]` | `[[Problem — State Communication and Irreducibility Verification]]`, `[[Problem — Identification of Communicating Classes and Absorbing States]]` |
-| `[[Stationary and Limiting Distributions in Markov Chains]]` | `[[Hardy-Weinberg Law Markov Chain Example]]`, `[[Weather Forecasting Markov Chain Example]]` |
-| `[[Gambler's Ruin Formula]]` | `[[Problem — Patty and Max Gambler's Ruin]]` |
+### Pathway 3: Bayesian Inference & MAP
+1. Bayes' Rule $\to$ `[[Bayesian Inference]]` (Parameters as random variables, posterior updating $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$).
+2. `[[Bayesian Inference]]` + `[[Maximum Likelihood Estimation]]` $\to$ `[[Maximum A Posteriori (MAP) Estimation]]` (Mode of posterior; proves equivalence to MLE under flat prior and connects to $L_1/L_2$ regularization).
+3. `[[Bayesian Inference]]` $\to$ `[[Credible Intervals]]` (Direct posterior probability statements; contrasts with frequentist confidence intervals).
+4. `[[Bayesian Inference]]` $\to$ `[[Beta-Binomial Conjugate Updating Formula]]` (Pseudocounts, weighted averages, Laplace's Rule of Succession).
+5. `[[Bayesian Inference]]` $\to$ `[[Normal-Normal Conjugate Updating Formula]]` (Precision addition and weighted posterior means).
+
+### Pathway 4: Hypothesis Testing & Multiplicity
+1. Decision Theory $\to$ `[[Hypothesis Testing Framework]]` (Null/alternative, Type I/II errors, power function, size).
+2. `[[Hypothesis Testing Framework]]` $\to$ `[[p-Values and Significance]]` (Sliding critical threshold, null distribution $P \sim \text{Uniform}(0, 1)$).
+3. `[[Maximum Likelihood Estimation]]` + `[[p-Values and Significance]]` $\to$ `[[Wald Test Statistic]]` (Asymptotic standard normal test).
+4. Multinomial Distribution $\to$ `[[Pearson's Chi-Square Goodness-of-Fit Test]]` (Degrees of freedom $k - 1$, Mendel's peas).
+5. Non-parametric Exchangeability $\to$ `[[Permutation Test Algorithm]]` (Exact permutation distribution and Monte Carlo test).
+6. Multiplicity Dilemma $\to$ `[[Multiple Testing and False Discovery Rate]]` (FWER inflation vs. False Discovery Rate).
+7. `[[Multiple Testing and False Discovery Rate]]` $\to$ `[[Benjamini-Hochberg Procedure Algorithm]]` (Adaptive linear rank thresholding).
+
+### Pathway 5: Queueing Theory
+1. Continuous-Time Markov Chains $\to$ `[[Queueing Systems and Kendall Notation]]` ($A/S/c/K$ taxonomy, $L, L_Q, W, W_Q$).
+2. Conservation Principles $\to$ `[[Little's Law]]` (Ross's Fundamental Cost Identity $R = \lambda_a G \implies L = \lambda_a W$).
+3. Poisson Process Properties $\to$ `[[PASTA Property and Inspection Paradox]]` (Independent increments prove $a_n = P_n$).
+4. Birth-Death Processes $\to$ `[[M-M-1 Queue]]` (Balance equations, telescoping geometric steady state, $\rho < 1$).
+5. `[[M-M-1 Queue]]` $\to$ `[[M-M-1 Performance Formulas]]` (Closed-form formulas and exponential latency tails).
+6. `[[M-M-1 Queue]]` $\to$ `[[Finite Capacity M-M-1-N Queue]]` (Finite state space, stability for all $\lambda$, blocking probability, effective throughput $\lambda_{\text{eff}}$).
+7. Burke's Theorem $\to$ `[[Jackson Networks and Tandem Queues]]` (Tandem queues, Jackson traffic equations $\boldsymbol{\lambda}^T = \mathbf{r}^T(\mathbf{I} - \mathbf{P})^{-1}$, product-form joint distributions).

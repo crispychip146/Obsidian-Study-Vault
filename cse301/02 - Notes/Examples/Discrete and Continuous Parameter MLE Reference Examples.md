@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 47
 ---
 
 # Discrete and Continuous Parameter MLE Reference Examples
+
+> 📖 **Reading Order:** Step 47 of 92 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Uniform Distribution Non-Regular MLE Example]] | ► **Next:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
 
 ## Overview
 

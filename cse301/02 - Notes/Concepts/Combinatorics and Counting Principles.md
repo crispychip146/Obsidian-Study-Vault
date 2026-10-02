@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 1
 ---
 
 # Combinatorics and Counting Principles
+
+> 📖 **Reading Order:** Step 01 of 92 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** *Start of Course* | ► **Next:** [[Probability Axioms and Naive Probability]]
+
+---
 
 ## Definition
 

@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 15
 ---
 
 # Exponential Distribution Memorylessness Example
+
+> 📖 **Reading Order:** Step 15 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Linearity of Expectation and Indicator Random Variables Example]] | ► **Next:** [[Problem — Indicator Variables for Distinct Birthday Counts]]
+
+---
 
 ## Problem Context & Setup
 

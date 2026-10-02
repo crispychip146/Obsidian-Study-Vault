@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 86
 ---
 
 # M-M-1 Performance Formulas
+
+> 📖 **Reading Order:** Step 86 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[M-M-1 Queue]] | ► **Next:** [[Finite Capacity M-M-1-N Queue]]
+
+---
 
 ## Formula Sheet
 

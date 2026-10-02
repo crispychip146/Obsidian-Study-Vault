@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 27
 ---
 
 # Chernoff Bound
+
+> 📖 **Reading Order:** Step 27 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Chebyshev Inequality]] | ► **Next:** [[Cauchy-Schwarz and Jensen Inequalities]]
+
+---
 
 ## Mathematical Statement
 

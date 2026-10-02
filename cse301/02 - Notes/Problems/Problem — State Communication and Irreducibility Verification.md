@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 80
 ---
 
 # Problem — State Communication and Irreducibility Verification
+
+> 📖 **Reading Order:** Step 80 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Rain Prediction Two Days Ahead]] | ► **Next:** [[Problem — Identification of Communicating Classes and Absorbing States]]
+
+---
 
 ## Problem
 

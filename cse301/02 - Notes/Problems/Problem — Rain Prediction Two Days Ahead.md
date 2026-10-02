@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 79
 ---
 
 # Problem — Rain Prediction Two Days Ahead
+
+> 📖 **Reading Order:** Step 79 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Four-Day Weather Forecast]] | ► **Next:** [[Problem — State Communication and Irreducibility Verification]]
+
+---
 
 ## Problem
 

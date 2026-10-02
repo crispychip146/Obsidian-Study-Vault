@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 74
 ---
 
 # Weather Forecasting Markov Chain Example
+
+> 📖 **Reading Order:** Step 74 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Gambler's Ruin Formula]] | ► **Next:** [[Higher-Order State Weather Prediction Example]]
+
+---
 
 ## Problem
 

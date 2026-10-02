@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 49
 ---
 
 # Bayesian Inference
+
+> 📖 **Reading Order:** Step 49 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]] | ► **Next:** [[Maximum A Posteriori (MAP) Estimation]]
+
+---
 
 ## Definition
 

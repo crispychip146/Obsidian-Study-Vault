@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 8
 ---
 
 # Discrete Probability Distributions
+
+> 📖 **Reading Order:** Step 08 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Random Variables and Probability Distributions]] | ► **Next:** [[Continuous Probability Distributions]]
+
+---
 
 ## Overview
 

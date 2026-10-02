@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 46
 ---
 
 # Uniform Distribution Non-Regular MLE Example
+
+> 📖 **Reading Order:** Step 46 of 92 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Normal Distribution Parameter MLE Derivation Example]] | ► **Next:** [[Discrete and Continuous Parameter MLE Reference Examples]]
+
+---
 
 ## Problem
 

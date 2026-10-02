@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 5
 ---
 
 # Derangements and Card Matching Example
+
+> 📖 **Reading Order:** Step 05 of 92 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Birthday Problem and Collisions Example]] | ► **Next:** [[Problem — Birthday Collisions and Approximation]]
+
+---
 
 ## Problem Context & Setup
 

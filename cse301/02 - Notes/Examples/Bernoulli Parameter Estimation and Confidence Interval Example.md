@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 40
 ---
 
 # Bernoulli Parameter Estimation and Confidence Interval Example
+
+> 📖 **Reading Order:** Step 40 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Normal-Based Large-Sample Confidence Interval]] | ► **Next:** [[Berger-Wolpert Confidence Set Puzzle Example]]
+
+---
 
 ## Problem
 

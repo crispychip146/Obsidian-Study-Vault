@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 32
 ---
 
 # Central Limit Theorem
+
+> 📖 **Reading Order:** Step 32 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Law of Large Numbers]] | ► **Next:** [[Normal Approximation to Binomial and Poisson Example]]
+
+---
 
 ## Definition
 

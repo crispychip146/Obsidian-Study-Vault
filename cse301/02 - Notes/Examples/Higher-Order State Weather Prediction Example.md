@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 75
 ---
 
 # Higher-Order State Weather Prediction Example
+
+> 📖 **Reading Order:** Step 75 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Weather Forecasting Markov Chain Example]] | ► **Next:** [[Hardy-Weinberg Law Markov Chain Example]]
+
+---
 
 ## Problem
 

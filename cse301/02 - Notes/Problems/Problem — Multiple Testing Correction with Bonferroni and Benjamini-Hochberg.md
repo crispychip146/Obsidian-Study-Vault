@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 67
 ---
 
 # Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg
+
+> 📖 **Reading Order:** Step 67 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]] | ► **Next:** [[Stochastic Process]]
+
+---
 
 ## Problem
 

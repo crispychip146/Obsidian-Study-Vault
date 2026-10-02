@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 9
 ---
 
 # Continuous Probability Distributions
+
+> 📖 **Reading Order:** Step 09 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Discrete Probability Distributions]] | ► **Next:** [[Joint and Marginal Distributions]]
+
+---
 
 ## Overview
 

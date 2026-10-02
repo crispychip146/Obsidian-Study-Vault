@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 19
 ---
 
 # Law of Total Probability and Bayes' Rule
+
+> 📖 **Reading Order:** Step 19 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Conditional Expectation]] | ► **Next:** [[Adam's Law (Law of Total Expectation)]]
+
+---
 
 ## Mathematical Statement
 

@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 71
 ---
 
 # Stationary and Limiting Distributions in Markov Chains
+
+> 📖 **Reading Order:** Step 71 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Classification of States in Markov Chains]] | ► **Next:** [[Chapman-Kolmogorov Equations]]
+
+---
 
 ## Definition
 

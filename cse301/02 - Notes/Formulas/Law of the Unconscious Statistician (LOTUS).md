@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 12
 ---
 
 # Law of the Unconscious Statistician (LOTUS)
+
+> 📖 **Reading Order:** Step 12 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Covariance and Correlation]] | ► **Next:** [[Moment Generating Functions]]
+
+---
 
 ## Mathematical Statement
 

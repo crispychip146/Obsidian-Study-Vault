@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 38
 ---
 
 # Confidence Intervals and Confidence Sets
+
+> 📖 **Reading Order:** Step 38 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Estimator Consistency and Convergence]] | ► **Next:** [[Normal-Based Large-Sample Confidence Interval]]
+
+---
 
 ## Definition
 

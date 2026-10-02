@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 50
 ---
 
 # Maximum A Posteriori (MAP) Estimation
+
+> 📖 **Reading Order:** Step 50 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Bayesian Inference]] | ► **Next:** [[Credible Intervals]]
+
+---
 
 ## Definition
 

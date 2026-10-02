@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 42
 ---
 
 # Problem — Unbiased yet Inconsistent Estimator Analysis
+
+> 📖 **Reading Order:** Step 42 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Berger-Wolpert Confidence Set Puzzle Example]] | ► **Next:** [[Maximum Likelihood Estimation]]
+
+---
 
 ## Problem
 

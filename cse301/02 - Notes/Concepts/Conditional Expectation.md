@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 18
 ---
 
 # Conditional Expectation
+
+> 📖 **Reading Order:** Step 18 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Conditional Probability and Independence]] | ► **Next:** [[Law of Total Probability and Bayes' Rule]]
+
+---
 
 ## Definition
 

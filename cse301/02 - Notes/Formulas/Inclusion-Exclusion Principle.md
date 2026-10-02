@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 3
 ---
 
 # Inclusion-Exclusion Principle
+
+> 📖 **Reading Order:** Step 03 of 92 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Probability Axioms and Naive Probability]] | ► **Next:** [[Birthday Problem and Collisions Example]]
+
+---
 
 ## Mathematical Statement
 

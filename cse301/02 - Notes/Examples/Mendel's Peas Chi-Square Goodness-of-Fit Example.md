@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 64
 ---
 
 # Mendel's Peas Chi-Square Goodness-of-Fit Example
+
+> 📖 **Reading Order:** Step 64 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Benjamini-Hochberg Procedure Algorithm]] | ► **Next:** [[Toy Permutation Test Example]]
+
+---
 
 ## Problem
 

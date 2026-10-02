@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 54
 ---
 
 # Bernoulli Bayesian Inference with Beta Prior Example
+
+> 📖 **Reading Order:** Step 54 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Normal-Normal Conjugate Updating Formula]] | ► **Next:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
+
+---
 
 ## Problem
 

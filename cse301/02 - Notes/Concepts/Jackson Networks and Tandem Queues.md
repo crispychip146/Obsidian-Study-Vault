@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 88
 ---
 
 # Jackson Networks and Tandem Queues
+
+> 📖 **Reading Order:** Step 88 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Finite Capacity M-M-1-N Queue]] | ► **Next:** [[Shoe Shine Shop Queueing Model Example]]
+
+---
 
 ## Definition
 

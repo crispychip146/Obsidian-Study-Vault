@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 30
 ---
 
 # Problem — Bounding Tail Probabilities with Chebyshev and Chernoff
+
+> 📖 **Reading Order:** Step 30 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Comparison of Probability Bounds Example]] | ► **Next:** [[Law of Large Numbers]]
+
+---
 
 ## Problem Statement
 

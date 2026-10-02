@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 20
 ---
 
 # Adam's Law (Law of Total Expectation)
+
+> 📖 **Reading Order:** Step 20 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Law of Total Probability and Bayes' Rule]] | ► **Next:** [[Eve's Law (Law of Total Variance)]]
+
+---
 
 ## Mathematical Statement
 

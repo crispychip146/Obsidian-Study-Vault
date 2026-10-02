@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 68
 ---
 
 # Stochastic Process
+
+> 📖 **Reading Order:** Step 68 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]] | ► **Next:** [[Markov Chain]]
+
+---
 
 ## Definition
 

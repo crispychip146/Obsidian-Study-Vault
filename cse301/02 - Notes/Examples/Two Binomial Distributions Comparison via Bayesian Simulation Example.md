@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 55
 ---
 
 # Two Binomial Distributions Comparison via Bayesian Simulation Example
+
+> 📖 **Reading Order:** Step 55 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Bernoulli Bayesian Inference with Beta Prior Example]] | ► **Next:** [[Problem — Laplace Rule of Succession and Bayesian Updating]]
+
+---
 
 ## Problem
 

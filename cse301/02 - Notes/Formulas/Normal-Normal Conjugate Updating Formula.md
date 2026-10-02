@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 53
 ---
 
 # Normal-Normal Conjugate Updating Formula
+
+> 📖 **Reading Order:** Step 53 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Beta-Binomial Conjugate Updating Formula]] | ► **Next:** [[Bernoulli Bayesian Inference with Beta Prior Example]]
+
+---
 
 ## Formula
 

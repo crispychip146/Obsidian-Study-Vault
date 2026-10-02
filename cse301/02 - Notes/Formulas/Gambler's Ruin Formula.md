@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 73
 ---
 
 # Gambler's Ruin Formula
+
+> 📖 **Reading Order:** Step 73 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Chapman-Kolmogorov Equations]] | ► **Next:** [[Weather Forecasting Markov Chain Example]]
+
+---
 
 ## Formula
 

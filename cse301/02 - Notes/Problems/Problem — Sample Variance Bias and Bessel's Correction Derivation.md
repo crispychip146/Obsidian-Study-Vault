@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 48
 ---
 
 # Problem — Sample Variance Bias and Bessel's Correction Derivation
+
+> 📖 **Reading Order:** Step 48 of 92 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Discrete and Continuous Parameter MLE Reference Examples]] | ► **Next:** [[Bayesian Inference]]
+
+---
 
 ## Problem
 

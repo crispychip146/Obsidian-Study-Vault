@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 70
 ---
 
 # Classification of States in Markov Chains
+
+> 📖 **Reading Order:** Step 70 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Markov Chain]] | ► **Next:** [[Stationary and Limiting Distributions in Markov Chains]]
+
+---
 
 ## Definition
 

@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 82
 ---
 
 # Queueing Systems and Kendall Notation
+
+> 📖 **Reading Order:** Step 82 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Problem — Identification of Communicating Classes and Absorbing States]] | ► **Next:** [[Little's Law]]
+
+---
 
 ## Definition
 

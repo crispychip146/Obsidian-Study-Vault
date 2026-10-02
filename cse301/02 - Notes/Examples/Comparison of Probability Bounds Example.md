@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 29
 ---
 
 # Comparison of Probability Bounds Example
+
+> 📖 **Reading Order:** Step 29 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Cauchy-Schwarz and Jensen Inequalities]] | ► **Next:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
+
+---
 
 ## Problem Context & Setup
 

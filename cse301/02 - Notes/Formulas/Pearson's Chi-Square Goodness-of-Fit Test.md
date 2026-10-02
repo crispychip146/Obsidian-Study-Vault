@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 60
 ---
 
 # Pearson's Chi-Square Goodness-of-Fit Test
+
+> 📖 **Reading Order:** Step 60 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Wald Test Statistic]] | ► **Next:** [[Permutation Test Algorithm]]
+
+---
 
 ## Formula
 

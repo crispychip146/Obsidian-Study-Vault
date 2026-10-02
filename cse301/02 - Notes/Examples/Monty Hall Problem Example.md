@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 22
 ---
 
 # Monty Hall Problem Example
+
+> 📖 **Reading Order:** Step 22 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Eve's Law (Law of Total Variance)]] | ► **Next:** [[Random Number of Random Variables Sum Example]]
+
+---
 
 ## Problem Context & Setup
 

@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 24
 ---
 
 # Problem — Compound Random Sum via Adam and Eve's Laws
+
+> 📖 **Reading Order:** Step 24 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Random Number of Random Variables Sum Example]] | ► **Next:** [[Markov Inequality]]
+
+---
 
 ## Problem Statement
 

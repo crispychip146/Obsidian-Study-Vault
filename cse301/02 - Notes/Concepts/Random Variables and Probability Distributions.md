@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 7
 ---
 
 # Random Variables and Probability Distributions
+
+> 📖 **Reading Order:** Step 07 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Problem — Birthday Collisions and Approximation]] | ► **Next:** [[Discrete Probability Distributions]]
+
+---
 
 ## Definition
 

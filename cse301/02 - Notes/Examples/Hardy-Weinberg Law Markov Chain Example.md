@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 76
 ---
 
 # Hardy-Weinberg Law Markov Chain Example
+
+> 📖 **Reading Order:** Step 76 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Higher-Order State Weather Prediction Example]] | ► **Next:** [[Problem — Patty and Max Gambler's Ruin]]
+
+---
 
 ## Problem
 

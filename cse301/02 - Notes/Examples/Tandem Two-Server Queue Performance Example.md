@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 90
 ---
 
 # Tandem Two-Server Queue Performance Example
+
+> 📖 **Reading Order:** Step 90 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Shoe Shine Shop Queueing Model Example]] | ► **Next:** [[Problem — M-M-1 Queue Performance Metrics Calculation]]
+
+---
 
 ## Problem
 

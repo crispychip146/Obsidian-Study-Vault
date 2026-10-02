@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 21
 ---
 
 # Eve's Law (Law of Total Variance)
+
+> 📖 **Reading Order:** Step 21 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Adam's Law (Law of Total Expectation)]] | ► **Next:** [[Monty Hall Problem Example]]
+
+---
 
 ## Mathematical Statement
 

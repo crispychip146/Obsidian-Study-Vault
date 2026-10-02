@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 43
 ---
 
 # Maximum Likelihood Estimation
+
+> 📖 **Reading Order:** Step 43 of 92 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]] | ► **Next:** [[Likelihood and Score Equations]]
+
+---
 
 ## Definition
 

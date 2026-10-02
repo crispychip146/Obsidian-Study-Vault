@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 17
 ---
 
 # Conditional Probability and Independence
+
+> 📖 **Reading Order:** Step 17 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Problem — Indicator Variables for Distinct Birthday Counts]] | ► **Next:** [[Conditional Expectation]]
+
+---
 
 ## Definition
 

@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 91
 ---
 
 # Problem — M-M-1 Queue Performance Metrics Calculation
+
+> 📖 **Reading Order:** Step 91 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Tandem Two-Server Queue Performance Example]] | ► **Next:** [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
+
+---
 
 ## Problem
 

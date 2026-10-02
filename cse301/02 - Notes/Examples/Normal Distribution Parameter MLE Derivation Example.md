@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 45
 ---
 
 # Normal Distribution Parameter MLE Derivation Example
+
+> 📖 **Reading Order:** Step 45 of 92 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Likelihood and Score Equations]] | ► **Next:** [[Uniform Distribution Non-Regular MLE Example]]
+
+---
 
 ## Problem
 

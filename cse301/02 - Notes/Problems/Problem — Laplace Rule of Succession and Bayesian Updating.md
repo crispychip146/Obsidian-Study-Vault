@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 56
 ---
 
 # Problem — Laplace Rule of Succession and Bayesian Updating
+
+> 📖 **Reading Order:** Step 56 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]] | ► **Next:** [[Hypothesis Testing Framework]]
+
+---
 
 ## Problem
 

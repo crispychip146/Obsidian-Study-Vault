@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 66
 ---
 
 # Problem — Comparing Prediction Algorithms via Paired Wald Test
+
+> 📖 **Reading Order:** Step 66 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Toy Permutation Test Example]] | ► **Next:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
+
+---
 
 ## Problem
 

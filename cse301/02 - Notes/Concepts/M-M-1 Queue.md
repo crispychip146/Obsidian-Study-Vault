@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 85
 ---
 
 # M-M-1 Queue
+
+> 📖 **Reading Order:** Step 85 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[PASTA Property and Inspection Paradox]] | ► **Next:** [[M-M-1 Performance Formulas]]
+
+---
 
 ## Definition
 

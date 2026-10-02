@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 35
 ---
 
 # Point Estimation
+
+> 📖 **Reading Order:** Step 35 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Problem — CLT Implications for the Weak Law of Large Numbers]] | ► **Next:** [[Bias-Variance Decomposition]]
+
+---
 
 ## Definition
 

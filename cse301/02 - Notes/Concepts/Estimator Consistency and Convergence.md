@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 37
 ---
 
 # Estimator Consistency and Convergence
+
+> 📖 **Reading Order:** Step 37 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Bias-Variance Decomposition]] | ► **Next:** [[Confidence Intervals and Confidence Sets]]
+
+---
 
 ## Definition
 

@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 57
 ---
 
 # Hypothesis Testing Framework
+
+> 📖 **Reading Order:** Step 57 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Problem — Laplace Rule of Succession and Bayesian Updating]] | ► **Next:** [[p-Values and Significance]]
+
+---
 
 ## Definition
 

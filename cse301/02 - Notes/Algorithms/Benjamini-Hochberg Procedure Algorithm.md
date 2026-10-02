@@ -2,9 +2,15 @@
 type: algorithm
 course: cse301
 status: active
+order: 63
 ---
 
 # Benjamini-Hochberg Procedure Algorithm
+
+> 📖 **Reading Order:** Step 63 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Multiple Testing and False Discovery Rate]] | ► **Next:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
+
+---
 
 ## Purpose
 

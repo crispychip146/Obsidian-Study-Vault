@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 34
 ---
 
 # Problem — CLT Implications for the Weak Law of Large Numbers
+
+> 📖 **Reading Order:** Step 34 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Normal Approximation to Binomial and Poisson Example]] | ► **Next:** [[Point Estimation]]
+
+---
 
 ## Problem Statement
 

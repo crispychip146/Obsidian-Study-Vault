@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 28
 ---
 
 # Cauchy-Schwarz and Jensen Inequalities
+
+> 📖 **Reading Order:** Step 28 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Chernoff Bound]] | ► **Next:** [[Comparison of Probability Bounds Example]]
+
+---
 
 ## 1. Cauchy-Schwarz Inequality
 

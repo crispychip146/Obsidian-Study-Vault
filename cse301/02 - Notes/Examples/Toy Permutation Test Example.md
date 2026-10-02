@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 65
 ---
 
 # Toy Permutation Test Example
+
+> 📖 **Reading Order:** Step 65 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]] | ► **Next:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
+
+---
 
 ## Problem
 

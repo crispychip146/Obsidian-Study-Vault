@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 62
 ---
 
 # Multiple Testing and False Discovery Rate
+
+> 📖 **Reading Order:** Step 62 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Permutation Test Algorithm]] | ► **Next:** [[Benjamini-Hochberg Procedure Algorithm]]
+
+---
 
 ## Definition
 

@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 44
 ---
 
 # Likelihood and Score Equations
+
+> 📖 **Reading Order:** Step 44 of 92 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Maximum Likelihood Estimation]] | ► **Next:** [[Normal Distribution Parameter MLE Derivation Example]]
+
+---
 
 ## Formula
 

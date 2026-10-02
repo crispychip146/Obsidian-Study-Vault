@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 14
 ---
 
 # Linearity of Expectation and Indicator Random Variables Example
+
+> 📖 **Reading Order:** Step 14 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Moment Generating Functions]] | ► **Next:** [[Exponential Distribution Memorylessness Example]]
+
+---
 
 ## Problem Context & Setup
 

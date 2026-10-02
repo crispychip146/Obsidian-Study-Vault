@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 10
 ---
 
 # Joint and Marginal Distributions
+
+> 📖 **Reading Order:** Step 10 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Continuous Probability Distributions]] | ► **Next:** [[Covariance and Correlation]]
+
+---
 
 ## Definition
 

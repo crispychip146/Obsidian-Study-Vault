@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 25
 ---
 
 # Markov Inequality
+
+> 📖 **Reading Order:** Step 25 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Problem — Compound Random Sum via Adam and Eve's Laws]] | ► **Next:** [[Chebyshev Inequality]]
+
+---
 
 ## Mathematical Statement
 

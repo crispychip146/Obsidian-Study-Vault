@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 77
 ---
 
 # Problem — Patty and Max Gambler's Ruin
+
+> 📖 **Reading Order:** Step 77 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Hardy-Weinberg Law Markov Chain Example]] | ► **Next:** [[Problem — Four-Day Weather Forecast]]
+
+---
 
 ## Problem
 

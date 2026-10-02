@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 33
 ---
 
 # Normal Approximation to Binomial and Poisson Example
+
+> 📖 **Reading Order:** Step 33 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Central Limit Theorem]] | ► **Next:** [[Problem — CLT Implications for the Weak Law of Large Numbers]]
+
+---
 
 ## Problem Context & Setup
 

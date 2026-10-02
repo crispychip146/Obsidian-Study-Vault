@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 89
 ---
 
 # Shoe Shine Shop Queueing Model Example
+
+> 📖 **Reading Order:** Step 89 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Jackson Networks and Tandem Queues]] | ► **Next:** [[Tandem Two-Server Queue Performance Example]]
+
+---
 
 ## Problem
 

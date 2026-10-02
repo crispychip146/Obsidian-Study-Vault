@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 23
 ---
 
 # Random Number of Random Variables Sum Example
+
+> 📖 **Reading Order:** Step 23 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Monty Hall Problem Example]] | ► **Next:** [[Problem — Compound Random Sum via Adam and Eve's Laws]]
+
+---
 
 ## Problem Context & Setup
 

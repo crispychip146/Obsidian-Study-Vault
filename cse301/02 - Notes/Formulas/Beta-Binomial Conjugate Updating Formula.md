@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 52
 ---
 
 # Beta-Binomial Conjugate Updating Formula
+
+> 📖 **Reading Order:** Step 52 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Credible Intervals]] | ► **Next:** [[Normal-Normal Conjugate Updating Formula]]
+
+---
 
 ## Formula
 

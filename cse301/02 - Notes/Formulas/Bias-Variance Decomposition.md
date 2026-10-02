@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 36
 ---
 
 # Bias-Variance Decomposition
+
+> 📖 **Reading Order:** Step 36 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Point Estimation]] | ► **Next:** [[Estimator Consistency and Convergence]]
+
+---
 
 ## Formula
 

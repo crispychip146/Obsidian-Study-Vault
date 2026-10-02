@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 87
 ---
 
 # Finite Capacity M-M-1-N Queue
+
+> 📖 **Reading Order:** Step 87 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[M-M-1 Performance Formulas]] | ► **Next:** [[Jackson Networks and Tandem Queues]]
+
+---
 
 ## Definition
 

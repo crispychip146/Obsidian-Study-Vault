@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 58
 ---
 
 # p-Values and Significance
+
+> 📖 **Reading Order:** Step 58 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Hypothesis Testing Framework]] | ► **Next:** [[Wald Test Statistic]]
+
+---
 
 ## Definition
 

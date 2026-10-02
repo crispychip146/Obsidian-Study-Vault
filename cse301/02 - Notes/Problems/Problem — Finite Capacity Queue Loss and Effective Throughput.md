@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 92
 ---
 
 # Problem — Finite Capacity Queue Loss and Effective Throughput
+
+> 📖 **Reading Order:** Step 92 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Problem — M-M-1 Queue Performance Metrics Calculation]] | ► **Next:** *End of Course*
+
+---
 
 ## Problem
 

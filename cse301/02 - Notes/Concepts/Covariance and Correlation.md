@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 11
 ---
 
 # Covariance and Correlation
+
+> 📖 **Reading Order:** Step 11 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Joint and Marginal Distributions]] | ► **Next:** [[Law of the Unconscious Statistician (LOTUS)]]
+
+---
 
 ## Definition
 

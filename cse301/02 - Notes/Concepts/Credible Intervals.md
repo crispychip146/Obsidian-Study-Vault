@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 51
 ---
 
 # Credible Intervals
+
+> 📖 **Reading Order:** Step 51 of 92 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Maximum A Posteriori (MAP) Estimation]] | ► **Next:** [[Beta-Binomial Conjugate Updating Formula]]
+
+---
 
 ## Definition
 

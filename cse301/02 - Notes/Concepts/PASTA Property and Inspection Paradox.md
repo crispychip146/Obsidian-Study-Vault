@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 84
 ---
 
 # PASTA Property and Inspection Paradox
+
+> 📖 **Reading Order:** Step 84 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Little's Law]] | ► **Next:** [[M-M-1 Queue]]
+
+---
 
 ## Definition
 

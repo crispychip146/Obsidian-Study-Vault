@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 81
 ---
 
 # Problem — Identification of Communicating Classes and Absorbing States
+
+> 📖 **Reading Order:** Step 81 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — State Communication and Irreducibility Verification]] | ► **Next:** [[Queueing Systems and Kendall Notation]]
+
+---
 
 ## Problem
 

@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 59
 ---
 
 # Wald Test Statistic
+
+> 📖 **Reading Order:** Step 59 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[p-Values and Significance]] | ► **Next:** [[Pearson's Chi-Square Goodness-of-Fit Test]]
+
+---
 
 ## Formula
 

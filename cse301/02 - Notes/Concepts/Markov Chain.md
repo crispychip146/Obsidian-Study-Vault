@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 69
 ---
 
 # Markov Chain
+
+> 📖 **Reading Order:** Step 69 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Stochastic Process]] | ► **Next:** [[Classification of States in Markov Chains]]
+
+---
 
 ## Definition
 

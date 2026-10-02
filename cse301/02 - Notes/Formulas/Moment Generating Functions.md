@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 13
 ---
 
 # Moment Generating Functions
+
+> 📖 **Reading Order:** Step 13 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Law of the Unconscious Statistician (LOTUS)]] | ► **Next:** [[Linearity of Expectation and Indicator Random Variables Example]]
+
+---
 
 ## Mathematical Statement
 

@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 41
 ---
 
 # Berger-Wolpert Confidence Set Puzzle Example
+
+> 📖 **Reading Order:** Step 41 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Bernoulli Parameter Estimation and Confidence Interval Example]] | ► **Next:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
+
+---
 
 ## Problem
 

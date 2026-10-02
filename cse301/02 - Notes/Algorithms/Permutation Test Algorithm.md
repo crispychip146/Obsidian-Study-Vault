@@ -2,9 +2,15 @@
 type: algorithm
 course: cse301
 status: active
+order: 61
 ---
 
 # Permutation Test Algorithm
+
+> 📖 **Reading Order:** Step 61 of 92 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Pearson's Chi-Square Goodness-of-Fit Test]] | ► **Next:** [[Multiple Testing and False Discovery Rate]]
+
+---
 
 ## Purpose
 

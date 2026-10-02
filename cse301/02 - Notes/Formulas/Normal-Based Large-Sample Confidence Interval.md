@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 39
 ---
 
 # Normal-Based Large-Sample Confidence Interval
+
+> 📖 **Reading Order:** Step 39 of 92 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Confidence Intervals and Confidence Sets]] | ► **Next:** [[Bernoulli Parameter Estimation and Confidence Interval Example]]
+
+---
 
 ## Formula
 

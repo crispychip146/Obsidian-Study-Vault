@@ -2,9 +2,15 @@
 type: concept
 course: cse301
 status: active
+order: 31
 ---
 
 # Law of Large Numbers
+
+> 📖 **Reading Order:** Step 31 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]] | ► **Next:** [[Central Limit Theorem]]
+
+---
 
 ## Definition
 

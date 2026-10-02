@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 16
 ---
 
 # Problem — Indicator Variables for Distinct Birthday Counts
+
+> 📖 **Reading Order:** Step 16 of 92 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Exponential Distribution Memorylessness Example]] | ► **Next:** [[Conditional Probability and Independence]]
+
+---
 
 ## Problem Statement
 

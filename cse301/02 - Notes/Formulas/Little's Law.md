@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 83
 ---
 
 # Little's Law
+
+> 📖 **Reading Order:** Step 83 of 92 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Queueing Systems and Kendall Notation]] | ► **Next:** [[PASTA Property and Inspection Paradox]]
+
+---
 
 ## Formula
 

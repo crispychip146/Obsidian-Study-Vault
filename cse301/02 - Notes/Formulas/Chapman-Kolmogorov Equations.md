@@ -2,9 +2,15 @@
 type: formula
 course: cse301
 status: active
+order: 72
 ---
 
 # Chapman-Kolmogorov Equations
+
+> 📖 **Reading Order:** Step 72 of 92 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Stationary and Limiting Distributions in Markov Chains]] | ► **Next:** [[Gambler's Ruin Formula]]
+
+---
 
 ## Formula
 

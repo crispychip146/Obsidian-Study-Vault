@@ -2,9 +2,15 @@
 type: problem
 course: cse301
 status: active
+order: 6
 ---
 
 # Problem — Birthday Collisions and Approximation
+
+> 📖 **Reading Order:** Step 06 of 92 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Derangements and Card Matching Example]] | ► **Next:** [[Random Variables and Probability Distributions]]
+
+---
 
 ## Problem Statement
 

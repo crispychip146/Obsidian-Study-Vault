@@ -2,9 +2,15 @@
 type: example
 course: cse301
 status: active
+order: 4
 ---
 
 # Birthday Problem and Collisions Example
+
+> 📖 **Reading Order:** Step 04 of 92 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Inclusion-Exclusion Principle]] | ► **Next:** [[Derangements and Card Matching Example]]
+
+---
 
 ## Problem Context & Setup
 

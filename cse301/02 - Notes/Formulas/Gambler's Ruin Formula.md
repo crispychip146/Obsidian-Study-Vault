@@ -168,7 +168,7 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 ## Prerequisites
 
 - [[Markov Chain]]
-- [[Conditional Probability]]
+- [[Conditional Probability and Independence|Conditional Probability]]
 
 ---
 

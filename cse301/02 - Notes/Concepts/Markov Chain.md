@@ -149,8 +149,8 @@ In CSE301 examinations:
 ## Prerequisites
 
 - [[Stochastic Process]]
-- [[Conditional Probability]]
-- [[Random Variable]]
+- [[Conditional Probability and Independence|Conditional Probability]]
+- [[Random Variables and Probability Distributions|Random Variable]]
 
 ---
 

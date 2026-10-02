@@ -12,6 +12,27 @@ order: 26
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2a, 2017 Q2b, 2018 Q2b, 2019 Q3c, 2020 Q1b, 2021 Q1c)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Stating the 4 Coffman Conditions (2017 Q2a):**
+>    - All four must hold simultaneously for a deadlock to occur:
+>      1. *Mutual Exclusion:* Resources are non-shareable.
+>      2. *Hold and Wait:* A process holding at least one resource is actively waiting for more.
+>      3. *No Preemption:* Resources cannot be forcibly seized; only released voluntarily.
+>      4. *Circular Wait:* A closed chain of processes waiting on each other $\{P_0 \to P_1 \to \dots \to P_n \to P_0\}$.
+> 2. **Attacking Conditions for Deadlock Prevention (2019 Q3c, 2021 Q1c):**
+>    - **Attacking Hold and Wait:**
+>      - *Protocol A:* A process must request and obtain all required resources simultaneously before starting execution (atomic batch allocation).
+>      - *Protocol B:* A process must release all its held resources before requesting any additional resources.
+>    - **Attacking Circular Wait:**
+>      - Define a global 1-to-1 ordering function $F: R \to \mathbb{N}$ on all resource types. Enforce that a process holding $R_i$ can only request $R_j$ if $F(R_j) > F(R_i)$. This mathematically eliminates directed cycles!
+> 3. **4-Thread / 4-Lock Circular Deadlock Proof (2018 Q2b):**
+>    - $T_1(L_1, L_2), T_2(L_2, L_3), T_3(L_3, L_4), T_4(L_4, L_1)$. If each thread acquires its first lock, a closed wait-for cycle $T_1 \to L_2 \to T_2 \to L_3 \to T_3 \to L_4 \to T_4 \to L_1 \to T_1$ is established. Since locks are single-unit and non-preemptable, deadlock is guaranteed.
+
+---
+
 ## 1. Formal Definition & Motivation
 
 In a multiprogramming system, processes execute concurrently and compete for a finite set of hardware and software resources (such as CPU, memory pages, disk drives, printers, mutex locks, and database records).

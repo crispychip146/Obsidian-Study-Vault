@@ -12,6 +12,24 @@ order: 12
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2020 Q2a)**
+> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Tested with Burst Diagram Analysis)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Differentiating Compute-Bound vs I/O-Bound Processes with Diagrams (2017 Q4a & 2020 Q2a):**
+>    - **Compute-Bound (CPU-Bound):** Spends the vast majority of time executing arithmetic/logic instructions. Exhibits very long CPU bursts punctuated by brief, infrequent I/O requests (e.g., scientific computing, video encoding, matrix multiplication).
+>    - **I/O-Bound:** Spends the vast majority of its lifecycle waiting for I/O operations (user typing, disk reads, network sockets). Characterized by frequent, very short CPU bursts followed by long I/O wait periods.
+>    - **The Diagram Expected by Examiners:**
+>      ```
+>      Compute-Bound:
+>      |================ Long CPU Burst ================|==| I/O |================ CPU ================|
+>
+>      I/O-Bound:
+>      |==| CPU |======== Long I/O Wait ========|==| CPU |======== Long I/O Wait ========|==| CPU |
+>      ```
+
+---
+
 ## Definition
 
 In a multiprogramming operating system, multiple processes reside simultaneously in the Ready state competing for execution time. **CPU Scheduling** is the core operating system mechanism that selects one process from the Ready Queue and allocates a physical CPU core to it.

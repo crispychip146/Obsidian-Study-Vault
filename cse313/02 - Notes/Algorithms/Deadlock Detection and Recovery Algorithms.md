@@ -12,6 +12,22 @@ order: 30
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 3 exam years, repeated!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Executing DFS Cycle Detection on Resource Allocation Graphs (2017 Q3c, 2020 Q3a):**
+>    - **The Setup:** Given a list of directed edges between Processes ($A, B, C, D$) and Resources ($1, 2, \dots, 6$). Run the cycle-detection algorithm starting from a specified node.
+>    - **The "Click" Mechanics:**
+>      - Maintain a visited/active path stack. Follow outgoing edges directed from process to requested resource ($P \to R$) and from allocated resource to holder ($R \to P$).
+>      - **2017 Q3(c) Case (Start at B):** $B \to 1 \to A$. $A$ has no outgoing edges (out-degree 0). Backtrack. Output: **"No cycle found from node B."**
+>      - **2020 Q3(a) Case (Start at C):** $C \to 5 \to D \to 6 \to A \to 1 \to B \to 4 \to C$. A back-edge to ancestor node $C$ is encountered! Output: **"Cycle detected: $C \to 5 \to D \to 6 \to A \to 1 \to B \to 4 \to C$. System is in Deadlock!"**
+> 2. **Can a Process Be Deadlocked Without Being in a Cycle? (2019 Q3b & 2020 Q3c verbatim):**
+>    - **The Answer:** **YES.**
+>    - **The Proof & Example:** Suppose processes $P_1$ and $P_2$ form a circular deadlock over single-instance resources $R_1$ and $R_2$ ($P_1 \to R_2 \to P_2 \to R_1 \to P_1$). If a third process $P_3$ now requests resource $R_1$, $P_3$ will block indefinitely waiting for $R_1$. Since $P_1$ will never release $R_1$, $P_3$ is permanently deadlocked, despite having no directed path leading back to $P_3$.
+
+---
+
 ## 1. Algorithmic Overview & Motivation
 
 In systems where neither static prevention nor dynamic avoidance is enforced, the OS permits processes to request and acquire resources freely. However, to prevent permanent system freezes, the operating system must:

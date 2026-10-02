@@ -12,6 +12,24 @@ order: 21
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q3c)**
+> **Frequency:** ⭐⭐⭐ **Critical Conceptual Trap in Concurrency Design**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Why `while` is Mandatory Instead of `if` for Condition Variables (2018 Q3c):**
+>    - **The Setup:** A student or engineer implements monitor methods using `if (count == 0) cond_wait(&nonempty);` with 2 consumers and 1 producer. What fatal bug occurs?
+>    - **The "Click" Mechanics (Mesa Semantics / Signal-and-Continue):**
+>      1. Buffer is empty ($count = 0$). Consumer $C_1$ executes `if (count == 0)` and sleeps via `cond_wait()`.
+>      2. Consumer $C_2$ enters, also finds $count = 0$, and sleeps.
+>      3. Producer enters, inserts 1 item ($count = 1$), and invokes `cond_signal()`.
+>      4. Language runtime moves $C_1$ from the condition queue to the ready queue. **Crucial point:** $C_1$ does NOT immediately seize the CPU or the monitor lock!
+>      5. Before $C_1$ gets scheduled, a new consumer $C_3$ (or $C_2$) enters the monitor, sees $count = 1$, consumes the single item, and leaves ($count$ drops back to 0).
+>      6. $C_1$ finally acquires the monitor lock and resumes immediately after `cond_wait()`.
+>      7. Because $C_1$ used `if` instead of `while`, it **never re-evaluates `count`**! It assumes an item is available and executes `buffer[out]`, causing a **buffer underflow exception, memory corruption, or system crash**.
+>      8. **The Rule:** Always wrap condition waits in a loop: `while (condition) cond_wait(&var);`.
+
+---
+
 ## 1. Intuition & Language-Level Abstraction
 
 While semaphores solve race conditions, they are low-level and unstructured. A single misplaced `wait()` or omitted `signal()` can crash an entire operating system.

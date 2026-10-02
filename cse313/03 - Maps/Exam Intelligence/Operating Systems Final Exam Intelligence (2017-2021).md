@@ -2,6 +2,13 @@
 
 This intelligence map analyzes recurring patterns, high-frequency question types, and conceptual weightings from the last 5 years of CSE313 final exams (2017–2021) across Questions 1 through 4.
 
+### 📚 Year-Wise Solved Question Links:
+- [[cse313/01 - Sources/Exams/Finals/Solutions/CSE313_2017_Solved_Questions_1_to_4|2017 Solved Exam (Q1 - Q4)]]
+- [[cse313/01 - Sources/Exams/Finals/Solutions/CSE313_2018_Solved_Questions_1_to_4|2018 Solved Exam (Q1 - Q4)]]
+- [[cse313/01 - Sources/Exams/Finals/Solutions/CSE313_2019_Solved_Questions_1_to_4|2019 Solved Exam (Q1 - Q4)]]
+- [[cse313/01 - Sources/Exams/Finals/Solutions/CSE313_2020_Solved_Questions_1_to_4|2020 Solved Exam (Q1 - Q4)]]
+- [[cse313/01 - Sources/Exams/Finals/Solutions/CSE313_2021_Solved_Questions_1_to_4|2021 Solved Exam (Q1 - Q4)]]
+
 ---
 
 ## 1. High-Frequency Exam Patterns (100% Recurrence)

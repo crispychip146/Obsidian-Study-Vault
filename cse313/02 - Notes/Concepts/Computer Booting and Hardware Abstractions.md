@@ -12,6 +12,23 @@ order: 3
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1a, 2021 Q3d)**
+> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Repeated Verbatim in 2017 and 2021!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Writing Down the Exact Steps of Booting a Computer (2017 Q1a & 2021 Q3d verbatim):**
+>    - **The Setup:** "Write down the steps of booting a computer."
+>    - **The 7-Step Full-Credit Answer Key:**
+>      1. **Power-On & Hardware Reset Vector:** Power supply asserts `POWER_GOOD`. The CPU starts execution at a hardwired ROM reset vector (`0xFFFFFFF0` on x86).
+>      2. **POST (Power-On Self-Test):** Firmware conducts diagnostic hardware self-tests (checks RAM integrity, CPU registers, system buses, keyboard, disks).
+>      3. **Boot Device Selection:** BIOS/UEFI scans configured NVRAM boot order (NVMe, SSD/HDD, USB, PXE network) for a bootable medium.
+>      4. **MBR / Boot Sector Loading:** The firmware loads the primary boot sector (Sector 0, 512 bytes) into RAM at address `0x7C00` and verifies the `0x55AA` boot signature.
+>      5. **Stage 1 Bootloader Execution:** Small bootloader code within the MBR executes, locates the active boot partition, and loads the Stage 2 Bootloader.
+>      6. **Stage 2 Bootloader (GRUB2 / NTLDR):** Displays the OS selection menu, loads the OS kernel image (`vmlinuz`) and initial RAM disk (`initramfs`) into memory, and switches CPU from 16-bit real mode to 32/64-bit protected/long mode.
+>      7. **Kernel Initialization & PID 1 Launch:** Kernel initializes memory paging, device drivers, and CPU scheduler, mounts real root (`/`), and spawns the first user-space process (`systemd` or `init`, PID 1).
+
+---
+
 ## Definition
 
 **Booting** (short for *bootstrapping*) is the initial sequential process that starts an operating system when a computer is powered on or restarted.

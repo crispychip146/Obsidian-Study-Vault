@@ -12,6 +12,25 @@ order: 7
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1b, 2018 Q2c, 2018 Q4a, 2020 Q4b)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years, verbatim repeated!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Drawing the `for (; i < 3; i++) fork();` Process Tree (2017 Q1b & 2020 Q4b verbatim):**
+>    - **The Setup:** A loop runs for $i = 0, 1, 2$, calling `fork()`. Draw the process tree and label the **starting value of $i$** for each created process node ($P_0$ to $P_7$).
+>    - **The "Click" Mechanics:**
+>      - When `fork()` is called, the child is born at that exact instruction line and starts with the parent's current value of $i$ *before* the loop increment `i++` is executed!
+>      - **Iteration 0 ($i=0$):** $P_0$ forks $P_1$. $\implies$ **$P_1$ starts with $i = 0$**. Both execute `i++` to become $i=1$.
+>      - **Iteration 1 ($i=1$):** $P_0$ forks $P_2$, $P_1$ forks $P_3$. $\implies$ **$P_2$ starts with $i = 1$**, **$P_3$ starts with $i = 1$**. All four execute `i++` to become $i=2$.
+>      - **Iteration 2 ($i=2$):** $P_0$ forks $P_4$, $P_2$ forks $P_5$, $P_1$ forks $P_6$, $P_3$ forks $P_7$. $\implies$ **$P_4, P_5, P_6, P_7$ all start with $i = 2$**.
+>      - Total processes created $= 2^3 = 8$ (1 root + 7 children).
+> 2. **Memory Isolation in Nested `fork()` Output Tracing (2018 Q2c):**
+>    - Because each child process receives a private, duplicated copy of the address space, modifying a variable `count++` in a child does **not** affect the parent or sibling processes.
+> 3. **Standard UNIX Execution Pattern (2018 Q4a):**
+>    - Know how to write robust C code utilizing `fork()`, `execvp(args[0], args)`, and `waitpid(pid, &status, 0)` with proper error checking on return values.
+
+---
+
 ## Definition
 
 Operating systems manage processes through distinct, fundamental operations:

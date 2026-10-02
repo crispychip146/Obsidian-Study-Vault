@@ -12,6 +12,26 @@ order: 14
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4b, 2018 Q3b, 2018 Q4b, 2018 Q4c, 2019 Q1a, 2020 Q1a, 2020 Q4c, 2021 Q2a)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+>
+> ### What Exam Questions Expect & How to Think:
+> 1. **Priority Scheduling with Round Robin Tie-Breaking (2017 Q4b, 2019 Q1a, 2020 Q1a, 2021 Q2a):**
+>    - **The Setup:** Processes have both numerical priority and arrival times. The scheduler always runs highest-priority processes first. Processes with identical priority share the CPU using Round Robin with time quantum $q$.
+>    - **The "Click" Rule:** Check whether priority convention states *higher number = higher priority* (e.g., 2020 Q1a) or *lower number = higher priority* (e.g., 2017 Q4b, 2019 Q1a). Read the prompt carefully!
+> 2. **Dynamic / Tiered Quanta (2020 Q1a):**
+>    - If the problem specifies *"The first 5 quanta use $q=20$, subsequent quanta use $q=30$,"* track elapsed time slices across the entire system. Once 5 slices (100 ms of CPU time) are consumed, switch your slice limit to 30 ms.
+> 3. **Non-Preemptive Quantum Completion Clause (2021 Q2a):**
+>    - When the question specifies: *"A running process completes its current quantum before any rescheduling occurs,"* if a higher-priority process arrives at $t=20$ during a $q=30$ slice running from $0 \to 30$, do NOT preempt at $t=20$! Let the running process finish until $t=30$, then switch!
+> 4. **Round Robin with Scheduler Overhead $S$ (2018 Q3b):**
+>    - When scheduler overhead is given ($S=1, q=2$), the CPU alternates: $[S=1] \to [P_1 \text{ for } 2] \to [S=1] \to [P_2 \text{ for } 2] \to \dots$. Turnaround time must include all intervening scheduler intervals!
+> 5. **New Job Insertion at Head vs Tail of Ready Queue (2018 Q4c):**
+>    - Newly arriving jobs must be inserted at the **end (tail)** of the ready queue. If placed at the head, continuous incoming bursts would preempt older waiting jobs, destroying cyclic fairness and causing starvation.
+> 6. **MLFQ Demotion and Priority Boost (2018 Q4b):**
+>    - CPU-bound jobs consume full quanta and get demoted ($Q_0 \to Q_1 \to Q_2$). Interactive jobs yield early and stay at $Q_0$. The Priority Boost period ($S=500\text{ ms}$) flushes all jobs back to $Q_0$ to prevent starvation and allow compute-bound jobs whose behavior turns interactive to reclaim low response latency.
+
+---
+
 ## Overview
 
 In interactive multi-user and desktop operating systems, human users expect near-instantaneous feedback to keyboard, mouse, and network events. Algorithms cannot allow long jobs to monopolize the CPU. The overriding design goals are **minimizing response time**, **preventing starvation**, and **maintaining fairness**.

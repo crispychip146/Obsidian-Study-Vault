@@ -12,6 +12,33 @@ order: 23
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2b, 2017 Q2c, 2018 Q3a, 2019 Q2b, 2020 Q1b, 2020 Q2b, 2021 Q4b)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Tanenbaum's Dining Philosophers Bug Traps (2017 Q2c & 2021 Q4b verbatim):**
+>    - **Trap 1: Placing `state[i] = THINKING;` AFTER `test(LEFT)` and `test(RIGHT)` inside `put_forks()`:**
+>      - *The "Click":* Look at the test condition inside `test(k)`:
+>        `if (state[k] == HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING) ...`
+>      - For neighbor $k$, philosopher $i$ is one of their neighbors. If $i$ calls `test()` *before* setting `state[i] = THINKING`, then $i$ is still recorded as `EATING`!
+>      - Therefore, `state[i] != EATING` evaluates to **FALSE**. Neither neighbor is signaled (`up(&s[k])` is bypassed), leaving hungry neighbors permanently sleeping even though the forks are abandoned. **Starvation & Deadlock occur!**
+>    - **Trap 2: Placing `up(&s[i])` OUTSIDE the `if` condition in `test()`:**
+>      - *The "Click":* Every philosopher calling `take_forks(i)` triggers `test(i)`, which would unconditionally execute `up(&s[i])`.
+>      - The subsequent `down(&s[i])` will immediately succeed without blocking, even if both neighbors are actively eating!
+>      - **Result:** Two adjacent philosophers will eat simultaneously, violating mutual exclusion and corrupting shared state!
+> 2. **Asymmetric Philosopher Deadlock-Free Proof (2019 Q2b):**
+>    - If even philosophers pick Right then Left, while odd philosophers pick Left then Right:
+>    - Look at philosopher $P_0$ (even) and $P_1$ (odd). $P_0$'s first fork is Fork 1 (its right fork). $P_1$'s first fork is also Fork 1 (its left fork).
+>    - Both compete for the exact same first fork! Since only one can win, the other blocks *before acquiring any fork*.
+>    - It is therefore impossible for all 5 philosophers to hold one fork simultaneously. Circular Wait is broken $\implies$ **Deadlock is provably impossible**.
+> 3. **Coffman Conditions in Dining Philosophers (2017 Q2b, 2020 Q1b):**
+>    - Mutual Exclusion (fork is non-shareable), Hold & Wait (holds left fork while waiting for right), No Preemption (cannot steal fork), Circular Wait ($P_0 \to P_1 \to \dots \to P_{N-1} \to P_0$).
+> 4. **Semaphore Signaling Extensions (2018 Q3a, 2020 Q2b):**
+>    - Waiting for multiple events: calling `sem_wait(&hello)` twice before printing "world".
+>    - Cyclic ordering of $M$ producers: array of $M$ turn semaphores, where producer $i$ waits on `turn[i]` and signals `turn[(i+1)%M]`.
+
+---
+
 ## 1. Algorithmic Overview & Motivation
 
 To evaluate and design synchronization primitives, computer scientists formalized canonical concurrency problems. These benchmarks model real-world operating system challenges:

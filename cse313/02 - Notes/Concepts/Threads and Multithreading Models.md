@@ -12,6 +12,26 @@ order: 8
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1d, 2019 Q4b, 2019 Q4c, 2020 Q1c, 2020 Q2c, 2021 Q1b, 2021 Q3c)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **PCS vs TCS Differentiation & Item Classification (2019 Q4b, 2020 Q1c, 2021 Q3c):**
+>    - **Process Contention Scope (PCS):** Competition for execution time occurs *strictly among threads belonging to the same process*. Scheduled by user-level runtime library onto available LWPs (Many-to-One and Many-to-Many models).
+>    - **Thread Contention Scope (TCS):** Competition occurs *globally across all threads in the entire operating system*. Scheduled directly by the OS kernel onto physical CPU cores (One-to-One model, e.g., Linux Pthreads).
+>    - **Item Classification (Shared vs Private):**
+>      - *Per-Thread Private:* Program Counter (PC), CPU Registers, Stack Pointer & Call Stack, Thread ID (TID), Thread-Local Storage (TLS).
+>      - *Per-Process Shared:* Address space (Text, Data, BSS, Heap), Global variables, Open file descriptors, Child processes, Signal handlers, Accounting info.
+> 2. **Why Blocking I/O Blocks Entire Process in ULT but Not KLT (2019 Q4c, 2021 Q1b):**
+>    - **User-Level Threads (ULT):** The kernel is completely unaware of individual threads; it only tracks the single enclosing Process Control Block (PCB). When a thread executes a blocking system call (e.g., `read()`), the kernel transitions the *entire PCB* into the `SLEEPING` state. All sibling user threads are frozen.
+>    - **Kernel-Level Threads (KLT):** Each thread has an independent kernel thread descriptor and kernel stack. When a thread blocks, the kernel suspends *only that individual thread* and immediately schedules other runnable threads belonging to the same process.
+> 3. **Advantages of Hybrid ($M:N$) Multithreading (2017 Q1d):**
+>    - Ultra-fast user-space thread switching without kernel trap overhead.
+>    - True multiprocessor parallel execution across multiple cores.
+>    - Non-blocking: if one user thread blocks, the user-space scheduler switches runnable user threads onto remaining available kernel threads.
+
+---
+
 ## Definition
 
 A **thread** (often called a **Lightweight Process (LWP)**) is the smallest basic unit of CPU execution and scheduling within an operating system.

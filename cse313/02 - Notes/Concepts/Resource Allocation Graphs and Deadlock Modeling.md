@@ -12,6 +12,20 @@ order: 27
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2018 Q2b, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **The Graph Cycle Theorem (Single vs Multi-Instance):**
+>    - **Single-Unit Resources:** A directed cycle is both **necessary and sufficient** for deadlock. (Cycle $\iff$ Deadlock).
+>    - **Multi-Unit Resources:** A directed cycle is **necessary but NOT sufficient**. A cycle can exist without deadlock if processes outside the cycle hold and eventually release resources needed inside the cycle.
+> 2. **Can a Process Be Deadlocked Without Being in a Cycle? (2019 Q3b & 2020 Q3c verbatim):**
+>    - Yes! Any process waiting for a resource that is permanently held by a deadlocked cycle is also deadlocked, even if the process has no directed path back to itself.
+> 3. **Step-by-Step Graph Tracing via DFS (2017 Q3c & 2020 Q3a):**
+>    - Trace edges strictly from request ($P \to R$) to assignment ($R \to P$). If you hit a node with no outgoing edges, backtrack. If you hit an active node currently on your recursion stack, a cycle is confirmed!
+
+---
+
 ## 1. Graph Theoretical Formulation
 
 Holt (1972) modeled resource allocation and deadlocks as a directed bipartite graph:

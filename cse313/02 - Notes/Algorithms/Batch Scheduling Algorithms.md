@@ -12,6 +12,26 @@ order: 13
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2017 Q4b, 2017 Q4c, 2019 Q1a, 2019 Q1b, 2020 Q2a, 2021 Q2b, 2021 Q2c, 2021 Q2d)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+>
+> ### What Exam Questions Expect & How to Think:
+> 1. **Batch Job Burst Range Ordering for Parameter $X$ (2019 Q1b, 2021 Q2d verbatim):**
+>    - **The Setup:** 4 jobs arrive at the same time with burst lengths $9, 3, 5, X$. Determine SJF execution order for all possible ranges of $X$.
+>    - **The "Click" Rule:** Sort the known numbers ($3, 5, 9$). Then systematically position $X$ across the 4 partition intervals:
+>      - If $X \le 3 \implies \mathbf{X \to 3 \to 5 \to 9}$
+>      - If $3 < X \le 5 \implies \mathbf{3 \to X \to 5 \to 9}$
+>      - If $5 < X \le 9 \implies \mathbf{3 \to 5 \to X \to 9}$
+>      - If $X > 9 \implies \mathbf{3 \to 5 \to 9 \to X}$
+> 2. **The FCFS Convoy Effect (2020 Q2a, 2021 Q2b verbatim):**
+>    - Explain that when a long CPU-bound process holds the CPU, short I/O-bound processes queue behind it while I/O devices sit idle. Once the CPU-bound job finally waits for I/O, the I/O-bound jobs quickly finish their CPU bursts and crowd the I/O queue, leaving the CPU idle.
+> 3. **SRTF vs Non-Preemptive SJF Advantage Proof (2021 Q2c):**
+>    - Construct a concrete counterexample: $P_1(A=0, B=10)$ and $P_2(A=2, B=2)$. Under non-preemptive SJF, $P_1$ finishes at 10 and $P_2$ finishes at 12 (Avg TAT = 10.0 ms). Under SRTF, $P_2$ preempts $P_1$ at $t=2$ and finishes at 4, $P_1$ finishes at 12 (Avg TAT = 7.0 ms). Demonstrates superior average turnaround!
+> 4. **Batch OS Scheduler Objectives (2017 Q4c):**
+>    - Maximize Throughput (jobs/hr), Maximize CPU Utilization (keep CPU near 100%), Minimize Turnaround Time.
+
+---
+
 ## Overview
 
 In batch operating systems (supercomputers, mainframe batch queues, background payroll/compilation jobs), there are no interactive users sitting at terminals waiting for immediate keyboard responses. The primary scheduling objectives are **maximizing throughput**, **maximizing CPU utilization**, and **minimizing average turnaround time**.

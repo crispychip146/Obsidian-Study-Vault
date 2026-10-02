@@ -12,6 +12,22 @@ order: 5
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3b, 2018 Q1a, 2020 Q4a)**
+> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, verbatim repeated!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **The 5 xv6/UNIX Process States & Transitions (2018 Q1a):**
+>    - **EMBRYO:** Memory and PCB allocated, but not yet fully initialized or runnable.
+>    - **RUNNABLE (Ready):** Ready to execute, waiting in the ready queue for CPU time.
+>    - **RUNNING:** Actively executing instructions on a physical CPU core.
+>    - **SLEEPING (Blocked):** Waiting for an external I/O event, timer, or lock.
+>    - **ZOMBIE:** Terminated execution, memory freed, but exit code retained in PCB until reaped by parent via `wait()`.
+> 2. **Process States During Starvation vs Livelock (2017 Q3b & 2020 Q4a verbatim):**
+>    - **Starvation:** The victim process is in the **`RUNNABLE` (Ready)** state (or `SLEEPING` awaiting an unfairly withheld lock). It consumes **0% CPU**; it is entirely ready to run, but the CPU scheduler continually bypasses it in favor of other jobs.
+>    - **Livelock:** The process is in the **`RUNNING`** state. It consumes **100% CPU cycles** spinning in an active loop. Its internal state values continuously oscillate and change in response to another process, yet neither makes functional forward progress.
+
+---
+
 ## Definition
 
 During its existence from initial creation to final termination, a process changes its execution status dynamically. The **process lifecycle** is modeled as a finite state machine governed by the operating system scheduler and hardware events.

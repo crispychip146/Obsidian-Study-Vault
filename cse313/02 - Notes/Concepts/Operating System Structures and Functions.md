@@ -12,6 +12,19 @@ order: 1
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q2d, 2020 Q4c)**
+> **Frequency:** ⭐⭐⭐ **Recurring Architectural Comparison**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Differentiating Monolithic vs Microkernel Architectures (2019 Q2d):**
+>    - **Kernel Boundary:** In Monolithic OS (Linux, Windows NT core), file systems, network stacks, and device drivers run inside Kernel Space (Ring 0). In Microkernel OS (Minix, seL4, QNX), only minimal primitives (IPC, low-level scheduling, basic paging) remain in Ring 0; drivers and file systems run as isolated servers in User Space (Ring 3).
+>    - **Performance vs Reliability Tradeoff:** Monolithic has higher performance (services communicate via direct function calls without context switching), but poor fault isolation (one buggy GPU or Wi-Fi driver crashes the entire machine). Microkernel has superior fault isolation (crashed driver server restarts transparently), but higher overhead due to frequent IPC context switches between Ring 3 and Ring 0.
+> 2. **System Classifications (2020 Q4c):**
+>    - *Multi-user OS:* Enables concurrent multi-user execution with robust privilege isolation, user IDs, and file permission ACLs.
+>    - *Multiprocessor OS:* Employs Symmetric Multiprocessing (SMP) to balance workloads across multiple cores sharing common RAM and bus architectures.
+
+---
+
 ## Definition
 
 An **Operating System (OS)** is a foundational system software layer that runs directly on bare computer hardware in privileged mode, acting as an intermediary between computer hardware and user applications.

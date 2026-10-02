@@ -12,6 +12,28 @@ order: 19
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q1b, 2018 Q1c, 2019 Q2a, 2019 Q2c, 2021 Q4a)**
+> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared 4 out of 5 recent exam years)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Priority Inversion: Strict Priority Scheduler vs Round Robin (2019 Q2a & 2021 Q4a verbatim):**
+>    - **The Scenario:** Process $L$ (low priority) enters its critical section (`flag[L] = true`). Process $H$ (high priority) wakes up, preempts $L$, sets `flag[H] = true, turn = L`, and executes the busy-wait spin: `while (flag[L] && turn == L);`.
+>    - **Strict Priority Failure:** Because $H$ has higher priority, the scheduler grants all CPU cycles to $H$. Process $L$ is starved and never scheduled; thus $L$ can never exit its critical section or clear `flag[L] = false`. $H$ spins forever $\implies$ **System Livelock / Priority Inversion Deadlock!**
+>    - **Round Robin Fix:** Under Round Robin, $H$'s time quantum expires via hardware timer interrupt. The scheduler forcibly switches execution to $L$. $L$ completes its critical section, sets `flag[L] = false`, and on the next turn $H$'s spin condition becomes false, allowing $H$ to enter cleanly.
+> 2. **Four Criteria for Critical Section Solution (2019 Q2c):**
+>    - **Mutual Exclusion:** Only one process inside at any time.
+>    - **Progress:** If CS is empty, only processes wishing to enter decide who goes next; decision cannot be postponed indefinitely.
+>    - **Bounded Waiting:** A bound exists on how many times others can enter before an applicant is admitted.
+>    - **No Speed Assumptions:** Must work regardless of relative CPU clock speeds or core counts.
+> 3. **Spinlock vs Sleep Lock Delay Formulations (2018 Q1b):**
+>    - Let critical section duration be $T$, context switch cost be $C$, and lock primitive cost be $A$.
+>    - **Spinlock:** $T_{best} = A$; $T_{worst} = T + A$ (spins for duration $T$).
+>    - **Queue-Based Lock:** $T_{best} = A$; $T_{worst} = 2C + 3A + T$ (contention $A$ + context switch to sleep $C$ + hold time $T$ + wake signal $A$ + context switch back $C$ + acquire $A$).
+> 4. **Atomic `FetchAndSubtract` Lock Construction (2018 Q1c):**
+>    - Initialize `lock = 1`. Spin `while (FetchAndSubtract(&lock, 1) <= 0) { FetchAndSubtract(&lock, -1); }`. Release with `FetchAndSubtract(&lock, -1);`.
+
+---
+
 ## 1. Algorithmic Overview & Motivation
 
 In 1981, Gary L. Peterson discovered an elegant, purely software-based solution to the two-process critical-section problem. Prior solutions (such as Dekker's algorithm in 1965) were convoluted. Peterson combined:

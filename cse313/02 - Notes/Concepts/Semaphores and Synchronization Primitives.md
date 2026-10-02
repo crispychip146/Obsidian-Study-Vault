@@ -12,6 +12,22 @@ order: 20
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2b, 2018 Q2a, 2018 Q3a, 2020 Q2b)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Solving the Shared Counter Race Condition (2018 Q2a):**
+>    - Initialize binary semaphore `mutex = 1`. Each worker executes: `sem_wait(&mutex); counter++; sem_post(&mutex);`.
+> 2. **Signaling / Precedence Constraints (2018 Q3a):**
+>    - **Requirement:** Print "world" only after "hello" has been printed at least twice.
+>    - **The Solution:** Initialize `sem_t sem_hello = 0`. Each time a thread prints "hello", it calls `sem_post(&sem_hello);`. The printing thread for "world" executes two back-to-back waits: `sem_wait(&sem_hello); sem_wait(&sem_hello); printf("world\n");`.
+> 3. **The Lost Wakeup Flaw and How Semaphores Solve It:**
+>    - When using bare `sleep()` and `wakeup()` calls, a wakeup signal sent before a process enters sleep is dropped by the OS and permanently lost. Semaphores solve this because **they have memory**: calling `sem_post()` increments an integer value, ensuring any past signal is saved for future callers.
+> 4. **Cyclic Producer Synchronization for $M$ Producers (2020 Q2b):**
+>    - Use an array of $M$ turn semaphores `turn[M]`, where `turn[0]=1` and all others are `0`. Producer $i$ waits on `turn[i]` and, upon inserting an item, signals `turn[(i+1)%M]`.
+
+---
+
 ## 1. Intuition & The Lost Wakeup Problem
 
 Prior to semaphores, synchronization relied either on CPU-burning busy-waiting or on elementary OS system calls: `sleep()` (suspend self) and `wakeup(pid)` (awaken suspended process).

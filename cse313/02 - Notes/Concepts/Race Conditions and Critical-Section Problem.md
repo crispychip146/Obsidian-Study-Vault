@@ -12,6 +12,20 @@ order: 18
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q2a, 2019 Q2c)**
+> **Frequency:** ⭐⭐⭐⭐ **Foundational Theory of Concurrency**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **The Four Essential Requirements for a Valid Critical Section Solution (2019 Q2c):**
+>    - **Mutual Exclusion:** If process $P_i$ is in its critical section, no other processes can enter their critical sections.
+>    - **Progress:** If the CS is empty and processes want to enter, only processes outside their remainder sections participate in selecting who enters next; selection cannot be postponed indefinitely.
+>    - **Bounded Waiting:** A bound must exist on how many times other processes can enter their CS after a process has requested entry and before that request is granted (prevents starvation).
+>    - **No Speed Assumptions:** The algorithm must remain correct regardless of CPU execution speeds or the number of physical cores.
+> 2. **Shared Variable Data Races (2018 Q2a):**
+>    - An unsynchronized `counter++` operation expands at machine level into 3 non-atomic instructions: `LOAD R, [counter]`, `ADD R, 1`, `STORE [counter], R`. Interleaving between concurrent threads produces lost updates.
+
+---
+
 ## 1. Intuition & Real-World Motivation
 
 In a multiprogramming or multithreaded system, processes share resources such as common memory buffers, global variables, files, or I/O devices. When two or more concurrent processes read and write shared data, and the final outcome depends on the exact order or timing in which the instructions interleave, a **race condition** occurs.

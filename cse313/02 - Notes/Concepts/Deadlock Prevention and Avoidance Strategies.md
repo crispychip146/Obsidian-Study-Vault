@@ -12,6 +12,24 @@ order: 28
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q1c, 2019 Q3c, 2021 Q1c, 2021 Q3a)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Differentiating Safe, Unsafe, and Deadlock States (2019 Q1c & 2021 Q3a):**
+>    - **Safe State:** A state from which there exists at least one order $\langle P_1, P_2, \dots, P_n \rangle$ where all processes can satisfy their peak claims, execute to completion, and return their resources.
+>    - **Unsafe State:** A state where NO such guaranteed sequence exists. **Crucial point:** An unsafe state is **NOT** necessarily deadlocked! Deadlock will only materialize if processes actually exercise their maximum claims simultaneously.
+>    - **Deadlock State:** A state where two or more processes are actively and permanently frozen.
+>    - **Venn Diagram Relation:** $\text{Deadlock States} \subset \text{Unsafe States} \subset \text{Total System States}$.
+> 2. **Deadlock Avoidance Mechanism:**
+>    - Deadlock Avoidance operates strictly on the principle of dynamic gatekeeping: whenever a process requests resources, the OS tests whether allocating them would move the system from a Safe state into an Unsafe state. If Unsafe, the request is denied and the process is forced to sleep.
+> 3. **Eliminating Circular Wait via Global Linear Ordering (2019 Q3c, 2021 Q1c):**
+>    - Define a 1-to-1 function $F: R \to \mathbb{N}$ mapping every resource type to an integer (e.g., $F(\text{Tape Drive})=1, F(\text{Disk})=5, F(\text{Printer})=12$).
+>    - Enforce the rule: A process may request resource $R_j$ if and only if $F(R_j) > F(R_i)$ for all resources $R_i$ it currently holds.
+>    - **Why it works:** In any dependency chain $P_0 \to P_1 \to \dots \to P_k \to P_0$, the resource indices would have to strictly increase: $F(R_0) < F(R_1) < \dots < F(R_k) < F(R_0)$, which implies $F(R_0) < F(R_0)$, a mathematical contradiction! Thus, cycles are impossible.
+
+---
+
 ## 1. Architectural Distinction: Prevention vs Avoidance
 
 While both strategies ensure that a system never encounters a deadlock, they operate on fundamentally different principles:

@@ -12,6 +12,24 @@ order: 29
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3a, 2019 Q3a, 2020 Q3b, 2021 Q1a, 2021 Q3a)**
+> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Solving for Unknown Resource Parameter $x$ (2017 Q3a):**
+>    - **The Setup:** Available vector has an unknown variable: $Available = [0, 0, x, 1, 1]$. You must find the minimum $x$ so the system is safe.
+>    - **The "Click" Insight:** Always compute $Need = Max - Allocation$ first. Find which process can execute *first* using only the fixed numeric values. Here, $Need_D = [0,0,1,1,1]$ requires $x \ge 1$. After $D$ completes, it frees its allocation, boosting $Work$ to $[1, 1, x+1, 2, 1]$. Next, $Need_C = [1,0,3,0,0]$ requires $x+1 \ge 3 \implies x \ge 2$. Thus, the minimum value is $x=2$!
+> 2. **Proving an UNSAFE State (2021 Q1a):**
+>    - **Exam Trap:** Students often assume every Banker's question must yield a valid safe sequence. In 2021 Q1(a), $Available = [0, 0, 1]$. $P_2$ runs ($Work \to [2, 0, 2]$), then $P_1$ runs ($Work \to [6, 2, 5]$). Now inspect remaining processes: $Need_{P3} = [0, 3, 1]$ (requires 3 of resource $B$, but $Work[B]=2$) and $Need_{P4} = [1, 1, 6]$ (requires 6 of $C$, but $Work[C]=5$). **Neither can proceed!** The correct, full-mark answer is: **"No safe sequence exists. The system is in an UNSAFE STATE."**
+> 3. **Single-Resource Capacity Problem (2020 Q3b):**
+>    - Given total capacity $E=20$ and allocations $[4, 5, 3, 4]$, calculate $Available = 20 - \sum Allocation = 20 - 16 = 4$. Compare $Available$ with $Need_i = Max_i - Alloc_i$. Since every process has $Need=4$, execute them sequentially, releasing their allocations until $Available = 20$.
+> 4. **Safe vs. Unsafe vs. Deadlock Distinction (2019 Q1c, 2021 Q3a):**
+>    - *Unsafe State:* A state where no execution sequence exists that guarantees completion if all processes claim maximum resources simultaneously. **Deadlock is NOT yet present**, but the system cannot prevent deadlock if processes request their max.
+>    - *Deadlock State:* Processes are actively and permanently blocked waiting on each other.
+>    - *Avoidance Rule:* The Banker's Algorithm ensures the system *never enters an unsafe state* by speculatively testing each request before granting it.
+
+---
+
 ## 1. Algorithmic Overview & Motivation
 
 Developed by **Edsger Dijkstra (1965)**, the **Banker's Algorithm** is the classic deadlock-avoidance algorithm for systems with multiple resource types and multiple instances per type.

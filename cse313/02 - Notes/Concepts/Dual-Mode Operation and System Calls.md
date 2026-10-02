@@ -12,6 +12,25 @@ order: 2
 
 ---
 
+> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1c, 2019 Q4a, 2021 Q3b)**
+> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, repeated!)**
+>
+> ### What Exam Questions Expect & How to Master Them:
+> 1. **Step-by-Step Execution of a System Call (2017 Q1c & 2019 Q4a verbatim):**
+>    - **The 7-Step Sequence:**
+>      1. *User-Space Invocation:* User application calls a C library wrapper (e.g., `read()`). The wrapper places arguments into CPU registers (`%rdi`, `%rsi`, `%rdx`) and loads the unique system call number into `%rax`.
+>      2. *Trap Trigger:* The program executes a software interrupt/trap instruction (`syscall` or `int 0x80`).
+>      3. *Hardware Mode Switch:* CPU hardware switches the execution mode bit from User Mode (Ring 3) to Kernel Mode (Ring 0) and switches the stack pointer from user stack to kernel stack.
+>      4. *State Preservation:* Hardware/microcode pushes the User Program Counter (PC) and processor flags onto the kernel stack.
+>      5. *Dispatch Table Lookup:* The kernel interrupt handler indexes into `sys_call_table[]` using the system call number in `%rax`.
+>      6. *Service Execution:* The kernel function validates user pointer bounds and executes the privileged operation.
+>      7. *Mode Return:* Kernel places return code into `%rax`, pops saved registers, and executes `sysret` or `iret`, resetting the mode bit to Ring 3 and resuming user program execution.
+> 2. **Differentiating User/Kernel Mode vs User/Kernel Space (2021 Q3b):**
+>    - **User Mode vs Kernel Mode (CPU Privilege):** Hardware state controlled by the CPU mode bit in the Program Status Word (PSW). Dictates whether privileged instructions (like `cli`, `sti`, modifying CR3, accessing I/O ports) are allowed.
+>    - **User Space vs Kernel Space (Memory Address Segmentation):** Division of the virtual address space. User space (lower addresses) is mapped per-process; Kernel space (upper addresses) is reserved for the OS core, page tables, and drivers, guarded by supervisor bit flags in page table entries.
+
+---
+
 ## Definition
 
 To prevent user programs from interfering with the proper operation of the system, crashing other programs, or taking exclusive control of hardware, modern computer architectures implement **Dual-Mode Operation**:

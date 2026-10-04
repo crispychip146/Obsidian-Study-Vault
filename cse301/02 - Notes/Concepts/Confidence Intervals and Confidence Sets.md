@@ -12,18 +12,15 @@ order: 38
 
 ---
 
-## Definition
+---
 
-A **$1 - \alpha$ confidence interval** for a scalar parameter $\theta \in \Theta$ is a random interval $C_n = (a, b)$, where the endpoints $a = a(X_1, \dots, X_n)$ and $b = b(X_1, \dots, X_n)$ are statistics calculated from the sample data, such that:
-$$P_\theta(\theta \in C_n) \ge 1 - \alpha \quad \text{for all } \theta \in \Theta$$
+## Starting Point and the Problem
 
-- $1 - \alpha$ is called the **coverage probability** or **confidence level** (e.g., $1 - \alpha = 0.95$ for a $95\%$ confidence interval, where $\alpha = 0.05$).
-- $\alpha$ is the **significance level** or error budget.
-- For multidimensional parameters $\boldsymbol{\theta} \in \mathbb{R}^d$, the interval generalizes to a **confidence set** (such as an ellipsoid, sphere, or convex region) $C_n \subset \mathbb{R}^d$ satisfying $P_{\boldsymbol{\theta}}(\boldsymbol{\theta} \in C_n) \ge 1 - \alpha$.
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Confidence Intervals and Confidence Sets, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
 
 ---
 
-## Intuition
+## Developing the Idea
 
 A point estimate $\hat{\theta}_n = 34.2$ gives a single guess, but provides zero information about how certain or uncertain that guess is. Could the truth be $34.3$? Could it be $150$?
 
@@ -40,7 +37,24 @@ $$\mathbf{C_n \text{ is random; } \theta \text{ is fixed.}}$$
 
 ---
 
-## How to Interpret Confidence Intervals
+---
+
+## Definition
+
+A **$1 - \alpha$ confidence interval** for a scalar parameter $\theta \in \Theta$ is a random interval $C_n = (a, b)$, where the endpoints $a = a(X_1, \dots, X_n)$ and $b = b(X_1, \dots, X_n)$ are statistics calculated from the sample data, such that:
+$$P_\theta(\theta \in C_n) \ge 1 - \alpha \quad \text{for all } \theta \in \Theta$$
+
+- $1 - \alpha$ is called the **coverage probability** or **confidence level** (e.g., $1 - \alpha = 0.95$ for a $95\%$ confidence interval, where $\alpha = 0.05$).
+- $\alpha$ is the **significance level** or error budget.
+- For multidimensional parameters $\boldsymbol{\theta} \in \mathbb{R}^d$, the interval generalizes to a **confidence set** (such as an ellipsoid, sphere, or convex region) $C_n \subset \mathbb{R}^d$ satisfying $P_{\boldsymbol{\theta}}(\boldsymbol{\theta} \in C_n) \ge 1 - \alpha$.
+
+---
+
+---
+
+## How It Works
+
+### How to Interpret Confidence Intervals
 
 ### ❌ The Common Incorrect Interpretation
 > *"There is a 95% probability that $\theta$ lies between 31.4 and 37.0."*
@@ -59,22 +73,7 @@ While technically correct, this interpretation is impractical because in real li
 This view emphasizes that the confidence coefficient $1 - \alpha$ is a property of the **procedure**, not of any single realized numerical interval.
 
 ---
-
-## Example: Opinion Polls
-
-A headline states:
-> *"83% of surveyed citizens favor policy X, accurate to within 4 percentage points 19 times out of 20 (95% confidence level)."*
-
-**Statistical translation:**
-- Sample size: $n$
-- Point estimate: $\hat{p}_n = 0.83$
-- Margin of error: $z_{0.025}\widehat{\text{se}} = 0.04$
-- The computed interval is $[0.83 - 0.04, 0.83 + 0.04] = [0.79, 0.87]$.
-- We have used a measurement procedure that successfully traps the true population proportion $p$ in $95\%$ of all applications.
-
----
-
-## Confidence Level vs. Post-Experiment Certainty: The Berger-Wolpert Puzzle
+### Confidence Level vs. Post-Experiment Certainty: The Berger-Wolpert Puzzle
 
 To illustrate that a confidence coefficient is a **pre-data guarantee**, not a measure of posterior certainty once data are observed, consider the celebrated puzzle by Berger & Wolpert (1984):
 
@@ -102,8 +101,7 @@ $$C = \begin{cases} \{Y_1 - 1\} & \text{if } Y_1 = Y_2 \\ \left\{\frac{Y_1 + Y_2
 **Lesson:** Frequentist confidence refers to the long-run performance of the procedure prior to observing data, whereas [[Credible Intervals]] in Bayesian inference measure post-experimental certainty.
 
 ---
-
-## Normal-Based Confidence Intervals
+### Normal-Based Confidence Intervals
 
 By the Central Limit Theorem and asymptotic properties of maximum likelihood estimators, many estimators $\hat{\theta}_n$ are asymptotically normal:
 $$\frac{\hat{\theta}_n - \theta}{\widehat{\text{se}}} \xrightarrow{d} N(0, 1)$$
@@ -116,8 +114,7 @@ For a $95\%$ confidence interval ($\alpha = 0.05$):
 $$z_{0.025} \approx 1.96 \approx 2 \implies C_n \approx \hat{\theta}_n \pm 2\widehat{\text{se}}$$
 
 ---
-
-## Duality Between Confidence Intervals and Hypothesis Tests
+### Duality Between Confidence Intervals and Hypothesis Tests
 
 Confidence intervals and two-sided [[Hypothesis Testing Framework|hypothesis tests]] are mathematically dual to one another:
 
@@ -130,7 +127,30 @@ Conversely, the set of all null hypotheses $\theta_0$ that are **not** rejected 
 
 ---
 
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Thinking the width of a CI increases with sample size:**
    The margin of error is proportional to $\widehat{\text{se}} \propto 1/\sqrt{n}$. As sample size $n$ increases, the confidence interval becomes narrower (more precise).
@@ -141,13 +161,39 @@ Conversely, the set of all null hypotheses $\theta_0$ that are **not** rejected 
 
 ---
 
+---
+
 ## Exam Relevance
+
+### Example: Opinion Polls
+
+A headline states:
+> *"83% of surveyed citizens favor policy X, accurate to within 4 percentage points 19 times out of 20 (95% confidence level)."*
+
+**Statistical translation:**
+- Sample size: $n$
+- Point estimate: $\hat{p}_n = 0.83$
+- Margin of error: $z_{0.025}\widehat{\text{se}} = 0.04$
+- The computed interval is $[0.83 - 0.04, 0.83 + 0.04] = [0.79, 0.87]$.
+- We have used a measurement procedure that successfully traps the true population proportion $p$ in $95\%$ of all applications.
+
+---
+### Exam Relevance
 
 Common exam questions include:
 1. Deriving large-sample confidence intervals for proportions, means, and general MLEs.
 2. Explaining the precise philosophical interpretation of confidence intervals and correcting common fallacies.
 3. Solving confidence set puzzles (such as the Berger-Wolpert puzzle).
 4. Explaining and applying the test-CI duality theorem.
+
+---
+### Examples & Problems
+
+- [[Bernoulli Parameter Estimation and Confidence Interval Example]]
+- [[Berger-Wolpert Confidence Set Puzzle Example]]
+- [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
+
+---
 
 ---
 
@@ -161,6 +207,8 @@ Common exam questions include:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Point Estimation]]
@@ -169,11 +217,11 @@ Common exam questions include:
 
 ---
 
-## Examples & Problems
+---
 
-- [[Bernoulli Parameter Estimation and Confidence Interval Example]]
-- [[Berger-Wolpert Confidence Set Puzzle Example]]
-- [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

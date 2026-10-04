@@ -12,6 +12,20 @@ order: 7
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Random Variables and Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Random Variables and Probability Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 A **random variable (RV)** $X$ is a function that maps outcomes from a sample space $S$ to real numbers:
@@ -23,7 +37,11 @@ The **probability distribution** of $X$ describes the allocation of probabilitie
 
 ---
 
-## Cumulative Distribution Function (CDF)
+---
+
+## How It Works
+
+### Cumulative Distribution Function (CDF)
 
 The **Cumulative Distribution Function (CDF)** of any random variable $X$ (discrete, continuous, or mixed) is defined as:
 $$F_X(x) = P(X \le x), \quad \text{for all } x \in \mathbb{R}$$
@@ -41,8 +59,7 @@ $$F_X(x) = P(X \le x), \quad \text{for all } x \in \mathbb{R}$$
 - $P(X > a) = 1 - F_X(a)$
 
 ---
-
-## Discrete vs. Continuous Random Variables
+### Discrete vs. Continuous Random Variables
 
 | Feature | Discrete Random Variable | Continuous Random Variable |
 |---|---|---|
@@ -54,8 +71,7 @@ $$F_X(x) = P(X \le x), \quad \text{for all } x \in \mathbb{R}$$
 | **CDF Connection** | $F_X(x) = \sum_{t \le x} p_X(t)$ (step function) | $F_X(x) = \int_{-\infty}^x f_X(t)\,dt$ (continuous curve) |
 
 ---
-
-## Expectation and Variance
+### Expectation and Variance
 
 ### Expectation (Mean)
 The expectation $\mathbb{E}[X]$ represents the probability-weighted average (center of mass) of the distribution:
@@ -87,7 +103,30 @@ $$\operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}$$
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+### Edge Cases & Common Pitfalls
 
 1. **Confusing PDF Value with Probability:**
    - For a continuous RV, $f_X(x)$ is a probability **density**, not a probability.
@@ -101,7 +140,11 @@ $$\operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}$$
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
 
 - **Distributions:** Foundation for specific families in [[Discrete Probability Distributions]] and [[Continuous Probability Distributions]].
 - **Transformations:** Evaluated via [[Law of the Unconscious Statistician (LOTUS)]] and Jacobian changes of variables.
@@ -110,7 +153,28 @@ $$\operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}$$
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 6 & 10, pages 17–19, 30–32)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_4.pdf` & `6.pdf`

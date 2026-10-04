@@ -12,13 +12,34 @@ order: 8
 
 ---
 
-## Overview
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Discrete Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Discrete Probability Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
+## Definition
+
+**Discrete Probability Distributions** is a foundational concept in probability and mathematical statistics governing random variables, probability distributions, or statistical decision-making.
+
+---
+
+## How It Works
+
+### Overview
 
 In probability, many real-world phenomena share underlying structures known as **distribution stories**. Recognizing the story behind a problem immediately identifies the distribution, its Probability Mass Function (PMF), mean, and variance without tedious re-derivation.
 
 ---
-
-## 1. Bernoulli Distribution: $\operatorname{Bern}(p)$
+### Bernoulli Distribution: $\operatorname{Bern}(p)$
 
 - **Story:** A single trial with two possible outcomes: "Success" (1) with probability $p$, or "Failure" (0) with probability $q = 1 - p$.
 - **Support:** $k \in \{0, 1\}$
@@ -29,8 +50,7 @@ In probability, many real-world phenomena share underlying structures known as *
 - **Role:** The foundational building block for Binomial, Geometric, and Negative Binomial distributions.
 
 ---
-
-## 2. Binomial Distribution: $\operatorname{Bin}(n, p)$
+### Binomial Distribution: $\operatorname{Bin}(n, p)$
 
 - **Story:** Number of successes in $n$ independent and identically distributed (i.i.d.) $\operatorname{Bern}(p)$ trials.
 - **Support:** $k \in \{0, 1, 2, \dots, n\}$
@@ -41,8 +61,7 @@ In probability, many real-world phenomena share underlying structures known as *
   *Derivation via Indicators:* Let $X = \sum_{i=1}^n I_i$, where $I_i \sim \operatorname{Bern}(p)$ are independent. By linearity, $\mathbb{E}[X] = \sum \mathbb{E}[I_i] = np$. By independence, $\operatorname{Var}(X) = \sum \operatorname{Var}(I_i) = npq$.
 
 ---
-
-## 3. Hypergeometric Distribution: $\operatorname{HGeom}(w, b, n)$
+### Hypergeometric Distribution: $\operatorname{HGeom}(w, b, n)$
 
 - **Story:** Sampling **without replacement** from a finite population of $w$ white (success) balls and $b$ black (failure) balls, drawing a sample of size $n$. $X$ is the number of white balls in the sample.
 - **Support:** $\max(0, n - b) \le k \le \min(n, w)$
@@ -54,8 +73,7 @@ In probability, many real-world phenomena share underlying structures known as *
 - **Finite Population Correction (FPC):** The factor $\frac{N - n}{N - 1}$ reflects reduced variance due to sampling without replacement. As $N \to \infty$ with $p$ fixed, $\frac{N - n}{N - 1} \to 1$, and $\operatorname{HGeom} \to \operatorname{Bin}(n, p)$.
 
 ---
-
-## 4. Geometric Distribution: $\operatorname{Geom}(p)$
+### Geometric Distribution: $\operatorname{Geom}(p)$
 
 - **Story:** Number of **failures before the first success** in a sequence of independent $\operatorname{Bern}(p)$ trials. *(Note: Some conventions count total trials until first success; the Harvard Stat 110 convention defines $\operatorname{Geom}(p)$ as failures before first success, with $X \in \{0, 1, 2, \dots\}$)*.
 - **Support:** $k \in \{0, 1, 2, \dots\}$
@@ -71,8 +89,7 @@ In probability, many real-world phenomena share underlying structures known as *
   The Geometric distribution is the **only** discrete distribution with the memoryless property!
 
 ---
-
-## 5. Negative Binomial Distribution: $\operatorname{NBin}(r, p)$
+### Negative Binomial Distribution: $\operatorname{NBin}(r, p)$
 
 - **Story:** Number of failures observed before achieving the $r$-th success in independent $\operatorname{Bern}(p)$ trials.
 - **Support:** $k \in \{0, 1, 2, \dots\}$
@@ -83,8 +100,7 @@ In probability, many real-world phenomena share underlying structures known as *
   $$\mathbb{E}[X] = \frac{r(1 - p)}{p}, \quad \operatorname{Var}(X) = \frac{r(1 - p)}{p^2}$$
 
 ---
-
-## 6. Poisson Distribution: $\operatorname{Pois}(\lambda)$
+### Poisson Distribution: $\operatorname{Pois}(\lambda)$
 
 - **Story:** Counts occurrences of rare events over a fixed interval of time or space, where events occur at a constant average rate $\lambda > 0$ independently of the time since the last event.
 - **Support:** $k \in \{0, 1, 2, \dots\}$
@@ -102,8 +118,7 @@ In probability, many real-world phenomena share underlying structures known as *
   $$X_1 + X_2 \sim \operatorname{Pois}(\lambda_1 + \lambda_2)$$
 
 ---
-
-## Summary Reference Table
+### Summary Reference Table
 
 | Distribution | Notation | Parameters | PMF $P(X = k)$ | Mean $\mathbb{E}[X]$ | Variance $\operatorname{Var}(X)$ |
 |---|---|---|---|---|---|
@@ -116,7 +131,37 @@ In probability, many real-world phenomena share underlying structures known as *
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
 
 - **Queueing Theory:** Poisson arrivals directly define Markovian arrival streams in the [[M-M-1 Queue]].
 - **Estimation:** Binomial and Poisson parameter estimation are central paradigms in [[Maximum Likelihood Estimation]] and [[Beta-Binomial Conjugate Updating Formula]].
@@ -124,7 +169,28 @@ In probability, many real-world phenomena share underlying structures known as *
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 6–9, pages 17–29)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_4.pdf` & `5.pdf`

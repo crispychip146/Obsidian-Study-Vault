@@ -32,6 +32,26 @@ order: 8
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Modern CPUs feature multi-core architectures capable of executing multiple instruction streams in parallel. While spawning separate processes enables concurrency, every process requires its own private address space, page tables, open file tables, and PCB.
+
+We want concurrent tasks within an application (e.g. rendering UI, spell-checking text, and downloading files in a document editor) to cooperate with minimal creation and context-switch overhead, while directly sharing common memory data structures. The central obstacle is that traditional process isolation makes memory sharing slow and cumbersome, requiring explicit IPC channels and frequent kernel boundary crossings.
+
+---
+
+## Developing the Idea
+
+To enable lightweight concurrency within a single application, the OS decomposes the process abstraction into two separate units:
+1. **Resource Grouping Unit (The Process):** Holds the address space, open files, global variables, and heap memory.
+2. **Execution Unit (The Thread):** Holds only the minimal state needed to execute instructions independently: a Program Counter (PC), CPU registers, and an independent call stack.
+
+All threads belonging to the same process share the identical address space and heap. This enables blazing-fast communication via shared variables, but introduces synchronization risks: threads can overwrite each other's data if not synchronized.
+
+---
+
 ## Definition
 
 A **thread** (often called a **Lightweight Process (LWP)**) is the smallest basic unit of CPU execution and scheduling within an operating system.
@@ -72,38 +92,11 @@ flowchart TD
 
 ---
 
-## What Do Threads Share vs. What Is Private?
-
-Understanding the boundary between shared and private thread state is critical for synchronization and programming:
-
-| Shared Across All Threads in a Process | Strictly Private to Each Individual Thread |
-|---|---|
-| **Text Segment** (Executable code instructions) | **Thread ID (TID)** (Unique numeric identifier) |
-| **Data & BSS Segments** (Global and static variables) | **Program Counter (PC)** (Current execution location) |
-| **Heap Segment** (All dynamically allocated memory) | **CPU Register Set** (Accumulator, index registers, flags) |
-| **Open File Descriptors** (Read/write offsets, files) | **Private Call Stack** (Local variables, return addresses) |
-| **Child Processes** (Created via `fork()`) | **Stack Pointer (SP)** (Points to thread's active stack top) |
-| **Signal Handlers & Permissions** (UID, GID, umask) | **Scheduling Priority & State** (Ready, Running, Blocked) |
-
 ---
 
-## Motivation for Multithreading (The 4 Benefits)
+## How It Works
 
-1. **Responsiveness (Non-blocking I/O):**
-   - In a web browser or GUI text editor, a single-threaded process freezes entirely while waiting for a network download or disk write.
-   - In a multithreaded application, one worker thread handles the slow network request while the main UI thread remains completely responsive to user keystrokes and clicks.
-2. **Resource Sharing:**
-   - Processes can only communicate through heavyweight IPC mechanisms (pipes, shared memory segments, message queues; see [[Message Passing and IPC Models]]).
-   - Threads automatically share all memory (globals, heap, arrays) by default, enabling zero-copy data passing.
-3. **Economy (Lightweight Creation & Switching):**
-   - Creating a thread is **10 to 30 times faster** than creating a process because no new address space or page tables need to be allocated.
-   - A thread context switch requires saving only CPU registers and stack pointers. It does **NOT** require reloading MMU page tables, avoiding expensive TLB flushes and cache invalidation.
-4. **Utilization of Multiprocessor Architectures:**
-   - On a multi-core CPU, distinct threads of the same process can execute **simultaneously in true hardware parallelism** on different physical cores. A single-threaded process can only ever utilize a single core (e.g., $25\%$ of a quad-core CPU).
-
----
-
-## Multithreading Implementation Models
+### Multithreading Implementation Models
 
 Multithreading can be implemented at the **User Level** (via user-space libraries) or at the **Kernel Level** (supported natively by the OS). This leads to three distinct mapping models:
 
@@ -147,7 +140,34 @@ flowchart TD
 
 ---
 
-## Edge Cases & Pitfalls
+---
+
+## Example
+
+A multithreaded web server:
+- Main thread listens on TCP socket port 80.
+- When an incoming connection arrives, rather than calling heavyweight `fork()`, the server spawns a lightweight worker thread:
+  `pthread_create(&tid, NULL, handle_client, (void*)client_sock);`
+- The worker thread reads files from the shared memory cache and writes to the client socket.
+- Context switching between worker threads avoids TLB invalidation because both threads share the same page table.
+
+---
+
+## Technical Details
+
+See related modules for microarchitectural implementation details.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Shared vs. Private State Invariant:** Threads share Code, Data, Heap, and File Descriptors, but maintain strictly private Stacks, Program Counters, and Register sets.
+- **Fault Vulnerability:** Because threads share an unprotected address space, an invalid memory write or segmentation fault in one thread crashes the entire parent process and all its sibling threads.
+- **Context Switch Efficiency:** Thread switching is substantially faster than process switching because memory page tables (CR3 register) remain unchanged, preserving CPU cache and TLB warm states.
+
+---
+
+## Common Mistakes
 
 1. **Race Conditions on Shared Memory:**
    - Because all threads share the heap and data segments, concurrent unsynchronized reads and writes cause silent memory corruption (see [[Race Conditions and Critical-Section Problem]]).
@@ -159,7 +179,9 @@ flowchart TD
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
 
 - **Next Step:** How does the degree of multiprogramming and thread concurrency affect total CPU throughput? (See [[CPU Multiprogramming Utilization Formula]]).
 - **Synchronization:** Thread safety demands mutual exclusion locks and semaphores (see [[Semaphores and Synchronization Primitives]]).
@@ -170,7 +192,30 @@ flowchart TD
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Race Conditions and Critical-Section Problem]]
+- [[Semaphores and Synchronization Primitives]]
+- [[Monitors and Condition Variables]]
+
+---
+
+## Prerequisites
+
+- [[Process Concepts and Memory Layout]]
+- [[Process Control Block and Context Switching]]
+
+---
+
+## Problems
+
+- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 29–42)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.2: Threads)

@@ -12,6 +12,20 @@ order: 59
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Wald Test Statistic, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Wald Test Statistic compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 The **Wald Test** is an asymptotic hypothesis test for evaluating null hypotheses about an unknown scalar or vector parameter $\theta$.
@@ -47,6 +61,8 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -57,6 +73,8 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 | $W$ | Wald test statistic | Standardized score |
 | $z_{\alpha/2}$ | Normal critical threshold | $1.96$ for $\alpha = 0.05$ |
 | $p$ | Two-sided $p$-value | $(0, 1)$ |
+
+---
 
 ---
 
@@ -72,7 +90,11 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 
 ---
 
+---
+
 ## Intuition
+
+### Intuition
 
 The Wald test measures how many **standard errors** the empirical estimate $\hat{\theta}_n$ sits away from the hypothesized center $\theta_0$:
 $$\text{Wald Statistic} = \frac{\text{Observed Deviation}}{\text{Standard Error of the Deviation}}$$
@@ -81,8 +103,22 @@ If $W = 0.4$, the estimate is less than half a standard error away from the null
 If $W = 4.2$, the estimate is over 4 standard errors away from the null value—an occurrence with probability less than $1$ in $10,000$ under $H_0$, warranting immediate rejection.
 
 ---
+### Duality with Confidence Intervals
 
-## Derivation of Asymptotic Size $\alpha$
+Notice that:
+$$\lvert W \rvert \le z_{\alpha/2} \iff -z_{\alpha/2} \le \frac{\hat{\theta}_n - \theta_0}{\widehat{\text{se}}} \le z_{\alpha/2} \iff \hat{\theta}_n - z_{\alpha/2}\widehat{\text{se}} \le \theta_0 \le \hat{\theta}_n + z_{\alpha/2}\widehat{\text{se}}$$
+
+Therefore:
+$$\text{The size } \alpha \text{ Wald test rejects } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
+where $C_n = \hat{\theta}_n \pm z_{\alpha/2}\widehat{\text{se}}$ is the standard $1 - \alpha$ confidence interval!
+
+---
+
+---
+
+## Derivation
+
+### Derivation of Asymptotic Size $\alpha$
 
 We wish to prove that the Wald test has asymptotic size $\alpha$:
 $$\lim_{n \to \infty} P_{\theta_0}\left(\lvert W \rvert > z_{\alpha/2}\right) = \alpha$$
@@ -102,18 +138,11 @@ $$\lim_{n \to \infty} P_{\theta_0}(\lvert W \rvert > z_{\alpha/2}) = \frac{\alph
 
 ---
 
-## Duality with Confidence Intervals
-
-Notice that:
-$$\lvert W \rvert \le z_{\alpha/2} \iff -z_{\alpha/2} \le \frac{\hat{\theta}_n - \theta_0}{\widehat{\text{se}}} \le z_{\alpha/2} \iff \hat{\theta}_n - z_{\alpha/2}\widehat{\text{se}} \le \theta_0 \le \hat{\theta}_n + z_{\alpha/2}\widehat{\text{se}}$$
-
-Therefore:
-$$\text{The size } \alpha \text{ Wald test rejects } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
-where $C_n = \hat{\theta}_n \pm z_{\alpha/2}\widehat{\text{se}}$ is the standard $1 - \alpha$ confidence interval!
-
 ---
 
-## Example: Comparing Prediction Algorithms (Unpaired)
+## Example
+
+### Example: Comparing Prediction Algorithms (Unpaired)
 
 Algorithm 1 is tested on $m = 100$ independent examples and makes $X = 15$ errors ($\hat{p}_1 = 0.15$).
 Algorithm 2 is tested on $n = 100$ independent examples and makes $Y = 25$ errors ($\hat{p}_2 = 0.25$).
@@ -133,12 +162,35 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 
 ---
 
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
 ## Related Concepts
 
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 - [[Normal-Based Large-Sample Confidence Interval]]
 - [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

@@ -12,6 +12,33 @@ order: 68
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+- **Overcoming Static Probability:** Classical probability models static outcomes. Real-world systems require modeling temporal dependencies, long-term trends, and sequential transitions.
+- **Handling History and Memory:** Unlike independent and identically distributed (i.i.d.) random variables—where the past has no bearing on the future—a stochastic process formalizes different degrees of historical dependence.
+- **Unified Framework:** It provides the mathematical foundation for [[Markov Chain]], Poisson processes, Brownian motion, queuing models, and time series analysis.
+
+---
+
+---
+
+## Developing the Idea
+
+In elementary probability, a random variable gives a single probabilistic snapshot: for example, the roll of a die or the height of an individual.
+
+However, many physical, biological, computational, and financial systems evolve dynamically across time:
+- The price of a stock at 9:30 AM, 9:31 AM, 9:32 AM...
+- The number of packets waiting in a network buffer at each clock cycle.
+- The weather (sunny, rainy) observed each morning.
+
+A stochastic process is simply a sequence of random variables that models how a system changes over time under uncertainty. It is a "random variable with a clock."
+
+---
+
+---
+
 ## Definition
 
 A **stochastic process** is an indexed collection of random variables:
@@ -26,28 +53,11 @@ defined on a common probability space $(\Omega, \mathcal{F}, P)$, where $T$ is t
 
 ---
 
-## Intuition
-
-In elementary probability, a random variable gives a single probabilistic snapshot: for example, the roll of a die or the height of an individual.
-
-However, many physical, biological, computational, and financial systems evolve dynamically across time:
-- The price of a stock at 9:30 AM, 9:31 AM, 9:32 AM...
-- The number of packets waiting in a network buffer at each clock cycle.
-- The weather (sunny, rainy) observed each morning.
-
-A stochastic process is simply a sequence of random variables that models how a system changes over time under uncertainty. It is a "random variable with a clock."
-
----
-
-## Why It Exists
-
-- **Overcoming Static Probability:** Classical probability models static outcomes. Real-world systems require modeling temporal dependencies, long-term trends, and sequential transitions.
-- **Handling History and Memory:** Unlike independent and identically distributed (i.i.d.) random variables—where the past has no bearing on the future—a stochastic process formalizes different degrees of historical dependence.
-- **Unified Framework:** It provides the mathematical foundation for [[Markov Chain]], Poisson processes, Brownian motion, queuing models, and time series analysis.
-
 ---
 
 ## How It Works
+
+### How It Works
 
 1. **State Space ($S$):** The set of all possible configurations or values the system can occupy.
    - Example: For a communication channel, $S = \{0, 1\}$.
@@ -61,18 +71,25 @@ A stochastic process is simply a sequence of random variables that models how a 
    for any selection of times $t_1 < t_2 < \dots < t_k$.
 
 ---
+### Important Properties
+
+- **Time Homogeneity:** A discrete-time process is time-homogeneous (stationary transition probabilities) if the conditional probability of moving from state $i$ to state $j$ does not depend on the absolute time index $n$:
+  $$P(X_{n+1} = j \mid X_n = i) = P(X_1 = j \mid X_0 = i)$$
+- **Stationarity:** A process is strictly stationary if the joint distribution of $(X_{t_1+h}, \dots, X_{t_k+h})$ is identical to that of $(X_{t_1}, \dots, X_{t_k})$ for all shifts $h$.
+
+---
+
+---
 
 ## Example
 
-Consider flipping a fair coin repeatedly at times $n = 1, 2, 3, \dots$:
-- Let $Y_n = +1$ if heads, and $-1$ if tails ($P(Y_n = 1) = P(Y_n = -1) = 0.5$).
-- Let $X_0 = 0$, and define $X_n = \sum_{k=1}^n Y_k$ for $n \ge 1$.
-
-Here, $\{X_n, n \ge 0\}$ is a discrete-time, discrete-state stochastic process known as a **one-dimensional simple random walk**. The value $X_n$ represents the position of a particle (or fortune of a gambler) at step $n$.
+See worked numerical applications in the linked example notes.
 
 ---
 
 ## Technical Details
+
+### Technical Details
 
 ### Memory and Dependence Spectrum
 Stochastic processes can be categorized by how much past history influences the future:
@@ -88,15 +105,18 @@ Stochastic processes can be categorized by how much past history influences the 
 
 ---
 
-## Important Properties
+---
 
-- **Time Homogeneity:** A discrete-time process is time-homogeneous (stationary transition probabilities) if the conditional probability of moving from state $i$ to state $j$ does not depend on the absolute time index $n$:
-  $$P(X_{n+1} = j \mid X_n = i) = P(X_1 = j \mid X_0 = i)$$
-- **Stationarity:** A process is strictly stationary if the joint distribution of $(X_{t_1+h}, \dots, X_{t_k+h})$ is identical to that of $(X_{t_1}, \dots, X_{t_k})$ for all shifts $h$.
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
 
 ---
 
 ## Common Mistakes
+
+### Common Mistakes
 
 - **Confusing State Space with Time Parameter:** Mixing up the possible values $X_t \in S$ with the indices $t \in T$. For example, a process can have continuous time ($T = [0, \infty)$) but a discrete state space ($S = \{0, 1, 2, \dots\}$), as in a Poisson process.
 - **Assuming All Processes Are Independent:** Treating $X_{n+1}$ as independent of $X_n$. In almost all stochastic models, temporal correlation is the primary object of study.
@@ -104,12 +124,27 @@ Stochastic processes can be categorized by how much past history influences the 
 
 ---
 
+---
+
 ## Exam Relevance
+
+### Example
+
+Consider flipping a fair coin repeatedly at times $n = 1, 2, 3, \dots$:
+- Let $Y_n = +1$ if heads, and $-1$ if tails ($P(Y_n = 1) = P(Y_n = -1) = 0.5$).
+- Let $X_0 = 0$, and define $X_n = \sum_{k=1}^n Y_k$ for $n \ge 1$.
+
+Here, $\{X_n, n \ge 0\}$ is a discrete-time, discrete-state stochastic process known as a **one-dimensional simple random walk**. The value $X_n$ represents the position of a particle (or fortune of a gambler) at step $n$.
+
+---
+### Exam Relevance
 
 In CSE301 examinations:
 - Questions frequently ask students to classify a process by its time set (discrete vs continuous) and state space (discrete vs continuous).
 - Students must identify whether a given physical or probabilistic system satisfies the Markov property or requires state augmentation to become Markovian.
 - Serves as the formal gateway to [[Markov Chain]], queuing models, and Poisson processes.
+
+---
 
 ---
 
@@ -121,6 +156,8 @@ In CSE301 examinations:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions|Random Variable]]
@@ -128,9 +165,13 @@ In CSE301 examinations:
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Rain Prediction Two Days Ahead]]
+
+---
 
 ---
 

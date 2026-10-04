@@ -12,6 +12,8 @@ order: 40
 
 ---
 
+---
+
 ## Problem
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} \text{Bernoulli}(p)$ be independent random trials with unknown success probability $p \in (0, 1)$.
@@ -25,6 +27,8 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 
 ---
 
+---
+
 ## Given
 
 - Sample: $X_1, \dots, X_n \overset{\text{iid}}{\sim} \text{Bernoulli}(p)$
@@ -32,6 +36,8 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 - Mean of single observation: $E[X_i] = 1 \cdot p + 0 \cdot (1-p) = p$
 - Variance of single observation: $\text{Var}(X_i) = E[X_i^2] - (E[X_i])^2 = p - p^2 = p(1-p)$
 - Numerical data: $n = 100$, $\sum X_i = 60$
+
+---
 
 ---
 
@@ -44,7 +50,17 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Point Estimation]]
 - [[Estimator Consistency and Convergence]]
@@ -52,8 +68,7 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 - [[Normal-Based Large-Sample Confidence Interval]]
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Unbiasedness Proof
 Compute the expected value of $\hat{p}_n$:
@@ -113,6 +128,8 @@ Given $n = 100$ and $\sum_{i=1}^{100} X_i = 60$:
 
 ---
 
+---
+
 ## Result
 
 1. $\hat{p}_n$ is strictly unbiased ($\text{bias} = 0$).
@@ -122,9 +139,13 @@ Given $n = 100$ and $\sum_{i=1}^{100} X_i = 60$:
 
 ---
 
+---
+
 ## Why This Works
 
 The sample proportion is an average of i.i.d. indicators. By the Law of Large Numbers, it concentrates around the true mean $p$. By the Central Limit Theorem, the distribution of $\hat{p}_n$ converges rapidly to a normal distribution $N(p, \text{se}^2)$, allowing us to use standard normal quantiles to form valid confidence bounds.
+
+---
 
 ---
 
@@ -135,11 +156,21 @@ The sample proportion is an average of i.i.d. indicators. By the Law of Large Nu
 
 ---
 
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
 ## Related Concepts
 
 - [[Point Estimation]]
 - [[Estimator Consistency and Convergence]]
 - [[Normal-Based Large-Sample Confidence Interval]]
+
+---
 
 ---
 

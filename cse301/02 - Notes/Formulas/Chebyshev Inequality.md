@@ -12,7 +12,21 @@ order: 26
 
 ---
 
-## Mathematical Statement
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Chebyshev Inequality, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Chebyshev Inequality compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 Let $X$ be a random variable with finite mean $\mu = \mathbb{E}[X]$ and finite variance $\sigma^2 = \operatorname{Var}(X)$. For any constant $c > 0$:
 
@@ -33,7 +47,49 @@ $$P(\lvert X - \mu \rvert < k\sigma) \ge 1 - \frac{1}{k^2}$$
 
 ---
 
-## Derivation from Markov's Inequality
+---
+
+## Variables
+
+| Symbol | Meaning |
+|---|---|
+| $X, Y$ | Random variables governed by underlying probability distributions |
+| $\mathbb{E}[\cdot]$ | Expected value operator |
+| $\text{Var}(\cdot)$ | Variance operator |
+
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### When Is Chebyshev's Inequality Tight?
+
+Chebyshev's inequality is **sharp** (cannot be improved without further distributional assumptions). Equality is attained by the three-point symmetric distribution:
+$$P(X = \mu - k\sigma) = \frac{1}{2k^2}, \quad P(X = \mu + k\sigma) = \frac{1}{2k^2}, \quad P(X = \mu) = 1 - \frac{1}{k^2}$$
+Here, $P(\lvert X - \mu \rvert \ge k\sigma) = \frac{1}{k^2}$ exactly.
+
+---
+### One-Sided Chebyshev (Cantelli's Inequality)
+
+If we only care about an upper tail deviation $X - \mu \ge c$ (where $c > 0$):
+$$P(X - \mu \ge c) \le \frac{\sigma^2}{\sigma^2 + c^2}$$
+Setting $c = k\sigma$:
+$$P(X - \mu \ge k\sigma) \le \frac{1}{1 + k^2}$$
+*(Notice this is strictly tighter than the naive half-Chebyshev bound $\frac{1}{2k^2}$ for large $k$)*.
+
+---
+
+---
+
+## Derivation
+
+### Derivation from Markov's Inequality
 
 Define the auxiliary random variable $Y = (X - \mu)^2$.
 Notice that:
@@ -46,26 +102,7 @@ $$P(\lvert X - \mu \rvert \ge c) = P(Y \ge c^2) \le \frac{\mathbb{E}[Y]}{c^2} = 
 $\blacksquare$
 
 ---
-
-## When Is Chebyshev's Inequality Tight?
-
-Chebyshev's inequality is **sharp** (cannot be improved without further distributional assumptions). Equality is attained by the three-point symmetric distribution:
-$$P(X = \mu - k\sigma) = \frac{1}{2k^2}, \quad P(X = \mu + k\sigma) = \frac{1}{2k^2}, \quad P(X = \mu) = 1 - \frac{1}{k^2}$$
-Here, $P(\lvert X - \mu \rvert \ge k\sigma) = \frac{1}{k^2}$ exactly.
-
----
-
-## One-Sided Chebyshev (Cantelli's Inequality)
-
-If we only care about an upper tail deviation $X - \mu \ge c$ (where $c > 0$):
-$$P(X - \mu \ge c) \le \frac{\sigma^2}{\sigma^2 + c^2}$$
-Setting $c = k\sigma$:
-$$P(X - \mu \ge k\sigma) \le \frac{1}{1 + k^2}$$
-*(Notice this is strictly tighter than the naive half-Chebyshev bound $\frac{1}{2k^2}$ for large $k$)*.
-
----
-
-## Direct Proof of the Weak Law of Large Numbers (WLLN)
+### Direct Proof of the Weak Law of Large Numbers (WLLN)
 
 Let $X_1, X_2, \dots, X_n$ be i.i.d. with mean $\mu$ and variance $\sigma^2$. Let the sample mean be $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$.
 - $\mathbb{E}[\bar{X}_n] = \mu$
@@ -81,7 +118,22 @@ This provides a direct, 3-line proof of the **Weak Law of Large Numbers**!
 
 ---
 
-## Related Notes
+---
+
+## Example
+
+See worked numerical examples in the associated Example and Problem notes.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
+## Related Concepts
 
 - [[Markov Inequality]] — Foundational inequality.
 - [[Chernoff Bound]] — Exponentially sharper bound when MGF exists.
@@ -89,7 +141,21 @@ This provides a direct, 3-line proof of the **Weak Law of Large Numbers**!
 
 ---
 
-## Sources & Traceability
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 17, pages 54–56)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`

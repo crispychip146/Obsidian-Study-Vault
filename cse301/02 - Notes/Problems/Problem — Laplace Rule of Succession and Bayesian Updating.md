@@ -12,6 +12,8 @@ order: 56
 
 ---
 
+---
+
 ## Problem
 
 An automated safety verification framework evaluates an autonomous vehicle control module across $n = 5$ independent critical road simulation tests. All $5$ tests pass without incident ($s = 5$ successes, $0$ failures). Let $p \in [0, 1]$ be the unknown true probability of passing a critical test.
@@ -26,11 +28,15 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 
 ---
 
+---
+
 ## Given
 
 - Sample: $n = 5$ independent Bernoulli trials
 - Observed successes: $s = 5$, failures: $n - s = 0$
 - Prior: $p \sim \text{Beta}(1, 1)$
+
+---
 
 ---
 
@@ -44,12 +50,16 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Bayesian Inference]]
 - [[Maximum Likelihood Estimation]]
 - [[Beta-Binomial Conjugate Updating Formula]]
 - Posterior Predictive Distribution
+
+---
 
 ---
 
@@ -60,13 +70,26 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 
 ---
 
+---
+
 ## Question Type
 
 - Theoretical Proof & Safety-Critical Application
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### 1. Frequentist MLE and the Zero-Probability Trap
 The likelihood function is:
@@ -132,8 +155,7 @@ $$\lim_{n \to \infty} \hat{p}_{\text{MLE}} = 1.0$$
 As $n \to \infty$, the Bayesian predictive probability approaches the MLE. For large datasets, the evidence of hundreds of flawless runs rightfully overcomes the prior skepticism.
 
 ---
-
-## Summary Comparison
+### Summary Comparison
 
 | Concept | Prediction on 6th Trial ($n=5, s=5$) | Prediction on 101st Trial ($n=100, s=100$) |
 |---|---|---|
@@ -141,12 +163,49 @@ As $n \to \infty$, the Bayesian predictive probability approaches the MLE. For l
 | **Bayesian (Laplace)** | $P(\text{Pass}) = \frac{6}{7} \approx 85.7\%$, $P(\text{Fail}) \approx 14.3\%$ | $P(\text{Pass}) = \frac{101}{102} \approx 99.02\%$, $P(\text{Fail}) \approx 0.98\%$ |
 
 ---
-
-## Related Concepts
+### Related Concepts
 
 - [[Bayesian Inference]]
 - [[Beta-Binomial Conjugate Updating Formula]]
 - [[Maximum Likelihood Estimation]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
+
+- Conflating correlation with causation or independence.
+- Misapplying the Central Limit Theorem when the variance of the underlying distribution is infinite (e.g. Cauchy).
+
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

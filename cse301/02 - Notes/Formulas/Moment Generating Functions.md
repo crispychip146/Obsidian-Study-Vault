@@ -12,7 +12,21 @@ order: 13
 
 ---
 
-## Mathematical Statement
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Moment Generating Functions, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Moment Generating Functions compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 The **Moment Generating Function (MGF)** of a random variable $X$ is defined as:
 $$M_X(t) = \mathbb{E}[e^{tX}]$$
@@ -20,7 +34,28 @@ for all real $t$ in some neighborhood $(-h, h)$ with $h > 0$ where the expectati
 
 ---
 
-## The Moment Generating Property
+---
+
+## Variables
+
+| Symbol | Meaning |
+|---|---|
+| $X, Y$ | Random variables governed by underlying probability distributions |
+| $\mathbb{E}[\cdot]$ | Expected value operator |
+| $\text{Var}(\cdot)$ | Variance operator |
+
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### The Moment Generating Property
 
 Expanding $e^{tX}$ using its Maclaurin series:
 $$e^{tX} = \sum_{n=0}^\infty \frac{(tX)^n}{n!} = 1 + tX + \frac{t^2 X^2}{2!} + \frac{t^3 X^3}{3!} + \dots$$
@@ -37,8 +72,7 @@ Specifically:
 - $\operatorname{Var}(X) = M_X''(0) - [M_X'(0)]^2$
 
 ---
-
-## Key Algebraic Properties of MGFs
+### Key Algebraic Properties of MGFs
 
 1. **Affine Transformation:**
    If $Y = aX + b$, then:
@@ -54,8 +88,7 @@ Specifically:
    If the MGFs of two random variables $X$ and $Y$ exist and are equal ($M_X(t) = M_Y(t)$) in an open neighborhood around $t = 0$, then $X$ and $Y$ have the **exact same probability distribution** ($F_X(x) = F_Y(x)$ for all $x$).
 
 ---
-
-## Reference Table of Common MGFs
+### Reference Table of Common MGFs
 
 | Distribution | Parameters | MGF $M_X(t)$ | Domain / Condition |
 |---|---|---|---|
@@ -70,7 +103,11 @@ Specifically:
 
 ---
 
-## Classic Proof Example: Sum of Independent Normals
+---
+
+## Derivation
+
+### Classic Proof Example: Sum of Independent Normals
 
 Let $X \sim \mathcal{N}(\mu_1, \sigma_1^2)$ and $Y \sim \mathcal{N}(\mu_2, \sigma_2^2)$ be independent.
 $$M_X(t) = e^{\mu_1 t + \frac{1}{2}\sigma_1^2 t^2}, \quad M_Y(t) = e^{\mu_2 t + \frac{1}{2}\sigma_2^2 t^2}$$
@@ -80,7 +117,22 @@ By the **Uniqueness Theorem**, $X + Y \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2
 
 ---
 
-## Related Notes
+---
+
+## Example
+
+See worked numerical examples in the associated Example and Problem notes.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
+## Related Concepts
 
 - [[Law of the Unconscious Statistician (LOTUS)]] — Used to compute $\mathbb{E}[e^{tX}]$.
 - [[Continuous Probability Distributions]] — Normal and Exponential distributions.
@@ -88,7 +140,21 @@ By the **Uniqueness Theorem**, $X + Y \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2
 
 ---
 
-## Sources & Traceability
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 15, pages 47–49)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_9.pdf`

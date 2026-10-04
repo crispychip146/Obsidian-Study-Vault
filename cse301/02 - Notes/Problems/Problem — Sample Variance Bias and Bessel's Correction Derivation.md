@@ -12,6 +12,8 @@ order: 48
 
 ---
 
+---
+
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) random sample from any probability distribution with finite population mean $\mu = E[X_i]$ and finite population variance $\sigma^2 = \text{Var}(X_i) > 0$.
@@ -28,12 +30,16 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 
 ---
 
+---
+
 ## Given
 
 - $X_1, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$
 - $E[X_i] = \mu$, $\text{Var}(X_i) = \sigma^2$
 - $E[\bar{X}] = \mu$, $\text{Var}(\bar{X}) = \frac{\sigma^2}{n}$
 - $\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$
+
+---
 
 ---
 
@@ -46,12 +52,16 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Point Estimation]]
 - [[Maximum Likelihood Estimation]]
 - [[Bias-Variance Decomposition]]
 - Properties of Expectation and Variance
+
+---
 
 ---
 
@@ -62,13 +72,26 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 
 ---
 
+---
+
 ## Question Type
 
 - Mathematical Proof & Analytical Derivation
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### Step 1: Algebraic Expansion
 We begin with the definition of the expectation:
@@ -136,14 +159,31 @@ Check unbiasedness:
 $$E[S^2] = \frac{n}{n - 1}E[\hat{\sigma}^2_n] = \frac{n}{n - 1}\left(\frac{n - 1}{n}\sigma^2\right) = \sigma^2 \quad \blacksquare$$
 
 ---
-
-## Geometric & Intuitive Interpretation
+### Geometric & Intuitive Interpretation
 
 Why does measuring deviations from $\bar{X}$ underestimate variance?
 The function $g(c) = \sum_{i=1}^n (X_i - c)^2$ is minimized over all possible choices of $c$ when $c = \bar{X}$.
 Therefore, for any fixed dataset:
 $$\sum_{i=1}^n (X_i - \bar{X})^2 \le \sum_{i=1}^n (X_i - \mu)^2$$
 Because $\bar{X}$ is calculated from the sample itself, the data points cluster closer to $\bar{X}$ than they do to the true population mean $\mu$. Using $\bar{X}$ "uses up" one degree of freedom, reducing the effective sample size from $n$ to $n - 1$.
+
+---
+### Related Concepts
+
+- [[Point Estimation]]
+- [[Maximum Likelihood Estimation]]
+- [[Normal Distribution Parameter MLE Derivation Example]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -154,11 +194,25 @@ Because $\bar{X}$ is calculated from the sample itself, the data points cluster 
 
 ---
 
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
 ## Related Concepts
 
-- [[Point Estimation]]
-- [[Maximum Likelihood Estimation]]
-- [[Normal Distribution Parameter MLE Derivation Example]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

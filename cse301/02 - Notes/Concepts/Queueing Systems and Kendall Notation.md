@@ -12,6 +12,20 @@ order: 82
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Queueing Systems and Kendall Notation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Queueing Systems and Kendall Notation reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 A **Queueing System** is a mathematical model of a service facility where entities ("customers", "packets", "tasks", "jobs") arrive stochastically over time, wait in a buffer or queue if the service facility is currently occupied, receive service from one or more servers, and subsequently depart the system.
@@ -37,7 +51,11 @@ where:
 
 ---
 
-## Fundamental Performance Metrics
+---
+
+## How It Works
+
+### Fundamental Performance Metrics
 
 Queueing theory tracks four core time-average performance quantities:
 
@@ -75,8 +93,7 @@ Multiplying through by $\lambda$ via [[Little's Law]] yields the customer breakd
 $$L = L_Q + \frac{\lambda}{\mu} = L_Q + \rho$$
 
 ---
-
-## Queue Disciplines
+### Queue Disciplines
 
 1. **FIFO / FCFS (First-In, First-Out):** Standard fair queue (bank line, grocery checkout).
 2. **LIFO / LCFS (Last-In, First-Out):** Stack-based processing (interrupt handling, warehouse inventory stacks).
@@ -85,14 +102,47 @@ $$L = L_Q + \frac{\lambda}{\mu} = L_Q + \rho$$
 5. **Priority Queueing (PRI):** High-priority jobs jump ahead of low-priority jobs (emergency room triage, QoS network packets).
 
 ---
-
-## Why Queueing Theory Matters in Computer Science
+### Why Queueing Theory Matters in Computer Science
 
 Queueing phenomena govern virtually every shared computing resource:
 - **Cloud Computing & Web Servers:** Sizing server clusters (AWS/Azure autoscaling) to prevent request latency spikes.
 - **Computer Networks:** Router packet buffer sizing to prevent packet drop (bufferbloat vs. packet loss).
 - **Operating Systems:** Process scheduling queues, I/O disk request dispatchers.
 - **Database Systems:** Connection pooling, query concurrency limits, lock contention.
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
 
 ---
 
@@ -103,6 +153,20 @@ Queueing phenomena govern virtually every shared computing resource:
 - [[M-M-1 Queue]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[Jackson Networks and Tandem Queues]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

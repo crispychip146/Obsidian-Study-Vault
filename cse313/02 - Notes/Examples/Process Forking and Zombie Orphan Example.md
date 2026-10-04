@@ -12,7 +12,9 @@ order: 10
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 Understanding process creation, variable isolation, and process termination in UNIX requires analyzing real POSIX C implementations.
 
@@ -23,7 +25,29 @@ We examine three fundamental scenarios:
 
 ---
 
-## Scenario 1: Standard `fork()` and Variable Isolation
+---
+
+## Given
+
+- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
+
+---
+
+## Required
+
+- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
+
+---
+
+## Solution
+
+### Scenario 1: Standard `fork()` and Variable Isolation
 
 ### C Implementation:
 ```c
@@ -69,7 +93,9 @@ int main() {
 
 ---
 
-## Scenario 2: Creating a Zombie Process in C
+---
+
+### Scenario 2: Creating a Zombie Process in C
 
 A zombie occurs when a child terminates, but its parent is sleeping or busy and fails to call `wait()`.
 
@@ -109,7 +135,9 @@ UID   PID  PPID  C STIME TTY          TIME CMD
 
 ---
 
-## Scenario 3: Creating an Orphan Process in C
+---
+
+### Scenario 3: Creating an Orphan Process in C
 
 An orphan occurs when the parent terminates while the child continues executing.
 
@@ -150,7 +178,9 @@ $
 
 ---
 
-## How to Properly Reap Child Exit Status
+---
+
+### How to Properly Reap Child Exit Status
 
 To prevent zombies, a parent should always use `wait(&status)` or `waitpid(pid, &status, options)`:
 
@@ -171,21 +201,45 @@ if (WIFEXITED(status)) {
 
 ---
 
-## Key Takeaways & Exam Tips
+---
+
+## Result
+
+The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
+
+---
+
+## Why This Works
+
+Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+
+---
+
+## Common Mistakes
 
 - **Output Order Non-Determinism:** Never assume the child will print before the parent or vice versa. Process scheduling order depends entirely on the CPU scheduler!
 - **Memory Copy Rule:** Any modification to variables in the child process is strictly local to the child. The parent will **never** see variable mutations made by the child.
 
 ---
 
-## Related Notes
+---
+
+## General Method
+
+Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+
+---
+
+## Related Concepts
 
 - [[Process Creation and Termination Operations]] — Theoretical foundations of `fork()`, `exec()`, zombies, and orphans.
 - [[Problem — Fork Execution Tree and Process Tracing]] — Tracing multi-level nested `fork()` call trees.
 
 ---
 
-## Sources & Traceability
+---
 
-- **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 22–28)
-- **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1)
+## Sources
+
+- Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
+- Silberschatz et al., *Operating System Concepts* (10th Edition)

@@ -12,6 +12,20 @@ order: 84
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to PASTA Property and Inspection Paradox, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, PASTA Property and Inspection Paradox reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 In queueing systems, the state of the system can look vastly different depending on **how** and **when** it is observed. We track three distinct steady-state probability distributions:
@@ -28,7 +42,11 @@ In queueing systems, the state of the system can look vastly different depending
 
 ---
 
-## Proposition 1: Arrivals and Departures See the Same Rates ($a_n = d_n$)
+---
+
+## How It Works
+
+### Proposition 1: Arrivals and Departures See the Same Rates ($a_n = d_n$)
 
 > **Theorem:** 
 > For any queueing system where customers enter and leave the system **one at a time** (no batch arrivals or batch departures), the steady-state arrival-seen distribution equals the departure-seen distribution:
@@ -45,8 +63,7 @@ Dividing both counts by the total number of transitions and taking $t \to \infty
 $$\lim_{t \to \infty} \frac{\text{Up-crossings}}{A(t)} = \lim_{t \to \infty} \frac{\text{Down-crossings}}{D(t)} \implies a_n = d_n \quad \blacksquare$$
 
 ---
-
-## Proposition 2: PASTA (Poisson Arrivals See Time Averages)
+### Proposition 2: PASTA (Poisson Arrivals See Time Averages)
 
 > **Theorem (PASTA):** 
 > If customers arrive according to a **Poisson process** (independent exponential interarrival times), then the distribution seen by an arriving customer is **identically equal to the continuous time-average distribution**:
@@ -61,8 +78,54 @@ Because knowing that an arrival is occurring at time $t$ provides zero informati
 $$P(X(t) = n \mid \text{arrival at } t) = P(X(t) = n) = P_n \implies a_n = P_n \quad \blacksquare$$
 
 ---
+### The Inspection Paradox
 
-## When Does PASTA Fail? (Counterexample)
+The contrast between $a_n$ and $P_n$ is closely related to the famous **Inspection Paradox** (or waiting time paradox) in renewal theory:
+- If buses arrive randomly at a bus stop with an average headway of $10$ minutes, a passenger arriving at a random time will, on average, wait **more than 5 minutes** (often the full $10$ minutes).
+- Why? A randomly arriving passenger is more likely to fall into an unusually long interarrival interval than an unusually short one (sampling proportional to length).
+
+---
+### Why PASTA is Fundamental to Queueing Analysis
+
+PASTA provides the magical bridge that allows queueing theorists to solve complex systems:
+- It is mathematically much easier to write differential balance equations for the **time-average continuous probabilities $P_n$**.
+- But system managers care about the **customer experience $a_n$** (e.g., what percentage of callers find the phone line busy and get dropped?).
+- PASTA guarantees that under Poisson arrivals, customer experience matches continuous time averages:
+  $$P(\text{customer is blocked}) = a_N = P_N$$
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+### When Does PASTA Fail? (Counterexample)
 
 When arrivals do **not** follow a Poisson process, $a_n$ and $P_n$ can be wildly divergent.
 
@@ -86,22 +149,6 @@ This discrepancy occurs because deterministic arrivals are synchronized with the
 
 ---
 
-## The Inspection Paradox
-
-The contrast between $a_n$ and $P_n$ is closely related to the famous **Inspection Paradox** (or waiting time paradox) in renewal theory:
-- If buses arrive randomly at a bus stop with an average headway of $10$ minutes, a passenger arriving at a random time will, on average, wait **more than 5 minutes** (often the full $10$ minutes).
-- Why? A randomly arriving passenger is more likely to fall into an unusually long interarrival interval than an unusually short one (sampling proportional to length).
-
----
-
-## Why PASTA is Fundamental to Queueing Analysis
-
-PASTA provides the magical bridge that allows queueing theorists to solve complex systems:
-- It is mathematically much easier to write differential balance equations for the **time-average continuous probabilities $P_n$**.
-- But system managers care about the **customer experience $a_n$** (e.g., what percentage of callers find the phone line busy and get dropped?).
-- PASTA guarantees that under Poisson arrivals, customer experience matches continuous time averages:
-  $$P(\text{customer is blocked}) = a_N = P_N$$
-
 ---
 
 ## Related Concepts
@@ -110,6 +157,20 @@ PASTA provides the magical bridge that allows queueing theorists to solve comple
 - [[M-M-1 Queue]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[Little's Law]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

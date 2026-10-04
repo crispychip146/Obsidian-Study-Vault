@@ -12,6 +12,8 @@ order: 75
 
 ---
 
+---
+
 ## Problem
 
 Suppose whether it rains today depends on the weather conditions of the **past two days**:
@@ -21,6 +23,8 @@ Suppose whether it rains today depends on the weather conditions of the **past t
 - If it did not rain either day, it will rain tomorrow with probability $0.2$.
 
 Given that it rained both yesterday and today, what is the probability that it rains the day after tomorrow?
+
+---
 
 ---
 
@@ -41,6 +45,8 @@ Initial condition: We start in **State 0** ($X_0 = 0$, meaning it rained both ye
 
 ---
 
+---
+
 ## Required
 
 1. Formulate the $4 \times 4$ one-step transition probability matrix $P$.
@@ -49,15 +55,24 @@ Initial condition: We start in **State 0** ($X_0 = 0$, meaning it rained both ye
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Markov Chain]] (State Space Augmentation)
 - [[Chapman-Kolmogorov Equations]]
 - [[Stochastic Process]]
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Construct the $4 \times 4$ Transition Probability Matrix
 Notice the temporal shift rule:
@@ -137,6 +152,15 @@ $$P(\text{Rain at } n = 2 \mid X_0 = 0) = P_{00}^{(2)} + P_{01}^{(2)}$$
 $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 
 ---
+### General Method
+
+1. **State Expansion:** For memory of depth $k$ over alphabet $\mathcal{A}$, define states as $k$-tuples $\mathbf{s} \in \mathcal{A}^k$.
+2. **Transition Matrix Structure:** $P_{(a_1, \dots, a_k), (b_1, \dots, b_k)} = 0$ unless $b_2 = a_1, b_3 = a_2, \dots, b_k = a_{k-1}$.
+3. **Multi-Step Forecasting:** Multiply $P^n$ and sum over all terminal states matching the event of interest.
+
+---
+
+---
 
 ## Result
 
@@ -147,10 +171,14 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 
 ---
 
+---
+
 ## Why This Works
 
 - Systems whose dynamics depend on a finite window of past history of length $k$ can always be modeled as a first-order Markov chain by defining the state as a $k$-tuple of consecutive values.
 - In this expanded state space, each transition automatically preserves continuity (the second element of the past tuple becomes the first element of the next tuple), ensuring the Markov property holds strictly.
+
+---
 
 ---
 
@@ -162,11 +190,11 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 
 ---
 
+---
+
 ## General Method
 
-1. **State Expansion:** For memory of depth $k$ over alphabet $\mathcal{A}$, define states as $k$-tuples $\mathbf{s} \in \mathcal{A}^k$.
-2. **Transition Matrix Structure:** $P_{(a_1, \dots, a_k), (b_1, \dots, b_k)} = 0$ unless $b_2 = a_1, b_3 = a_2, \dots, b_k = a_{k-1}$.
-3. **Multi-Step Forecasting:** Multiply $P^n$ and sum over all terminal states matching the event of interest.
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
 
 ---
 
@@ -175,6 +203,8 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Weather Forecasting Markov Chain Example]]
+
+---
 
 ---
 

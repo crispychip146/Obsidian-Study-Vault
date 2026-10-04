@@ -12,7 +12,9 @@ order: 5
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 Consider the classic **de Montmort Matching Problem** (also known as the Hat Check Problem or Secret Santa Problem):
 A deck of $n$ distinct cards numbered $1, 2, \dots, n$ is thoroughly shuffled and dealt one by one into $n$ spots labeled $1, 2, \dots, n$.
@@ -27,7 +29,29 @@ A deck of $n$ distinct cards numbered $1, 2, \dots, n$ is thoroughly shuffled an
 
 ---
 
-## Step-by-Step Solution
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Step-by-Step Solution
 
 ### Question 1: Probability of At Least One Match
 Let $A_i$ be the event that card $i$ is in position $i$, for $i \in \{1, 2, \dots, n\}$.
@@ -94,8 +118,7 @@ $$\lim_{n \to \infty} P(\text{derangement}) = e^{-1} \approx 36.79\%$$
 $$\lim_{n \to \infty} P(\text{at least one match}) = 1 - e^{-1} \approx 63.21\%$$
 
 ---
-
-## Verification / Sanity Checks
+### Verification / Sanity Checks
 
 Let's test small values of $n$:
 - **$n = 1$:** 1 card, must match. $P(\text{match}) = 1$. Formula gives $1$. Correct.
@@ -110,14 +133,36 @@ Let's test small values of $n$:
 
 ---
 
-## Key Takeaways & Exam Tips
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
 
 - **Symmetry Trick:** Notice how $P(A_i \cap \dots \cap A_{i_k})$ only depends on the size $k$, not which specific indices are chosen. This allows pulling the probability outside the summation: $\sum_{1 \le i_1 < \dots < i_k \le n} \dots = \binom{n}{k} P(A_1 \cap \dots \cap A_k)$.
 - **Convergence Speed:** Because $k!$ grows astronomically fast, $P(\text{derangement})$ converges to $1/e$ within 4 decimal places already at $n = 7$.
 
 ---
 
-## Related Notes
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Inclusion-Exclusion Principle]] — Theoretical formula and indicator variable proof.
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Method of indicator variables.
@@ -125,7 +170,9 @@ Let's test small values of $n$:
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 3, pages 7–9)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_2.pdf`

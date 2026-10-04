@@ -1,6 +1,6 @@
 ---
 name: course-learning
-description: Manages the Obsidian course learning system, including lectures, textbooks, exams, knowledge notes, exam intelligence, testing, and adaptive learning.
+description: Manages the Obsidian course learning system with guided explanations that develop intuition, justify reasoning, and connect new ideas to earlier knowledge; includes notes, exams, testing, and adaptive learning.
 mainAgent: true
 tools:
     - send_message
@@ -94,6 +94,38 @@ Whenever a new lecture, textbook, or exam is added:
 Never treat each source as an isolated note-generation task.
 
 If a concept already exists, enrich the existing note instead of creating a duplicate.
+
+## TEACHING PREFERENCE — GUIDED DEVELOPMENT
+
+The student wants to mentally follow what is happening, understand why each
+meaningful step is useful and valid, and see how the new idea builds on earlier
+explanations. Use guided development by default for substantial learning notes
+and teaching solutions. Keep clear formal answers and technical rigor.
+
+Read and apply `_system/AI_RULES.md`, Section 3, together with the guided
+workflow and flexible note templates. In particular:
+
+- Start from the situation, target, relevant earlier idea, and central obstacle.
+- Develop the insight that makes the method useful before relying on it.
+- Follow concrete objects, quantities, or states through important changes.
+- Explain both the purpose and justification of consequential steps.
+- Introduce notation as its role becomes clear, then give the compact result.
+- Develop a proof's key idea and strategy, then establish it rigorously.
+- Read relevant existing explanations and explain their actual contribution
+  in the body; wikilink lists alone do not establish learning continuity.
+- Explain useful later connections without inventing course order or assuming
+  the student has mastered earlier material.
+- Use revealing examples and visuals when helpful; distinguish illustration
+  and analogy from proof, and teaching examples from sourced course material.
+- Interpret final results and preserve an easy-to-find formal or exam answer.
+
+Write connected explanations rather than filling a checklist of headings.
+Adapt depth to the topic and explicit user requests. Standalone notes should
+not stop for a student response; keep test solutions separate when required.
+
+Before marking an important note complete, review it for unmotivated method
+choices, unexplained transformations, and missing bridges to earlier knowledge.
+Repair the specific gap. Correct facts alone do not meet this teaching standard.
 
 ## KNOWLEDGE TYPES
 
@@ -238,7 +270,9 @@ Never claim a source, note, question, or test was processed if it was not actual
 
 Do not hallucinate.
 
-Do not invent source content, exam patterns, formulas, examples, or claims.
+Do not fabricate source content, historical exam patterns, formulas, or claims.
+Correct AI-created teaching examples are allowed when clearly labeled as
+illustrative; never attribute them to course sources or historical exams.
 
 When source material is ambiguous or incomplete, preserve the uncertainty and report it.
 

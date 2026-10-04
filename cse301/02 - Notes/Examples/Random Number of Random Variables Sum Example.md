@@ -12,7 +12,9 @@ order: 23
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 In computer systems, network modeling, and e-commerce, cumulative workloads often involve a **random number of random quantities**:
 - $N$ = number of customer requests arriving per minute at a cloud server, where $N \sim \operatorname{Pois}(\lambda)$ with $\lambda = 100$ requests/min.
@@ -29,7 +31,29 @@ $$S_N = \sum_{i=1}^N X_i \quad (\text{with } S_0 = 0)$$
 
 ---
 
-## Step-by-Step Solution
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Step-by-Step Solution
 
 ### Step 1: Preliminary Distributions and Moments
 - For $N \sim \operatorname{Pois}(\lambda)$:
@@ -82,8 +106,7 @@ The standard deviation is:
 $$\operatorname{SD}(S_N) = \sqrt{80,000} \approx 282.84\text{ ms}$$
 
 ---
-
-## Variance Decomposition Analysis
+### Variance Decomposition Analysis
 
 - **$\mathbf{EV} = 40,000$ ($50\%$ of total variance):** Arises from the internal randomness of service times $X_i$ (some jobs take 2 ms, others take 80 ms).
 - **$\mathbf{VE} = 40,000$ ($50\%$ of total variance):** Arises from the external arrival randomness of $N$ (some minutes see 85 requests, others see 115 requests).
@@ -92,7 +115,34 @@ Notice that if the number of requests were fixed at exactly $N = 100$ (determini
 
 ---
 
-## Related Notes
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Adam's Law (Law of Total Expectation)]] — Foundational expectation law.
 - [[Eve's Law (Law of Total Variance)]] — General variance formula.
@@ -101,7 +151,9 @@ Notice that if the number of requests were fixed at exactly $N = 100$ (determini
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`

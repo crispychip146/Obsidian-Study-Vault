@@ -12,6 +12,20 @@ order: 17
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Probability and Independence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Conditional Probability and Independence reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 In real-world decision making, new information arrives continuously. **Conditional probability** quantifies how the probability of an event $A$ updates upon learning that an event $B$ has occurred.
@@ -24,7 +38,11 @@ Conditioning on $B$ discards all outcomes outside of $B$. The event $B$ becomes 
 
 ---
 
-## The Multiplication Rule
+---
+
+## How It Works
+
+### The Multiplication Rule
 
 Rearranging the definition of conditional probability:
 $$P(A \cap B) = P(B) P(A \mid B) = P(A) P(B \mid A)$$
@@ -36,8 +54,7 @@ $$P(A_1 \cap A_2 \cap \dots \cap A_n) = P(A_1) P(A_2 \mid A_1) P(A_3 \mid A_1 \c
 This chain rule is the mathematical bedrock of **Markov processes**, **autoregressive language models**, and sequential Bayesian filtering.
 
 ---
-
-## Independence of Events
+### Independence of Events
 
 Two events $A$ and $B$ are **independent** (written $A \perp B$) if learning that $B$ occurred provides zero information about whether $A$ occurred:
 $$P(A \mid B) = P(A)$$
@@ -54,8 +71,7 @@ $$P(A \cap B) = P(A) P(B)$$
 3. **Empty Set and Universe:** Any event $A$ is independent of the empty set $\emptyset$ and the entire sample space $S$.
 
 ---
-
-## Pairwise Independence vs. Mutual Independence
+### Pairwise Independence vs. Mutual Independence
 
 For three or more events, **pairwise independence does NOT imply mutual independence**!
 
@@ -86,8 +102,7 @@ In fact, if you know that both $A$ and $B$ occurred, you know with $100\%$ certa
 Thus, $A, B, C$ are **pairwise independent but NOT mutually independent**!
 
 ---
-
-## Conditional Independence
+### Conditional Independence
 
 Events $A$ and $B$ are **conditionally independent given $C$** if:
 $$P(A \cap B \mid C) = P(A \mid C) P(B \mid C)$$
@@ -101,7 +116,30 @@ $$P(A \mid B \cap C) = P(A \mid C)$$
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+### Edge Cases & Common Pitfalls
 
 1. **Mutually Exclusive vs. Independent:**
    - If $A$ and $B$ are mutually exclusive ($A \cap B = \emptyset$), then $P(A \cap B) = 0$.
@@ -112,7 +150,11 @@ $$P(A \mid B \cap C) = P(A \mid C)$$
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
 
 - **Bayes' Rule:** Inverts condition and effect (see [[Law of Total Probability and Bayes' Rule]]).
 - **Markov Property:** Future is conditionally independent of past given the present: $P(X_{n+1} \mid X_n, \dots, X_0) = P(X_{n+1} \mid X_n)$ (see [[Markov Chain]]).
@@ -120,7 +162,28 @@ $$P(A \mid B \cap C) = P(A \mid C)$$
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 4, pages 10–12)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_3.pdf`

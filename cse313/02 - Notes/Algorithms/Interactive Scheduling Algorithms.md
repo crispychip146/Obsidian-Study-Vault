@@ -32,7 +32,44 @@ order: 14
 
 ---
 
-## Overview
+---
+
+## The Problem and Earlier Tools
+
+In interactive desktop, mobile, and server environments, users interact with multiple GUI windows and terminals simultaneously. Batch algorithms (FCFS, SJF) minimize average turnaround time, but produce unacceptable response times (often seconds or minutes), making interactive systems feel completely frozen.
+
+We want scheduling algorithms that guarantee fast, bounded response times (under 50–100 ms) and fair CPU sharing. The central obstacle is that long-running computations will starve interactive tasks unless the operating system forcefully preempts the running process.
+
+---
+
+## Developing the Core Idea
+
+The foundational mechanism for interactive scheduling is **Time Slicing via Hardware Timer Interrupts**:
+- **Round Robin (RR):** Allocates each ready process a fixed time quantum $q$. When the timer ticks after $q$ ms, the running process is preempted and appended to the tail of the ready queue.
+- **Priority Scheduling:** Assigns priority ranks to processes; dynamic aging increments priority over time to prevent starvation.
+- **Multilevel Feedback Queue (MLFQ):** Automatically learns process characteristics without advance knowledge: short bursts stay in high-priority queues; long bursts migrate down to lower-priority, larger-quantum queues.
+- **Lottery Scheduling:** Probabilistic proportional-share scheduling using randomized tickets.
+
+---
+
+## Inputs
+
+- Ready Queue of runnable processes.
+- Time quantum length $q$ (typically 10–100 ms).
+- Priority values and feedback queue thresholds.
+
+---
+
+## Outputs
+
+- Scheduled process ID dispatched to the CPU.
+- Maximum response time bound $R \le (n - 1)q$ for $n$ processes.
+
+---
+
+## How It Works
+
+### Overview
 
 In interactive multi-user and desktop operating systems, human users expect near-instantaneous feedback to keyboard, mouse, and network events. Algorithms cannot allow long jobs to monopolize the CPU. The overriding design goals are **minimizing response time**, **preventing starvation**, and **maintaining fairness**.
 
@@ -44,7 +81,9 @@ The dominant interactive algorithms are:
 
 ---
 
-## 1. Round Robin (RR) Scheduling
+---
+
+### 1. Round Robin (RR) Scheduling
 
 ### Algorithmic Logic
 - **Type:** Preemptive time-slicing.
@@ -84,7 +123,9 @@ CPU wastes time swapping registers       Degrades into FCFS (Convoy Effect)
 
 ---
 
-## 2. Priority Scheduling (Static & Dynamic)
+---
+
+### 2. Priority Scheduling (Static & Dynamic)
 
 ### Algorithmic Logic
 - Each process is assigned an integer **priority level**.
@@ -108,7 +149,9 @@ Consider three processes: High ($H$), Medium ($M$), Low ($L$):
 
 ---
 
-## 3. Multilevel Feedback Queue (MLFQ)
+---
+
+### 3. Multilevel Feedback Queue (MLFQ)
 
 Created by Fernando Corbató (Turing Award winner), the **Multilevel Feedback Queue (MLFQ)** is the gold-standard scheduling framework adopted by modern general-purpose operating systems (Linux CFS, Windows NT, macOS).
 
@@ -135,7 +178,9 @@ flowchart TD
 
 ---
 
-## 4. Lottery Scheduling (Proportional Share)
+---
+
+### 4. Lottery Scheduling (Proportional Share)
 
 - **Mechanism:** The OS allocates each process a set of discrete **lottery tickets**. Whenever a scheduling decision is made, the OS generates a pseudo-random number between $1$ and $T_{\text{total}}$. Whichever process holds the winning ticket gets the CPU!
 - **Proportional Share Property:** If Process $A$ holds 75 tickets and Process $B$ holds 25 tickets, over time Process $A$ receives exactly $75\%$ of CPU cycles and Process $B$ receives $25\%$.
@@ -143,7 +188,9 @@ flowchart TD
 
 ---
 
-## Comparative Reference Table
+---
+
+### Comparative Reference Table
 
 | Algorithm | Primary Strengths | Primary Weaknesses | Best Suited For |
 |---|---|---|---|
@@ -154,7 +201,53 @@ flowchart TD
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Pseudocode
+
+```c
+// Implementation provided in lecture references
+```
+
+---
+
+## Example
+
+Three processes $P_1(24\text{ ms}), P_2(3\text{ ms}), P_3(3\text{ ms})$ with quantum $q = 4\text{ ms}$. $P_1$ runs for 4 ms, then $P_2$ finishes in 3 ms, $P_3$ finishes in 3 ms, and $P_1$ finishes its remaining 20 ms in 5 slices.
+
+---
+
+## Complexity
+
+### Time Complexity
+$O(1)$ dispatch time using FIFO round-robin pointer rotation or multilevel array bitmasks.
+
+### Space Complexity
+$O(n)$ space for priority queue headers and ready lists.
+
+---
+
+## Properties
+
+- **Bounded Response Guarantee:** Under Round Robin with quantum $q$ and $n$ processes, no process waits longer than $(n - 1)q$ time units for its next turn.
+- **Quantum Sensitivity:** If $q \to \infty$, RR degenerates into FCFS; if $q \to 0$, context switch overhead dominates and system throughput drops toward zero.
+
+---
+
+## Limitations
+
+- Priority inversion can occur when a high-priority process waits for a resource held by a low-priority process (resolved by Priority Inheritance).
+
+---
+
+## Common Mistakes
+
+- Misunderstanding preemption boundaries during execution.
+- Failing to verify state invariants before granting resource claims.
+
+---
+
+## Exam Relevance
 
 - **Next Step:** Mathematical formulas for calculating waiting times and predicting future burst times using exponential smoothing (see [[Scheduling Metrics and Burst Estimation Formulas]]).
 - **Simulation:** Full step-by-step Gantt chart walkthroughs of Round Robin vs FCFS vs SJF (see [[Comprehensive CPU Scheduling Simulation Example]]).
@@ -165,7 +258,29 @@ flowchart TD
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Scheduling Metrics and Burst Estimation Formulas]]
+- [[Comprehensive CPU Scheduling Simulation Example]]
+
+---
+
+## Prerequisites
+
+- [[CPU Scheduling Principles and Criteria]]
+- [[Batch Scheduling Algorithms]]
+
+---
+
+## Problems
+
+- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 25–48)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4.3: Scheduling in Interactive Systems)

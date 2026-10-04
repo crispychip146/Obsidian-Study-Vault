@@ -12,7 +12,9 @@ order: 29
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 Suppose a fair coin is flipped $n = 100$ times independently. Let $X$ denote the total number of heads observed:
 $$X \sim \operatorname{Bin}(100, 0.5)$$
@@ -29,7 +31,29 @@ We will compare the bounds given by:
 
 ---
 
-## Step-by-Step Derivations
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Step-by-Step Derivations
 
 ### Baseline Parameters
 - Mean: $\mu = np = 100 \times 0.5 = 50$
@@ -78,7 +102,9 @@ $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \time
 
 ---
 
-## Comparison Summary Table
+---
+
+## Result
 
 | Method | Information Leveraged | Bound for $P(X \ge 75)$ | Relative Ratio to Exact |
 |---|---|---|---|
@@ -90,14 +116,30 @@ $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \time
 
 ---
 
-## Key Takeaways & Exam Tips
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
 
 - **Information Principle:** Every additional statistical moment integrated into an inequality tightens the bound by orders of magnitude.
 - **Tail Behavior:** For deviations far out in the tail ($k \ge 3$ standard deviations), polynomial bounds (Chebyshev) are very conservative, while Chernoff's exponential decay closely mirrors the true tail probability.
 
 ---
 
-## Related Notes
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Markov Inequality]] — Derivation and indicator proof.
 - [[Chebyshev Inequality]] — Variance-based concentration.
@@ -106,7 +148,9 @@ $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \time
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17 & 18, pages 54–59)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`

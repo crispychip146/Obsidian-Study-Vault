@@ -12,6 +12,20 @@ order: 85
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to M-M-1 Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, M-M-1 Queue reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 An **M/M/1 Queue** is the foundational stochastic model of a single-server queueing system characterized by:
@@ -25,7 +39,11 @@ Let $X(t)$ denote the number of customers in the system at time $t$. The stochas
 
 ---
 
-## State Transition Diagram (Birth-Death Process)
+---
+
+## How It Works
+
+### State Transition Diagram (Birth-Death Process)
 
 ```
         λ           λ           λ                 λ
@@ -41,8 +59,7 @@ Let $X(t)$ denote the number of customers in the system at time $t$. The stochas
 - **Death Rate (Departure):** $\mu_n = \mu$ for all $n \ge 1$, and $\mu_0 = 0$ (no departures from an empty system).
 
 ---
-
-## Stability Condition: Traffic Intensity $\rho < 1$
+### Stability Condition: Traffic Intensity $\rho < 1$
 
 Define the **traffic intensity** (server utilization):
 $$\rho = \frac{\lambda}{\mu}$$
@@ -54,8 +71,7 @@ $$\mathbf{\rho < 1 \iff \lambda < \mu}$$
 - **If $\lambda \ge \mu$ ($\rho \ge 1$):** Customers arrive faster than (or equal to) the processing rate. The expected number of customers in the system grows without bound as $t \to \infty$ ($L \to \infty, W \to \infty$). No stationary distribution exists.
 
 ---
-
-## Derivation of Steady-State Probabilities
+### Derivation of Steady-State Probabilities
 
 In steady state, the principle of **detailed balance** dictates that the long-run probability flux into each state must equal the probability flux out of that state.
 
@@ -97,8 +113,7 @@ $$P_n = (1 - \rho)\rho^n, \quad n = 0, 1, 2, \dots$$
 > The steady-state number of customers in an M/M/1 queue follows a **Geometric distribution** shifted to include zero, with parameter $1 - \rho$.
 
 ---
-
-## Derivation of Performance Measures
+### Derivation of Performance Measures
 
 ### 1. Average Number in System ($L$)
 $$L = E[X] = \sum_{n=0}^\infty n P_n = (1 - \rho)\sum_{n=0}^\infty n \rho^n$$
@@ -118,8 +133,7 @@ $$L_Q = \lambda \left(\frac{\lambda}{\mu(\mu - \lambda)}\right) = \mathbf{\frac{
 Notice that $L - L_Q = \frac{\rho}{1 - \rho} - \frac{\rho^2}{1 - \rho} = \frac{\rho(1 - \rho)}{1 - \rho} = \rho$, perfectly matching the average number of customers currently receiving service.
 
 ---
-
-## Summary Reference Table
+### Summary Reference Table
 
 | Metric | Formula | Behavior as $\rho \to 1$ |
 |---|---|---|
@@ -132,8 +146,7 @@ Notice that $L - L_Q = \frac{\rho}{1 - \rho} - \frac{\rho^2}{1 - \rho} = \frac{\
 | Mean Wait in Queue ($W_Q$) | $\frac{\rho}{\mu - \lambda}$ | Explodes to $\infty$ |
 
 ---
-
-## The Non-linear "Hockey Stick" Latency Curve
+### The Non-linear "Hockey Stick" Latency Curve
 
 A critical engineering insight from the formula $W = \frac{1}{\mu(1 - \rho)}$:
 - At $\rho = 0.5$ (50% CPU utilization): $W = \frac{2}{\mu}$ (delay is $2 \times$ service time).
@@ -144,6 +157,40 @@ As utilization approaches $100\%$, waiting time does **not** increase linearly; 
 
 ---
 
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+
+---
+
 ## Related Concepts
 
 - [[Queueing Systems and Kendall Notation]]
@@ -151,6 +198,20 @@ As utilization approaches $100\%$, waiting time does **not** increase linearly; 
 - [[PASTA Property and Inspection Paradox]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[M-M-1 Performance Formulas]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

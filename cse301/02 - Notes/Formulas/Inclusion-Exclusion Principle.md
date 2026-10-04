@@ -12,7 +12,21 @@ order: 3
 
 ---
 
-## Mathematical Statement
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Inclusion-Exclusion Principle, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Inclusion-Exclusion Principle compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 Let $A_1, A_2, \dots, A_n$ be events in a probability space. The probability that **at least one** of these events occurs is given by the **Inclusion-Exclusion Principle**:
 
@@ -28,7 +42,9 @@ There are $\binom{n}{k}$ terms in each sum $S_k$, yielding a total of $2^n - 1$ 
 
 ---
 
-## Intuitive Derivation via Indicator Random Variables
+---
+
+## Variables
 
 The cleanest and most rigorous proof uses indicator random variables:
 Let $I_{A_i}$ be the indicator variable for event $A_i$ (i.e., $I_{A_i} = 1$ if $A_i$ occurs, and $0$ otherwise).
@@ -49,7 +65,18 @@ $\blacksquare$
 
 ---
 
-## Bonferroni Inequalities (Truncation Bounds)
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### Bonferroni Inequalities (Truncation Bounds)
 
 When $n$ is large, computing all $2^n - 1$ terms is intractable. The partial sums provide alternating upper and lower bounds:
 - **1 term (Boole's inequality):**
@@ -63,7 +90,17 @@ In general, stopping after an **odd** number of sums gives an **upper bound**, w
 
 ---
 
-## Application Examples
+---
+
+## Derivation
+
+Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+
+---
+
+## Example
+
+### Application Examples
 
 ### 1. The Montmort Matching Problem (Derangements)
 A deck of $n$ numbered cards ($1, 2, \dots, n$) is shuffled. A match occurs at position $i$ if card $i$ is at the $i$-th position.
@@ -82,7 +119,16 @@ Remarkably, for $n \ge 7$, this probability is essentially constant!
 
 ---
 
-## Related Notes
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
+## Related Concepts
 
 - [[Probability Axioms and Naive Probability]] — Axiomatic basis.
 - [[Derangements and Card Matching Example]] — Full step-by-step example.
@@ -90,7 +136,21 @@ Remarkably, for $n \ge 7$, this probability is essentially constant!
 
 ---
 
-## Sources & Traceability
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 3, pages 7–9)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_2.pdf`

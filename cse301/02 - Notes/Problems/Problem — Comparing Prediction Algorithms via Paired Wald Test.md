@@ -12,6 +12,8 @@ order: 66
 
 ---
 
+---
+
 ## Problem
 
 A machine learning team compares two image classification models, Algorithm 1 and Algorithm 2.
@@ -37,6 +39,8 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 
 ---
 
+---
+
 ## Given
 
 - Sample size: $n = 500$ paired observations
@@ -51,6 +55,8 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 
 ---
 
+---
+
 ## Required
 
 1. Explanation of why unpaired test fails.
@@ -58,6 +64,8 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 3. $\bar{D}$, $S_D^2$, and $\widehat{\text{se}}(\bar{D})$.
 4. Paired Wald statistic $W$ and $p$-value.
 5. Final statistical verdict at $\alpha = 0.05$.
+
+---
 
 ---
 
@@ -70,7 +78,31 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 
 ---
 
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+- [[Discrete Probability Distributions]]
+
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### 1. Why the Unpaired Test Is Invalid
 The unpaired two-sample Wald test assumes that samples $X$ and $Y$ are **statistically independent**.
@@ -131,12 +163,49 @@ $$W_{\text{unpaired}} = \frac{-0.05}{0.02086} = -2.40 \implies p = 0.016$$
 Notice that $\widehat{\text{se}}$ in the paired test ($0.01468$) is **$30\%$ smaller** than the unpaired standard error ($0.02086$), yielding a test statistic that is much more decisive ($W = -3.41$ vs. $-2.40$).
 
 ---
-
-## Related Concepts
+### Related Concepts
 
 - [[Wald Test Statistic]]
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
+
+- Conflating correlation with causation or independence.
+- Misapplying the Central Limit Theorem when the variance of the underlying distribution is infinite (e.g. Cauchy).
+
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

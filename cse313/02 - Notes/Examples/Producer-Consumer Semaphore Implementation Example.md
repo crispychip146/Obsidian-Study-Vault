@@ -12,7 +12,9 @@ order: 24
 
 ---
 
-## Problem Setup & Configuration
+---
+
+## Problem
 
 Consider a concurrent system with:
 - A shared circular buffer of fixed size $N = 3$.
@@ -29,7 +31,29 @@ Consider a concurrent system with:
 
 ---
 
-## 1. Chronological Step-by-Step Execution Trace
+---
+
+## Given
+
+- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
+
+---
+
+## Required
+
+- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
+
+---
+
+## Solution
+
+### 1. Chronological Step-by-Step Execution Trace
 
 Below is a detailed time trace demonstrating process synchronization, buffer filling, process suspension upon full buffer, and wake-up upon item consumption.
 
@@ -76,7 +100,9 @@ Below is a detailed time trace demonstrating process synchronization, buffer fil
 
 ---
 
-## 2. Semaphore State Matrix
+---
+
+### 2. Semaphore State Matrix
 
 | Time | Active Process | Action Taken | `mutex` | `empty` | `full` | `empty` Queue | `full` Queue | Buffer State `[0, 1, 2]` |
 |---|---|---|---|---|---|---|---|---|
@@ -90,7 +116,9 @@ Below is a detailed time trace demonstrating process synchronization, buffer fil
 
 ---
 
-## 3. Concrete POSIX C Implementation
+---
+
+### 3. Concrete POSIX C Implementation
 
 ```c
 #include <stdio.h>
@@ -163,7 +191,41 @@ int main() {
 
 ---
 
-## Source Traceability & Metadata
-- **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 35–40: Bounded-Buffer / Producer-Consumer with Semaphores).
-- **Previous Topic:** [[Classic Synchronization Solutions]] (Step 23).
-- **Next Topic:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]] (Step 25).
+---
+
+## Result
+
+The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
+
+---
+
+## Why This Works
+
+Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+
+---
+
+## Common Mistakes
+
+- Overlooking state changes between execution phases.
+- Incorrectly calculating intermediate residual capacities or queue offsets.
+
+---
+
+## General Method
+
+Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+
+---
+
+## Related Concepts
+
+- [[Operating System Structures and Functions]]
+- [[Process Concepts and Memory Layout]]
+
+---
+
+## Sources
+
+- Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
+- Silberschatz et al., *Operating System Concepts* (10th Edition)

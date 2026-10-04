@@ -12,6 +12,26 @@ order: 51
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Credible Intervals, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+A credible interval provides the exact answer to the intuitive question that most non-statisticians mistakenly believe a frequentist confidence interval answers:
+
+> *"Given the data I actually observed, what is a range of values that contains the unknown parameter with 95% probability?"*
+
+Because Bayesian statistics treats $\theta$ as a random variable conditional on the observed data $\mathbf{x}$, we can integrate the posterior density $f(\theta \mid \mathbf{x})$ directly between two endpoints $[a, b]$ to calculate the exact probability that $\theta \in [a, b]$.
+
+---
+
+---
+
 ## Definition
 
 In Bayesian statistics, a **$1 - \alpha$ Credible Interval** (also called a **posterior interval**) for an unknown parameter $\theta \in \Theta$ is an interval $C \subset \Theta$ such that the posterior probability that $\theta$ lies within $C$, given the observed sample data $\mathbf{X} = \mathbf{x}$, is equal to $1 - \alpha$:
@@ -24,17 +44,11 @@ Common choices of significance level $\alpha$ include $\alpha = 0.05$ (a $95\%$ 
 
 ---
 
-## Intuition
-
-A credible interval provides the exact answer to the intuitive question that most non-statisticians mistakenly believe a frequentist confidence interval answers:
-
-> *"Given the data I actually observed, what is a range of values that contains the unknown parameter with 95% probability?"*
-
-Because Bayesian statistics treats $\theta$ as a random variable conditional on the observed data $\mathbf{x}$, we can integrate the posterior density $f(\theta \mid \mathbf{x})$ directly between two endpoints $[a, b]$ to calculate the exact probability that $\theta \in [a, b]$.
-
 ---
 
-## Credible Interval vs. Frequentist Confidence Interval
+## How It Works
+
+### Credible Interval vs. Frequentist Confidence Interval
 
 Understanding the philosophical and mathematical differences between these two concepts is a cornerstone of modern statistical theory:
 
@@ -51,8 +65,7 @@ Understanding the philosophical and mathematical differences between these two c
 > You can **only** say *"There is a 95% probability that $\theta$ lies in $[a, b]$"* when referring to a **Bayesian Credible Interval**. Making that statement about a frequentist confidence interval is mathematically incorrect under classical statistical definitions.
 
 ---
-
-## Types of Credible Intervals
+### Types of Credible Intervals
 
 Because there are infinite intervals that contain $1 - \alpha$ area under the posterior curve, two primary conventions are used:
 
@@ -75,7 +88,49 @@ where $k$ is the largest constant chosen such that $\int_{C_{\text{HPD}}} f(\the
 
 ---
 
-## Example: Normal-Normal Model
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+### Asymptotic Agreement with Frequentist Intervals (Bernstein-von Mises Theorem)
+
+As the sample size $n \to \infty$:
+- The likelihood dominates the prior distribution.
+- The posterior distribution converges to a Gaussian centered at the MLE with variance equal to the inverse Fisher information:
+  $$\theta \mid \mathbf{X} \approx N\left(\hat{\theta}_{\text{MLE}}, \frac{1}{I_n(\hat{\theta}_{\text{MLE}})}\right)$$
+- Consequently, for large $n$, the **Bayesian credible interval asymptotically coincides with the Frequentist Wald confidence interval**:
+  $$C_{\text{Bayes}} \approx C_{\text{Frequentist}} \approx \hat{\theta}_{\text{MLE}} \pm z_{\alpha/2}\widehat{\text{se}}$$
+
+---
+
+---
+
+## Common Mistakes
+
+### Common Mistakes
+
+- Setting equal-tail cutoffs on a highly skewed posterior (such as an exponential or heavily skewed Beta) and expecting it to yield the shortest interval (the HPD region is shorter).
+- Believing that credible intervals require large samples (unlike frequentist Wald intervals, Bayesian credible intervals are exact for any sample size $n$, even $n = 1$, provided the prior and likelihood models are correct).
+
+---
+
+---
+
+## Exam Relevance
+
+### Example: Normal-Normal Model
 
 Let $X_1, \dots, X_n \sim N(\theta, \sigma^2)$ with known variance $\sigma^2$.
 Assign a Gaussian prior $\theta \sim N(a, b^2)$.
@@ -95,22 +150,6 @@ $$C = \left[\bar{\theta} - 1.96\tau, \quad \bar{\theta} + 1.96\tau\right]$$
 
 ---
 
-## Asymptotic Agreement with Frequentist Intervals (Bernstein-von Mises Theorem)
-
-As the sample size $n \to \infty$:
-- The likelihood dominates the prior distribution.
-- The posterior distribution converges to a Gaussian centered at the MLE with variance equal to the inverse Fisher information:
-  $$\theta \mid \mathbf{X} \approx N\left(\hat{\theta}_{\text{MLE}}, \frac{1}{I_n(\hat{\theta}_{\text{MLE}})}\right)$$
-- Consequently, for large $n$, the **Bayesian credible interval asymptotically coincides with the Frequentist Wald confidence interval**:
-  $$C_{\text{Bayes}} \approx C_{\text{Frequentist}} \approx \hat{\theta}_{\text{MLE}} \pm z_{\alpha/2}\widehat{\text{se}}$$
-
----
-
-## Common Mistakes
-
-- Setting equal-tail cutoffs on a highly skewed posterior (such as an exponential or heavily skewed Beta) and expecting it to yield the shortest interval (the HPD region is shorter).
-- Believing that credible intervals require large samples (unlike frequentist Wald intervals, Bayesian credible intervals are exact for any sample size $n$, even $n = 1$, provided the prior and likelihood models are correct).
-
 ---
 
 ## Related Concepts
@@ -119,6 +158,20 @@ As the sample size $n \to \infty$:
 - [[Confidence Intervals and Confidence Sets]]
 - [[Normal-Normal Conjugate Updating Formula]]
 - [[Beta-Binomial Conjugate Updating Formula]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

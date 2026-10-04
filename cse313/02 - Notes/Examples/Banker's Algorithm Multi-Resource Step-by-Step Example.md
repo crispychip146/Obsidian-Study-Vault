@@ -12,7 +12,9 @@ order: 31
 
 ---
 
-## 1. Problem Specification
+---
+
+## Problem
 
 *(Directly derived from course simulation lecture notes: `Notes on algorithm simulation.pdf`)*
 
@@ -36,7 +38,29 @@ $$E = (9, 3, 6)$$
 
 ---
 
-## 2. Step 1: Compute Available Vector ($A$) and Need Matrix ($R$)
+---
+
+## Given
+
+- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
+
+---
+
+## Required
+
+- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
+
+---
+
+## Solution
+
+### 2. Step 1: Compute Available Vector ($A$) and Need Matrix ($R$)
 
 ### 1. Available Vector ($A$):
 The available resources are calculated by subtracting the total allocated resources from the total system capacity:
@@ -57,7 +81,9 @@ $$R = \begin{pmatrix} 2 & 2 & 2 \\ 0 & 0 & 1 \\ 1 & 0 & 3 \\ 4 & 2 & 0 \end{pmat
 
 ---
 
-## 3. Step 2: Safety Simulation Algorithm
+---
+
+### 3. Step 2: Safety Simulation Algorithm
 
 We initialize $Work = A = (0, 1, 1)$ and $Finish = [F, F, F, F]$.
 
@@ -115,7 +141,9 @@ $$Work_{\text{new}} = Work_{\text{old}} + CA(P_4) = (9, 3, 4) + (0, 0, 2) = \mat
 
 ---
 
-## 4. Final Conclusion & State Verification
+---
+
+## Result
 
 Since $Finish[i] = \text{TRUE}$ for all $i \in \{1, 2, 3, 4\}$, the system is in a **SAFE STATE**.
 
@@ -126,7 +154,35 @@ $$\mathbf{\langle P_2 \to P_1 \to P_3 \to P_4 \rangle}$$
 
 ---
 
-## Source Traceability & Metadata
-- **Source Material:** `Notes on algorithm simulation.pdf` (Pages 1–4: Banker's Algorithm for multiple resource types simulation) and `5. Deadlocks-week6-7-RRR.pdf` (Slides 28–31).
-- **Previous Topic:** [[Deadlock Detection and Recovery Algorithms]] (Step 30).
-- **Next Topic:** [[Resource Allocation Graph Cycle Detection Example]] (Step 32).
+---
+
+## Why This Works
+
+Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+
+---
+
+## Common Mistakes
+
+- Overlooking state changes between execution phases.
+- Incorrectly calculating intermediate residual capacities or queue offsets.
+
+---
+
+## General Method
+
+Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+
+---
+
+## Related Concepts
+
+- [[Operating System Structures and Functions]]
+- [[Process Concepts and Memory Layout]]
+
+---
+
+## Sources
+
+- Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
+- Silberschatz et al., *Operating System Concepts* (10th Edition)

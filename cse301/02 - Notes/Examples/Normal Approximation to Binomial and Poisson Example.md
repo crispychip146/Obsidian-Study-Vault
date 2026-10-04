@@ -12,7 +12,9 @@ order: 33
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 The [[Central Limit Theorem]] allows us to approximate complicated discrete probability sums with simple standard normal CDF evaluations $\Phi(z)$.
 
@@ -22,7 +24,29 @@ We examine two classic applications:
 
 ---
 
-## Part 1: Binomial Normal Approximation
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Part 1: Binomial Normal Approximation
 
 Let $X \sim \operatorname{Bin}(n, p)$ with $n = 400$ and $p = 0.52$.
 - Mean: $\mu = np = 400 \times 0.52 = 208$
@@ -52,8 +76,7 @@ $$P(X \le 200) = \sum_{k=0}^{200} \binom{400}{k} (0.52)^k (0.48)^{400 - k} \appr
 The continuity correction improves precision dramatically!
 
 ---
-
-## Part 2: Poisson Normal Approximation
+### Part 2: Poisson Normal Approximation
 
 Let $X \sim \operatorname{Pois}(\lambda)$ with $\lambda = 100$.
 Because a Poisson RV with integer parameter $\lambda$ can be viewed as the sum of $\lambda$ independent $\operatorname{Pois}(1)$ random variables, the CLT applies directly as $\lambda \to \infty$.
@@ -80,7 +103,21 @@ The error is just $0.03\%$!
 
 ---
 
-## Key Takeaways & Exam Tips
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
 
 - **When is the Normal Approximation Valid?**
   - For Binomial: $np \ge 10$ and $n(1 - p) \ge 10$.
@@ -93,7 +130,15 @@ The error is just $0.03\%$!
 
 ---
 
-## Related Notes
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Central Limit Theorem]] — Foundational limit theorem.
 - [[Continuous Probability Distributions]] — Standard normal distribution and $\Phi(z)$.
@@ -101,7 +146,9 @@ The error is just $0.03\%$!
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 20–21, pages 61–63)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`

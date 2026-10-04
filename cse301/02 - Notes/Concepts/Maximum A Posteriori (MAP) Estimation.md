@@ -12,6 +12,25 @@ order: 50
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum A Posteriori (MAP) Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+If the posterior distribution $f(\theta \mid \mathbf{x})$ is a landscape of hills and valleys representing your certainty after seeing the evidence, the **MAP estimate is the highest mountain peak** (the statistical mode).
+
+It answers the question:
+> *"What is the single most probable parameter value given both my prior scientific knowledge and my collected data?"*
+
+---
+
+---
+
 ## Definition
 
 The **Maximum A Posteriori (MAP)** estimator is a Bayesian point estimation method that selects the value of the parameter $\theta \in \Theta$ that maximizes the posterior probability density function:
@@ -29,16 +48,11 @@ $$\hat{\theta}_{\text{MAP}} = \arg\max_{\theta \in \Theta} \Big[ \ell_n(\theta) 
 
 ---
 
-## Intuition
-
-If the posterior distribution $f(\theta \mid \mathbf{x})$ is a landscape of hills and valleys representing your certainty after seeing the evidence, the **MAP estimate is the highest mountain peak** (the statistical mode).
-
-It answers the question:
-> *"What is the single most probable parameter value given both my prior scientific knowledge and my collected data?"*
-
 ---
 
-## MAP vs. MLE: The Key Distinction
+## How It Works
+
+### MAP vs. MLE: The Key Distinction
 
 Recall the definition of the Maximum Likelihood Estimator from [[Maximum Likelihood Estimation]]:
 $$\hat{\theta}_{\text{MLE}} = \arg\max_{\theta \in \Theta} \ell_n(\theta)$$
@@ -66,8 +80,7 @@ $$\hat{\theta}_{\text{MAP}} = \arg\max_{\theta \in \Theta} \big[ \ell_n(\theta) 
 > When the prior distribution is uniform (flat), the MAP estimator is **identically equal to the Maximum Likelihood Estimator**.
 
 ---
-
-## The Prior as a Regularizer in Machine Learning
+### The Prior as a Regularizer in Machine Learning
 
 In modern machine learning and computational statistics, the log-prior $\log f(\theta)$ in the MAP objective function is interpreted as a **regularization penalty** that prevents overfitting:
 
@@ -91,8 +104,53 @@ $$\arg\min_\theta \left[ -\ell_n(\theta) + \frac{1}{b}\lVert\theta\rVert_1 \righ
 This is precisely **Lasso Regression** ($L_1$ regularization), which induces exact sparsity (setting irrelevant coefficients to zero).
 
 ---
+### Important Properties and Limitations
 
-## Example: Bernoulli with Beta Prior
+### Advantages of MAP
+1. **Computational Simplicity:** Finding the mode requires numerical optimization (gradient ascent) rather than high-dimensional integration.
+2. **Prior Incorporation:** Prevents extreme or impossible estimates when sample size $n$ is very small.
+
+### Limitations of MAP
+1. **Not Invariant under Reparameterization:** Unlike MLE, MAP depends on the parameterization chosen because the Jacobian of the transformation alters the prior density.
+2. **Ignores Posterior Uncertainty:** MAP returns only a single point and ignores the spread or skewness of the posterior distribution.
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+### Common Mistakes
+
+- Concluding that MAP and Posterior Mean are always the same. They only coincide when the posterior distribution is symmetric and unimodal.
+- Forgetting that when $\alpha \le 1$ or $\beta \le 1$, the Beta mode can occur at the boundary $0$ or $1$.
+
+---
+
+---
+
+## Exam Relevance
+
+### Example: Bernoulli with Beta Prior
 
 Let $X_1, \dots, X_n \sim \text{Bernoulli}(p)$ with number of successes $s = \sum X_i$.
 Assign a conjugate prior $p \sim \text{Beta}(\alpha, \beta)$ with $\alpha, \beta > 1$:
@@ -121,23 +179,6 @@ Notice that for a uniform prior ($\alpha = 1, \beta = 1$), the MAP estimator red
 
 ---
 
-## Important Properties and Limitations
-
-### Advantages of MAP
-1. **Computational Simplicity:** Finding the mode requires numerical optimization (gradient ascent) rather than high-dimensional integration.
-2. **Prior Incorporation:** Prevents extreme or impossible estimates when sample size $n$ is very small.
-
-### Limitations of MAP
-1. **Not Invariant under Reparameterization:** Unlike MLE, MAP depends on the parameterization chosen because the Jacobian of the transformation alters the prior density.
-2. **Ignores Posterior Uncertainty:** MAP returns only a single point and ignores the spread or skewness of the posterior distribution.
-
----
-
-## Common Mistakes
-
-- Concluding that MAP and Posterior Mean are always the same. They only coincide when the posterior distribution is symmetric and unimodal.
-- Forgetting that when $\alpha \le 1$ or $\beta \le 1$, the Beta mode can occur at the boundary $0$ or $1$.
-
 ---
 
 ## Related Concepts
@@ -146,6 +187,20 @@ Notice that for a uniform prior ($\alpha = 1, \beta = 1$), the MAP estimator red
 - [[Maximum Likelihood Estimation]]
 - [[Beta-Binomial Conjugate Updating Formula]]
 - [[Credible Intervals]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

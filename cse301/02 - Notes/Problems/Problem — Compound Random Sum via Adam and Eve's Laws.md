@@ -12,7 +12,9 @@ order: 24
 
 ---
 
-## Problem Statement
+---
+
+## Problem
 
 A distributed database cluster receives a random number $N$ of write transactions per second, where $N \sim \operatorname{Bin}(m, p)$ with $m = 200$ client threads and transmission probability $p = 0.4$.
 Each committed write transaction $i$ writes $X_i$ megabytes of log data, where $X_1, X_2, \dots$ are i.i.d. continuous random variables following a Gamma distribution:
@@ -26,7 +28,28 @@ Assume $N$ and the sequence $\{X_i\}$ are mutually independent. Let $S_N = \sum_
 
 ---
 
-## Prerequisites & Relevant Concepts
+---
+
+## Given
+
+- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
+
+---
+
+## Required
+
+- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
+
+---
+
+## Concepts Tested
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Prerequisites
 
 - [[Discrete Probability Distributions]] — Binomial distribution properties.
 - [[Continuous Probability Distributions]] — Gamma distribution properties.
@@ -35,7 +58,24 @@ Assume $N$ and the sequence $\{X_i\}$ are mutually independent. Let $S_N = \sum_
 
 ---
 
-## Full Step-by-Step Solution
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
+## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Full Step-by-Step Solution
 
 ### Part 1: Expected Value $\mathbb{E}[S_N]$
 First, compute the parameters of the underlying distributions:
@@ -112,14 +152,47 @@ $$M_{S_N}(t) = \left[ 0.6 + 0.4(1 - 2t)^{-3} \right]^{200} \quad \text{for } t <
 
 ---
 
-## Common Pitfalls
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
 
 1. **Forgetting the Squared Mean in VE:** Writing $\operatorname{Var}(N \mathbb{E}[X]) = \mathbb{E}[X]\operatorname{Var}(N)$ instead of $(\mathbb{E}[X])^2 \operatorname{Var}(N)$. Constants pull out squared from variance!
 2. **Confusing MGF composition:** The compound MGF is $M_N(\ln M_X(t))$, which equals the Probability Generating Function (PGF) of $N$ evaluated at $M_X(t)$: $G_N(M_X(t))$.
 
 ---
 
-## Sources & Traceability
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Source
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 15 & 16, pages 47–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`

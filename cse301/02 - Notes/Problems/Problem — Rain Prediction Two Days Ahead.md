@@ -12,6 +12,8 @@ order: 79
 
 ---
 
+---
+
 ## Problem
 
 Suppose whether it rains on any given day depends on the weather conditions of the previous two days:
@@ -38,11 +40,15 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Given
 
 - Initial state: $X_0 = 0$ (State 0: rained yesterday and today)
 - Transition probability matrix $P$ as given above.
 - Target event: It rains on day 2 (the day after tomorrow).
+
+---
 
 ---
 
@@ -54,11 +60,15 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Markov Chain]] (Higher-Order State Representation)
 - [[Chapman-Kolmogorov Equations]]
 - Law of Total Probability
+
+---
 
 ---
 
@@ -69,13 +79,26 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Question Type
 
 Numerical / Matrix Multiplication
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### Step 1: Compute Row 0 of $P^{(2)} = P \cdot P$
 By the [[Chapman-Kolmogorov Equations]], the two-step transition probabilities from State 0 are given by the dot product of Row 0 of $P$ with each column of $P$:
@@ -110,10 +133,40 @@ $$P(\text{Rain on day 2} \mid X_0 = 0) = P_{00}^{(2)} + P_{01}^{(2)}$$
 $$P(\text{Rain on day 2}) = 0.49 + 0.12 = 0.61 \quad (61.0\%)$$
 
 ---
-
-## Key Idea
+### Key Idea
 
 When predicting an event in an augmented-state Markov chain, the physical event of interest typically corresponds to a **subset of states** rather than a single state. The overall probability is the sum of transition probabilities into all constituent states belonging to that event.
+
+---
+### Exam Pattern
+
+Standard exam question testing:
+1. Efficient row-by-matrix multiplication ($1 \times 4$ row vector times $4 \times 4$ matrix).
+2. Proper mapping from composite state definitions back to underlying real-world events.
+
+---
+### Related Problems
+
+- [[Problem — Four-Day Weather Forecast]]
+- [[Problem — Patty and Max Gambler's Ruin]]
+
+---
+### Related Concepts
+
+- [[Higher-Order State Weather Prediction Example]]
+- [[Chapman-Kolmogorov Equations]]
+- [[Markov Chain]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -125,26 +178,25 @@ When predicting an event in an augmented-state Markov chain, the physical event 
 
 ---
 
+---
+
 ## Exam Pattern
 
-Standard exam question testing:
-1. Efficient row-by-matrix multiplication ($1 \times 4$ row vector times $4 \times 4$ matrix).
-2. Proper mapping from composite state definitions back to underlying real-world events.
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
 
 ---
 
 ## Related Problems
 
+- [[Problem — Birthday Collisions and Approximation]]
 - [[Problem — Four-Day Weather Forecast]]
-- [[Problem — Patty and Max Gambler's Ruin]]
 
 ---
 
 ## Related Concepts
 
-- [[Higher-Order State Weather Prediction Example]]
-- [[Chapman-Kolmogorov Equations]]
-- [[Markov Chain]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

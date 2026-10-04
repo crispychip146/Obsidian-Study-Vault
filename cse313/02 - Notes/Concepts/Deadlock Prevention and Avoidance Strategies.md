@@ -30,20 +30,37 @@ order: 28
 
 ---
 
-## 1. Architectural Distinction: Prevention vs Avoidance
+---
 
-While both strategies ensure that a system never encounters a deadlock, they operate on fundamentally different principles:
+## Starting Point and the Problem
 
-| Dimension | Deadlock Prevention (Static) | Deadlock Avoidance (Dynamic) |
-|---|---|---|
-| **Operating Principle** | Enforces structural constraints on program behavior so that at least one of the 4 Coffman conditions **cannot physically occur**. | Tracks runtime resource requests dynamically using **a priori knowledge** (maximum claims) to guarantee the system stays in a **safe state**. |
-| **Information Required** | None; pure static protocol. | Maximum resource requirement vector for each process. |
-| **Resource Utilization** | Low (overly restrictive rules). | Higher (flexible allocation when safe). |
-| **Algorithmic Overhead** | Low runtime overhead. | High runtime computation on every allocation request. |
+Once deadlock occurs, processes freeze, hardware resources sit idle, and human intervention or process killing is typically required to restore system function.
+
+We want the operating system to guarantee that deadlocks never occur in the first place. The central obstacle is balancing safety against system efficiency: overly restrictive policies prevent deadlock by crippling concurrency and wasting hardware capacity.
 
 ---
 
-## 2. Deadlock Prevention: Attacking the Four Coffman Conditions
+## Developing the Idea
+
+Operating system designers developed two distinct proactive strategies:
+1. **Deadlock Prevention:** A static design-time approach that eliminates deadlocks by constraining how requests are made, ensuring that at least one of the four Coffman conditions can never hold.
+   - Attack Mutual Exclusion: Spooling.
+   - Attack Hold and Wait: Require processes to request all resources upfront.
+   - Attack No Preemption: Forcibly seize resources if a process cannot get what it needs.
+   - Attack Circular Wait: Establish a global total ordering $F: R 	o \mathbb{N}$ and require processes to request resources in strictly increasing order.
+2. **Deadlock Avoidance:** A dynamic runtime approach where the OS inspects every request in real time, granting it only if the resulting system state remains **Safe** (a guaranteed safe sequence exists).
+
+---
+
+## Definition
+
+
+
+---
+
+## How It Works
+
+### 2. Deadlock Prevention: Attacking the Four Coffman Conditions
 
 Havender (1968) and Tanenbaum demonstrated that deadlocks are prevented by structurally invalidating any one of the four necessary conditions:
 
@@ -83,43 +100,69 @@ flowchart TD
 
 ---
 
-## 3. Deadlock Avoidance: Safe and Unsafe States
+---
 
-Deadlock avoidance does not impose restrictive ordering rules. Instead, each process must declare its **maximum resource requirement** ($\text{MaxReq}_i$) upfront.
+## Example
 
-```mermaid
-graph TD
-    subgraph System State Space
-        U["Unsafe States"]
-        S["Safe States (Guaranteed No Deadlock)"]
-        D["Deadlock States"]
-        S --- U
-        U --- D
-    end
-```
-
-### Definitions:
-- **Safe State:** A state is safe if the OS can guarantee that all processes can run to completion without deadlocking, even if **every process suddenly requests its declared maximum resource needs simultaneously**.
-- **Unsafe State:** An unsafe state is **NOT** a deadlock! Rather, an unsafe state is a state from which the OS can no longer guarantee avoidance of a deadlock if processes request their maximum claims.
-- **Deadlock:** An inevitable circular blockage. A deadlock is a strict subset of unsafe states ($\text{Deadlock} \subset \text{Unsafe}$).
-
-### Resource Trajectories
-Tanenbaum visualizes avoidance using a 2D resource trajectory plot where Process $A$'s progress is on the $x$-axis and Process $B$'s progress is on the $y$-axis. The intersection of their resource requirements forms a rectangular **forbidden zone** (unsafe region). The OS scheduler must steer execution paths around the forbidden zone so the trajectory never enters it.
+Havender's Global Resource Ordering ($F(R)$):
+Let Disk $= 1$, Printer $= 2$, Tape Drive $= 3$.
+- Rule: A process holding Resource $i$ may only request Resource $j$ if $F(j) > F(i)$.
+- Suppose $P_1$ holds Disk ($1$) and wants Printer ($2$): Valid! ($2 > 1$).
+- Suppose $P_2$ holds Printer ($2$) and wants Disk ($1$): Rejected by compiler/kernel! ($1 < 2$).
+Circular wait is mathematically impossible because a cycle would require $i_1 < i_2 < \dots < i_k < i_1$, a logical contradiction.
 
 ---
 
-## 4. The Concept of a Safe Sequence
+## Technical Details
 
-A state is **safe** if and only if there exists at least one ordered sequence of processes:
-$$\langle P_1, P_2, \dots, P_n \rangle$$
-known as a **Safe Sequence**, such that for each process $P_i$, the additional resources that $P_i$ can still request can be satisfied by:
-$$\text{Need}_i \le \text{Available} + \sum_{j < i} \text{Allocation}_j$$
-
-If such a sequence exists, the OS can let $P_1$ run to completion, collect its released resources, then run $P_2$, and so forth, guaranteeing that every process successfully terminates!
+See related modules for microarchitectural implementation details.
 
 ---
 
-## Source Traceability & Metadata
+## Important Properties and Why They Hold
+
+- **Safe State Invariant:** A safe state is NOT deadlock; a safe state guarantees that at least one execution sequence exists where all processes can terminate.
+- **Deadlock Subset Invariant:** Deadlock is a strict subset of Unsafe states. An unsafe state is not necessarily deadlocked; it simply means the OS cannot prevent deadlock if all processes claim their maximum demands simultaneously.
+- **Prevention vs. Avoidance Trade-Off:** Prevention restricts programming flexibility and resource utilization statically; Avoidance requires prior knowledge of maximum resource claims at runtime.
+
+---
+
+## Common Mistakes
+
+- Assuming user mode code can execute privileged instructions directly without a system call trap.
+- Overlooking race conditions in shared variables without explicit synchronization.
+
+---
+
+## Exam Relevance
+
+Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
+
+---
+
+## Related Concepts
+
+- [[Banker's Algorithm]]
+- [[Deadlock Detection and Recovery Algorithms]]
+- [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
+
+---
+
+## Prerequisites
+
+- [[Deadlock Fundamentals and Coffman Conditions]]
+- [[Resource Allocation Graphs and Deadlock Modeling]]
+
+---
+
+## Problems
+
+- [[Problem — Banker's Algorithm Safe State and Request Granting]]
+
+---
+
+## Sources
+
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 25–27, 32–37: Resource Trajectories, Safe and Unsafe States, Deadlock Prevention Methods).
 - **Previous Topic:** [[Resource Allocation Graphs and Deadlock Modeling]] (Step 27).
 - **Next Topic:** [[Banker's Algorithm]] (Step 29).

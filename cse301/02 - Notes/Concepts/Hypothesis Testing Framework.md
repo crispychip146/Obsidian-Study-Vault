@@ -12,6 +12,20 @@ order: 57
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Hypothesis Testing Framework, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Hypothesis Testing Framework reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 **Statistical Hypothesis Testing** is a formal decision-theoretic framework for assessing whether empirical data provide sufficient evidence to reject a specified scientific conjecture (the null hypothesis) in favor of a competing conjecture (the alternative hypothesis).
@@ -29,7 +43,11 @@ A hypothesis test is defined by:
 
 ---
 
-## The Legal Trial Analogy: Asymmetric Decision Making
+---
+
+## How It Works
+
+### The Legal Trial Analogy: Asymmetric Decision Making
 
 Hypothesis testing operates under the exact same asymmetric evidentiary standard as a criminal legal trial in common law:
 
@@ -44,8 +62,7 @@ Hypothesis testing operates under the exact same asymmetric evidentiary standard
 > We **never** say *"we accept the null hypothesis"*. We say *"we fail to reject $H_0$"* or *"we retain $H_0$"*. Absence of evidence is not evidence of absence.
 
 ---
-
-## The Two Types of Error
+### The Two Types of Error
 
 Because of random sampling variability, any statistical decision rule can make two distinct errors:
 
@@ -65,8 +82,7 @@ Because of random sampling variability, any statistical decision rule can make t
 - **Statistical Power ($1 - \beta$):** The probability of correctly rejecting a false null hypothesis.
 
 ---
-
-## Power Function, Size, and Significance Level
+### Power Function, Size, and Significance Level
 
 ### Definition: Power Function
 The **power function** $\beta(\theta)$ of a test with rejection region $R$ is the probability of rejecting $H_0$ when the true parameter value is $\theta$:
@@ -82,8 +98,44 @@ $$\beta(\theta) = P_\theta(\mathbf{X} \in R)$$
   $$\sup_{\theta \in \Theta_0} \beta(\theta) \le \alpha$$
 
 ---
+### Most Powerful Tests (Neyman-Pearson Paradigm)
 
-## Hypotheses Classifications
+Ideally, among all tests that satisfy the size constraint $\text{Size} \le \alpha$, we desire the test that **maximizes statistical power $\beta(\theta)$ for all $\theta \in \Theta_1$**.
+- For simple vs. simple hypotheses ($H_0: \theta = \theta_0$ vs $H_1: \theta = \theta_1$), the **Neyman-Pearson Lemma** proves that the Likelihood Ratio Test is the uniformly most powerful (UMP) test.
+- For general composite hypotheses, uniformly most powerful tests rarely exist, motivating standard large-sample tests such as the [[Wald Test Statistic]] and Likelihood Ratio Test.
+
+---
+### Statistical vs. Scientific (Practical) Significance
+
+A fundamental error in applied data science is equating **statistical significance** with **scientific importance**:
+- **Statistical Significance ($p < \alpha$):** Indicates that the observed sample effect is unlikely to be pure random sampling noise.
+- **Scientific Significance:** Measures whether the magnitude of the effect has real-world practical utility.
+
+### The Large-Sample Fallacy
+Because the standard error decays as $\text{se} \propto \frac{1}{\sqrt{n}}$, if sample size $n$ is massive (e.g., $n = 10,000,000$ web click logs), even an infinitesimally tiny, completely irrelevant difference (e.g., a button color increasing conversion by $0.00001\%$) will achieve an astronomical test statistic and $p < 10^{-15}$. It is statistically significant, but scientifically meaningless!
+
+---
+### Duality Between Tests and Confidence Intervals
+
+Hypothesis testing and interval estimation are two sides of the same mathematical coin:
+
+> **Inversion Theorem:**
+> A level $\alpha$ two-sided test rejects $H_0: \theta = \theta_0$ if and only if $\theta_0$ falls outside the corresponding $1 - \alpha$ confidence interval $C_n$:
+> $$\text{Reject } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+### Hypotheses Classifications
 
 1. **Simple Hypothesis:** Specifies a single exact distribution:
    $$H_0: \theta = \theta_0$$
@@ -98,32 +150,25 @@ $$\beta(\theta) = P_\theta(\mathbf{X} \in R)$$
 
 ---
 
-## Most Powerful Tests (Neyman-Pearson Paradigm)
+---
 
-Ideally, among all tests that satisfy the size constraint $\text{Size} \le \alpha$, we desire the test that **maximizes statistical power $\beta(\theta)$ for all $\theta \in \Theta_1$**.
-- For simple vs. simple hypotheses ($H_0: \theta = \theta_0$ vs $H_1: \theta = \theta_1$), the **Neyman-Pearson Lemma** proves that the Likelihood Ratio Test is the uniformly most powerful (UMP) test.
-- For general composite hypotheses, uniformly most powerful tests rarely exist, motivating standard large-sample tests such as the [[Wald Test Statistic]] and Likelihood Ratio Test.
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
 
 ---
 
-## Statistical vs. Scientific (Practical) Significance
+## Common Mistakes
 
-A fundamental error in applied data science is equating **statistical significance** with **scientific importance**:
-- **Statistical Significance ($p < \alpha$):** Indicates that the observed sample effect is unlikely to be pure random sampling noise.
-- **Scientific Significance:** Measures whether the magnitude of the effect has real-world practical utility.
-
-### The Large-Sample Fallacy
-Because the standard error decays as $\text{se} \propto \frac{1}{\sqrt{n}}$, if sample size $n$ is massive (e.g., $n = 10,000,000$ web click logs), even an infinitesimally tiny, completely irrelevant difference (e.g., a button color increasing conversion by $0.00001\%$) will achieve an astronomical test statistic and $p < 10^{-15}$. It is statistically significant, but scientifically meaningless!
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
 
 ---
 
-## Duality Between Tests and Confidence Intervals
+## Exam Relevance
 
-Hypothesis testing and interval estimation are two sides of the same mathematical coin:
-
-> **Inversion Theorem:**
-> A level $\alpha$ two-sided test rejects $H_0: \theta = \theta_0$ if and only if $\theta_0$ falls outside the corresponding $1 - \alpha$ confidence interval $C_n$:
-> $$\text{Reject } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
 
 ---
 
@@ -134,6 +179,20 @@ Hypothesis testing and interval estimation are two sides of the same mathematica
 - [[Multiple Testing and False Discovery Rate]]
 - [[Permutation Test Algorithm]]
 - [[Confidence Intervals and Confidence Sets]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

@@ -12,6 +12,8 @@ order: 91
 
 ---
 
+---
+
 ## Problem
 
 An internet edge router receives incoming network packets according to a Poisson process at an average arrival rate of $\lambda = 800$ packets per second. The router's transmission interface processes packets with exponentially distributed transmission times at an average service rate of $\mu = 1000$ packets per second. The buffer capacity is effectively unlimited.
@@ -25,12 +27,16 @@ An internet edge router receives incoming network packets according to a Poisson
 
 ---
 
+---
+
 ## Given
 
 - Model: M/M/1
 - Arrival rate: $\lambda = 800$ packets/sec
 - Service rate: $\mu = 1000$ packets/sec
 - Capacity: $\infty$
+
+---
 
 ---
 
@@ -45,6 +51,8 @@ An internet edge router receives incoming network packets according to a Poisson
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[M-M-1 Queue]]
@@ -54,7 +62,31 @@ An internet edge router receives incoming network packets according to a Poisson
 
 ---
 
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+- [[Discrete Probability Distributions]]
+
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### 1. Traffic Intensity and Idle Probability
 $$\rho = \frac{\lambda}{\mu} = \frac{800}{1000} = 0.80 \quad (80\% \text{ utilization})$$
@@ -118,12 +150,49 @@ Now suppose $\lambda_{\text{new}} = 800 \times 1.20 = 960$ packets/second:
 Because queueing delay is hyperbolic in $(1 - \rho)^{-1}$, a modest $20\%$ increase in traffic pushes the system from an $80\%$ load to a $96\%$ load, causing packet delay to quintuple from $5$ ms to $25$ ms. This non-linear explosion is why queueing analysis is indispensable for network capacity planning.
 
 ---
-
-## Related Concepts
+### Related Concepts
 
 - [[M-M-1 Queue]]
 - [[M-M-1 Performance Formulas]]
 - [[Little's Law]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
+
+- Conflating correlation with causation or independence.
+- Misapplying the Central Limit Theorem when the variance of the underlying distribution is infinite (e.g. Cauchy).
+
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

@@ -12,7 +12,9 @@ order: 16
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 Consider a workload of 4 processes arriving at different times with varying CPU burst durations:
 
@@ -32,7 +34,29 @@ Simulate execution, construct ASCII Gantt charts, and compute individual and ave
 
 ---
 
-## 1. First-Come, First-Served (FCFS)
+---
+
+## Given
+
+- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
+
+---
+
+## Required
+
+- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
+
+---
+
+## Solution
+
+### 1. First-Come, First-Served (FCFS)
 
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: $P_1$ arrives and runs until completion ($t = 8$).
@@ -57,7 +81,9 @@ $$\text{Average Waiting Time} = \frac{0 + 7 + 10 + 18}{4} = \frac{35}{4} = \math
 
 ---
 
-## 2. Shortest Job First (SJF — Non-Preemptive)
+---
+
+### 2. Shortest Job First (SJF — Non-Preemptive)
 
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: Only $P_1$ has arrived. $P_1$ is dispatched and runs to completion (non-preemptive!) from $t = 0$ to $t = 8$.
@@ -84,7 +110,9 @@ $$\text{Average Waiting Time} = \frac{0 + 7 + 15 + 9}{4} = \frac{31}{4} = \mathb
 
 ---
 
-## 3. Shortest Remaining Time First (SRTF — Preemptive)
+---
+
+### 3. Shortest Remaining Time First (SRTF — Preemptive)
 
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: $P_1$ starts (remaining: 8).
@@ -126,7 +154,9 @@ $$\text{Average Waiting Time} = \frac{9 + 0 + 15 + 2}{4} = \frac{26}{4} = \mathb
 
 ---
 
-## 4. Round Robin (RR with Quantum $q = 4\text{ ms}$)
+---
+
+### 4. Round Robin (RR with Quantum $q = 4\text{ ms}$)
 
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: Ready queue = $[P_1]$. $P_1$ runs for full quantum $q=4$ (remaining: $8 - 4 = 4$).
@@ -164,7 +194,9 @@ $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathb
 
 ---
 
-## Master Comparison Summary
+---
+
+## Result
 
 | Metric | FCFS | SJF (Non-Preemptive) | SRTF (Preemptive) | Round Robin ($q=4$) |
 |---|---|---|---|---|
@@ -179,7 +211,28 @@ $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathb
 
 ---
 
-## Related Notes
+---
+
+## Why This Works
+
+Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+
+---
+
+## Common Mistakes
+
+- Overlooking state changes between execution phases.
+- Incorrectly calculating intermediate residual capacities or queue offsets.
+
+---
+
+## General Method
+
+Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+
+---
+
+## Related Concepts
 
 - [[Batch Scheduling Algorithms]] — Formal specifications of FCFS, SJF, and SRTF.
 - [[Interactive Scheduling Algorithms]] — Mechanics of Round Robin and quantum sizing.
@@ -187,7 +240,9 @@ $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathb
 
 ---
 
-## Sources & Traceability
+---
 
-- **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 13–48)
-- **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4)
+## Sources
+
+- Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
+- Silberschatz et al., *Operating System Concepts* (10th Edition)

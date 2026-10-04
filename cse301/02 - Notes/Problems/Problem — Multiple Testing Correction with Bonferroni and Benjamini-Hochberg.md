@@ -12,6 +12,8 @@ order: 67
 
 ---
 
+---
+
 ## Problem
 
 A bioinformatics researcher evaluates $m = 10$ genes to determine whether their expression levels differ between cancer patients and healthy controls. The $10$ independent hypothesis tests produce the following ordered $p$-values:
@@ -31,6 +33,8 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 
 ---
 
+---
+
 ## Given
 
 - Number of tests: $m = 10$
@@ -38,6 +42,8 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 - Ordered $p$-values:
   $P_{(1)} = 0.00017$, $P_{(2)} = 0.00448$, $P_{(3)} = 0.00671$, $P_{(4)} = 0.00907$, $P_{(5)} = 0.01220$,
   $P_{(6)} = 0.33626$, $P_{(7)} = 0.39341$, $P_{(8)} = 0.53882$, $P_{(9)} = 0.58125$, $P_{(10)} = 0.98617$.
+
+---
 
 ---
 
@@ -50,6 +56,8 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Multiple Testing and False Discovery Rate]]
@@ -59,7 +67,31 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 
 ---
 
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+- [[Discrete Probability Distributions]]
+
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### 1. Unadjusted Hypothesis Testing
 Each test is compared against the raw threshold $\alpha = 0.05$.
@@ -127,18 +159,54 @@ $$\mathbf{\text{Reject } H_{(1)}, H_{(2)}, H_{(3)}, H_{(4)}, H_{(5)}}$$
 | **Benjamini-Hochberg** | 5 | $H_{(1)}$ to $H_{(5)}$ | $\text{FDR} \le 0.05$ | **Best:** Recovers all 5 discoveries with $\le 5\%$ expected false positive rate |
 
 ---
-
-## Key Takeaway
+### Key Takeaway
 
 The Bonferroni correction is so harsh that it discards genes 3, 4, and 5 ($p$-values between $0.006$ and $0.012$, which are highly significant in isolation). The Benjamini-Hochberg procedure recognizes that having multiple small $p$-values increases our collective confidence that real discoveries are present, adaptively relaxing the threshold and safely declaring all 5 discoveries.
+
+---
+### Related Concepts
+
+- [[Multiple Testing and False Discovery Rate]]
+- [[Benjamini-Hochberg Procedure Algorithm]]
+- [[p-Values and Significance]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
+
+- Conflating correlation with causation or independence.
+- Misapplying the Central Limit Theorem when the variance of the underlying distribution is infinite (e.g. Cauchy).
+
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Related Concepts
 
-- [[Multiple Testing and False Discovery Rate]]
-- [[Benjamini-Hochberg Procedure Algorithm]]
-- [[p-Values and Significance]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

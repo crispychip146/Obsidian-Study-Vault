@@ -12,7 +12,9 @@ order: 14
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 The **Fundamental Bridge** between probability and expectation is the **indicator random variable**:
 For any event $A$:
@@ -30,7 +32,29 @@ We demonstrate the power of this method across two classic problems:
 
 ---
 
-## Step-by-Step Solution
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Step-by-Step Solution
 
 ### Problem 1: Expected White Balls Sampled Without Replacement
 Let $N = w + b$ total balls. Draw a sample of size $n$ without replacement. Let $X$ be the number of white balls drawn.
@@ -73,8 +97,7 @@ Let $D$ be the number of **distinct days** of the year that are someone's birthd
   $$\mathbb{E}[D] = \sum_{d=1}^{365} \mathbb{E}[I_d] = 365 \left[ 1 - \left( 1 - \frac{1}{365} \right)^k \right]$$
 
 ---
-
-## Numerical Evaluation for $k = 30$ and $k = 365$
+### Numerical Evaluation for $k = 30$ and $k = 365$
 
 - **For $k = 30$ people:**
   $$\mathbb{E}[D] = 365 \left[ 1 - \left(\frac{364}{365}\right)^{30} \right] \approx 365 [ 1 - 0.9210 ] \approx 28.84 \text{ days}$$
@@ -87,14 +110,36 @@ Let $D$ be the number of **distinct days** of the year that are someone's birthd
 
 ---
 
-## Key Takeaways & Exam Tips
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
 
 - **The Indicator Choice Trick:** If asked for "the number of occupied bins", define indicators for the **bins**, not the balls!
 - **Independence is Irrelevant for Linearity:** $\mathbb{E}[X_1 + \dots + X_n] = \mathbb{E}[X_1] + \dots + \mathbb{E}[X_n]$ is true **always**. Never spend time checking independence when calculating expectations.
 
 ---
 
-## Related Notes
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Discrete Probability Distributions]] — Hypergeometric and Binomial properties.
 - [[Law of the Unconscious Statistician (LOTUS)]] — Expectation mechanics.
@@ -102,7 +147,9 @@ Let $D$ be the number of **distinct days** of the year that are someone's birthd
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 8, pages 23–25)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_5.pdf`

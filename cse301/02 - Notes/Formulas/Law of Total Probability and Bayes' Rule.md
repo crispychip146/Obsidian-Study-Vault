@@ -12,7 +12,21 @@ order: 19
 
 ---
 
-## Mathematical Statement
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Law of Total Probability and Bayes' Rule, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Law of Total Probability and Bayes' Rule compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 ### 1. Law of Total Probability (LTP)
 Let $B_1, B_2, \dots, B_n$ form a **partition** of the sample space $S$ (i.e., they are mutually disjoint, $B_i \cap B_j = \emptyset$ for $i \ne j$, and $\bigcup_{i=1}^n B_i = S$, with $P(B_i) > 0$).
@@ -40,7 +54,28 @@ where:
 
 ---
 
-## Component Breakdown & Terminology
+---
+
+## Variables
+
+| Symbol | Meaning |
+|---|---|
+| $X, Y$ | Random variables governed by underlying probability distributions |
+| $\mathbb{E}[\cdot]$ | Expected value operator |
+| $\text{Var}(\cdot)$ | Variance operator |
+
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### Component Breakdown & Terminology
 
 - **Prior Probability $P(B_k)$:** The baseline belief in hypothesis $B_k$ prior to seeing any experimental data.
 - **Likelihood $P(A \mid B_k)$:** The probability that evidence $A$ would be generated if hypothesis $B_k$ were true.
@@ -51,7 +86,17 @@ $$\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence
 
 ---
 
-## Classic Application Example: Rare Disease Testing
+---
+
+## Derivation
+
+Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+
+---
+
+## Example
+
+### Classic Application Example: Rare Disease Testing
 
 Suppose a rare disease affects $0.1\%$ of the population ($P(D) = 0.001$).
 A diagnostic test has:
@@ -71,7 +116,16 @@ $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 
 
 ---
 
-## Related Notes
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
+## Related Concepts
 
 - [[Conditional Probability and Independence]] — Definition of conditioning and multiplication rule.
 - [[Bayesian Inference]] — Statistical inference paradigm built on Bayes' Rule.
@@ -79,7 +133,21 @@ $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 
 
 ---
 
-## Sources & Traceability
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 4 & 5, pages 10–16)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_3.pdf`

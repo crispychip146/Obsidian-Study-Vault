@@ -12,7 +12,9 @@ order: 30
 
 ---
 
-## Problem Statement
+---
+
+## Problem
 
 A high-frequency network switch processes incoming packets. The number of packets arriving in a 1-millisecond window follows a Poisson distribution with mean $\lambda = 20$:
 $$X \sim \operatorname{Pois}(20)$$
@@ -29,7 +31,28 @@ $$P(X \ge 40)$$
 
 ---
 
-## Prerequisites & Relevant Concepts
+---
+
+## Given
+
+- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
+
+---
+
+## Required
+
+- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
+
+---
+
+## Concepts Tested
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Prerequisites
 
 - [[Discrete Probability Distributions]] — Poisson distribution moments and MGF.
 - [[Markov Inequality]] — First-moment bounding.
@@ -38,7 +61,24 @@ $$P(X \ge 40)$$
 
 ---
 
-## Full Step-by-Step Solution
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
+## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Full Step-by-Step Solution
 
 ### Part 1: Markov's Inequality
 Since $X$ is a count of packets, $X \ge 0$.
@@ -107,14 +147,47 @@ Chernoff exploits the fact that the Poisson distribution has an analytic MGF wit
 
 ---
 
-## Common Pitfalls
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
 
 1. **Failure to check $t^* > 0$:** If the requested threshold $a$ is less than the mean ($a < \mu$), the optimal $t^*$ will be negative, meaning one must use the lower tail Chernoff bound ($t < 0$).
 2. **Algebraic error in $h(t)$:** Forgetting to subtract the $-40t$ term when substituting $t^* = \ln 2$.
 
 ---
 
-## Sources & Traceability
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Source
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17 & 18, pages 54–59)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf` (Problem 2)

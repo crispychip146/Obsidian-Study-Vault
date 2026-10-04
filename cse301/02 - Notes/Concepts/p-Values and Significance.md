@@ -12,21 +12,15 @@ order: 58
 
 ---
 
-## Definition
+---
 
-The **$p$-value** is the probability, computed assuming the null hypothesis $H_0$ is true, of observing a test statistic at least as extreme as (or more extreme than) the value actually observed in the sample data.
+## Starting Point and the Problem
 
-Formally, let $T(\mathbf{X})$ be a test statistic where large values provide evidence against $H_0$, and let $t_{\text{obs}} = T(\mathbf{x})$ denote the realized value calculated from the observed dataset $\mathbf{x}$. The $p$-value is defined as:
-
-$$p = \sup_{\theta \in \Theta_0} P_\theta\left(T(\mathbf{X}) \ge t_{\text{obs}}\right)$$
-
-### Alternative Operational Definition
-The $p$-value is the **smallest significance level $\alpha$** at which a hypothesis test would reject the null hypothesis $H_0$:
-$$p = \inf\big\{\alpha \in (0, 1) : T(\mathbf{x}) \in R_\alpha\big\}$$
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to p-Values and Significance, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
 
 ---
 
-## Intuition: The Sliding Threshold
+## Developing the Idea
 
 Reporting a binary verdict ("reject at $\alpha = 0.05$" or "fail to reject") throws away valuable evidentiary nuance:
 - Did you reject with overwhelming, undeniable evidence ($p = 0.00001$)?
@@ -45,7 +39,27 @@ Imagine the critical rejection cutoff $c_\alpha$ as a sliding high-jump bar:
 
 ---
 
-## Standard Interpretation Scale
+---
+
+## Definition
+
+The **$p$-value** is the probability, computed assuming the null hypothesis $H_0$ is true, of observing a test statistic at least as extreme as (or more extreme than) the value actually observed in the sample data.
+
+Formally, let $T(\mathbf{X})$ be a test statistic where large values provide evidence against $H_0$, and let $t_{\text{obs}} = T(\mathbf{x})$ denote the realized value calculated from the observed dataset $\mathbf{x}$. The $p$-value is defined as:
+
+$$p = \sup_{\theta \in \Theta_0} P_\theta\left(T(\mathbf{X}) \ge t_{\text{obs}}\right)$$
+
+### Alternative Operational Definition
+The $p$-value is the **smallest significance level $\alpha$** at which a hypothesis test would reject the null hypothesis $H_0$:
+$$p = \inf\big\{\alpha \in (0, 1) : T(\mathbf{x}) \in R_\alpha\big\}$$
+
+---
+
+---
+
+## How It Works
+
+### Standard Interpretation Scale
 
 While modern statistics encourages reporting exact numerical $p$-values rather than binary thresholds, the following scientific scale is widely recognized:
 
@@ -57,8 +71,7 @@ While modern statistics encourages reporting exact numerical $p$-values rather t
 | $p \ge 0.10$ | **Little to No Evidence** against $H_0$ (consistent with chance) |
 
 ---
-
-## How to Compute the $p$-Value
+### How to Compute the $p$-Value
 
 ### 1. One-Sided Right-Tail Test
 For $H_0: \theta \le \theta_0$ vs $H_1: \theta > \theta_0$:
@@ -73,8 +86,7 @@ For $H_0: \theta = \theta_0$ vs $H_1: \theta \ne \theta_0$, where the null distr
 $$p = P(\lvert Z \rvert \ge \lvert w_{\text{obs}} \rvert) = 2 \cdot P(Z \le -\lvert w_{\text{obs}} \rvert) = 2\Phi(-\lvert w_{\text{obs}} \rvert)$$
 
 ---
-
-## Crucial Fallacies and Misinterpretations
+### Crucial Fallacies and Misinterpretations
 
 The American Statistical Association (ASA) highlighted that the $p$-value is one of the most frequently misunderstood concepts in all of science.
 
@@ -93,8 +105,7 @@ A tiny $p$-value ($p = 0.001$) does **not** mean there is a $99.9\%$ chance that
 A large $p$-value simply means the sample size was too small or the variance was too large to detect a difference. It indicates **insufficient evidence**, never proof of equality.
 
 ---
-
-## The Null Distribution of the $p$-Value
+### The Null Distribution of the $p$-Value
 
 An extraordinary mathematical property of the $p$-value:
 > **Theorem:** 
@@ -114,12 +125,60 @@ This beautiful result explains why setting a threshold $\alpha = 0.05$ guarantee
 
 ---
 
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+
+---
+
 ## Related Concepts
 
 - [[Hypothesis Testing Framework]]
 - [[Wald Test Statistic]]
 - [[Multiple Testing and False Discovery Rate]]
 - [[Permutation Test Algorithm]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

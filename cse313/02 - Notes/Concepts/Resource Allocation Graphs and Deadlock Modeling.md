@@ -26,7 +26,39 @@ order: 27
 
 ---
 
-## 1. Graph Theoretical Formulation
+---
+
+## Starting Point and the Problem
+
+In real-world operating systems with dozens of processes and hundreds of heterogeneous resources (some with multiple identical instances, like 4 tape drives or 8 memory buffers), informal reasoning about deadlocks quickly becomes impossible.
+
+We want a formal mathematical model to precisely represent system allocation state and detect whether deadlock exists. The central obstacle is distinguishing harmless resource contention from true deadlock when resources have multiple instances: a cycle in dependency may or may not mean deadlock.
+
+---
+
+## Developing the Idea
+
+Computer scientists solve this by modeling resource allocations as a directed bipartite graph: the **Resource Allocation Graph (RAG)** $G = (V, E)$.
+
+The vertices $V$ are partitioned into:
+- Process nodes $P = \{P_1, P_2, \dots, P_n\}$ (represented as circles).
+- Resource nodes $R = \{R_1, R_2, \dots, R_m\}$ (represented as squares containing dots for each instance).
+
+The edges $E$ represent dependencies:
+- **Request Edge ($P_i 	o R_j$):** Process $P_i$ is waiting for an instance of resource $R_j$.
+- **Assignment Edge ($R_j 	o P_i$):** An instance of resource $R_j$ is allocated to process $P_i$.
+
+---
+
+## Definition
+
+
+
+---
+
+## How It Works
+
+### 1. Graph Theoretical Formulation
 
 Holt (1972) modeled resource allocation and deadlocks as a directed bipartite graph:
 $$G = (V, E)$$
@@ -52,30 +84,37 @@ graph LR
 
 ---
 
-## 2. The Fundamental Cycle vs Deadlock Theorems
+---
 
-The relationship between graph cycles and deadlocks depends strictly on the number of instances per resource class:
+## Example
 
-```mermaid
-flowchart TD
-    G{"Does the Resource Allocation Graph contain a cycle?"}
-    G -- "NO" --> ND["GUARANTEED: NO DEADLOCK"]
-    G -- "YES" --> Inst{"How many instances per resource type?"}
-    Inst -- "Single Instance per Resource" --> DL["GUARANTEED: DEADLOCK EXISTS!<br/>(Cycle is Necessary & Sufficient)"]
-    Inst -- "Multiple Instances per Resource" --> Poss["DEADLOCK MAY OR MAY NOT EXIST<br/>(Cycle is Necessary, but NOT Sufficient)"]
-```
-
-### Theorem 1: Single-Instance Systems
-> In a system where every resource type contains exactly **one single instance**, a directed cycle in the Resource Allocation Graph is both a **necessary and sufficient** condition for deadlock.
-> $$\text{Cycle} \iff \text{Deadlock}$$
-
-### Theorem 2: Multi-Instance Systems
-> In a system where resource types contain **multiple instances**, a directed cycle is a **necessary condition, but NOT a sufficient condition** for deadlock.
-> $$\text{Deadlock} \implies \text{Cycle} \quad (\text{Cycle} \centernot\implies \text{Deadlock})$$
+Cycle analysis on RAGs:
+- **Single-Instance Resources:** If every resource has exactly 1 instance, a directed cycle in the RAG is both **necessary and sufficient** for deadlock. A cycle strictly proves deadlock!
+- **Multiple-Instance Resources:** If resources have multiple instances, a cycle is **necessary but NOT sufficient**. For example, processes outside the cycle may finish and return resources, breaking the dependency.
 
 ---
 
-## 3. Concrete Visual Examples
+## Technical Details
+
+See related modules for microarchitectural implementation details.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Graph Reduction Theorem:** A RAG is deadlocked if and only if it cannot be completely reduced. The **Graph Reduction Algorithm** repeatedly finds unblocked processes, satisfies their requests, and deletes all their edges until no more processes can be reduced.
+- **Bipartite Invariant:** Edges strictly alternate between Process nodes and Resource nodes; an edge can never directly connect two processes or two resources.
+
+---
+
+## Common Mistakes
+
+- Assuming user mode code can execute privileged instructions directly without a system call trap.
+- Overlooking race conditions in shared variables without explicit synchronization.
+
+---
+
+## Exam Relevance
 
 ### Case A: Single-Instance Cycle $\implies$ Permanent Deadlock
 Consider processes $A, B$ and resources $R, S$ (1 instance each):
@@ -122,24 +161,31 @@ The cycle dissolved completely!
 
 ---
 
-## 4. Graph Reduction Algorithm
+---
 
-To formally verify whether a multi-instance graph is deadlocked, the OS executes **Graph Reduction**:
+## Related Concepts
 
-### Step-by-Step Reduction Protocol:
-1. Search for a process node $P_i$ whose pending resource requests can be completely satisfied by the currently available unassigned resource instances.
-2. If such a $P_i$ is found, assume $P_i$ runs to completion without blocking:
-   - Erase all request edges from $P_i$.
-   - Erase all assignment edges to $P_i$ (returning its held instances to the available pool).
-   - Erase node $P_i$.
-3. Repeat Steps 1 and 2 until no further process can be satisfied.
-4. **Termination Criteria:**
-   - If **all process nodes are erased**, the graph is completely reducible $\implies$ **No Deadlock**.
-   - If **non-empty process nodes remain**, the system is deadlocked, and the remaining processes are the ones deadlocked!
+- [[Deadlock Prevention and Avoidance Strategies]]
+- [[Banker's Algorithm]]
+- [[Deadlock Detection and Recovery Algorithms]]
+- [[Resource Allocation Graph Cycle Detection Example]]
 
 ---
 
-## Source Traceability & Metadata
+## Prerequisites
+
+- [[Deadlock Fundamentals and Coffman Conditions]]
+
+---
+
+## Problems
+
+- [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
+
+---
+
+## Sources
+
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 10–13, 16–17: Deadlock Modeling, Resource Allocation Graphs, Cycle Analysis).
 - **Previous Topic:** [[Deadlock Fundamentals and Coffman Conditions]] (Step 26).
 - **Next Topic:** [[Deadlock Prevention and Avoidance Strategies]] (Step 28).

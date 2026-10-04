@@ -12,6 +12,8 @@ order: 80
 
 ---
 
+---
+
 ## Problem
 
 Consider a three-state [[Markov Chain]] with state space $S = \{0, 1, 2\}$ and transition probability matrix:
@@ -29,10 +31,14 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Given
 
 - State space $S = \{0, 1, 2\}$
 - Transition matrix $P$ as specified above.
+
+---
 
 ---
 
@@ -45,11 +51,15 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Classification of States in Markov Chains]] (Accessibility, Communication, Communicating Classes, Irreducibility, Periodicity)
 - [[Chapman-Kolmogorov Equations]]
 - [[Markov Chain]]
+
+---
 
 ---
 
@@ -60,13 +70,26 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Question Type
 
 Proof / Conceptual Verification
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### Step 1: Verify Accessibility $0 \to 2$
 State $2$ is accessible from state $0$ ($0 \to 2$) if there exists an integer $n \ge 1$ such that $P_{02}^n > 0$.
@@ -123,10 +146,42 @@ $$d(0) = d(1) = d(2) = 1$$
 All states are **aperiodic**.
 
 ---
-
-## Key Idea
+### Key Idea
 
 A zero entry $P_{ij} = 0$ in the one-step transition matrix does *not* imply that state $j$ cannot be reached from state $i$. Reachability only requires the existence of at least one path of non-zero probability in the transition graph. If any state in an irreducible class has a self-loop ($P_{ii} > 0$), the entire class is automatically aperiodic.
+
+---
+### Exam Pattern
+
+A staple exam question testing:
+1. Definition of accessibility vs direct transition.
+2. Formal proof of communication via intermediate paths.
+3. Definition and verification of irreducibility.
+4. Exploiting self-loops ($P_{ii} > 0$) to establish aperiodicity instantly.
+
+---
+### Related Problems
+
+- [[Problem — Identification of Communicating Classes and Absorbing States]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+### Related Concepts
+
+- [[Classification of States in Markov Chains]]
+- [[Stationary and Limiting Distributions in Markov Chains]]
+- [[Chapman-Kolmogorov Equations]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -138,28 +193,25 @@ A zero entry $P_{ij} = 0$ in the one-step transition matrix does *not* imply tha
 
 ---
 
+---
+
 ## Exam Pattern
 
-A staple exam question testing:
-1. Definition of accessibility vs direct transition.
-2. Formal proof of communication via intermediate paths.
-3. Definition and verification of irreducibility.
-4. Exploiting self-loops ($P_{ii} > 0$) to establish aperiodicity instantly.
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
 
 ---
 
 ## Related Problems
 
-- [[Problem — Identification of Communicating Classes and Absorbing States]]
+- [[Problem — Birthday Collisions and Approximation]]
 - [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Related Concepts
 
-- [[Classification of States in Markov Chains]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
-- [[Chapman-Kolmogorov Equations]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

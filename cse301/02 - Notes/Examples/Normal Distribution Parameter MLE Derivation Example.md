@@ -12,6 +12,8 @@ order: 45
 
 ---
 
+---
+
 ## Problem
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a sample of size $n$ from a normal distribution with unknown mean $\mu \in (-\infty, \infty)$ and unknown variance $\sigma^2 > 0$.
@@ -19,6 +21,8 @@ Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a samp
 1. Derive the joint Maximum Likelihood Estimators $\hat{\mu}_{\text{MLE}}$ and $\hat{\sigma}^2_{\text{MLE}}$.
 2. Prove whether $\hat{\mu}_{\text{MLE}}$ is unbiased.
 3. Prove whether $\hat{\sigma}^2_{\text{MLE}}$ is unbiased, and if biased, determine the exact bias and explain Bessel's correction.
+
+---
 
 ---
 
@@ -31,6 +35,8 @@ Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a samp
 
 ---
 
+---
+
 ## Required
 
 1. Closed-form expressions for $\hat{\mu}$ and $\hat{\sigma}^2$.
@@ -39,7 +45,17 @@ Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a samp
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Maximum Likelihood Estimation]]
 - [[Likelihood and Score Equations]]
@@ -47,8 +63,7 @@ Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a samp
 - [[Bias-Variance Decomposition]]
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Formulate the Likelihood and Log-Likelihood
 The likelihood of the sample is the product of individual densities:
@@ -105,6 +120,8 @@ $$E[S^2] = \frac{n}{n-1} E[\hat{\sigma}^2_{\text{MLE}}] = \frac{n}{n-1}\left(\fr
 
 ---
 
+---
+
 ## Result
 
 - $\hat{\mu}_{\text{MLE}} = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ (Unbiased)
@@ -113,9 +130,13 @@ $$E[S^2] = \frac{n}{n-1} E[\hat{\sigma}^2_{\text{MLE}}] = \frac{n}{n-1}\left(\fr
 
 ---
 
+---
+
 ## Why This Works
 
 The score equations find the coordinates $(\mu, \sigma^2)$ at which the Gaussian surface matches the empirical moments of the data. The variance MLE is biased because measuring distances from the sample mean $\bar{X}$ instead of the true population mean $\mu$ absorbs one degree of freedom, systematically reducing the sum of squared deviations.
+
+---
 
 ---
 
@@ -126,11 +147,21 @@ The score equations find the coordinates $(\mu, \sigma^2)$ at which the Gaussian
 
 ---
 
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
 ## Related Concepts
 
 - [[Maximum Likelihood Estimation]]
 - [[Likelihood and Score Equations]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
 
 ---
 

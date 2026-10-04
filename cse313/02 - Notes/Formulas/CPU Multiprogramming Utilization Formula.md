@@ -12,20 +12,67 @@ order: 9
 
 ---
 
-## Mathematical Statement
+---
 
-Let $n$ denote the **degree of multiprogramming** (the number of independent processes loaded concurrently into main memory). Let $p$ denote the average fraction of time each process spends waiting for I/O operations to complete (where $0 \le p \le 1$).
+## The Question and Earlier Knowledge
 
-Under the probabilistic assumption that process I/O requests are statistically independent, the **CPU Utilization** (the fraction of time the processor is actively executing instructions) is given by:
+How much CPU computing capacity is actively utilized when $n$ independent processes are loaded concurrently into main memory, and what fraction of CPU time is wasted idling during I/O waits?
 
-$$\text{CPU Utilization} = 1 - p^n$$
-
-Equivalently, the probability that the CPU is completely idle (zero processes ready to compute) is:
-$$P(\text{CPU Idle}) = p^n$$
+We already know that processes alternate between CPU bursts and I/O bursts. When only a single process is resident in memory ($n=1$), any time it blocks on slow disk or network I/O, the expensive CPU has nothing to do and sits completely idle. The obstacle to calculating multi-process CPU utilization directly is modeling the complex concurrent scheduling interactions among multiple processes without running an intractable minute-by-minute simulation.
 
 ---
 
-## Intuitive Derivation & Probabilistic Logic
+## Developing the Formula
+
+We model the system using probabilistic analysis:
+1. Let $p$ be the average fraction of time each process spends waiting for I/O ($0 \le p \le 1$).
+2. For a single process, the probability it is waiting on I/O at any random instant is $p$.
+3. Assuming processes behave independently, the probability that **all $n$ processes are simultaneously blocked on I/O** is the product of their individual probabilities: $p \times p \times \dots \times p = p^n$.
+4. The CPU is completely idle if and only if every single resident process is blocked on I/O.
+5. Therefore, by the complement rule of probability, at least one process is ready to execute with probability $1 - p^n$.
+
+---
+
+## Formula
+
+$$\text{CPU Utilization} = 1 - p^n$$
+
+$$\text{CPU Idle Probability} = p^n$$
+
+---
+
+## Variables
+
+| Symbol | Meaning | Domain |
+|---|---|---|
+| $n$ | Degree of multiprogramming (number of processes resident in RAM) | $n \in \mathbb{Z}^+$ |
+| $p$ | Average fraction of time each process spends waiting for I/O | $0 \le p \le 1$ |
+| $p^n$ | Probability that all $n$ processes are simultaneously blocked | $0 \le p^n \le 1$ |
+| $1 - p^n$ | CPU Utilization (probability that CPU is actively computing) | $0 \le 1 - p^n \le 1$ |
+
+---
+
+## Conditions
+
+- Process I/O requests are statistically independent.
+- Main memory has sufficient capacity to keep all $n$ processes resident simultaneously without page thrashing.
+- Context switching overhead is negligible relative to burst lengths.
+
+---
+
+## Intuition
+
+### Model Limitations & Assumptions
+
+While invaluable for conceptual modeling, the formula makes simplifying assumptions that break down in extreme cases:
+1. **Assumes Independent I/O:** Processes are rarely purely independent. In reality, multiple processes compete for the same physical disk controller or network interface, causing queueing bottlenecks.
+2. **Ignores Context Switching Overhead:** Context switches consume non-zero CPU time. If $n$ becomes excessively large, physical memory is exhausted, triggering paging/thrashing where the CPU spends $99\%$ of its time swapping pages to disk.
+
+---
+
+---
+
+## Derivation
 
 1. Consider a single process running in isolation ($n = 1$). By definition, it spends fraction $p$ of its time blocked on I/O. Therefore:
    $$\text{CPU Utilization} = 1 - p$$
@@ -41,7 +88,11 @@ $\blacksquare$
 
 ---
 
-## Numerical Analysis: The Power of Multiprogramming
+---
+
+## Example
+
+### Numerical Analysis: The Power of Multiprogramming
 
 Consider a workload where processes spend $p = 0.80$ ($80\%$) of their total lifecycle waiting for I/O:
 
@@ -67,7 +118,9 @@ xychart-beta
 
 ---
 
-## Practical Hardware Design Implication: Sizing RAM
+---
+
+### Practical Hardware Design Implication: Sizing RAM
 
 This formula guides physical memory capacity planning in operating systems:
 - Suppose a computer has $2\text{ GB}$ of RAM, with the OS taking $512\text{ MB}$ and each user process requiring $256\text{ MB}$.
@@ -80,25 +133,36 @@ This formula guides physical memory capacity planning in operating systems:
 
 ---
 
-## Model Limitations & Assumptions
+---
 
-While invaluable for conceptual modeling, the formula makes simplifying assumptions that break down in extreme cases:
-1. **Assumes Independent I/O:** Processes are rarely purely independent. In reality, multiple processes compete for the same physical disk controller or network interface, causing queueing bottlenecks.
-2. **Ignores Context Switching Overhead:** Context switches consume non-zero CPU time. If $n$ becomes excessively large, physical memory is exhausted, triggering paging/thrashing where the CPU spends $99\%$ of its time swapping pages to disk.
+## Common Mistakes
+
+- Confusing $p$ (I/O wait fraction) with CPU burst fraction ($1 - p$).
+- Assuming $n$ can be increased indefinitely to achieve 100% utilization: once memory is exhausted, paging overhead triggers **Thrashing**, crashing CPU utilization to near zero.
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+## Related Concepts
 
-- **Next Step:** See concrete C code demonstrations of process spawning and state tracing (see [[Process Forking and Zombie Orphan Example]]).
-- **Scheduling:** The degree of multiprogramming determines the length of the Ready Queue in [[CPU Scheduling Principles and Criteria]].
-- **Exam Testing:** Common numerical question on midterms:
-  - "Given that processes spend 70% of their time waiting for I/O, how many processes must be resident in memory to achieve at least 90% CPU utilization?"
-  - *Calculation:* $1 - 0.70^n \ge 0.90 \implies 0.70^n \le 0.10 \implies n \ln(0.70) \le \ln(0.10) \implies n(-0.3567) \le -2.3026 \implies n \ge 6.45 \implies n = 7 \text{ processes}$.
+- [[CPU Scheduling Principles and Criteria]]
+- [[Process Forking and Zombie Orphan Example]]
 
 ---
 
-## Sources & Traceability
+## Prerequisites
+
+- [[Process Concepts and Memory Layout]]
+- [[Process Lifecycle and State Transitions]]
+
+---
+
+## Problems
+
+- [[Comprehensive CPU Scheduling Simulation Example]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 16–21)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.4: Modeling Multiprogramming)

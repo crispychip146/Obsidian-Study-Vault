@@ -12,6 +12,20 @@ order: 52
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Beta-Binomial Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Beta-Binomial Conjugate Updating Formula compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 Let $p \in (0, 1)$ be the success probability of a Bernoulli or Binomial process.
@@ -41,6 +55,8 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning | Interpretation |
@@ -54,6 +70,8 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
 
 ---
 
+---
+
 ## Conditions
 
 1. The data generating process must be conditionally independent $\text{Bernoulli}(p)$ or $\text{Binomial}(n, p)$ given $p$.
@@ -62,7 +80,11 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
 
 ---
 
-## Intuition: Pseudocounts and Shrinkage
+---
+
+## Intuition
+
+### Intuition: Pseudocounts and Shrinkage
 
 The Beta hyperparameters $\alpha$ and $\beta$ act as **fictitious prior observations**:
 - Setting $\alpha = 10, \beta = 10$ is mathematically equivalent to entering the laboratory with prior experience of having already observed $10$ successes and $10$ failures.
@@ -73,7 +95,11 @@ The Beta hyperparameters $\alpha$ and $\beta$ act as **fictitious prior observat
 
 ---
 
+---
+
 ## Derivation
+
+### Derivation
 
 By Bayes' theorem, the posterior density satisfies:
 $$f(p \mid \mathbf{x}) \propto f(p) \cdot L_n(p)$$
@@ -98,7 +124,11 @@ $$= w \bar{X} + (1 - w) p_0 \quad \blacksquare$$
 
 ---
 
-## Example: Laplace's Rule of Succession
+---
+
+## Example
+
+### Example: Laplace's Rule of Succession
 
 Suppose we have zero prior knowledge about an event, modeled by a uniform prior $p \sim \text{Uniform}(0, 1) \iff \text{Beta}(1, 1)$, so $\alpha = 1, \beta = 1$.
 We observe $n$ consecutive occurrences of the event with zero failures ($s = n$).
@@ -113,10 +143,16 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 - Setting $\alpha = 0, \beta = 0$ as a prior. The prior must have $\alpha > 0, \beta > 0$ to be proper. The Haldane prior $\text{Beta}(0, 0)$ is improper.
 - Forgetting to subtract $s$ from $n$ when calculating the second parameter: the second parameter is $\beta + (n - s)$, not $\beta + n$.
+
+---
 
 ---
 
@@ -125,6 +161,20 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 - [[Bayesian Inference]]
 - [[Maximum A Posteriori (MAP) Estimation]]
 - [[Normal-Normal Conjugate Updating Formula]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

@@ -12,6 +12,8 @@ order: 55
 
 ---
 
+---
+
 ## Problem
 
 A clinical trial evaluates an experimental drug against a standard control treatment:
@@ -28,11 +30,15 @@ $$\tau = g(p_1, p_2) = p_2 - p_1$$
 
 ---
 
+---
+
 ## Given
 
 - Control data: $n_1 = 50, X_1 = 30 \implies X_1 \sim \text{Binomial}(n_1, p_1)$
 - Treatment data: $n_2 = 50, X_2 = 40 \implies X_2 \sim \text{Binomial}(n_2, p_2)$
 - Independent priors: $f(p_1, p_2) = f(p_1)f(p_2) = 1 \cdot 1 = 1$ on $[0, 1] \times [0, 1]$
+
+---
 
 ---
 
@@ -44,7 +50,17 @@ $$\tau = g(p_1, p_2) = p_2 - p_1$$
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Bayesian Inference]]
 - [[Beta-Binomial Conjugate Updating Formula]]
@@ -52,8 +68,7 @@ $$\tau = g(p_1, p_2) = p_2 - p_1$$
 - Monte Carlo simulation of posterior distributions
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Joint and Marginal Posterior Distributions
 Because the trials are conducted independently and the priors are independent, the joint likelihood factorizes:
@@ -123,6 +138,8 @@ We can verify the simulation analytically:
 
 ---
 
+---
+
 ## Result
 
 - Marginal posteriors: $p_1 \sim \text{Beta}(31, 21)$ and $p_2 \sim \text{Beta}(41, 11)$.
@@ -132,9 +149,26 @@ We can verify the simulation analytically:
 
 ---
 
+---
+
 ## Why This Works
 
 In frequentist statistics, evaluating a non-linear or multi-parameter hypothesis $p_2 - p_1$ requires asymptotic two-sample $Z$-tests or complex asymptotic delta methods. In Bayesian statistics, having the full joint posterior distribution allows any function $\tau = g(p_1, p_2)$ to be evaluated directly and exactly by forward Monte Carlo sampling.
+
+---
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
 
 ---
 
@@ -143,6 +177,8 @@ In frequentist statistics, evaluating a non-linear or multi-parameter hypothesis
 - [[Bayesian Inference]]
 - [[Credible Intervals]]
 - [[Beta-Binomial Conjugate Updating Formula]]
+
+---
 
 ---
 

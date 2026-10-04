@@ -12,6 +12,27 @@ order: 37
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Estimator Consistency and Convergence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+Consistency is the ultimate "sanity check" of any statistical estimator:
+- With 10 data points, your estimate might be moderately noisy.
+- With 1,000 data points, your estimate should be much closer to the truth.
+- With $1,000,000$ data points, the probability that your estimate differs from the true parameter by any noticeable amount $\epsilon$ approaches zero.
+
+If an estimator is not consistent, collecting more data does not guarantee that you will learn the truth. In modern statistics, **consistency is considered far more important than unbiasedness**. Unbiasedness is merely a finite-sample property that can be easily corrected, whereas inconsistency indicates a fundamentally flawed procedure.
+
+---
+
+---
+
 ## Definition
 
 An estimator is **consistent** if, as the sample size $n$ grows toward infinity, the estimator converges in probability to the true underlying parameter value $\theta$.
@@ -26,18 +47,11 @@ $$\lim_{n \to \infty} P_\theta\left(\lvert \hat{\theta}_n - \theta \rvert \le \e
 
 ---
 
-## Intuition
-
-Consistency is the ultimate "sanity check" of any statistical estimator:
-- With 10 data points, your estimate might be moderately noisy.
-- With 1,000 data points, your estimate should be much closer to the truth.
-- With $1,000,000$ data points, the probability that your estimate differs from the true parameter by any noticeable amount $\epsilon$ approaches zero.
-
-If an estimator is not consistent, collecting more data does not guarantee that you will learn the truth. In modern statistics, **consistency is considered far more important than unbiasedness**. Unbiasedness is merely a finite-sample property that can be easily corrected, whereas inconsistency indicates a fundamentally flawed procedure.
-
 ---
 
-## Modes of Convergence
+## How It Works
+
+### Modes of Convergence
 
 To analyze consistency rigorously, we define two fundamental modes of stochastic convergence:
 
@@ -52,8 +66,7 @@ $$\lim_{n \to \infty} E[(X_n - X)^2] = 0$$
 *Intuition:* The average squared Euclidean distance between $X_n$ and $X$ shrinks to zero.
 
 ---
-
-## Fundamental Implication: Quadratic Mean Implies Probability
+### Fundamental Implication: Quadratic Mean Implies Probability
 
 ### Theorem
 If $X_n \xrightarrow{qm} X$, then $X_n \xrightarrow{P} X$.
@@ -72,8 +85,7 @@ Because probabilities are bounded below by zero, the squeeze theorem yields:
 $$\lim_{n \to \infty} P(\lvert X_n - X \rvert > \epsilon) = 0 \implies X_n \xrightarrow{P} X \quad \blacksquare$$
 
 ---
-
-## Consistency via Mean Squared Error (MSE)
+### Consistency via Mean Squared Error (MSE)
 
 Testing convergence in probability directly using probabilities can be mathematically challenging. The standard method to prove consistency is via the **MSE Consistency Criterion**:
 
@@ -98,8 +110,7 @@ Since convergence in quadratic mean implies convergence in probability:
 $$\hat{\theta}_n \xrightarrow{P} \theta \quad \blacksquare$$
 
 ---
-
-## Relationship Between Unbiasedness and Consistency
+### Relationship Between Unbiasedness and Consistency
 
 A common student misconception is that unbiasedness and consistency are equivalent, or that one implies the other. **Neither implication holds in general.**
 
@@ -135,8 +146,7 @@ $$\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
    Both bias and variance vanish asymptotically, so $\text{MSE} \to 0$, which proves that $\hat{\sigma}^2_n \xrightarrow{P} \sigma^2$. The estimator is **consistent** despite being biased!
 
 ---
-
-## Important Properties
+### Important Properties
 
 1. **Continuous Mapping Theorem:** If $\hat{\theta}_n \xrightarrow{P} \theta$ and $g(\cdot)$ is a continuous function at $\theta$, then $g(\hat{\theta}_n) \xrightarrow{P} g(\theta)$.
 2. **Slutsky's Theorem:** If $X_n \xrightarrow{d} X$ and $Y_n \xrightarrow{P} c$ (a constant), then:
@@ -148,7 +158,30 @@ $$\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
 
 ---
 
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Confusing almost sure convergence with convergence in probability:**
    Consistency requires convergence in probability ($\xrightarrow{P}$). Strong consistency requires almost sure convergence ($\xrightarrow{\text{a.s.}}$), which is a strictly stronger condition.
@@ -157,12 +190,18 @@ $$\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
 
 ---
 
+---
+
 ## Exam Relevance
+
+### Exam Relevance
 
 Exam questions often test:
 1. Proving that an estimator is consistent using the $\text{MSE} \to 0$ theorem.
 2. Identifying or constructing counterexamples of estimators that are unbiased yet inconsistent, or consistent yet biased.
 3. Applying Markov's inequality to prove that quadratic mean convergence implies convergence in probability.
+
+---
 
 ---
 
@@ -175,6 +214,8 @@ Exam questions often test:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Point Estimation]]
@@ -182,10 +223,14 @@ Exam questions often test:
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
 
 ---
 

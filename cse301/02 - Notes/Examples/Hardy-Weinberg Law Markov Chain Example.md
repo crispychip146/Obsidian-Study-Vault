@@ -12,6 +12,8 @@ order: 76
 
 ---
 
+---
+
 ## Problem
 
 In population genetics, consider a gene with two alleles, $A$ and $a$. An individual's genotype consists of a pair of these genes: $AA$, $aa$, or $Aa$.
@@ -22,6 +24,8 @@ In a large population, suppose the initial fractions of individuals with genotyp
 2. Derive the genotype proportions $p, q, r$ in the next generation.
 3. Prove that the allele frequencies remain constant in all subsequent generations (**Hardy-Weinberg Law**).
 4. Model the genetic lineage of a single individual across generations as a three-state [[Markov Chain]], determine its transition probability matrix $P$, and prove that the stationary distribution is $\pi = (p, q, r)$.
+
+---
 
 ---
 
@@ -36,6 +40,8 @@ In a large population, suppose the initial fractions of individuals with genotyp
 
 ---
 
+---
+
 ## Required
 
 1. Allele frequencies $P(A)$ and $P(a)$.
@@ -45,7 +51,17 @@ In a large population, suppose the initial fractions of individuals with genotyp
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Markov Chain]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
@@ -53,8 +69,7 @@ In a large population, suppose the initial fractions of individuals with genotyp
 - Conditional Probability
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Probability that a Random Gene Is Type $A$ or $a$
 Selecting a gene from a randomly chosen parent is mathematically equivalent to drawing a gene uniformly at random from the population's entire gene pool.
@@ -177,6 +192,8 @@ Thus, $\pi P = \pi$, confirming that $\pi = (p, q, r)$ is indeed the stationary 
 
 ---
 
+---
+
 ## Result
 
 1. Allele frequencies: $P(A) = p_0 + r_0/2$, $P(a) = q_0 + r_0/2$.
@@ -186,9 +203,13 @@ Thus, $\pi P = \pi$, confirming that $\pi = (p, q, r)$ is indeed the stationary 
 
 ---
 
+---
+
 ## Why This Works
 
 The stability of the gene pool mirrors the convergence of a Markov chain to its stationary distribution: once the population reaches random-mating equilibrium, the probability distribution of an individual descendant's genotype matches the macroscopic composition of the entire population.
+
+---
 
 ---
 
@@ -200,11 +221,21 @@ The stability of the gene pool mirrors the convergence of a Markov chain to its 
 
 ---
 
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
 ## Related Concepts
 
 - [[Markov Chain]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
 - [[Stochastic Process]]
+
+---
 
 ---
 

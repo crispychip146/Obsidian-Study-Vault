@@ -12,6 +12,8 @@ order: 46
 
 ---
 
+---
+
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a continuous uniform distribution on the interval $[0, \theta]$:
@@ -25,12 +27,16 @@ $$X_i \overset{\text{iid}}{\sim} \text{Uniform}(0, \theta), \quad \theta > 0$$
 
 ---
 
+---
+
 ## Given
 
 - Probability density function:
   $$f(x; \theta) = \frac{1}{\theta} \mathbf{1}_{\{0 \le x \le \theta\}} = \begin{cases} \frac{1}{\theta} & \text{if } 0 \le x \le \theta \\ 0 & \text{otherwise} \end{cases}$$
 - Sample order statistics:
   $$X_{(1)} = \min_{1 \le i \le n} X_i, \quad X_{(n)} = \max_{1 \le i \le n} X_i$$
+
+---
 
 ---
 
@@ -44,15 +50,24 @@ $$X_i \overset{\text{iid}}{\sim} \text{Uniform}(0, \theta), \quad \theta > 0$$
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Maximum Likelihood Estimation]]
 - [[Point Estimation]]
 - Non-regular estimation (parameter-dependent support)
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Why Standard Calculus Fails
 If one ignores the support indicator and writes:
@@ -114,16 +129,7 @@ $$\hat{\theta}_{\text{unbiased}} = \frac{n+1}{n} X_{(n)}$$
 $$E[\hat{\theta}_{\text{unbiased}}] = \frac{n+1}{n} E[X_{(n)}] = \frac{n+1}{n}\left(\frac{n}{n+1}\theta\right) = \theta$$
 
 ---
-
-## Result
-
-- $\hat{\theta}_{\text{MLE}} = X_{(n)} = \max_{1 \le i \le n} X_i$
-- $E[\hat{\theta}_{\text{MLE}}] = \frac{n}{n+1}\theta \implies \text{bias} = -\frac{\theta}{n+1}$ (asymptotically unbiased as $n \to \infty$)
-- Unbiased estimator: $\frac{n+1}{n} \max(X_i)$
-
----
-
-## General Method for Non-Regular Likelihoods
+### General Method for Non-Regular Likelihoods
 
 When parameters define the support boundary:
 1. Write the joint likelihood explicitly using indicator functions $\mathbf{1}_{\{a \le X_i \le b\}}$.
@@ -133,11 +139,44 @@ When parameters define the support boundary:
 
 ---
 
+---
+
+## Result
+
+- $\hat{\theta}_{\text{MLE}} = X_{(n)} = \max_{1 \le i \le n} X_i$
+- $E[\hat{\theta}_{\text{MLE}}] = \frac{n}{n+1}\theta \implies \text{bias} = -\frac{\theta}{n+1}$ (asymptotically unbiased as $n \to \infty$)
+- Unbiased estimator: $\frac{n+1}{n} \max(X_i)$
+
+---
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
 ## Related Concepts
 
 - [[Maximum Likelihood Estimation]]
 - [[Point Estimation]]
 - [[Discrete and Continuous Parameter MLE Reference Examples]]
+
+---
 
 ---
 

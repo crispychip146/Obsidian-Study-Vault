@@ -12,6 +12,20 @@ order: 11
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Covariance and Correlation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Covariance and Correlation reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 **Covariance** measures the degree of linear association between two random variables $X$ and $Y$:
@@ -25,7 +39,11 @@ $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\oper
 
 ---
 
-## Fundamental Properties of Covariance
+---
+
+## How It Works
+
+### Fundamental Properties of Covariance
 
 1. **Self-Covariance is Variance:**
    $$\operatorname{Cov}(X, X) = \operatorname{Var}(X)$$
@@ -47,8 +65,7 @@ $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\oper
    $$\operatorname{Var}\left( \sum_{i=1}^n X_i \right) = \sum_{i=1}^n \operatorname{Var}(X_i) + 2 \sum_{1 \le i < j \le n} \operatorname{Cov}(X_i, X_j)$$
 
 ---
-
-## Fundamental Properties of Correlation
+### Fundamental Properties of Correlation
 
 1. **Bounded Range (Cauchy-Schwarz):**
    $$-1 \le \rho(X, Y) \le 1$$
@@ -65,7 +82,50 @@ $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\oper
 
 ---
 
-## Independence vs. Uncorrelatedness
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
+
+- **Foundations:** Defined from expectation and variance in [[Random Variables and Probability Distributions]].
+- **Joint Densities:** Evaluated via double integrals over joint distributions in [[Joint and Marginal Distributions]].
+- **Correlation Bound:** The property $-1 \le \rho \le 1$ is a direct consequence of the [[Cauchy-Schwarz and Jensen Inequalities|Cauchy-Schwarz Inequality]].
+- **Indicators:** Covariance between indicator variables $I_A, I_B$ is $P(A \cap B) - P(A)P(B)$ (see application in [[Problem — Indicator Variables for Distinct Birthday Counts]]).
+- **Portfolio Theory & Estimation:** Central to the variance of sample means $\bar{X}$ and the [[Bias-Variance Decomposition]].
+- **Conditioning:** Bivariate linear regression predicts $\mathbb{E}[Y \mid X] = \mu_Y + \rho \frac{\sigma_Y}{\sigma_X}(X - \mu_X)$ (see [[Conditional Expectation]]).
+
+---
+
+---
+
+## Related Concepts
 
 - **Independence implies Uncorrelatedness:**
   If $X$ and $Y$ are independent ($X \perp Y$), then $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$. Therefore:
@@ -86,18 +146,21 @@ Thus, $X$ and $Y$ are **uncorrelated ($\rho = 0$), yet completely dependent**!
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
 
-- **Foundations:** Defined from expectation and variance in [[Random Variables and Probability Distributions]].
-- **Joint Densities:** Evaluated via double integrals over joint distributions in [[Joint and Marginal Distributions]].
-- **Correlation Bound:** The property $-1 \le \rho \le 1$ is a direct consequence of the [[Cauchy-Schwarz and Jensen Inequalities|Cauchy-Schwarz Inequality]].
-- **Indicators:** Covariance between indicator variables $I_A, I_B$ is $P(A \cap B) - P(A)P(B)$ (see application in [[Problem — Indicator Variables for Distinct Birthday Counts]]).
-- **Portfolio Theory & Estimation:** Central to the variance of sample means $\bar{X}$ and the [[Bias-Variance Decomposition]].
-- **Conditioning:** Bivariate linear regression predicts $\mathbb{E}[Y \mid X] = \mu_Y + \rho \frac{\sigma_Y}{\sigma_X}(X - \mu_X)$ (see [[Conditional Expectation]]).
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
 
 ---
 
-## Sources & Traceability
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 13, pages 40–43)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_8.pdf`

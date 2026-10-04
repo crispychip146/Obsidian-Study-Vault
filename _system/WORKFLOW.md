@@ -106,6 +106,12 @@ Do not immediately create notes.
 
 First determine how the information fits into the existing knowledge base.
 
+For each substantial topic, identify the problem it addresses, the obstacle,
+the key insight, a revealing small example, and any proof strategy. Read the
+relevant earlier explanations so the new explanation can build on their actual
+reasoning and notation. Identify useful later connections only when supported
+by available concepts, sources, or course maps.
+
 ---
 
 # 4. Existing Knowledge Check
@@ -159,31 +165,57 @@ Do not silently overwrite existing knowledge.
 
 # 6. Learning-First Note Generation
 
-When creating or updating a note, optimize for learning rather than
-summarization.
+Follow the guided-development standard in `_system/AI_RULES.md`, Section 3.
+Use `_system/NOTE_SCHEMA.md` as a flexible structure, not a heading checklist.
 
-The explanation must be suitable for a complete beginner.
+## Plan the Explanation
 
-The reader should be able to progress through:
+Before drafting an important note, determine:
 
-1. Why the concept exists
-2. Intuition
-3. Basic explanation
-4. Formal definition
-5. Step-by-step mechanism
-6. Technical details
-7. Mathematical formulation
-8. Worked examples
-9. Edge cases
-10. Common mistakes
-11. Relationships with other concepts
-12. Exam/problem-solving techniques
-13. Advanced understanding
+- What situation and question should the reader mentally follow?
+- What earlier idea provides the starting point, and what does it contribute?
+- What difficulty makes the new method useful?
+- What observation makes the method or proof understandable?
+- Which objects, quantities, or states should the example track?
+- Which transitions need explicit justification?
 
-Do not assume prerequisite knowledge without linking to it.
+This is drafting preparation; do not add a planning report to every note.
 
-If a prerequisite is necessary, create or reference the prerequisite
-note.
+## Develop the Note
+
+1. Briefly recall the relevant earlier idea with an explained wikilink.
+2. Establish the situation, target, and obstacle in understandable terms.
+3. Develop the central insight with a small revealing example when useful.
+4. Explain the mechanism as changes in state, knowledge, or counting.
+5. Introduce formal terminology and notation as their roles become clear.
+6. Develop the proof or derivation, justifying important transitions.
+7. Solve representative problems and interpret the results.
+8. Explain relevant assumptions, failure cases, and common mistakes.
+9. Describe a meaningful next conceptual connection when one exists.
+
+Adapt this order to the topic and interleave examples with reasoning. Preserve
+clear final results and course-required technical detail. Do not force every
+component into simple notes or concise revision requests.
+
+If a prerequisite is necessary, provide the brief bridge needed at the point
+of use and reference or create the prerequisite note when appropriate. Do not
+assume a link alone supplies the needed understanding.
+
+## Review the Reasoning Before Marking Complete
+
+Use the understanding check in `_system/AI_RULES.md`, Section 3.8, and the note
+quality checklist in `_system/NOTE_SCHEMA.md`.
+
+Read the explanation for abrupt jumps: an unmotivated formula, an unexplained
+method choice, a proof step without justification, or a prerequisite named but
+never connected. Repair the missing bridge rather than adding generic prose.
+
+Verify that illustrative examples are correct and distinguished from sourced
+course examples, and that an example or analogy is not presented as a proof.
+
+Preserve useful existing content when enriching notes. An explanation can need
+improvement even when its facts are correct; do not replace its clear formal
+answer with a longer narrative that loses rigor.
 
 ---
 
@@ -205,6 +237,9 @@ Look for:
 - commonly confused concepts
 
 Add meaningful Obsidian `[[wikilinks]]`.
+Explain important connections where they are used in the reasoning, not only
+in a list at the end. State what is carried forward from the earlier concept
+and what the current concept adds. Do not invent a learning or lecture order.
 
 Do not create links merely because two concepts occur in the same source.
 
@@ -534,7 +569,9 @@ If the student understands theory but fails calculations:
 
 If the student can calculate but cannot explain:
 
-→ provide conceptual/theoretical questions.
+→ ask for interpretation, justification of steps, prediction under changed
+conditions, and connections to earlier ideas. Review the missing explanatory
+bridge, then provide conceptual/theoretical practice.
 
 ---
 
@@ -636,6 +673,10 @@ A topic is well covered when appropriate material exists for:
 - worked solutions
 
 The exact components depend on the topic.
+
+For important learning notes, completion also requires a mentally followable
+mechanism, justified consequential steps, and explained connections to earlier
+knowledge. A list of headings, facts, and links is not sufficient.
 
 ---
 

@@ -30,6 +30,28 @@ order: 12
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+In a multiprogrammed operating system, multiple runnable processes populate the Ready Queue simultaneously, all competing for execution time on the available CPU cores.
+
+We want an algorithmic policy to decide which process receives the CPU next, how long it runs, and when it should be preempted, in order to maximize overall system productivity and user satisfaction. The central obstacle is that different scheduling goals conflict directly: minimizing response time for interactive users hurts batch job throughput, while minimizing context-switch overhead hurts fairness.
+
+---
+
+## Developing the Idea
+
+The CPU scheduling subsystem resolves this conflict by leveraging the fundamental empirical property of computing workloads: the **CPU–I/O Burst Cycle**.
+
+Processes alternate between bursts of intensive CPU computation and waiting for I/O:
+- **I/O-Bound processes** have many very short CPU bursts separated by long I/O waits (e.g. text editors, browsers).
+- **Compute-Bound processes** have few, very long CPU bursts and rare I/O waits (e.g. scientific simulations, video encoders).
+
+By designing schedulers that track burst characteristics, the OS can prioritize I/O-bound jobs to keep peripheral devices busy while interleaving compute-bound jobs during idle periods.
+
+---
+
 ## Definition
 
 In a multiprogramming operating system, multiple processes reside simultaneously in the Ready state competing for execution time. **CPU Scheduling** is the core operating system mechanism that selects one process from the Ready Queue and allocates a physical CPU core to it.
@@ -38,7 +60,11 @@ The component of the operating system that performs this selection is the **Sche
 
 ---
 
-## The CPU–I/O Burst Cycle
+---
+
+## How It Works
+
+### The CPU–I/O Burst Cycle
 
 Process execution consists of an alternating cycle of **CPU execution (bursts)** and **I/O wait (bursts)**:
 - A process computes on the CPU for some duration (CPU burst).
@@ -68,84 +94,33 @@ flowchart LR
 
 ---
 
-## When Scheduling Decisions Occur: Preemption
+---
 
-CPU scheduling decisions must be made under four circumstances:
+## Example
 
-1. When a process transitions from the **Running** state to the **Waiting (Blocked)** state (e.g., executing `read()`).
-2. When a process transitions from the **Running** state to the **Ready** state (e.g., hardware timer interrupt expires).
-3. When a process transitions from the **Waiting** state to the **Ready** state (e.g., I/O completion interrupt fires).
-4. When a process **Terminates** (`exit()`).
-
-### Preemptive vs. Non-Preemptive Scheduling:
-
-```mermaid
-classDiagram
-    class Scheduling_Modes {
-        +Non-Preemptive (Cooperative)
-        +Preemptive
-    }
-    class Non_Preemptive {
-        Triggers: Circumstances 1 and 4 only
-        Rule: Process keeps CPU until it voluntarily yields or terminates
-        Risk: Rogue while(1) loop freezes entire OS
-    }
-    class Preemptive {
-        Triggers: All 4 circumstances (hardware timer driven)
-        Rule: OS forcefully interrupts running process to dispatch another
-        Risk: Race conditions on shared kernel data structures
-    }
-    Scheduling_Modes <|-- Non_Preemptive
-    Scheduling_Modes <|-- Preemptive
-```
-
-- **Non-Preemptive (Cooperative) Scheduling:**
-  Once a process is given the CPU, it continues running until it voluntarily releases it—either by requesting an I/O operation (blocking) or by terminating.
-  *Drawback:* A poorly written process in an infinite loop will freeze the entire machine.
-- **Preemptive Scheduling:**
-  The operating system uses a periodic hardware **timer interrupt** (clock tick) to take the CPU away from a running process, moving it back to the Ready Queue.
-  *Requirement:* Standard in all modern operating systems (Linux, Windows, macOS).
+Scheduling decisions at 4 critical points:
+1. Process switches from Running to Waiting state (e.g. `read()` system call) $	o$ Non-preemptive scheduling.
+2. Process switches from Running to Ready state (e.g. timer interrupt ticks) $	o$ Preemptive scheduling.
+3. Process switches from Waiting to Ready state (e.g. I/O completion interrupt) $	o$ Preemptive scheduling choice.
+4. Process terminates $	o$ Non-preemptive scheduling.
 
 ---
 
-## Scheduling Criteria (Performance Metrics)
+## Technical Details
 
-Different environments demand different optimization criteria:
-
-1. **CPU Utilization (Maximized):**
-   - The percentage of time the CPU is actively performing useful work (typically $40\%$ on light loads to $90\%$ on heavy loads; see [[CPU Multiprogramming Utilization Formula]]).
-2. **Throughput (Maximized):**
-   - The number of completed processes per unit of time (e.g., 50 jobs/hour).
-3. **Turnaround Time ($T_{\text{turn}}$) (Minimized):**
-   - The total elapsed time from the moment a process is submitted/arrives until it completely finishes:
-     $$T_{\text{turn}} = T_{\text{completion}} - T_{\text{arrival}}$$
-   - Includes time spent waiting in the ready queue, executing on the CPU, and waiting for I/O.
-4. **Waiting Time ($T_{\text{wait}}$) (Minimized):**
-   - The total cumulative time a process spends sitting in the **Ready Queue** waiting to be allocated the CPU:
-     $$T_{\text{wait}} = T_{\text{turn}} - T_{\text{burst}}$$
-   - *(Note: Scheduling algorithms have zero control over how long a disk takes to read data; they directly control only waiting time)*.
-5. **Response Time ($T_{\text{resp}}$) (Minimized):**
-   - The time from submission until the process produces its **very first output or response** on the CPU:
-     $$T_{\text{resp}} = T_{\text{first CPU dispatch}} - T_{\text{arrival}}$$
-   - Crucial in interactive systems (typing, gaming).
-6. **Fairness:**
-   - Every process should receive an equitable share of CPU time; no process should suffer **Starvation** (indefinite postponement).
+See related modules for microarchitectural implementation details.
 
 ---
 
-## Scheduling Environments: The Three Kingdoms
+## Important Properties and Why They Hold
 
-Operating systems categorize workloads into three fundamentally distinct environments:
-
-| Environment | Primary Goals | Representative Algorithms |
-|---|---|---|
-| **Batch Systems** | Maximize throughput, minimize turnaround time, maximize CPU utilization | FCFS, SJF, SRTF (see [[Batch Scheduling Algorithms]]) |
-| **Interactive Systems** | Minimize response time, ensure fairness, prevent starvation | Round Robin, Priority, MLFQ (see [[Interactive Scheduling Algorithms]]) |
-| **Real-Time Systems** | Guarantee meeting hard/soft deadlines, maintain predictability | Rate Monotonic (RMS), Earliest Deadline First (EDF) |
+- **Preemption vs. Overhead Invariant:** Preemption guarantees bounded response times for interactive applications, but increases total CPU overhead due to frequent context switches and cache thrashing.
+- **Turnaround vs. Waiting Equivalence:** Turnaround Time ($T_{TAT} = T_{	ext{completion}} - T_{	ext{arrival}}$) is always strictly equal to Waiting Time plus Burst Time: $T_{TAT} = T_{wait} + T_{burst}$.
+- **Workload Trade-Off Invariant:** No single scheduling algorithm can simultaneously optimize all criteria (Throughput, Turnaround, Waiting Time, Response Time, and CPU Utilization).
 
 ---
 
-## Edge Cases & Common Pitfalls
+## Common Mistakes
 
 1. **Confusing Waiting Time with Turnaround Time:**
    - Turnaround time includes the process's own CPU burst time. Waiting time is *strictly* the time spent waiting in the Ready Queue doing nothing.
@@ -155,7 +130,9 @@ Operating systems categorize workloads into three fundamentally distinct environ
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
 
 - **Next Step:** How batch systems optimize turnaround time using non-preemptive and shortest-burst strategies (see [[Batch Scheduling Algorithms]]).
 - **Interactive Systems:** How time-sharing interactive systems slice CPU time into quanta (see [[Interactive Scheduling Algorithms]]).
@@ -164,7 +141,30 @@ Operating systems categorize workloads into three fundamentally distinct environ
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Batch Scheduling Algorithms]]
+- [[Interactive Scheduling Algorithms]]
+- [[Scheduling Metrics and Burst Estimation Formulas]]
+
+---
+
+## Prerequisites
+
+- [[Process Lifecycle and State Transitions]]
+- [[Process Control Block and Context Switching]]
+
+---
+
+## Problems
+
+- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 1–14)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4: Scheduling)

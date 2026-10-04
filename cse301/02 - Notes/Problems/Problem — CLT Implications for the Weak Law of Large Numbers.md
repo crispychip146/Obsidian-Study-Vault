@@ -12,7 +12,9 @@ order: 34
 
 ---
 
-## Problem Statement
+---
+
+## Problem
 
 A polling agency wants to estimate the true proportion $p$ of users who prefer a new user interface over the old one. They survey $n$ independent users, modeling their responses as $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \operatorname{Bern}(p)$.
 The agency estimates $p$ using the sample proportion:
@@ -29,7 +31,28 @@ $$P\left( \lvert \hat{p}_n - p \rvert \le 0.03 \right) \ge 0.95 \iff P\left( \lv
 
 ---
 
-## Prerequisites & Relevant Concepts
+---
+
+## Given
+
+- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
+
+---
+
+## Required
+
+- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
+
+---
+
+## Concepts Tested
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Prerequisites
 
 - [[Chebyshev Inequality]] — Non-parametric sample bound.
 - [[Central Limit Theorem]] — Normal approximation of sample mean.
@@ -38,7 +61,24 @@ $$P\left( \lvert \hat{p}_n - p \rvert \le 0.03 \right) \ge 0.95 \iff P\left( \lv
 
 ---
 
-## Full Step-by-Step Solution
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
+## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Full Step-by-Step Solution
 
 ### Part 1: Worst-Case Variance
 For $X_i \sim \operatorname{Bern}(p)$:
@@ -109,14 +149,47 @@ Therefore, $\bar{X}_n \xrightarrow{P} \mu$. The CLT implies the Weak Law of Larg
 
 ---
 
-## Common Pitfalls
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
 
 1. **Forgetting $\sqrt{n}$ in the denominator:** The standard error of the sample mean is $\frac{\sigma}{\sqrt{n}}$, not $\frac{\sigma}{n}$.
 2. **Confusing 1-sided and 2-sided tail critical values:** For $95\%$ two-sided coverage, each tail receives $2.5\%$, which corresponds to $z_{0.025} = 1.96$, not $z_{0.05} = 1.645$.
 
 ---
 
-## Sources & Traceability
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Source
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17, 20, 21, pages 54–63)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf` (Problem 3 & 4)

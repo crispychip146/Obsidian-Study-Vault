@@ -29,6 +29,28 @@ order: 3
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+When a computer's power switch is flipped, main memory (RAM) is completely volatile and holds random, uninitialized bits. The CPU registers hold undefined values, and no operating system is present in memory.
+
+We want the machine to transition reliably from cold, unpowered silicon into a protected, multitasking environment running the OS kernel with memory management, scheduling, and device drivers fully active. The central obstacle is a bootstrap chicken-and-egg dilemma: the CPU can only execute instructions that reside in memory, but the software responsible for loading programs from storage (the OS) is itself sitting unread on disk.
+
+---
+
+## Developing the Idea
+
+The solution is **bootstrapping** (pulling oneself up by one's own bootstraps) through a disciplined, multi-stage chain of increasingly sophisticated software layers.
+
+Each stage has just enough capability to initialize the minimum hardware needed to locate and load the next stage:
+1. Non-volatile ROM firmware (BIOS/UEFI) runs first because its code is physically etched into flash silicon.
+2. Firmware loads a tiny 512-byte primary boot sector (MBR Stage 1).
+3. Stage 1 loads a feature-rich bootloader (GRUB2, Stage 2) capable of reading complex disk filesystems.
+4. Stage 2 loads the compressed OS kernel image into RAM and transfers control.
+
+---
+
 ## Definition
 
 **Booting** (short for *bootstrapping*) is the initial sequential process that starts an operating system when a computer is powered on or restarted.
@@ -37,7 +59,11 @@ Because main memory (RAM) is volatile, it contains random, meaningless data at p
 
 ---
 
-## The Step-by-Step Boot Sequence
+---
+
+## How It Works
+
+### The Step-by-Step Boot Sequence
 
 The modern computer boot sequence follows six precise phases:
 
@@ -86,7 +112,9 @@ Once kernel initialization is complete, the kernel mounts the root file system a
 
 ---
 
-## Essential Hardware Abstractions
+---
+
+### Essential Hardware Abstractions
 
 To understand process execution and scheduling, an operating system relies on four fundamental hardware abstractions:
 
@@ -127,7 +155,74 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
+
+## Example
+
+Step-by-step trace of booting an x86-64 machine:
+1. Power supply asserts `POWER_GOOD`. CPU hardware initializes the program counter to the reset vector `0xFFFFFFF0`.
+2. BIOS executes Power-On Self-Test (POST), testing memory chips and bus bridges.
+3. BIOS reads Sector 0 (`0x7C00`) from the NVMe SSD and checks for signature `0x55AA`.
+4. MBR code loads GRUB2 from the boot partition.
+5. GRUB2 loads `vmlinuz` and `initramfs`, switches the CPU to 64-bit Long Mode, and jumps to kernel entry.
+6. Kernel initializes page tables, mounts `/`, and executes `/sbin/init` (PID 1).
+
+---
+
+## Technical Details
+
+### Essential Hardware Abstractions
+
+To understand process execution and scheduling, an operating system relies on four fundamental hardware abstractions:
+
+```mermaid
+classDiagram
+    class CPU_Registers {
+        +Program Counter (PC)
+        +Stack Pointer (SP)
+        +Program Status Word (PSW)
+        +General Purpose Registers
+    }
+    class Memory_Hierarchy {
+        +L1/L2/L3 Caches
+        +Physical RAM
+        +Secondary Storage (SSD/HDD)
+    }
+    class Control_Units {
+        +Memory Management Unit (MMU)
+        +Interrupt Controller (APIC)
+        +Direct Memory Access (DMA)
+    }
+    CPU_Registers --> Memory_Hierarchy : Reads / Writes
+    Control_Units --> CPU_Registers : Generates Interrupts
+```
+
+### 1. Key CPU Registers
+- **Program Counter (PC / EIP / RIP):** Contains the memory address of the next machine instruction to be fetched and executed.
+- **Stack Pointer (SP / ESP / RSP):** Points to the top of the current execution call stack in memory (used for local variables, parameter passing, and return addresses).
+- **Program Status Word (PSW / Flags):** Holds critical CPU status flags (Carry, Zero, Overflow, Interrupt Enable flag, and the **Kernel/User Mode Bit**).
+
+### 2. The Memory Hierarchy
+Systems trade speed for capacity and cost:
+$$\text{Registers (< 1 ns, < 1 KB)} \to \text{Caches (1–10 ns, MBs)} \to \text{RAM (50–100 ns, GBs)} \to \text{NVMe/SSD (10–100 }\mu\text{s, TBs)} \to \text{HDD (ms, TBs)}$$
+The OS abstracts this entire hierarchy into a clean, uniform **Virtual Address Space** per process.
+
+### 3. Interrupt Descriptor Table (IDT)
+An array of function pointers stored in kernel memory. When interrupt line $k$ triggers, the hardware pauses the current instruction, looks up index $k$ in the IDT, and vectors execution immediately to that address in kernel mode.
+
+---
+
+---
+
+## Important Properties and Why They Hold
+
+- **Chain-of-Trust Invariant:** Each stage verifies the presence or integrity of the succeeding stage before transferring execution control.
+- **Progressive Mode Elevation:** The CPU begins in legacy 16-bit real mode with flat memory addressing, and is sequentially upgraded by bootloaders into 32-bit protected mode and 64-bit long mode with paging enabled.
+- **Hardware Abstraction Decoupling:** Firmware abstracts low-level motherboard differences so bootloaders and kernels can query system topology via standardized tables (ACPI, SMBIOS).
+
+---
+
+## Common Mistakes
 
 1. **Missing Boot Signature:** If sector 0 does not terminate with `0x55AA`, the BIOS refuses to boot and reports: *"No bootable device found"*.
 2. **Volatile vs Non-Volatile Memory:** Beginners often wonder why the kernel isn't kept permanently in RAM. RAM requires continuous electrical power to maintain capacitive charges; turning off power resets RAM to random electrical noise.
@@ -137,7 +232,9 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
 
 - **Next Step:** Once the OS is booted and PID 1 is running, how does the OS represent, structure, and isolate individual running programs? (See [[Process Concepts and Memory Layout]]).
 - **Process Trees:** The boot sequence culminates in spawning PID 1, from which all subsequent processes are created via `fork()` (see [[Process Creation and Termination Operations]]).
@@ -148,7 +245,29 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Operating System Structures and Functions]]
+- [[Dual-Mode Operation and System Calls]]
+- [[Process Concepts and Memory Layout]]
+
+---
+
+## Prerequisites
+
+- [[Operating System Structures and Functions]]
+
+---
+
+## Problems
+
+- [[Problem — Fork Execution Tree and Process Tracing]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 7–10, 29–36)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 1 (Section 1.3: Hardware Overview, Section 1.5: Booting)

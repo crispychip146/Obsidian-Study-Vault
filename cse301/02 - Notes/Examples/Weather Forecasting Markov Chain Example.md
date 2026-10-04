@@ -12,6 +12,8 @@ order: 74
 
 ---
 
+---
+
 ## Problem
 
 Suppose that the chance of rain tomorrow depends only on whether it is raining today and not on previous days' weather:
@@ -21,6 +23,8 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 1. Formulate the system as a two-state [[Markov Chain]] and write its transition probability matrix $P$.
 2. Given that it is raining today, calculate the probability that it rains four days from now.
 3. Compute the long-run proportion of days that are rainy.
+
+---
 
 ---
 
@@ -36,6 +40,8 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 
 ---
 
+---
+
 ## Required
 
 1. One-step transition probability matrix $P$.
@@ -44,15 +50,24 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Formulate the Transition Probability Matrix
 Using states $\{0, 1\}$:
@@ -113,6 +128,16 @@ General formula check:
 $$\pi_0 = \frac{\beta}{1 + \beta - \alpha} = \frac{0.4}{1 + 0.4 - 0.7} = \frac{0.4}{0.7} = \frac{4}{7}$$
 
 ---
+### General Method
+
+For any 2-state Markov chain $P = \begin{pmatrix} \alpha & 1-\alpha \\ \beta & 1-\beta \end{pmatrix}$:
+1. Multi-step transition matrix: Use repeated squaring $P^{(2k)} = (P^{(k)})^2$.
+2. Stationary distribution closed-form solution:
+   $$\pi_0 = \frac{\beta}{1 - \alpha + \beta}, \qquad \pi_1 = \frac{1 - \alpha}{1 - \alpha + \beta}$$
+
+---
+
+---
 
 ## Result
 
@@ -127,10 +152,14 @@ Notice how close $P_{00}^4 = 0.5749$ is to the limiting value $\pi_0 \approx 0.5
 
 ---
 
+---
+
 ## Why This Works
 
 - The Chapman-Kolmogorov equations guarantee that multi-step probabilities correspond to powers of the transition matrix. Computing $P^4 = (P^2)^2$ reduces computational complexity from 3 matrix multiplications to 2.
 - Because all entries of $P$ are strictly positive ($P_{ij} > 0$), the chain is irreducible and aperiodic (primitive), guaranteeing geometric convergence of $P^n$ to a rank-1 matrix where every row equals $\pi = (4/7, 3/7)$.
+
+---
 
 ---
 
@@ -142,12 +171,11 @@ Notice how close $P_{00}^4 = 0.5749$ is to the limiting value $\pi_0 \approx 0.5
 
 ---
 
+---
+
 ## General Method
 
-For any 2-state Markov chain $P = \begin{pmatrix} \alpha & 1-\alpha \\ \beta & 1-\beta \end{pmatrix}$:
-1. Multi-step transition matrix: Use repeated squaring $P^{(2k)} = (P^{(k)})^2$.
-2. Stationary distribution closed-form solution:
-   $$\pi_0 = \frac{\beta}{1 - \alpha + \beta}, \qquad \pi_1 = \frac{1 - \alpha}{1 - \alpha + \beta}$$
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
 
 ---
 
@@ -157,6 +185,8 @@ For any 2-state Markov chain $P = \begin{pmatrix} \alpha & 1-\alpha \\ \beta & 1
 - [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
 - [[Higher-Order State Weather Prediction Example]]
+
+---
 
 ---
 

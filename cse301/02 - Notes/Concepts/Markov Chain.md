@@ -12,6 +12,34 @@ order: 69
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+1. **Tractable Modeling of Sequential Dependency:** Modeling systems where full memory creates an exponential state explosion ($|S|^n$). The Markov property collapses this history into the current state alone.
+2. **Foundation for Algorithmic Analysis:** Markov chains provide the bedrock for PageRank, Markov Chain Monte Carlo (MCMC), randomized algorithms, queuing systems, speech recognition (HMMs), and reinforcement learning (MDPs).
+3. **Analytical Solvability:** By reducing temporal dynamics to linear algebraic operations on the transition matrix $P$, long-run equilibria and multi-step behaviors can be computed using matrix powers and eigenvectors.
+
+---
+
+---
+
+## Developing the Idea
+
+When modeling a system that evolves over time, two extremes exist:
+- **Complete Independence:** What happens tomorrow has zero correlation with today. (Often unrealistic: tomorrow's weather or stock price obviously depends on today's).
+- **Full Historical Memory:** To predict tomorrow, you must inspect every single event since the dawn of time ($X_0, X_1, \dots, X_n$). (Computationally intractable and often unnecessary).
+
+A **Markov chain** strikes the sweet spot: **the future is conditionally independent of the past, given the present**.
+If you know where the system is *right now* ($X_n = i$), the exact historical trajectory that brought it there provides no additional information about where it will go next ($X_{n+1} = j$).
+
+In plain terms:
+> *"The future depends on the past only through the present."*
+
+---
+
+---
+
 ## Definition
 
 A **discrete-time Markov chain** is a discrete-time [[Stochastic Process]] $\{X_n, n = 0, 1, 2, \dots\}$ taking values in a finite or countable state space $S \subseteq \{0, 1, 2, \dots\}$ such that for all time steps $n \ge 0$ and all states $i_0, i_1, \dots, i_{n-1}, i, j \in S$:
@@ -38,29 +66,11 @@ P_{i0} & P_{i1} & P_{i2} & \cdots \\
 
 ---
 
-## Intuition
-
-When modeling a system that evolves over time, two extremes exist:
-- **Complete Independence:** What happens tomorrow has zero correlation with today. (Often unrealistic: tomorrow's weather or stock price obviously depends on today's).
-- **Full Historical Memory:** To predict tomorrow, you must inspect every single event since the dawn of time ($X_0, X_1, \dots, X_n$). (Computationally intractable and often unnecessary).
-
-A **Markov chain** strikes the sweet spot: **the future is conditionally independent of the past, given the present**.
-If you know where the system is *right now* ($X_n = i$), the exact historical trajectory that brought it there provides no additional information about where it will go next ($X_{n+1} = j$).
-
-In plain terms:
-> *"The future depends on the past only through the present."*
-
----
-
-## Why It Exists
-
-1. **Tractable Modeling of Sequential Dependency:** Modeling systems where full memory creates an exponential state explosion ($|S|^n$). The Markov property collapses this history into the current state alone.
-2. **Foundation for Algorithmic Analysis:** Markov chains provide the bedrock for PageRank, Markov Chain Monte Carlo (MCMC), randomized algorithms, queuing systems, speech recognition (HMMs), and reinforcement learning (MDPs).
-3. **Analytical Solvability:** By reducing temporal dynamics to linear algebraic operations on the transition matrix $P$, long-run equilibria and multi-step behaviors can be computed using matrix powers and eigenvectors.
-
 ---
 
 ## How It Works
+
+### How It Works
 
 1. **Specify State Space ($S$):** Identify all distinct, mutually exclusive situations the system can occupy.
 2. **Determine Transition Probabilities ($P_{ij}$):** For every pair of states $(i, j)$, determine the probability that the system moves from $i$ to $j$ in one discrete time step.
@@ -74,8 +84,66 @@ In plain terms:
    $$P(X_0 = i_0, X_1 = i_1, X_2 = i_2, \dots, X_n = i_n) = \alpha_{i_0} P_{i_0 i_1} P_{i_1 i_2} \cdots P_{i_{n-1} i_n}$$
 
 ---
+### Important Properties
+
+- **Row Sum Property:** $\sum_{j} P_{ij} = 1$ for all rows $i$. (Columns do not generally sum to 1 unless the matrix is doubly stochastic).
+- **Markov Property Holds for Multi-Step Horizons:**
+  $$P(X_{n+m} = j \mid X_n = i, X_{n-1} = i_{n-1}, \dots, X_0 = i_0) = P(X_{n+m} = j \mid X_n = i) = P_{ij}^m$$
+- **Closure under Matrix Multiplication:** Multi-step transitions are given directly by powers of $P$ via [[Chapman-Kolmogorov Equations]].
+
+---
+
+---
 
 ## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+### Technical Details
+
+### Time Homogeneity (Stationary Transitions)
+A Markov chain is called **time-homogeneous** if the transition probabilities do not depend on the absolute time index $n$:
+$$P(X_{n+1} = j \mid X_n = i) = P(X_1 = j \mid X_0 = i) = P_{ij}, \quad \forall n \ge 0$$
+Unless explicitly stated otherwise, Markov chains studied in CSE301 are assumed to be time-homogeneous.
+
+### State Space Augmentation (Handling Higher-Order Memory)
+If a system depends on the last $k$ time steps (a $k$-th order Markov chain):
+$$P(X_{n+1} = j \mid X_n, X_{n-1}, \dots, X_{n-k+1})$$
+it can always be reformulated as a standard first-order Markov chain by expanding the state space into $k$-tuples:
+$$Y_n = (X_n, X_{n-1}, \dots, X_{n-k+1})$$
+See [[Higher-Order State Weather Prediction Example]] for a concrete application.
+
+---
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+### Common Mistakes
+
+- **Confusing Row Sums with Column Sums:** Summing columns to 1 instead of rows. $P$ is row-stochastic ($\sum_j P_{ij} = 1$), not necessarily column-stochastic.
+- **Assuming Symmetry ($P_{ij} = P_{ji}$):** Transition probabilities are directed. The probability of transitioning from rain to sun is rarely equal to the probability of transitioning from sun to rain.
+- **Prematurely Declaring a Non-Markov Process Impossible:** Forgetting that non-Markovian processes with finite historical dependence can be converted into Markov chains via state augmentation.
+- **Misapplying the Markov Property:** Forgetting that conditioning on the *present* state is required to separate past and future. Unconditioned, $X_{n+1}$ and $X_{n-1}$ are usually dependent.
+
+---
+
+---
+
+## Exam Relevance
+
+### Example
 
 ### 1. Two-State Weather Model
 Suppose the chance of rain tomorrow depends solely on whether it rains today:
@@ -97,48 +165,15 @@ p & 1 - p \\
 \end{pmatrix}$$
 
 ---
-
-## Technical Details
-
-### Time Homogeneity (Stationary Transitions)
-A Markov chain is called **time-homogeneous** if the transition probabilities do not depend on the absolute time index $n$:
-$$P(X_{n+1} = j \mid X_n = i) = P(X_1 = j \mid X_0 = i) = P_{ij}, \quad \forall n \ge 0$$
-Unless explicitly stated otherwise, Markov chains studied in CSE301 are assumed to be time-homogeneous.
-
-### State Space Augmentation (Handling Higher-Order Memory)
-If a system depends on the last $k$ time steps (a $k$-th order Markov chain):
-$$P(X_{n+1} = j \mid X_n, X_{n-1}, \dots, X_{n-k+1})$$
-it can always be reformulated as a standard first-order Markov chain by expanding the state space into $k$-tuples:
-$$Y_n = (X_n, X_{n-1}, \dots, X_{n-k+1})$$
-See [[Higher-Order State Weather Prediction Example]] for a concrete application.
-
----
-
-## Important Properties
-
-- **Row Sum Property:** $\sum_{j} P_{ij} = 1$ for all rows $i$. (Columns do not generally sum to 1 unless the matrix is doubly stochastic).
-- **Markov Property Holds for Multi-Step Horizons:**
-  $$P(X_{n+m} = j \mid X_n = i, X_{n-1} = i_{n-1}, \dots, X_0 = i_0) = P(X_{n+m} = j \mid X_n = i) = P_{ij}^m$$
-- **Closure under Matrix Multiplication:** Multi-step transitions are given directly by powers of $P$ via [[Chapman-Kolmogorov Equations]].
-
----
-
-## Common Mistakes
-
-- **Confusing Row Sums with Column Sums:** Summing columns to 1 instead of rows. $P$ is row-stochastic ($\sum_j P_{ij} = 1$), not necessarily column-stochastic.
-- **Assuming Symmetry ($P_{ij} = P_{ji}$):** Transition probabilities are directed. The probability of transitioning from rain to sun is rarely equal to the probability of transitioning from sun to rain.
-- **Prematurely Declaring a Non-Markov Process Impossible:** Forgetting that non-Markovian processes with finite historical dependence can be converted into Markov chains via state augmentation.
-- **Misapplying the Markov Property:** Forgetting that conditioning on the *present* state is required to separate past and future. Unconditioned, $X_{n+1}$ and $X_{n-1}$ are usually dependent.
-
----
-
-## Exam Relevance
+### Exam Relevance
 
 In CSE301 examinations:
 1. **Transition Matrix Formulation:** Constructing $P$ from narrative problem descriptions (e.g., weather models, genetic processes, customer brand switching).
 2. **Validating Stochastic Matrices:** Verifying non-negativity and row-sum normalization.
 3. **Joint Path Probability Calculations:** Computing $P(X_0 = i_0, X_1 = i_1, \dots, X_n = i_n)$ by multiplying transition entries.
 4. **Higher-Order State Expansion:** Converting 2-day or multi-day weather dependencies into a valid first-order transition matrix.
+
+---
 
 ---
 
@@ -152,6 +187,8 @@ In CSE301 examinations:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Stochastic Process]]
@@ -160,11 +197,15 @@ In CSE301 examinations:
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Four-Day Weather Forecast]]
 - [[Problem — Rain Prediction Two Days Ahead]]
 - [[Problem — State Communication and Irreducibility Verification]]
+
+---
 
 ---
 

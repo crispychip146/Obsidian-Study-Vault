@@ -30,20 +30,43 @@ order: 29
 
 ---
 
-## 1. Algorithmic Overview & Motivation
+---
 
-Developed by **Edsger Dijkstra (1965)**, the **Banker's Algorithm** is the classic deadlock-avoidance algorithm for systems with multiple resource types and multiple instances per type.
+## The Problem and Earlier Tools
 
-### The Town Banker Analogy:
-A small-town banker has a fixed total pool of cash. Several business clients request credit lines:
-- Each client declares their **maximum credit limit** upfront.
-- A client takes loans in small installments over time.
-- The banker knows that once a client receives their maximum limit, they will finish their project and pay back the entire loan.
-- **Banker's Invariant:** The banker will **never** approve a loan request if granting it would leave the vault with less cash than the maximum remaining need of at least one client. As long as one client can finish, their repaid funds can be used to satisfy the next, avoiding bankruptcy (deadlock).
+In multiprogrammed systems, processes request multiple resource types dynamically. Earlier techniques—such as static deadlock prevention—force processes to request all resources upfront or impose strict linear acquisition ordering, leading to severe resource underutilization.
+
+We want an algorithm that dynamically evaluates resource requests in real time and decides whether granting a request is safe. The central obstacle is worst-case concurrency: granting a request that leaves resources available right now might still lead to deadlock later if all processes suddenly claim their maximum declared demands simultaneously.
 
 ---
 
-## 2. Mathematical Formalization & Data Structures
+## Developing the Core Idea
+
+Dijkstra's key insight is the **Town Banker Analogy**: A banker with a fixed pool of cash never allocates money such that the remaining vault cash cannot satisfy the maximum remaining credit line of at least one client.
+
+By maintaining this **Safe State Invariant**, the operating system guarantees that at least one process can finish, return all its held resources to the available pool, and thereby allow the remaining processes to finish sequentially without deadlock.
+
+---
+
+## Inputs
+
+- $E = [e_1, e_2, \dots, e_m]$: Total existing resource vector.
+- $CA = [n 	imes m]$: Current Allocation matrix ($CA[i][j]$ = instances of $R_j$ held by $P_i$).
+- $MaxReq = [n 	imes m]$: Maximum Requirement matrix.
+- $Request_i = [r_1, r_2, \dots, r_m]$: Dynamic request vector from process $P_i$.
+
+---
+
+## Outputs
+
+- Boolean decision: **Grant** request immediately, or **Suspend** $P_i$ until resources become available.
+- Safe execution sequence: $[P_{s1}, P_{s2}, \dots, P_{sn}]$ proving system safety.
+
+---
+
+## How It Works
+
+### 2. Mathematical Formalization & Data Structures
 
 Let $n$ be the number of processes in the system, and $m$ be the number of distinct resource types.
 
@@ -61,7 +84,26 @@ $$X \le Y \iff X_j \le Y_j \quad \forall j \in \{1, 2, \dots, m\}$$
 
 ---
 
-## 3. The Safety Algorithm
+---
+
+## Pseudocode
+
+### 1. Algorithmic Overview & Motivation
+
+Developed by **Edsger Dijkstra (1965)**, the **Banker's Algorithm** is the classic deadlock-avoidance algorithm for systems with multiple resource types and multiple instances per type.
+
+### The Town Banker Analogy:
+A small-town banker has a fixed total pool of cash. Several business clients request credit lines:
+- Each client declares their **maximum credit limit** upfront.
+- A client takes loans in small installments over time.
+- The banker knows that once a client receives their maximum limit, they will finish their project and pay back the entire loan.
+- **Banker's Invariant:** The banker will **never** approve a loan request if granting it would leave the vault with less cash than the maximum remaining need of at least one client. As long as one client can finish, their repaid funds can be used to satisfy the next, avoiding bankruptcy (deadlock).
+
+---
+
+---
+
+### 3. The Safety Algorithm
 
 This algorithm determines whether the current system state is safe:
 
@@ -90,7 +132,87 @@ Algorithm Safety_Check:
 
 ---
 
-## 4. The Resource-Request Algorithm
+---
+
+### 5. Algorithmic Complexity & Limitations
+
+- **Time Complexity:** The safety check requires $O(m \times n^2)$ operations in the worst case (searching through $n$ rows up to $n$ times, each taking $m$ comparisons).
+- **Practical Limitations in Modern OSs:**
+  1. *A priori knowledge:* Real-world processes rarely know their exact peak resource demands before execution.
+  2. *Static assumptions:* Assumes fixed process counts and fixed resource counts; modern systems dynamically add/remove hardware and fork/terminate processes.
+  3. *Overhead:* Running an $O(m \cdot n^2)$ safety simulation on **every single system resource call** would cripple OS performance.
+
+---
+
+---
+
+## Example
+
+Suppose $Available = [3, 3, 2]$, and 5 processes have need vectors. The safety algorithm simulates running each process that satisfies $Need_i \le Work$, collecting its allocated resources back into $Work$, until all processes finish.
+
+---
+
+## Complexity
+
+### Time Complexity
+$O(m 	imes n^2)$ where $n$ is the number of processes and $m$ is the number of resource types.
+
+### Space Complexity
+$O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
+
+---
+
+## Properties
+
+- **Deadlock-Free Guarantee:** The algorithm strictly guarantees that the system will never enter a deadlocked state.
+- **Conservatism (Incompleteness):** An unsafe state does NOT mean deadlock is inevitable; it merely means the OS cannot guarantee deadlock prevention in the worst case.
+- **Termination:** The safety algorithm terminates in at most $n$ iterations.
+
+---
+
+## Limitations
+
+- Requires processes to state their maximum resource needs in advance ($MaxReq$), which is difficult or impossible for general-purpose applications.
+- Assumes a fixed number of processes $n$ and fixed resources $m$, incompatible with dynamic plug-and-play hardware.
+- Assumes processes terminate in finite time and release all allocated resources.
+
+---
+
+## Common Mistakes
+
+- Misunderstanding preemption boundaries during execution.
+- Failing to verify state invariants before granting resource claims.
+
+---
+
+## Exam Relevance
+
+Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
+
+---
+
+## Related Concepts
+
+- [[Deadlock Prevention and Avoidance Strategies]]
+- [[Deadlock Detection and Recovery Algorithms]]
+- [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
+
+---
+
+## Prerequisites
+
+- [[Deadlock Fundamentals and Coffman Conditions]]
+- [[Resource Allocation Graphs and Deadlock Modeling]]
+
+---
+
+## Problems
+
+- [[Problem — Banker's Algorithm Safe State and Request Granting]]
+
+---
+
+## Sources
 
 When a running process $P_i$ issues a new resource request vector $Request_i$:
 
@@ -127,17 +249,6 @@ flowchart TD
 
 ---
 
-## 5. Algorithmic Complexity & Limitations
-
-- **Time Complexity:** The safety check requires $O(m \times n^2)$ operations in the worst case (searching through $n$ rows up to $n$ times, each taking $m$ comparisons).
-- **Practical Limitations in Modern OSs:**
-  1. *A priori knowledge:* Real-world processes rarely know their exact peak resource demands before execution.
-  2. *Static assumptions:* Assumes fixed process counts and fixed resource counts; modern systems dynamically add/remove hardware and fork/terminate processes.
-  3. *Overhead:* Running an $O(m \cdot n^2)$ safety simulation on **every single system resource call** would cripple OS performance.
-
----
-
-## Source Traceability & Metadata
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 28–31: Banker's Algorithm for Single and Multiple Resources) and `Notes on algorithm simulation.pdf`.
 - **Previous Topic:** [[Deadlock Prevention and Avoidance Strategies]] (Step 28).
 - **Next Topic:** [[Deadlock Detection and Recovery Algorithms]] (Step 30).

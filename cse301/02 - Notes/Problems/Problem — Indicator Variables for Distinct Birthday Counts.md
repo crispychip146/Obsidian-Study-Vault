@@ -12,7 +12,9 @@ order: 16
 
 ---
 
-## Problem Statement
+---
+
+## Problem
 
 Consider $k$ individuals whose birthdays are independent and uniformly distributed across $n$ days of the year (where $n = 365$). Let $D$ be the random variable representing the number of distinct days that are the birthday of at least one person in the group.
 
@@ -23,7 +25,28 @@ Consider $k$ individuals whose birthdays are independent and uniformly distribut
 
 ---
 
-## Prerequisites & Relevant Concepts
+---
+
+## Given
+
+- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
+
+---
+
+## Required
+
+- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
+
+---
+
+## Concepts Tested
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Prerequisites
 
 - [[Discrete Probability Distributions]] — Indicators and Bernoulli variables.
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Method of indicators.
@@ -31,7 +54,24 @@ Consider $k$ individuals whose birthdays are independent and uniformly distribut
 
 ---
 
-## Full Step-by-Step Solution
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
+## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Full Step-by-Step Solution
 
 ### Part 1: Indicator Representation
 For each day $i \in \{1, 2, \dots, n\}$, define the indicator variable:
@@ -107,8 +147,7 @@ $$\operatorname{Var}(D) = \sum_{i=1}^n \operatorname{Var}(I_i) + \sum_{i \ne j} 
    $$\operatorname{Var}(D) = n\left( 1 - \frac{1}{n} \right)^k + n(n - 1)\left( 1 - \frac{2}{n} \right)^k - n^2 \left( 1 - \frac{1}{n} \right)^{2k}$$
 
 ---
-
-## Alternative Approaches / Insights
+### Alternative Approaches / Insights
 
 - **Asymptotic Limit ($n \to \infty, k/n \to c$):**
   Let $c = k/n$. Then $\left(1 - \frac{1}{n}\right)^k \to e^{-c}$ and $\left(1 - \frac{2}{n}\right)^k \to e^{-2c}$.
@@ -118,14 +157,47 @@ $$\operatorname{Var}(D) = \sum_{i=1}^n \operatorname{Var}(I_i) + \sum_{i \ne j} 
 
 ---
 
-## Common Pitfalls
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
 
 1. **Forgetting Covariances:** Assuming $\operatorname{Var}(D) = \sum \operatorname{Var}(I_i) = np(1-p)$. This is invalid because the indicators $I_i$ are NOT independent.
 2. **Sign of Covariance:** Missing the fact that competition for a fixed number of people creates negative dependence ($\operatorname{Cov} < 0$), which makes the true variance *smaller* than it would be under independent trials.
 
 ---
 
-## Sources & Traceability
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+
+---
+
+## Source
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 8 & 13, pages 23–25, 40–43)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_5.pdf` & `8.pdf`

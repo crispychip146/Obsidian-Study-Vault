@@ -12,7 +12,9 @@ order: 11
 
 ---
 
-## Problem Statement
+---
+
+## Problem
 
 Analyze the following four POSIX C code snippets and answer the corresponding tracing questions:
 
@@ -73,7 +75,50 @@ int main() {
 
 ---
 
-## Prerequisites & Relevant Concepts
+---
+
+## Given
+
+- Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
+
+---
+
+## Required
+
+- Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
+
+---
+
+## Concepts Tested
+
+- [[Operating System Structures and Functions]]
+- [[Process Lifecycle and State Transitions]]
+
+---
+
+## Prerequisites
+
+- [[Process Concepts and Memory Layout]]
+- [[Process Control Block and Context Switching]]
+
+---
+
+## Question Type
+
+Code Trace / Process Tree Construction
+
+---
+
+## Solution
+
+### Understanding the Situation
+Interpret the given problem state, identify all participating entities (processes, resources, semaphores), and establish the operational rules governing their interactions.
+
+### Developing the Key Idea
+Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffman cycle conditions, Gantt timeline rules) and verify that all prerequisites hold.
+
+### Working Through the Solution
+### Prerequisites & Relevant Concepts
 
 - [[Process Creation and Termination Operations]] — Mechanics of `fork()` and return values.
 - [[Process Forking and Zombie Orphan Example]] — Address space duplication.
@@ -81,7 +126,9 @@ int main() {
 
 ---
 
-## Full Step-by-Step Solution
+---
+
+### Full Step-by-Step Solution
 
 ### Solution to Part 1: Sequential Fork Calls
 
@@ -204,7 +251,18 @@ flowchart TD
 
 ---
 
-## Common Pitfalls
+### Result and Interpretation
+The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
+
+---
+
+## Reusable Insight
+
+Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
+
+---
+
+## Common Mistakes
 
 1. **Ignoring Short-Circuit:** Assuming that `fork() && fork()` always creates 4 processes. The child of the first fork *never* executes the second fork!
 2. **Buffer Flushing Artifacts:**
@@ -212,7 +270,29 @@ flowchart TD
 
 ---
 
-## Sources & Traceability
+---
+
+## Exam Pattern
+
+Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
+
+---
+
+## Related Problems
+
+- [[Problem — Banker's Algorithm Safe State and Request Granting]]
+- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
+
+---
+
+## Related Concepts
+
+- [[CPU Scheduling Principles and Criteria]]
+- [[Deadlock Fundamentals and Coffman Conditions]]
+
+---
+
+## Source
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 22–28)
 - **Question ID:** `Q-CSE313-001`

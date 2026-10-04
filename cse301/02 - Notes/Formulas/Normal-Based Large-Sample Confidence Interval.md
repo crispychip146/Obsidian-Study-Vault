@@ -12,6 +12,20 @@ order: 39
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Normal-Based Large-Sample Confidence Interval, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Normal-Based Large-Sample Confidence Interval compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 When an estimator $\hat{\theta}_n$ is asymptotically normal, an approximate **$1 - \alpha$ confidence interval** for parameter $\theta$ is:
@@ -23,6 +37,8 @@ where:
 - $\widehat{\text{se}} = \widehat{\text{se}}(\hat{\theta}_n)$ is the estimated standard error.
 - $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$ is the upper $\alpha/2$ quantile of the standard normal distribution $N(0, 1)$.
 - Margin of error is $\text{ME} = z_{\alpha/2}\widehat{\text{se}}$.
+
+---
 
 ---
 
@@ -39,6 +55,8 @@ where:
 
 ---
 
+---
+
 ## Conditions
 
 1. **Asymptotic Normality:** The standardized estimator converges in distribution to a standard normal variable:
@@ -51,7 +69,11 @@ where:
 
 ---
 
+---
+
 ## Intuition
+
+### Intuition
 
 The standard normal probability density curve $\phi(z)$ is symmetric around zero. The area under the curve between $-z_{\alpha/2}$ and $+z_{\alpha/2}$ equals exactly $1 - \alpha$, leaving area $\alpha/2$ in each of the two outer tails.
 
@@ -59,7 +81,11 @@ Because $\hat{\theta}_n$ behaves approximately like a normal bell curve centered
 
 ---
 
+---
+
 ## Derivation
+
+### Derivation
 
 Let $Z_n = \frac{\hat{\theta}_n - \theta}{\widehat{\text{se}}}$. By the asymptotic normality assumption, $Z_n \xrightarrow{d} Z \sim N(0, 1)$.
 
@@ -86,7 +112,11 @@ $$2(1 - \alpha/2) - 1 = 2 - \alpha - 1 = 1 - \alpha \quad \blacksquare$$
 
 ---
 
+---
+
 ## Example
+
+### Example
 
 Suppose we sample $n = 400$ consumers and find that $260$ prefer brand A.
 We want a $95\%$ confidence interval for the population preference $p$.
@@ -106,7 +136,11 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Using $t$-critical values when $\sigma$ is known or $n$ is very large:**
    The $z$-interval is exact for normal populations with known $\sigma$ and asymptotically valid for any distribution with finite variance for large $n$.
@@ -114,6 +148,8 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
    The standard error decreases as $1/\sqrt{n}$, not $1/n$.
 3. **Plugging true parameter into $\widehat{\text{se}}$:**
    The true parameter $p$ or $\theta$ is unknown. We must plug in the sample estimate $\hat{p}$ or $\hat{\theta}$.
+
+---
 
 ---
 
@@ -126,6 +162,8 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Point Estimation]]
@@ -133,10 +171,14 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 
 ---
 
+---
+
 ## Problems
 
 - [[Bernoulli Parameter Estimation and Confidence Interval Example]]
 - [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
+
+---
 
 ---
 

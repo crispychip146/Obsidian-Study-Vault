@@ -12,6 +12,20 @@ order: 72
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Chapman-Kolmogorov Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Chapman-Kolmogorov Equations compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 ### Scalar Form
@@ -34,6 +48,8 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning |
@@ -47,6 +63,8 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 
 ---
 
+---
+
 ## Conditions
 
 1. **Discrete-Time Markov Process:** The underlying process $\{X_n, n \ge 0\}$ must satisfy the Markov property:
@@ -57,7 +75,11 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 
 ---
 
+---
+
 ## Intuition
+
+### Intuition
 
 To travel from city $i$ to city $j$ in $n+m$ days, you must be in *some* city $k$ at day $n$.
 
@@ -71,7 +93,11 @@ In matrix terms, computing transition probabilities over multiple time steps is 
 
 ---
 
+---
+
 ## Derivation
+
+### Derivation
 
 Let $X_0 = i$. We want to compute $P(X_{n+m} = j \mid X_0 = i)$.
 
@@ -99,7 +125,11 @@ $$P_{ij}^{n+m} = \sum_{k=0}^\infty P_{ik}^n P_{kj}^m \quad \blacksquare$$
 
 ---
 
+---
+
 ## Example
+
+### Example
 
 Consider the two-state weather chain:
 $$P = \begin{pmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{pmatrix}$$
@@ -124,12 +154,18 @@ Thus, $P_{00}^4 = 0.5749$.
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 - **Element-wise Exponentiation:** Raising individual matrix entries to the power $n$ (i.e., $(P_{ij})^n$) instead of performing matrix multiplication $P^n$.
 - **Summing over Wrong Index:** Summing over destination states $j$ instead of intermediate waypoints $k$.
 - **Transposing Matrix Multiplication Order:** In general, $A B \neq B A$. While $P^n P^m = P^m P^n = P^{n+m}$ holds for powers of the same matrix, when multiplying initial probability row vectors $\alpha$, one must compute $\alpha P^n$ (row times matrix), not $P^n \alpha$.
 - **Dropping the Conditioning Prematurely:** Forgetting to justify the removal of $X_0 = i$ in the third line of the derivation via the Markov property.
+
+---
 
 ---
 
@@ -141,10 +177,14 @@ Thus, $P_{00}^4 = 0.5749$.
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Conditional Probability and Independence|Conditional Probability]]
+
+---
 
 ---
 
@@ -153,6 +193,8 @@ Thus, $P_{00}^4 = 0.5749$.
 - [[Problem — Four-Day Weather Forecast]]
 - [[Problem — Rain Prediction Two Days Ahead]]
 - [[Problem — State Communication and Irreducibility Verification]]
+
+---
 
 ---
 

@@ -12,6 +12,8 @@ order: 89
 
 ---
 
+---
+
 ## Problem
 
 A shoe shine shop has two chairs, each staffed by a dedicated server:
@@ -29,6 +31,8 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 
 ---
 
+---
+
 ## Given
 
 - Server 1 rate: $\mu_1$ (Chair 1)
@@ -36,6 +40,8 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 - Arrival rate: $\lambda$ (Poisson)
 - Capacity: At most 2 customers total in the shop.
 - Blocking rule: When Chair 1 is done and Chair 2 is busy, Chair 1 enters blocked state $b$.
+
+---
 
 ---
 
@@ -49,7 +55,17 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Queueing Systems and Kendall Notation]]
 - [[PASTA Property and Inspection Paradox]]
@@ -57,8 +73,7 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 - Continuous-Time Markov Chain balance equations
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Choosing the State Space
 Merely counting the total number of customers $N \in \{0, 1, 2\}$ is insufficient, because when 1 customer is present, they could be in Chair 1 or Chair 2. Furthermore, when 2 customers are present, Chair 1 could be actively working or blocked.
@@ -149,6 +164,13 @@ Applying [[Little's Law]]:
 $$W = \frac{L}{\lambda_a} = \frac{P_{10} + P_{01} + 2(P_{11} + P_{b1})}{\lambda(P_{00} + P_{01})}$$
 
 ---
+### Key Insight: The Cost of Blocking
+
+Notice that when $\mu_1 \gg \mu_2$ (cleaning is very fast, polishing is slow), Chair 1 spends almost all its time in the blocked state $(b, 1)$. Even though Server 1 is available and sitting idle, incoming customers are turned away at the door because the previous customer has nowhere to move. This illustrates the importance of intermediate buffers in pipeline computing architectures.
+
+---
+
+---
 
 ## Result
 
@@ -158,9 +180,24 @@ $$W = \frac{L}{\lambda_a} = \frac{P_{10} + P_{01} + 2(P_{11} + P_{b1})}{\lambda(
 
 ---
 
-## Key Insight: The Cost of Blocking
+---
 
-Notice that when $\mu_1 \gg \mu_2$ (cleaning is very fast, polishing is slow), Chair 1 spends almost all its time in the blocked state $(b, 1)$. Even though Server 1 is available and sitting idle, incoming customers are turned away at the door because the previous customer has nowhere to move. This illustrates the importance of intermediate buffers in pipeline computing architectures.
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
 
 ---
 
@@ -170,6 +207,8 @@ Notice that when $\mu_1 \gg \mu_2$ (cleaning is very fast, polishing is slow), C
 - [[PASTA Property and Inspection Paradox]]
 - [[Little's Law]]
 - [[Finite Capacity M-M-1-N Queue]]
+
+---
 
 ---
 

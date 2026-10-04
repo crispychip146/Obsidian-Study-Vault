@@ -28,40 +28,35 @@ order: 20
 
 ---
 
-## 1. Intuition & The Lost Wakeup Problem
+---
 
-Prior to semaphores, synchronization relied either on CPU-burning busy-waiting or on elementary OS system calls: `sleep()` (suspend self) and `wakeup(pid)` (awaken suspended process).
+## Starting Point and the Problem
 
-### The Lost Wakeup Flaw:
-Consider the classic Producer-Consumer scenario with a shared buffer of size $N$ and an item counter `count`:
-1. The buffer is empty (`count == 0`).
-2. The consumer inspects `count`, sees it is 0, and prepares to call `sleep()`.
-3. Just before the consumer invokes `sleep()`, the scheduler preempts the consumer and runs the producer.
-4. The producer produces an item, inserts it, increments `count` to 1, and notes that `count` was just 0. It calls `wakeup(consumer)` to alert the consumer.
-5. However, the consumer is **not yet asleep**! The wakeup signal is discarded by the OS (it has no memory).
-6. The consumer resumes and finally executes `sleep()`.
-7. Eventually, the producer fills the entire buffer (`count == N`), calls `sleep()`, and blocks.
-8. **Result:** Both processes are asleep forever. The system is completely deadlocked.
+In concurrent programming, low-level mutual exclusion using spinlocks (busy-waiting loops like `while (test_and_set(&lock));`) forces CPU cores to consume 100% power executing useless spin cycles while waiting for a lock to clear. Furthermore, primitive integer flags suffer from "lost wakeup" race conditions.
 
-```
-Consumer                         Producer                         Buffer Count
--------------------------------------------------------------------------------
-reads count (0)                                                        0
-[PREEMPTED before sleep()]
-                                 produces item                         0
-                                 inserts item, count++                 1
-                                 sends wakeup(Consumer) -> LOST!       1
-resumes, executes sleep()                                              1
-[Consumer ASLEEP]
-                                 fills buffer to N, executes sleep()   N
-[DEADLOCK: Both asleep forever]
-```
-
-To resolve this, Edsger Dijkstra (1965) introduced a synchronization primitive that remembers signals: the **Semaphore**.
+We want an expressive, general-purpose synchronization primitive that allows threads to coordinate mutual exclusion and manage shared resource pools without wasting CPU cycles. The central obstacle is that the operations of testing, decrementing, and sleeping must occur completely atomically: if a thread is preempted halfway through checking a counter, synchronization collapses.
 
 ---
 
-## 2. Dijkstra's Semaphore Architecture
+## Developing the Idea
+
+In 1965, **Edsger Dijkstra** introduced the **Semaphore**: an integer variable $S$ that can only be accessed through two standardized, strictly atomic primitives:
+1. **`wait(S)`** (originally named `P(S)` from Dutch *proberen*, to test): Decrements $S$. If $S < 0$, the calling thread is blocked and placed onto a wait queue.
+2. **`signal(S)`** (originally named `V(S)` from Dutch *verhogen*, to increment): Increments $S$. If $S \le 0$, the kernel awakens one blocked thread from the wait queue.
+
+Unlike spinlocks, a thread calling `wait()` when resources are unavailable voluntarily yields the CPU via `sleep()` / `block()`, enabling the OS to run productive work until `signal()` awakens it.
+
+---
+
+## Definition
+
+
+
+---
+
+## How It Works
+
+### 2. Dijkstra's Semaphore Architecture
 
 A **semaphore** $S$ is a protected integer variable that, apart from initialization, can only be accessed through two standard, indivisible (atomic) operations:
 - **`wait(S)`** (originally **`down(S)`**, or Dutch **`P(S)`** for *proberen* / "to test")
@@ -72,44 +67,22 @@ All modifications to the semaphore integer and its internal waiting queue must e
 
 ---
 
-## 3. Kernel-Level Non-Busy Waiting Implementation
+---
 
-In modern operating systems, semaphores do not spin. A process that cannot proceed is placed into a blocked FIFO queue in the semaphore structure and yields the CPU:
+## Example
 
-```c
-typedef struct {
-    int value;
-    struct task_struct *queue_head; // FIFO list of blocked PCBs
-} semaphore;
-
-void wait(semaphore *S) {
-    S->value--;
-    if (S->value < 0) {
-        // Add this calling process to S->queue_head
-        // Set process state to BLOCKED / SLEEPING
-        block(); // Yield CPU to scheduler
-    }
-}
-
-void signal(semaphore *S) {
-    S->value++;
-    if (S->value <= 0) {
-        // Remove a process P from S->queue_head
-        // Set process P state to READY
-        wakeup(P); // Insert P into CPU ready queue
-    }
-}
-```
-
-### Critical Mathematical Property of Negative Semaphore Values:
-When `S->value < 0`, its absolute magnitude $|S\text{->value}|$ represents the **exact number of processes currently blocked and waiting** on that semaphore!
-- If $S = 3$: 3 resources are currently available.
-- If $S = 0$: 0 resources are available; no process is waiting.
-- If $S = -4$: 0 resources are available, and exactly 4 processes are queued asleep.
+Managing a pool of 3 printer devices using a Counting Semaphore initialized to $S = 3$:
+1. Job 1 calls `wait(S)` $	o S = 2$, enters printer.
+2. Job 2 calls `wait(S)` $	o S = 1$, enters printer.
+3. Job 3 calls `wait(S)` $	o S = 0$, enters printer.
+4. Job 4 calls `wait(S)` $	o S = -1 < 0$, Job 4 blocks and enters the semaphore wait queue.
+5. Job 1 completes printing and calls `signal(S)` $	o S = 0 \le 0$, Job 4 is unblocked and granted printer access.
 
 ---
 
-## 4. Types of Semaphores
+## Technical Details
+
+### 4. Types of Semaphores
 
 ### 1. Binary Semaphore (Mutual Exclusion / Mutex)
 - Integer value restricted strictly between $0$ and $1$.
@@ -133,20 +106,17 @@ When `S->value < 0`, its absolute magnitude $|S\text{->value}|$ represents the *
 
 ---
 
-## 5. Mutexes vs Binary Semaphores
+---
 
-While binary semaphores are often used as mutexes, strict POSIX/OS standards distinguish between them:
+## Important Properties and Why They Hold
 
-| Property | Mutex (Mutual Exclusion Lock) | Binary Semaphore |
-|---|---|---|
-| **Primary Intent** | Mutual Exclusion locking | Signaling and Synchronization |
-| **Ownership** | **Has ownership:** Only the thread that locked the mutex is legally permitted to unlock it. | **No ownership:** Any thread/interrupt handler can call `signal()` to awaken a waiting thread. |
-| **Use Case** | Protecting critical sections | Task coordination / Event notification |
-| **POSIX API** | `pthread_mutex_lock()`, `pthread_mutex_unlock()` | `sem_wait()`, `sem_post()` |
+- **Wait Queue Invariance:** If semaphore value $S < 0$, then the absolute value $|S|$ represents the exact number of processes currently blocked in the semaphore queue.
+- **Atomicity Invariant:** The test-and-decrement in `wait()` and the increment-and-wakeup in `signal()` are indivisible atomic operations protected by kernel spinlocks or disabled interrupts.
+- **Mutex vs. Counting Distinction:** A binary semaphore ($S \in \{0, 1\}$) provides mutual exclusion; a general counting semaphore ($S \ge 0$) manages counting pools of identical resources.
 
 ---
 
-## 6. Common Synchronization Errors with Semaphores
+## Common Mistakes
 
 Because semaphores are low-level procedural primitives, small developer mistakes result in fatal system deadlocks:
 
@@ -181,7 +151,37 @@ Because semaphores are low-level procedural primitives, small developer mistakes
 
 ---
 
-## Source Traceability & Metadata
+---
+
+## Exam Relevance
+
+Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
+
+---
+
+## Related Concepts
+
+- [[Monitors and Condition Variables]]
+- [[Classic Synchronization Solutions]]
+- [[Producer-Consumer Semaphore Implementation Example]]
+
+---
+
+## Prerequisites
+
+- [[Race Conditions and Critical-Section Problem]]
+- [[Threads and Multithreading Models]]
+
+---
+
+## Problems
+
+- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
+
+---
+
+## Sources
+
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 29–42: Sleep and Wakeup, The Lost Wakeup Problem, Semaphores, Mutexes in Pthreads).
 - **Previous Topic:** [[Peterson's Algorithm and Hardware Mutual Exclusion]] (Step 19).
 - **Next Topic:** [[Monitors and Condition Variables]] (Step 21).

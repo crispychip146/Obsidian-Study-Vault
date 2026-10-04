@@ -12,6 +12,26 @@ order: 4
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+On storage media, a computer program is merely an inert, passive sequence of bytes: compiled machine code instructions and static data constants stored inside an ELF or PE binary file.
+
+We want the CPU to execute this program, track its dynamic variables as they change during execution, maintain its function call history, and allow multiple instances of the same program to run simultaneously without interfering with one another. The central obstacle is that a static binary has no runtime state: it has no program counter, no dynamic stack frames, and no allocated heap.
+
+---
+
+## Developing the Idea
+
+To bridge this gap, the operating system creates the **Process** abstraction: an active instance of a program in execution.
+
+A process encapsulates both the static program and its complete dynamic operational environment:
+- As Tanenbaum's cake baking analogy illustrates: the recipe is the program, the baker is the CPU, the ingredients are the input data, and the activity of mixing and baking is the process.
+- To prevent conflicts, the OS assigns each process a private, continuous **Virtual Address Space** partitioned into distinct logical segments: Text (read-only code), Initialized Data, Uninitialized Data (BSS), Heap (growing dynamically upward), and Stack (growing dynamically downward).
+
+---
+
 ## Definition
 
 A **process** is a **program in execution**. It is the fundamental unit of computation and resource allocation in an operating system.
@@ -25,69 +45,26 @@ Multiple distinct processes can run instances of the same underlying program sim
 
 ---
 
-## The Cake Baking Analogy (Tanenbaum)
+---
 
-To intuitively understand the separation between a program, a process, a processor, and input data, consider baking a birthday cake:
-- **The Recipe:** The **program** (a static, written sequence of instructions).
-- **The Ingredients:** The **input data** (flour, eggs, sugar, milk).
-- **The Baker:** The **processor (CPU)** (the active physical agent executing instructions).
-- **The Process:** The **entire dynamic activity** of the baker reading the recipe, mixing ingredients, heating the oven, and baking the cake over time.
+## How It Works
 
-*Analogy Extension (Preemption):* If the baker's child runs into the kitchen crying with a bee sting, the baker saves their place in the recipe (records current state / Program Counter), switches tasks to administer first aid (handles higher-priority interrupt / context switch), and then returns to the kitchen, restoring the saved recipe step to continue baking.
+The mechanism operates through coordinated hardware execution and operating system kernel protocols.
 
 ---
 
-## Process Memory Layout (Address Space)
+## Example
 
-When an executable binary is loaded into memory, the operating system constructs a structured **Virtual Address Space** for the process. In a standard 32-bit or 64-bit architecture, the memory layout is organized into distinct segments:
-
-```
-High Memory Address (0xFFFFFFFF in 32-bit)
-+---------------------------------------------------+
-|               Kernel Space                        | (Protected: accessible only in Kernel Mode)
-+---------------------------------------------------+
-|               Environment Variables & CLI Args    | (argc, argv, envp)
-+---------------------------------------------------+
-|                       STACK                       | (Local variables, function frames)
-|                         |                         |
-|                         v (Grows DOWNWARD)        |
-|                                                   |
-|                         ^ (Grows UPWARD)          |
-|                         |                         |
-|                       HEAP                        | (Dynamic memory: malloc, calloc, new)
-+---------------------------------------------------+
-|               BSS Segment                         | (Uninitialized global & static variables; zeroed)
-+---------------------------------------------------+
-|               DATA Segment                        | (Initialized global & static variables)
-+---------------------------------------------------+
-|               TEXT (CODE) Segment                 | (Read-Only machine instructions)
-+---------------------------------------------------+
-Low Memory Address (0x00000000)
-```
-
-### Detailed Segment Breakdown:
-
-1. **Text (Code) Segment:**
-   - Contains the compiled executable machine code instructions.
-   - **Protection:** Marked **Read-Only** by the MMU. Attempting to write to the text segment generates a segmentation fault.
-   - **Sharability:** If multiple processes run the same program (e.g., multiple instances of `bash`), they share a single physical copy of the text segment in RAM, conserving physical memory.
-2. **Initialized Data Segment:**
-   - Stores global variables and static local variables that have an explicit initial non-zero value specified by the programmer (e.g., `int max_users = 100;`).
-3. **Uninitialized Data Segment (BSS — Block Started by Symbol):**
-   - Stores global and static variables that are uninitialized or initialized to zero (e.g., `int buffer[1024];`).
-   - Does not occupy physical space inside the executable file on disk; the OS simply zeroes out this memory block during process loading.
-4. **Heap Segment:**
-   - Used for dynamic memory allocation at runtime via standard library calls (`malloc()`, `calloc()`, `realloc()`, or C++ `new`).
-   - Managed via kernel system calls `brk()` and `sbrk()`, or memory-mapping `mmap()`.
-   - **Grows upward** toward higher memory addresses.
-5. **Stack Segment:**
-   - Manages automatic storage: function call frames (activation records), function parameters, return addresses, and local variables.
-   - **Grows downward** toward lower memory addresses.
-   - Every time a function is invoked, a new stack frame is pushed; when the function returns, its frame is popped.
+Consider running two separate terminal windows each executing `./my_program`:
+- Both processes share the exact same physical memory frames for their read-only Text segment (code instructions).
+- Each process has completely independent physical memory frames for their Data, Heap, and Stack segments.
+- If Process 1 modifies variable `x = 100`, Process 2 still reads `x = 0`. Each operates within its own private address space.
 
 ---
 
-## Stack vs. Heap: Critical Comparison
+## Technical Details
+
+### Stack vs. Heap: Critical Comparison
 
 | Dimension | Stack Segment | Heap Segment |
 |---|---|---|
@@ -99,7 +76,17 @@ Low Memory Address (0x00000000)
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
+
+## Important Properties and Why They Hold
+
+- **Address Space Isolation:** Memory protection hardware (MMU page tables) ensures that Process $A$ cannot read or alter memory in Process $B$ without explicit shared-memory IPC primitives.
+- **Stack-Heap Separation:** The stack grows downward toward lower memory addresses with every function call; the heap grows upward via `brk()` / `sbrk()` or `mmap()`. Collision between them results in out-of-memory errors or stack overflow exceptions.
+- **Reentrancy of Code:** The text segment is marked execute-only and read-only, allowing multiple concurrent processes to safely share the same physical code frames.
+
+---
+
+## Common Mistakes
 
 1. **Stack Overflow:**
    - Caused by infinite or deeply nested recursion, or allocating large arrays locally on the stack (e.g., `char huge[10000000];` inside a function).
@@ -112,7 +99,9 @@ Low Memory Address (0x00000000)
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
 
 - **Next Step:** As a process executes through its memory segments, how does its status change between waiting for I/O and running on the CPU? (See [[Process Lifecycle and State Transitions]]).
 - **Process Context:** The hardware registers and segment pointers are tracked inside the [[Process Control Block and Context Switching]].
@@ -123,7 +112,31 @@ Low Memory Address (0x00000000)
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Process Lifecycle and State Transitions]]
+- [[Process Control Block and Context Switching]]
+- [[Process Creation and Termination Operations]]
+- [[Threads and Multithreading Models]]
+
+---
+
+## Prerequisites
+
+- [[Computer Booting and Hardware Abstractions]]
+- [[Operating System Structures and Functions]]
+
+---
+
+## Problems
+
+- [[Problem — Fork Execution Tree and Process Tracing]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 1–7)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2: Processes and Threads (Section 2.1)

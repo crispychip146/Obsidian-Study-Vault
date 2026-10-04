@@ -28,6 +28,27 @@ order: 5
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+In any modern computing system, there are typically hundreds or thousands of processes configured, but only a small number of physical CPU cores (e.g. 4 to 16 cores).
+
+We want the system to multiplex these cores fairly and efficiently so that all active programs make progress, interactive applications respond instantly to user input, and batch computations utilize spare cycles. The central obstacle is that processes have radically different immediate needs: some are actively computing, some are waiting for slow disk or network I/O, and others are waiting for timer alarms.
+
+---
+
+## Developing the Idea
+
+The operating system structures process management around a formal **Finite State Machine (FSM)**: the **Process Lifecycle**.
+
+By categorizing every process into one of several well-defined states, the OS CPU scheduler only ever considers processes that are genuinely ready to run:
+- A process waiting for disk data cannot consume CPU cycles even if the CPU is completely idle.
+- When an I/O operation completes, a hardware interrupt signals the kernel, transitioning that process from Blocked back to Ready.
+- Under memory pressure, the OS extends this model with **Suspended States**, paging out entire processes to secondary storage to reclaim physical RAM frames.
+
+---
+
 ## Definition
 
 During its existence from initial creation to final termination, a process changes its execution status dynamically. The **process lifecycle** is modeled as a finite state machine governed by the operating system scheduler and hardware events.
@@ -41,7 +62,11 @@ The standard representation is the **Five-State Process Model**:
 
 ---
 
-## The 5-State Transition Diagram
+---
+
+## How It Works
+
+### The 5-State Transition Diagram
 
 ```mermaid
 stateDiagram-v2
@@ -77,7 +102,9 @@ stateDiagram-v2
 
 ---
 
-## The Extended 7-State Model (Suspended States)
+---
+
+### The Extended 7-State Model (Suspended States)
 
 When physical RAM is heavily overcommitted (thrashing), the OS must free up memory by swapping entire processes out of physical RAM and onto secondary storage (the swap partition/file). This introduces two **Suspended States**:
 
@@ -95,18 +122,42 @@ flowchart TD
 
 ---
 
-## Edge Cases & Strict Invariants
+---
 
-| Proposed Transition | Possible? | Explanation |
-|---|---|---|
-| $\text{Running} \to \text{Blocked}$ | **YES** | Process voluntarily requests I/O or blocks on a lock. |
-| $\text{Blocked} \to \text{Running}$ | **IMPOSSIBLE** | Violates scheduling arbitration. Must enter Ready first. |
-| $\text{Ready} \to \text{Blocked}$ | **IMPOSSIBLE** | A process can only request a blocking operation while actively executing on the CPU! |
-| $\text{Blocked} \to \text{Ready}$ | **YES** | Standard event completion via hardware interrupt handler. |
+## Example
+
+Tracing a text editor process:
+1. User launches editor: OS allocates PCB and transitions process to **New**, then **Ready**.
+2. Scheduler picks it: Transitions to **Running**.
+3. User types a key: Editor waits for next keystroke and invokes `read()`, transitioning to **Waiting (Blocked)**. The CPU is yielded to another process.
+4. Keyboard interrupt fires: OS moves editor back to **Ready**.
+5. Timer slice expires during spell-check: OS moves editor from **Running** to **Ready** (preemption).
+6. User clicks Save & Exit: Editor writes file, executes `exit()`, and enters **Terminated**.
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+## Technical Details
+
+See related modules for microarchitectural implementation details.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Strict Invariance of Transitions:** A process cannot jump directly from Blocked to Running; it *must* first enter the Ready state so the scheduler can evaluate priorities fairly.
+- **Uniprocessor Running Uniqueness:** On a system with $C$ CPU cores, at most $C$ processes can occupy the Running state simultaneously at any instant.
+- **State Determinism:** Every state transition is triggered either by a hardware interrupt (timer, I/O device) or an explicit software trap/system call.
+
+---
+
+## Common Mistakes
+
+- Assuming user mode code can execute privileged instructions directly without a system call trap.
+- Overlooking race conditions in shared variables without explicit synchronization.
+
+---
+
+## Exam Relevance
 
 - **Next Step:** What underlying data structure records these states and enables saving/restoring them? (See [[Process Control Block and Context Switching]]).
 - **CPU Scheduling:** Scheduling algorithms operate directly on the collection of processes sitting in the **Ready** state (see [[CPU Scheduling Principles and Criteria]] and [[Interactive Scheduling Algorithms]]).
@@ -117,7 +168,29 @@ flowchart TD
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Process Control Block and Context Switching]]
+- [[CPU Scheduling Principles and Criteria]]
+- [[CPU Multiprogramming Utilization Formula]]
+
+---
+
+## Prerequisites
+
+- [[Process Concepts and Memory Layout]]
+
+---
+
+## Problems
+
+- [[Problem — Fork Execution Tree and Process Tracing]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 11–15)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.2: Process States)

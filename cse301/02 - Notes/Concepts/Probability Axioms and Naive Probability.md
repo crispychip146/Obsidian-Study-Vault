@@ -12,6 +12,20 @@ order: 2
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Probability Axioms and Naive Probability, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Probability Axioms and Naive Probability reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 **Probability** is a mathematical framework for quantifying uncertainty. Formally, a **probability space** is a triple $(S, \mathcal{F}, P)$, where:
@@ -23,7 +37,11 @@ Historically and pedagogically, probability began with the **naive definition**,
 
 ---
 
-## The Naive Definition of Probability
+---
+
+## How It Works
+
+### The Naive Definition of Probability
 
 If a sample space $S$ is finite and all elementary outcomes are equally likely (symmetric):
 $$P(A) = \frac{\lvert A \rvert}{\lvert S \rvert} = \frac{\# \text{ outcomes favorable to } A}{\text{total } \# \text{ outcomes in } S}$$
@@ -36,8 +54,7 @@ $$P(A) = \frac{\lvert A \rvert}{\lvert S \rvert} = \frac{\# \text{ outcomes favo
 To overcome these limitations, modern probability rests on the **Kolmogorov Axioms**.
 
 ---
-
-## Kolmogorov Axioms of Probability
+### Kolmogorov Axioms of Probability
 
 Let $S$ be a sample space and $\mathcal{F}$ a collection of events. A function $P: \mathcal{F} \to \mathbb{R}$ is a probability function if it satisfies:
 
@@ -58,7 +75,23 @@ $$P(A_1 \cup A_2 \cup \dots \cup A_n) = \sum_{i=1}^n P(A_i) \quad \text{when } A
 
 ---
 
-## Immediate Consequences and Theorems
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+### Immediate Consequences and Theorems
 
 From the three axioms, all foundational properties of probability follow deductively:
 
@@ -97,7 +130,11 @@ From the three axioms, all foundational properties of probability follow deducti
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
+
+## Common Mistakes
+
+### Edge Cases & Common Pitfalls
 
 1. **Assuming Equal Likelihood Blindly:**
    - *Error:* Claiming "There are two outcomes (win or lose lottery), so probability of winning is $1/2$."
@@ -111,7 +148,11 @@ From the three axioms, all foundational properties of probability follow deducti
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
 
 - **Combinatorics:** Evaluates the numerator $\lvert A \rvert$ and denominator $\lvert S \rvert$ in naive probability (see [[Combinatorics and Counting Principles]]).
 - **Conditional Probability:** Axioms extend directly into conditional probability spaces $P(\cdot \mid B)$ (see [[Conditional Probability and Independence]]).
@@ -120,7 +161,28 @@ From the three axioms, all foundational properties of probability follow deducti
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 1–3, pages 1–9)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf` and `2.pdf`

@@ -12,15 +12,36 @@ order: 9
 
 ---
 
-## Overview
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Continuous Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Continuous Probability Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
+## Definition
+
+**Continuous Probability Distributions** is a foundational concept in probability and mathematical statistics governing random variables, probability distributions, or statistical decision-making.
+
+---
+
+## How It Works
+
+### Overview
 
 A continuous random variable $X$ can take any real value within an interval (or union of intervals). Its behavior is characterized by a **Probability Density Function (PDF)** $f_X(x)$ such that:
 $$P(a \le X \le b) = \int_a^b f_X(x) \, dx$$
 with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 
 ---
-
-## 1. Continuous Uniform Distribution: $\operatorname{Unif}(a, b)$
+### Continuous Uniform Distribution: $\operatorname{Unif}(a, b)$
 
 - **Story:** Complete uncertainty over a bounded interval $[a, b]$; all sub-intervals of equal length are equally likely.
 - **PDF:**
@@ -35,8 +56,7 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
   - *Application:* Fundamental to pseudo-random number generation and Monte Carlo simulations.
 
 ---
-
-## 2. Normal (Gaussian) Distribution: $\mathcal{N}(\mu, \sigma^2)$
+### Normal (Gaussian) Distribution: $\mathcal{N}(\mu, \sigma^2)$
 
 - **Story:** The central distribution of probability and statistics, arising whenever many small, independent random disturbances add together (formalized by the [[Central Limit Theorem]]).
 - **PDF:**
@@ -56,8 +76,7 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
   $$aX_1 + bX_2 \sim \mathcal{N}(a\mu_1 + b\mu_2, a^2\sigma_1^2 + b^2\sigma_2^2)$$
 
 ---
-
-## 3. Exponential Distribution: $\operatorname{Exp}(\lambda)$
+### Exponential Distribution: $\operatorname{Exp}(\lambda)$
 
 - **Story:** The continuous waiting time between events in a Poisson process with rate $\lambda > 0$ (e.g., time until the next packet arrival, customer service duration, or radioactive decay).
 - **PDF:**
@@ -75,8 +94,7 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
   and $P(X_i = \min(X_1, \dots, X_n)) = \frac{\lambda_i}{\sum_{j=1}^n \lambda_j}$.
 
 ---
-
-## 4. Gamma Distribution: $\operatorname{Gamma}(a, \lambda)$
+### Gamma Distribution: $\operatorname{Gamma}(a, \lambda)$
 
 - **Story:** Waiting time until the $a$-th event in a Poisson process with rate $\lambda$ (for integer shape $a$, also called the **Erlang distribution**).
 - **PDF:**
@@ -87,8 +105,7 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 - **Connection to Exponential:** If $X_1, \dots, X_a \overset{\text{i.i.d.}}{\sim} \operatorname{Exp}(\lambda)$, then $\sum_{i=1}^a X_i \sim \operatorname{Gamma}(a, \lambda)$.
 
 ---
-
-## 5. Beta Distribution: $\operatorname{Beta}(a, b)$
+### Beta Distribution: $\operatorname{Beta}(a, b)$
 
 - **Story:** Continuous distribution supported on the interval $(0, 1)$, widely used as a prior distribution for probabilities and proportions.
 - **PDF:**
@@ -100,8 +117,7 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 - **Conjugacy:** Serves as the conjugate prior for Bernoulli/Binomial likelihoods (see [[Beta-Binomial Conjugate Updating Formula]]).
 
 ---
-
-## Summary Reference Table
+### Summary Reference Table
 
 | Distribution | Notation | Parameters | PDF $f(x)$ | Support | Mean $\mathbb{E}[X]$ | Variance $\operatorname{Var}(X)$ |
 |---|---|---|---|---|---|---|
@@ -113,7 +129,37 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
 
 - **Queueing Theory:** Inter-arrival and service times in [[M-M-1 Queue]] are exponentially distributed due to memorylessness.
 - **Inference:** Normal and Beta distributions form the pillars of [[Normal-Normal Conjugate Updating Formula]] and [[Maximum Likelihood Estimation]].
@@ -121,7 +167,28 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 10–12, pages 30–39)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_6.pdf` & `7.pdf`

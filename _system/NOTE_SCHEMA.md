@@ -116,24 +116,35 @@ verification.
 
 ---
 
-# 5. LEARNING DEPTH
+# 5. LEARNING DEPTH AND GUIDED DEVELOPMENT
 
-Knowledge should normally be developed progressively.
+The student prefers to mentally follow what is happening, why each meaningful
+step is useful and valid, and how the reasoning grows from earlier ideas.
+Follow `_system/AI_RULES.md`, Section 3, for the full teaching standard.
 
-Use this progression when the subject requires it:
+Develop important notes from a concrete question and obstacle toward the key
+insight, mechanism, and formal understanding. Do not begin with unexplained
+heavy notation and postpone the motivation until after the answer.
 
-1. Why does this exist?
-2. Intuition
-3. Core concept
-4. Technical explanation
-5. Worked example
-6. Advanced understanding
-7. Problem solving
-8. Exam application
+The templates below are flexible guides. Sections may be merged or reordered
+to preserve a connected explanation. Do not fill every heading mechanically,
+repeat the same intuition in several sections, or add a proof to a topic that
+does not require one. Keep clear results and rigorous formal arguments.
 
-Not every note requires every section.
+For each important prerequisite, explain the earlier idea briefly and state
+what role it plays here. Use real existing notes when available. A link list
+alone is not an explanation. Provide the local bridge needed for independent
+reading; do not claim the student has mastered the prerequisite.
 
-However, important concepts should normally progress beyond a short definition.
+For a useful future connection, state the remaining question or new capability
+and explain how another concept addresses it. Use known course order only when
+supported; conceptual dependency does not establish lecture order.
+
+Use a small running example, diagram, trace, or comparison when it reveals the
+mechanism. Label AI-created teaching examples as illustrative. Show how the
+example's reasoning generalizes, and distinguish intuition from proof.
+
+The five primary note types and existing frontmatter remain unchanged.
 
 ---
 
@@ -152,39 +163,34 @@ status: active
 
 # Concept Name
 
+## Starting Point and the Problem
+
+Recall the relevant earlier idea and explain what it lets us do.
+Establish a concrete situation, the target, and the difficulty or limitation
+that motivates this concept. Explain important terminology as it appears.
+
+---
+
+## Developing the Idea
+
+Use a revealing example to develop the central insight from that starting
+point. Follow what happens to relevant objects or states. Explain how the
+new idea addresses the difficulty. Use an analogy only if its mapping helps.
+
+---
+
 ## Definition
 
-Clearly define the concept.
-
-Use technically correct terminology.
-
----
-
-## Intuition
-
-Explain the idea in simple language.
-
-Assume the student may be seeing the concept for the first time.
-
-Use analogies when they genuinely improve understanding.
-
----
-
-## Why It Exists
-
-Explain:
-
-- What problem does it solve?
-- Why was it introduced?
-- What limitation or need motivated it?
+State the technically correct definition and connect its terms to the idea
+just developed. Keep the definition easy to locate for revision.
 
 ---
 
 ## How It Works
 
-Explain the mechanism step by step.
-
-Break complicated processes into smaller parts.
+Explain the mechanism step by step. Track what changes and why each
+consequential step helps. Connect the mechanism to the earlier idea and
+justify important transitions using definitions or assumptions.
 
 ---
 
@@ -203,9 +209,11 @@ advanced understanding or exams.
 
 ---
 
-## Important Properties
+## Important Properties and Why They Hold
 
-List important characteristics, conditions, assumptions, or guarantees.
+Explain important characteristics, assumptions, and guarantees.
+For claims requiring proof, develop the proof's key idea and then give the
+rigorous argument, explaining why its steps establish the claim generally.
 
 ---
 
@@ -262,15 +270,18 @@ status: active
 
 # Algorithm Name
 
-## Purpose
+## The Problem and Earlier Tools
 
-What problem does the algorithm solve?
+Explain the situation, required output, and central obstacle. Recall earlier
+tools or algorithms and explain the relevant capability or limitation.
 
 ---
 
-## Core Idea
+## Developing the Core Idea
 
-Explain the central idea in simple language.
+Show the observation that suggests the algorithm. Use a natural first attempt
+or a small example when it reveals the difficulty. Explain why the chosen
+approach makes progress without implying it is the only valid approach.
 
 ---
 
@@ -288,7 +299,9 @@ Describe the expected output.
 
 ## How It Works
 
-Explain the algorithm step by step.
+Explain the algorithm step by step, showing the relevant state before and
+after important operations. Explain why choices are made, how they move toward
+the output, and what invariant or property is preserved where relevant.
 
 ---
 
@@ -300,9 +313,9 @@ algorithm
 
 ## Example
 
-Walk through a concrete example.
-
-Show intermediate steps when they matter.
+Walk through a concrete example using a trace, table, or diagram when useful.
+Track actual state changes and explain important decisions. Relate the trace
+to the pseudocode and extract the reasoning that carries to other inputs.
 
 ---
 
@@ -330,6 +343,9 @@ Include relevant properties such as:
 - Termination
 
 Only include properties that actually apply.
+For correctness arguments, explain the key observation or invariant, establish
+it rigorously, and show why termination produces the required result. Use the
+appropriate proof strategy; an execution trace alone is not a correctness proof.
 
 ---
 
@@ -392,9 +408,25 @@ status: active
 
 # Formula Name
 
+## The Question and Earlier Knowledge
+
+Explain the quantity or relationship we want to determine. Recall the earlier
+ideas used to construct it and identify the obstacle to calculating it directly.
+
+---
+
+## Developing the Formula
+
+Use a small situation to expose the structure. Explain what is being counted,
+measured, combined, conditioned on, or averaged. Motivate the important
+operations before introducing the complete expression.
+
+---
+
 ## Formula
 
-[Formula goes here]
+State the compact formula and connect its terms to the reasoning just developed.
+Keep it easy to locate for reference.
 
 ---
 
@@ -417,21 +449,26 @@ Include assumptions and restrictions.
 
 ## Intuition
 
-Explain what the formula is actually telling us.
-
-Do not leave the formula as unexplained notation.
+Interpret the formula in the original situation. Explain what important
+terms represent and how the expression behaves in a revealing simple or
+limiting case. Merge this into the development if a separate section repeats it.
 
 ---
 
 ## Derivation
 
-Provide the derivation when useful or required by the course.
+Provide the derivation when useful or required by the course. State the
+assumptions, explain the key idea, and justify consequential transformations,
+including important changes of index, sample space, or conditioning.
+Explain why the argument applies generally; distinguish an illustrative
+calculation from a formal derivation or proof.
 
 ---
 
 ## Example
 
-Show a worked example.
+Show a worked example. Interpret the givens, explain why the formula applies,
+connect substitutions to their meanings, and interpret and check the result.
 
 ---
 
@@ -501,41 +538,40 @@ State what needs to be found or demonstrated.
 
 ---
 
-## Concepts Used
+## Understanding the Problem and Choosing the Method
 
-- [[Concept]]
-- [[Formula]]
-- [[Algorithm]]
+Explain what the situation means and what makes the target difficult.
+Develop the observation that suggests the method. Recall the earlier ideas
+being used and explain their roles; include relevant links such as
+[[Concept]], [[Formula]], or [[Algorithm]].
 
 ---
 
 ## Solution
 
-### Step 1
+Use descriptive steps that follow the actual reasoning. For each consequential
+step, explain the current situation, the chosen action or inference, its purpose
+and justification, and what it changes or establishes. Show meaningful
+intermediate calculations or states without narrating every routine operation.
 
-Explain the first step.
-
-### Step 2
-
-Explain the next step.
-
-### Step 3
-
-Continue until the problem is solved.
-
-Do not skip important reasoning.
+For a proof, first develop the key observation and strategy, then establish
+the claim rigorously. Do not skip a logical bridge or replace proof with an
+example.
 
 ---
 
 ## Result
 
-State the final answer clearly.
+State the final answer clearly. Explain what it means in the original
+situation and verify it with an appropriate check when possible.
 
 ---
 
 ## Why This Works
 
-Explain the reasoning behind the solution.
+Explain why the method reaches the required result and where its assumptions
+matter. Reasoning must also appear alongside the solution steps; this section
+is for consolidation, not delayed justification.
 
 ---
 
@@ -547,7 +583,8 @@ Explain alternative incorrect approaches when useful.
 
 ## General Method
 
-Extract the reusable problem-solving technique.
+Extract the reusable problem-solving technique and the cues that suggest it.
+Where useful, change one condition and explain what carries over or must change.
 
 ---
 
@@ -638,15 +675,39 @@ Examples:
 
 ## Solution
 
-Provide the complete solution.
+### Understanding the Situation
 
-Show reasoning rather than only the final answer.
+Interpret the original question without altering it. Explain what its objects
+and givens mean, what is required, and the central difficulty.
+
+### Developing the Key Idea
+
+Recall the specific earlier result or mechanism we can reuse and explain its
+connection. Develop the observation that suggests the approach, and explain
+why the method's assumptions hold here.
+
+### Working Through the Solution
+
+Provide the complete solution with meaningful intermediate work. Explain the
+purpose and justification of consequential steps and what each establishes.
+For proofs, develop the strategy and then present a rigorous general argument.
+
+### Result and Interpretation
+
+Give the final answer and explain it in the problem's language. Check it when
+possible. Add a compact exam-ready answer if useful without repeating the full
+teaching explanation.
 
 ---
 
-## Key Idea
+## Reusable Insight
 
-Explain the main insight required to solve the problem.
+Explain what reasoning carries to other problems and how to recognize its use.
+Use a targeted variation when it reveals an important assumption or connection.
+
+For unsolved questions and practice tests, omit the solution until appropriate
+under the testing rules. Preserve the original question separately; do not put
+solution-revealing guidance in the student's test question.
 
 ---
 
@@ -720,6 +781,9 @@ materials, make that distinction clear.
 # 12. WIKILINK RULES
 
 Use Obsidian wikilinks whenever a meaningful related note exists.
+Explain important relationships in the body: state what earlier idea is being
+reused and how it helps the current reasoning. Link lists remain useful for
+navigation but do not replace these explanatory bridges.
 
 Example:
 
@@ -864,20 +928,26 @@ exams.
 
 # 18. PROBLEM-SOLVING STANDARD
 
-Solutions should prioritize understanding.
+Solutions should develop understanding alongside the answer.
 
-A complete solution should normally contain:
+A complete learning solution should normally explain:
 
-1. What is being asked?
-2. What information is given?
-3. Which concept applies?
-4. Why does that concept apply?
-5. What steps are performed?
-6. Why does each step work?
-7. What is the final result?
-8. How could the problem be recognized in an exam?
+1. What situation does the question describe, and what is being asked?
+2. What is given, and what earlier knowledge can we use?
+3. What is difficult about reaching the target?
+4. What observation suggests the chosen method?
+5. Why does the method apply under these assumptions?
+6. What does each meaningful step change or establish, and why is it valid?
+7. What does the result mean, and how can we check it?
+8. What reasoning can we reuse in a changed or unfamiliar problem?
 
-Avoid answers that provide only a final result without reasoning.
+For proof problems, state the claim and assumptions, develop the strategy,
+justify the formal argument, and explain why all required cases are covered.
+Examples and analogies support understanding but do not replace proof.
+
+Use connected prose, relevant mathematics, and traces or diagrams where useful.
+Do not mechanically answer these eight prompts as eight repeated sections.
+Keep the final answer clear and easy to locate.
 
 ---
 
@@ -977,6 +1047,17 @@ Before considering a note complete, verify:
 - [ ] Existing knowledge preserved
 - [ ] Exam relevance included where evidence exists
 - [ ] No unsupported claims
+- [ ] Concrete situation, target, and obstacle clear where relevant
+- [ ] Key insight developed before relying on the method
+- [ ] Important state changes or inferences mentally followable
+- [ ] Consequential steps explained for both purpose and justification
+- [ ] Earlier ideas recalled and their actual roles explained
+- [ ] Symbols and important operations connected to their meanings
+- [ ] Proof strategy and general justification explained where applicable
+- [ ] Examples, analogies, and proofs correctly distinguished
+- [ ] Result interpreted and checked where appropriate
+- [ ] Useful future connection explained when available
+- [ ] Connected flow without redundant sections or artificial discovery
 
 ---
 

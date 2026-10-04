@@ -12,6 +12,20 @@ order: 36
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Bias-Variance Decomposition, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Bias-Variance Decomposition compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 For any point estimator $\hat{\theta}_n$ of an unknown parameter $\theta$:
@@ -22,6 +36,8 @@ where:
 - $\text{MSE}(\hat{\theta}_n) = E_\theta[(\hat{\theta}_n - \theta)^2]$ is the **Mean Squared Error**.
 - $\text{bias}(\hat{\theta}_n) = E_\theta[\hat{\theta}_n] - \theta$ is the **estimator bias**.
 - $\text{Var}_\theta(\hat{\theta}_n) = E_\theta[(\hat{\theta}_n - E_\theta[\hat{\theta}_n])^2]$ is the **estimator variance**.
+
+---
 
 ---
 
@@ -38,6 +54,8 @@ where:
 
 ---
 
+---
+
 ## Conditions
 
 1. The second moment of the estimator must exist: $E_\theta[\hat{\theta}_n^2] < \infty$.
@@ -46,7 +64,11 @@ where:
 
 ---
 
+---
+
 ## Intuition
+
+### Intuition
 
 Total squared error decomposes cleanly into two orthogonal components:
 1. **Bias squared:** How far off your average estimate is from the true parameter value.
@@ -59,7 +81,11 @@ This identity reveals the fundamental **bias-variance trade-off** in statistics 
 
 ---
 
+---
+
 ## Derivation
+
+### Derivation
 
 Let $\bar{\theta}_n = E_\theta[\hat{\theta}_n]$. Note that $\bar{\theta}_n$ is a non-random constant for a fixed $\theta$.
 
@@ -91,7 +117,11 @@ $$\text{MSE}(\hat{\theta}_n) = \text{Var}_\theta(\hat{\theta}_n) + \text{bias}^2
 
 ---
 
+---
+
 ## Example
+
+### Example
 
 Suppose $X_1, \dots, X_n \sim N(\mu, \sigma^2)$. We wish to estimate the variance $\sigma^2$.
 Consider two competing estimators:
@@ -114,12 +144,18 @@ Even though $\tilde{\sigma}^2$ is biased, it has strictly **lower MSE** than the
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Forgetting to square the bias:**
    Writing $\text{MSE} = \text{bias} + \text{Var}$ instead of $\text{bias}^2 + \text{Var}$. Notice units: if $\theta$ is in meters, variance and MSE are in $\text{meters}^2$, so bias must be squared.
 2. **Assuming the cross-product term is non-zero:**
    Thinking $E[(\hat{\theta} - \bar{\theta})(\bar{\theta} - \theta)] \ne 0$. It is always zero because $E[\hat{\theta} - \bar{\theta}] = 0$ and the other factor is non-random.
+
+---
 
 ---
 
@@ -131,6 +167,8 @@ Even though $\tilde{\sigma}^2$ is biased, it has strictly **lower MSE** than the
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Point Estimation]]
@@ -138,10 +176,14 @@ Even though $\tilde{\sigma}^2$ is biased, it has strictly **lower MSE** than the
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
 
 ---
 

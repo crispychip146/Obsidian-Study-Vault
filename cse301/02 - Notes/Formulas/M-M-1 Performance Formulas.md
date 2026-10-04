@@ -12,7 +12,21 @@ order: 86
 
 ---
 
-## Formula Sheet
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs M-M-1 Performance Formulas, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, M-M-1 Performance Formulas compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 For an M/M/1 queue with Poisson arrival rate $\lambda$, exponential service rate $\mu$, and stability condition $\rho = \frac{\lambda}{\mu} < 1$:
 
@@ -29,7 +43,28 @@ For an M/M/1 queue with Poisson arrival rate $\lambda$, exponential service rate
 
 ---
 
-## Continuous Residence Time Distributions
+---
+
+## Variables
+
+| Symbol | Meaning |
+|---|---|
+| $X, Y$ | Random variables governed by underlying probability distributions |
+| $\mathbb{E}[\cdot]$ | Expected value operator |
+| $\text{Var}(\cdot)$ | Variance operator |
+
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### Continuous Residence Time Distributions
 
 Beyond average values, the M/M/1 queue permits exact closed-form probability distributions for individual customer wait times:
 
@@ -46,19 +81,7 @@ For $t > 0$, the tail probability is:
 $$\mathbf{P(T_Q > t) = \rho e^{-(\mu - \lambda)t}}$$
 
 ---
-
-## Derivation of $P(N \ge k)$
-
-To find the probability that the system holds at least $k$ customers:
-$$P(N \ge k) = \sum_{n=k}^\infty P_n = \sum_{n=k}^\infty (1 - \rho)\rho^n$$
-Factor out $\rho^k$:
-$$= (1 - \rho)\rho^k \sum_{m=0}^\infty \rho^m$$
-Since $\sum_{m=0}^\infty \rho^m = \frac{1}{1 - \rho}$:
-$$P(N \ge k) = (1 - \rho)\rho^k \left(\frac{1}{1 - \rho}\right) = \mathbf{\rho^k} \quad \blacksquare$$
-
----
-
-## Quick Reference Identities
+### Quick Reference Identities
 
 $$\begin{aligned}
 L &= L_Q + \rho \\
@@ -71,7 +94,26 @@ W_Q &= \rho W
 
 ---
 
-## Example: Quick Parameter Calculation
+---
+
+## Derivation
+
+### Derivation of $P(N \ge k)$
+
+To find the probability that the system holds at least $k$ customers:
+$$P(N \ge k) = \sum_{n=k}^\infty P_n = \sum_{n=k}^\infty (1 - \rho)\rho^n$$
+Factor out $\rho^k$:
+$$= (1 - \rho)\rho^k \sum_{m=0}^\infty \rho^m$$
+Since $\sum_{m=0}^\infty \rho^m = \frac{1}{1 - \rho}$:
+$$P(N \ge k) = (1 - \rho)\rho^k \left(\frac{1}{1 - \rho}\right) = \mathbf{\rho^k} \quad \blacksquare$$
+
+---
+
+---
+
+## Example
+
+### Example: Quick Parameter Calculation
 
 A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ requests/sec.
 1. **Utilization:** $\rho = \frac{40}{50} = 0.80$ ($80\%$ busy).
@@ -84,12 +126,35 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 
 ---
 
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
 ## Related Concepts
 
 - [[M-M-1 Queue]]
 - [[Little's Law]]
 - [[Queueing Systems and Kendall Notation]]
 - [[Problem — M-M-1 Queue Performance Metrics Calculation]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

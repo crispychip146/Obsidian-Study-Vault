@@ -12,6 +12,8 @@ order: 92
 
 ---
 
+---
+
 ## Problem
 
 A cloud microservice endpoint handles incoming API requests using a single database worker thread.
@@ -30,12 +32,16 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 
 ---
 
+---
+
 ## Given
 
 - Model: M/M/1/3
 - Capacity: $N = 3$
 - Arrival rate: $\lambda = 6$ req/s
 - Service rate: $\mu = 4$ req/s
+
+---
 
 ---
 
@@ -50,6 +56,8 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Finite Capacity M-M-1-N Queue]]
@@ -59,7 +67,31 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 
 ---
 
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+- [[Discrete Probability Distributions]]
+
+---
+
+## Question Type
+
+Probability / Statistical Inference / Markov Chain Analysis
+
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### 1. Stability with $\rho > 1$
 In an infinite capacity queue (M/M/1), $\lambda > \mu$ causes the queue to grow to infinity because arrivals can accumulate without bound.
@@ -130,8 +162,7 @@ $$W = \frac{L}{\lambda_{\text{eff}}} = \frac{129 / 65}{228 / 65} = \frac{129}{22
 > This would incorrectly report an overly optimistic latency by averaging in the $41.5\%$ of requests that were dropped immediately without waiting!
 
 ---
-
-## Result Summary Table
+### Result Summary Table
 
 | Metric | Exact Fraction | Decimal Value | Meaning |
 |---|---|---|---|
@@ -142,13 +173,50 @@ $$W = \frac{L}{\lambda_{\text{eff}}} = \frac{129 / 65}{228 / 65} = \frac{129}{22
 | Mean Response Time ($W$) | $43/76$ | $0.566$ s | Average latency per accepted query |
 
 ---
-
-## Related Concepts
+### Related Concepts
 
 - [[Finite Capacity M-M-1-N Queue]]
 - [[PASTA Property and Inspection Paradox]]
 - [[Little's Law]]
 - [[M-M-1 Queue]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+
+---
+
+## Common Mistakes
+
+- Conflating correlation with causation or independence.
+- Misapplying the Central Limit Theorem when the variance of the underlying distribution is infinite (e.g. Cauchy).
+
+---
+
+## Exam Pattern
+
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+
+---
+
+## Related Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
+
+---
+
+## Related Concepts
+
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

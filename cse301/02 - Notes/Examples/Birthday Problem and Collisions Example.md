@@ -12,7 +12,9 @@ order: 4
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 Consider a group of $k$ individuals gathered in a room. Assuming:
 1. There are $n = 365$ days in a year (ignoring leap years).
@@ -26,7 +28,29 @@ Consider a group of $k$ individuals gathered in a room. Assuming:
 
 ---
 
-## Step-by-Step Solution
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Step-by-Step Solution
 
 ### Step 1: Use the Complement Rule
 Calculating the probability of "at least one shared birthday" directly is cumbersome because there could be pairs, triplets, multiple pairs, etc.
@@ -86,8 +110,7 @@ For $n = 365$:
 $$k \approx 1.177 \sqrt{365} \approx 1.177 \times 19.105 \approx 22.49 \implies k = 23$$
 
 ---
-
-## Computer Science Application: Hash Collisions
+### Computer Science Application: Hash Collisions
 
 In computer science, this is the foundation of **hash table collision analysis** and **cryptographic birthday attacks**:
 - If a hash function produces $b$-bit hashes, the number of possible hash values is $n = 2^b$.
@@ -97,14 +120,36 @@ In computer science, this is the foundation of **hash table collision analysis**
 
 ---
 
-## Key Takeaways & Exam Tips
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
 
 - **Intuition behind the small $k$:** People intuitively compare themselves to others ($22$ comparisons). But the number of distinct *pairs* in the room is $\binom{23}{2} = \frac{23 \times 22}{2} = 253$ pairs! With 253 opportunities for a match, exceeding 50% is natural.
 - **Exam Rule:** If an exam question asks for "at least one...", immediately think of computing $1 - P(\text{none})$.
 
 ---
 
-## Related Notes
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Combinatorics and Counting Principles]] — Multiplication rule and permutations.
 - [[Probability Axioms and Naive Probability]] — Complement rule and naive probability definition.
@@ -112,7 +157,9 @@ In computer science, this is the foundation of **hash table collision analysis**
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 2, pages 4–6)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf`

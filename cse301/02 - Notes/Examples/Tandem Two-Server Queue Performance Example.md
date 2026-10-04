@@ -12,6 +12,8 @@ order: 90
 
 ---
 
+---
+
 ## Problem
 
 An e-commerce order processing pipeline consists of two sequential processing stages in series:
@@ -28,12 +30,16 @@ An e-commerce order processing pipeline consists of two sequential processing st
 
 ---
 
+---
+
 ## Given
 
 - Pipeline structure: Tandem queue ($Q_1 \to Q_2$)
 - External arrival rate: $\lambda = 8$ orders/min
 - Server 1 processing rate: $\mu_1 = 12$ orders/min
 - Server 2 processing rate: $\mu_2 = 10$ orders/min
+
+---
 
 ---
 
@@ -47,7 +53,17 @@ An e-commerce order processing pipeline consists of two sequential processing st
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Jackson Networks and Tandem Queues]]
 - [[M-M-1 Queue]]
@@ -56,8 +72,7 @@ An e-commerce order processing pipeline consists of two sequential processing st
 - Burke's Theorem
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Stability and Traffic Intensities
 By Burke's Theorem, the departure process from Stage 1 is a Poisson process with rate $\lambda = 8$. Therefore, Stage 2 receives a Poisson arrival stream with rate $\lambda_2 = \lambda = 8$ orders/min.
@@ -118,7 +133,9 @@ $$\mathbf{L = \lambda W \quad \checkmark}$$
 
 ---
 
-## Result Summary Table
+---
+
+## Result
 
 | Metric | Stage 1 (Validation) | Stage 2 (Payment) | Total Pipeline |
 |---|---|---|---|
@@ -132,12 +149,35 @@ $$\mathbf{L = \lambda W \quad \checkmark}$$
 
 ---
 
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
 ## Related Concepts
 
 - [[Jackson Networks and Tandem Queues]]
 - [[M-M-1 Queue]]
 - [[M-M-1 Performance Formulas]]
 - [[Little's Law]]
+
+---
 
 ---
 

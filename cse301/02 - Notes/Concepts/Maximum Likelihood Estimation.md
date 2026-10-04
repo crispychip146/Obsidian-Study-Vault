@@ -12,24 +12,15 @@ order: 43
 
 ---
 
-## Definition
+---
 
-**Maximum Likelihood Estimation (MLE)** is a method of estimating the unknown parameters $\theta \in \Theta$ of a statistical model by finding the parameter values that maximize the **likelihood function**—the probability (or probability density) of having observed the collected data under that parameter.
+## Starting Point and the Problem
 
-Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} f(x; \theta)$. 
-The **likelihood function** $L_n(\theta)$ is the joint probability density function viewed as a function of the parameter $\theta$:
-$$L_n(\theta) = \prod_{i=1}^n f(X_i; \theta)$$
-
-The **Maximum Likelihood Estimator (MLE)**, denoted $\hat{\theta}_{\text{MLE}}$ or $\hat{\theta}_n$, is defined as:
-$$\hat{\theta}_n = \arg\max_{\theta \in \Theta} L_n(\theta)$$
-
-Because the natural logarithm is a strictly monotonically increasing function, maximizing $L_n(\theta)$ is mathematically equivalent to maximizing the **log-likelihood function** $\ell_n(\theta)$:
-$$\ell_n(\theta) = \log L_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta)$$
-$$\hat{\theta}_n = \arg\max_{\theta \in \Theta} \ell_n(\theta)$$
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum Likelihood Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
 
 ---
 
-## Intuition
+## Developing the Idea
 
 Think of maximum likelihood estimation through the lens of a detective investigating a crime scene:
 - You have already observed the clues (the dataset $X_1, \dots, X_n$).
@@ -48,7 +39,30 @@ Thus, **the MLE is exactly the parameter value that maximizes the posterior prob
 
 ---
 
-## Why Use the Log-Likelihood?
+---
+
+## Definition
+
+**Maximum Likelihood Estimation (MLE)** is a method of estimating the unknown parameters $\theta \in \Theta$ of a statistical model by finding the parameter values that maximize the **likelihood function**—the probability (or probability density) of having observed the collected data under that parameter.
+
+Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} f(x; \theta)$. 
+The **likelihood function** $L_n(\theta)$ is the joint probability density function viewed as a function of the parameter $\theta$:
+$$L_n(\theta) = \prod_{i=1}^n f(X_i; \theta)$$
+
+The **Maximum Likelihood Estimator (MLE)**, denoted $\hat{\theta}_{\text{MLE}}$ or $\hat{\theta}_n$, is defined as:
+$$\hat{\theta}_n = \arg\max_{\theta \in \Theta} L_n(\theta)$$
+
+Because the natural logarithm is a strictly monotonically increasing function, maximizing $L_n(\theta)$ is mathematically equivalent to maximizing the **log-likelihood function** $\ell_n(\theta)$:
+$$\ell_n(\theta) = \log L_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta)$$
+$$\hat{\theta}_n = \arg\max_{\theta \in \Theta} \ell_n(\theta)$$
+
+---
+
+---
+
+## How It Works
+
+### Why Use the Log-Likelihood?
 
 1. **Summation vs. Multiplication:** Products of $n$ small probabilities $\prod f(X_i; \theta)$ quickly cause floating-point arithmetic underflow on computers. Taking logarithms turns the product into a sum $\sum \log f(X_i; \theta)$, which is numerically stable and straightforward to differentiate.
 2. **Identical Maximizer:** Because $\frac{d}{du}\log(u) = \frac{1}{u} > 0$ for all $u > 0$, $\log$ is strictly increasing. Therefore:
@@ -56,8 +70,7 @@ Thus, **the MLE is exactly the parameter value that maximizes the posterior prob
 3. **Multiplicative Constants:** Any positive constant factor $c$ that does not depend on $\theta$ adds a constant $\log c$ to $\ell_n(\theta)$, leaving its derivative and maximizer completely unchanged.
 
 ---
-
-## How It Works: The Standard Calculus Recipe
+### How It Works: The Standard Calculus Recipe
 
 For smooth, differentiable models where the support of $X$ does not depend on $\theta$:
 
@@ -78,8 +91,7 @@ For smooth, differentiable models where the support of $X$ does not depend on $\
 > ⚠️ **Warning — Non-Regular Distributions:** If the support of $f(x; \theta)$ depends on $\theta$ (such as $\text{Uniform}(0, \theta)$), the likelihood is discontinuous or non-differentiable at the boundary. Calculus fails, and the MLE must be determined by inspecting boundary conditions (see [[Uniform Distribution Non-Regular MLE Example]]).
 
 ---
-
-## Important Properties of MLEs
+### Important Properties of MLEs
 
 Under standard regularity conditions (smoothness, common support independent of $\theta$, identifiable parameter space), the MLE possesses four stellar theoretical properties:
 
@@ -104,8 +116,7 @@ where $I_1(\theta) = -E\left[\frac{\partial^2 \log f(X; \theta)}{\partial \theta
 Among all consistent, asymptotically normal estimators, the MLE achieves the lowest possible asymptotic variance, meeting the **Cramér-Rao Lower Bound**.
 
 ---
-
-## Does MLE Guarantee Unbiasedness?
+### Does MLE Guarantee Unbiasedness?
 
 **No! Unbiasedness is NOT a property of MLEs.**
 
@@ -119,7 +130,30 @@ Maximum likelihood optimizes for making the observed data likely; it makes zero 
 
 ---
 
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Attempting to differentiate without checking support:**
    Trying to differentiate the likelihood of $\text{Uniform}(0, \theta)$ with respect to $\theta$ and setting it to zero yields $-n/\theta^{n+1} = 0$, which has no solution!
@@ -130,7 +164,11 @@ Maximum likelihood optimizes for making the observed data likely; it makes zero 
 
 ---
 
+---
+
 ## Exam Relevance
+
+### Exam Relevance
 
 MLE is one of the most heavily tested topics in computing and data science examinations. Expected questions include:
 1. Setting up likelihood and log-likelihood functions for common distributions (Normal, Bernoulli, Poisson, Exponential, Geometric, Uniform).
@@ -138,6 +176,16 @@ MLE is one of the most heavily tested topics in computing and data science exami
 3. Checking second-order conditions to confirm maximality.
 4. Proving whether the derived MLE is unbiased or biased, and computing its exact bias.
 5. Invoking the equivariance property to find the MLE of transformed parameters without resolving from scratch.
+
+---
+### Examples & Problems
+
+- [[Normal Distribution Parameter MLE Derivation Example]]
+- [[Uniform Distribution Non-Regular MLE Example]]
+- [[Discrete and Continuous Parameter MLE Reference Examples]]
+- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
 
 ---
 
@@ -151,6 +199,8 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 ---
 
+---
+
 ## Prerequisites
 
 - Calculus (derivatives, partial derivatives, critical points, logarithmic differentiation)
@@ -158,12 +208,11 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 ---
 
-## Examples & Problems
+---
 
-- [[Normal Distribution Parameter MLE Derivation Example]]
-- [[Uniform Distribution Non-Regular MLE Example]]
-- [[Discrete and Continuous Parameter MLE Reference Examples]]
-- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

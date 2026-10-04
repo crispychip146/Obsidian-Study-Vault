@@ -30,38 +30,35 @@ order: 21
 
 ---
 
-## 1. Intuition & Language-Level Abstraction
+---
 
-While semaphores solve race conditions, they are low-level and unstructured. A single misplaced `wait()` or omitted `signal()` can crash an entire operating system.
+## Starting Point and the Problem
 
-To make concurrent programming robust, **C.A.R. Hoare (1974)** and **Per Brinch Hansen (1975)** invented the **Monitor**:
-> A monitor is a higher-level synchronization construct implemented directly within a programming language or runtime (e.g., Java, C#, Concurrent Pascal).
+While semaphores provide powerful synchronization, they are low-level primitives: every programmer must remember to place `wait()` before every critical section and `signal()` after every critical section in the exact right order.
 
-### The Core Monitor Invariant:
-**Only one process or thread can be actively executing inside a monitor at any single moment.**
-The compiler and language runtime automatically enforce mutual exclusion upon entry to any monitor procedure. The developer does not manually call `acquire_lock()` or `release_lock()`.
-
-```mermaid
-flowchart TD
-    subgraph Monitor Structure
-        EQ["Monitor Entry Queue<br/>(Threads waiting for monitor lock)"]
-        subgraph Inside Monitor
-            Lock["Active Thread in Monitor<br/>(Mutual Exclusion Enforced)"]
-            SharedData["Private Shared State Variables"]
-            Procs["Procedures / Methods"]
-        end
-        CV1["Condition Variable X Queue<br/>(wait(x))"]
-        CV2["Condition Variable Y Queue<br/>(wait(y))"]
-    end
-    EQ --> Lock
-    Lock -.->|"wait(x)"| CV1
-    Lock -.->|"wait(y)"| CV2
-    CV1 -.->|"signal(x)"| Lock
-```
+We want a high-level, language-enforced abstraction where synchronization errors are impossible or caught at compile time. The central obstacle is programmer fallibility: omitting a single `signal()` causes permanent deadlock; calling `wait()` twice freezes the program; swapping the order of two semaphore calls violates mutual exclusion.
 
 ---
 
-## 2. Monitor Architecture & Syntax
+## Developing the Idea
+
+To eliminate manual synchronization errors, C.A.R. Hoare and Per Brinch Hansen invented the **Monitor**: an object-oriented synchronization construct built directly into programming languages (such as Java, C#, or Ada).
+
+A monitor encapsulates shared variables and procedures within a protected boundary:
+- **Automatic Mutual Exclusion:** Only one thread can be actively executing inside any procedure of the monitor at any given moment. The compiler automatically injects lock acquisition and release code at procedure entry and exit.
+- **Condition Variables:** When a thread inside the monitor needs to wait for a specific condition (e.g. `buffer_not_empty`), it calls `cond.wait()`, atomically releasing the monitor lock and sleeping. When another thread satisfies the condition, it calls `cond.signal()`, waking the waiting thread.
+
+---
+
+## Definition
+
+
+
+---
+
+## How It Works
+
+### 2. Monitor Architecture & Syntax
 
 A monitor encapsulates private shared state variables, initialization code, and public access procedures:
 
@@ -90,7 +87,9 @@ monitor ProducerConsumerMonitor {
 
 ---
 
-## 3. Condition Variables
+---
+
+### 3. Condition Variables
 
 Monitors alone cannot handle situations where a process enters a monitor procedure, finds that a condition is not met (e.g., buffer is full), and must wait. If it simply halted, it would hold the monitor lock, blocking all other processes from entering to change the condition!
 
@@ -106,7 +105,34 @@ A condition variable is a synchronization object (not an integer counter) with t
 
 ---
 
-## 4. Signaling Disciplines: Hoare vs Mesa Semantics
+---
+
+## Example
+
+Java Monitor syntax for a thread-safe bank account:
+```java
+public class BankAccount {
+    private int balance = 0;
+
+    public synchronized void deposit(int amount) {
+        balance += amount;
+        notifyAll(); // Signal waiting withdrawers
+    }
+
+    public synchronized void withdraw(int amount) throws InterruptedException {
+        while (balance < amount) {
+            wait(); // Sleep and release lock until balance increases
+        }
+        balance -= amount;
+    }
+}
+```
+
+---
+
+## Technical Details
+
+### 4. Signaling Disciplines: Hoare vs Mesa Semantics
 
 When process $P$ executes `signal(c)` inside a monitor, waking up sleeping process $Q$, both $P$ and $Q$ could potentially execute inside the monitor simultaneously, violating the fundamental monitor invariant. Operating systems and languages resolve this using two paradigms:
 
@@ -131,48 +157,9 @@ When process $P$ executes `signal(c)` inside a monitor, waking up sleeping proce
 
 ---
 
-## 5. POSIX Pthreads Implementation: `pthread_cond_t`
-
-In C/C++, monitors are modeled using a POSIX mutex and condition variable pair:
-
-```c
-#include <pthread.h>
-
-pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t cond  = PTHREAD_COND_INITIALIZER;
-
-void *worker_thread(void *arg) {
-    pthread_mutex_lock(&lock);
-    
-    // Always use a while loop for Mesa-style condition variables!
-    while (resource_available == 0) {
-        // Atomically unlocks 'lock' and puts thread to sleep
-        pthread_cond_wait(&cond, &lock);
-        // Automatically re-acquires 'lock' before returning here!
-    }
-    
-    // Consume resource
-    use_resource();
-    
-    pthread_mutex_unlock(&lock);
-    return NULL;
-}
-
-void *signaler_thread(void *arg) {
-    pthread_mutex_lock(&lock);
-    
-    resource_available = 1;
-    pthread_cond_signal(&cond); // Wakes one waiting thread
-    // Or pthread_cond_broadcast(&cond) to wake all waiting threads
-    
-    pthread_mutex_unlock(&lock);
-    return NULL;
-}
-```
-
 ---
 
-## 6. Comprehensive Comparison: Semaphores vs Monitors
+### 6. Comprehensive Comparison: Semaphores vs Monitors
 
 | Feature | Semaphore | Monitor |
 |---|---|---|
@@ -185,7 +172,53 @@ void *signaler_thread(void *arg) {
 
 ---
 
-## Source Traceability & Metadata
+---
+
+## Important Properties and Why They Hold
+
+- **Mesa vs. Hoare Signaling Semantics:**
+  - *Mesa Semantics (Java, POSIX Pthreads):* `signal()` awakens a waiter, but the signaling thread keeps running. The waiter is moved to the ready queue and must re-check its condition via `while (!condition)` due to potential race conditions.
+  - *Hoare Semantics:* `signal()` immediately transfers the monitor lock directly to the waiting thread; the signaling thread is suspended. Condition check can use `if (!condition)`.
+- **Compile-Time Safety:** Programmers cannot accidentally bypass mutual exclusion when accessing monitor variables, drastically reducing synchronization bugs.
+
+---
+
+## Common Mistakes
+
+- Assuming user mode code can execute privileged instructions directly without a system call trap.
+- Overlooking race conditions in shared variables without explicit synchronization.
+
+---
+
+## Exam Relevance
+
+Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
+
+---
+
+## Related Concepts
+
+- [[Classic Synchronization Solutions]]
+- [[Message Passing and IPC Models]]
+- [[Producer-Consumer Semaphore Implementation Example]]
+
+---
+
+## Prerequisites
+
+- [[Semaphores and Synchronization Primitives]]
+- [[Race Conditions and Critical-Section Problem]]
+
+---
+
+## Problems
+
+- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
+
+---
+
+## Sources
+
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 43–52: Monitors, Condition Variables, Hoare vs Mesa Semantics).
 - **Previous Topic:** [[Semaphores and Synchronization Primitives]] (Step 20).
 - **Next Topic:** [[Message Passing and IPC Models]] (Step 22).

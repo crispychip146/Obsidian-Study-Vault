@@ -12,6 +12,8 @@ order: 78
 
 ---
 
+---
+
 ## Problem
 
 Consider a two-state [[Markov Chain]] modeling weather, with states $0$ (Rain) and $1$ (No Rain). The one-step transition probability matrix is:
@@ -27,12 +29,16 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Given
 
 - State space $S = \{0, 1\}$ ($0 = \text{Rain}$, $1 = \text{No Rain}$)
 - Transition probability matrix:
   $$P = \begin{pmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{pmatrix}$$
 - Starting state: $X_0 = 0$
+
+---
 
 ---
 
@@ -44,11 +50,15 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
+
+---
 
 ---
 
@@ -59,13 +69,26 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Question Type
 
 Numerical / Multi-step Matrix Power
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### Step 1: Compute Two-Step Matrix $P^{(2)} = P \cdot P$
 By the [[Chapman-Kolmogorov Equations]], $P^{(2)} = P^2$:
@@ -118,10 +141,39 @@ $$|P_{00}^{(4)} - \pi_0| = |0.5749 - 0.5714| = 0.0035$$
 The probability after just 4 steps is within $0.35\%$ of the infinite-horizon limit.
 
 ---
-
-## Key Idea
+### Key Idea
 
 Repeated squaring allows computation of $P^n$ in $O(\log n)$ matrix multiplications rather than $O(n)$. For ergodic Markov chains, $P^n$ converges geometrically fast to the matrix with identical rows equal to $\pi$.
+
+---
+### Exam Pattern
+
+Exam questions frequently ask for:
+1. $P^{(2)}$ or $P^{(4)}$ via matrix multiplication.
+2. Comparison with the steady-state vector $\pi$ to demonstrate understanding of convergence.
+
+---
+### Related Problems
+
+- [[Problem — Rain Prediction Two Days Ahead]]
+
+---
+### Related Concepts
+
+- [[Chapman-Kolmogorov Equations]]
+- [[Weather Forecasting Markov Chain Example]]
+- [[Stationary and Limiting Distributions in Markov Chains]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -133,25 +185,25 @@ Repeated squaring allows computation of $P^n$ in $O(\log n)$ matrix multiplicati
 
 ---
 
+---
+
 ## Exam Pattern
 
-Exam questions frequently ask for:
-1. $P^{(2)}$ or $P^{(4)}$ via matrix multiplication.
-2. Comparison with the steady-state vector $\pi$ to demonstrate understanding of convergence.
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
 
 ---
 
 ## Related Problems
 
-- [[Problem — Rain Prediction Two Days Ahead]]
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Related Concepts
 
-- [[Chapman-Kolmogorov Equations]]
-- [[Weather Forecasting Markov Chain Example]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

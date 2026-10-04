@@ -12,6 +12,30 @@ order: 62
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Multiple Testing and False Discovery Rate, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+Imagine flipping a fair coin:
+- Getting 5 heads in a row has a small probability: $(0.5)^5 = 0.03125 < 0.05$. In a single test, this would be deemed "statistically significant" ($p < 0.05$).
+- However, if 100 students in a lecture hall all flip fair coins 5 times, on average $\approx 3$ students will achieve 5 straight heads purely by chance!
+
+In modern data science, genomics, and A/B testing:
+- A DNA microarray tests $m = 20,000$ genes simultaneously.
+- If we conduct every test at unadjusted $\alpha = 0.05$:
+  $$\text{Expected False Discoveries} = 20,000 \times 0.05 = 1,000 \text{ fake discoveries!}$$
+Researchers would waste millions of dollars chasing 1,000 ghost genes that have zero actual biological effect.
+
+---
+
+---
+
 ## Definition
 
 The **Multiple Testing Problem** arises when a researcher conducts $m > 1$ statistical hypothesis tests simultaneously. If each individual test is evaluated at the nominal significance level $\alpha$ (e.g., $\alpha = 0.05$), the probability of committing at least one false positive (Type I error) across the family of tests escalates rapidly toward certainty.
@@ -30,21 +54,11 @@ The **Multiple Testing Problem** arises when a researcher conducts $m > 1$ stati
 
 ---
 
-## Intuition: The Multiplicity Inflation Trap
-
-Imagine flipping a fair coin:
-- Getting 5 heads in a row has a small probability: $(0.5)^5 = 0.03125 < 0.05$. In a single test, this would be deemed "statistically significant" ($p < 0.05$).
-- However, if 100 students in a lecture hall all flip fair coins 5 times, on average $\approx 3$ students will achieve 5 straight heads purely by chance!
-
-In modern data science, genomics, and A/B testing:
-- A DNA microarray tests $m = 20,000$ genes simultaneously.
-- If we conduct every test at unadjusted $\alpha = 0.05$:
-  $$\text{Expected False Discoveries} = 20,000 \times 0.05 = 1,000 \text{ fake discoveries!}$$
-Researchers would waste millions of dollars chasing 1,000 ghost genes that have zero actual biological effect.
-
 ---
 
-## Two Error Metrics: FWER vs. FDR
+## How It Works
+
+### Two Error Metrics: FWER vs. FDR
 
 To guard against multiple testing inflation, statisticians define two fundamentally different error metrics:
 
@@ -62,8 +76,7 @@ To guard against multiple testing inflation, statisticians define two fundamenta
 ```
 
 ---
-
-## 1. Family-Wise Error Rate (FWER) and the Bonferroni Method
+### Family-Wise Error Rate (FWER) and the Bonferroni Method
 
 ### Definition
 The **Family-Wise Error Rate (FWER)** is the probability of committing **at least one** Type I error across all $m$ tests:
@@ -96,8 +109,7 @@ $$\text{FWER} = P\left(\bigcup_{i \in I_0} R_i\right) \le \sum_{i \in I_0} P(R_i
 The Bonferroni method is **drastically conservative**. When $m = 10,000$, $\alpha/m = 0.000005$. While it successfully prevents false positives, it destroys statistical power, failing to detect genuinely real scientific effects.
 
 ---
-
-## 2. False Discovery Rate (FDR) and the Benjamini-Hochberg Method
+### False Discovery Rate (FDR) and the Benjamini-Hochberg Method
 
 Introduced by Yoav Benjamini and Yosef Hochberg in their landmark 1995 paper, the **False Discovery Rate (FDR)** represents a modern paradigm shift.
 
@@ -114,8 +126,7 @@ In high-throughput screening, researchers do not need a 100% clean sheet with ze
 Controlling FDR at $q = 0.05$ guarantees that **on average, no more than 5% of your reported discoveries are false alarms**.
 
 ---
-
-## Comparison of Testing Methodologies
+### Comparison of Testing Methodologies
 
 | Criterion | Unadjusted Testing | Bonferroni Correction (FWER) | Benjamini-Hochberg (FDR) |
 |---|---|---|---|
@@ -127,12 +138,60 @@ Controlling FDR at $q = 0.05$ guarantees that **on average, no more than 5% of y
 
 ---
 
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+
+---
+
+## Exam Relevance
+
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+
+---
+
 ## Related Concepts
 
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 - [[Benjamini-Hochberg Procedure Algorithm]]
 - [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

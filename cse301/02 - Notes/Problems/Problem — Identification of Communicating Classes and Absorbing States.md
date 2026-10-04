@@ -12,6 +12,8 @@ order: 81
 
 ---
 
+---
+
 ## Problem
 
 Consider a discrete-time [[Markov Chain]] with four states $S = \{0, 1, 2, 3\}$ and transition probability matrix:
@@ -31,10 +33,14 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Given
 
 - State space $S = \{0, 1, 2, 3\}$
 - Transition matrix $P$ as given above.
+
+---
 
 ---
 
@@ -48,11 +54,15 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Classification of States in Markov Chains]]
 - [[Markov Chain]]
 - Absorbing states, recurrence, transience, irreducibility
+
+---
 
 ---
 
@@ -63,13 +73,26 @@ $$P = \begin{pmatrix}
 
 ---
 
+---
+
 ## Question Type
 
 Conceptual / State Space Decomposition
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### Step 1: Analyze State Reachability
 Examine the row transitions of $P$:
@@ -130,10 +153,41 @@ A Markov chain is irreducible if and only if it consists of a single communicati
 Because the state space is partitioned into three distinct classes $\{0, 1\}, \{2\}, \{3\}$, the chain is **reducible** (not irreducible).
 
 ---
-
-## Key Idea
+### Key Idea
 
 Accessibility ($i \to j$) is a directed reachability property, whereas communication ($i \leftrightarrow j$) is an equivalence relation requiring mutually reachable paths. In transition graphs, any state with outgoing transitions to a closed class from which there is no return path is transient.
+
+---
+### Exam Pattern
+
+Exam questions frequently provide a $3 \times 3$ or $4 \times 4$ matrix and ask students to:
+1. List all equivalence classes.
+2. Label each class as recurrent or transient.
+3. Identify absorbing states.
+4. State whether the chain is irreducible.
+
+---
+### Related Problems
+
+- [[Problem — State Communication and Irreducibility Verification]]
+
+---
+### Related Concepts
+
+- [[Classification of States in Markov Chains]]
+- [[Markov Chain]]
+- [[Stationary and Limiting Distributions in Markov Chains]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -145,27 +199,25 @@ Accessibility ($i \to j$) is a directed reachability property, whereas communica
 
 ---
 
+---
+
 ## Exam Pattern
 
-Exam questions frequently provide a $3 \times 3$ or $4 \times 4$ matrix and ask students to:
-1. List all equivalence classes.
-2. Label each class as recurrent or transient.
-3. Identify absorbing states.
-4. State whether the chain is irreducible.
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
 
 ---
 
 ## Related Problems
 
-- [[Problem — State Communication and Irreducibility Verification]]
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Related Concepts
 
-- [[Classification of States in Markov Chains]]
-- [[Markov Chain]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

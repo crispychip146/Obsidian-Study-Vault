@@ -12,13 +12,31 @@ order: 10
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Joint and Marginal Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Joint and Marginal Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 When studying two or more random variables simultaneously (e.g., $(X, Y)$), their collective behavior is described by a **joint probability distribution**.
 
 ---
 
-## 1. Discrete Joint Distributions
+---
+
+## How It Works
+
+### Discrete Joint Distributions
 
 Let $X$ and $Y$ be discrete random variables.
 - **Joint PMF:**
@@ -34,8 +52,7 @@ Let $X$ and $Y$ be discrete random variables.
   $$p_{Y \mid X}(y \mid x) = P(Y = y \mid X = x) = \frac{p_{X, Y}(x, y)}{p_X(x)} \quad \text{for } p_X(x) > 0$$
 
 ---
-
-## 2. Continuous Joint Distributions
+### Continuous Joint Distributions
 
 Let $X$ and $Y$ be continuous random variables.
 - **Joint CDF:**
@@ -56,8 +73,7 @@ Let $X$ and $Y$ be continuous random variables.
   $$f_{Y \mid X}(y \mid x) = \frac{f_{X, Y}(x, y)}{f_X(x)} \quad \text{for } f_X(x) > 0$$
 
 ---
-
-## 3. Independence of Random Variables
+### Independence of Random Variables
 
 Random variables $X$ and $Y$ are **independent** ($X \perp Y$) if and only if any of the following equivalent conditions hold for all $x, y$:
 
@@ -73,7 +89,23 @@ Random variables $X$ and $Y$ are **independent** ($X \perp Y$) if and only if an
 
 ---
 
-## 4. 2D Law of the Unconscious Statistician (LOTUS)
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+### 2D Law of the Unconscious Statistician (LOTUS)
 
 To compute the expected value of a function $g(X, Y)$ of two random variables without first deriving the distribution of $g(X, Y)$:
 
@@ -85,7 +117,11 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
+
+## Common Mistakes
+
+### Edge Cases & Common Pitfalls
 
 1. **The Support Trap (Crucial Exam Concept):**
    - Consider $f_{X, Y}(x, y) = 8xy$ on $0 \le y \le x \le 1$.
@@ -97,7 +133,11 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
+
+### Cross-Topic Connections / Exam Relevance
 
 - **Covariance:** Linear association measured by integrating against the joint density (see [[Covariance and Correlation]]).
 - **Conditioning:** Conditional density $f_{Y \mid X}(y \mid x)$ forms the foundation for [[Conditional Expectation]] and Adam's / Eve's laws.
@@ -106,7 +146,28 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 13, pages 40–43)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_8.pdf`

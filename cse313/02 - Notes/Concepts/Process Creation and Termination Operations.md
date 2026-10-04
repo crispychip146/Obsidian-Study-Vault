@@ -31,6 +31,28 @@ order: 7
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+When an operating system boots, it begins with only a single user-space ancestor process (`systemd` or `init`, PID 1). During system operation, users launch applications, web servers spawn worker tasks, and shells run pipeline commands.
+
+We want a robust, uniform mechanism to dynamically create new processes, configure their execution environments, and cleanly reclaim all associated kernel and hardware resources when they finish. The central obstacle is managing parent-child dependencies and resource cleanup: if a child terminates before its parent, its exit status must be preserved; if a parent dies first, the child must not be left unmanaged.
+
+---
+
+## Developing the Idea
+
+UNIX solves process lifecycle operations through a two-step mechanism: **`fork()`** and **`exec()`**.
+
+Rather than creating a brand-new process from scratch with dozens of configuration flags:
+1. `fork()` creates an exact clone of the caller: duplicating memory via Copy-On-Write (COW), inheriting open file descriptors, and returning $0$ to the child and the child's new PID to the parent.
+2. `execve()` replaces the cloned address space with a brand-new executable image loaded from disk.
+3. When a process finishes via `exit()`, it transitions to a **Zombie** state: its memory is freed, but its exit code remains in the PCB until the parent reaps it via `wait()`.
+4. If a parent terminates without waiting for its children, they become **Orphans** and are adopted by PID 1 (`init`/`systemd`), which automatically reaps their exit status.
+
+---
+
 ## Definition
 
 Operating systems manage processes through distinct, fundamental operations:
@@ -39,7 +61,11 @@ Operating systems manage processes through distinct, fundamental operations:
 
 ---
 
-## Process Creation in UNIX/Linux: `fork()` and `exec()`
+---
+
+## How It Works
+
+### Process Creation in UNIX/Linux: `fork()` and `exec()`
 
 In UNIX-like systems, process creation is decoupled into two separate, elegant primitives: `fork()` and `exec()`.
 
@@ -87,7 +113,9 @@ Historically, duplicating an entire multi-gigabyte address space during `fork()`
 
 ---
 
-## Process Termination: The 4 Causes
+---
+
+### Process Termination: The 4 Causes
 
 A process terminates due to one of four events:
 
@@ -102,7 +130,45 @@ A process terminates due to one of four events:
 
 ---
 
-## Zombie and Orphan Processes: High-Yield Exam Topic
+---
+
+## Example
+
+Shell command execution `ls -l`:
+1. The shell process calls `fork()`.
+2. In child ($PID_{	ext{ret}} = 0$): child calls `execvp("ls", args)`, replacing its shell image with the `/bin/ls` binary.
+3. In parent ($PID_{	ext{ret}} > 0$): shell calls `waitpid(child_pid, &status, 0)`, blocking until `ls` finishes.
+4. When `ls` finishes, it returns code $0$; kernel notifies parent, reaps child's PCB, and the shell prompts for the next command.
+
+---
+
+## Technical Details
+
+See related modules for microarchitectural implementation details.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Copy-On-Write (COW) Efficiency:** `fork()` does not physically copy memory pages immediately; it marks pages read-only and shares them. A physical page copy occurs only if either parent or child writes to memory.
+- **Zombie Invariant:** A terminated process whose parent has not invoked `wait()` remains in the kernel process table as a zombie; excessive zombies exhaust the OS process ID table.
+- **Orphan Adoption Invariant:** No process is ever left without a valid parent; the operating system guarantees that PID 1 adopts all orphaned processes and calls `wait()` periodically.
+
+---
+
+## Common Mistakes
+
+1. **You Cannot "Kill" a Zombie:**
+   - Executing `kill -9 <zombie_pid>` does **NOTHING** because the process is already dead!
+   - To remove a zombie, you must kill its parent (which causes the zombie to be adopted by `init`, which immediately calls `wait()`), or send the parent a `SIGCHLD` signal to force it to call `wait()`.
+2. **Cascading Termination:**
+   - In some operating systems (like VMS), when a parent process terminates, the OS automatically terminates all of its children, grandchildren, and descendants. UNIX does not enforce cascading termination by default—children simply become orphans.
+
+---
+
+---
+
+## Exam Relevance
 
 When a process terminates, its memory space, open files, and CPU allocations are immediately released back to the OS. However, its entry in the **Process Table** (and its PCB) cannot be deleted yet, because the parent process has a right to read the child's exit status code and CPU statistics using `wait()` or `waitpid()`.
 
@@ -141,28 +207,31 @@ classDiagram
 
 ---
 
-## Edge Cases & Common Pitfalls
+---
 
-1. **You Cannot "Kill" a Zombie:**
-   - Executing `kill -9 <zombie_pid>` does **NOTHING** because the process is already dead!
-   - To remove a zombie, you must kill its parent (which causes the zombie to be adopted by `init`, which immediately calls `wait()`), or send the parent a `SIGCHLD` signal to force it to call `wait()`.
-2. **Cascading Termination:**
-   - In some operating systems (like VMS), when a parent process terminates, the OS automatically terminates all of its children, grandchildren, and descendants. UNIX does not enforce cascading termination by default—children simply become orphans.
+## Related Concepts
+
+- [[Process Forking and Zombie Orphan Example]]
+- [[Problem — Fork Execution Tree and Process Tracing]]
+- [[Dual-Mode Operation and System Calls]]
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+## Prerequisites
 
-- **Next Step:** Instead of heavyweight processes with isolated address spaces, how can we execute multiple lightweight execution streams inside the *same* address space? (See [[Threads and Multithreading Models]]).
-- **Worked Tracing:** How to calculate the exact number of processes created by nested `fork()` calls (see [[Process Forking and Zombie Orphan Example]] and [[Problem — Fork Execution Tree and Process Tracing]]).
-- **Exam Testing:** Found on virtually every OS midterm:
-  - "Differentiate between a Zombie process and an Orphan process."
-  - "How do you eliminate a zombie process from the process table?"
-  - "Explain how Copy-On-Write optimizes the combination of `fork()` and `exec()`."
+- [[Process Concepts and Memory Layout]]
+- [[Process Control Block and Context Switching]]
 
 ---
 
-## Sources & Traceability
+## Problems
+
+- [[Problem — Fork Execution Tree and Process Tracing]]
+- [[Process Forking and Zombie Orphan Example]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 9–10, 22–28)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.1: Process Creation, Section 2.1.2: Process Termination)

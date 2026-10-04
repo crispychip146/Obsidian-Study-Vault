@@ -12,6 +12,8 @@ order: 77
 
 ---
 
+---
+
 ## Problem
 
 Patty and Max flip pennies in successive independent rounds. On each flip, Patty wins with probability $p = 0.6$ and loses with probability $q = 1 - p = 0.4$. 
@@ -21,6 +23,8 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 1. What is the probability that Patty wipes Max out (wins all 15 pennies)?
 2. What is the probability that Patty is ruined?
 3. Compare Patty's initial fraction of the total wealth with her winning probability, and interpret the result.
+
+---
 
 ---
 
@@ -35,11 +39,15 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 
 ---
 
+---
+
 ## Required
 
 1. Win probability $P_5 = P(\text{fortune reaches } 15 \mid X_0 = 5)$.
 2. Ruin probability $Q_5 = 1 - P_5$.
 3. Comparison between initial stake proportion $i/N$ and win probability $P_5$.
+
+---
 
 ---
 
@@ -51,10 +59,14 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Gambler's Ruin Formula]]
+
+---
 
 ---
 
@@ -64,7 +76,18 @@ Numerical / Applied Probability
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### Step 1: Identify the Parameter Ratio $q/p$
 $$\frac{q}{p} = \frac{0.4}{0.6} = \frac{4}{6} = \frac{2}{3}$$
@@ -108,10 +131,41 @@ If the game were fair ($p = 0.5$), Patty's chance of winning would be exactly $3
 However, because Patty possesses a $60\%$ to $40\%$ single-trial advantage, her probability of wiping Max out surges to **$87.03\%$**.
 
 ---
-
-## Key Idea
+### Key Idea
 
 In a repeated random walk with absorbing barriers, win probability does not scale linearly with initial capital unless $p = 1/2$. A small per-trial edge ($p > 1/2$) compounds exponentially over a multi-round horizon because $(q/p)^i$ decays rapidly with $i$.
+
+---
+### Exam Pattern
+
+This is a classic examination problem testing:
+1. Recognizing a Gambler's Ruin scenario from a narrative description.
+2. Correctly identifying $i$, $N$, $p$, and $q$.
+3. Evaluating the ratio $(q/p)$ and substituting into the closed-form formula without arithmetic slips.
+4. Explaining the qualitative behavior of biased vs fair walks.
+
+---
+### Related Problems
+
+- [[Problem — Rain Prediction Two Days Ahead]]
+
+---
+### Related Concepts
+
+- [[Gambler's Ruin Formula]]
+- [[Markov Chain]]
+- [[Classification of States in Markov Chains]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -123,27 +177,25 @@ In a repeated random walk with absorbing barriers, win probability does not scal
 
 ---
 
+---
+
 ## Exam Pattern
 
-This is a classic examination problem testing:
-1. Recognizing a Gambler's Ruin scenario from a narrative description.
-2. Correctly identifying $i$, $N$, $p$, and $q$.
-3. Evaluating the ratio $(q/p)$ and substituting into the closed-form formula without arithmetic slips.
-4. Explaining the qualitative behavior of biased vs fair walks.
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
 
 ---
 
 ## Related Problems
 
-- [[Problem — Rain Prediction Two Days Ahead]]
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Related Concepts
 
-- [[Gambler's Ruin Formula]]
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

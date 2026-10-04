@@ -12,6 +12,20 @@ order: 88
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Jackson Networks and Tandem Queues, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Jackson Networks and Tandem Queues reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 An **Open Queueing Network** is a directed network of interconnected service stations (nodes) where customers arrive from outside the network, move through a sequence of queues according to probabilistic routing, receive service, and eventually exit the system.
@@ -25,7 +39,11 @@ A network of queues is called a **Jackson Network** if:
 
 ---
 
-## 1. Tandem (Sequential) Queues
+---
+
+## How It Works
+
+### Tandem (Sequential) Queues
 
 The simplest queueing network is a **Tandem Queue** consisting of two servers in series:
 
@@ -64,8 +82,7 @@ $$L = L_1 + L_2 = \frac{\rho_1}{1 - \rho_1} + \frac{\rho_2}{1 - \rho_2}$$
 $$W = W_1 + W_2 = \frac{1}{\mu_1 - \lambda} + \frac{1}{\mu_2 - \lambda}$$
 
 ---
-
-## 2. General Open Jackson Networks
+### General Open Jackson Networks
 
 In a general $k$-node network, traffic can circulate, split, merge, and form feedback loops.
 
@@ -90,8 +107,36 @@ where:
 - $(\mathbf{I} - \mathbf{P})^{-1}$ is the fundamental Leontief inverse matrix.
 
 ---
+### Network Performance Measures
 
-## Jackson's Theorem (Product-Form Stationary Distribution)
+### 1. Total Average Number of Customers in the Network ($L$)
+$$L = \sum_{j=1}^k L_j = \sum_{j=1}^k \frac{\rho_j}{1 - \rho_j} = \sum_{j=1}^k \frac{\lambda_j}{\mu_j - \lambda_j}$$
+
+### 2. Total Average Time in Network ($W$)
+By [[Little's Law]] applied to the entire network:
+$$W = \frac{L}{\gamma}$$
+where $\gamma = \sum_{j=1}^k r_j$ is the **total external arrival rate** into the network:
+$$W = \frac{\sum_{j=1}^k L_j}{\sum_{j=1}^k r_j}$$
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+### Jackson's Theorem (Product-Form Stationary Distribution)
 
 > **Jackson's Theorem (1957):**
 > Suppose every queue in the open network is stable:
@@ -105,23 +150,22 @@ Yet, Jackson's theorem proves that the joint equilibrium distribution behaves **
 
 ---
 
-## Network Performance Measures
-
-### 1. Total Average Number of Customers in the Network ($L$)
-$$L = \sum_{j=1}^k L_j = \sum_{j=1}^k \frac{\rho_j}{1 - \rho_j} = \sum_{j=1}^k \frac{\lambda_j}{\mu_j - \lambda_j}$$
-
-### 2. Total Average Time in Network ($W$)
-By [[Little's Law]] applied to the entire network:
-$$W = \frac{L}{\gamma}$$
-where $\gamma = \sum_{j=1}^k r_j$ is the **total external arrival rate** into the network:
-$$W = \frac{\sum_{j=1}^k L_j}{\sum_{j=1}^k r_j}$$
-
 ---
 
 ## Common Mistakes
 
+### Common Mistakes
+
 - Using the gross internal rate $\lambda_j$ instead of total external rate $\sum r_i$ in the denominator of network Little's Law $W = L / \gamma$.
 - Forgetting that $\rho_j = \lambda_j / \mu_j$ uses the total traffic $\lambda_j$ solved from the traffic equations, not merely the external arrival rate $r_j$.
+
+---
+
+---
+
+## Exam Relevance
+
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
 
 ---
 
@@ -131,6 +175,20 @@ $$W = \frac{\sum_{j=1}^k L_j}{\sum_{j=1}^k r_j}$$
 - [[Little's Law]]
 - [[Queueing Systems and Kendall Notation]]
 - [[Tandem Two-Server Queue Performance Example]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

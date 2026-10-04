@@ -12,7 +12,21 @@ order: 25
 
 ---
 
-## Mathematical Statement
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Markov Inequality, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Markov Inequality compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 Let $X$ be a **non-negative random variable** (i.e., $P(X \ge 0) = 1$) with finite expectation $\mathbb{E}[X] < \infty$. For any threshold $a > 0$:
 
@@ -23,7 +37,9 @@ $$P(X \ge c \mathbb{E}[X]) \le \frac{1}{c}$$
 
 ---
 
-## Elegant Proof via Indicator Random Variables
+---
+
+## Variables
 
 Consider the indicator random variable $I_{X \ge a}$, defined as:
 $$I_{X \ge a} = \begin{cases} 1 & \text{if } X \ge a \\ 0 & \text{if } X < a \end{cases}$$
@@ -44,15 +60,25 @@ $\blacksquare$
 
 ---
 
-## When Is Markov's Inequality Tight?
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### When Is Markov's Inequality Tight?
 
 Markov's inequality holds with **strict equality** ($P(X \ge a) = \frac{\mathbb{E}[X]}{a}$) if and only if $X$ takes values only in $\{0, a\}$:
 $$P(X = a) = p, \quad P(X = 0) = 1 - p$$
 Then $\mathbb{E}[X] = ap$, and $P(X \ge a) = p = \frac{\mathbb{E}[X]}{a}$.
 
 ---
-
-## Generalized Markov Inequality
+### Generalized Markov Inequality
 
 If $g: \mathbb{R} \to [0, \infty)$ is a non-negative, strictly monotonically increasing function on the support of $X$, then for any $a$:
 $$P(X \ge a) = P(g(X) \ge g(a)) \le \frac{\mathbb{E}[g(X)]}{g(a)}$$
@@ -64,7 +90,23 @@ This generalization is the mother of all major concentration inequalities:
 
 ---
 
-## Common Pitfalls
+---
+
+## Derivation
+
+Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+
+---
+
+## Example
+
+See worked numerical examples in the associated Example and Problem notes.
+
+---
+
+## Common Mistakes
+
+### Common Pitfalls
 
 1. **Forgetting Non-negativity:** Markov's inequality is **invalid** if $X$ can take negative values!
    - *Counterexample:* Let $X = -100$ with probability $0.5$ and $X = 100$ with probability $0.5$. Then $\mathbb{E}[X] = 0$.
@@ -73,7 +115,9 @@ This generalization is the mother of all major concentration inequalities:
 
 ---
 
-## Related Notes
+---
+
+## Related Concepts
 
 - [[Chebyshev Inequality]] — Second-moment specialization.
 - [[Chernoff Bound]] — Exponential moment specialization.
@@ -81,7 +125,21 @@ This generalization is the mother of all major concentration inequalities:
 
 ---
 
-## Sources & Traceability
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 17, pages 54–56)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`

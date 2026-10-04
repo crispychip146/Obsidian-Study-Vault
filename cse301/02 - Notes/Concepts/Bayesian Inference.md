@@ -12,38 +12,15 @@ order: 49
 
 ---
 
-## Definition
+---
 
-**Bayesian Inference** is an approach to statistical inference in which probabilities are interpreted as degrees of belief or measures of uncertainty about unknown states of nature, rather than as objective limiting relative frequencies.
+## Starting Point and the Problem
 
-In the Bayesian framework:
-- The parameter $\theta \in \Theta$ is treated as a **random variable** governed by a probability distribution.
-- Prior beliefs about $\theta$ before observing data are encoded in a **prior distribution** $f(\theta)$ (or $P(\theta)$).
-- Given observed data $\mathbf{X} = (X_1, X_2, \dots, X_n)$ generated according to model $f(\mathbf{x} \mid \theta)$, beliefs are updated using **Bayes' Theorem** to form the **posterior distribution** $f(\theta \mid \mathbf{x})$:
-
-$$f(\theta \mid \mathbf{x}) = \frac{f(\mathbf{x} \mid \theta) f(\theta)}{m(\mathbf{x})} = \frac{L_n(\theta) f(\theta)}{\int_\Theta L_n(\theta) f(\theta) d\theta} \propto L_n(\theta) f(\theta)$$
-
-where:
-- $f(\theta)$: The **prior probability density** (our belief before seeing the data).
-- $L_n(\theta) = f(\mathbf{x} \mid \theta)$: The **likelihood function** (the probability of the data given parameter $\theta$).
-- $m(\mathbf{x}) = \int_\Theta f(\mathbf{x} \mid \theta) f(\theta) d\theta$: The **marginal likelihood** or **evidence** (a normalizing constant independent of $\theta$).
-- $f(\theta \mid \mathbf{x})$: The **posterior probability density** (our updated belief after observing the data).
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Bayesian Inference, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
 
 ---
 
-## Frequentist vs. Bayesian Philosophies
-
-| Dimension | Frequentist School (Classical) | Bayesian School |
-|---|---|---|
-| **Nature of Probability** | Limiting relative frequency of repeatable events in the physical world. | Quantified degree of personal belief, rational uncertainty, or information state. |
-| **Status of Parameters $\theta$** | Fixed, constant, non-random unknown truth. Cannot make probability statements about $\theta$. | Random variable. Has a probability distribution before and after seeing data. |
-| **Source of Randomness** | The data collection procedure / random sampling across hypothetical repetitions. | The observer's epistemic uncertainty about the parameter. |
-| **Updating Mechanism** | Estimators, tests, asymptotic sampling distributions. | Bayes' theorem: $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$. |
-| **Interval Estimation** | [[Confidence Intervals and Confidence Sets]]: $95\%$ of random intervals cover fixed $\theta$. | [[Credible Intervals]]: Given the observed data, $P(\theta \in C \mid \mathbf{x}) = 0.95$. |
-
----
-
-## Intuition: The Information Updating Pipeline
+## Developing the Idea
 
 ```
            Prior Belief f(θ)
@@ -63,7 +40,64 @@ where:
 
 ---
 
-## Bayesian Point Estimation
+---
+
+## Definition
+
+**Bayesian Inference** is an approach to statistical inference in which probabilities are interpreted as degrees of belief or measures of uncertainty about unknown states of nature, rather than as objective limiting relative frequencies.
+
+In the Bayesian framework:
+- The parameter $\theta \in \Theta$ is treated as a **random variable** governed by a probability distribution.
+- Prior beliefs about $\theta$ before observing data are encoded in a **prior distribution** $f(\theta)$ (or $P(\theta)$).
+- Given observed data $\mathbf{X} = (X_1, X_2, \dots, X_n)$ generated according to model $f(\mathbf{x} \mid \theta)$, beliefs are updated using **Bayes' Theorem** to form the **posterior distribution** $f(\theta \mid \mathbf{x})$:
+
+$$f(\theta \mid \mathbf{x}) = \frac{f(\mathbf{x} \mid \theta) f(\theta)}{m(\mathbf{x})} = \frac{L_n(\theta) f(\theta)}{\int_\Theta L_n(\theta) f(\theta) d\theta} \propto L_n(\theta) f(\theta)$$
+
+where:
+- $f(\theta)$: The **prior probability density** (our belief before seeing the data).
+- $L_n(\theta) = f(\mathbf{x} \mid \theta)$: The **likelihood function** (the probability of the data given parameter $\theta$).
+- $m(\mathbf{x}) = \int_\Theta f(\mathbf{x} \mid \theta) f(\theta) d\theta$: The **marginal likelihood** or **evidence** (a normalizing constant independent of $\theta$).
+- $f(\theta \mid \mathbf{x})$: The **posterior probability density** (our updated belief after observing the data).
+
+---
+
+---
+
+## How It Works
+
+### When NOT to Use Bayesian Inference
+
+1. **Weak Data + Strong Subjective Prior:**
+   When sample size $n$ is very small, a poorly calibrated or overly dogmatic subjective prior dominates the likelihood, causing severe bias.
+2. **Computational Tractability:**
+   Outside of simple conjugate models, normalizing constants $\int L_n(\theta) f(\theta) d\theta$ in high dimensions require computationally intensive Markov Chain Monte Carlo (MCMC) simulations.
+3. **Legal or Regulatory Contexts:**
+   In clinical drug approvals or legal court proceedings, regulators frequently mandate objective frequentist guarantees that are completely immune to subjective investigator biases.
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+### Frequentist vs. Bayesian Philosophies
+
+| Dimension | Frequentist School (Classical) | Bayesian School |
+|---|---|---|
+| **Nature of Probability** | Limiting relative frequency of repeatable events in the physical world. | Quantified degree of personal belief, rational uncertainty, or information state. |
+| **Status of Parameters $\theta$** | Fixed, constant, non-random unknown truth. Cannot make probability statements about $\theta$. | Random variable. Has a probability distribution before and after seeing data. |
+| **Source of Randomness** | The data collection procedure / random sampling across hypothetical repetitions. | The observer's epistemic uncertainty about the parameter. |
+| **Updating Mechanism** | Estimators, tests, asymptotic sampling distributions. | Bayes' theorem: $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$. |
+| **Interval Estimation** | [[Confidence Intervals and Confidence Sets]]: $95\%$ of random intervals cover fixed $\theta$. | [[Credible Intervals]]: Given the observed data, $P(\theta \in C \mid \mathbf{x}) = 0.95$. |
+
+---
+### Bayesian Point Estimation
 
 Unlike frequentist inference which focuses heavily on the single point $\hat{\theta}_{\text{MLE}}$, Bayesian inference provides the **entire continuous posterior distribution** $f(\theta \mid \mathbf{x})$. To compress this distribution into a single number, one selects a summary metric based on a loss function:
 
@@ -78,8 +112,7 @@ Unlike frequentist inference which focuses heavily on the single point $\hat{\th
    *Optimality:* The mode of the posterior distribution (minimizes 0-1 classification loss). See [[Maximum A Posteriori (MAP) Estimation]].
 
 ---
-
-## Conjugate Priors
+### Conjugate Priors
 
 A prior distribution $f(\theta)$ is called **conjugate** to a likelihood model $f(x \mid \theta)$ if the resulting posterior distribution $f(\theta \mid x)$ belongs to the **exact same parametric probability family** as the prior.
 
@@ -95,8 +128,7 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
 | $\text{Exponential}(\lambda)$ | $\lambda > 0$ | $\text{Gamma}(\alpha, \beta)$ | $\text{Gamma}(\alpha + n, \beta + \sum X_i)$ |
 
 ---
-
-## Types of Priors
+### Types of Priors
 
 1. **Informative / Subjective Priors:**
    Reflect genuine historical data, scientific consensus, or physical constraints (e.g., historical medical trials).
@@ -111,18 +143,18 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
 
 ---
 
-## When NOT to Use Bayesian Inference
+---
 
-1. **Weak Data + Strong Subjective Prior:**
-   When sample size $n$ is very small, a poorly calibrated or overly dogmatic subjective prior dominates the likelihood, causing severe bias.
-2. **Computational Tractability:**
-   Outside of simple conjugate models, normalizing constants $\int L_n(\theta) f(\theta) d\theta$ in high dimensions require computationally intensive Markov Chain Monte Carlo (MCMC) simulations.
-3. **Legal or Regulatory Contexts:**
-   In clinical drug approvals or legal court proceedings, regulators frequently mandate objective frequentist guarantees that are completely immune to subjective investigator biases.
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
 
 ---
 
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Treating the posterior as proportional to the prior alone:**
    Forgetting that the likelihood acts as the filter: $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$.
@@ -133,13 +165,27 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
 
 ---
 
+---
+
 ## Exam Relevance
+
+### Exam Relevance
 
 In examinations, expect to:
 1. Identify the philosophical differences between frequentist and Bayesian inference.
 2. Set up Bayes' rule for conjugate models and derive posterior hyperparameters.
 3. Calculate posterior means, medians, MAP estimators, and credible intervals.
 4. Explain how prior parameters act as "fictitious prior observations" (pseudocounts).
+
+---
+### Examples & Problems
+
+- [[Bernoulli Bayesian Inference with Beta Prior Example]]
+- [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
+- [[Berger-Wolpert Confidence Set Puzzle Example]]
+
+---
 
 ---
 
@@ -153,6 +199,8 @@ In examinations, expect to:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Point Estimation]]
@@ -161,12 +209,11 @@ In examinations, expect to:
 
 ---
 
-## Examples & Problems
+---
 
-- [[Bernoulli Bayesian Inference with Beta Prior Example]]
-- [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
-- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
-- [[Berger-Wolpert Confidence Set Puzzle Example]]
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

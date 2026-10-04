@@ -12,6 +12,20 @@ order: 60
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Pearson's Chi-Square Goodness-of-Fit Test, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Pearson's Chi-Square Goodness-of-Fit Test compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 **Pearson's Chi-Square ($\chi^2$) Goodness-of-Fit Test** evaluates whether an observed categorical frequency distribution differs significantly from a hypothesized theoretical distribution.
@@ -40,6 +54,8 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning | Role |
@@ -54,6 +70,8 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 
 ---
 
+---
+
 ## Conditions
 
 1. **Independent Observations:** The $n$ trials must be independent.
@@ -65,7 +83,11 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 
 ---
 
+---
+
 ## Intuition
+
+### Intuition
 
 Each term in the sum:
 $$\frac{(O_j - E_j)^2}{E_j} = \left( \frac{O_j - E_j}{\sqrt{E_j}} \right)^2$$
@@ -78,8 +100,7 @@ $$\sum_{j=1}^k O_j = n \quad \text{and} \quad \sum_{j=1}^k E_j = n \implies \sum
 Once the deviations of the first $k - 1$ categories are known, the deviation of the $k$-th category is completely fixed. This single linear constraint removes one degree of freedom, yielding $k - 1$.
 
 ---
-
-## Connection to the Chi-Square Distribution
+### Connection to the Chi-Square Distribution
 
 Recall the definition of the $\chi^2_m$ distribution:
 > If $Z_1, Z_2, \dots, Z_m \overset{\text{iid}}{\sim} N(0, 1)$, then the sum of their squares follows a Chi-Square distribution with $m$ degrees of freedom:
@@ -93,7 +114,17 @@ If $V \approx k - 1$, the observed data match theoretical expectations. If $V \g
 
 ---
 
-## Example: Rolling a Die for Fairness
+---
+
+## Derivation
+
+Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+
+---
+
+## Example
+
+### Example: Rolling a Die for Fairness
 
 A die is rolled $n = 60$ times to test whether it is fair ($H_0: p_1 = \dots = p_6 = 1/6$).
 - Number of categories: $k = 6 \implies df = 6 - 1 = 5$.
@@ -109,11 +140,34 @@ Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with
 
 ---
 
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
 ## Related Concepts
 
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 - [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

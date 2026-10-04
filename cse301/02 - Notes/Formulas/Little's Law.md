@@ -12,6 +12,20 @@ order: 83
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Little's Law, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Little's Law compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 **Little's Law** is the most celebrated and fundamental theorem in queueing theory and operations research. It establishes an exact, invariant relationship between inventory (concurrency), throughput (arrival rate), and delay (residence time):
@@ -36,6 +50,8 @@ where:
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -50,7 +66,18 @@ where:
 
 ---
 
-## Universality: Why Little's Law Is Extraordinary
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### Universality: Why Little's Law Is Extraordinary
 
 Little's Law requires **almost no restrictive assumptions**:
 - It does **not** assume Poisson arrivals (works for ANY arrival distribution).
@@ -66,7 +93,11 @@ The only requirements are:
 
 ---
 
-## Derivation via the Fundamental Cost Identity
+---
+
+## Derivation
+
+### Derivation via the Fundamental Cost Identity
 
 Little's Law can be derived with mathematical elegance using the **Fundamental Cost Identity** introduced by Sheldon Ross:
 
@@ -116,7 +147,11 @@ Choose the cost rule: **"Every customer pays \$1 per unit of time while in servi
 
 ---
 
-## Example: Fast-Food Drive-Through
+---
+
+## Example
+
+### Example: Fast-Food Drive-Through
 
 A drive-through lane observes that cars arrive at an average rate of $\lambda = 2$ cars per minute.
 On average, a car spends $W = 3$ minutes from entering the driveway until leaving with their food.
@@ -127,10 +162,16 @@ At any random instant, an overhead drone will count an average of **6 cars** in 
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 - **Unit mismatch:** Mixing hours and minutes (e.g., $\lambda$ in customers/hour and $W$ in minutes). Always convert to identical time units!
 - **Gross vs. Effective Arrivals:** Using gross arrival rate $\lambda$ instead of effective arrival rate $\lambda_a = \lambda(1 - P_{\text{blocked}})$ in finite capacity loss systems.
+
+---
 
 ---
 
@@ -140,6 +181,20 @@ At any random instant, an overhead drone will count an average of **6 cars** in 
 - [[M-M-1 Queue]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[M-M-1 Performance Formulas]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

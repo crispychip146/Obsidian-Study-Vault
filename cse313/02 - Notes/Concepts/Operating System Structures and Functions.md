@@ -25,6 +25,26 @@ order: 1
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Before the operating system existed, programmers wrote machine instructions directly against bare hardware, manually toggling console switches and reading punch cards. If a programmer made a memory indexing mistake, the hardware halted. If a program needed to read from a disk or tape, it had to implement low-level drive timing and controller commands from scratch.
+
+We want a system where multiple programs can execute reliably, share expensive CPU and memory resources, and access storage without programmers reinventing physical hardware controllers. The central obstacle is hardware vulnerability and resource contention: without a central arbiter, one rogue or buggy program can overwrite memory belonging to another program or monopolize hardware indefinitely.
+
+---
+
+## Developing the Idea
+
+To overcome hardware vulnerability, computer architects and systems designers introduced a software intermediary running in privileged execution mode: the **Operating System (OS)**.
+
+The OS resolves the obstacle by presenting two complementary faces:
+1. **Top-Down (The Extended Machine):** It replaces messy, timing-sensitive physical hardware (I/O ports, interrupt lines, disk cylinder addresses) with clean, high-level abstractions: files, directories, processes, and virtual memory.
+2. **Bottom-Up (The Resource Manager):** It acts as an impartial controller that allocates CPU cores, memory frames, and I/O bandwidth across competing tasks according to policies of fairness, efficiency, and security.
+
+---
+
 ## Definition
 
 An **Operating System (OS)** is a foundational system software layer that runs directly on bare computer hardware in privileged mode, acting as an intermediary between computer hardware and user applications.
@@ -49,21 +69,11 @@ flowchart TD
 
 ---
 
-## Why Does It Exist? (Motivation & History)
-
-In the earliest computing systems (1940s–1950s), there was no operating system. Programmers wrote machine code directly against bare hardware, manually toggling console switches and managing punch cards. This had critical drawbacks:
-- **No Resource Sharing:** Only one user could execute one program at a time. If the program waited for a slow paper-tape reader, the expensive vacuum-tube CPU sat idle.
-- **Hardware Fragility:** Every application had to implement its own device drivers. An accidental memory write by a programmer could freeze or destroy hardware state.
-- **Wasted Programmer Effort:** Every software development team had to reinvent basic I/O routines, memory allocators, and program loaders.
-
-The OS arose to solve these problems through:
-- **Batch Processing:** Grouping similar jobs together to eliminate setup downtime.
-- **Multiprogramming:** Keeping multiple jobs resident in memory simultaneously so that when Job A blocks on I/O, the CPU immediately switches to Job B, maximizing CPU utilization.
-- **Time-Sharing (Multitasking):** Rapidly switching the CPU between users (round-robin scheduling with timer interrupts) to give each interactive user the illusion of a dedicated personal computer.
-
 ---
 
-## Operating System Architectures
+## How It Works
+
+### Operating System Architectures
 
 The architectural organization of the kernel governs how OS components interact, execute, and isolate faults:
 
@@ -99,7 +109,21 @@ The architectural organization of the kernel governs how OS components interact,
 
 ---
 
-## Core Operating System Responsibilities
+---
+
+## Example
+
+Consider two applications running concurrently: a web browser downloading an image over Wi-Fi and a compiler building a C project:
+1. The compiler executes compute instructions at full CPU speed.
+2. The browser requests network packets by invoking a system call.
+3. The OS steps in, places the browser in a waiting queue, assigns the CPU to the compiler, and configures the network controller to use Direct Memory Access (DMA).
+4. When the packet arrives, an interrupt alerts the OS, which wakes the browser without either application ever needing to know the other exists.
+
+---
+
+## Technical Details
+
+### Core Operating System Responsibilities
 
 1. **Process Management:** Creating, terminating, scheduling, and synchronizing processes and threads (see [[Process Concepts and Memory Layout]] and [[CPU Scheduling Principles and Criteria]]).
 2. **Memory Management:** Allocating memory dynamically, tracking free frames, translating virtual addresses to physical addresses via the MMU, and swapping/paging (see [[Process Control Block and Context Switching]]).
@@ -109,7 +133,17 @@ The architectural organization of the kernel governs how OS components interact,
 
 ---
 
-## Edge Cases & Common Misconceptions
+---
+
+## Important Properties and Why They Hold
+
+- **Fault Isolation:** In microkernel systems, servers run in isolated user-space address spaces; a crash in a device driver server does not corrupt the kernel or halt other processes.
+- **Protection Boundary Invariance:** User applications cannot execute privileged CPU instructions (such as disabling interrupts or modifying page table registers); any violation causes a hardware exception caught by the OS.
+- **Performance Trade-Off:** Monolithic kernels maximize execution throughput by executing all OS services in Ring 0 with zero context-switching penalty, but sacrifice isolation resilience.
+
+---
+
+## Common Mistakes
 
 1. **"The OS is the same as the GUI or Shell":**
    - The graphical desktop environment (e.g., Windows Desktop, GNOME) or command-line shell (e.g., `bash`, `zsh`) is **NOT** part of the kernel.
@@ -120,7 +154,9 @@ The architectural organization of the kernel governs how OS components interact,
 
 ---
 
-## Cross-Topic Connections / Exam Relevance
+---
+
+## Exam Relevance
 
 - **Next Step:** To enforce protection, hardware provides CPU execution rings (see [[Dual-Mode Operation and System Calls]]).
 - **Process Abstraction:** The primary resource unit managed by the OS is the process (see [[Process Concepts and Memory Layout]]).
@@ -128,7 +164,29 @@ The architectural organization of the kernel governs how OS components interact,
 
 ---
 
-## Sources & Traceability
+---
+
+## Related Concepts
+
+- [[Dual-Mode Operation and System Calls]]
+- [[Process Concepts and Memory Layout]]
+- [[Computer Booting and Hardware Abstractions]]
+
+---
+
+## Prerequisites
+
+- [[Computer Booting and Hardware Abstractions]]
+
+---
+
+## Problems
+
+- [[Problem — Fork Execution Tree and Process Tracing]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 1–6, 11–12)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 1: Introduction (Sections 1.1–1.7)

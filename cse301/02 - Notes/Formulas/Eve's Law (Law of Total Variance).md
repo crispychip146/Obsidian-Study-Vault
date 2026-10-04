@@ -12,7 +12,21 @@ order: 21
 
 ---
 
-## Mathematical Statement
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Eve's Law (Law of Total Variance), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Eve's Law (Law of Total Variance) compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
+## Formula
 
 The **Law of Total Variance**, known affectionately as **Eve's Law** (complementing [[Adam's Law (Law of Total Expectation)|Adam's Law]]), decomposes the unconditional variance of a random variable $Y$ into two distinct, orthogonal sources of variability when conditioned on $X$:
 
@@ -25,7 +39,47 @@ $$\mathbf{E}\mathbf{V} + \mathbf{V}\mathbf{E} \quad \text{("EVVE")}$$
 
 ---
 
-## Rigorous Derivation
+---
+
+## Variables
+
+| Symbol | Meaning |
+|---|---|
+| $X, Y$ | Random variables governed by underlying probability distributions |
+| $\mathbb{E}[\cdot]$ | Expected value operator |
+| $\text{Var}(\cdot)$ | Variance operator |
+
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### Statistical Interpretation: ANOVA Decomposition
+
+Eve's Law is the probabilistic foundation of the **Analysis of Variance (ANOVA)**:
+- **$\mathbb{E}[\operatorname{Var}(Y \mid X)]$ = Within-Group Variance (Unexplained Variance):**
+  The average spread of $Y$ *within* subpopulations with fixed $X$. This variation cannot be explained by knowing $X$.
+- **$\operatorname{Var}(\mathbb{E}[Y \mid X])$ = Between-Group Variance (Explained Variance):**
+  The spread of the subpopulation group averages across different values of $X$. This measures the variation in $Y$ that is directly accounted for by knowing $X$.
+
+### Consequence for Best Prediction:
+Because $\operatorname{Var}(\mathbb{E}[Y \mid X]) \ge 0$:
+$$\operatorname{Var}(Y) \ge \mathbb{E}[\operatorname{Var}(Y \mid X)]$$
+Conditioning **reduces variance on average**. Information never increases uncertainty on average!
+
+---
+
+---
+
+## Derivation
+
+### Rigorous Derivation
 
 Recall the fundamental definition of variance:
 $$\operatorname{Var}(Y) = \mathbb{E}[Y^2] - (\mathbb{E}[Y])^2$$
@@ -51,22 +105,11 @@ $\blacksquare$
 
 ---
 
-## Statistical Interpretation: ANOVA Decomposition
-
-Eve's Law is the probabilistic foundation of the **Analysis of Variance (ANOVA)**:
-- **$\mathbb{E}[\operatorname{Var}(Y \mid X)]$ = Within-Group Variance (Unexplained Variance):**
-  The average spread of $Y$ *within* subpopulations with fixed $X$. This variation cannot be explained by knowing $X$.
-- **$\operatorname{Var}(\mathbb{E}[Y \mid X])$ = Between-Group Variance (Explained Variance):**
-  The spread of the subpopulation group averages across different values of $X$. This measures the variation in $Y$ that is directly accounted for by knowing $X$.
-
-### Consequence for Best Prediction:
-Because $\operatorname{Var}(\mathbb{E}[Y \mid X]) \ge 0$:
-$$\operatorname{Var}(Y) \ge \mathbb{E}[\operatorname{Var}(Y \mid X)]$$
-Conditioning **reduces variance on average**. Information never increases uncertainty on average!
-
 ---
 
-## Application: Variance of a Compound Random Sum
+## Example
+
+### Application: Variance of a Compound Random Sum
 
 Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.d. with mean $\mu_X$ and variance $\sigma_X^2$, independent of $N$.
 
@@ -85,7 +128,16 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 
 ---
 
-## Related Notes
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
+## Related Concepts
 
 - [[Adam's Law (Law of Total Expectation)]] — Expectation counterpart.
 - [[Random Number of Random Variables Sum Example]] — Practical compound sum calculations.
@@ -93,7 +145,21 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 
 ---
 
-## Sources & Traceability
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
+
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`

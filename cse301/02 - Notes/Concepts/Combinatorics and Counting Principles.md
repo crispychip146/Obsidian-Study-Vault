@@ -12,6 +12,20 @@ order: 1
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Combinatorics and Counting Principles, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Combinatorics and Counting Principles reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 **Combinatorics** is the branch of discrete mathematics dedicated to counting the number of configurations, arrangements, and selections of elements from a finite set without explicitly listing them.
@@ -21,7 +35,11 @@ $$P(A) = \frac{\lvert A \rvert}{\lvert S \rvert} = \frac{\# \text{ favorable out
 
 ---
 
-## Core Counting Rules
+---
+
+## How It Works
+
+### Core Counting Rules
 
 ### 1. The Multiplication Rule
 If an experiment consists of $k$ sequential stages, where:
@@ -48,19 +66,7 @@ $$\binom{n}{k} = \frac{P(n, k)}{k!} = \frac{n!}{k!(n - k)!}$$
 The symbol $\binom{n}{k}$ is read as *"n choose k"* and is known as the **binomial coefficient**.
 
 ---
-
-## The Four Sampling Paradigms
-
-When drawing $k$ items from a set of $n$ distinct objects:
-
-| | Order Matters (Sequences) | Order Does Not Matter (Subsets) |
-|---|---|---|
-| **With Replacement** | $n^k$ | $\binom{n + k - 1}{k}$ (Bose-Einstein / Stars & Bars) |
-| **Without Replacement** | $\frac{n!}{(n - k)!}$ | $\binom{n}{k}$ |
-
----
-
-## Stars and Bars (Bose-Einstein Allocation)
+### Stars and Bars (Bose-Einstein Allocation)
 
 To find the number of ways to distribute $k$ indistinguishable items into $n$ distinguishable bins:
 Imagine lining up the $k$ items (represented by stars $\star$) and placing $n - 1$ dividers (bars $\mid$) between them to create $n$ compartments:
@@ -71,7 +77,32 @@ $$\binom{n + k - 1}{k} = \binom{n + k - 1}{n - 1}$$
 
 ---
 
-## Story Proofs (Combinatorial Proofs)
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+### The Four Sampling Paradigms
+
+When drawing $k$ items from a set of $n$ distinct objects:
+
+| | Order Matters (Sequences) | Order Does Not Matter (Subsets) |
+|---|---|---|
+| **With Replacement** | $n^k$ | $\binom{n + k - 1}{k}$ (Bose-Einstein / Stars & Bars) |
+| **Without Replacement** | $\frac{n!}{(n - k)!}$ | $\binom{n}{k}$ |
+
+---
+
+---
+
+## Important Properties and Why They Hold
+
+### Story Proofs (Combinatorial Proofs)
 
 A **story proof** (or combinatorial proof) proves an algebraic identity by interpreting both sides of the equation as two different ways of counting the exact same physical collection of items, avoiding tedious algebraic manipulation.
 
@@ -92,7 +123,11 @@ $$\binom{m + n}{k} = \sum_{j=0}^k \binom{m}{j} \binom{n}{k - j}$$
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 1. **Overcounting by treating identical items as distinct:**
    Forgetting to divide by $k!$ when order is irrelevant.
@@ -103,12 +138,34 @@ $$\binom{m + n}{k} = \sum_{j=0}^k \binom{m}{j} \binom{n}{k - j}$$
 
 ---
 
+---
+
+## Exam Relevance
+
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+
+---
+
 ## Related Concepts
 
 - [[Probability Axioms and Naive Probability]]
 - [[Inclusion-Exclusion Principle]]
 - [[Birthday Problem and Collisions Example]]
 - [[Derangements and Card Matching Example]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

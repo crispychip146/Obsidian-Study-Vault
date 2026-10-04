@@ -12,6 +12,20 @@ order: 53
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Normal-Normal Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Normal-Normal Conjugate Updating Formula compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\theta, \sigma^2)$ be a sample with unknown mean $\theta \in (-\infty, \infty)$ and known variance $\sigma^2 > 0$. Let $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
@@ -40,6 +54,8 @@ where $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning | Role |
@@ -57,7 +73,18 @@ where $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
 
 ---
 
-## Intuition: The Physics of Information (Precisions Add)
+---
+
+## Conditions
+
+- Random variables must possess finite first and second moments (well-defined expectations).
+- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+
+---
+
+## Intuition
+
+### Intuition: The Physics of Information (Precisions Add)
 
 In statistics, **precision** is defined as the reciprocal of variance: $\text{Precision} = \frac{1}{\text{Variance}}$.
 Precision measures the certainty or information density of an estimate.
@@ -77,7 +104,11 @@ $$\bar{\theta} = \frac{\text{Data Precision} \times \bar{X} + \text{Prior Precis
 
 ---
 
+---
+
 ## Derivation
+
+### Derivation
 
 By Bayes' theorem:
 $$f(\theta \mid \mathbf{x}) \propto f(\mathbf{x} \mid \theta) f(\theta)$$
@@ -106,7 +137,11 @@ This is recognized immediately as a Gaussian density $N(\bar{\theta}, \tau^2) \q
 
 ---
 
+---
+
 ## Example
+
+### Example
 
 Suppose an instrument measures a physical constant $\theta$. Instrument precision is known with $\sigma = 2$.
 - Prior belief: $\theta \sim N(100, 3^2) \implies a = 100, b = 3, b^2 = 9$.
@@ -127,11 +162,34 @@ Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior
 
 ---
 
+---
+
+## Common Mistakes
+
+- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
+- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+
+---
+
 ## Related Concepts
 
 - [[Bayesian Inference]]
 - [[Credible Intervals]]
 - [[Beta-Binomial Conjugate Updating Formula]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Random Variables and Probability Distributions]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

@@ -12,6 +12,8 @@ order: 64
 
 ---
 
+---
+
 ## Problem
 
 In his historic 1865 genetics experiments on dihybrid inheritance, Gregor Mendel crossed pea plants and predicted four progeny phenotypes based on his Law of Independent Assortment:
@@ -30,6 +32,8 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 
 ---
 
+---
+
 ## Given
 
 - Categories: $k = 4$
@@ -37,6 +41,8 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 - Null Hypothesis:
   $$H_0: \mathbf{p} = \left(\frac{9}{16}, \frac{3}{16}, \frac{3}{16}, \frac{1}{16}\right) = (0.5625, 0.1875, 0.1875, 0.0625)$$
 - Significance level: $\alpha = 0.05$
+
+---
 
 ---
 
@@ -49,15 +55,24 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 
 ---
 
-## Concepts Used
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Concepts Used
 
 - [[Pearson's Chi-Square Goodness-of-Fit Test]]
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 
 ---
-
-## Solution
+### Solution
 
 ### Step 1: Calculate Expected Counts
 Under $H_0$, expected count is $E_j = n \cdot p_{0j}$:
@@ -109,6 +124,13 @@ $$V = 0.0162 + 0.1013 + 0.1349 + 0.2176 = 0.4700$$
   Mendel's experimental data match the theoretical $9:3:3:1$ inheritance ratios exceptionally well.
 
 ---
+### Historical Note: Fisher's "Too Good to Be True" Critique
+
+In 1936, the great statistician Ronald Fisher analyzed all of Mendel's published pea experiments. Fisher noted that across all experiments, the combined $\chi^2$ values were extraordinarily small ($p \approx 0.99993$). In statistical theory, an exact $H_0$ generates $V$ uniformly distributed in tail areas. A $p$-value of $0.9999$ occurs purely by chance only once in $10,000$ times, leading Fisher to suggest that an overzealous assistant may have slightly "tidied up" the counts to match Mendel's ratios more closely than natural sampling noise would produce!
+
+---
+
+---
 
 ## Result
 
@@ -120,9 +142,24 @@ $$V = 0.0162 + 0.1013 + 0.1349 + 0.2176 = 0.4700$$
 
 ---
 
-## Historical Note: Fisher's "Too Good to Be True" Critique
+---
 
-In 1936, the great statistician Ronald Fisher analyzed all of Mendel's published pea experiments. Fisher noted that across all experiments, the combined $\chi^2$ values were extraordinarily small ($p \approx 0.99993$). In statistical theory, an exact $H_0$ generates $V$ uniformly distributed in tail areas. A $p$-value of $0.9999$ occurs purely by chance only once in $10,000$ times, leading Fisher to suggest that an overzealous assistant may have slightly "tidied up" the counts to match Mendel's ratios more closely than natural sampling noise would produce!
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
 
 ---
 
@@ -131,6 +168,8 @@ In 1936, the great statistician Ronald Fisher analyzed all of Mendel's published
 - [[Pearson's Chi-Square Goodness-of-Fit Test]]
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
+
+---
 
 ---
 

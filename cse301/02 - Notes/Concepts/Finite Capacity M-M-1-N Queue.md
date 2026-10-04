@@ -12,6 +12,20 @@ order: 87
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Finite Capacity M-M-1-N Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+
+---
+
+## Developing the Idea
+
+By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Finite Capacity M-M-1-N Queue reveals the underlying structural mechanics that govern random variables and estimation errors.
+
+---
+
 ## Definition
 
 An **M/M/1/N Queue** (also written M/M/1/K) is a single-server queueing system with a **finite physical capacity $N$**.
@@ -21,7 +35,11 @@ An **M/M/1/N Queue** (also written M/M/1/K) is a single-server queueing system w
 
 ---
 
-## State Transition Diagram (Truncated Birth-Death Process)
+---
+
+## How It Works
+
+### State Transition Diagram (Truncated Birth-Death Process)
 
 ```
         λ           λ           λ                     λ
@@ -38,8 +56,7 @@ Notice the critical difference at the upper boundary:
 - Departures continue at rate $\mu$ from state $N$ to $N - 1$.
 
 ---
-
-## Derivation of Steady-State Probabilities
+### Derivation of Steady-State Probabilities
 
 ### 1. Balance Equations
 - **State 0:**
@@ -67,8 +84,7 @@ $$P_0 = P_1 = \dots = P_N = \frac{1}{N + 1}$$
 $$P_n = \frac{(1 - \rho)\rho^n}{1 - \rho^{N+1}}, \quad n = 0, 1, \dots, N \quad (\text{for } \rho \ne 1)$$
 
 ---
-
-## Stability: Finite Buffers Cannot Blow Up
+### Stability: Finite Buffers Cannot Blow Up
 
 In an infinite M/M/1 queue, stability requires $\rho < 1$.
 In an M/M/1/N queue:
@@ -78,8 +94,7 @@ In an M/M/1/N queue:
 *Intuition:* If customers arrive at a rate of 10,000 per second and the server processes only 1 per second, the queue length cannot grow past $N$. The system simply drops $99.99\%$ of incoming traffic.
 
 ---
-
-## Blocking Probability and Effective Arrival Rate
+### Blocking Probability and Effective Arrival Rate
 
 By the [[PASTA Property and Inspection Paradox|PASTA property]], because arrivals follow a Poisson process, the proportion of arrivals that find the system full is identical to the time-average probability $P_N$:
 
@@ -91,8 +106,47 @@ Only customers who find fewer than $N$ people present successfully enter the fac
 $$\lambda_a = \lambda_{\text{eff}} = \lambda(1 - P_N)$$
 
 ---
+### Average Number of Customers ($L$)
 
-## Little's Law Subtlety: Which $\lambda$ to Use?
+$$L = \sum_{n=0}^N n P_n = P_0 \sum_{n=0}^N n \rho^n$$
+Carrying out the finite sum using the identity $\sum_{n=0}^N n \rho^n = \frac{\rho [1 - (N+1)\rho^N + N\rho^{N+1}]}{(1 - \rho)^2}$ yields:
+
+$$L = \frac{\rho}{1 - \rho} - \frac{(N + 1)\rho^{N+1}}{1 - \rho^{N+1}}$$
+
+Notice that:
+- As $N \to \infty$ with $\rho < 1$, the second term $\frac{(N+1)\rho^{N+1}}{1 - \rho^{N+1}} \to 0$, recovering the infinite M/M/1 formula $L = \frac{\rho}{1 - \rho}$.
+- For finite $N$, $L$ is strictly less than the infinite queue length, bounded above by $N$.
+
+---
+### Engineering Trade-Off: Buffer Sizing
+
+Network router engineers use the M/M/1/N model to balance two competing evils:
+1. **Small Buffer ($N$ small):**
+   - ✅ Small delay ($W$ is very small; no bufferbloat).
+   - ❌ High packet drop rate ($P_N$ is large).
+2. **Large Buffer ($N$ large):**
+   - ✅ Low packet drop rate ($P_N$ is small).
+   - ❌ High latency and jitter ($W$ becomes massive under congestion).
+
+---
+
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+### Little's Law Subtlety: Which $\lambda$ to Use?
 
 A classic trap in queueing theory exams occurs when applying [[Little's Law]] to finite-capacity loss systems:
 
@@ -105,28 +159,18 @@ $$\mathbf{W = \frac{L}{\lambda_a} = \frac{L}{\lambda(1 - P_N)}}$$
 
 ---
 
-## Average Number of Customers ($L$)
+---
 
-$$L = \sum_{n=0}^N n P_n = P_0 \sum_{n=0}^N n \rho^n$$
-Carrying out the finite sum using the identity $\sum_{n=0}^N n \rho^n = \frac{\rho [1 - (N+1)\rho^N + N\rho^{N+1}]}{(1 - \rho)^2}$ yields:
+## Common Mistakes
 
-$$L = \frac{\rho}{1 - \rho} - \frac{(N + 1)\rho^{N+1}}{1 - \rho^{N+1}}$$
-
-Notice that:
-- As $N \to \infty$ with $\rho < 1$, the second term $\frac{(N+1)\rho^{N+1}}{1 - \rho^{N+1}} \to 0$, recovering the infinite M/M/1 formula $L = \frac{\rho}{1 - \rho}$.
-- For finite $N$, $L$ is strictly less than the infinite queue length, bounded above by $N$.
+- Confusing conditional probabilities with unconditional joint probabilities.
+- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
 
 ---
 
-## Engineering Trade-Off: Buffer Sizing
+## Exam Relevance
 
-Network router engineers use the M/M/1/N model to balance two competing evils:
-1. **Small Buffer ($N$ small):**
-   - ✅ Small delay ($W$ is very small; no bufferbloat).
-   - ❌ High packet drop rate ($P_N$ is large).
-2. **Large Buffer ($N$ large):**
-   - ✅ Low packet drop rate ($P_N$ is small).
-   - ❌ High latency and jitter ($W$ becomes massive under congestion).
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
 
 ---
 
@@ -136,6 +180,20 @@ Network router engineers use the M/M/1/N model to balance two competing evils:
 - [[Little's Law]]
 - [[PASTA Property and Inspection Paradox]]
 - [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
+
+---
+
+---
+
+## Prerequisites
+
+- [[Probability Axioms and Naive Probability]]
+
+---
+
+## Problems
+
+- [[Problem — Birthday Collisions and Approximation]]
 
 ---
 

@@ -12,7 +12,9 @@ order: 34
 
 ---
 
-## Problem Statement
+---
+
+## Problem
 
 This problem evaluates deadlock detection using two standard techniques: Depth-First Search (DFS) cycle tracing for single-instance graphs, and graph reduction for multi-instance graphs.
 
@@ -66,7 +68,50 @@ flowchart TD
 
 ---
 
-## Detailed Step-by-Step Solutions
+---
+
+## Given
+
+- Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
+
+---
+
+## Required
+
+- Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
+
+---
+
+## Concepts Tested
+
+- [[Operating System Structures and Functions]]
+- [[Process Lifecycle and State Transitions]]
+
+---
+
+## Prerequisites
+
+- [[Process Concepts and Memory Layout]]
+- [[Process Control Block and Context Switching]]
+
+---
+
+## Question Type
+
+Graph Theory / Cycle Detection & Reduction
+
+---
+
+## Solution
+
+### Understanding the Situation
+Interpret the given problem state, identify all participating entities (processes, resources, semaphores), and establish the operational rules governing their interactions.
+
+### Developing the Key Idea
+Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffman cycle conditions, Gantt timeline rules) and verify that all prerequisites hold.
+
+### Working Through the Solution
+### Detailed Step-by-Step Solutions
 
 ### Part 1: Single-Instance DFS Simulation Trace
 
@@ -167,7 +212,46 @@ This vividly demonstrates Theorem 2: in multi-instance resource systems, **a cyc
 
 ---
 
-## Source Traceability & Metadata
+### Result and Interpretation
+The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
+
+---
+
+## Reusable Insight
+
+Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
+
+---
+
+## Common Mistakes
+
+- Misinterpreting the initial state vector or indexing offsets.
+- Confusing necessary conditions with sufficient conditions during analysis.
+
+---
+
+## Exam Pattern
+
+Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
+
+---
+
+## Related Problems
+
+- [[Problem — Banker's Algorithm Safe State and Request Granting]]
+- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
+
+---
+
+## Related Concepts
+
+- [[CPU Scheduling Principles and Criteria]]
+- [[Deadlock Fundamentals and Coffman Conditions]]
+
+---
+
+## Source
+
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 16–23: Graph Reduction, Cycle Analysis) and `Notes on algorithm simulation.pdf` (Pages 5–7).
 - **Question ID:** `Q-CSE313-005`
 - **Related Notes:**

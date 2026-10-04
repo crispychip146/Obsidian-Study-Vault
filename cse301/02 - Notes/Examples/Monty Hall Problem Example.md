@@ -12,7 +12,9 @@ order: 22
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 On a game show, you are presented with three closed doors ($1, 2, 3$):
 - Behind one door is a car (the grand prize).
@@ -28,7 +30,29 @@ The game proceeds as follows:
 
 ---
 
-## Step-by-Step Solution
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Step-by-Step Solution
 
 ### Method 1: The Intuitive Complement / Partition Argument
 Let $C_i$ be the event that the car is behind Door $i$ ($i \in \{1, 2, 3\}$).
@@ -78,8 +102,7 @@ We want to evaluate $P(C_1 \mid M_2)$ vs. $P(C_3 \mid M_2)$.
      $$P(C_3 \mid M_2) = \frac{P(M_2 \mid C_3)P(C_3)}{P(M_2)} = \frac{(1)(1/3)}{1/2} = \frac{1/3}{1/2} = \frac{2}{3}$$
 
 ---
-
-## Why Common Intuition Fails (The 50/50 Fallacy)
+### Why Common Intuition Fails (The 50/50 Fallacy)
 
 People instinctively assume: *"Two doors are left, so the probability must be 50/50."*
 The fallacy overlooks the **host's protocol and knowledge**:
@@ -88,14 +111,43 @@ The fallacy overlooks the **host's protocol and knowledge**:
 
 ---
 
-## Related Notes
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Conditional Probability and Independence]] — Sample space reduction.
 - [[Law of Total Probability and Bayes' Rule]] — The mathematical machinery used in Method 2.
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 5, pages 15–16)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_3.pdf`

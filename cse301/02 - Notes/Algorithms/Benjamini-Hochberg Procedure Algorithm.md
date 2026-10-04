@@ -12,7 +12,9 @@ order: 63
 
 ---
 
-## Purpose
+---
+
+## The Problem and Earlier Tools
 
 The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
 
@@ -23,7 +25,9 @@ It solves the excessive conservatism of the classical [[Multiple Testing and Fal
 
 ---
 
-## Core Idea: The Step-Up Adaptive Threshold
+---
+
+## Developing the Core Idea
 
 Rather than comparing every $p$-value against a fixed, brutally small threshold $\alpha/m$ (as Bonferroni does), the BH procedure compares ordered $p$-values against a **linearly increasing threshold**:
 
@@ -37,18 +41,23 @@ By finding the largest index $k$ where the data still fall below the threshold l
 
 ---
 
-## Inputs and Outputs
+---
 
-- **Inputs:**
-  - A collection of $m$ individual $p$-values: $P_1, P_2, \dots, P_m$.
-  - Target FDR significance level: $q \in (0, 1)$ (default: $0.05$).
-- **Outputs:**
-  - Rejection cutoff index: $k \in \{0, 1, \dots, m\}$.
-  - Set of rejected null hypotheses: $\mathcal{R} = \{H_{(1)}, H_{(2)}, \dots, H_{(k)}\}$.
+## Inputs
+
+- Ranked empirical test statistics, p-values, or sample arrays.
+
+---
+
+## Outputs
+
+- Decision vector: rejected null hypotheses or permutation p-value.
 
 ---
 
 ## How It Works
+
+### How It Works
 
 1. **Sort:** Order the $m$ raw $p$-values from smallest to largest:
    $$P_{(1)} \le P_{(2)} \le \dots \le P_{(m)}$$
@@ -64,8 +73,20 @@ By finding the largest index $k$ where the data still fall below the threshold l
      Even if some intermediate $P_{(j)} > \ell_j$ for $j < k$, the procedure still rejects $H_{(j)}$ because $k$ acts as a global step-up anchor!
 
 ---
+### Related Concepts
+
+- [[Multiple Testing and False Discovery Rate]]
+- [[p-Values and Significance]]
+- [[Hypothesis Testing Framework]]
+- [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
+
+---
+
+---
 
 ## Pseudocode
+
+### Pseudocode
 
 ```python
 def benjamini_hochberg(p_values, q=0.05):
@@ -98,7 +119,11 @@ def benjamini_hochberg(p_values, q=0.05):
 
 ---
 
-## Worked Example: 10 Tests Comparison
+---
+
+## Example
+
+### Worked Example: 10 Tests Comparison
 
 Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with target FDR $q = 0.05$:
 
@@ -123,6 +148,8 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 
 ---
 
+---
+
 ## Complexity
 
 - **Time Complexity:** $O(m \log m)$ dominated by sorting the $m$ $p$-values. The subsequent linear scan is $O(m)$.
@@ -130,7 +157,11 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 
 ---
 
-## Properties and Guarantees
+---
+
+## Properties
+
+### Properties and Guarantees
 
 1. **Exact FDR Bound:** Under independence of test statistics (or positive regression dependency PRDS), Benjamini and Hochberg proved that:
    $$\text{FDR} = E\left[\frac{V}{R}\right] = \frac{m_0}{m} q \le q$$
@@ -138,11 +169,42 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 
 ---
 
+---
+
+## Limitations
+
+- Exact permutation calculation requires evaluating $\binom{N}{n}$ combinations, becoming intractable for large $N$ (requiring Monte Carlo sampling).
+
+---
+
+## Common Mistakes
+
+- Confusing Family-Wise Error Rate (FWER) with False Discovery Rate (FDR).
+- Permuting non-exchangeable data under heterogeneous variances.
+
+---
+
+## Exam Relevance
+
+Appears on CSE 301 examinations testing multiple comparisons or non-parametric statistical hypothesis testing.
+
+---
+
 ## Related Concepts
 
-- [[Multiple Testing and False Discovery Rate]]
-- [[p-Values and Significance]]
 - [[Hypothesis Testing Framework]]
+- [[Multiple Testing and False Discovery Rate]]
+
+---
+
+## Prerequisites
+
+- [[Hypothesis Testing Framework]]
+
+---
+
+## Problems
+
 - [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
 
 ---

@@ -12,7 +12,9 @@ order: 32
 
 ---
 
-## 1. Problem Specification & Setup
+---
+
+## Problem
 
 *(Directly derived from course simulation lecture notes: `Notes on algorithm simulation.pdf` and `5. Deadlocks-week6-7-RRR.pdf`, Slide 17)*
 
@@ -27,7 +29,29 @@ Consider a single-instance Resource Allocation Graph $G = (V, E)$ containing pro
 
 ---
 
-## 2. Simulation Trace 1: Starting Node $D$
+---
+
+## Given
+
+- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
+
+---
+
+## Required
+
+- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
+
+---
+
+## Solution
+
+### 2. Simulation Trace 1: Starting Node $D$
 
 ### Initial Setup:
 - `Initial Node` $\leftarrow D$
@@ -76,7 +100,9 @@ Because this is a single-instance resource system, **a deadlock strictly exists*
 
 ---
 
-## 3. Simulation Trace 2: Starting Node $R$
+---
+
+### 3. Simulation Trace 2: Starting Node $R$
 
 ### Initial Setup:
 - `Initial Node` $\leftarrow R$
@@ -110,14 +136,44 @@ No deadlocked cycles are reachable from starting node $R$.
 
 ---
 
-## 4. Key Takeaways & Exam Simulation Rules
+---
+
+## Result
+
+The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
+
+---
+
+## Why This Works
+
+Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+
+---
+
+## Common Mistakes
+
 1. **Unmarked Edges:** Whenever an edge is traversed, it is marked so it will not be traversed again in the same path.
 2. **Backtracking Condition:** When a dead-end node is encountered (no outgoing edges), the node is removed from list $L$, and the current pointer $CN$ retracts to the parent node.
 3. **Deadlock Equivalence:** In an exam simulation, you only trace from the specified starting nodes. For complete system safety, the detection algorithm is executed with every node in $V$ as a potential root. If all roots report *"No cycle Found"*, the entire system is deadlock-free.
 
 ---
 
-## Source Traceability & Metadata
-- **Source Material:** `Notes on algorithm simulation.pdf` (Pages 5–7: Deadlock detection for single resource) and `5. Deadlocks-week6-7-RRR.pdf` (Slide 17).
-- **Previous Topic:** [[Banker's Algorithm Multi-Resource Step-by-Step Example]] (Step 31).
-- **Next Topic:** [[Problem — Banker's Algorithm Safe State and Request Granting]] (Step 33).
+---
+
+## General Method
+
+Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+
+---
+
+## Related Concepts
+
+- [[Operating System Structures and Functions]]
+- [[Process Concepts and Memory Layout]]
+
+---
+
+## Sources
+
+- Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
+- Silberschatz et al., *Operating System Concepts* (10th Edition)

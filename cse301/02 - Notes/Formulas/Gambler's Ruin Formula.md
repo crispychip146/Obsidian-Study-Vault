@@ -12,6 +12,20 @@ order: 73
 
 ---
 
+---
+
+## The Question and Earlier Knowledge
+
+What analytical relationship or closed-form expectation governs Gambler's Ruin Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+
+---
+
+## Developing the Formula
+
+By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Gambler's Ruin Formula compresses complex probabilistic reasoning into a clean, reusable formula.
+
+---
+
 ## Formula
 
 Let a gambler start with initial fortune $i$ and play successive independent games against an opponent, where the gambler wins 1 unit with probability $p$ and loses 1 unit with probability $q = 1 - p$. The contest terminates when the gambler's fortune reaches either $0$ (ruin) or $N$ (success / bankrupting the opponent).
@@ -41,6 +55,8 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
+---
+
 ## Variables
 
 | Symbol | Meaning |
@@ -55,6 +71,8 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
+---
+
 ## Conditions
 
 1. **Absorbing Boundaries:** States $0$ and $N$ are absorbing: $P_{00} = 1$ and $P_{NN} = 1$. Once reached, the game halts immediately.
@@ -65,7 +83,11 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
+---
+
 ## Intuition
+
+### Intuition
 
 - **Fair Game ($p = 1/2$):** In a fair coin-toss game, win probability is strictly proportional to capital share: $P_i = i/N$. If you bring $20\%$ of the total bankroll to the table, your chance of taking all the money is exactly $20\%$.
 - **Compounding Geometric Advantage ($p \neq 1/2$):** When $p > 1/2$, the ratio $q/p < 1$. As fortune $i$ increases, $(q/p)^i$ decays exponentially toward 0, making your win probability surge rapidly toward 1. A tiny statistical edge compounds powerfully over time.
@@ -75,7 +97,11 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
+---
+
 ## Derivation
+
+### Derivation
 
 Let $P_i = P(\text{fortune reaches } N \mid X_0 = i)$.
 
@@ -135,7 +161,11 @@ Substituting $P_1$ back into the formula for $P_i$:
 
 ---
 
+---
+
 ## Example
+
+### Example
 
 Patty and Max play a coin-tossing game.
 - Patty wins each flip with probability $p = 0.6$ (hence $q = 0.4$).
@@ -154,12 +184,18 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 
 ---
 
+---
+
 ## Common Mistakes
+
+### Common Mistakes
 
 - **Confusing Total Fortune ($N$) with Opponent's Fortune ($M$):** $N$ is the total sum of money in play ($N = i_{\text{player}} + i_{\text{opponent}}$). If the opponent has $10$ coins and you have $5$, then $N = 15$, not $10$.
 - **Inverting the Ratio $q/p$:** Using $p/q$ instead of $q/p$. Remember: $q$ (loss probability) is in the numerator!
 - **Using Non-Fair Formula when $p = 0.5$:** Substituting $p = 0.5$ into $\frac{1 - (q/p)^i}{1 - (q/p)^N}$ produces $0/0$. When $p = 0.5$, use L'Hôpital's rule or directly apply $P_i = i/N$.
 - **Misinterpreting $N \to \infty$ for Fair Games:** Believing that in a fair game ($p = 0.5$), you have a $50\%$ chance of never going bankrupt against an infinite bankroll. The true probability is exactly $0$.
+
+---
 
 ---
 
@@ -171,6 +207,8 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Markov Chain]]
@@ -178,9 +216,13 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Patty and Max Gambler's Ruin]]
+
+---
 
 ---
 

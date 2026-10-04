@@ -12,6 +12,38 @@ order: 35
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+In the real world, we rarely or never observe an entire population:
+- We cannot measure the exact blood pressure of every human on Earth.
+- We cannot test every microchip produced by a semiconductor fab until destruction.
+- We cannot observe infinite flips of a coin.
+
+Instead, we collect a finite random sample of size $n$. Point estimation provides a principled mathematical framework for extracting a single optimal guess of the underlying true data-generating parameter from noisy, incomplete observations.
+
+---
+
+---
+
+## Developing the Idea
+
+Imagine you are an archer shooting arrows at a hidden bullseye ($\theta$):
+- Each sample dataset $X_1, \dots, X_n$ represents one shot.
+- Because each sample contains different random data points, your arrow lands at a different spot $\hat{\theta}_n$ each time.
+- If you repeat the experiment many times with new datasets, you generate a scatter of arrow marks.
+
+Point estimation asks two intuitive questions:
+1. **Is your aim centered on the bullseye?** If your arrows cluster symmetrically around the bullseye without systematic drift, your estimator is **unbiased**. If your arrows consistently veer to the upper-right, your estimator is **biased**.
+2. **How tightly clustered are your shots?** Even if you are aimed at the center, do your arrows scatter all over the target (high standard error) or land in a tight cluster (low standard error)?
+
+A great estimator has both **zero bias** (centered on truth) and **low standard error** (tightly clustered).
+
+---
+
+---
+
 ## Definition
 
 **Point estimation** is the process of using sample data to calculate a single best-guess numerical value (a "point") for an unknown population parameter $\theta$, distribution characteristic, or functional quantity.
@@ -28,33 +60,11 @@ A crucial distinction in statistical theory:
 
 ---
 
-## Intuition
-
-Imagine you are an archer shooting arrows at a hidden bullseye ($\theta$):
-- Each sample dataset $X_1, \dots, X_n$ represents one shot.
-- Because each sample contains different random data points, your arrow lands at a different spot $\hat{\theta}_n$ each time.
-- If you repeat the experiment many times with new datasets, you generate a scatter of arrow marks.
-
-Point estimation asks two intuitive questions:
-1. **Is your aim centered on the bullseye?** If your arrows cluster symmetrically around the bullseye without systematic drift, your estimator is **unbiased**. If your arrows consistently veer to the upper-right, your estimator is **biased**.
-2. **How tightly clustered are your shots?** Even if you are aimed at the center, do your arrows scatter all over the target (high standard error) or land in a tight cluster (low standard error)?
-
-A great estimator has both **zero bias** (centered on truth) and **low standard error** (tightly clustered).
-
----
-
-## Why It Exists
-
-In the real world, we rarely or never observe an entire population:
-- We cannot measure the exact blood pressure of every human on Earth.
-- We cannot test every microchip produced by a semiconductor fab until destruction.
-- We cannot observe infinite flips of a coin.
-
-Instead, we collect a finite random sample of size $n$. Point estimation provides a principled mathematical framework for extracting a single optimal guess of the underlying true data-generating parameter from noisy, incomplete observations.
-
 ---
 
 ## How It Works
+
+### How It Works
 
 Point estimation evaluates estimators using several fundamental statistical metrics:
 
@@ -85,8 +95,69 @@ By the [[Bias-Variance Decomposition]], MSE splits neatly into:
 $$\text{MSE}(\hat{\theta}_n) = \text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta(\hat{\theta}_n)$$
 
 ---
+### Important Properties
+
+| Property | Symbol | Formula | Ideal Value |
+|---|---|---|---|
+| Unbiasedness | $\text{bias}(\hat{\theta}_n)$ | $E_\theta[\hat{\theta}_n] - \theta$ | $0$ |
+| Precision (Variance) | $\text{Var}_\theta(\hat{\theta}_n)$ | $E_\theta[(\hat{\theta}_n - E[\hat{\theta}_n])^2]$ | $\to 0$ as $n \to \infty$ |
+| Standard Error | $\text{se}(\hat{\theta}_n)$ | $\sqrt{\text{Var}_\theta(\hat{\theta}_n)}$ | Decreases at rate $1/\sqrt{n}$ |
+| Mean Squared Error | $\text{MSE}(\hat{\theta}_n)$ | $\text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta(\hat{\theta}_n)$ | $\to 0$ as $n \to \infty$ |
+| Consistency | $\hat{\theta}_n \xrightarrow{P} \theta$ | $P(\lvert\hat{\theta}_n - \theta\rvert > \epsilon) \to 0$ | Holds for large samples |
+
+---
+
+---
 
 ## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+### Technical Details
+
+### Point Estimation Targets
+Point estimation applies far beyond scalar distribution parameters:
+1. **Parametric parameters:** Mean $\mu$, variance $\sigma^2$, rate $\lambda$, probability $p$.
+2. **Nonparametric functions:** Empirical Cumulative Distribution Function $\hat{F}_n(x)$, probability density function $\hat{f}(x)$ via kernel density estimation.
+3. **Regression functions:** Conditional expectation $r(x) = E[Y \mid X = x]$.
+4. **Predictive estimation:** Guessing the value of an unobserved future outcome $Y_{n+1}$.
+
+### Bias vs. Variance Trade-off
+Unbiasedness is often considered an overrated property in modern statistics. An unbiased estimator can have immense variance, making it practically useless on any individual dataset. Conversely, introducing a tiny amount of bias can substantially reduce the variance, leading to a much smaller total $\text{MSE}$.
+
+---
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+### Common Mistakes
+
+1. **Confusing parameter $\theta$ with estimator $\hat{\theta}_n$:** 
+   Treating $\theta$ as a random variable. Under classical frequentist inference, $\theta$ is a fixed number. $\hat{\theta}_n$ is the random variable because it changes from sample to sample.
+2. **Confusing Standard Deviation ($\sigma$) with Standard Error ($\text{se}$):**
+   Standard deviation $\sigma$ measures the spread of individual data points in the population. Standard error $\text{se} = \sigma / \sqrt{n}$ measures the spread of the sample average $\hat{\theta}_n$ across multiple datasets.
+3. **Believing unbiasedness implies consistency:**
+   An estimator can be completely unbiased for every $n$ yet fail to converge to the truth (e.g., ignoring all data except the first observation: $\hat{\mu} = X_1$).
+
+---
+
+---
+
+## Exam Relevance
+
+### Example
 
 Consider estimating the success probability $p$ of a $\text{Bernoulli}(p)$ coin from $n$ independent flips $X_1, \dots, X_n \sim \text{Bernoulli}(p)$, where $E[X_i] = p$ and $\text{Var}(X_i) = p(1-p)$.
 
@@ -107,45 +178,7 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
    $$\widehat{\text{se}}(\hat{p}_n) = \sqrt{\frac{\hat{p}_n(1 - \hat{p}_n)}{n}}$$
 
 ---
-
-## Technical Details
-
-### Point Estimation Targets
-Point estimation applies far beyond scalar distribution parameters:
-1. **Parametric parameters:** Mean $\mu$, variance $\sigma^2$, rate $\lambda$, probability $p$.
-2. **Nonparametric functions:** Empirical Cumulative Distribution Function $\hat{F}_n(x)$, probability density function $\hat{f}(x)$ via kernel density estimation.
-3. **Regression functions:** Conditional expectation $r(x) = E[Y \mid X = x]$.
-4. **Predictive estimation:** Guessing the value of an unobserved future outcome $Y_{n+1}$.
-
-### Bias vs. Variance Trade-off
-Unbiasedness is often considered an overrated property in modern statistics. An unbiased estimator can have immense variance, making it practically useless on any individual dataset. Conversely, introducing a tiny amount of bias can substantially reduce the variance, leading to a much smaller total $\text{MSE}$.
-
----
-
-## Important Properties
-
-| Property | Symbol | Formula | Ideal Value |
-|---|---|---|---|
-| Unbiasedness | $\text{bias}(\hat{\theta}_n)$ | $E_\theta[\hat{\theta}_n] - \theta$ | $0$ |
-| Precision (Variance) | $\text{Var}_\theta(\hat{\theta}_n)$ | $E_\theta[(\hat{\theta}_n - E[\hat{\theta}_n])^2]$ | $\to 0$ as $n \to \infty$ |
-| Standard Error | $\text{se}(\hat{\theta}_n)$ | $\sqrt{\text{Var}_\theta(\hat{\theta}_n)}$ | Decreases at rate $1/\sqrt{n}$ |
-| Mean Squared Error | $\text{MSE}(\hat{\theta}_n)$ | $\text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta(\hat{\theta}_n)$ | $\to 0$ as $n \to \infty$ |
-| Consistency | $\hat{\theta}_n \xrightarrow{P} \theta$ | $P(\lvert\hat{\theta}_n - \theta\rvert > \epsilon) \to 0$ | Holds for large samples |
-
----
-
-## Common Mistakes
-
-1. **Confusing parameter $\theta$ with estimator $\hat{\theta}_n$:** 
-   Treating $\theta$ as a random variable. Under classical frequentist inference, $\theta$ is a fixed number. $\hat{\theta}_n$ is the random variable because it changes from sample to sample.
-2. **Confusing Standard Deviation ($\sigma$) with Standard Error ($\text{se}$):**
-   Standard deviation $\sigma$ measures the spread of individual data points in the population. Standard error $\text{se} = \sigma / \sqrt{n}$ measures the spread of the sample average $\hat{\theta}_n$ across multiple datasets.
-3. **Believing unbiasedness implies consistency:**
-   An estimator can be completely unbiased for every $n$ yet fail to converge to the truth (e.g., ignoring all data except the first observation: $\hat{\mu} = X_1$).
-
----
-
-## Exam Relevance
+### Exam Relevance
 
 In exam problems, you will typically be asked to:
 1. Determine whether an estimator is unbiased by computing $E[\hat{\theta}_n]$.
@@ -153,6 +186,8 @@ In exam problems, you will typically be asked to:
 3. Construct the plug-in estimated standard error $\widehat{\text{se}}$.
 4. Evaluate Mean Squared Error and discuss the trade-off between bias and variance.
 5. Contrast point estimation with interval estimation ([[Confidence Intervals and Confidence Sets]]).
+
+---
 
 ---
 
@@ -166,6 +201,8 @@ In exam problems, you will typically be asked to:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Stochastic Process]] (Random Variables, Expectation, Variance)
@@ -173,10 +210,14 @@ In exam problems, you will typically be asked to:
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
 
 ---
 

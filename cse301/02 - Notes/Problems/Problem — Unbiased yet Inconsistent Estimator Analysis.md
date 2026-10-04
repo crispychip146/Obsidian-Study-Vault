@@ -12,6 +12,8 @@ order: 42
 
 ---
 
+---
+
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a population distribution with unknown mean $\mu$ and known finite variance $\sigma^2 > 0$.
@@ -28,12 +30,16 @@ That is, the analyst simply records the first observed value and discards the re
 
 ---
 
+---
+
 ## Given
 
 - $X_1, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$
 - $E[X_i] = \mu$ for all $i$
 - $\text{Var}(X_i) = \sigma^2 > 0$ for all $i$
 - Estimator: $\hat{\mu}_n = X_1$
+
+---
 
 ---
 
@@ -47,11 +53,15 @@ That is, the analyst simply records the first observed value and discards the re
 
 ---
 
+---
+
 ## Concepts Tested
 
 - [[Point Estimation]]
 - [[Estimator Consistency and Convergence]]
 - [[Bias-Variance Decomposition]]
+
+---
 
 ---
 
@@ -62,13 +72,26 @@ That is, the analyst simply records the first observed value and discards the re
 
 ---
 
+---
+
 ## Question Type
 
 - Conceptual & Analytical Derivation
 
 ---
 
+---
+
 ## Solution
+
+### Understanding the Situation
+Interpret the given sample space, random variables, and event conditions.
+
+### Developing the Key Idea
+Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+
+### Working Through the Solution
+### Solution
 
 ### 1. Bias Calculation
 The expected value of $\hat{\mu}_n$ is:
@@ -128,10 +151,37 @@ Because the probability of deviating from $\mu$ by more than $\epsilon$ never go
 | Value of More Data | None (ignores extra data) | High (variance shrinks linearly with $n$) |
 
 ---
-
-## Key Idea
+### Key Idea
 
 Unbiasedness only guarantees that the *expected center* of the estimator equals the true parameter on average across infinite hypothetical repetitions of size $n$. It says **nothing** about whether the estimator concentrates around that center as $n$ grows. Consistency requires the variance (or MSE) to shrink to zero, which requires pooling information across all $n$ data points.
+
+---
+### Exam Pattern
+
+This question frequently appears in midterm and final examinations to test whether students understand the fundamental theoretical distinction between finite-sample properties (unbiasedness) and asymptotic large-sample properties (consistency).
+
+---
+### Related Problems
+
+- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+
+---
+### Related Concepts
+
+- [[Point Estimation]]
+- [[Estimator Consistency and Convergence]]
+- [[Bias-Variance Decomposition]]
+
+---
+
+### Result and Interpretation
+The final analytical solution and numerical metrics are rigorously verified against probability axioms.
+
+---
+
+## Reusable Insight
+
+Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
 
 ---
 
@@ -142,23 +192,25 @@ Unbiasedness only guarantees that the *expected center* of the estimator equals 
 
 ---
 
+---
+
 ## Exam Pattern
 
-This question frequently appears in midterm and final examinations to test whether students understand the fundamental theoretical distinction between finite-sample properties (unbiasedness) and asymptotic large-sample properties (consistency).
+Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
 
 ---
 
 ## Related Problems
 
-- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
+- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Related Concepts
 
-- [[Point Estimation]]
-- [[Estimator Consistency and Convergence]]
-- [[Bias-Variance Decomposition]]
+- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
 
 ---
 

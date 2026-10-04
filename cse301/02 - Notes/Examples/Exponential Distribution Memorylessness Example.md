@@ -12,7 +12,9 @@ order: 15
 
 ---
 
-## Problem Context & Setup
+---
+
+## Problem
 
 Let $T \sim \operatorname{Exp}(\lambda)$ represent the lifetime of an electronic component (or service time at a server), with rate parameter $\lambda > 0$.
 The survival function is:
@@ -26,7 +28,29 @@ In human terms: If you have already waited $s$ minutes for a service to complete
 
 ---
 
-## Mathematical Proof of Memorylessness
+---
+
+## Given
+
+- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
+
+---
+
+## Required
+
+- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
+
+---
+
+## Understanding the Problem and Choosing the Method
+
+Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
+
+---
+
+## Solution
+
+### Mathematical Proof of Memorylessness
 
 Using the definition of conditional probability:
 $$P(T > s + t \mid T > s) = \frac{P(T > s + t \cap T > s)}{P(T > s)}$$
@@ -36,8 +60,7 @@ $$P(T > s + t \mid T > s) = \frac{P(T > s + t)}{P(T > s)} = \frac{e^{-\lambda(s 
 $\blacksquare$
 
 ---
-
-## Competing Exponentials: The Two-Server Race
+### Competing Exponentials: The Two-Server Race
 
 Suppose an incoming job is processed in parallel by two servers, Server 1 and Server 2, whose service times are independent:
 $$T_1 \sim \operatorname{Exp}(\lambda_1), \quad T_2 \sim \operatorname{Exp}(\lambda_2)$$
@@ -63,8 +86,7 @@ $$P(T_1 < T_2) = \int_0^\infty e^{-\lambda_2 t} \lambda_1 e^{-\lambda_1 t} \, dt
 $$P(T_1 < T_2) = \lambda_1 \left[ \frac{-e^{-(\lambda_1 + \lambda_2)t}}{\lambda_1 + \lambda_2} \right]_0^\infty = \frac{\lambda_1}{\lambda_1 + \lambda_2}$$
 
 ---
-
-## Concrete Numerical Example: Post Office Paradox
+### Concrete Numerical Example: Post Office Paradox
 
 Alice, Bob, and Charlie walk into a post office with two clerks.
 - Alice and Bob begin service simultaneously with Clerk 1 and Clerk 2, respectively.
@@ -87,7 +109,34 @@ Despite arriving after Alice and Bob, Charlie is the last to leave with probabil
 
 ---
 
-## Related Notes
+---
+
+## Result
+
+The mathematical derivation confirms the target probability or estimator value.
+
+---
+
+## Why This Works
+
+The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+
+---
+
+## Common Mistakes
+
+- Forgetting normalization constants when evaluating continuous posterior densities.
+- Misidentifying degrees of freedom in chi-square tests.
+
+---
+
+## General Method
+
+Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+
+---
+
+## Related Concepts
 
 - [[Continuous Probability Distributions]] — Exponential, Gamma, and Normal distributions.
 - [[M-M-1 Queue]] — Memoryless property guarantees Markovian state transitions.
@@ -95,7 +144,9 @@ Despite arriving after Alice and Bob, Charlie is the last to leave with probabil
 
 ---
 
-## Sources & Traceability
+---
+
+## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 12, pages 36–39)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_7.pdf`

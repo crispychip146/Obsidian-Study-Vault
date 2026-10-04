@@ -12,6 +12,32 @@ order: 71
 
 ---
 
+---
+
+## Starting Point and the Problem
+
+- **Predicting Steady-State Performance:** In queuing models, web browsing (PageRank), and computer systems, we need to know the steady-state load, average buffer occupancy, or server utilization without simulating infinitely many individual transitions.
+- **Handling Asymptotic Behavior:** Powers of transition matrices $P^n$ become computationally prohibitive for large $n$. Finding $\pi$ reduces the limit of matrix powers to solving a system of linear equations.
+- **MCMC Sampling:** Algorithms like Metropolis-Hastings construct a Markov chain whose unique stationary distribution matches a desired complex target distribution.
+
+---
+
+---
+
+## Developing the Idea
+
+1. **Forgetting the Past:** Over long time horizons, the chain "forgets" where it started. Whether it began in state 0 or state 5, the probability of finding it in state $j$ after millions of steps approaches $\pi_j$.
+2. **Self-Consistent Equilibrium:** Imagine pouring a fluid across the state graph. At each step, a fraction $P_{ij}$ of the fluid at node $i$ flows along the edge to node $j$. If the distribution of fluid is $\pi$, the amount leaving each node is exactly replaced by the inflows from neighboring nodes. Applying one more transition leaves the distribution unchanged: $\pi P = \pi$.
+3. **Long-Run Fraction of Time:** $\pi_j$ represents the proportion of time the process spends in state $j$ over an infinite horizon:
+   $$\pi_j = \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N \mathbf{1}_{\{X_n = j\}}$$
+4. **Mean Return Time:** If you are currently in state $j$, the expected number of steps until the chain returns to state $j$, denoted $\mu_{jj}$, is inversely proportional to its stationary probability:
+   $$\pi_j = \frac{1}{\mu_{jj}}$$
+   (Rare states have tiny $\pi_j$ and huge return times; frequently visited states have large $\pi_j$ and short return times).
+
+---
+
+---
+
 ## Definition
 
 ### 1. Limiting Distribution
@@ -38,27 +64,11 @@ where $\mathbf{1}$ is a column vector of ones.
 
 ---
 
-## Intuition
-
-1. **Forgetting the Past:** Over long time horizons, the chain "forgets" where it started. Whether it began in state 0 or state 5, the probability of finding it in state $j$ after millions of steps approaches $\pi_j$.
-2. **Self-Consistent Equilibrium:** Imagine pouring a fluid across the state graph. At each step, a fraction $P_{ij}$ of the fluid at node $i$ flows along the edge to node $j$. If the distribution of fluid is $\pi$, the amount leaving each node is exactly replaced by the inflows from neighboring nodes. Applying one more transition leaves the distribution unchanged: $\pi P = \pi$.
-3. **Long-Run Fraction of Time:** $\pi_j$ represents the proportion of time the process spends in state $j$ over an infinite horizon:
-   $$\pi_j = \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N \mathbf{1}_{\{X_n = j\}}$$
-4. **Mean Return Time:** If you are currently in state $j$, the expected number of steps until the chain returns to state $j$, denoted $\mu_{jj}$, is inversely proportional to its stationary probability:
-   $$\pi_j = \frac{1}{\mu_{jj}}$$
-   (Rare states have tiny $\pi_j$ and huge return times; frequently visited states have large $\pi_j$ and short return times).
-
 ---
 
-## Why It Exists
+## How It Works
 
-- **Predicting Steady-State Performance:** In queuing models, web browsing (PageRank), and computer systems, we need to know the steady-state load, average buffer occupancy, or server utilization without simulating infinitely many individual transitions.
-- **Handling Asymptotic Behavior:** Powers of transition matrices $P^n$ become computationally prohibitive for large $n$. Finding $\pi$ reduces the limit of matrix powers to solving a system of linear equations.
-- **MCMC Sampling:** Algorithms like Metropolis-Hastings construct a Markov chain whose unique stationary distribution matches a desired complex target distribution.
-
----
-
-## The Global Balance Equations
+### The Global Balance Equations
 
 The defining system $\pi_j = \sum_i \pi_i P_{ij}$ is called the system of **Global Balance Equations**.
 
@@ -70,8 +80,7 @@ $$\underbrace{\pi_j \sum_{k \neq j} P_{jk}}_{\text{Total Flow Out of State } j} 
 In steady state, the rate of probability probability flowing out of state $j$ must exactly equal the rate flowing into state $j$.
 
 ---
-
-## Critical Distinction: Stationary vs. Limiting Distribution
+### Critical Distinction: Stationary vs. Limiting Distribution
 
 A common exam pitfall is assuming that a stationary distribution and a limiting distribution are identical. They are related, but not equivalent:
 
@@ -99,8 +108,7 @@ For an **irreducible** and **aperiodic** Markov chain with finite state space:
 3. The convergence is geometric: $|P_{ij}^n - \pi_j| \le C \cdot \lambda^n$, where $\lambda$ is governed by the second-largest eigenvalue of $P$.
 
 ---
-
-## Step-by-Step Solving Procedure
+### Step-by-Step Solving Procedure
 
 To find the stationary / limiting distribution for an $m$-state chain:
 
@@ -119,7 +127,43 @@ To find the stationary / limiting distribution for an $m$-state chain:
 
 ---
 
-## Example: Two-State Weather Chain
+---
+
+## Example
+
+See worked numerical applications in the linked example notes.
+
+---
+
+## Technical Details
+
+Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
+- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+
+---
+
+## Common Mistakes
+
+### Common Mistakes
+
+- **Forgetting the Normalization Condition ($\sum \pi_j = 1$):** Trying to solve $\pi(P - I) = 0$ directly without $\sum \pi_j = 1$, yielding the trivial all-zero vector $\pi = 0$.
+- **Not Dropping a Redundant Balance Equation:** Attempting to solve all $m$ balance equations plus the normalization equation simultaneously with standard inversion without recognizing linear dependence.
+- **Treating Periodic Chains as having Limiting Probabilities:** Stating that $\lim_{n \to \infty} P_{ij}^n = \pi_j$ when the chain has period $d \ge 2$. (Long-run average time proportions still equal $\pi_j$, but point-wise limit $\lim P_{ij}^n$ does not exist).
+- **Writing $\pi$ as a Column Vector in $P \pi = \pi$:** In Markov chains, $\pi$ is a **row vector** on the left: $\pi P = \pi$. Writing $P \pi = \pi$ solves for right eigenvectors (which is simply the all-ones vector $\mathbf{1}$, since $P \mathbf{1} = \mathbf{1}$).
+
+---
+
+---
+
+## Exam Relevance
+
+### Example: Two-State Weather Chain
 
 $$P = \begin{pmatrix} \alpha & 1 - \alpha \\ \beta & 1 - \beta \end{pmatrix}$$
 where $0 < \alpha, \beta < 1$.
@@ -141,17 +185,7 @@ $$\pi_1 = \frac{1 - 0.7}{0.7} = \frac{0.3}{0.7} = \frac{3}{7} \approx 0.4286$$
 In the long run, it rains $57.14\%$ of days.
 
 ---
-
-## Common Mistakes
-
-- **Forgetting the Normalization Condition ($\sum \pi_j = 1$):** Trying to solve $\pi(P - I) = 0$ directly without $\sum \pi_j = 1$, yielding the trivial all-zero vector $\pi = 0$.
-- **Not Dropping a Redundant Balance Equation:** Attempting to solve all $m$ balance equations plus the normalization equation simultaneously with standard inversion without recognizing linear dependence.
-- **Treating Periodic Chains as having Limiting Probabilities:** Stating that $\lim_{n \to \infty} P_{ij}^n = \pi_j$ when the chain has period $d \ge 2$. (Long-run average time proportions still equal $\pi_j$, but point-wise limit $\lim P_{ij}^n$ does not exist).
-- **Writing $\pi$ as a Column Vector in $P \pi = \pi$:** In Markov chains, $\pi$ is a **row vector** on the left: $\pi P = \pi$. Writing $P \pi = \pi$ solves for right eigenvectors (which is simply the all-ones vector $\mathbf{1}$, since $P \mathbf{1} = \mathbf{1}$).
-
----
-
-## Exam Relevance
+### Exam Relevance
 
 In CSE301 examinations:
 - Setting up and solving balance equations for 2-state and 3-state chains.
@@ -159,6 +193,8 @@ In CSE301 examinations:
 - Explaining the necessary conditions (irreducible + aperiodic) for the existence of limiting distributions.
 - Interpreting $\pi_j$ as long-run time proportion and calculating mean return time $\mu_{jj} = 1/\pi_j$.
 - Verifying whether a proposed distribution is stationary (as in the [[Hardy-Weinberg Law Markov Chain Example]]).
+
+---
 
 ---
 
@@ -172,6 +208,8 @@ In CSE301 examinations:
 
 ---
 
+---
+
 ## Prerequisites
 
 - [[Markov Chain]]
@@ -179,9 +217,13 @@ In CSE301 examinations:
 
 ---
 
+---
+
 ## Problems
 
 - [[Problem — Four-Day Weather Forecast]]
+
+---
 
 ---
 

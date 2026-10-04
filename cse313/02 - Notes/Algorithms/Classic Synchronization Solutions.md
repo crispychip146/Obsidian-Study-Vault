@@ -39,17 +39,46 @@ order: 23
 
 ---
 
-## 1. Algorithmic Overview & Motivation
+---
 
-To evaluate and design synchronization primitives, computer scientists formalized canonical concurrency problems. These benchmarks model real-world operating system challenges:
-1. **Producer-Consumer (Bounded Buffer):** Buffer overflow and underflow prevention with mutual exclusion.
-2. **Readers-Writers:** Distinguishing shared read-only access from exclusive write access.
-3. **Dining Philosophers:** Resource contention, deadlock prevention, and starvation freedom.
-4. **Sleeping Barber:** Asymmetric customer-server coordination with finite waiting capacity.
+## The Problem and Earlier Tools
+
+Concurrent systems feature recurring interaction patterns: producer-consumer pipelines, reader-heavy databases, resource sharing amongst philosophers, and customer-service queues. Without disciplined synchronization templates, developers introduce race conditions, deadlocks, and starvation.
+
+We want standardized, deadlock-free algorithmic solutions to the classic synchronization benchmarks:
+1. **Producer-Consumer (Bounded Buffer)**
+2. **Readers-Writers Problem**
+3. **Dining Philosophers Problem**
+4. **Sleeping Barber Problem**
 
 ---
 
-## 2. The Producer-Consumer (Bounded Buffer) Problem
+## Developing the Core Idea
+
+Each classic problem is solved using a combination of counting semaphores (for tracking resource inventory) and binary semaphores/mutexes (for mutual exclusion of critical regions):
+- Bounded Buffer: `empty` counts free slots, `full` counts filled slots, `mutex` serializes buffer access.
+- Readers-Writers: `readcount` allows unlimited concurrent readers while `wrt` blocks writers when any reader is present.
+- Dining Philosophers: State array (`THINKING, HUNGRY, EATING`) with atomic neighbor testing prevents circular waiting.
+- Sleeping Barber: `customers` semaphore signals waiting clients; `barbers` semaphore signals barber readiness.
+
+---
+
+## Inputs
+
+- Concurrent thread streams (Producers, Consumers, Readers, Writers, Philosophers, Barbers).
+- Shared buffer capacity $N$, table size $5$, or waiting room seats.
+
+---
+
+## Outputs
+
+- Deadlock-free, race-free coordinated concurrent task execution.
+
+---
+
+## How It Works
+
+### 2. The Producer-Consumer (Bounded Buffer) Problem
 
 ### Invariants:
 - A shared circular buffer holds at most $N$ items.
@@ -109,7 +138,9 @@ void consumer(void) {
 
 ---
 
-## 3. The Readers-Writers Problem
+---
+
+### 3. The Readers-Writers Problem
 
 ### Invariants:
 - Multiple readers may read shared data concurrently without interference.
@@ -158,7 +189,9 @@ void reader(void) {
 
 ---
 
-## 4. The Dining Philosophers Problem
+---
+
+### 4. The Dining Philosophers Problem
 
 Five philosophers sit around a circular table. Between each pair of philosophers is a single chopstick (total 5 chopsticks). A philosopher alternates between thinking and eating. To eat, a philosopher must acquire **both** their left and right chopsticks.
 
@@ -240,7 +273,9 @@ void philosopher(int i) {
 
 ---
 
-## 5. The Sleeping Barber Problem
+---
+
+### 5. The Sleeping Barber Problem
 
 A barbershop has 1 barber, 1 barber chair, and $N$ waiting chairs.
 - If there are no customers, the barber sleeps in the barber chair.
@@ -282,7 +317,86 @@ void customer(void) {
 
 ---
 
-## Source Traceability & Metadata
+---
+
+## Pseudocode
+
+### 1. Algorithmic Overview & Motivation
+
+To evaluate and design synchronization primitives, computer scientists formalized canonical concurrency problems. These benchmarks model real-world operating system challenges:
+1. **Producer-Consumer (Bounded Buffer):** Buffer overflow and underflow prevention with mutual exclusion.
+2. **Readers-Writers:** Distinguishing shared read-only access from exclusive write access.
+3. **Dining Philosophers:** Resource contention, deadlock prevention, and starvation freedom.
+4. **Sleeping Barber:** Asymmetric customer-server coordination with finite waiting capacity.
+
+---
+
+---
+
+## Example
+
+Producer-Consumer with buffer size 5: Producer calls `wait(empty)`, `wait(mutex)`, inserts item, `signal(mutex)`, `signal(full)`. Consumer calls `wait(full)`, `wait(mutex)`, removes item, `signal(mutex)`, `signal(empty)`.
+
+---
+
+## Complexity
+
+### Time Complexity
+$O(1)$ semaphore operations per task iteration.
+
+### Space Complexity
+$O(1)$ or $O(N)$ state memory.
+
+---
+
+## Properties
+
+- **Freedom from Deadlock:** Proper semaphore ordering guarantees absence of circular wait.
+- **Starvation Vulnerabilities:** In classic Readers-Writers, continuous arrivals of readers can starve writers indefinitely (requiring writer-preference variations).
+
+---
+
+## Limitations
+
+- Programmer must strictly adhere to pairwise `wait()` and `signal()` protocol; any missing call causes system hang.
+
+---
+
+## Common Mistakes
+
+- Misunderstanding preemption boundaries during execution.
+- Failing to verify state invariants before granting resource claims.
+
+---
+
+## Exam Relevance
+
+Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
+
+---
+
+## Related Concepts
+
+- [[Monitors and Condition Variables]]
+- [[Producer-Consumer Semaphore Implementation Example]]
+
+---
+
+## Prerequisites
+
+- [[Semaphores and Synchronization Primitives]]
+- [[Race Conditions and Critical-Section Problem]]
+
+---
+
+## Problems
+
+- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
+
+---
+
+## Sources
+
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 35–52: Producer-Consumer with Semaphores, Dining Philosophers, Readers and Writers, Sleeping Barber Problem).
 - **Previous Topic:** [[Message Passing and IPC Models]] (Step 22).
 - **Next Topic:** [[Producer-Consumer Semaphore Implementation Example]] (Step 24).

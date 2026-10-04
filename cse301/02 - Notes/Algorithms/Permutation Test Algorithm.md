@@ -12,7 +12,9 @@ order: 61
 
 ---
 
-## Purpose
+---
+
+## The Problem and Earlier Tools
 
 The **Permutation Test** (also known as a randomization test) is a non-parametric, exact statistical method for testing whether two independent samples originate from the same underlying probability distribution ($H_0: F_X = F_Y$).
 
@@ -23,7 +25,9 @@ It solves the problem of hypothesis testing when:
 
 ---
 
-## Core Idea: Exchangeability Under the Null
+---
+
+## Developing the Core Idea
 
 Suppose we have two samples:
 - $X_1, X_2, \dots, X_m \sim F_X$
@@ -37,19 +41,23 @@ By shuffling the pooled data across all $N!$ possible permutations and recomputi
 
 ---
 
-## Inputs and Outputs
+---
 
-- **Inputs:**
-  - Sample 1: $\mathbf{X} = (X_1, \dots, X_m)$
-  - Sample 2: $\mathbf{Y} = (Y_1, \dots, Y_n)$
-  - Test statistic function: $T(\mathbf{X}, \mathbf{Y})$ (e.g., difference in means $T = \lvert \bar{X} - \bar{Y} \rvert$)
-  - Monte Carlo repetitions: $B$ (for large $N$ where $N!$ is too large to enumerate, e.g., $B = 10,000$)
-- **Outputs:**
-  - Exact or Monte Carlo $p$-value: $p \in [0, 1]$.
+## Inputs
+
+- Ranked empirical test statistics, p-values, or sample arrays.
+
+---
+
+## Outputs
+
+- Decision vector: rejected null hypotheses or permutation p-value.
 
 ---
 
 ## How It Works
+
+### How It Works
 
 ### Exact Permutation Test (Small $N$)
 1. Compute the observed test statistic:
@@ -67,8 +75,19 @@ By shuffling the pooled data across all $N!$ possible permutations and recomputi
 When $N$ exceeds $\approx 20$, the number of permutations $N!$ is astronomically large. We approximate the permutation distribution with high precision by drawing $B$ random permutations uniformly at random.
 
 ---
+### Related Concepts
+
+- [[Hypothesis Testing Framework]]
+- [[p-Values and Significance]]
+- [[Toy Permutation Test Example]]
+
+---
+
+---
 
 ## Pseudocode
+
+### Pseudocode
 
 ```python
 def permutation_test(X, Y, B=10000):
@@ -99,7 +118,11 @@ def permutation_test(X, Y, B=10000):
 
 ---
 
-## Example: Toy Permutation Test
+---
+
+## Example
+
+### Example: Toy Permutation Test
 
 Let sample 1 be $(X_1, X_2) = (1, 9)$ ($m = 2$) and sample 2 be $Y_1 = 3$ ($n = 1$).
 - Pooled data: $\mathbf{Z} = (1, 9, 3)$, $N = 3$.
@@ -121,6 +144,8 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 
 ---
 
+---
+
 ## Complexity
 
 - **Exact Test:**
@@ -132,7 +157,17 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 
 ---
 
-## Properties and Limitations
+---
+
+## Properties
+
+- **FDR Control:** Strictly controls false discovery rate or exact non-parametric size under exchangeability.
+
+---
+
+## Limitations
+
+### Properties and Limitations
 
 ### Properties
 1. **Exact Size:** Under $H_0$, the Type I error rate is strictly $\le \alpha$ for **any** sample size $n$, with zero asymptotic approximation error.
@@ -144,11 +179,37 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 
 ---
 
+---
+
+## Common Mistakes
+
+- Confusing Family-Wise Error Rate (FWER) with False Discovery Rate (FDR).
+- Permuting non-exchangeable data under heterogeneous variances.
+
+---
+
+## Exam Relevance
+
+Appears on CSE 301 examinations testing multiple comparisons or non-parametric statistical hypothesis testing.
+
+---
+
 ## Related Concepts
 
 - [[Hypothesis Testing Framework]]
-- [[p-Values and Significance]]
-- [[Toy Permutation Test Example]]
+- [[Multiple Testing and False Discovery Rate]]
+
+---
+
+## Prerequisites
+
+- [[Hypothesis Testing Framework]]
+
+---
+
+## Problems
+
+- [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
 
 ---
 

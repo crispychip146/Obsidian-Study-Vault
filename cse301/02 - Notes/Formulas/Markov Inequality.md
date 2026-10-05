@@ -12,19 +12,13 @@ order: 25
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+If $X$ is nonnegative and sometimes reaches at least $a>0$, those occasions contribute at least $a$ each to its average. Consequently $E[X]\ge aP(X\ge a)$, which rearranges to Markov's inequality.
 
-What analytical relationship or closed-form expectation governs Markov Inequality, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+This proof shows both its strength and its limitation. It needs no distributional shape, but uses only the mean. A variable that is zero most of the time and exactly $a$ on the remaining occasions reaches equality. Much sharper answers require more information about the distribution.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Markov Inequality compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The nonnegative assumption is essential: negative outcomes could cancel large positive ones in the mean. For a signed variable, apply the inequality to a nonnegative transformation such as $|X|$ or $(X-\mu)^2$ if its expectation exists. [[Chebyshev Inequality]] uses the squared transformation to bound distance from the mean.
 
 ## Formula
 
@@ -34,8 +28,6 @@ $$P(X \ge a) \le \frac{\mathbb{E}[X]}{a}$$
 
 Equivalently, setting $a = c \mathbb{E}[X]$ for $c > 0$:
 $$P(X \ge c \mathbb{E}[X]) \le \frac{1}{c}$$
-
----
 
 ---
 
@@ -60,15 +52,6 @@ $\blacksquare$
 
 ---
 
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
-
----
-
 ## Intuition
 
 ### When Is Markov's Inequality Tight?
@@ -90,20 +73,6 @@ This generalization is the mother of all major concentration inequalities:
 
 ---
 
----
-
-## Derivation
-
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
-
----
-
-## Example
-
-See worked numerical examples in the associated Example and Problem notes.
-
----
-
 ## Common Mistakes
 
 ### Common Pitfalls
@@ -115,29 +84,13 @@ See worked numerical examples in the associated Example and Problem notes.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+A bound greater than one may be replaced by one, but it gives no useful improvement over the probability axioms. When writing $P(X\ge cE[X])\le1/c$, handle the zero-mean case separately.
 
-- [[Chebyshev Inequality]] — Second-moment specialization.
-- [[Chernoff Bound]] — Exponential moment specialization.
-- [[Comparison of Probability Bounds Example]] — Side-by-side numerical comparison.
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Chebyshev Inequality]]
 
 ## Sources
 

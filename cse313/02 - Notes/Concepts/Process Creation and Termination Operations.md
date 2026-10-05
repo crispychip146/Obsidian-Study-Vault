@@ -12,13 +12,12 @@ order: 7
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1b, 2018 Q2c, 2018 Q4a, 2020 Q4b)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years, verbatim repeated!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q1b, 2018 Q2c, 2018 Q4a, 2020 Q4b)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Drawing the `for (; i < 3; i++) fork();` Process Tree (2017 Q1b & 2020 Q4b verbatim):**
 >    - **The Setup:** A loop runs for $i = 0, 1, 2$, calling `fork()`. Draw the process tree and label the **starting value of $i$** for each created process node ($P_0$ to $P_7$).
->    - **The "Click" Mechanics:**
+>    - **The tracing method:**
 >      - When `fork()` is called, the child is born at that exact instruction line and starts with the parent's current value of $i$ *before* the loop increment `i++` is executed!
 >      - **Iteration 0 ($i=0$):** $P_0$ forks $P_1$. $\implies$ **$P_1$ starts with $i = 0$**. Both execute `i++` to become $i=1$.
 >      - **Iteration 1 ($i=1$):** $P_0$ forks $P_2$, $P_1$ forks $P_3$. $\implies$ **$P_2$ starts with $i = 1$**, **$P_3$ starts with $i = 1$**. All four execute `i++` to become $i=2$.
@@ -31,35 +30,21 @@ order: 7
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Process creation and program replacement answer different questions. **`fork()` creates another process. `exec()` replaces the program executed by an existing process.** Keeping them separate explains how a shell launches a command.
 
-When an operating system boots, it begins with only a single user-space ancestor process (`systemd` or `init`, PID 1). During system operation, users launch applications, web servers spawn worker tasks, and shells run pipeline commands.
+After a successful fork, parent and child continue after the same call, but receive different return values: the parent receives the child's PID, and the child receives zero. This lets the child take the program-loading branch while the parent takes the waiting branch. Their ordinary writable variables are logically independent, even when copy-on-write temporarily shares physical pages.
 
-We want a robust, uniform mechanism to dynamically create new processes, configure their execution environments, and cleanly reclaim all associated kernel and hardware resources when they finish. The central obstacle is managing parent-child dependencies and resource cleanup: if a child terminates before its parent, its exit status must be preserved; if a parent dies first, the child must not be left unmanaged.
+The child can call `exec` to load the command. A successful exec begins the new program rather than returning to the old call site. The process identity remains, while its program image changes. Later, exit releases execution resources and makes termination information available. The parent calls `wait` or `waitpid` to collect that information.
 
----
-
-## Developing the Idea
-
-UNIX solves process lifecycle operations through a two-step mechanism: **`fork()`** and **`exec()`**.
-
-Rather than creating a brand-new process from scratch with dozens of configuration flags:
-1. `fork()` creates an exact clone of the caller: duplicating memory via Copy-On-Write (COW), inheriting open file descriptors, and returning $0$ to the child and the child's new PID to the parent.
-2. `execve()` replaces the cloned address space with a brand-new executable image loaded from disk.
-3. When a process finishes via `exit()`, it transitions to a **Zombie** state: its memory is freed, but its exit code remains in the PCB until the parent reaps it via `wait()`.
-4. If a parent terminates without waiting for its children, they become **Orphans** and are adopted by PID 1 (`init`/`systemd`), which automatically reaps their exit status.
-
----
+Use [[Process Lifecycle and State Transitions]] to interpret a waiting parent: it can be blocked while its child executes. Use [[Process Control Block and Context Switching]] to understand why the kernel can retain an exit record after the child has stopped running.
 
 ## Definition
 
 Operating systems manage processes through distinct, fundamental operations:
 - **Process Creation:** The mechanism by which an existing process (the **parent**) spawns a new process (the **child**), forming a hierarchical tree of processes rooted at `init`/`systemd` (PID 1).
 - **Process Termination:** The mechanism by which a process ends its execution, releases allocated resources, and reports an exit status code to its parent.
-
----
 
 ---
 
@@ -113,8 +98,6 @@ Historically, duplicating an entire multi-gigabyte address space during `fork()`
 
 ---
 
----
-
 ### Process Termination: The 4 Causes
 
 A process terminates due to one of four events:
@@ -130,8 +113,6 @@ A process terminates due to one of four events:
 
 ---
 
----
-
 ## Example
 
 Shell command execution `ls -l`:
@@ -139,12 +120,6 @@ Shell command execution `ls -l`:
 2. In child ($PID_{	ext{ret}} = 0$): child calls `execvp("ls", args)`, replacing its shell image with the `/bin/ls` binary.
 3. In parent ($PID_{	ext{ret}} > 0$): shell calls `waitpid(child_pid, &status, 0)`, blocking until `ls` finishes.
 4. When `ls` finishes, it returns code $0$; kernel notifies parent, reaps child's PCB, and the shell prompts for the next command.
-
----
-
-## Technical Details
-
-See related modules for microarchitectural implementation details.
 
 ---
 
@@ -163,8 +138,6 @@ See related modules for microarchitectural implementation details.
    - To remove a zombie, you must kill its parent (which causes the zombie to be adopted by `init`, which immediately calls `wait()`), or send the parent a `SIGCHLD` signal to force it to call `wait()`.
 2. **Cascading Termination:**
    - In some operating systems (like VMS), when a parent process terminates, the OS automatically terminates all of its children, grandchildren, and descendants. UNIX does not enforce cascading termination by default—children simply become orphans.
-
----
 
 ---
 
@@ -207,29 +180,15 @@ classDiagram
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Fork return values identify execution branches, not scheduling order. In [[Process Forking and Zombie Orphan Example]], compare ordinary copied variables with inherited file descriptors: separate address spaces do not mean all underlying OS resources are separate.
 
-- [[Process Forking and Zombie Orphan Example]]
-- [[Problem — Fork Execution Tree and Process Tracing]]
-- [[Dual-Mode Operation and System Calls]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
+- [[Process Lifecycle and State Transitions]]
 - [[Process Control Block and Context Switching]]
-
----
-
-## Problems
-
-- [[Problem — Fork Execution Tree and Process Tracing]]
 - [[Process Forking and Zombie Orphan Example]]
-
----
 
 ## Sources
 

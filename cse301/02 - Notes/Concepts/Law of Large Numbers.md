@@ -12,19 +12,13 @@ order: 31
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+An individual observation remains noisy when you collect more data. What stabilizes is the average: unusually high and low observations increasingly balance under the law's assumptions.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Law of Large Numbers, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+For iid observations with a finite mean $\mu$, the weak law says $\bar X_n\to\mu$ in probability. This means the probability of an error larger than any fixed positive tolerance tends to zero. The strong law says the averages converge almost surely along an infinite sample path, a stronger mode of convergence.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Law of Large Numbers reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+With finite variance, the weak-law proof is especially transparent: independence gives $\operatorname{Var}(\bar X_n)=\sigma^2/n$, then [[Chebyshev Inequality]] bounds the probability of error by $\sigma^2/(n\epsilon^2)$. This proof uses a stronger moment assumption than the usual iid finite-mean theorem itself. Do not interpret the law as guaranteeing monotone improvement after every new observation.
 
 ## Definition
 
@@ -36,8 +30,6 @@ $$\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$$
 There are two fundamental versions of the Law of Large Numbers, distinguished by the mode of mathematical convergence:
 1. **The Weak Law of Large Numbers (WLLN)** — Convergence in Probability.
 2. **The Strong Law of Large Numbers (SLLN)** — Almost Sure Convergence.
-
----
 
 ---
 
@@ -71,23 +63,7 @@ A frequent psychological error is the **Gambler's Fallacy**: believing that afte
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
 ## Important Properties and Why They Hold
-
-### The Weak Law of Large Numbers (WLLN)
 
 ### Statement:
 For any arbitrary precision tolerance $\epsilon > 0$:
@@ -112,23 +88,12 @@ By the squeeze theorem, the probability converges to 0. $\blacksquare$
 *(Note: The WLLN remains true even if $\sigma^2 = \infty$, as long as $\mathbb{E}[\lvert X_i \rvert] < \infty$, proven using characteristic functions or truncation)*.
 
 ---
-### The Strong Law of Large Numbers (SLLN)
-
 ### Statement:
 The sample mean converges to $\mu$ with probability 1:
 $$P\left( \lim_{n \to \infty} \bar{X}_n = \mu \right) = 1$$
 
 In formal terminology, $\bar{X}_n$ **converges almost surely (a.s.)** to $\mu$:
 $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
-
----
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
 
 ---
 
@@ -141,26 +106,14 @@ $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+The law describes convergence toward the mean. [[Central Limit Theorem]] describes the scale and approximate shape of the remaining fluctuations around it.
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Chebyshev Inequality]]
+- [[Central Limit Theorem]]
 
 ## Sources
 

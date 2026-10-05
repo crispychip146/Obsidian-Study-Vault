@@ -12,8 +12,6 @@ order: 34
 
 ---
 
----
-
 ## Problem
 
 A polling agency wants to estimate the true proportion $p$ of users who prefer a new user interface over the old one. They survey $n$ independent users, modeling their responses as $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \operatorname{Bern}(p)$.
@@ -31,54 +29,13 @@ $$P\left( \lvert \hat{p}_n - p \rvert \le 0.03 \right) \ge 0.95 \iff P\left( \lv
 
 ---
 
----
-
-## Given
-
-- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
-
----
-
-## Required
-
-- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
-
----
-
-## Concepts Tested
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
-
-## Prerequisites
-
-- [[Chebyshev Inequality]] — Non-parametric sample bound.
-- [[Central Limit Theorem]] — Normal approximation of sample mean.
-- [[Law of Large Numbers]] — Convergence in probability definition.
-- [[Normal-Based Large-Sample Confidence Interval]] — Margin of error formulation.
-
----
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+The normalized fluctuation $Z_n=\sqrt n(\bar X_n-\mu)/\sigma$ converges to a normal distribution. We need to turn that statement into $P(|\bar X_n-\mu|>\epsilon)\to0$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+Do not simply substitute an increasing threshold into a limit theorem stated for fixed thresholds. Instead choose a fixed $K$ large enough that the normal tail outside $[-K,K]$ is small. Convergence in distribution makes $P(|Z_n|>K)$ close to that tail for sufficiently large $n$. Eventually $\epsilon\sqrt n/\sigma>K$, so $P(|\bar X_n-\mu|>\epsilon)\le P(|Z_n|>K)$. Since the fixed-tail target can be made arbitrarily small, the desired probability tends to zero.
 
-### Working Through the Solution
-### Full Step-by-Step Solution
+This is a tightness argument: normalized fluctuations stay on a bounded probabilistic scale while the threshold grows. A CLT-based finite sample calculation is an approximation; a [[Chebyshev Inequality|Chebyshev]] sample-size calculation gives a distribution-free guarantee under its variance assumptions.
 
 ### Part 1: Worst-Case Variance
 For $X_i \sim \operatorname{Bern}(p)$:
@@ -129,34 +86,17 @@ $$n_{\text{CLT}} = 1,068 \text{ users}$$
 - $n_{\text{Cheb}} = 5,556$
 - $n_{\text{CLT}} = 1,068$
 - The Chebyshev bound demands more than **$5\times$ as much data** as the CLT normal approximation.
-- This discrepancy arises because Chebyshev must guarantee the bound across all conceivable, pathological, heavy-tailed distributions. In contrast, the CLT leverages the fact that sums of Bernoulli trials rapidly form a smooth Gaussian distribution with light, exponentially decaying tails.
+- Chebyshev uses only the variance and gives a rigorous but conservative guarantee. The CLT calculation uses a normal approximation and yields an approximate sample size. For these Bernoulli data, an exact binomial calculation can assess finite-sample coverage.
 
-#### 2. Mathematical Proof that CLT implies WLLN:
-We wish to prove that if $\frac{\sqrt{n}(\bar{X}_n - \mu)}{\sigma} \xrightarrow{d} Z \sim \mathcal{N}(0, 1)$, then for any $\epsilon > 0$, $\lim_{n \to \infty} P(\lvert \bar{X}_n - \mu \rvert \ge \epsilon) = 0$.
+#### 2. Proof that the CLT implies the weak law
 
-Rewrite the probability in terms of the standardized variable $Z_n$:
-$$P\left( \lvert \bar{X}_n - \mu \rvert \ge \epsilon \right) = P\left( \frac{\sqrt{n} \lvert \bar{X}_n - \mu \rvert}{\sigma} \ge \frac{\epsilon \sqrt{n}}{\sigma} \right) = P\left( \lvert Z_n \rvert \ge \frac{\epsilon \sqrt{n}}{\sigma} \right)$$
+Let $Z_n=\sqrt n(\bar X_n-\mu)/\sigma\Rightarrow Z\sim N(0,1)$, with $0<\sigma<\infty$. Fix an error tolerance $\epsilon>0$ and a probability target $\delta>0$.
 
-By the CLT, the CDF of $Z_n$ converges pointwise to $\Phi$:
-$$P\left( \lvert Z_n \rvert \ge \frac{\epsilon \sqrt{n}}{\sigma} \right) \approx 2 \left[ 1 - \Phi\left( \frac{\epsilon \sqrt{n}}{\sigma} \right) \right]$$
+Choose a fixed $K$ such that $P(|Z|\ge K)<\delta/2$. Since the normal distribution has no atoms at $\pm K$, convergence in distribution gives $P(|Z_n|\ge K)<\delta$ for all sufficiently large $n$. Also, $\epsilon\sqrt n/\sigma$ eventually exceeds $K$. Consequently,
 
-As $n \to \infty$, since $\epsilon > 0$ and $\sigma > 0$:
-$$\frac{\epsilon \sqrt{n}}{\sigma} \to \infty$$
-Because $\lim_{z \to \infty} \Phi(z) = 1$:
-$$\lim_{n \to \infty} 2\left[ 1 - \Phi\left( \frac{\epsilon \sqrt{n}}{\sigma} \right) \right] = 2[1 - 1] = 0$$
+$$P(|\bar X_n-\mu|\ge\epsilon)=P(|Z_n|\ge\epsilon\sqrt n/\sigma)\le P(|Z_n|\ge K)<\delta.$$
 
-Therefore, $\bar{X}_n \xrightarrow{P} \mu$. The CLT implies the Weak Law of Large Numbers! $\blacksquare$
-
----
-
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
+Since $\delta$ was arbitrary, this proves convergence in probability. The proof uses a fixed continuity threshold before comparing it with the increasing threshold; an informal normal approximation at a moving threshold is not a rigorous limit argument.
 
 ---
 
@@ -167,27 +107,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+The CLT implies the weak law under these assumptions, but their finite-sample promises differ. Keep approximate confidence and guaranteed probability bounds separate when interpreting a sample-size result.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Chebyshev Inequality|Chebyshev]]
 
 ## Source
 

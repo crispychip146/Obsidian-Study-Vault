@@ -12,8 +12,6 @@ order: 5
 
 ---
 
----
-
 ## Problem
 
 Consider the classic **de Montmort Matching Problem** (also known as the Hat Check Problem or Secret Santa Problem):
@@ -29,29 +27,13 @@ A deck of $n$ distinct cards numbered $1, 2, \dots, n$ is thoroughly shuffled an
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
 
-### Step-by-Step Solution
+Shuffle $n$ labeled cards into $n$ labeled positions. We want no card in its original position. Subtracting the probability that each individual card matches would overcorrect, because several cards may match together.
+
+Let $A_i$ mean card $i$ is in position $i$. If a specified set of $k$ cards is fixed, the remaining cards can be arranged in $(n-k)!$ ways out of $n!$ equally likely permutations. There are $\binom nk$ ways to choose that specified set. Their combined inclusion-exclusion term is therefore $\binom nk(n-k)!/n!=1/k!$.
+
+This produces $P(\text{no matches})=\sum_{k=0}^n(-1)^k/k!$. The corresponding number of derangements is this probability times $n!$. The limiting value $e^{-1}$ comes from the exponential series; it is not an assumption that card-match events are independent.
 
 ### Question 1: Probability of At Least One Match
 Let $A_i$ be the event that card $i$ is in position $i$, for $i \in \{1, 2, \dots, n\}$.
@@ -133,20 +115,6 @@ Let's test small values of $n$:
 
 ---
 
----
-
-## Result
-
-The mathematical derivation confirms the target probability or estimator value.
-
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 - **Symmetry Trick:** Notice how $P(A_i \cap \dots \cap A_{i_k})$ only depends on the size $k$, not which specific indices are chosen. This allows pulling the probability outside the summation: $\sum_{1 \le i_1 < \dots < i_k \le n} \dots = \binom{n}{k} P(A_1 \cap \dots \cap A_k)$.
@@ -154,23 +122,13 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 ---
 
----
+## What to carry forward
 
-## General Method
+The lesson from [[Inclusion-Exclusion Principle]] is to count intersections that are simple even when the target event is complicated. The finite alternating sum is exact; $e^{-1}$ is its large-$n$ limit.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Inclusion-Exclusion Principle]] — Theoretical formula and indicator variable proof.
-- [[Linearity of Expectation and Indicator Random Variables Example]] — Method of indicator variables.
-- [[Probability Axioms and Naive Probability]] — Naive counting and sample spaces.
-
----
-
----
+- [[Inclusion-Exclusion Principle]]
 
 ## Sources
 

@@ -12,36 +12,13 @@ order: 61
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+A permutation test builds its reference distribution by reassigning labels in ways permitted under the null. If observations are exchangeable between groups, the labels carry no information about their distribution under the null, while the pooled values stay fixed.
 
-The **Permutation Test** (also known as a randomization test) is a non-parametric, exact statistical method for testing whether two independent samples originate from the same underlying probability distribution ($H_0: F_X = F_Y$).
+Compute the observed statistic first, then enumerate valid label assignments or sample them. The fraction whose statistics are at least as extreme gives the exact enumerated $p$-value. For Monte Carlo testing, a standard valid construction includes the observed configuration and uses $(b+1)/(B+1)$ with $B$ random permutations and $b$ exceedances, rather than reporting zero from no exceedances.
 
-It solves the problem of hypothesis testing when:
-1. Sample sizes are too small for Central Limit Theorem asymptotic approximations to hold.
-2. Parametric assumptions (such as normality or equal variances) are violated or unknown.
-3. An exact, assumption-free $p$-value is required.
-
----
-
----
-
-## Developing the Core Idea
-
-Suppose we have two samples:
-- $X_1, X_2, \dots, X_m \sim F_X$
-- $Y_1, Y_2, \dots, Y_n \sim F_Y$
-Total pooled observations: $N = m + n$.
-
-Under the null hypothesis $H_0: F_X = F_Y$, both groups are drawn from the **exact same distribution**.
-Consequently, the group labels ("X" vs "Y") are completely meaningless and arbitrary. Any partition of the $N$ pooled numbers into a group of size $m$ and a group of size $n$ was **equally likely to have occurred**.
-
-By shuffling the pooled data across all $N!$ possible permutations and recomputing the test statistic, we generate the **exact empirical null distribution** of the statistic without making any parametric assumptions.
-
----
-
----
+The allowed rearrangements depend on the design. Paired data may require within-pair swaps, and clustered data require preserving their structure. Equal means alone do not generally imply exchangeability when distributions differ. The assumption justifies the randomization; enumeration cannot rescue an invalid permutation scheme.
 
 ## Inputs
 
@@ -56,8 +33,6 @@ By shuffling the pooled data across all $N!$ possible permutations and recomputi
 ---
 
 ## How It Works
-
-### How It Works
 
 ### Exact Permutation Test (Small $N$)
 1. Compute the observed test statistic:
@@ -83,11 +58,7 @@ When $N$ exceeds $\approx 20$, the number of permutations $N!$ is astronomically
 
 ---
 
----
-
 ## Pseudocode
-
-### Pseudocode
 
 ```python
 def permutation_test(X, Y, B=10000):
@@ -118,8 +89,6 @@ def permutation_test(X, Y, B=10000):
 
 ---
 
----
-
 ## Example
 
 ### Example: Toy Permutation Test
@@ -144,8 +113,6 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 
 ---
 
----
-
 ## Complexity
 
 - **Exact Test:**
@@ -157,8 +124,6 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 
 ---
 
----
-
 ## Properties
 
 - **FDR Control:** Strictly controls false discovery rate or exact non-parametric size under exchangeability.
@@ -167,8 +132,6 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 
 ## Limitations
 
-### Properties and Limitations
-
 ### Properties
 1. **Exact Size:** Under $H_0$, the Type I error rate is strictly $\le \alpha$ for **any** sample size $n$, with zero asymptotic approximation error.
 2. **Distribution-Free:** Requires no assumption of normality, equal variance, or symmetry.
@@ -176,8 +139,6 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 ### Limitations
 1. **Exchangeability Assumption:** Observations must be independent and exchangeable under $H_0$. If two groups have different shapes or variances under $H_0$, the permutation test can yield inflated Type I errors.
 2. **Computational Overhead:** Requires simulation loops.
-
----
 
 ---
 
@@ -194,24 +155,13 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 
 ---
 
-## Related Concepts
+## What to carry forward
 
-- [[Hypothesis Testing Framework]]
-- [[Multiple Testing and False Discovery Rate]]
+[[Toy Permutation Test Example]] is small enough to enumerate completely. Compare label assignments, not merely different orderings within the same group, when reducing repeated configurations.
 
----
+## Related notes
 
-## Prerequisites
-
-- [[Hypothesis Testing Framework]]
-
----
-
-## Problems
-
-- [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
-
----
+- [[Toy Permutation Test Example]]
 
 ## Sources
 

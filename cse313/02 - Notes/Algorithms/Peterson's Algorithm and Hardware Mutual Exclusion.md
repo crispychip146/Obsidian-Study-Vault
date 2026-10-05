@@ -12,13 +12,12 @@ order: 19
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q1b, 2018 Q1c, 2019 Q2a, 2019 Q2c, 2021 Q4a)**
-> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared 4 out of 5 recent exam years)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2018 Q1b, 2018 Q1c, 2019 Q2a, 2019 Q2c, 2021 Q4a)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Priority Inversion: Strict Priority Scheduler vs Round Robin (2019 Q2a & 2021 Q4a verbatim):**
 >    - **The Scenario:** Process $L$ (low priority) enters its critical section (`flag[L] = true`). Process $H$ (high priority) wakes up, preempts $L$, sets `flag[H] = true, turn = L`, and executes the busy-wait spin: `while (flag[L] && turn == L);`.
->    - **Strict Priority Failure:** Because $H$ has higher priority, the scheduler grants all CPU cycles to $H$. Process $L$ is starved and never scheduled; thus $L$ can never exit its critical section or clear `flag[L] = false`. $H$ spins forever $\implies$ **System Livelock / Priority Inversion Deadlock!**
+>    - **Single-core strict-priority failure:** Because $H$ has higher priority, the scheduler grants all CPU cycles to $H$. Process $L$ is starved and never scheduled; thus $L$ can never exit its critical section or clear `flag[L] = false`. $H$ spins forever $\implies$ **Unbounded spinning caused by priority inversion in this scheduling model.**
 >    - **Round Robin Fix:** Under Round Robin, $H$'s time quantum expires via hardware timer interrupt. The scheduler forcibly switches execution to $L$. $L$ completes its critical section, sets `flag[L] = false`, and on the next turn $H$'s spin condition becomes false, allowing $H$ to enter cleanly.
 > 2. **Four Criteria for Critical Section Solution (2019 Q2c):**
 >    - **Mutual Exclusion:** Only one process inside at any time.
@@ -34,25 +33,15 @@ order: 19
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+Two intent flags say who wants the critical section, but they do not resolve simultaneous demand. A turn variable breaks that tie. Peterson combines both ideas from [[Race Conditions and Critical-Section Problem]]: announce interest, then give the competitor precedence if both are interested.
 
-In concurrent programming, multiple threads updating shared variables suffer from race conditions. Early software attempts failed: strict alternation (`turn` variable) fails Progress because a thread in its remainder section blocks the other; boolean intent flags (`flag[i] = true`) fail Mutual Exclusion when both threads set their flags before testing.
+This note uses the code's **self-waits** convention: process $i$ writes `interested[i]=true; turn=i;` and waits while `interested[j] && turn==i`. Here `turn` identifies the process that yields. Some books use the equivalent other-gets-precedence convention, writing `turn=j` and waiting for `turn==j`. Do not mix a write from one with a test from the other.
 
-We want a pure software solution that guarantees mutual exclusion, progress, and bounded waiting for two concurrent processes without requiring special hardware instructions. The central obstacle is ensuring that when both processes attempt to enter the critical section simultaneously, the tie is broken deterministically and symmetrically.
+Suppose both flags are true and $P_1$ writes turn last. Then `turn=1`: $P_1$ waits, while $P_0$ can enter. When $P_0$ leaves, it clears its flag, releasing $P_1$. If it immediately asks again, it writes `turn=0`, yielding to the already interested peer. This explains both the tie-breaking and the bound on overtaking.
 
----
-
-## Developing the Core Idea
-
-In 1981, **G.L. Peterson** discovered that combining intent flags with a polite yielding mechanism creates a provably correct mutual exclusion algorithm:
-- Each process sets its own intent flag: `flag[i] = true;`
-- Crucially, it sets the turn variable to the *other* process: `turn = j;`
-- A process waits only while: `while (flag[j] && turn == j);`
-- If both processes arrive simultaneously, the memory write that occurs last sets `turn`, allowing the other process to immediately enter the critical section.
-
----
+The classroom proof assumes sequentially consistent atomic reads and writes and that an admitted process eventually runs and exits. Plain shared C integers do not provide that memory-model guarantee; production synchronization requires correctly specified atomic operations or established locks.
 
 ## Inputs
 
@@ -70,26 +59,19 @@ In 1981, **G.L. Peterson** discovered that combining intent flags with a polite 
 
 ## How It Works
 
-### 4. Formal Proof of Correctness
+### Mutual exclusion: follow the last entry write
 
-### 1. Mutual Exclusion
-Assume for contradiction that both $P_0$ and $P_1$ are in their critical sections at time $t$. Both must have set their `interested` flags to `TRUE`.
-For $P_0$ to exit the `while` loop, either `interested[1] == FALSE` or `turn == 1`.
-For $P_1$ to exit the `while` loop, either `interested[0] == FALSE` or `turn == 0`.
-Since both are in the critical section, both `interested[0]` and `interested[1]` are `TRUE`.
-Thus, it must be that `turn == 1` (letting $P_0$ in) AND `turn == 0` (letting $P_1$ in).
-However, `turn` is a single scalar variable that cannot be both 0 and 1 simultaneously. **Contradiction!**
+Assume both participants are in the critical section and consider the later of their `turn` writes for these entries. Suppose P1 wrote `turn=1` last. P0 had already announced interest before its own earlier turn write, and remains interested while inside. After P1's last write, nobody changes `turn` before either leaves or begins a new attempt.
 
-### 2. Progress
-If only one process requests entry, it immediately proceeds because `interested[other] == FALSE`. If both request entry, the value of `turn` will be either 0 or 1, guaranteeing that exactly one process will exit the while loop immediately. No process outside the critical section can prevent the other from entering.
+P1 therefore observes `interested[0] && turn==1` as true and cannot finish its entry loop while P0 is inside. This contradicts the assumed overlap. The other last-writer case is symmetric. The proof reasons about writes and observations in sequence; two historical loop exits cannot simply be treated as simultaneous tests.
 
-### 3. Bounded Waiting
-A process $P_i$ waits at most one critical section execution of $P_j$. When $P_j$ exits, it sets `interested[j] = FALSE`. If $P_j$ attempts to re-enter, it sets `turn = j`, forcing itself to wait and allowing $P_i$ to proceed.
+### Progress and bounded overtaking
 
-> [!WARNING] Modern CPU Out-of-Order Execution Hazard
-> On modern out-of-order superscalar processors (x86, ARM), compiler optimizations and processor memory controllers can reorder writes (`interested[process] = TRUE` and `turn = process`). If `turn = process` is committed before `interested[process] = TRUE`, mutual exclusion can be broken! Therefore, in modern C/C++, explicit **memory fences/barriers** (`std::atomic_thread_fence`) are mandatory.
+If only one participant is interested, the other's flag is false and entry succeeds. If both are interested, the final turn write makes one yield and the other eligible. After that participant exits, it clears its flag; if it asks again, it writes its own ID to turn and yields to the already interested peer. The peer can be overtaken at most once after its entry protocol has established interest and the tie-breaking write, under eventual scheduling and finite critical sections.
 
----
+### Memory-model boundary
+
+The proof uses sequentially consistent atomic reads and writes. Plain shared C/C++ integers do not satisfy that premise in a concurrent program. A fence alone does not legalize data races. A direct educational implementation can use sequentially consistent language atomics; production code normally uses the platform's supported locking facilities.
 
 ---
 
@@ -126,8 +108,6 @@ enter_region:
 
 ---
 
----
-
 ### 6. The Priority Inversion Problem
 
 A major defect of busy-waiting synchronization (spinlocks) is the **Priority Inversion Problem**:
@@ -140,8 +120,6 @@ A major defect of busy-waiting synchronization (spinlocks) is the **Priority Inv
 7. $H$ runs forever in an infinite busy-wait loop, and $L$ starves completely!
 
 **Solution:** Priority Inheritance Protocol or blocking synchronization primitives ([[Semaphores and Synchronization Primitives]]).
-
----
 
 ---
 
@@ -159,17 +137,13 @@ In addition, hardware designers introduced atomic read-modify-write CPU instruct
 
 ---
 
----
-
-### 2. Peterson's Algorithm Implementation
-
 ### Global Data Structures:
 ```c
 #define FALSE 0
 #define TRUE  1
 #define N     2       // Number of competing processes
 
-int turn;             // Whose turn is it to enter?
+int turn;             // Process ID that yields when both are interested
 int interested[N] = {FALSE, FALSE}; // Does process want to enter?
 ```
 
@@ -193,11 +167,7 @@ void leave_region(int process) {
 
 ---
 
----
-
 ## Example
-
-### 3. Step-by-Step Execution Scenarios
 
 ### Scenario A: Uncontested Access (Only Process 0 wants to enter)
 1. Process 0 calls `enter_region(0)`:
@@ -222,12 +192,10 @@ void leave_region(int process) {
 
 ---
 
----
-
 ## Complexity
 
 ### Time Complexity
-$O(1)$ operations in entry and exit; busy-waiting cycles while waiting.
+A constant number of setup/exit operations; the number of repeated waiting reads is not bounded by a constant.
 
 ### Space Complexity
 $O(1)$ memory (2 booleans and 1 integer).
@@ -245,41 +213,17 @@ $O(1)$ memory (2 booleans and 1 integer).
 ## Limitations
 
 - Limited to 2 processes (generalizable to $N$ via Filter algorithm, but complex).
-- Relies on sequential memory consistency; on modern out-of-order processors, hardware atomic instructions (`TestAndSet`, `CompareAndSwap`) or memory barriers are required.
+- Relies on sequential memory consistency; on modern out-of-order processors, a valid language-level atomic and ordering implementation, or established locks, is required.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Misunderstanding preemption boundaries during execution.
-- Failing to verify state invariants before granting resource claims.
+A spin loop is still runnable. On one core, strict priority can let a high-priority spinner prevent the low-priority holder from running and unlocking. Hardware atomic acquisition solves the indivisible test/update problem; it does not by itself solve fairness or priority inversion.
 
----
-
-## Exam Relevance
-
-Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
-
----
-
-## Related Concepts
-
-- [[Semaphores and Synchronization Primitives]]
-- [[Classic Synchronization Solutions]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Race Conditions and Critical-Section Problem]]
-
----
-
-## Problems
-
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
 
 ## Sources
 

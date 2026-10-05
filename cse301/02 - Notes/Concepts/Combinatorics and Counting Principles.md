@@ -12,19 +12,13 @@ order: 1
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Suppose you are assigning three different jobs to five people. Before calculating, ask what a completed outcome looks like: an ordered list of three people, because changing who gets which job changes the assignment. There are five choices for the first job, four for the second, and three for the third. Multiplication follows from extending each partial assignment in all the available ways.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Combinatorics and Counting Principles, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Now change the question to choosing a three-person committee. The same ordered construction counts each committee $3!$ times, once for every ordering of its members. Dividing by $3!$ removes that deliberate overcount. This is why permutations and combinations have different denominators: the formulas encode what you regard as the same outcome.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Combinatorics and Counting Principles reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Replacement is another modeling choice. Allowing the same person to fill several jobs keeps the number of choices at five at each step; forbidding it makes the choices shrink. State order and replacement before selecting a formula.
 
 ## Definition
 
@@ -35,11 +29,7 @@ $$P(A) = \frac{\lvert A \rvert}{\lvert S \rvert} = \frac{\# \text{ favorable out
 
 ---
 
----
-
 ## How It Works
-
-### Core Counting Rules
 
 ### 1. The Multiplication Rule
 If an experiment consists of $k$ sequential stages, where:
@@ -77,14 +67,6 @@ $$\binom{n + k - 1}{k} = \binom{n + k - 1}{n - 1}$$
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
 
 ### The Four Sampling Paradigms
@@ -95,8 +77,6 @@ When drawing $k$ items from a set of $n$ distinct objects:
 |---|---|---|
 | **With Replacement** | $n^k$ | $\binom{n + k - 1}{k}$ (Bose-Einstein / Stars & Bars) |
 | **Without Replacement** | $\frac{n!}{(n - k)!}$ | $\binom{n}{k}$ |
-
----
 
 ---
 
@@ -123,11 +103,7 @@ $$\binom{m + n}{k} = \sum_{j=0}^k \binom{m}{j} \binom{n}{k - j}$$
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Overcounting by treating identical items as distinct:**
    Forgetting to divide by $k!$ when order is irrelevant.
@@ -138,36 +114,13 @@ $$\binom{m + n}{k} = \sum_{j=0}^k \binom{m}{j} \binom{n}{k - j}$$
 
 ---
 
----
+## What to carry forward
 
-## Exam Relevance
+Counting provides the numerator and denominator in [[Probability Axioms and Naive Probability]]. That ratio represents probability only when the elementary outcomes being counted are equally likely.
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Probability Axioms and Naive Probability]]
-- [[Inclusion-Exclusion Principle]]
-- [[Birthday Problem and Collisions Example]]
-- [[Derangements and Card Matching Example]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

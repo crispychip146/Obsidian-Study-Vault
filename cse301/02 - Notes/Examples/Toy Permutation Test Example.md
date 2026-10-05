@@ -12,8 +12,6 @@ order: 65
 
 ---
 
----
-
 ## Problem
 
 Consider a tiny dataset consisting of two samples:
@@ -32,15 +30,11 @@ $$T = \lvert \bar{X} - \bar{Y} \rvert$$
 
 ---
 
----
-
 ## Given
 
 - Pooled data vector: $\mathbf{Z} = (1, 9, 3)$ of length $N = 3$.
 - Group sizes: $m = 2, n = 1$.
 - Test statistic formula: $T = \left\lvert \frac{X_1 + X_2}{2} - Y_1 \right\rvert$.
-
----
 
 ---
 
@@ -53,15 +47,13 @@ $$T = \lvert \bar{X} - \bar{Y} \rvert$$
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+The observed group means are 5 and 3, so their absolute difference is 2. Under the exchangeable null, keep the three pooled values fixed and consider which one is assigned to the single-observation group.
+
+There are three distinct label assignments. Choosing 3 gives statistic 2, choosing 9 gives 7, and choosing 1 gives 5. Enumerating all six ordered permutations repeats each assignment twice, so it produces the same reference proportions. Every statistic is at least the observed 2; the exact $p$-value is one.
+
+This does not prove the distributions identical. It says the observed separation is the least extreme among the assignments in this tiny experiment. With so few assignments, attainable $p$-values are coarse and the test has limited ability to detect differences.
 
 ### Concepts Used
 
@@ -70,8 +62,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[p-Values and Significance]]
 
 ---
-### Solution
-
 ### Step 1: Observed Statistic Calculation
 From the original group assignment:
 $$\bar{X} = \frac{1 + 9}{2} = 5, \quad \bar{Y} = Y_1 = 3$$
@@ -112,8 +102,6 @@ Since $p = 1.0 \gg 0.05$, we fail to reject $H_0$. There is zero evidence that t
 
 ---
 
----
-
 ## Result
 
 - Observed difference: $t_{\text{obs}} = 2$.
@@ -122,38 +110,20 @@ Since $p = 1.0 \gg 0.05$, we fail to reject $H_0$. There is zero evidence that t
 
 ---
 
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 1. **Exactness:** The permutation test is exact; it does not rely on the Central Limit Theorem. With $N = 3$, an asymptotic test (like a $z$-test) would be absurd and completely invalid.
-2. **Minimal Achievable $p$-value:** Notice that even if the observed data had yielded the most extreme statistic possible ($T = 7$), the $p$-value would have been $p = \frac{2}{6} = 0.333$. This demonstrates that with $N = 3$, it is mathematically impossible to reject $H_0$ at the $\alpha = 0.05$ level, regardless of how extreme the data are. A permutation test requires at least $\binom{N}{m} \ge \frac{1}{\alpha} = 20$ permutations (e.g., $N \ge 6$) to ever reach a $p$-value below $0.05$.
+2. **Minimal Achievable $p$-value:** Notice that even if the observed data had yielded the most extreme statistic possible ($T = 7$), the $p$-value would have been $p = \frac{2}{6} = 0.333$. This demonstrates that with $N = 3$, it is impossible under these assumptions to reject $H_0$ at the $\alpha = 0.05$ level, regardless of how extreme the data are. A permutation test requires at least $\binom{N}{m} \ge \frac{1}{\alpha} = 20$ permutations (e.g., $N \ge 6$) to ever reach a $p$-value below $0.05$.
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Permutation Test Algorithm]] conditions on the pooled values and uses exchangeability. Including ties through “at least as extreme” is essential to the exact calculation.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Permutation Test Algorithm]]
-- [[Hypothesis Testing Framework]]
-- [[p-Values and Significance]]
-
----
-
----
 
 ## Sources
 

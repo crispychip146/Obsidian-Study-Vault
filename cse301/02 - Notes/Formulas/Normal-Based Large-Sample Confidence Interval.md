@@ -12,19 +12,13 @@ order: 39
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+The interval starts from an approximate probability statement about standardized estimation error: $(\hat\theta_n-\theta)/\widehat{\mathrm{se}}\approx N(0,1)$. The standard error describes variation of the estimator across samples, not variation of individual observations.
 
-What analytical relationship or closed-form expectation governs Normal-Based Large-Sample Confidence Interval, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Choose $z=\Phi^{-1}(1-\alpha/2)$ so the central normal interval $[-z,z]$ contains probability $1-\alpha$. Multiplying by the estimated standard error and rearranging for $\theta$ yields $\hat\theta_n\pm z\widehat{\mathrm{se}}$. This algebraic inversion explains the familiar estimate-plus-or-minus-margin form.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Normal-Based Large-Sample Confidence Interval compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+Validity requires a suitable asymptotic normal approximation and a reliable standard-error estimate. Near parameter boundaries, with small samples or highly skewed estimators, a symmetric interval can behave poorly. For a proportion it can even extend outside $[0,1]$. The interval formula is a method with assumptions, not an automatic consequence of having a point estimate.
 
 ## Formula
 
@@ -37,8 +31,6 @@ where:
 - $\widehat{\text{se}} = \widehat{\text{se}}(\hat{\theta}_n)$ is the estimated standard error.
 - $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$ is the upper $\alpha/2$ quantile of the standard normal distribution $N(0, 1)$.
 - Margin of error is $\text{ME} = z_{\alpha/2}\widehat{\text{se}}$.
-
----
 
 ---
 
@@ -55,8 +47,6 @@ where:
 
 ---
 
----
-
 ## Conditions
 
 1. **Asymptotic Normality:** The standardized estimator converges in distribution to a standard normal variable:
@@ -69,11 +59,7 @@ where:
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 The standard normal probability density curve $\phi(z)$ is symmetric around zero. The area under the curve between $-z_{\alpha/2}$ and $+z_{\alpha/2}$ equals exactly $1 - \alpha$, leaving area $\alpha/2$ in each of the two outer tails.
 
@@ -81,11 +67,7 @@ Because $\hat{\theta}_n$ behaves approximately like a normal bell curve centered
 
 ---
 
----
-
 ## Derivation
-
-### Derivation
 
 Let $Z_n = \frac{\hat{\theta}_n - \theta}{\widehat{\text{se}}}$. By the asymptotic normality assumption, $Z_n \xrightarrow{d} Z \sim N(0, 1)$.
 
@@ -112,11 +94,7 @@ $$2(1 - \alpha/2) - 1 = 2 - \alpha - 1 = 1 - \alpha \quad \blacksquare$$
 
 ---
 
----
-
 ## Example
-
-### Example
 
 Suppose we sample $n = 400$ consumers and find that $260$ prefer brand A.
 We want a $95\%$ confidence interval for the population preference $p$.
@@ -136,11 +114,7 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Using $t$-critical values when $\sigma$ is known or $n$ is very large:**
    The $z$-interval is exact for normal populations with known $\sigma$ and asymptotically valid for any distribution with finite variance for large $n$.
@@ -151,36 +125,13 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Bernoulli Parameter Estimation and Confidence Interval Example]] derives its standard error rather than guessing one. An exact or alternative interval may be preferable when the normal approximation is inadequate.
 
-- [[Confidence Intervals and Confidence Sets]]
-- [[Point Estimation]]
-- [[Wald Test Statistic]]
-- [[Maximum Likelihood Estimation]]
-
----
-
----
-
-## Prerequisites
-
-- [[Point Estimation]]
-- Normal Distribution Properties and Central Limit Theorem
-
----
-
----
-
-## Problems
+## Related notes
 
 - [[Bernoulli Parameter Estimation and Confidence Interval Example]]
-- [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
-
----
-
----
 
 ## Sources
 

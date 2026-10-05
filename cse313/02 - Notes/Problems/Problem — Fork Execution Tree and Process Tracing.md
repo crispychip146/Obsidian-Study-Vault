@@ -12,8 +12,6 @@ order: 11
 
 ---
 
----
-
 ## Problem
 
 Analyze the following four POSIX C code snippets and answer the corresponding tracing questions:
@@ -75,31 +73,10 @@ int main() {
 
 ---
 
----
-
-## Given
-
-- Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
-
----
-
-## Required
-
-- Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
-
----
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
-
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
-- [[Process Control Block and Context Switching]]
 
 ---
 
@@ -111,13 +88,14 @@ Code Trace / Process Tree Construction
 
 ## Solution
 
-### Understanding the Situation
-Interpret the given problem state, identify all participating entities (processes, resources, semaphores), and establish the operational rules governing their interactions.
+Every successful `fork()` splits the execution that reaches it into a parent path and a child path. The child starts **after that call**, not at the beginning of `main`. This rule from [[Process Creation and Termination Operations]] is enough to build the process tree.
 
-### Developing the Key Idea
-Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffman cycle conditions, Gantt timeline rules) and verify that all prerequisites hold.
+For three unconditional calls, every existing process reaches every next call, so the population doubles: $1\to2\to4\to8$. In the loop, printing happens after each doubling, so count print executions per iteration and add $2+4+8$. Counting only the final population would answer a different question.
 
-### Working Through the Solution
+The Boolean example needs a different trace. A child receives zero from the first fork, so `&&` short-circuits and that child skips the second call. The parent receives a positive PID and evaluates the second operand. Of those two paths, only the path seeing two nonzero returns enters the body and forks again. The total is four, because only reachable calls create children.
+
+Assume all forks succeed. Also distinguish calls to `printf` from bytes ultimately flushed: copied unflushed stdio buffers can duplicate output when later forks occur. Explicit flushing is needed if observed output must match the abstract call count under redirection.
+
 ### Prerequisites & Relevant Concepts
 
 - [[Process Creation and Termination Operations]] — Mechanics of `fork()` and return values.
@@ -125,10 +103,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - C logical short-circuit rules (`&&` stops if first operand is false/0; `||` stops if first operand is true/non-zero).
 
 ---
-
----
-
-### Full Step-by-Step Solution
 
 ### Solution to Part 1: Sequential Fork Calls
 
@@ -251,46 +225,21 @@ flowchart TD
 
 ---
 
-### Result and Interpretation
-The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
-
----
-
-## Reusable Insight
-
-Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
-
----
-
 ## Common Mistakes
 
 1. **Ignoring Short-Circuit:** Assuming that `fork() && fork()` always creates 4 processes. The child of the first fork *never* executes the second fork!
 2. **Buffer Flushing Artifacts:**
-   - If `printf("Hello")` does not contain a newline `\n` and output is redirected to a file, C standard I/O buffers the text in user space. During `fork()`, the unflushed buffer is cloned into the child, causing `"Hello"` to be printed twice as many times as expected! (Always use `\n` or `fflush(stdout)` in tracing problems).
+   - If `printf("Hello")` does not contain a newline `\n` and output is redirected to a file, C standard I/O buffers the text in user space. During `fork()`, the unflushed buffer is cloned into the child, causing `"Hello"` to be printed twice as many times as expected! (Use `fflush(stdout)` before further forks when observed output must match the abstract print-call count; a newline alone does not flush a fully buffered redirected stream).
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+The $2^k$ rule requires $k$ successful unconditional forks reached by every current process. For conditionals, construct separate paths and apply short-circuit rules before counting. The reusable skill is tracking which execution reaches which call, not identifying how many times the word `fork` appears.
 
-Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
-
-## Related Concepts
-
-- [[CPU Scheduling Principles and Criteria]]
-- [[Deadlock Fundamentals and Coffman Conditions]]
-
----
+- [[Process Creation and Termination Operations]]
 
 ## Source
 

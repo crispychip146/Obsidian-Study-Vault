@@ -12,26 +12,13 @@ order: 37
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Consistency says an estimator learns from increasing data: for every fixed tolerance $\epsilon>0$, the chance that $\hat\theta_n$ misses $\theta$ by more than $\epsilon$ tends to zero. It is a statement about a sequence of estimation rules, not just one sample size.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Estimator Consistency and Convergence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Unbiasedness answers a different question. A rule that always uses $X_1$ may have the correct expectation but ignore all later data, so its distribution never tightens. A biased rule can still be consistent if its bias vanishes and its variability also shrinks.
 
----
-
-## Developing the Idea
-
-Consistency is the ultimate "sanity check" of any statistical estimator:
-- With 10 data points, your estimate might be moderately noisy.
-- With 1,000 data points, your estimate should be much closer to the truth.
-- With $1,000,000$ data points, the probability that your estimate differs from the true parameter by any noticeable amount $\epsilon$ approaches zero.
-
-If an estimator is not consistent, collecting more data does not guarantee that you will learn the truth. In modern statistics, **consistency is considered far more important than unbiasedness**. Unbiasedness is merely a finite-sample property that can be easily corrected, whereas inconsistency indicates a fundamentally flawed procedure.
-
----
-
----
+One convenient sufficient route is $E[(\hat\theta_n-\theta)^2]\to0$. Apply Markov to the squared error to bound the probability of a fixed error. Through [[Bias-Variance Decomposition]], vanishing bias and variance imply this condition. The reverse implication from consistency to vanishing MSE requires additional control of rare large errors.
 
 ## Definition
 
@@ -44,8 +31,6 @@ which means that for every tolerance threshold $\epsilon > 0$:
 $$\lim_{n \to \infty} P_\theta\left(\lvert \hat{\theta}_n - \theta \rvert > \epsilon\right) = 0$$
 or equivalently,
 $$\lim_{n \to \infty} P_\theta\left(\lvert \hat{\theta}_n - \theta \rvert \le \epsilon\right) = 1$$
-
----
 
 ---
 
@@ -66,8 +51,6 @@ $$\lim_{n \to \infty} E[(X_n - X)^2] = 0$$
 *Intuition:* The average squared Euclidean distance between $X_n$ and $X$ shrinks to zero.
 
 ---
-### Fundamental Implication: Quadratic Mean Implies Probability
-
 ### Theorem
 If $X_n \xrightarrow{qm} X$, then $X_n \xrightarrow{P} X$.
 
@@ -158,30 +141,7 @@ $$\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Confusing almost sure convergence with convergence in probability:**
    Consistency requires convergence in probability ($\xrightarrow{P}$). Strong consistency requires almost sure convergence ($\xrightarrow{\text{a.s.}}$), which is a strictly stronger condition.
@@ -190,11 +150,7 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
-
 ## Exam Relevance
-
-### Exam Relevance
 
 Exam questions often test:
 1. Proving that an estimator is consistent using the $\text{MSE} \to 0$ theorem.
@@ -203,36 +159,14 @@ Exam questions often test:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Convergence in probability, almost sure convergence, and quadratic-mean convergence are different strengths of control. [[Problem — Unbiased yet Inconsistent Estimator Analysis]] demonstrates why a correct average alone is not enough.
 
-- [[Point Estimation]]
+## Related notes
+
 - [[Bias-Variance Decomposition]]
-- [[Confidence Intervals and Confidence Sets]]
-- [[Maximum Likelihood Estimation]]
-
----
-
----
-
-## Prerequisites
-
-- [[Point Estimation]]
-- Markov Inequality and Probability Bounds
-
----
-
----
-
-## Problems
-
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
-- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
----
-
----
 
 ## Sources
 

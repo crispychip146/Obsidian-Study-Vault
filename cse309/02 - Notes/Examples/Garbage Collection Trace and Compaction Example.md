@@ -12,8 +12,6 @@ order: 30
 
 ---
 
----
-
 ## Problem
 
 Consider a program executing with a heap of 100 memory units. The heap currently contains 6 allocated objects:
@@ -36,27 +34,15 @@ Heap space `[80 .. 99]` is currently unallocated.
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+The object table is a pointer graph, not merely an address diagram. Start from O1 and follow O1→O3→O5. Those three objects survive. O2 and O4 point to each other, but have no path from a root, so their cycle is garbage by [[Trace-Based Garbage Collection Algorithms]].
+
+Mark-and-sweep returns their regions and O6's region to the free pool without moving O1, O3, or O5. Compaction places the 45 live units consecutively, but must rewrite every pointer affected by relocation.
+
+For the copying comparison, use a separate hypothetical destination region with enough capacity. The original example occupies addresses through 79, so it cannot already be a valid heap with only [0,49] as a 50-unit active semispace. Treating half the stated 100-unit region as its existing from-space would contradict the initial layout.
+
+[[Copying Garbage Collection Algorithm]] then copies O1, O3, and O5, updating pointers through forwarding addresses. Different collection methods preserve the same reachable graph while producing different free-space layouts.
 
 ### Simulation 1: Mark-and-Sweep
 
@@ -113,65 +99,30 @@ Address: 0         10         30         45                                100
 ---
 ### Simulation 3: Cheney's Copying Collector
 
-Let total memory 100 be split into two 50-unit semispaces:
-- `From-space`: addresses `[0 .. 49]`
-- `To-space`: addresses `[50 .. 99]`
+The stated object layout cannot fit in a 50-unit active semispace. For this comparison, retain the original `[0 .. 99]` region as from-space and reserve a separate 100-unit to-space `[100 .. 199]`. This explicitly changes the memory reservation for part 3, while keeping the input object graph and sizes unchanged.
 
-1. Initial state in To-space: `scan = 50`, `free = 50`.
-2. **Copy Root $O_1$:**
-   - Copy $O_1$ (size 10) to address `50`.
-   - `free` advances to $50 + 10 = 60$.
-   - Old $O_1$ gets forwarding pointer $50$. Root updated to $50$.
-3. **Scan Object at `50` ($O_1$):**
-   - Inspect child pointer $O_3$ (size 20).
-   - Copy $O_3$ to address `60`; `free = 80`.
-   - $O_1$'s child pointer updated to $60$. Old $O_3$ gets forwarding pointer $60$.
-   - `scan` advances to `60`.
-4. **Scan Object at `60` ($O_3$):**
-   - Inspect child pointer $O_5$ (size 15).
-   - Copy $O_5$ to address `80`; `free = 95`.
-   - $O_3$'s child pointer updated to $80$. Old $O_5$ gets forwarding pointer $80$.
-   - `scan` advances to `80`.
-5. **Scan Object at `80` ($O_5$):**
-   - No pointers $\implies$ `scan` advances to `95`.
-6. `scan == free == 95`: Collection terminates!
-7. To-space has contiguous live objects in `[50 .. 94]`, with 5 units remaining before next swap.
+| Event | Destination/action | `scan` after event | `free` after event |
+|---|---|---|---|
+| Initialize | Empty to-space | 100 | 100 |
+| Copy root O1 | O1 occupies `[100 .. 109]`; root becomes 100 | 100 | 110 |
+| Scan O1 | Copy O3 to `[110 .. 129]`; rewrite O1's pointer to 110 | 110 | 130 |
+| Scan O3 | Copy O5 to `[130 .. 144]`; rewrite O3's pointer to 130 | 130 | 145 |
+| Scan O5 | No child pointers | 145 | 145 |
 
----
-
----
+Each old live object stores its forwarding address. `scan == free` means every copied object has been scanned. Swap the regions' roles; the new active region has 45 live units and 55 free units. The old region becomes the destination for the next collection.
 
 ## Result
 
-The compilation pass finishes with verified intermediate representations and correct register assignments.
+All three methods retain O1, O3, and O5. Sweep leaves separate holes; compaction and the amended copying setup produce contiguous survivors. The copying setup requires additional reserved destination memory rather than splitting the inconsistent original layout in half.
 
----
+## What to carry forward
 
-## Why This Works
+Verify live size 10+20+15=45 and dead allocated size 15+10+10=35. Initial unallocated space contributes another 20 units. A moving collector must preserve graph edges as well as those totals.
 
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Trace-Based Garbage Collection Algorithms]]
+- [[Copying Garbage Collection Algorithm]]
 
 ## Sources
 

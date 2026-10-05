@@ -12,8 +12,6 @@ order: 24
 
 ---
 
----
-
 ## Problem
 
 Consider a concurrent system with:
@@ -31,27 +29,15 @@ Consider a concurrent system with:
 
 ---
 
----
-
-## Given
-
-- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
-
----
-
-## Required
-
-- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
-
----
-
 ## Solution
+
+Track two things in the bounded-buffer code: **permissions** and **stored data**. An empty-slot wait reserves room before a producer modifies the buffer. A full-item wait reserves an item before a consumer removes it. The mutex protects the indices and the actual insertion or removal.
+
+For an illustrative capacity-three buffer, begin with `empty=3`, `full=0`, and an unlocked mutex. A producer takes one empty permission, enters the protected update, inserts the item, leaves, then posts a full permission. A consumer follows the reverse transfer: take full, remove under the mutex, then post empty.
+
+The transfer is why wait and signal order matters. Posting `full` before the item exists can let a consumer observe an unfinished insertion. Holding `mutex` while waiting on a zero `empty` count can block the consumer needed to free space.
+
+[[Classic Synchronization Solutions]] gives the pattern; this trace shows the pattern's state changes. At quiescent points, available empty plus full permissions equal capacity. During an operation, a permission can be held by a thread between its wait and corresponding post, so the raw counter sum alone is not the full invariant.
 
 ### 1. Chronological Step-by-Step Execution Trace
 
@@ -100,8 +86,6 @@ Below is a detailed time trace demonstrating process synchronization, buffer fil
 
 ---
 
----
-
 ### 2. Semaphore State Matrix
 
 | Time | Active Process | Action Taken | `mutex` | `empty` | `full` | `empty` Queue | `full` Queue | Buffer State `[0, 1, 2]` |
@@ -113,8 +97,6 @@ Below is a detailed time trace demonstrating process synchronization, buffer fil
 | $t_4$ | $P_2$ | `wait(empty)` $\to$ BLOCKED | 1 | **-1** | 3 | $\{P_2\}$ | $\emptyset$ | `['A', 'B', 'C']` |
 | $t_5$ | $C_1$ | Removes `'A'`; signals `empty` | 1 | **0** | 2 | $\emptyset$ ($P_2$ woken) | $\emptyset$ | `[ - , 'B', 'C']` |
 | $t_6$ | $P_2$ | Inserts `'D'` into slot 0 | 1 | 0 | 3 | $\emptyset$ | $\emptyset$ | `['D', 'B', 'C']` |
-
----
 
 ---
 
@@ -191,39 +173,13 @@ int main() {
 
 ---
 
----
+## What to carry forward
 
-## Result
+Count in-flight reservations as well as available permissions. Check initialization, buffer-index updates, release order, and error paths. POSIX examples are implementation illustrations; successful waits and appropriate handling of interrupted calls are assumptions of the simplified trace.
 
-The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
+## Related notes
 
----
-
-## Why This Works
-
-Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
-
----
-
-## Common Mistakes
-
-- Overlooking state changes between execution phases.
-- Incorrectly calculating intermediate residual capacities or queue offsets.
-
----
-
-## General Method
-
-Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
-
----
-
-## Related Concepts
-
-- [[Operating System Structures and Functions]]
-- [[Process Concepts and Memory Layout]]
-
----
+- [[Classic Synchronization Solutions]]
 
 ## Sources
 

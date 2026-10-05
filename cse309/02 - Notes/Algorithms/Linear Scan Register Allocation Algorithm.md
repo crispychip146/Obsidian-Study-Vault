@@ -12,199 +12,22 @@ order: 45
 
 ---
 
----
+## Building the idea
 
----
+Linear scan visits intervals in start order and maintains an **active** set whose registers are currently occupied. Before handling a new interval, expire those whose endpoints are already past, releasing their registers.
 
----
+If a register is free, assign it. If all are occupied, compare the new interval's end with the latest end among active intervals. The basic heuristic keeps the intervals ending sooner and spills the one ending latest, hoping to free capacity sooner. It is a heuristic, not a proof of globally minimum spill cost.
 
----
+[[Live Ranges and Live Intervals in Register Allocation]] explains the approximation being allocated. With closed intervals [s,e], an interval ending at e still overlaps one starting at e, so the expiration test is `end < start`. A half-open convention would use a different test.
 
-## The Problem and Earlier Tools
-
-While graph coloring produces near-optimal register allocation, building the interference graph takes $O(V^2)$ time and graph coloring is NP-hard. In **Just-In-Time (JIT) compilers** (such as Java JVM HotSpot C1, JavaScript V8, and .NET Core CLR), compilation occurs during program execution. Spending milliseconds on complex graph coloring introduces noticeable latency.
-
-**Massimiliano Poletto and Vivek Sarkar (1999)** invented **Linear Scan Register Allocation**:
-- Replaces interference graphs with **1-dimensional live intervals** $[s, e]$.
-- Processes intervals in a single linear pass sorted by starting point.
-- Achieves **$O(V \log R)$ or $O(V)$ time complexity**!
-- Generates code that runs within $12\%$ of the quality of full graph coloring while compiling **orders of magnitude faster**.
-
-```mermaid
-flowchart TD
-    Intervals["Sort Live Intervals by Start Point"] --> Loop["Iterate Through Each Interval i"]
-    Loop --> Expire["expireOldIntervals(i): Free registers whose intervals ended"]
-    Expire --> CheckCapacity{"Active Registers == K?"}
-    CheckCapacity -->|"No (Free Register Available)"| Allocate["Assign free register to i; Add i to Active"]
-    CheckCapacity -->|"Yes (Registers Full)"| Spill["spillAtInterval(i): Spill interval with latest end point"]
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-1. `intervals`: List of all variable intervals $[start_i, end_i]$, sorted in ascending order of $start_i$.
-2. `active`: A list of currently active intervals that currently hold physical registers, maintained in **ascending order of their end points** ($end_j$).
-3. `R`: The number of available physical registers.
-4. `free_registers`: A pool of currently unassigned hardware registers.
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+Maintain active order by end, free-register ownership, and each interval's storage assignment. A victim's register is transferred only after the required spill handling preserves its value.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 The algorithm transitions through defined phases.
 
 ---
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Algorithmic Implementation
 
@@ -269,20 +92,6 @@ def linear_scan_register_allocation(intervals, R):
 
 ---
 
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 - **Sorting Intervals:** $O(V \log V)$, where $V$ is the number of variables.
@@ -292,28 +101,7 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ---
 
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
 ## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
 
 ### Key Mechanics: Why Spill the Latest End Point?
 
@@ -327,86 +115,24 @@ Spilling the variable whose lifetime extends **farthest into the future**:
 
 ---
 
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Linear Scan Register Allocation Algorithm on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+[[Linear Scan Register Allocation Step-by-Step Example]] shows how each new interval changes the state. Sorting and active-set operations determine complexity; “linear scan” does not remove a separate sorting cost or imply every implementation is strictly O(V).
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
 - [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Linear Scan Register Allocation Step-by-Step Example]]
 
 ## Sources
 

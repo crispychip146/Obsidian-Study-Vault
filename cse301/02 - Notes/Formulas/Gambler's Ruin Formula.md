@@ -12,19 +12,13 @@ order: 73
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Let $h_i$ be the probability of reaching fortune $N$ before zero when starting at $i$. The boundary values are $h_0=0$ and $h_N=1$. Condition on the first round to obtain $h_i=ph_{i+1}+qh_{i-1}$, with $p+q=1$.
 
-What analytical relationship or closed-form expectation governs Gambler's Ruin Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+The recurrence says each interior success probability averages its neighboring values according to the next step. For $p=q$, its increments are equal, so the boundary conditions force $h_i=i/N$. For unequal positive $p$ and $q$, successive increments form a geometric progression with ratio $q/p$, giving $h_i=[1-(q/p)^i]/[1-(q/p)^N]$.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Gambler's Ruin Formula compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+Check the extremes: zero starting wealth cannot win and full wealth has already won. A positive drift raises success probability above the initial wealth fraction, but does not remove the risk of an early losing run.
 
 ## Formula
 
@@ -55,8 +49,6 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -71,8 +63,6 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
----
-
 ## Conditions
 
 1. **Absorbing Boundaries:** States $0$ and $N$ are absorbing: $P_{00} = 1$ and $P_{NN} = 1$. Once reached, the game halts immediately.
@@ -83,11 +73,7 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 - **Fair Game ($p = 1/2$):** In a fair coin-toss game, win probability is strictly proportional to capital share: $P_i = i/N$. If you bring $20\%$ of the total bankroll to the table, your chance of taking all the money is exactly $20\%$.
 - **Compounding Geometric Advantage ($p \neq 1/2$):** When $p > 1/2$, the ratio $q/p < 1$. As fortune $i$ increases, $(q/p)^i$ decays exponentially toward 0, making your win probability surge rapidly toward 1. A tiny statistical edge compounds powerfully over time.
@@ -97,11 +83,7 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 
 ---
 
----
-
 ## Derivation
-
-### Derivation
 
 Let $P_i = P(\text{fortune reaches } N \mid X_0 = i)$.
 
@@ -161,11 +143,7 @@ Substituting $P_1$ back into the formula for $P_i$:
 
 ---
 
----
-
 ## Example
-
-### Example
 
 Patty and Max play a coin-tossing game.
 - Patty wins each flip with probability $p = 0.6$ (hence $q = 0.4$).
@@ -184,11 +162,7 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Confusing Total Fortune ($N$) with Opponent's Fortune ($M$):** $N$ is the total sum of money in play ($N = i_{\text{player}} + i_{\text{opponent}}$). If the opponent has $10$ coins and you have $5$, then $N = 15$, not $10$.
 - **Inverting the Ratio $q/p$:** Using $p/q$ instead of $q/p$. Remember: $q$ (loss probability) is in the numerator!
@@ -197,34 +171,13 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Problem — Patty and Max Gambler's Ruin]] inserts the starting wealth and bias. Handle $p=0$ or $p=1$ directly rather than using a formula with undefined ratios.
 
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-- [[Stochastic Process]]
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Conditional Probability and Independence|Conditional Probability]]
-
----
-
----
-
-## Problems
+## Related notes
 
 - [[Problem — Patty and Max Gambler's Ruin]]
-
----
-
----
 
 ## Sources
 

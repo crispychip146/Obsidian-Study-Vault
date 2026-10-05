@@ -12,119 +12,17 @@ order: 2
 
 ---
 
----
+## Building the idea
 
----
+An expression's value often becomes known after its children have been evaluated. A declaration's type may be known before its identifier list is processed. These are different directions of information flow.
 
----
+A **synthesized attribute** is computed for a production's left-hand-side occurrence from the permitted information at that node and its children. An **inherited attribute** supplies context to a right-hand-side occurrence from the parent or sibling occurrences, according to the SDD's rules.
 
----
+In an illustrative declaration `int a,b`, the type comes from `int` and must reach both identifiers. The identifiers cannot infer it from their names. In an illustrative arithmetic expression, each leaf contributes a value and the parent combines it. [[Syntax-Directed Definitions and Translation Schemes]] describes both using attributes; the distinction explains why their evaluation schedules differ.
 
-## Starting Point and the Problem
-
-To truly feel why we have two distinct types of attributes, consider how information naturally flows in any human hierarchy—such as a large organization:
-
-```mermaid
-flowchart TD
-    subgraph UpwardFlow ["1. Bottom-Up Information Flow (Synthesized)"]
-        direction BT
-        Worker1["Worker 1 (Value: 2)"] --> Manager["Manager (Computes 2 + 3)"]
-        Worker2["Worker 2 (Value: 3)"] --> Manager
-        Manager --> VP["VP / Root (Calculates Total: 5)"]
-    end
-
-    subgraph DownwardFlow ["2. Top-Down & Lateral Information Flow (Inherited)"]
-        direction TB
-        CEO["CEO: 'The type for this declaration is FLOAT'"] --> DeptLead["Dept Lead (Holds type 'float')"]
-        DeptLead -->|"Passes context to right"| Emp1["Variable 'x' (Receives 'float')"]
-        Emp1 -->|"Passes context to right"| Emp2["Variable 'y' (Receives 'float')"]
-        Emp2 -->|"Passes context to right"| Emp3["Variable 'z' (Receives 'float')"]
-    end
-```
-
-### The Two Computational Needs of a Programming Language:
-1. **Evaluating Expressions (Bottom-Up):**
-   When you write `x = 2 + 3 * 4`, the value of `3 * 4` must be computed *before* you can add `2`. The smaller components report their results up to the larger components. This is **Synthesis** (bottom-up aggregation).
-2. **Propagating Context & Types (Top-Down & Sideways):**
-   When you write `float a, b, c;`, look at the token `float`. It appears once, at the far left. The identifiers `a`, `b`, and `c` have no idea what data type they are supposed to be! They cannot "synthesize" their type from below because they have no children. They must **inherit** their data type from the context established to their left. This is **Inheritance** (top-down and lateral context sharing).
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Let $A \longrightarrow X_1 X_2 \dots X_n$ be a production in a context-free grammar.
-
-```mermaid
-flowchart TD
-    subgraph Synthesized ["Synthesized Attribute: A.s"]
-        direction BT
-        X1["Child X1"] --> A1["Parent Head: A.s"]
-        X2["Child X2"] --> A1
-        Xn["Child Xn"] --> A1
-        A_other["Parent A's other attributes"] -.-> A1
-    end
-
-    subgraph Inherited ["Inherited Attribute: Xj.i"]
-        direction TB
-        ParentA["Parent Head: A.inh"] --> TargetXj["Child Body: Xj.i"]
-        SiblingLeft["Left Siblings: X1, ..., Xj-1"] --> TargetXj
-        Xj_other["Xj's other attributes"] -.-> TargetXj
-    end
-```
-
-### 1. Synthesized Attribute
-An attribute $A.s$ associated with the head of a production $A$ is **synthesized** if its value is defined by a semantic rule:
-$$A.s = f(X_1.a_1, X_2.a_2, \dots, X_n.a_n, A.a_{\text{other}})$$
-- **Defined at:** The **head (LHS)** of the production ($A$).
-- **Depends on:** The attribute values of the grammar symbols $X_1, \dots, X_n$ on the **body (RHS)**, and potentially other attributes of $A$ itself.
-- **Terminal Symbols:** Terminals can have synthesized attributes, but they are computed **exclusively by the Lexical Analyzer** (e.g., `digit.lexval = 5`, `id.name = 'count'`).
-
----
-
-### 2. Inherited Attribute
-An attribute $X_j.i$ associated with a body symbol $X_j$ ($1 \le j \le n$) is **inherited** if its value is defined by a semantic rule:
-$$X_j.i = f(A.a, X_1.a_1, X_2.a_2, \dots, X_{j-1}.a_{j-1}, X_j.a_{\text{other}})$$
-- **Defined at:** A **body symbol (RHS)** of the production ($X_j$).
-- **Depends on:** The inherited attributes of the **head non-terminal $A$**, and the attributes of the **sibling symbols** appearing to the left or right of $X_j$.
-- **Terminals CANNOT have inherited attributes!** Why? (See the Lexer Factory Proof below).
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Synthesized and Inherited Attributes** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Attribute direction describes dependencies, not a requirement to move physical memory up or down a tree.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Architectural Comparison: Synthesized vs. Inherited
 
@@ -139,14 +37,6 @@ $$X_j.i = f(A.a, X_1.a_1, X_2.a_2, \dots, X_{j-1}.a_{j-1}, X_j.a_{\text{other}})
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
 ### The Lexer Factory Proof: Why Terminals Cannot Inherit
 
 Students frequently ask on exams: *"Why can non-terminals have inherited attributes, but terminals cannot?"*
@@ -160,116 +50,7 @@ Think of the compiler front end as a two-stage assembly line:
 
 ---
 
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 ### The Danger Zone: Circular Dependency Traps
 
@@ -297,31 +78,9 @@ This is why the compiler community invented the **L-Attributed restriction**: in
 
 ---
 
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### Deep Walkthrough: Inherited Attributes in Type Declarations
 
@@ -376,39 +135,14 @@ Without inherited attributes, handling this declaration would require awkward mu
 
 ---
 
----
-### Exam Relevance
+## What to carry forward
 
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
+Build the dependency graph before choosing a traversal. [[S-Attributed and L-Attributed SDDs]] gives restrictions that make particular evaluation orders possible. An unrestricted inherited rule can depend on a right sibling; L-attributed rules restrict such dependencies.
 
----
-
----
-
----
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[S-Attributed and L-Attributed SDDs]]
 
 ## Sources
 

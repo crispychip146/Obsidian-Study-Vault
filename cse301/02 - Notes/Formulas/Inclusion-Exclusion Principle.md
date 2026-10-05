@@ -12,19 +12,13 @@ order: 3
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Imagine counting students who take either statistics or operating systems. Adding the two class sizes counts every student enrolled in both classes twice. Subtracting the intersection once leaves each student counted exactly once. The probability version uses the same bookkeeping with weights instead of headcounts.
 
-What analytical relationship or closed-form expectation governs Inclusion-Exclusion Principle, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+For three events, subtracting all pairwise intersections removes a student in all three classes three times after adding them three times. Their net count becomes zero, so we add the triple intersection back once. More generally, an outcome belonging to $r$ events contributes $\binom r1-\binom r2+\cdots+(-1)^{r+1}\binom rr=1$.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Inclusion-Exclusion Principle compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+That alternating sum explains the signs rather than asking you to memorize them. Choose a simple family of overlapping events whose union describes the target, then count each intersection. [[Derangements and Card Matching Example]] uses “position $i$ is correctly matched” as that family.
 
 ## Formula
 
@@ -39,8 +33,6 @@ where $S_k$ is the sum of the probabilities of all distinct $k$-way intersection
 $$S_k = \sum_{1 \le i_1 < i_2 < \dots < i_k \le n} P(A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_k})$$
 
 There are $\binom{n}{k}$ terms in each sum $S_k$, yielding a total of $2^n - 1$ terms.
-
----
 
 ---
 
@@ -65,15 +57,6 @@ $\blacksquare$
 
 ---
 
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
-
----
-
 ## Intuition
 
 ### Bonferroni Inequalities (Truncation Bounds)
@@ -90,17 +73,7 @@ In general, stopping after an **odd** number of sums gives an **upper bound**, w
 
 ---
 
----
-
-## Derivation
-
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
-
----
-
 ## Example
-
-### Application Examples
 
 ### 1. The Montmort Matching Problem (Derangements)
 A deck of $n$ numbered cards ($1, 2, \dots, n$) is shuffled. A match occurs at position $i$ if card $i$ is at the $i$-th position.
@@ -119,36 +92,13 @@ Remarkably, for $n \ge 7$, this probability is essentially constant!
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+Inclusion-exclusion is exact, but many intersections can make it expensive. Truncating it gives alternating upper and lower bounds; it does not generally give an exact answer.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Probability Axioms and Naive Probability]] — Axiomatic basis.
-- [[Derangements and Card Matching Example]] — Full step-by-step example.
-- [[Linearity of Expectation and Indicator Random Variables Example]] — Exploitation of indicator algebra.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Derangements and Card Matching Example]]
 
 ## Sources
 

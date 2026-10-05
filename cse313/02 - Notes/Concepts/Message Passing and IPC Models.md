@@ -12,33 +12,15 @@ order: 22
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+[[Threads and Multithreading Models]] allows activities to communicate through shared memory. Separate processes can instead exchange messages: one sends a piece of information, and the other receives it through a communication channel. This changes the coordination problem from who may access a shared variable to who can send, where a message waits, and when each operation completes.
 
-Shared-memory synchronization primitives (mutexes, semaphores, monitors) assume that all communicating threads share a single, unified physical address space.
+Keep three design choices independent. **Naming:** address a process directly or a mailbox shared by participants. **Blocking:** wait for completion or return immediately under the API's rules. **Buffering:** store messages, store a bounded number, or require sender and receiver to meet.
 
-We want a communication mechanism that operates uniformly whether communicating processes run on the same physical CPU, on a microkernel operating system with disjoint address spaces, or across different computers connected via a local network. The central obstacle is that in distributed environments or isolated address spaces, one process cannot dereference pointers or write to memory belonging to another process.
+A zero-capacity channel illustrates rendezvous: the sender cannot leave a message behind, so handover needs a receiving participant. With a bounded mailbox, the sender can often return after enqueueing even if the receiver has not consumed the message. When it fills, capacity creates backpressure.
 
----
-
-## Developing the Idea
-
-The operating system provides an alternative IPC architecture: **Message Passing**.
-
-Instead of sharing memory, processes communicate by explicitly transmitting self-contained data packets via two standardized kernel primitives:
-1. **`send(destination, &message)`**
-2. **`receive(source, &message)`**
-
-The operating system kernel handles the data copying, synchronization, queuing, and network serialization transparently. Message passing unifies local inter-process communication (pipes, message queues, sockets) with distributed computing.
-
----
-
-## Definition
-
-
-
----
+In the producer-consumer example, blocking receive replaces waiting for a nonempty shared buffer. Blocking send on a full mailbox replaces waiting for an empty slot. The channel implements that coordination; the application's protocol must still define valid messages and their meaning.
 
 ## How It Works
 
@@ -50,8 +32,6 @@ The interface is centered around two fundamental system calls:
 
 ---
 
----
-
 ### 5. UNIX IPC Mechanisms Overview
 
 Modern POSIX operating systems provide concrete message-passing primitives:
@@ -59,11 +39,9 @@ Modern POSIX operating systems provide concrete message-passing primitives:
 | Mechanism | Scope | Directionality | Characteristics |
 |---|---|---|---|
 | **Anonymous Pipe (`pipe()`)** | Parent-child related processes | Half-duplex (unidirectional byte stream) | Uses standard file descriptors; data destroyed once read. |
-| **Named Pipe / FIFO (`mkfifo()`)** | Unrelated processes on same host | Bidirectional or Unidirectional | Exists as a filesystem node; survives process termination. |
+| **Named Pipe / FIFO (`mkfifo()`)** | Unrelated processes on same host | Portably unidirectional; two channels can support two-way traffic | Exists as a filesystem node; survives process termination. |
 | **UNIX Domain Socket (`AF_UNIX`)** | Any process on the same OS host | Full-duplex (bidirectional) | High performance, avoids network stack overhead. |
 | **Network Sockets (`AF_INET`)** | Across distributed network hosts | Full-duplex byte stream / datagrams | Operates over TCP/IP network protocol stack. |
-
----
 
 ---
 
@@ -114,13 +92,13 @@ Communication can be either synchronous or asynchronous:
 - **Non-blocking Receive:** The receiver either retrieves a valid message or immediately receives a null indicator if no message is pending.
 
 > [!NOTE] Rendezvous
-> When **both** `send()` and `receive()` are blocking, the synchronization point is called a **Rendezvous**. Sender and receiver meet at the exact moment of message handover.
+> A **zero-capacity synchronous channel** requires sender and receiver to rendezvous for handover. Both APIs being blocking is insufficient by itself: a buffered send may finish once enqueued, before receipt.
 
 ---
 
 ### 3. Buffering Capacity (Queue Sizing)
 
-Every message channel has an internal buffer maintained by the operating system:
+The communication model specifies a buffering policy:
 
 1. **Zero Capacity (No Buffering):**
    - The queue length is 0.
@@ -134,51 +112,24 @@ Every message channel has an internal buffer maintained by the operating system:
 
 ---
 
----
-
 ## Important Properties and Why They Hold
 
 - **Zero-Sharing Memory Isolation:** Communicating processes do not share any state; memory corruption in one process cannot directly alter memory in the peer process.
 - **Synchronization Coupling Dimensions:**
-  - *Blocking (Synchronous):* `send()` blocks until receiver acknowledges receipt; creates a rendezvous.
+  - *Blocking:* `send()` waits until its API-defined completion condition holds; this may mean enqueueing or synchronous receipt, depending on buffering and protocol.
   - *Non-Blocking (Asynchronous):* `send()` copies message to kernel buffer and returns immediately.
 - **Buffering Invariant:** Systems with zero-capacity buffers require rendezvous; bounded/unbounded buffers allow producer to run ahead of consumer.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
+Blocking send does not universally mean acknowledged consumption; check the API's completion rule. Byte-stream pipes and sockets may not preserve application message boundaries, so protocols need framing. [[Classic Synchronization Solutions]] compares the same cooperation problems using shared-memory primitives.
 
----
+## Related notes
 
-## Exam Relevance
-
-Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
-
----
-
-## Related Concepts
-
-- [[Semaphores and Synchronization Primitives]]
+- [[Threads and Multithreading Models]]
 - [[Classic Synchronization Solutions]]
-- [[Dual-Mode Operation and System Calls]]
-
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
-- [[Operating System Structures and Functions]]
-
----
-
-## Problems
-
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
 
 ## Sources
 

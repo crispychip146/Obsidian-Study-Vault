@@ -12,8 +12,6 @@ order: 78
 
 ---
 
----
-
 ## Problem
 
 Consider a two-state [[Markov Chain]] modeling weather, with states $0$ (Rain) and $1$ (No Rain). The one-step transition probability matrix is:
@@ -29,16 +27,12 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Given
 
 - State space $S = \{0, 1\}$ ($0 = \text{Rain}$, $1 = \text{No Rain}$)
 - Transition probability matrix:
   $$P = \begin{pmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{pmatrix}$$
 - Starting state: $X_0 = 0$
-
----
 
 ---
 
@@ -50,24 +44,11 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Chapman-Kolmogorov Equations]]
-
----
 
 ---
 
@@ -77,18 +58,13 @@ Numerical / Multi-step Matrix Power
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Rain in two days can occur through two routes: rain tomorrow then rain again, or dry tomorrow then rain. Their combined probability is $0.7^2+0.3(0.4)=0.61$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+For four days, use $P^4=(P^2)^2$ or the scalar recurrence $r_{n+1}=0.4+0.3r_n$. Starting from $r_0=1$, it gives $r_n=4/7+(3/7)(0.3)^n$, so $r_4=0.5749$.
 
-### Working Through the Solution
-### Solution
+The formula also separates the stationary part from the transient effect of today's observation. The transient term shrinks geometrically because $|0.3|<1$. It is the recurrence and the chain's properties, not merely solving $\pi P=\pi$, that justify calling $4/7$ the limit here.
 
 ### Step 1: Compute Two-Step Matrix $P^{(2)} = P \cdot P$
 By the [[Chapman-Kolmogorov Equations]], $P^{(2)} = P^2$:
@@ -166,17 +142,6 @@ Exam questions frequently ask for:
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - **Incorrect Element Multiplication:** Computing $(P_{00})^4 = (0.7)^4 = 0.2401$ instead of matrix exponentiation.
@@ -185,27 +150,14 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Chapman-Kolmogorov Equations]] explains summing paths; [[Weather Forecasting Markov Chain Example]] gives the recurrence interpretation. Both routes should agree numerically.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Chapman-Kolmogorov Equations]]
+- [[Weather Forecasting Markov Chain Example]]
 
 ## Source
 

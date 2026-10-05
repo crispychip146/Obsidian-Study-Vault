@@ -12,19 +12,13 @@ order: 36
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Imagine an estimator that repeatedly lands near the wrong target, and another that averages to the right target but scatters widely. Both can have substantial squared error, for different reasons.
 
-What analytical relationship or closed-form expectation governs Bias-Variance Decomposition, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+To separate those reasons, add and subtract the estimator's mean: $\hat\theta-\theta=(\hat\theta-E_\theta[\hat\theta])+(E_\theta[\hat\theta]-\theta)$. The first term fluctuates with mean zero; the second is the fixed bias. Squaring and taking expectations removes the cross term, leaving variance plus squared bias.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Bias-Variance Decomposition compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The subscript $\theta$ means repeated samples are generated under the fixed true parameter. Bias itself may be negative, but its contribution to MSE is nonnegative. Reducing variance can compensate for introducing some bias, which is why an unbiased estimator is not automatically the most accurate under squared loss.
 
 ## Formula
 
@@ -36,8 +30,6 @@ where:
 - $\text{MSE}(\hat{\theta}_n) = E_\theta[(\hat{\theta}_n - \theta)^2]$ is the **Mean Squared Error**.
 - $\text{bias}(\hat{\theta}_n) = E_\theta[\hat{\theta}_n] - \theta$ is the **estimator bias**.
 - $\text{Var}_\theta(\hat{\theta}_n) = E_\theta[(\hat{\theta}_n - E_\theta[\hat{\theta}_n])^2]$ is the **estimator variance**.
-
----
 
 ---
 
@@ -54,8 +46,6 @@ where:
 
 ---
 
----
-
 ## Conditions
 
 1. The second moment of the estimator must exist: $E_\theta[\hat{\theta}_n^2] < \infty$.
@@ -64,11 +54,7 @@ where:
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 Total squared error decomposes cleanly into two orthogonal components:
 1. **Bias squared:** How far off your average estimate is from the true parameter value.
@@ -81,11 +67,7 @@ This identity reveals the fundamental **bias-variance trade-off** in statistics 
 
 ---
 
----
-
 ## Derivation
-
-### Derivation
 
 Let $\bar{\theta}_n = E_\theta[\hat{\theta}_n]$. Note that $\bar{\theta}_n$ is a non-random constant for a fixed $\theta$.
 
@@ -117,11 +99,7 @@ $$\text{MSE}(\hat{\theta}_n) = \text{Var}_\theta(\hat{\theta}_n) + \text{bias}^2
 
 ---
 
----
-
 ## Example
-
-### Example
 
 Suppose $X_1, \dots, X_n \sim N(\mu, \sigma^2)$. We wish to estimate the variance $\sigma^2$.
 Consider two competing estimators:
@@ -144,11 +122,7 @@ Even though $\tilde{\sigma}^2$ is biased, it has strictly **lower MSE** than the
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Forgetting to square the bias:**
    Writing $\text{MSE} = \text{bias} + \text{Var}$ instead of $\text{bias}^2 + \text{Var}$. Notice units: if $\theta$ is in meters, variance and MSE are in $\text{meters}^2$, so bias must be squared.
@@ -157,35 +131,13 @@ Even though $\tilde{\sigma}^2$ is biased, it has strictly **lower MSE** than the
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Estimator Consistency and Convergence]] asks what happens as the sample size grows. MSE tending to zero is sufficient for consistency, but a nonvanishing MSE alone does not disprove convergence in probability.
 
-- [[Point Estimation]]
+## Related notes
+
 - [[Estimator Consistency and Convergence]]
-- [[Maximum Likelihood Estimation]]
-
----
-
----
-
-## Prerequisites
-
-- [[Point Estimation]]
-- Linearity of Expectation and Definition of Variance
-
----
-
----
-
-## Problems
-
-- [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
-- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
----
-
----
 
 ## Sources
 

@@ -12,8 +12,6 @@ order: 17
 
 ---
 
----
-
 ## Problem
 
 A multiprogrammed operating system has a single CPU core and five processes arriving in the ready queue. The arrival times, CPU burst times, and process priorities are listed below:
@@ -43,31 +41,10 @@ A multiprogrammed operating system has a single CPU core and five processes arri
 
 ---
 
----
-
-## Given
-
-- Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
-
----
-
-## Required
-
-- Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
-
----
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
-
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
-- [[Process Control Block and Context Switching]]
 
 ---
 
@@ -79,14 +56,13 @@ Scheduling Simulation / Gantt Chart Analysis
 
 ## Solution
 
-### Understanding the Situation
-Interpret the given problem state, identify all participating entities (processes, resources, semaphores), and establish the operational rules governing their interactions.
+The five algorithms receive identical jobs, so the question isolates the effect of scheduling policy. Begin with one ledger containing arrival, original burst, remaining burst, first start, and completion. Update remaining work after every run; record first start once and completion only when remaining work reaches zero.
 
-### Developing the Key Idea
-Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffman cycle conditions, Gantt timeline rules) and verify that all prerequisites hold.
+For non-preemptive policies, decisions happen when a running burst ends. For SRTF and preemptive priority, also inspect arrivals. A higher-priority arrival can preempt even if it has a longer burst, because priority and burst length are different selection rules.
 
-### Working Through the Solution
-### Detailed Step-by-Step Solutions
+RR needs an ordered queue. The question explicitly puts arrivals at a boundary before the expired job. At $t=3$, this places $P_4$ ahead of the requeued $P_1$. That small rule changes later turns, so it must appear in the trace, not be guessed after drawing the chart.
+
+Use [[Scheduling Metrics and Burst Estimation Formulas]] only after the timeline is settled. As a conservation check, every schedule here supplies 22 units of useful service. With zero overhead and no idle gaps, they all end at $t=22$, even though individual completion and response times differ.
 
 ### Part 1: First-Come, First-Served (FCFS)
 
@@ -98,10 +74,13 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - $t = 21$: $P_5$ executes until completion ($t = 21 + 1 = 22$).
 
 #### Gantt Chart (FCFS):
-```
-|        P1        |    P2    |     P3     |   P4   | P5 |
-0                 10         14           19       21   22
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 10) | $P_1$ |
+| [10, 14) | $P_2$ |
+| [14, 19) | $P_3$ |
+| [19, 21) | $P_4$ |
+| [21, 22) | $P_5$ |
 
 #### Metrics Table:
 
@@ -134,10 +113,13 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
   - $P_3$ runs from $t = 17$ to $t = 22$.
 
 #### Gantt Chart (SJF):
-```
-|        P1        | P5 |   P4   |    P2    |     P3     |
-0                 10   11       13        17           22
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 10) | $P_1$ |
+| [10, 11) | $P_5$ |
+| [11, 13) | $P_4$ |
+| [13, 17) | $P_2$ |
+| [17, 22) | $P_3$ |
 
 #### Metrics Table:
 
@@ -176,10 +158,14 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - $t = 22$: $P_1$ completes ($C_1 = 22$).
 
 #### Gantt Chart (SRTF):
-```
-| P1 |    P2    | P5 |   P4   |     P3     |        P1        |
-0    1          5    6        8           13                 22
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 1) | $P_1$ |
+| [1, 5) | $P_2$ |
+| [5, 6) | $P_5$ |
+| [6, 8) | $P_4$ |
+| [8, 13) | $P_3$ |
+| [13, 22) | $P_1$ |
 
 #### Metrics Table:
 
@@ -218,10 +204,14 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - $t = 22$: $P_5$ completes ($C_5 = 22$).
 
 #### Gantt Chart (Priority):
-```
-| P1 |    P2    |   P4   |        P1        |     P3     | P5 |
-0    1          5        7                 16           21   22
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 1) | $P_1$ |
+| [1, 5) | $P_2$ |
+| [5, 7) | $P_4$ |
+| [7, 16) | $P_1$ |
+| [16, 21) | $P_3$ |
+| [21, 22) | $P_5$ |
 
 #### Metrics Table:
 
@@ -269,10 +259,17 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
   - Runs final 1 ms (until $t = 22$). $P_1$ completes! ($C_1 = 22$).
 
 #### Gantt Chart (RR, $q = 3$):
-```
-|  P1  |  P2  |  P3  |  P4  |  P1  | P5 | P2 |  P3  |     P1     |
-0      3      6      9     11     14   15   16     18           22
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 3) | $P_1$ |
+| [3, 6) | $P_2$ |
+| [6, 9) | $P_3$ |
+| [9, 11) | $P_4$ |
+| [11, 14) | $P_1$ |
+| [14, 15) | $P_5$ |
+| [15, 16) | $P_2$ |
+| [16, 18) | $P_3$ |
+| [18, 22) | $P_1$ |
 
 #### Metrics Table:
 
@@ -309,43 +306,13 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 
 ---
 
-### Result and Interpretation
-The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
+## What to carry forward
 
----
+A smaller quantum does not alter required CPU service. It alters turn order and switching opportunities; a real switching cost can then extend elapsed time. Count actual switches under the stated convention rather than assuming that every unit slice incurs one, especially when only one job remains.
 
-## Reusable Insight
+## Related notes
 
-Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
-
----
-
-## Common Mistakes
-
-- Misinterpreting the initial state vector or indexing offsets.
-- Confusing necessary conditions with sufficient conditions during analysis.
-
----
-
-## Exam Pattern
-
-Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
-
----
-
-## Related Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
-
-## Related Concepts
-
-- [[CPU Scheduling Principles and Criteria]]
-- [[Deadlock Fundamentals and Coffman Conditions]]
-
----
+- [[Scheduling Metrics and Burst Estimation Formulas]]
 
 ## Source
 

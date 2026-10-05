@@ -12,24 +12,13 @@ order: 50
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+The MAP estimate selects a parameter value where the posterior density is highest. Because the posterior's normalizing constant does not depend on the parameter, maximize $L(\theta)\pi(\theta)$, or its logarithm when positive.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum A Posteriori (MAP) Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+This resembles MLE with an additional log-prior term. A prior that favors smaller coefficients, for example, can act like a penalty in an optimization problem. A uniform prior gives the same maximizer as likelihood on its support, but only within that allowed region.
 
----
-
-## Developing the Idea
-
-If the posterior distribution $f(\theta \mid \mathbf{x})$ is a landscape of hills and valleys representing your certainty after seeing the evidence, the **MAP estimate is the highest mountain peak** (the statistical mode).
-
-It answers the question:
-> *"What is the single most probable parameter value given both my prior scientific knowledge and my collected data?"*
-
----
-
----
+A density mode is not a probability assigned to a point in a continuous model. It can also change under nonlinear reparameterization because densities include a Jacobian factor. A posterior mean instead averages the whole posterior and solves a squared-loss decision problem. Neither summary is universally the right answer; choose it to match what the estimate will be used for.
 
 ## Definition
 
@@ -45,8 +34,6 @@ $$\hat{\theta}_{\text{MAP}} = \arg\max_{\theta \in \Theta} \Big[ L_n(\theta) f(\
 
 Taking the natural logarithm, MAP maximizes the sum of the log-likelihood and the log-prior:
 $$\hat{\theta}_{\text{MAP}} = \arg\max_{\theta \in \Theta} \Big[ \ell_n(\theta) + \log f(\theta) \Big]$$
-
----
 
 ---
 
@@ -104,8 +91,6 @@ $$\arg\min_\theta \left[ -\ell_n(\theta) + \frac{1}{b}\lVert\theta\rVert_1 \righ
 This is precisely **Lasso Regression** ($L_1$ regularization), which induces exact sparsity (setting irrelevant coefficients to zero).
 
 ---
-### Important Properties and Limitations
-
 ### Advantages of MAP
 1. **Computational Simplicity:** Finding the mode requires numerical optimization (gradient ascent) rather than high-dimensional integration.
 2. **Prior Incorporation:** Prevents extreme or impossible estimates when sample size $n$ is very small.
@@ -116,35 +101,10 @@ This is precisely **Lasso Regression** ($L_1$ regularization), which induces exa
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - Concluding that MAP and Posterior Mean are always the same. They only coincide when the posterior distribution is symmetric and unimodal.
 - Forgetting that when $\alpha \le 1$ or $\beta \le 1$, the Beta mode can occur at the boundary $0$ or $1$.
-
----
 
 ---
 
@@ -179,30 +139,13 @@ Notice that for a uniform prior ($\alpha = 1, \beta = 1$), the MAP estimator red
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Bernoulli Bayesian Inference with Beta Prior Example]] contrasts mean, MAP, and MLE numerically. For beta posteriors, the interior mode formula needs both shape parameters greater than one.
 
-- [[Bayesian Inference]]
-- [[Maximum Likelihood Estimation]]
-- [[Beta-Binomial Conjugate Updating Formula]]
-- [[Credible Intervals]]
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Bernoulli Bayesian Inference with Beta Prior Example]]
 
 ## Sources
 

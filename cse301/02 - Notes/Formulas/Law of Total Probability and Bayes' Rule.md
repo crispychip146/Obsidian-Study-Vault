@@ -12,19 +12,13 @@ order: 19
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+An observed result can arise by several routes. If $B_1,\ldots,B_m$ partition the population, the event $A$ is split into disjoint pieces $A\cap B_i$. Their probabilities add, giving $P(A)=\sum_i P(A\mid B_i)P(B_i)$.
 
-What analytical relationship or closed-form expectation governs Law of Total Probability and Bayes' Rule, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Bayes' rule reverses the question. A test model may give the chance of a positive result among people with a condition, while we want the chance of the condition among people with a positive result. The joint weight for the condition-and-positive route is divided by the total positive weight over all routes.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Law of Total Probability and Bayes' Rule compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+This denominator is why prevalence matters. Even a small false-positive rate can contribute many positives when the unaffected population is large. Make a probability tree or a table of joint weights before dividing; it keeps the direction of conditioning visible and prevents confusing sensitivity with the desired posterior probability.
 
 ## Formula
 
@@ -54,25 +48,6 @@ where:
 
 ---
 
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
-
----
-
 ## Intuition
 
 ### Component Breakdown & Terminology
@@ -83,14 +58,6 @@ where:
 - **Posterior Probability $P(B_k \mid A)$:** The updated belief in hypothesis $B_k$ after incorporating evidence $A$.
 
 $$\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}$$
-
----
-
----
-
-## Derivation
-
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
 
 ---
 
@@ -116,36 +83,13 @@ $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+[[Bayesian Inference]] applies the same reweighting principle to unknown parameters. Check that the alternatives form an exhaustive, disjoint partition and that the observed event has positive probability.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Conditional Probability and Independence]] — Definition of conditioning and multiplication rule.
-- [[Bayesian Inference]] — Statistical inference paradigm built on Bayes' Rule.
-- [[Monty Hall Problem Example]] — Bayesian solution to the famous game show puzzle.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Bayesian Inference]]
 
 ## Sources
 

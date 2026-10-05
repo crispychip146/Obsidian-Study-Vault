@@ -12,10 +12,9 @@ order: 8
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1d, 2019 Q4b, 2019 Q4c, 2020 Q1c, 2020 Q2c, 2021 Q1b, 2021 Q3c)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q1d, 2019 Q4b, 2019 Q4c, 2020 Q1c, 2020 Q2c, 2021 Q1b, 2021 Q3c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **PCS vs TCS Differentiation & Item Classification (2019 Q4b, 2020 Q1c, 2021 Q3c):**
 >    - **Process Contention Scope (PCS):** Competition for execution time occurs *strictly among threads belonging to the same process*. Scheduled by user-level runtime library onto available LWPs (Many-to-One and Many-to-Many models).
 >    - **Thread Contention Scope (TCS):** Competition occurs *globally across all threads in the entire operating system*. Scheduled directly by the OS kernel onto physical CPU cores (One-to-One model, e.g., Linux Pthreads).
@@ -32,25 +31,15 @@ order: 8
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A process may need several activities at once: receiving input, decoding data, and drawing a window. Giving each activity an entire private address space can make communication expensive. **Threads** let these execution paths share one process's address space and resources while keeping separate registers, stacks, and instruction positions.
 
-Modern CPUs feature multi-core architectures capable of executing multiple instruction streams in parallel. While spawning separate processes enables concurrency, every process requires its own private address space, page tables, open file tables, and PCB.
+Now distinguish who knows about them. With user-level threading, a runtime chooses among its threads. If the kernel sees only one schedulable thread, it can select the process without choosing its individual user threads. The runtime makes that second choice. A blocking system call on the sole kernel thread can then stop all user threads in that model.
 
-We want concurrent tasks within an application (e.g. rendering UI, spell-checking text, and downloading files in a document editor) to cooperate with minimal creation and context-switch overhead, while directly sharing common memory data structures. The central obstacle is that traditional process isolation makes memory sharing slow and cumbersome, requiring explicit IPC channels and frequent kernel boundary crossings.
+With kernel-level threads, the kernel recognizes multiple schedulable execution contexts. Blocking one need not block the others, and separate cores can execute different threads simultaneously. A many-to-many model maps user threads onto several kernel threads, so both scheduling layers participate.
 
----
-
-## Developing the Idea
-
-To enable lightweight concurrency within a single application, the OS decomposes the process abstraction into two separate units:
-1. **Resource Grouping Unit (The Process):** Holds the address space, open files, global variables, and heap memory.
-2. **Execution Unit (The Thread):** Holds only the minimal state needed to execute instructions independently: a Program Counter (PC), CPU registers, and an independent call stack.
-
-All threads belonging to the same process share the identical address space and heap. This enables blazing-fast communication via shared variables, but introduces synchronization risks: threads can overwrite each other's data if not synchronized.
-
----
+This extends [[Process Control Block and Context Switching]]: changing the instruction stream does not always require changing resource ownership. On a single core, switching between threads still happens over time. On multiple cores, independent threads can run in parallel if their mapping allows it.
 
 ## Definition
 
@@ -89,8 +78,6 @@ flowchart TD
         end
     end
 ```
-
----
 
 ---
 
@@ -140,8 +127,6 @@ flowchart TD
 
 ---
 
----
-
 ## Example
 
 A multithreaded web server:
@@ -150,12 +135,6 @@ A multithreaded web server:
   `pthread_create(&tid, NULL, handle_client, (void*)client_sock);`
 - The worker thread reads files from the shared memory cache and writes to the client socket.
 - Context switching between worker threads avoids TLB invalidation because both threads share the same page table.
-
----
-
-## Technical Details
-
-See related modules for microarchitectural implementation details.
 
 ---
 
@@ -179,8 +158,6 @@ See related modules for microarchitectural implementation details.
 
 ---
 
----
-
 ## Exam Relevance
 
 - **Next Step:** How does the degree of multiprogramming and thread concurrency affect total CPU throughput? (See [[CPU Multiprogramming Utilization Formula]]).
@@ -192,28 +169,14 @@ See related modules for microarchitectural implementation details.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+A thread's private stack does not make every object reached from that stack private. Shared heap and global data create the hazards developed in [[Race Conditions and Critical-Section Problem]]. Thread mapping determines who schedules execution; synchronization determines whether shared updates are safe.
 
-- [[Race Conditions and Critical-Section Problem]]
-- [[Semaphores and Synchronization Primitives]]
-- [[Monitors and Condition Variables]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
-
----
-
-## Problems
-
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
+- [[Race Conditions and Critical-Section Problem]]
 
 ## Sources
 

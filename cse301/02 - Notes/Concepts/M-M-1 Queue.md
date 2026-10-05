@@ -12,19 +12,13 @@ order: 85
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+An M/M/1 queue has Poisson arrivals of rate $\lambda$, independent exponential service times of rate $\mu$, and one server. In the usual model there is unlimited waiting room and work-conserving service.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to M-M-1 Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+The customer count is a birth-death chain: arrivals increase it by one at rate $\lambda$, and service completion decreases a positive count by one at rate $\mu$. Memorylessness means we do not need elapsed service time in the state.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, M-M-1 Queue reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+In equilibrium, neighboring-state flow gives $\lambda\pi_n=\mu\pi_{n+1}$, so $\pi_n$ is proportional to $\rho^n$ with $\rho=\lambda/\mu$. This geometric series can be normalized only if $\rho<1$. If arrivals match or exceed service capacity, the infinite-buffer model has no stationary probability distribution of this form. A busy fraction close to one creates large delays because little spare capacity remains to clear random surges.
 
 ## Definition
 
@@ -36,8 +30,6 @@ An **M/M/1 Queue** is the foundational stochastic model of a single-server queue
 - **FIFO Discipline:** Customers are served strictly First-In, First-Out.
 
 Let $X(t)$ denote the number of customers in the system at time $t$. The stochastic process $\{X(t), t \ge 0\}$ is a **Continuous-Time Markov Chain (CTMC)**, specifically a **Birth-Death Process** with state space $\{0, 1, 2, \dots\}$.
-
----
 
 ---
 
@@ -113,8 +105,6 @@ $$P_n = (1 - \rho)\rho^n, \quad n = 0, 1, 2, \dots$$
 > The steady-state number of customers in an M/M/1 queue follows a **Geometric distribution** shifted to include zero, with parameter $1 - \rho$.
 
 ---
-### Derivation of Performance Measures
-
 ### 1. Average Number in System ($L$)
 $$L = E[X] = \sum_{n=0}^\infty n P_n = (1 - \rho)\sum_{n=0}^\infty n \rho^n$$
 Using the geometric derivative identity $\sum_{n=0}^\infty n \rho^n = \rho \frac{d}{d\rho}\left(\sum_{n=0}^\infty \rho^n\right) = \frac{\rho}{(1 - \rho)^2}$:
@@ -157,63 +147,13 @@ As utilization approaches $100\%$, waiting time does **not** increase linearly; 
 
 ---
 
----
+## What to carry forward
 
-## Example
+[[M-M-1 Performance Formulas]] derives summaries from this distribution. Finite capacity changes the normalization and allows a stationary model through loss, even when attempted arrivals exceed service rate.
 
-See worked numerical applications in the linked example notes.
+## Related notes
 
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
-## Exam Relevance
-
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
-
-- [[Queueing Systems and Kendall Notation]]
-- [[Little's Law]]
-- [[PASTA Property and Inspection Paradox]]
-- [[Finite Capacity M-M-1-N Queue]]
 - [[M-M-1 Performance Formulas]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

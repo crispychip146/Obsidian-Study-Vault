@@ -12,19 +12,13 @@ order: 7
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A random experiment produces an outcome; a random variable turns that outcome into a quantity we can study. Two coin flips might produce HT, while a variable $X$ records the number of heads, giving $X=1$. Different outcomes can map to the same value.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Random Variables and Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+The distribution describes how the probability weights move onto values of $X$. Its cumulative distribution function is $F_X(x)=P(X\le x)$: the total probability accumulated up to a threshold. A discrete variable has jumps corresponding to point masses. An absolutely continuous variable has a density whose area over an interval gives its probability; the density height itself is not a probability.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Random Variables and Probability Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Expectation summarizes location and variance summarizes squared spread around that location. Neither replaces the full distribution: two variables can share a mean and variance but have very different tail behavior. We will use [[Law of the Unconscious Statistician (LOTUS)]] to calculate summaries without first finding every transformed distribution.
 
 ## Definition
 
@@ -34,8 +28,6 @@ $$X: S \to \mathbb{R}$$
 Despite the name, a random variable is **neither random nor a variable** in the algebraic sense—it is a **deterministic function** whose input is determined by a random experiment.
 
 The **probability distribution** of $X$ describes the allocation of probabilities across the possible values that $X$ can take in $\mathbb{R}$.
-
----
 
 ---
 
@@ -71,8 +63,6 @@ $$F_X(x) = P(X \le x), \quad \text{for all } x \in \mathbb{R}$$
 | **CDF Connection** | $F_X(x) = \sum_{t \le x} p_X(t)$ (step function) | $F_X(x) = \int_{-\infty}^x f_X(t)\,dt$ (continuous curve) |
 
 ---
-### Expectation and Variance
-
 ### Expectation (Mean)
 The expectation $\mathbb{E}[X]$ represents the probability-weighted average (center of mass) of the distribution:
 - **Discrete:** $\mathbb{E}[X] = \sum_{x} x \, p_X(x)$
@@ -103,27 +93,6 @@ $$\operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}$$
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
 
 ### Edge Cases & Common Pitfalls
@@ -140,8 +109,6 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -153,26 +120,13 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+In formal probability, the outcome-to-number map must be measurable so its events have probabilities. The discrete and density-based cases in this course satisfy that requirement in the usual constructions.
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Law of the Unconscious Statistician (LOTUS)]]
 
 ## Sources
 

@@ -12,8 +12,6 @@ order: 41
 
 ---
 
----
-
 ## Problem
 
 Let $\theta$ be an unknown, fixed real number. Let $X_1, X_2$ be independent random variables with:
@@ -30,16 +28,12 @@ $$C = \begin{cases} \{Y_1 - 1\} & \text{if } Y_1 = Y_2 \\ \left\{\frac{Y_1 + Y_2
 
 ---
 
----
-
 ## Given
 
 - Observation model: $Y_i = \theta + X_i$
 - Perturbations: $X_1, X_2 \overset{\text{iid}}{\sim} \text{Uniform}(\{-1, +1\})$
 - Four equally likely combinations: $(+1, +1), (+1, -1), (-1, +1), (-1, -1)$, each with probability $1/4$.
 - Realized observations: $Y_1 = 15, Y_2 = 17$.
-
----
 
 ---
 
@@ -51,15 +45,13 @@ $$C = \begin{cases} \{Y_1 - 1\} & \text{if } Y_1 = Y_2 \\ \left\{\frac{Y_1 + Y_2
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+The confidence rule in this puzzle covers $\theta$ in three of the four equally likely perturbation cases, so its unconditional coverage is 75%. Check that claim by applying the rule to all four outcomes, rather than interpreting the percentage after seeing one outcome.
+
+Now observe 15 and 17. Under the specified model, each observation is exactly one away from $\theta$. The only parameter compatible with both values is 16. The data therefore identify $\theta$ exactly in this branch, even though the rule's overall coverage is 75%.
+
+There is no contradiction: unconditional coverage averages over branches with different information. On the unequal-observation branch the rule always succeeds; failures occur in one equal-observation branch. The example exposes why a repeated-sample coverage percentage should not automatically be read as a probability statement conditioned on the data you happened to observe.
 
 ### Concepts Used
 
@@ -68,8 +60,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[Credible Intervals]]
 
 ---
-### Solution
-
 ### Step 1: Verification of Coverage Probability $P_\theta(\theta \in C) = 3/4$
 Since $X_1, X_2$ are independent and each takes value $\pm 1$ with probability $1/2$, the joint outcome $(X_1, X_2)$ has 4 equally likely realizations, each occurring with probability $\frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$.
 
@@ -130,8 +120,6 @@ $$P(\theta = 16 \mid \text{data}) = 1.0 \quad (100\%)$$
 
 ---
 
----
-
 ## Result
 
 - Pre-experimental frequentist coverage: $P_\theta(\theta \in C) = 75\%$
@@ -140,13 +128,9 @@ $$P(\theta = 16 \mid \text{data}) = 1.0 \quad (100\%)$$
 
 ---
 
----
-
 ## Why This Works
 
 The confidence coefficient ($75\%$) is a pre-experimental average over all possible future datasets. It reflects the fact that across many random runs, the procedure fails when $(X_1, X_2) = (-1, -1)$. But when the realized data reveal $Y_1 \ne Y_2$, we know with certainty that we are in Rows 2 or 3, where failure is impossible. Frequentist confidence intervals do not condition on the observed ancillary statistic $\lvert Y_1 - Y_2 \rvert$.
-
----
 
 ---
 
@@ -157,23 +141,13 @@ The confidence coefficient ($75\%$) is a pre-experimental average over all possi
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Confidence Intervals and Confidence Sets]] defines the procedure-level guarantee. A posterior conclusion additionally depends on a specified prior and likelihood; do not introduce one silently to reinterpret coverage.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Confidence Intervals and Confidence Sets]]
-- [[Bayesian Inference]]
-- [[Credible Intervals]]
-
----
-
----
 
 ## Sources
 

@@ -12,8 +12,6 @@ order: 15
 
 ---
 
----
-
 ## Problem
 
 Let $T \sim \operatorname{Exp}(\lambda)$ represent the lifetime of an electronic component (or service time at a server), with rate parameter $\lambda > 0$.
@@ -28,27 +26,13 @@ In human terms: If you have already waited $s$ minutes for a service to complete
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Let $T$ be a waiting time with exponential rate $\lambda$. Its survival probability is $P(T>t)=e^{-\lambda t}$. Given that we have already waited $s$, the chance of waiting at least another $t$ is the ratio $P(T>s+t)/P(T>s)$, which simplifies to $e^{-\lambda t}$.
+
+The cancellation explains memorylessness: surviving to time $s$ does not change the distribution of the remaining wait. It does not mean the elapsed time disappears; the total wait is still $s$ plus a fresh exponential residual.
+
+For independent competing exponential clocks, no clock ringing by time $t$ means every clock survives. Multiplying their survival probabilities adds their rates, so the first event time is exponential with rate equal to the sum. This is why queueing state diagrams add outgoing event rates. Independence and constant rates are essential assumptions.
 
 ### Mathematical Proof of Memorylessness
 
@@ -109,42 +93,13 @@ Despite arriving after Alice and Bob, Charlie is the last to leave with probabil
 
 ---
 
----
+## What to carry forward
 
-## Result
+[[M-M-1 Queue]] relies on memorylessness to describe the state using the customer count alone. With general service durations, elapsed service time may also matter.
 
-The mathematical derivation confirms the target probability or estimator value.
+## Related notes
 
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
-
-- [[Continuous Probability Distributions]] — Exponential, Gamma, and Normal distributions.
-- [[M-M-1 Queue]] — Memoryless property guarantees Markovian state transitions.
-- [[PASTA Property and Inspection Paradox]] — How memorylessness affects arrival averages.
-
----
-
----
+- [[M-M-1 Queue]]
 
 ## Sources
 

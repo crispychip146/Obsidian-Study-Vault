@@ -12,8 +12,6 @@ order: 29
 
 ---
 
----
-
 ## Problem
 
 Suppose a fair coin is flipped $n = 100$ times independently. Let $X$ denote the total number of heads observed:
@@ -31,29 +29,13 @@ We will compare the bounds given by:
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
 
-### Step-by-Step Derivations
+We are bounding the same tail using different amounts of information. For $X\sim\operatorname{Binomial}(100,0.5)$ and the event $X\ge75$, the mean is 50 and variance is 25.
+
+Markov uses only nonnegativity and the mean, giving $50/75=2/3$. Chebyshev notices that 75 is 25 away from the mean, giving $25/25^2=0.04$. The one-sided Cantelli bound uses the same variance more efficiently for this particular direction, giving $25/(25+25^2)=1/26$.
+
+Chernoff uses the binomial MGF, hence information about the full distribution and independent-trial structure. Its optimized result is much smaller. These are all upper bounds; none asserts that the true probability equals the bound. Comparing them explains why retaining distributional structure can matter far more than doing additional arithmetic on a coarse bound.
 
 ### Baseline Parameters
 - Mean: $\mu = np = 100 \times 0.5 = 50$
@@ -102,8 +84,6 @@ $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \time
 
 ---
 
----
-
 ## Result
 
 | Method | Information Leveraged | Bound for $P(X \ge 75)$ | Relative Ratio to Exact |
@@ -116,14 +96,6 @@ $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \time
 
 ---
 
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 - **Information Principle:** Every additional statistical moment integrated into an inequality tightens the bound by orders of magnitude.
@@ -131,24 +103,13 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Chernoff Bound]] requires a valid MGF domain and optimization. Choose the weakest tool that already gives the guarantee you need, while distinguishing a rigorous bound from an approximation.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Markov Inequality]] — Derivation and indicator proof.
-- [[Chebyshev Inequality]] — Variance-based concentration.
-- [[Chernoff Bound]] — MGF optimization.
-- [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]] — Multi-tier bounding exercises.
-
----
-
----
+- [[Chernoff Bound]]
 
 ## Sources
 

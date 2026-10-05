@@ -12,82 +12,17 @@ order: 21
 
 ---
 
----
+## Building the idea
 
----
+A procedure's source declaration is one thing; each call creates another **activation** with its own parameters, locals, return location, and saved state. Recursive calls therefore need distinct activation records even though they execute the same code.
 
----
+For conventional synchronous calls, B called by A returns before A's activation ends. The still-active calls form a path through the activation tree, making a stack a natural representation. Push a frame on entry and remove it on return.
 
----
+An activation record stores what this call must remember. The dynamic link relates it to its caller; a static link, when needed for nested lexical scopes, relates it to its enclosing environment. These links can point to different frames.
 
-## Starting Point and the Problem
-
-When you launch an executable binary in an operating system (e.g., typing `./a.out` in Linux or double-clicking an `.exe` in Windows), the OS kernel does not simply dump bytes into RAM. It constructs a **Virtual Memory Space** (typically 4GB on 32-bit architectures or 256TB on 64-bit architectures) managed by hardware page tables:
-- The CPU hardware does not understand high-level concepts like "recursion", "objects", "local variables", or "lexical scope".
-- The compiler is the architect that organizes this flat virtual address space into distinct memory regions, ensuring that procedures can invoke each other, allocate dynamic structures, and recurse infinitely without corrupting program code or clobbering each other's data.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-The runtime address space of a process is partitioned into four major logical zones:
-
-```mermaid
-flowchart TD
-    subgraph Virtual_Memory ["Process Virtual Address Space (0x00000000 to 0xFFFFFFFF)"]
-        direction TB
-        Code["<b>1. Code / Text Segment (Low Addresses)</b><br/>Compiled Machine Instructions · Read-Only · Fixed Size"]
-        Static["<b>2. Static / Data Segment</b><br/>Global Variables · Static Variables · String Literals · Fixed Size"]
-        Heap["<b>3. Heap Segment</b><br/>Dynamic Allocations (malloc, new) · Grows Upward (▲)"]
-        Free["<b>Unallocated Virtual Memory Reservoir</b><br/>Shared Dynamic Expansion Space"]
-        Stack["<b>4. Call Stack Segment (High Addresses)</b><br/>Activation Records (Frames) · Local Variables · Grows Downward (▼)"]
-    end
-    Code --> Static --> Heap --> Free --> Stack
-```
-
-### Why Do the Stack and Heap Grow Toward Each Other?
-This is one of the most brilliant architectural designs in computer history:
-- When writing a program, neither the programmer nor the compiler knows in advance whether the application will be **stack-heavy** (e.g., deep recursion in tree traversal, backtracking) or **heap-heavy** (e.g., allocating large graph datasets, databases).
-- If the operating system partitioned fixed quotas for Stack and Heap (say, 50MB each), a program allocating 60MB of heap would crash with "Out of Memory", even if 49MB of stack space sat completely empty and idle!
-- By anchoring the Heap at the bottom growing **upward** ($\uparrow$) toward higher addresses, and anchoring the Stack at the ceiling growing **downward** ($\downarrow$) toward lower addresses, both dynamic regions share a single large, elastic reservoir of free memory. A program runs out of memory only when the two colliding boundaries meet!
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Run-Time Storage Organization and Activation Records** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Type Expressions and Storage Layout]] provides offsets within a frame. Runtime storage also includes static data and heap objects whose lifetimes do not follow call-return nesting. Escaping closures are an important reason that not every environment can remain solely on the control stack.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Activation Trees: The Mathematics of Procedure Lifetimes
 
@@ -129,9 +64,6 @@ graph TD
 5. By induction over the sequence of calls and returns, the active stack frames always mirror the root-to-leaf path in the activation tree. $\blacksquare$
 
 ---
-
----
-### Technical Details
 
 ### The Anatomy of an Activation Record (Stack Frame)
 
@@ -182,187 +114,14 @@ Why do CPUs have both a Stack Pointer register (`$sp` / `esp` / `rsp`) and a Fra
 
 ---
 
----
-### Important Properties and Why They Hold
+## What to carry forward
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
+[[Calling Sequences and Stack Frame Management]] explains how caller and callee build and remove the frame. The activation-tree stack property assumes the conventional call-return model; coroutines and asynchronous continuations need additional lifetime machinery.
 
----
-### Related Concepts
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Type Expressions and Storage Layout]]
+- [[Calling Sequences and Stack Frame Management]]
 
 ## Sources
 

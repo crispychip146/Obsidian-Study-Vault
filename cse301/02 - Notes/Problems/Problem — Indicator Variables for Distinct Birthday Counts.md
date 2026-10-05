@@ -12,8 +12,6 @@ order: 16
 
 ---
 
----
-
 ## Problem
 
 Consider $k$ individuals whose birthdays are independent and uniformly distributed across $n$ days of the year (where $n = 365$). Let $D$ be the random variable representing the number of distinct days that are the birthday of at least one person in the group.
@@ -25,53 +23,13 @@ Consider $k$ individuals whose birthdays are independent and uniformly distribut
 
 ---
 
----
-
-## Given
-
-- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
-
----
-
-## Required
-
-- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
-
----
-
-## Concepts Tested
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
-
-## Prerequisites
-
-- [[Discrete Probability Distributions]] — Indicators and Bernoulli variables.
-- [[Linearity of Expectation and Indicator Random Variables Example]] — Method of indicators.
-- [[Covariance and Correlation]] — Covariance of indicators and variance of a sum.
-
----
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+The target is the number of distinct birthdays represented, not the number of matching pairs. Let $I_d$ indicate whether day $d$ is occupied. Then the count is $D=\sum_{d=1}^n I_d$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+Under independent uniform birthdays, day $d$ is empty only if every one of the $k$ people avoids it, with probability $a=(1-1/n)^k$. Thus $E[D]=n(1-a)$. This avoids deriving the distribution of $D$.
 
-### Working Through the Solution
-### Full Step-by-Step Solution
+For the variance, two days are jointly occupied unless at least one is empty. Inclusion-exclusion gives $P(I_d=I_e=1)=1-2a+b$, where $b=(1-2/n)^k$. Subtracting $(1-a)^2$ gives covariance $b-a^2$. Occupying one day uses some of the fixed number of draws, which explains this nonpositive dependence. Sum the individual variances and the $n(n-1)$ ordered covariance terms to obtain the formula below.
 
 ### Part 1: Indicator Representation
 For each day $i \in \{1, 2, \dots, n\}$, define the indicator variable:
@@ -157,17 +115,6 @@ $$\operatorname{Var}(D) = \sum_{i=1}^n \operatorname{Var}(I_i) + \sum_{i \ne j} 
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 1. **Forgetting Covariances:** Assuming $\operatorname{Var}(D) = \sum \operatorname{Var}(I_i) = np(1-p)$. This is invalid because the indicators $I_i$ are NOT independent.
@@ -175,27 +122,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Linearity of Expectation and Indicator Random Variables Example]] handles the mean without independence of the indicators. The variance requires the two-day calculation; omitting it loses the occupancy dependence.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Linearity of Expectation and Indicator Random Variables Example]]
 
 ## Source
 

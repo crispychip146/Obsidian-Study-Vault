@@ -12,8 +12,6 @@ order: 40
 
 ---
 
----
-
 ## Problem
 
 Consider the following basic block containing redundant computations and array references:
@@ -39,29 +37,15 @@ Assume that at the exit of this basic block:
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
 
-### Step-by-Step DAG Construction
+The repeated `b+c` at statements 1 and 3 can share a node because b and c still denote their incoming values. After statement 5 assigns b, statement 6's `b+c` has a different operand identity and cannot reuse that earlier addition.
+
+Create leaves for incoming values, such as b0 and d0. Assignment changes labels attached to value nodes, not the historical meaning of those leaves. For `d=a-d`, the right-hand d is the incoming d0; after the instruction, the name d denotes the new subtraction result.
+
+[[DAG Construction and Local Optimization of Basic Blocks]] uses these identities to distinguish real redundancy from repeated spelling. Once live-out names are known, retain the dependencies needed to produce a, b, and f. A dead variable's computation may still be necessary as an ancestor of a live result.
+
+The example consists of scalar assignments; array-store aliasing is a separate issue explored in its linked problem.
 
 ### Step 1: Statement (1) `a = b + c`
 - Create leaf nodes $b_0$ and $c_0$.
@@ -153,39 +137,13 @@ f = b
 
 ---
 
----
+## What to carry forward
 
-## Result
+Delete unused result nodes only after checking whether live nodes depend on them. Reassembled code must preserve the final values of all live-out variables, including names assigned more than once.
 
-The compilation pass finishes with verified intermediate representations and correct register assignments.
+## Related notes
 
----
-
-## Why This Works
-
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
-
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[DAG Construction and Local Optimization of Basic Blocks]]
 
 ## Sources
 

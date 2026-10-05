@@ -12,32 +12,13 @@ order: 38
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A confidence set is a rule that maps random data to a set of plausible parameter values. Its coverage is evaluated before observing the data: for a fixed true $\theta$, how often would this rule produce a set containing $\theta$ across repeated samples?
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Confidence Intervals and Confidence Sets, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Once the data are observed, the realized set is fixed. In the frequentist model, the fixed parameter either belongs to that set or does not; the coverage percentage describes the procedure's repeated-sample behavior. It need not equal a conditional probability of containment for this particular observed dataset.
 
----
-
-## Developing the Idea
-
-A point estimate $\hat{\theta}_n = 34.2$ gives a single guess, but provides zero information about how certain or uncertain that guess is. Could the truth be $34.3$? Could it be $150$?
-
-A confidence interval provides a **region of plausible values** taking into account the sampling error:
-$$\text{Estimate} \pm \text{Margin of Error}$$
-
-### The Critical Conceptual Insight
-In frequentist inference:
-$$\mathbf{C_n \text{ is random; } \theta \text{ is fixed.}}$$
-
-- The true parameter $\theta$ does **not** move. It is an immovable fact of nature.
-- The interval $C_n = (a(\mathbf{X}), b(\mathbf{X}))$ is a random pair of brackets tossed onto the real line like a horseshoe at a peg.
-- In repeated experiments, the brackets land in different positions. In a fraction $1 - \alpha$ of experiments, the random brackets successfully trap the fixed peg $\theta$.
-
----
-
----
+To construct a confidence interval, find a statistic whose distribution is known or approximately known, then invert an event with probability $1-\alpha$. [[Normal-Based Large-Sample Confidence Interval]] uses an approximately standard normal estimation error. More coverage usually requires a wider interval, trading precision for a stronger coverage target.
 
 ## Definition
 
@@ -50,29 +31,16 @@ $$P_\theta(\theta \in C_n) \ge 1 - \alpha \quad \text{for all } \theta \in \Thet
 
 ---
 
----
-
 ## How It Works
 
-### How to Interpret Confidence Intervals
+### Interpreting coverage
 
-### ❌ The Common Incorrect Interpretation
-> *"There is a 95% probability that $\theta$ lies between 31.4 and 37.0."*
+A 95% coverage procedure contains the fixed true parameter with probability at least 0.95 over repeated data generated under its assumptions. Exact 0.95 coverage and approximate large-sample coverage should be distinguished from a lower-bound guarantee.
 
-**Why this is mathematically false in classical frequentist statistics:**
-Once the data have been collected and the numerical endpoints $[31.4, 37.0]$ are calculated, **there is no randomness left**. The fixed true parameter $\theta$ is either inside $[31.4, 37.0]$ or it is not. The true probability is either $1$ or $0$; we simply do not know which. A probability statement about $\theta$ is only valid in [[Bayesian Inference]], where $\theta$ is modeled as a random variable with a prior distribution.
+For one observed interval, coverage is a property of the rule that produced it. It does not automatically supply a posterior probability that the parameter lies in those particular endpoints. Over a finite collection of applications, the observed success fraction is random; it is not guaranteed to be exactly 95%. Approximate procedures also depend on whether their approximation is adequate.
 
-### ⚠️ The Standard Textbook Interpretation
-> *"If we repeat this exact experiment an infinite number of times and compute a 95% confidence interval each time, 95% of those computed intervals will contain the true parameter $\theta$."*
+The practical reading is: use a procedure with the stated calibration and report its assumptions, alongside the realized interval. Calling the repeated-sample interpretation impractical does not justify replacing it with a stronger conditional claim.
 
-While technically correct, this interpretation is impractical because in real life we almost never repeat the exact same experiment under identical conditions.
-
-### ✅ The Better Interpretation (Wasserman's Daily Tracker)
-> *"Suppose that every day of your professional career, you construct a 95% confidence interval for a completely different parameter in an unrelated scientific domain (today a drug cure rate, tomorrow the mass of an exoplanet, the next day a political poll). Over your entire lifetime, exactly 95% of the intervals you produce will successfully contain their respective true parameters."*
-
-This view emphasizes that the confidence coefficient $1 - \alpha$ is a property of the **procedure**, not of any single realized numerical interval.
-
----
 ### Confidence Level vs. Post-Experiment Certainty: The Berger-Wolpert Puzzle
 
 To illustrate that a confidence coefficient is a **pre-data guarantee**, not a measure of posterior certainty once data are observed, consider the celebrated puzzle by Berger & Wolpert (1984):
@@ -93,7 +61,7 @@ $$C = \begin{cases} \{Y_1 - 1\} & \text{if } Y_1 = Y_2 \\ \left\{\frac{Y_1 + Y_2
    Suppose we collect data and observe $Y_1 = 15, Y_2 = 17$.
    Since $Y_1 \ne Y_2$, our rule instructs us to return:
    $$C = \left\{\frac{15 + 17}{2}\right\} = \{16\}$$
-   Because $Y_1 = 15$ and $Y_2 = 17$ differ by $2$, the only possible underlying perturbations are $X_1 = -1$ and $X_2 = +1$ (or vice versa). Hence:
+   Because $Y_1 = 15$ and $Y_2 = 17$ differ by $2$, the only possible underlying perturbations are $X_1 = -1$ and $X_2 = +1$ . Hence:
    $$15 = \theta - 1 \implies \theta = 16 \quad \text{and} \quad 17 = \theta + 1 \implies \theta = 16$$
    We know with **100% mathematical certainty** that $\theta = 16$.
    Yet under frequentist theory, $C$ is still formally labeled a **75% confidence interval**!
@@ -123,34 +91,11 @@ Confidence intervals and two-sided [[Hypothesis Testing Framework|hypothesis tes
 > $$\theta_0 \notin C_n$$
 > is a test with significance level $\alpha$.
 
-Conversely, the set of all null hypotheses $\theta_0$ that are **not** rejected by a size $\alpha$ test forms a $1 - \alpha$ confidence interval for $\theta$.
-
----
-
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+Conversely, the set of all null hypotheses $\theta_0$ that are **not** rejected by a size $\alpha$ test forms a $1 - \alpha$ confidence set for $\theta$; it is an interval only when that acceptance set has interval shape.
 
 ---
 
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Thinking the width of a CI increases with sample size:**
    The margin of error is proportional to $\widehat{\text{se}} \propto 1/\sqrt{n}$. As sample size $n$ increases, the confidence interval becomes narrower (more precise).
@@ -158,8 +103,6 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
    Higher confidence (e.g., $99\%$ vs $95\%$) requires a larger critical value ($z_{0.005} = 2.576$ vs $z_{0.025} = 1.96$), making the interval **wider**. To be more certain of capturing the truth, you must cast a wider net.
 3. **Asserting that two intervals that overlap have no statistically significant difference:**
    Two $95\%$ confidence intervals can slightly overlap even when the difference between the two sample means is statistically significant at the $\alpha = 0.05$ level. A formal two-sample test or difference CI should be constructed instead.
-
----
 
 ---
 
@@ -175,7 +118,7 @@ A headline states:
 - Point estimate: $\hat{p}_n = 0.83$
 - Margin of error: $z_{0.025}\widehat{\text{se}} = 0.04$
 - The computed interval is $[0.83 - 0.04, 0.83 + 0.04] = [0.79, 0.87]$.
-- We have used a measurement procedure that successfully traps the true population proportion $p$ in $95\%$ of all applications.
+- The interval comes from a procedure targeting 95% repeated-sample coverage under the stated sampling assumptions; the realized interval is $[0.79,0.87]$.
 
 ---
 ### Exam Relevance
@@ -195,35 +138,15 @@ Common exam questions include:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Berger-Wolpert Confidence Set Puzzle Example]] separates unconditional coverage from information in the realized data. A [[Credible Intervals|Bayesian credible interval]] instead uses a posterior distribution for the parameter.
 
-- [[Point Estimation]]
+## Related notes
+
 - [[Normal-Based Large-Sample Confidence Interval]]
-- [[Hypothesis Testing Framework]]
-- [[Credible Intervals]]
-- [[Wald Test Statistic]]
-
----
-
----
-
-## Prerequisites
-
-- [[Point Estimation]]
-- Standard Normal Distribution and Quantiles ($z$-scores)
-- Central Limit Theorem
-
----
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Berger-Wolpert Confidence Set Puzzle Example]]
+- [[Credible Intervals|Bayesian credible interval]]
 
 ## Sources
 

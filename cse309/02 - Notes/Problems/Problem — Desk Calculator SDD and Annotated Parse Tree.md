@@ -12,8 +12,6 @@ order: 9
 
 ---
 
----
-
 ## Problem
 
 A compiler frontend engineer is designing an extended arithmetic calculator module that supports addition (`+`) and right-associative exponentiation (`^`). The language syntax and semantics are formalized by the following Syntax-Directed Definition (SDD):
@@ -37,49 +35,15 @@ $$\mathbf{3 + 2 \wedge 3 \wedge 2}$$
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+The exponent production `T -> F ^ T1` makes the right operand another T, so `2^3^2` groups as `2^(3^2)`. That is a structural statement before any numbers are computed.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+Construct the parse tree from the specified grammar, then annotate numeric leaves and work upward. The inner exponent must be evaluated before the outer one, because its value is an input to the outer power rule. Addition at E combines the completed terms afterward.
 
-### Working Through the Solution
-### In-Depth Solution & Pedagogical Walkthrough
+Use [[Syntax-Directed Definitions and Translation Schemes]] to distinguish grammar edges from attribute dependencies. A parse-tree edge says which symbol expands into which children; a dependency arrow says which computed value needs another. The given rules are synthesized, so the child-first schedule is legal by [[S-Attributed and L-Attributed SDDs]].
+
+For the acyclicity argument, follow dependencies from lower tree occurrences to their ancestors. Depth changes consistently, so a dependency path cannot return to its starting occurrence.
 
 ### Part 1: Grammar Architecture & Precedence Analysis
 Before drawing a single node, let us analyze how the grammar reflects arithmetic reality:
@@ -235,17 +199,6 @@ Because the graph is a Directed Acyclic Graph (DAG) with all arrows pointing fro
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
-
----
-
-## Reusable Insight
-
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
 ## Common Mistakes
 
 > [!CAUTION] Trap 1: The Left-Associativity Assumption
@@ -260,27 +213,14 @@ Always follow compiler phase invariants: parse bottom-up or top-down according t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+Right recursion encodes right association here; it does not automatically make every semantic action right-associative. Preserve the production and exponent rule together when explaining the final value.
 
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[S-Attributed and L-Attributed SDDs]]
 
 ## Source
 

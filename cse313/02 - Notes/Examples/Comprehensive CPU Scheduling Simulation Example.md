@@ -12,8 +12,6 @@ order: 16
 
 ---
 
----
-
 ## Problem
 
 Consider a workload of 4 processes arriving at different times with varying CPU burst durations:
@@ -26,7 +24,7 @@ Consider a workload of 4 processes arriving at different times with varying CPU 
 | **$P_4$** | $3\text{ ms}$ | $5\text{ ms}$ | 2 |
 
 **Goal:**  
-Simulate execution, construct ASCII Gantt charts, and compute individual and average **Turnaround Time ($T_{\text{turn}}$)**, **Waiting Time ($T_{\text{wait}}$)**, and **Response Time ($T_{\text{resp}}$)** under four standard algorithms:
+Simulate execution, construct execution timelines, and compute individual and average **Turnaround Time ($T_{\text{turn}}$)**, **Waiting Time ($T_{\text{wait}}$)**, and **Response Time ($T_{\text{resp}}$)** under four standard algorithms:
 1. **First-Come, First-Served (FCFS)**
 2. **Shortest Job First (SJF — Non-Preemptive)**
 3. **Shortest Remaining Time First (SRTF — Preemptive)**
@@ -34,29 +32,15 @@ Simulate execution, construct ASCII Gantt charts, and compute individual and ave
 
 ---
 
----
-
-## Given
-
-- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
-
----
-
-## Required
-
-- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
-
----
-
 ## Solution
 
-### 1. First-Come, First-Served (FCFS)
+Use the workload table to separate two kinds of information: arrival time determines **eligibility**, while burst or remaining time influences **selection**. At $t=0$, only $P_1$ is eligible. Therefore non-preemptive SJF cannot start $P_2$ merely because its burst is shorter.
+
+FCFS keeps $P_1$ running and then follows arrivals. Non-preemptive SJF also keeps it running, but at $t=8$ chooses among all jobs that have arrived. SRTF differs at $t=1$: $P_1$ has 7 units left, while the arriving $P_2$ needs 4, so $P_2$ takes over. That single decision changes several completion times.
+
+For Round Robin, write the queue after every slice. Arriving jobs wait at the tail; a partially served job rejoins when its quantum ends. A finished job disappears. The state trace explains the chart, and the chart explains the metrics using [[Scheduling Metrics and Burst Estimation Formulas]].
+
+All these schedules perform the same 26 units of CPU service under the zero-overhead model. Differences in average waiting come from how that service is distributed among jobs, not from magically doing less work.
 
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: $P_1$ arrives and runs until completion ($t = 8$).
@@ -64,11 +48,12 @@ Analyze initial conditions, verify prerequisite invariants, track state changes 
 - At $t = 12$: $P_3$ runs until completion ($t = 12 + 9 = 21$).
 - At $t = 21$: $P_4$ runs until completion ($t = 21 + 5 = 26$).
 
-```
-Gantt Chart (FCFS):
-|    P1    |   P2   |     P3     |   P4   |
-0          8        12           21       26
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 8) | $P_1$ |
+| [8, 12) | $P_2$ |
+| [12, 21) | $P_3$ |
+| [21, 26) | $P_4$ |
 
 ### Metrics Calculation:
 - **$P_1$:** Completion $C = 8 \implies T_{\text{turn}} = 8 - 0 = 8\text{ ms}, \quad T_{\text{wait}} = 8 - 8 = 0\text{ ms}, \quad T_{\text{resp}} = 0\text{ ms}$
@@ -81,10 +66,6 @@ $$\text{Average Waiting Time} = \frac{0 + 7 + 10 + 18}{4} = \frac{35}{4} = \math
 
 ---
 
----
-
-### 2. Shortest Job First (SJF — Non-Preemptive)
-
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: Only $P_1$ has arrived. $P_1$ is dispatched and runs to completion (non-preemptive!) from $t = 0$ to $t = 8$.
 - At $t = 8$: $P_2 (B=4)$, $P_3 (B=9)$, and $P_4 (B=5)$ are all in the Ready Queue.
@@ -93,11 +74,12 @@ $$\text{Average Waiting Time} = \frac{0 + 7 + 10 + 18}{4} = \frac{35}{4} = \math
   - Shortest is $P_4 \implies P_4$ runs from $t = 12$ to $t = 17$.
 - At $t = 17$: $P_3$ runs from $t = 17$ to $t = 26$.
 
-```
-Gantt Chart (SJF Non-Preemptive):
-|    P1    |   P2   |   P4   |     P3     |
-0          8        12       17           26
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 8) | $P_1$ |
+| [8, 12) | $P_2$ |
+| [12, 17) | $P_4$ |
+| [17, 26) | $P_3$ |
 
 ### Metrics Calculation:
 - **$P_1$:** $C = 8 \implies T_{\text{turn}} = 8 - 0 = 8\text{ ms}, \quad T_{\text{wait}} = 8 - 8 = 0\text{ ms}, \quad T_{\text{resp}} = 0\text{ ms}$
@@ -109,10 +91,6 @@ $$\text{Average Turnaround Time} = \frac{8 + 11 + 24 + 14}{4} = \frac{57}{4} = \
 $$\text{Average Waiting Time} = \frac{0 + 7 + 15 + 9}{4} = \frac{31}{4} = \mathbf{7.75\text{ ms}}$$
 
 ---
-
----
-
-### 3. Shortest Remaining Time First (SRTF — Preemptive)
 
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: $P_1$ starts (remaining: 8).
@@ -129,11 +107,13 @@ $$\text{Average Waiting Time} = \frac{0 + 7 + 15 + 9}{4} = \frac{31}{4} = \mathb
 - At $t = 17$: $P_1$ completes!
   $P_3$ runs from $t = 17$ to $t = 26$.
 
-```
-Gantt Chart (SRTF Preemptive):
-| P1 |   P2   |   P4   |    P1    |     P3     |
-0    1        5        10         17           26
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 1) | $P_1$ |
+| [1, 5) | $P_2$ |
+| [5, 10) | $P_4$ |
+| [10, 17) | $P_1$ |
+| [17, 26) | $P_3$ |
 
 ### Metrics Calculation:
 - **$P_1$:** Completion $C = 17 \implies T_{\text{turn}} = 17 - 0 = 17\text{ ms}$.
@@ -154,10 +134,6 @@ $$\text{Average Waiting Time} = \frac{9 + 0 + 15 + 2}{4} = \frac{26}{4} = \mathb
 
 ---
 
----
-
-### 4. Round Robin (RR with Quantum $q = 4\text{ ms}$)
-
 ### Execution Trace & Gantt Chart:
 - At $t = 0$: Ready queue = $[P_1]$. $P_1$ runs for full quantum $q=4$ (remaining: $8 - 4 = 4$).
   During this interval: $P_2$ arrived at $t=1$, $P_3$ at $t=2$, $P_4$ at $t=3$.
@@ -176,11 +152,16 @@ $$\text{Average Waiting Time} = \frac{9 + 0 + 15 + 2}{4} = \frac{26}{4} = \mathb
   Ready queue = $[P_3]$.
 - At $t = 25$: $P_3$ runs for its remaining $1\text{ ms}$, **completes at $t = 26$**!
 
-```
-Gantt Chart (Round Robin, q = 4):
-|   P1   |   P2   |   P3   |   P4   |   P1   |   P3   | P4 | P3 |
-0        4        8        12       16       20       24   25   26
-```
+| Interval (ms) | Running process |
+|---|---|
+| [0, 4) | $P_1$ |
+| [4, 8) | $P_2$ |
+| [8, 12) | $P_3$ |
+| [12, 16) | $P_4$ |
+| [16, 20) | $P_1$ |
+| [20, 24) | $P_3$ |
+| [24, 25) | $P_4$ |
+| [25, 26) | $P_3$ |
 
 ### Metrics Calculation:
 - **$P_1$:** Completion $C = 20 \implies T_{\text{turn}} = 20 - 0 = 20\text{ ms}, \quad T_{\text{wait}} = 20 - 8 = 12\text{ ms}, \quad T_{\text{resp}} = 0 - 0 = 0\text{ ms}$
@@ -191,8 +172,6 @@ Gantt Chart (Round Robin, q = 4):
 $$\text{Average Turnaround Time} = \frac{20 + 7 + 24 + 22}{4} = \frac{73}{4} = \mathbf{18.25\text{ ms}}$$
 $$\text{Average Waiting Time} = \frac{12 + 3 + 15 + 17}{4} = \frac{47}{4} = \mathbf{11.75\text{ ms}}$$
 $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathbf{4.50\text{ ms}}$$
-
----
 
 ---
 
@@ -207,40 +186,17 @@ $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathb
 
 ### Deep Insight:
 - **SRTF** wins decisively on **average waiting time ($6.50\text{ ms}$)** and **turnaround time ($13.00\text{ ms}$)** because it relentlessly schedules the shortest remaining chunks.
-- **Round Robin** has a higher turnaround time ($18.25\text{ ms}$) because long jobs are interleaved and prolonged, but it guarantees that **every process gets its first response quickly** (average response time drops to $4.50\text{ ms}$), providing the smooth responsiveness human users require!
+- **Round Robin** has a higher turnaround time ($18.25\text{ ms}$) because long jobs are interleaved and prolonged, while reducing mean first-response delay relative to FCFS in this workload to $4.50\text{ ms}$. The SRTF response average here is slightly lower at $4.25\text{ ms}$; responsiveness depends on the workload and policy.
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+Check each job's accumulated intervals against its burst before computing averages. SRTF and RR answer different goals: finishing short remaining work versus giving repeated turns. The comparison table describes this workload; it does not prove that one policy dominates on every workload.
 
-Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Overlooking state changes between execution phases.
-- Incorrectly calculating intermediate residual capacities or queue offsets.
-
----
-
-## General Method
-
-Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
-
----
-
-## Related Concepts
-
-- [[Batch Scheduling Algorithms]] — Formal specifications of FCFS, SJF, and SRTF.
-- [[Interactive Scheduling Algorithms]] — Mechanics of Round Robin and quantum sizing.
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]] — Practice exam problem.
-
----
-
----
+- [[Scheduling Metrics and Burst Estimation Formulas]]
 
 ## Sources
 

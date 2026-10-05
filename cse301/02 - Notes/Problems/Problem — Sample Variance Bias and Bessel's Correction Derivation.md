@@ -12,8 +12,6 @@ order: 48
 
 ---
 
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) random sample from any probability distribution with finite population mean $\mu = E[X_i]$ and finite population variance $\sigma^2 = \text{Var}(X_i) > 0$.
@@ -30,16 +28,12 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 
 ---
 
----
-
 ## Given
 
 - $X_1, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$
 - $E[X_i] = \mu$, $\text{Var}(X_i) = \sigma^2$
 - $E[\bar{X}] = \mu$, $\text{Var}(\bar{X}) = \frac{\sigma^2}{n}$
 - $\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$
-
----
 
 ---
 
@@ -52,8 +46,6 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Point Estimation]]
@@ -63,35 +55,19 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 
 ---
 
----
-
-## Prerequisites
-
-- Linearity of expectation
-- Variance identity: $\text{Var}(Y) = E[Y^2] - (E[Y])^2 \implies E[(Y - E[Y])^2] = \text{Var}(Y)$
-
----
-
----
-
 ## Question Type
 
 - Mathematical Proof & Analytical Derivation
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+The proof becomes simple if we first compare residuals around the fitted center with deviations around the true center. The identity is $\sum_i(X_i-\bar X)^2=\sum_i(X_i-\mu)^2-n(\bar X-\mu)^2$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+The first term has expectation $n\sigma^2$. The subtracted term has expectation $n\operatorname{Var}(\bar X)=\sigma^2$, because $\bar X$ is unbiased and the observations are independent. Hence the residual sum has expectation $(n-1)\sigma^2$; dividing by $n$ gives bias $-\sigma^2/n$ and dividing by $n-1$ gives an unbiased estimator for $n\ge2$.
 
-### Working Through the Solution
-### Solution
+The geometric interpretation is a constraint: residuals around $\bar X$ must sum to zero, so only $n-1$ can vary freely. No Gaussian assumption is needed for the expectation identity, only the stated finite moments and sampling assumptions. Calling the uncorrected estimator an MLE specifically refers to the Gaussian model.
 
 ### Step 1: Algebraic Expansion
 We begin with the definition of the expectation:
@@ -176,17 +152,6 @@ Because $\bar{X}$ is calculated from the sample itself, the data points cluster 
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Forgetting that $\sum (X_i - \mu) = n(\bar{X} - \mu)$, which simplifies the cross-product term.
@@ -194,27 +159,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Normal Distribution Parameter MLE Derivation Example]] explains the likelihood denominator. Bessel's correction removes expected bias; it does not automatically minimize mean squared error.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Normal Distribution Parameter MLE Derivation Example]]
 
 ## Source
 

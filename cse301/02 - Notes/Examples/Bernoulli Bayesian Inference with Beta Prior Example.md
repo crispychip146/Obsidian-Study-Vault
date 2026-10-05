@@ -12,8 +12,6 @@ order: 54
 
 ---
 
----
-
 ## Problem
 
 A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ successful recoveries and $6$ non-recoveries. Let $p \in (0, 1)$ denote the true recovery probability.
@@ -22,8 +20,6 @@ A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ succe
 2. Compute the Bayes point estimate (posterior mean) and the MAP estimate under this flat prior. Compare both with the Maximum Likelihood Estimator (MLE).
 3. Now suppose an expert clinical researcher insists on an informative prior: based on historical treatments, they specify $p \sim \text{Beta}(4, 4)$ (prior mean $0.5$, effective prior sample size $8$). Derive the new posterior distribution, posterior mean, and MAP estimate.
 4. Calculate the weight placed on the sample data versus the prior in both scenarios.
-
----
 
 ---
 
@@ -37,8 +33,6 @@ A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ succe
 
 ---
 
----
-
 ## Required
 
 1. Posterior distributions for both priors.
@@ -47,15 +41,13 @@ A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ succe
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Fourteen successes and six failures contribute the likelihood exponents. Add them to each prior's beta shapes: $\operatorname{Beta}(1,1)$ becomes $\operatorname{Beta}(15,7)$, and $\operatorname{Beta}(4,4)$ becomes $\operatorname{Beta}(18,10)$.
+
+The observed proportion is 0.7. The posterior means, about 0.6818 and 0.6429, are pulled toward the prior mean 0.5. The stronger prior has concentration eight rather than two, so it receives more weight against the same twenty observations. This is an explicit calculation of how the prior affects the answer.
+
+MAP and mean need not coincide: for a beta posterior with shapes greater than one, the mode is $(a-1)/(a+b-2)$. The flat-prior MAP returns 0.7, while its posterior mean remains smoothed. “Flat” here describes density in $p$; it does not mean the posterior mean must equal the empirical fraction.
 
 ### Concepts Used
 
@@ -65,8 +57,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[Maximum Likelihood Estimation]]
 
 ---
-### Solution
-
 ### Scenario A: Flat Uniform Prior $\text{Beta}(1, 1)$
 
 1. **Posterior Derivation:**
@@ -115,8 +105,6 @@ Identify the random variables, state the conditional distributions, select the a
 
 ---
 
----
-
 ## Result
 
 | Metric | Flat Prior $\text{Beta}(1, 1)$ | Informative Prior $\text{Beta}(4, 4)$ | Classical Frequentist MLE |
@@ -129,37 +117,19 @@ Identify the random variables, state the conditional distributions, select the a
 
 ---
 
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 Under the flat prior, the MAP estimate equals the MLE, while the posterior mean incorporates mild regularization. When an informative prior centered at $0.5$ is introduced, it exerts a gravitational pull (shrinkage) on the estimate, moving it from $0.70$ down to $0.6429$.
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Beta-Binomial Conjugate Updating Formula]] supplies the algebra. A clinical example here is an illustrative statistical model; the estimates describe the specified trial assumptions rather than establishing treatment efficacy by themselves.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Bayesian Inference]]
-- [[Maximum A Posteriori (MAP) Estimation]]
 - [[Beta-Binomial Conjugate Updating Formula]]
-
----
-
----
 
 ## Sources
 

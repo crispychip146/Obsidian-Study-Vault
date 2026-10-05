@@ -12,8 +12,6 @@ order: 24
 
 ---
 
----
-
 ## Problem
 
 A distributed database cluster receives a random number $N$ of write transactions per second, where $N \sim \operatorname{Bin}(m, p)$ with $m = 200$ client threads and transmission probability $p = 0.4$.
@@ -28,54 +26,13 @@ Assume $N$ and the sequence $\{X_i\}$ are mutually independent. Let $S_N = \sum_
 
 ---
 
----
-
-## Given
-
-- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
-
----
-
-## Required
-
-- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
-
----
-
-## Concepts Tested
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
-
-## Prerequisites
-
-- [[Discrete Probability Distributions]] — Binomial distribution properties.
-- [[Continuous Probability Distributions]] — Gamma distribution properties.
-- [[Adam's Law (Law of Total Expectation)]] & [[Eve's Law (Law of Total Variance)]]
-- [[Moment Generating Functions]] — MGF conditioning.
-
----
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+First identify which uncertainty controls the length and which controls the size of each contribution. Here $N\sim\operatorname{Binomial}(200,0.4)$ has mean 80 and variance 48. Each independent gamma size has shape 3 and rate $0.5$, so its mean is 6 MB and variance 12 MB².
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+Conditioning on $N$ turns total size $S$ into a fixed-length sum. Its conditional mean is $6N$ and its conditional variance is $12N$. Average the first to get 480 MB. For the variance, average $12N$ and add the variance of $6N$: $12(80)+36(48)=2688$ MB².
 
-### Working Through the Solution
-### Full Step-by-Step Solution
+The two terms have a physical interpretation. Even with exactly 80 files, their different sizes create variability. Randomly receiving more or fewer files creates additional variability. If deriving an MGF, condition again: $M_{S\mid N}(t)=M_X(t)^N$, so $M_S(t)$ is the probability generating function of $N$ evaluated at $M_X(t)$, wherever finite.
 
 ### Part 1: Expected Value $\mathbb{E}[S_N]$
 First, compute the parameters of the underlying distributions:
@@ -152,17 +109,6 @@ $$M_{S_N}(t) = \left[ 0.6 + 0.4(1 - 2t)^{-3} \right]^{200} \quad \text{for } t <
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 1. **Forgetting the Squared Mean in VE:** Writing $\operatorname{Var}(N \mathbb{E}[X]) = \mathbb{E}[X]\operatorname{Var}(N)$ instead of $(\mathbb{E}[X])^2 \operatorname{Var}(N)$. Constants pull out squared from variance!
@@ -170,27 +116,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Eve's Law (Law of Total Variance)]] prevents forgetting the count-variability term. State the gamma rate convention and independence assumptions before substituting values.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Eve's Law (Law of Total Variance)]]
 
 ## Source
 

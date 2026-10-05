@@ -12,19 +12,13 @@ order: 27
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Markov's inequality bounds a nonnegative quantity. For an upper-tail event, transform $X$ into $e^{tX}$ with $t>0$: large values of $X$ become especially large after exponentiation. Then $P(X\ge a)\le e^{-ta}M_X(t)$.
 
-What analytical relationship or closed-form expectation governs Chernoff Bound, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Every admissible positive $t$ gives a valid bound. We choose the tightest one by minimizing its logarithm, $\log M_X(t)-ta$. Differentiating gives candidate optimizers, but check the MGF domain and boundary cases. The optimum may be a limit, rather than an interior derivative-zero point.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Chernoff Bound compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+For a sum of independent variables, MGFs multiply and log-MGFs add. This is what often turns a weak polynomial bound into an exponential one. For a lower-tail event use a negative $t$; multiplying the threshold inequality by a negative number reverses its direction before exponentiating.
 
 ## Formula
 
@@ -36,25 +30,6 @@ For any real threshold $a$:
 
 - **Lower Tail Bound:**
   $$P(X \le a) \le \inf_{t < 0} e^{-ta} M_X(t)$$
-
----
-
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -79,8 +54,6 @@ $$P(X \ge a) \le e^{-I(a)}$$
 
 ---
 
----
-
 ## Derivation
 
 ### Derivation via Markov's Inequality
@@ -98,8 +71,6 @@ $\blacksquare$
 
 Similarly, for the lower tail ($a \le \mathbb{E}[X]$), multiplying by $t < 0$ reverses the inequality ($X \le a \iff tx \ge ta \iff e^{tX} \ge e^{ta}$), yielding:
 $$P(X \le a) \le \inf_{t < 0} e^{-ta} M_X(t)$$
-
----
 
 ---
 
@@ -123,37 +94,13 @@ $$P(\lvert Z \rvert \ge c) \le 2e^{-c^2 / 2}$$
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+[[Comparison of Probability Bounds Example]] compares information used by each bound. A Chernoff bound is a guarantee, not an estimate of the exact tail probability.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Markov Inequality]] — Base inequality used in the proof.
-- [[Chebyshev Inequality]] — Second moment polynomial bound.
-- [[Moment Generating Functions]] — Provides $M_X(t)$.
-- [[Comparison of Probability Bounds Example]] — Concrete numerical benchmark.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Comparison of Probability Bounds Example]]
 
 ## Sources
 

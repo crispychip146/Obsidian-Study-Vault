@@ -12,91 +12,17 @@ order: 24
 
 ---
 
----
+## Building the idea
 
----
+Heap objects can outlive the function that creates them, so allocation cannot rely on popping the last stack frame. A heap allocator must find a suitably sized free region and remember how to reclaim it later.
 
----
+For an illustrative 12-byte request among holes of 8, 20, and 40 bytes, first-fit skips 8 and chooses 20. Best-fit also chooses 20 here because it is the smallest sufficient hole. Another request history can make their future layouts differ; one local choice does not prove a universal winner.
 
----
+**Internal fragmentation** is unused space inside an allocated block. **External fragmentation** is free space split across separated holes. A request can fail despite enough total free bytes if no suitable contiguous block exists.
 
-## Starting Point and the Problem
-
-In any long-running application—such as a database engine, a web server, or a 3D game engine—objects are constantly instantiated and destroyed across days or months:
-- Unlike the Stack, which operates in strict LIFO order, heap objects have **arbitrary lifetimes**. Object $A$ allocated at 9:00 AM may live for 10 seconds, while Object $B$ allocated at 9:01 AM may live for 3 weeks.
-- Over time, as objects of varying sizes are allocated and freed, the heap turns into **Swiss cheese**: a patchwork of tiny active allocations separated by small free voids.
-
-Consider a server with 16 gigabytes of physical RAM:
-```
-Heap Memory State:
-[ 100 KB Allocated ] [ 200 KB Free ] [ 50 KB Allocated ] [ 300 KB Free ] ... [ 100 KB Free ]
-```
-Suppose total free space sums up to **8 gigabytes**. Yet when the server attempts to allocate a single contiguous **500-kilobyte** image buffer, the operating system throws a fatal `std::bad_alloc` / `OutOfMemoryError` crash!
-
-How can a server with 8 gigabytes of free RAM fail to allocate 500 kilobytes?
-Because of **External Fragmentation**: the 8GB of free memory is pulverized into millions of tiny, non-contiguous fragments, and not a single contiguous block of 500KB exists!
-
-The **Heap Memory Manager** is the low-level systems software layer (e.g., `glibc ptmalloc`, Google `tcmalloc`, FreeBSD/Facebook `jemalloc`) designed to conquer fragmentation while keeping allocation times in single-digit nanoseconds.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-```
-                             Memory Fragmentation
-                       ┌───────────────┴───────────────┐
-                       ▼                               ▼
-             Internal Fragmentation          External Fragmentation
-        (Wasted space INSIDE block)      (Wasted space BETWEEN blocks)
-```
-
-### 2.1 Internal Fragmentation
-- **Definition:** Occurs when the memory manager allocates a chunk whose physical size is strictly greater than the payload requested by the program.
-- **Root Causes:**
-  1. **Hardware Bus Alignment:** On modern 64-bit architectures, pointers and words must be 8-byte or 16-byte aligned. If an application requests `malloc(13)`, the allocator rounds up to 16 bytes. The 3 trailing padding bytes are wasted.
-  2. **Minimum Chunk Size:** Every block requires internal bookkeeping pointers (header, footer, free list links). An allocator cannot create a chunk smaller than its header size (typically 16 to 32 bytes).
-
-### 2.2 External Fragmentation
-- **Definition:** Occurs when total unallocated heap memory is abundantly sufficient to satisfy a request, but the memory is fractured into disjointed slices such that **no single contiguous block is large enough**.
-- **Root Cause:** Uneven lifetimes and variable sizes of dynamic data.
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Heap Memory Management and Allocation Strategies** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Boundary tags record size and allocation information near block boundaries so adjacent free regions can be found and coalesced. [[Run-Time Storage Organization and Activation Records]] explains why heap lifetimes differ from stack lifetimes; this note explains how that flexibility costs bookkeeping.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Dynamic Heap Placement Strategies
 
@@ -131,16 +57,13 @@ flowchart LR
 
 ---
 
----
-### Technical Details
-
 ### Free Space Coalescing: Donald Knuth's Boundary Tag Method
 
 When an application calls `free(p)`, the freed block must be merged with its immediate physical neighbors (if they are free) to reconstitute larger contiguous blocks.
 
 ### The Left-Neighbor Dilemma:
 - Finding the **right neighbor** in physical memory is easy: its address is simply $p + \text{size}(p)$.
-- But how do you find the **left neighbor**? In linear memory, you only have pointer $p$. You have no idea whether the left neighbor is an 8-byte chunk or a 4096-byte chunk! Without extra information, locating the left neighbor requires scanning the entire heap from address $0$, taking catastrophic $O(N)$ time!
+- But how do you find the **left neighbor**? In linear memory, you only have pointer $p$. You have no idea whether the left neighbor is an 8-byte chunk or a 4096-byte chunk! Without extra information, locating the left neighbor requires scanning the entire heap from address $0$, taking serious $O(N)$ time!
 
 ### Knuth's Genius Insight: The Footer Tag
 Donald Knuth introduced **Boundary Tags**: placing a bookkeeping tag at **both the start (Header) and end (Footer)** of every memory block:
@@ -171,9 +94,6 @@ Physical Layout of Two Adjacent Blocks:
 ```
 
 ---
-
----
-### Important Properties and Why They Hold
 
 ### The $O(1)$ Coalescing Algorithm & Correctness Invariant
 
@@ -229,181 +149,14 @@ $$\forall i, \; \neg (\text{is\_free}(\text{block}_i) \land \text{is\_free}(\tex
 
 ---
 
----
-### Related Concepts
+## What to carry forward
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+Allocation strategy, alignment, metadata, and free-list structure all affect performance. Coalescing physical neighbors can be constant time with appropriate metadata, but updating the chosen free-list structure may add work. [[Garbage Collection Fundamentals and Reference Counting]] asks when reclamation should occur automatically.
 
----
-### Prerequisites
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Run-Time Storage Organization and Activation Records]]
+- [[Garbage Collection Fundamentals and Reference Counting]]
 
 ## Sources
 

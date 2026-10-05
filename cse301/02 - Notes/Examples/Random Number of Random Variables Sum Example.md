@@ -12,8 +12,6 @@ order: 23
 
 ---
 
----
-
 ## Problem
 
 In computer systems, network modeling, and e-commerce, cumulative workloads often involve a **random number of random quantities**:
@@ -31,29 +29,13 @@ $$S_N = \sum_{i=1}^N X_i \quad (\text{with } S_0 = 0)$$
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
 
-### Step-by-Step Solution
+A random sum varies because both the terms and the number of terms vary. Let $S=\sum_{i=1}^N X_i$, with iid summands independent of $N$. Given $N=n$, the sum is ordinary: its mean is $n\mu$ and variance $n\sigma^2$.
+
+Now use [[Adam's Law (Law of Total Expectation)]] to average $N\mu$, giving $E[S]=\mu E[N]$. Eve's law averages the conditional variance and adds the variability of the conditional mean: $\operatorname{Var}(S)=\sigma^2E[N]+\mu^2\operatorname{Var}(N)$.
+
+For Poisson count mean 100 and exponential times of mean 20 ms and variance 400 ms², these contributions are 40,000 ms² each. The total mean is 2,000 ms and total variance 80,000 ms². Squared time units on the variance are a useful check. Without independence between $N$ and the sequence, these formulas need not hold.
 
 ### Step 1: Preliminary Distributions and Moments
 - For $N \sim \operatorname{Pois}(\lambda)$:
@@ -115,43 +97,14 @@ Notice that if the number of requests were fixed at exactly $N = 100$ (determini
 
 ---
 
----
+## What to carry forward
 
-## Result
+Treat an empty sum at $N=0$ as zero. Conditioning removes the random-length obstacle before any algebra; that same move is used in [[Problem — Compound Random Sum via Adam and Eve's Laws]].
 
-The mathematical derivation confirms the target probability or estimator value.
+## Related notes
 
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
-
-- [[Adam's Law (Law of Total Expectation)]] — Foundational expectation law.
-- [[Eve's Law (Law of Total Variance)]] — General variance formula.
-- [[Continuous Probability Distributions]] — Exponential distribution properties.
-- [[Discrete Probability Distributions]] — Poisson distribution properties.
-
----
-
----
+- [[Adam's Law (Law of Total Expectation)]]
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ## Sources
 

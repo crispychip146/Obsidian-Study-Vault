@@ -12,251 +12,28 @@ order: 28
 
 ---
 
----
+## Building the idea
 
----
+Cheney's collector copies reachable objects from from-space into to-space. Its key observation is that copied-but-unscanned objects already form a queue inside to-space: `scan` points to its front and `free` to its end.
 
----
+Copy each root target. Then scan the object at `scan`; for every pointer field, copy its target if needed and rewrite the field to the destination. Move `scan` past the processed object. New copies extend `free`, so discovery and queueing happen together.
 
----
+A forwarding address in the old object ensures shared references and cycles reuse one destination object. Without it, two incoming pointers could produce duplicate copies or a cycle could copy forever. When `scan==free`, every copied object has been scanned and all reachable references have been redirected.
 
-## The Problem and Earlier Tools
-
-In 1969, Robert R. Fenichel and Jerome C. Yochelson introduced the revolutionary concept of **Semispace Copying Garbage Collection**:
-- Divide the heap into two equal-sized zones: **From-space** (where the program allocates) and **To-space** (dormant reserve).
-- When From-space fills, suspend the program, traverse all live objects reachable from the Root Set, copy them compactly into To-space, and instantly swap the spaces.
-
-However, early implementations faced a terrifying chicken-and-egg dilemma:
-> *If the heap is completely full of memory allocations, how can the garbage collector allocate memory for a Breadth-First Search (BFS) queue or recursion stack to traverse the graph?*
-> If memory is exhausted, allocating an auxiliary queue in RAM will cause the garbage collector itself to crash with an Out-Of-Memory error or Stack Overflow!
-
-In 1970, **C. J. Cheney** published a seminal paper solving this dilemma with pure mathematical genius:
-**Use To-space itself as the BFS queue!**
-Cheney's algorithm performs a complete breadth-first graph traversal, copying, pointer forwarding, and compaction using strictly **zero extra auxiliary memory ($O(1)$ auxiliary space)**!
-
-```mermaid
-flowchart TD
-    subgraph From_Space ["From-Space (Active Allocator)"]
-        direction TB
-        F_live1["Object A (Live)"]
-        F_dead1["Object D (Dead Garbage)"]
-        F_live2["Object B (Live)"]
-        F_dead2["Object E (Dead Garbage)"]
-        F_live3["Object C (Live)"]
-    end
-
-    subgraph To_Space ["To-Space (Compacted Live Objects)"]
-        direction TB
-        T_live1["Object A'"]
-        T_live2["Object B'"]
-        T_live3["Object C'"]
-        T_free["Clean Unallocated Free Space (Bump Pointer)"]
-    end
-
-    F_live1 -.->|"Cheney's Copy"| T_live1
-    F_live2 -.->|"Cheney's Copy"| T_live2
-    F_live3 -.->|"Cheney's Copy"| T_live3
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-Cheney's algorithm governs To-space using two simple memory pointers:
-- **`free` Pointer:** Points to the beginning of unallocated memory in To-space (where the next live object will be copied). Acts as the **Tail (Back)** of the BFS queue.
-- **`scan` Pointer:** Points to the next copied object in To-space whose outgoing pointer fields have **not yet been examined or updated**. Acts as the **Head (Front)** of the BFS queue.
-
-```
-To-space Internal Layout during Collection:
-┌──────────────────────────────┬──────────────────────────────┬──────────────────────────────┐
-│ Objects Fully Scanned        │ Objects Waiting to be Scanned│ Unallocated Empty Space      │
-│ (Black State: All fields fixed)│ (Grey State: The BFS Queue)  │ (Ready for next copy)        │
-└──────────────────────────────┴──────────────────────────────┴──────────────────────────────┘
-▲                              ▲                              ▲
-To-space Base                  scan                           free
-```
-
-### The Invariant States:
-1. **$0 \le \text{offset} < scan$:** Objects that have been copied and whose outgoing pointers have already been updated to point to new To-space locations (**Scanned / Black**).
-2. **$scan \le \text{offset} < free$:** Objects that have been copied into To-space, but their internal pointer fields still point to old objects in From-space (**Unscanned / Grey**). **This contiguous memory region IS the BFS Queue!**
-3. **$\text{offset} \ge free$:** Untouched, pristine free memory.
-
-When the queue is empty:
-$$\mathbf{scan == free}$$
-the entire collection terminates!
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+[[Trace-Based Garbage Collection Algorithms]] supplies reachability; copying also compacts survivors. It requires accurate root and pointer identification, sufficient destination capacity, and a relocation-compatible runtime.
 
 ## How It Works
 
-### Inputs
+### Comparing costs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+| Property | Mark-and-sweep | Two-semispace copying |
+|---|---|---|
+| Work | Scan roots, trace reachable pointers, and sweep managed allocated blocks/metadata. | Scan roots and reachable pointers; copy live bytes. |
+| Layout | Survivors remain at their addresses; free regions may be fragmented. | Survivors are packed into destination space, subject to alignment. |
+| Extra space | Mark metadata and a traversal worklist. | Destination space and forwarding metadata; the scan/free queue uses constant control state. |
+| Allocation | Depends on the free-list or size-class design. | A bump-pointer fast path can be constant time, excluding checks and initialization costs. |
 
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Architectural Evaluation & The Weak Generational Hypothesis
-
-| Metric | Mark-and-Sweep | Cheney's Copying Collector |
-| :--- | :--- | :--- |
-| **Time Complexity** | $O(\text{Heap Size})$ (Must sweep all dead memory) | **$O(\text{Live Volume})$** (Zero cost for dead objects) |
-| **Auxiliary Memory Needed** | Requires recursion stack or bit array | **$O(1)$ Zero extra RAM** (Uses To-space as queue) |
-| **Heap Compaction** | None (causes severe external fragmentation) | **100% Compaction** (Objects packed contiguously) |
-| **Allocation Cost** | Free list search ($O(1)$ to $O(N)$) | **Bump Pointer:** `p = free; free += size;` ($O(1)$ 2 CPU cycles) |
-| **Memory Utilization** | $100\%$ of heap available | **$50\%$** (Must reserve half the heap as To-space) |
-
-### The Generational Superpower:
-The **Weak Generational Hypothesis** states that in virtually all programs, **over 95% of objects die within milliseconds of allocation** (temporary strings, loop variables, iterators).
-
-Because Cheney's collector cost is proportional *only to live objects*, running Cheney's collector on a young generation where 95% of objects are dead means the collector finishes in sub-millisecond time while reclaiming 95% of the memory! This is the core engine powering the **Java HotSpot Young Generation (Eden/Survivor Spaces)** and the **V8 JavaScript engine**.
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
+The weak generational hypothesis is the empirical observation that many objects in many workloads die young. It motivates collecting a young region frequently, but supplies no universal percentage, lifetime, or pause-time guarantee. Generational collection also needs to account for pointers from older regions into the young one.
 
 ### The Complete Algorithmic Implementation
 
@@ -312,26 +89,11 @@ class CheneyCollector:
 
 ---
 
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
-### Time Complexity
 ### Theorem: Correctness and Graph Isomorphism
 *Cheney's Copying Garbage Collection algorithm produces a compact, isomorphic copy of the reachable graph $\text{Reachable}(G, R)$ in To-space, updates all references consistently, and runs in time strictly proportional to the number and size of live objects:*
-$$\text{Time Complexity} = O(L) \quad \text{where } L = |\text{Reachable}(G, R)|$$
+$$\text{Time Complexity} = O(L) \quad \text{where } L \text{ includes live bytes, roots, and scanned pointer fields}$$
 
 ### Proof:
 1. **Queue Property:**
@@ -350,119 +112,34 @@ $$\text{Time Complexity} = O(L) \quad \text{where } L = |\text{Reachable}(G, R)|
    - Thus, $(u_{new}, v_{new})$ exists in To-space. All pointers in the root set and inside live objects point exclusively to valid To-space addresses.
 4. **Time Complexity:**
    - Notice what happens to unreachable garbage: **Unreachable objects in From-space are NEVER visited, NEVER inspected, and NEVER copied.**
-   - Total operations equal $\sum_{v \in \text{Reachable}} \text{size}(v)$.
+   - Total work includes root scanning, pointer-field traversal, and $\sum_{v \in \text{Reachable}} \text{size}(v)$ bytes copied.
    - Therefore, the time complexity is strictly $O(L)$, completely independent of total heap capacity $H$! $\blacksquare$
 
 ---
 
 ### Space Complexity
-$O(N)$ auxiliary memory for data structures.
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
+The implicit queue uses $O(1)$ control state. Destination capacity must hold all live objects, and forwarding/object metadata is additional storage; this is not an $O(1)$ total-memory collector.
 
 ---
 
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Copying Garbage Collection Algorithm on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+The queue needs only scan/free control state beyond the destination and object metadata. Total work includes roots, pointer fields, and live bytes copied. [[Garbage Collection Trace and Compaction Example]] compares its packed result with nonmoving sweep holes.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Trace-Based Garbage Collection Algorithms]]
+- [[Garbage Collection Trace and Compaction Example]]
 
 ## Sources
 

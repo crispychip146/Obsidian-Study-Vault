@@ -12,8 +12,6 @@ order: 34
 
 ---
 
----
-
 ## Problem
 
 This problem evaluates deadlock detection using two standard techniques: Depth-First Search (DFS) cycle tracing for single-instance graphs, and graph reduction for multi-instance graphs.
@@ -68,31 +66,10 @@ flowchart TD
 
 ---
 
----
-
-## Given
-
-- Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
-
----
-
-## Required
-
-- Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
-
----
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
-
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
-- [[Process Control Block and Context Switching]]
 
 ---
 
@@ -104,14 +81,13 @@ Graph Theory / Cycle Detection & Reduction
 
 ## Solution
 
-### Understanding the Situation
-Interpret the given problem state, identify all participating entities (processes, resources, semaphores), and establish the operational rules governing their interactions.
+The problem compares two models, so decide which model applies before choosing a method. In the single-instance case, a directed waiting cycle means each participant needs the uniquely held resource of the next. DFS can expose that closed chain.
 
-### Developing the Key Idea
-Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffman cycle conditions, Gantt timeline rules) and verify that all prerequisites hold.
+In the multi-instance case, a graph cycle alone is inconclusive. Use the current Request vectors and Available pool. If a request fits, let that process finish hypothetically and return its Allocation. Repeating this can dissolve a visible cycle by introducing another resource instance.
 
-### Working Through the Solution
-### Detailed Step-by-Step Solutions
+Follow [[Deadlock Detection and Recovery Algorithms]] for DFS path state and resource reduction. They answer the same broad question with different information: reachability and active ancestors in the first, counts and componentwise availability in the second. Do not substitute declared maximum Need for current Request unless the question explicitly asks for Banker's safety.
+
+A useful final answer identifies the actual cycle or unfinished process set and states the resource-instance assumption behind the conclusion. The intermediate path or Work updates are the evidence; a bare “deadlocked” label hides the most important part of the reasoning.
 
 ### Part 1: Single-Instance DFS Simulation Trace
 
@@ -212,43 +188,13 @@ This vividly demonstrates Theorem 2: in multi-instance resource systems, **a cyc
 
 ---
 
-### Result and Interpretation
-The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
+## What to carry forward
 
----
+Resource graphs describe dependencies; resource counts determine whether those dependencies are inescapable. A cycle is sufficient in the single-instance model and only necessary in the usual multi-instance model. That distinction is the reusable insight to carry into a changed graph.
 
-## Reusable Insight
+## Related notes
 
-Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
-
----
-
-## Common Mistakes
-
-- Misinterpreting the initial state vector or indexing offsets.
-- Confusing necessary conditions with sufficient conditions during analysis.
-
----
-
-## Exam Pattern
-
-Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
-
----
-
-## Related Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
-
-## Related Concepts
-
-- [[CPU Scheduling Principles and Criteria]]
-- [[Deadlock Fundamentals and Coffman Conditions]]
-
----
+- [[Deadlock Detection and Recovery Algorithms]]
 
 ## Source
 

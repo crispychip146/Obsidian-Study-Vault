@@ -12,104 +12,17 @@ order: 12
 
 ---
 
----
+## Building the idea
 
----
+A declaration supplies both a meaning and a storage requirement. `array(10,int)` describes ten integer elements; if each occupies w bytes in the specified layout, its width is 10w. A record combines fields, but alignment can introduce padding between them.
 
----
+The compiler records types in the symbol table and assigns relative offsets in a chosen region or frame. An illustrative sequence of widths 4 then 8 does not necessarily give offsets 0 then 4: if the second object needs 8-byte alignment, its offset is rounded to 8 first.
 
----
+[[Synthesized and Inherited Attributes]] explains how widths and element types flow through declaration grammar rules. The current offset is bookkeeping for placement; the type expression describes the declared object independently of the final absolute address.
 
-## Starting Point and the Problem
-
-To the central processing unit (CPU) and random-access memory (RAM), memory is nothing more than a giant, undifferentiated, linear sequence of raw bytes addressed from `0x00000000` to `0xFFFFFFFF`:
-- The silicon hardware does not inherently know whether 4 bytes at address `0x7FFF0040` represent a signed two's-complement integer, an IEEE-754 single-precision float, a pointer to a heap structure, or four ASCII characters.
-- If machine instructions perform an integer addition `ADD` on four bytes that actually represented an IEEE-754 float, the result is mathematical garbage. If code attempts to jump to an address stored in an integer, the CPU triggers a catastrophic segmentation fault or an exploitable security vulnerability.
-
-**Types are a compile-time mathematical discipline imposed on raw silicon.**
-
-During semantic analysis and intermediate code generation, the compiler's type system performs two indispensable tasks:
-1. **Type Checking & Safety:** Validating that every operator receives operands of compatible mathematical types, preventing runtime memory corruption.
-2. **Storage Layout & Relative Addressing:** Calculating the exact footprint (width in bytes) of every data structure and computing the relative byte offset of every variable within an activation record or global data segment.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-A compiler represents types internally not as flat strings, but as **Type Expressions** formed over an inductive algebraic signature.
-
-### 2.1 Formal Inductive Definition
-Let $\mathcal{B} = \{\mathbf{int}, \mathbf{float}, \mathbf{char}, \mathbf{bool}, \mathbf{void}\}$ be the set of primitive atomic types. The universe of valid type expressions $\mathcal{T}$ is defined inductively:
-
-1. **Base Elements:** Every atomic type $b \in \mathcal{B}$ is a type expression: $b \in \mathcal{T}$.
-2. **Type Names:** Any defined type name or alias is a type expression.
-3. **Array Constructor:** If $T \in \mathcal{T}$ and $N \in \mathbb{Z}^+$, then:
-   $$\mathbf{array}(N, T) \in \mathcal{T}$$
-   representing a contiguous collection of $N$ elements of type $T$.
-4. **Record / Struct Constructor:** If $T_1, T_2, \dots, T_k \in \mathcal{T}$ and $f_1, f_2, \dots, f_k$ are unique field identifiers:
-   $$\mathbf{record}(\{f_1: T_1, \; f_2: T_2, \; \dots, \; f_k: T_k\}) \in \mathcal{T}$$
-5. **Pointer Constructor:** If $T \in \mathcal{T}$, then:
-   $$\mathbf{pointer}(T) \in \mathcal{T}$$
-   representing a memory address whose target is of type $T$.
-6. **Function Constructor:** If $T_1, \dots, T_k \in \mathcal{T}$ and $R \in \mathcal{T}$, then:
-   $$(T_1 \times T_2 \times \dots \times T_k) \longrightarrow R \in \mathcal{T}$$
-   representing a callable procedure accepting arguments of types $T_i$ and returning $R$.
-
-### 2.2 Tree Representation of Complex Types
-Consider the C declaration: `char* (*fp)(int, float[10]);`  
-This translates to the formal type expression:
-$$(\mathbf{int} \times \mathbf{array}(10, \mathbf{float})) \longrightarrow \mathbf{pointer}(\mathbf{char})$$
-
-```mermaid
-graph TD
-    Fn["-> (Function Constructor)"]
-    Fn --- InParams["x (Cartesian Product)"]
-    Fn --- RetVal["pointer"]
-    
-    InParams --- P1["int"]
-    InParams --- P2["array(10)"]
-    P2 --- P2_elem["float"]
-    
-    RetVal --- P3["char"]
-```
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Type Expressions and Storage Layout** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Compare structural type equivalence, which examines construction, with name equivalence, which depends on declarations. The language decides which notion applies. Identical byte widths alone never establish identical types.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Syntax-Directed Translation for Declarations and Offsets
 
@@ -208,9 +121,6 @@ class Env:
 
 ---
 
----
-### Technical Details
-
 ### Storage Layout and Relative Addressing
 
 During the declaration phase of compilation, the compiler must allocate physical space for every symbol. It computes two parameters for every declared entity:
@@ -231,9 +141,6 @@ N \times \text{width}(T') & \text{if } T = \mathbf{array}(N, T') \\
 > Modern CPUs fetch memory across 32-bit (4-byte) or 64-bit (8-byte) buses. If a 4-byte integer is stored at an unaligned address like `0x1001`, the CPU may require two separate memory bus transactions and bit-shifting logic to assemble the value, severely degrading performance. Therefore, compilers insert **padding bytes** inside structs so each field starts at an address divisible by its natural alignment.
 
 ---
-
----
-### Important Properties and Why They Hold
 
 ### Type Equivalence: Structural vs. Name Equivalence
 
@@ -272,181 +179,15 @@ Under **Structural Equivalence**, `PointA` and `PointB` are identical because th
 
 ---
 
----
-### Related Concepts
+## What to carry forward
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+[[Multi-Dimensional Array Addressing Formulas]] uses dimension widths to locate elements. [[Run-Time Storage Organization and Activation Records]] gives the runtime region in which a relative offset is interpreted.
 
----
-### Prerequisites
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Synthesized and Inherited Attributes]]
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Run-Time Storage Organization and Activation Records]]
 
 ## Sources
 

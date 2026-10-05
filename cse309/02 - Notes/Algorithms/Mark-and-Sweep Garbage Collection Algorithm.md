@@ -12,188 +12,29 @@ order: 27
 
 ---
 
----
+## Building the idea
 
----
+Mark-and-sweep separates **finding survivors** from **reclaiming the rest**. Begin with the roots, mark each newly reached object, and put its outgoing references on a worklist. Mark before recursively revisiting it so a cycle cannot cause endless traversal.
 
----
+After the worklist empties, sweep allocated blocks: marked blocks survive, unmarked blocks become free, and marks are reset for the next collection. The mark phase establishes reachability; the sweep phase acts on that classification.
 
----
+Why does marking find every reachable object? Roots are discovered initially. Whenever an object is discovered, all its outgoing references are eventually examined, so the next object along any finite root path is discovered. Conversely, every discovery begins at a root or follows a discovered object's pointer. This proves the marked set is exactly the reachable set under the model.
 
-## The Problem and Earlier Tools
-
-In 1960, John McCarthy invented the **Mark-and-Sweep** algorithm for the Lisp programming language, introducing the world's first automatic trace-based garbage collector.
-
-Before Mark-and-Sweep, computer scientists assumed that reclaiming memory required tracking each object individually at the moment it was discarded. McCarthy realized a profound mathematical duality:
-> *Instead of trying to prove that an object is dead, prove which objects are alive! Anything not provably alive from the Root Set is dead by definition.*
-
-Mark-and-Sweep operates in two strictly decoupled phases:
-1. **The Mark Phase:** A graph-reachability traversal (DFS or BFS) starting from the Root Set that marks all accessible live objects.
-2. **The Sweep Phase:** A single linear, physical memory scan across the entire heap from bottom to top. Unmarked memory blocks are returned to the free list; marked blocks are preserved, and their mark bits are reset to zero for the next cycle.
-
-```mermaid
-flowchart TD
-    subgraph Mark_Phase ["Phase 1: Mark Phase (Graph Traversal)"]
-        direction TB
-        Roots["Root Set"] --> LiveA["Mark Object A"]
-        LiveA --> LiveB["Mark Object B"]
-        LiveA --> LiveC["Mark Object C"]
-        Unvisited["Object D (Dead / Unmarked)"]
-    end
-    subgraph Sweep_Phase ["Phase 2: Sweep Phase (Linear Physical Scan)"]
-        direction LR
-        ScanStart["Heap 0x0000"] --> CheckA["Obj A: Marked? Yes -> unmark(A)"]
-        CheckA --> CheckD["Obj D: Marked? No -> free(D)!"]
-        CheckD --> CheckB["Obj B: Marked? Yes -> unmark(B)"]
-        CheckB --> CheckC["Obj C: Marked? Yes -> unmark(C)"]
-        CheckC --> ScanEnd["Heap 0xFFFF"]
-    end
-    Mark_Phase --> Sweep_Phase
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-```python
-class MarkSweepCollector:
-    def __init__(self, heap_start: int, heap_end: int):
-        self.heap_start = heap_start
-        self.heap_end = heap_end
-        self.free_list = []
-
-    def collect(self, root_set: list):
-        # =========================================================
-        # PHASE 1: MARK PHASE (Graph Reachability)
-        # =========================================================
-        worklist = []  # The Unscanned (Grey) Queue
-
-        # 1. Seed worklist with all non-null roots
-        for root in root_set:
-            if root is not None and not root.marked:
-                root.marked = True      # Transition: Unreached -> Unscanned
-                worklist.append(root)
-
-        # 2. Exhaust worklist (BFS / DFS traversal)
-        while len(worklist) > 0:
-            current = worklist.pop()    # Transition: Unscanned -> Scanned
-            for child in current.get_outgoing_pointers():
-                if child is not None and not child.marked:
-                    child.marked = True # Discovered reachable child
-                    worklist.append(child)
-
-        # =========================================================
-        # PHASE 2: SWEEP PHASE (Linear Physical Memory Scan)
-        # =========================================================
-        curr_ptr = self.heap_start
-        while curr_ptr < self.heap_end:
-            chunk = get_chunk_at(curr_ptr)
-            if chunk.is_allocated:
-                if not chunk.marked:
-                    # Object is unreachable garbage: reclaim it!
-                    chunk.is_allocated = False
-                    self.free_list.append(chunk)
-                else:
-                    # Object is alive: reset mark bit for next collection cycle
-                    chunk.marked = False
-
-            # Advance linearly to the next physical chunk in memory
-            curr_ptr += chunk.size
-```
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+[[Trace-Based Garbage Collection Algorithms]] supplies the traversal invariant. Survivors keep their locations, which avoids relocation but can leave separated holes.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Performance Bottlenecks & Modern Industrial Optimizations
 
 While Mark-and-Sweep is elegant, naive implementations suffer from two severe hardware bottlenecks:
 
-### 1. The $O(\text{Heap Size})$ Sweep Penalty
-- Notice that Phase 2 scans the **entire physical heap from beginning to end**, checking every memory word.
-- Suppose an enterprise application has a **64-gigabyte heap**, but only **100 megabytes** of live data.
-- The Sweep Phase must still touch and scan all 64 gigabytes of memory pages! This induces massive hardware page faults and cache thrashing just to discover dead space.
+### Sweep cost and mark storage
 
-### 2. Cache-Line Pollution (In-Header Mark Bits)
-- If `marked` is stored as a bit inside the object header, the sweep phase writes to the header of every surviving object to clear the bit (`chunk.marked = False`).
-- Writing to every live object marks every CPU cache line as "dirty", forcing the CPU cache controller to write back gigabytes of data to physical DRAM.
+Marking follows reachable references. Sweeping additionally inspects the allocator's managed blocks or metadata to identify unmarked allocations. Its cost depends on that representation; it need not read every byte of reserved virtual address space.
 
-### Industrial Solution: Bitmap Marking
-Modern production runtimes (such as Go and the Java HotSpot JVM) do **not** store mark bits inside object headers:
-- They maintain a separate, dense, contiguous **Mark Bitmap** stored in a small dedicated memory table (1 bit per 8 or 16 bytes of heap).
-- Scanning and sweeping 64GB of heap requires inspecting only a compact 512MB bitmap!
-- The CPU can test and clear bits using 64-bit word operations (`word == 0`) and bitwise instructions, executing the sweep phase orders of magnitude faster.
+Mark bits can live in object headers or in side metadata such as a bitmap. Header updates affect object cache lines; a side bitmap concentrates mark state, but still needs enough information to identify object boundaries and reclaim regions. A bitmap changes locality and storage costs, rather than guaranteeing a fixed speedup or eliminating all heap-management work.
 
 ---
-
----
-### Properties
-
-### Formal Proof of Correctness
 
 ### Theorem: Correctness of Mark-and-Sweep
 *Upon termination of the Mark-and-Sweep algorithm:*
@@ -220,217 +61,33 @@ Modern production runtimes (such as Go and the Java HotSpot JVM) do **not** stor
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 ### Time Complexity
-$O(N)$ to $O(N^2)$ depending on basic block length, graph density, or live intervals.
+Root scanning plus $O(V_L+E_L)$ marking and $O(B)$ sweeping in an object/block model, where $V_L,E_L$ describe the reachable graph and $B$ the managed blocks scanned.
 
 ### Space Complexity
-$O(N)$ for auxiliary state tables, stacks, or free lists.
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
+Mark metadata plus a traversal worklist of up to $O(V_L)$ object references; allocator/free-list storage is accounted for separately.
 
 ---
 
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Mark-and-Sweep Garbage Collection Algorithm on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+A conventional cost is root scanning plus reachable pointer traversal plus allocated-block sweeping. Sweeping need not examine every byte of reserved address space. Worklist storage can grow with discovered objects; iterative traversal avoids relying on an unbounded language call stack.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Trace-Based Garbage Collection Algorithms]]
 
 ## Sources
 

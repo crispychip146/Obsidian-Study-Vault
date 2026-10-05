@@ -12,118 +12,15 @@ order: 1
 
 ---
 
----
+## Building the idea
 
----
+A grammar can tell us that `3+4` is a valid expression. It does not, by itself, calculate 7, check operand types, or generate instructions. Syntax-directed translation attaches those computations to the structure the parser discovers.
 
----
+A **syntax-directed definition (SDD)** associates attributes and semantic rules with grammar productions. For `E -> E1 + T`, a rule such as `E.val = E1.val + T.val` states a dependency: obtain both child values before computing the parent. An **SDT**, or translation scheme, places executable actions within production bodies, making their timing explicit.
 
----
-
-## Starting Point and the Problem
-
-To understand why Syntax-Directed Translation exists, you have to realize the profound limitation of a parser: **A parser is blind to meaning.**
-
-A parser is like a strict English teacher who checks grammar. If you hand the teacher the sentence:
-> *"The green stone sleeps furiously."*
-
-The teacher checks: *Noun phrase? Yes. Verb? Yes. Adverb? Yes.* The sentence is stamped **SYNTACTICALLY VALID**. 
-
-Does it make any sense? No. Does it calculate anything? No. 
-
-When a parser processes the expression `2 + 3 * 4`, all it does is verify that the tokens follow the grammar rules ($E \to E + T, \; T \to T * F$). It produces an abstract, lifeless wooden skeleton called a **Parse Tree**. To the parser, `2`, `3`, and `4` are just terminal tokens. It does not know that `+` means addition, it does not calculate `14`, it does not check if variable types match, and it cannot generate a single line of machine code!
-
-```mermaid
-flowchart TD
-    Raw["Source Code: 2 + 3 * 4"] --> Lexer["Lexical Analyzer (Tokens)"]
-    Lexer --> Parser["Syntax Analyzer (Parser)"]
-    Parser --> Skeleton["Lifeless Parse Tree Skeleton<br/>(Only confirms grammar validity)"]
-    Skeleton -->|"Syntax-Directed Translation<br/>Injects Semantics & Computation"| LivingTree["Living Annotated Tree<br/>(Calculates 14, checks types, emits IR)"]
-```
-
-### The Solution: Piggybacking Semantics onto Syntax
-We do not want to invent a completely separate, complicated mechanism to traverse code. The parse tree already reflects the hierarchical structure of the language! 
-
-So, compiler designers had an ingenious insight:
-> **Let's piggyback semantic meaning directly onto the syntactic structure.**
-
-We attach properties called **Attributes** to grammar symbols (like attaching sticky notes to each node of the parse tree), and we attach mathematical equations or code snippets called **Semantic Rules / Actions** to the grammar productions. As the tree is parsed, these rules fire, computing values, checking types, and generating code.
-
-This unified framework is called **Syntax-Directed Translation (SDT)**.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Compilers formalize this concept into two distinct specifications: **Syntax-Directed Definitions (SDD)** and **Syntax-Directed Translation Schemes (SDT)**. 
-
-Students often confuse these two. Here is the intuitive way to feel the difference:
-
-```mermaid
-flowchart LR
-    SDD["Syntax-Directed Definition (SDD)<br/>THE ARCHITECT'S BLUEPRINT<br/>• Declarative<br/>• States WHAT must be true<br/>• Order is NOT specified"] 
-    -->|"Realized into an execution order"| 
-    SDT["Syntax-Directed Translation Scheme (SDT)<br/>THE BUILDER'S STEP-BY-STEP RECIPE<br/>• Imperative<br/>• States WHEN and HOW to execute<br/>• Order is STRICTLY left-to-right"]
-```
-
-### 1. Syntax-Directed Definition (SDD) = Declarative Blueprint
-An SDD associates attributes with grammar symbols and **mathematical equations** with productions. It tells you **WHAT** relationship must hold, but deliberately hides **WHEN** to compute it.
-- *Example Production:* $E \longrightarrow E_1 + T$
-- *Semantic Rule:* $E.val = E_1.val + T.val$
-- *What it means:* "In any valid parse tree, the numerical value at node $E$ must be equal to the sum of the numerical values at its children $E_1$ and $T$."
-- Notice that it does *not* say whether to calculate $E_1$ first or $T$ first. It is pure declarative mathematics.
-
-### 2. Syntax-Directed Translation Scheme (SDT) = Imperative Recipe
-An SDT takes an SDD and embeds explicit executable program fragments (called **Semantic Actions**) inside curly braces `{ ... }` directly within the production bodies.
-- *Example Production with Action:* $E \longrightarrow E_1 + T \quad \{ E.val = E_1.val + T.val; \}$
-- *What it means:* "Parse $E_1$, then parse token `+`, then parse $T$, and the moment $T$ finishes, immediately execute this exact line of code!"
-- The order is explicit and locked into the parser's traversal.
-
-| Dimension | Syntax-Directed Definition (SDD) | Syntax-Directed Translation Scheme (SDT) |
-| :--- | :--- | :--- |
-| **Philosophy** | **Declarative** (High-level specification) | **Imperative** (Implementation program) |
-| **Semantic Element** | Mathematical rules / equations | Executable code blocks `{ ... }` |
-| **Evaluation Order** | **Unspecified** (any order respecting dependencies) | **Strictly Left-to-Right** (tied to parse tree traversal) |
-| **Side Effects** | Disallowed or strictly controlled | Allowed (can print to stdout, write to disk, mutate globals) |
-| **Primary Utility** | Mathematical reasoning, cycle detection, proofs | Production compiler code generation, Yacc/Bison parser actions |
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Syntax-Directed Definitions and Translation Schemes** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Think of one parse-tree occurrence as one record carrying information. Repeated uses of the symbol `E` have separate records. A dependency graph tells us which values must be available first; a valid evaluation order respects those arrows. The grammar supplies the shape, while semantic rules supply the meaning computed on that shape.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Grammar Attributes: The Data Carriers
 
@@ -244,127 +141,7 @@ These classes will be explored deeply in the next two notes.
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 ### Common Exam Traps and Pitfalls
 
@@ -375,67 +152,13 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ---
 
----
+## What to carry forward
 
----
+[[Synthesized and Inherited Attributes]] distinguishes information returned from a subtree from information supplied to it. This is the next useful question: not merely what an attribute means, but where its inputs become available.
 
----
+## Related notes
 
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Synthesized and Inherited Attributes]]
 
 ## Sources
 

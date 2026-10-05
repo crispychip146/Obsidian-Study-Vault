@@ -12,10 +12,9 @@ order: 12
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2020 Q2a)**
-> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Tested with Burst Diagram Analysis)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q4a, 2020 Q2a)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Differentiating Compute-Bound vs I/O-Bound Processes with Diagrams (2017 Q4a & 2020 Q2a):**
 >    - **Compute-Bound (CPU-Bound):** Spends the vast majority of time executing arithmetic/logic instructions. Exhibits very long CPU bursts punctuated by brief, infrequent I/O requests (e.g., scientific computing, video encoding, matrix multiplication).
 >    - **I/O-Bound:** Spends the vast majority of its lifecycle waiting for I/O operations (user typing, disk reads, network sockets). Characterized by frequent, very short CPU bursts followed by long I/O wait periods.
@@ -30,35 +29,21 @@ order: 12
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+[[Process Lifecycle and State Transitions]] tells us which processes are ready. Scheduling asks which ready process should run next. That choice matters even when all jobs eventually receive exactly the CPU work they need: a short interactive task can feel very different depending on whether it waits behind a long calculation.
 
-In a multiprogrammed operating system, multiple runnable processes populate the Ready Queue simultaneously, all competing for execution time on the available CPU cores.
+Follow one process's timeline. Its **response time** ends when it first receives the CPU. Its **turnaround time** ends when it finishes. Its **waiting time** accumulates while it is ready but not running. These measure different experiences, so a scheduler can improve one and worsen another.
 
-We want an algorithmic policy to decide which process receives the CPU next, how long it runs, and when it should be preempted, in order to maximize overall system productivity and user satisfaction. The central obstacle is that different scheduling goals conflict directly: minimizing response time for interactive users hurts batch job throughput, while minimizing context-switch overhead hurts fairness.
+A non-preemptive scheduler lets a running burst continue until it blocks or ends. A preemptive scheduler can interrupt it at an allowed event, such as quantum expiration or a higher-priority arrival. Preemption creates opportunities for responsiveness, but it also requires the state-saving mechanism from [[Process Control Block and Context Switching]].
 
----
-
-## Developing the Idea
-
-The CPU scheduling subsystem resolves this conflict by leveraging the fundamental empirical property of computing workloads: the **CPU–I/O Burst Cycle**.
-
-Processes alternate between bursts of intensive CPU computation and waiting for I/O:
-- **I/O-Bound processes** have many very short CPU bursts separated by long I/O waits (e.g. text editors, browsers).
-- **Compute-Bound processes** have few, very long CPU bursts and rare I/O waits (e.g. scientific simulations, video encoders).
-
-By designing schedulers that track burst characteristics, the OS can prioritize I/O-bound jobs to keep peripheral devices busy while interleaving compute-bound jobs during idle periods.
-
----
+When comparing policies, specify the workload and overhead assumptions. A finite collection of known CPU bursts is not the same problem as interactive jobs whose next burst is unknown. The policy's goal and available information determine which comparison makes sense.
 
 ## Definition
 
 In a multiprogramming operating system, multiple processes reside simultaneously in the Ready state competing for execution time. **CPU Scheduling** is the core operating system mechanism that selects one process from the Ready Queue and allocates a physical CPU core to it.
 
 The component of the operating system that performs this selection is the **Scheduler**, and the algorithm it executes is the **Scheduling Algorithm**.
-
----
 
 ---
 
@@ -94,8 +79,6 @@ flowchart LR
 
 ---
 
----
-
 ## Example
 
 Scheduling decisions at 4 critical points:
@@ -106,15 +89,9 @@ Scheduling decisions at 4 critical points:
 
 ---
 
-## Technical Details
-
-See related modules for microarchitectural implementation details.
-
----
-
 ## Important Properties and Why They Hold
 
-- **Preemption vs. Overhead Invariant:** Preemption guarantees bounded response times for interactive applications, but increases total CPU overhead due to frequent context switches and cache thrashing.
+- **Preemption tradeoff:** Time slicing can improve response opportunities, but a bound requires the scheduling policy and workload assumptions. Switching also adds overhead and can disturb cache state.
 - **Turnaround vs. Waiting Equivalence:** Turnaround Time ($T_{TAT} = T_{	ext{completion}} - T_{	ext{arrival}}$) is always strictly equal to Waiting Time plus Burst Time: $T_{TAT} = T_{wait} + T_{burst}$.
 - **Workload Trade-Off Invariant:** No single scheduling algorithm can simultaneously optimize all criteria (Throughput, Turnaround, Waiting Time, Response Time, and CPU Utilization).
 
@@ -130,8 +107,6 @@ See related modules for microarchitectural implementation details.
 
 ---
 
----
-
 ## Exam Relevance
 
 - **Next Step:** How batch systems optimize turnaround time using non-preemptive and shortest-burst strategies (see [[Batch Scheduling Algorithms]]).
@@ -141,28 +116,16 @@ See related modules for microarchitectural implementation details.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+For a CPU-only scheduling exercise, turnaround equals CPU service plus ready-queue waiting. If a process also waits for I/O, include that blocked time separately. [[Batch Scheduling Algorithms]] emphasizes completion-oriented choices; [[Interactive Scheduling Algorithms]] adds time slicing and responsiveness.
 
-- [[Batch Scheduling Algorithms]]
-- [[Interactive Scheduling Algorithms]]
-- [[Scheduling Metrics and Burst Estimation Formulas]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Process Lifecycle and State Transitions]]
 - [[Process Control Block and Context Switching]]
-
----
-
-## Problems
-
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
+- [[Batch Scheduling Algorithms]]
+- [[Interactive Scheduling Algorithms]]
 
 ## Sources
 

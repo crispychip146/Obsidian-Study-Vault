@@ -12,10 +12,9 @@ order: 26
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2a, 2017 Q2b, 2018 Q2b, 2019 Q3c, 2020 Q1b, 2021 Q1c)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q2a, 2017 Q2b, 2018 Q2b, 2019 Q3c, 2020 Q1b, 2021 Q1c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Stating the 4 Coffman Conditions (2017 Q2a):**
 >    - All four must hold simultaneously for a deadlock to occur:
 >      1. *Mutual Exclusion:* Resources are non-shareable.
@@ -33,25 +32,15 @@ order: 26
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Suppose A holds a scanner and needs a printer, while B holds the printer and needs the scanner. Both can be correctly waiting, yet no ordinary completion can occur: each needs the other to release first. This is **deadlock**.
 
-In any multitasking system, processes compete for exclusive access to shared resources: disk drives, database record locks, printer queues, and memory buffers.
+[[Semaphores and Synchronization Primitives]] prevents unsafe simultaneous access, but waiting for a protected resource introduces dependencies. The Coffman conditions describe the ingredients of resource deadlock: exclusive resources, holding while requesting more, resources that cannot simply be taken away, and a circular wait.
 
-We want every process to obtain the resources it needs, execute its computation, and release those resources back to the pool. The central obstacle is the phenomenon of **Deadlock**: a circular waiting condition where two or more processes are permanently frozen, each holding a resource the other needs and waiting for a resource the other holds, such that none can ever proceed.
+Read each condition through the scanner-printer example. Sharing both devices would remove exclusivity; requiring all resources at once would remove hold-and-wait; safely reclaiming one would remove non-preemption; consistent acquisition order would prevent a circular chain. These are possible design changes with different costs.
 
----
-
-## Developing the Idea
-
-In 1971, **Edward G. Coffman Jr.** established the theoretical foundation of deadlock analysis by proving that a system deadlock can occur if and only if **four necessary conditions** hold simultaneously:
-1. **Mutual Exclusion:** Resources cannot be shared; only one process can hold a resource at a time.
-2. **Hold and Wait:** A process holding at least one resource is permitted to request and wait for additional resources.
-3. **No Preemption:** Resources cannot be forcibly confiscated from a process; they can only be released voluntarily upon task completion.
-4. **Circular Wait:** A closed chain of processes $\{P_0, P_1, \dots, P_n\}$ exists such that $P_0$ waits for a resource held by $P_1$, $P_1$ waits for $P_2$, and $P_n$ waits for $P_0$.
-
----
+The four conditions identify what a deadlock requires in the conventional model. Their general availability in a system does not mean the system is deadlocked at every instant. Analyze the actual requests and allocations. With multiple instances, even a visible graph cycle needs further analysis because another instance may allow a process to finish.
 
 ## Definition
 
@@ -75,13 +64,11 @@ Any legitimate process must interact with a resource through three sequential ph
 
 ---
 
----
-
 ## How It Works
 
 ### 2. The Four Coffman Conditions (1971)
 
-In 1971, Edward G. Coffman Jr. proved that a resource deadlock can occur **if and only if** the following four structural conditions hold simultaneously:
+The following four Coffman conditions are necessary for resource deadlock in the standard reusable-resource model. Allowing them creates the possibility of deadlock; it does not mean every execution or allocation is already deadlocked:
 
 | # | Coffman Condition | Formal Description |
 |---|---|---|
@@ -91,9 +78,7 @@ In 1971, Edward G. Coffman Jr. proved that a resource deadlock can occur **if an
 | **4** | **Circular Wait** | There must exist a closed circular chain of two or more processes $\{P_0, P_1, \dots, P_n\}$, such that $P_0$ is waiting for a resource held by $P_1$, $P_1$ is waiting for a resource held by $P_2$, and $P_n$ is waiting for a resource held by $P_0$. |
 
 > [!IMPORTANT] The Golden Rule of Deadlock Elimination
-> **All four conditions are necessary.** If an operating system successfully invalidates or breaks **even one** of these four conditions, a deadlock is mathematically impossible!
-
----
+> **All four conditions are necessary.** If an operating system successfully invalidates or breaks **even one** of these four conditions, a deadlock is impossible under these assumptions!
 
 ---
 
@@ -108,57 +93,25 @@ Both processes are permanently blocked. Neither will ever call `release()`.
 
 ---
 
-## Technical Details
-
-See related modules for microarchitectural implementation details.
-
----
-
 ## Important Properties and Why They Hold
 
-- **Coffman Equivalence Theorem:** A deadlock state occurs if and only if all four Coffman conditions are simultaneously satisfied. Eliminating even one single condition completely guarantees that deadlock cannot occur.
+- **Prevention principle:** A resource deadlock requires all four conditions. A protocol that prevents any one of them prevents this form of deadlock under the model; the conditions being permitted alone does not prove that a particular state is deadlocked.
 - **Deadlock vs. Starvation vs. Livelock:**
   - *Deadlock:* All involved processes are blocked in sleep state; zero CPU consumed, permanent freeze.
   - *Starvation:* Process is ready to run but repeatedly bypassed by scheduler; progress is theoretically possible.
-  - *Livelock:* Processes actively change state in response to each other, but make zero forward progress (consuming 100% CPU).
+  - *Livelock:* Processes actively change state in response to each other, but make zero forward progress (possibly consuming CPU while making no useful progress).
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
+Deadlock differs from starvation, where others progress while one waits, and from livelock, where activity continues without useful progress. [[Resource Allocation Graphs and Deadlock Modeling]] represents the dependencies; [[Deadlock Prevention and Avoidance Strategies]] asks how to keep them from becoming permanent.
 
----
-
-## Exam Relevance
-
-Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
-
----
-
-## Related Concepts
-
-- [[Resource Allocation Graphs and Deadlock Modeling]]
-- [[Deadlock Prevention and Avoidance Strategies]]
-- [[Banker's Algorithm]]
-- [[Deadlock Detection and Recovery Algorithms]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Semaphores and Synchronization Primitives]]
-- [[Process Lifecycle and State Transitions]]
-
----
-
-## Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
+- [[Resource Allocation Graphs and Deadlock Modeling]]
+- [[Deadlock Prevention and Avoidance Strategies]]
 
 ## Sources
 

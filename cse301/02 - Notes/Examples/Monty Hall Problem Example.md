@@ -12,8 +12,6 @@ order: 22
 
 ---
 
----
-
 ## Problem
 
 On a game show, you are presented with three closed doors ($1, 2, 3$):
@@ -30,29 +28,13 @@ The game proceeds as follows:
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
 
-### Step-by-Step Solution
+The host's behavior is part of the probability model. In the usual Monty Hall setup, the host knows the prize location, always opens an unchosen goat door, and always offers a switch. Opening a goat door is therefore informed evidence, not an independent random reveal.
+
+Keep your initial choice fixed and separate the cases. It was correct with probability $1/3$; switching then loses. It was wrong with probability $2/3$; the host must remove the other goat, so switching then wins. This case split proves the switching strategy's $2/3$ success probability without needing to track every named door.
+
+If you ask for a posterior after one particular door is opened, specify how the host chooses when both unchosen doors contain goats. That tie-breaking rule can affect the particular-door posterior. It does not alter the overall switching success probability under the always-reveal, always-offer protocol.
 
 ### Method 1: The Intuitive Complement / Partition Argument
 Let $C_i$ be the event that the car is behind Door $i$ ($i \in \{1, 2, 3\}$).
@@ -111,41 +93,13 @@ The fallacy overlooks the **host's protocol and knowledge**:
 
 ---
 
----
+## What to carry forward
 
-## Result
+[[Law of Total Probability and Bayes' Rule]] makes the host protocol explicit. A host who opens doors randomly or selectively offers switches defines a different experiment.
 
-The mathematical derivation confirms the target probability or estimator value.
+## Related notes
 
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
-
-- [[Conditional Probability and Independence]] — Sample space reduction.
-- [[Law of Total Probability and Bayes' Rule]] — The mathematical machinery used in Method 2.
-
----
-
----
+- [[Law of Total Probability and Bayes' Rule]]
 
 ## Sources
 

@@ -12,8 +12,6 @@ order: 55
 
 ---
 
----
-
 ## Problem
 
 Consider the following basic block $B$ representing the inner step of an array traversal loop:
@@ -37,49 +35,15 @@ Assume $i$ is initialized before the loop to $0$ ($i = 0$), and array elements a
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+The loop increments i before loading, so its first access uses i=1, not i=0. That timing determines the strength-reduction initialization.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+Initialize an offset t to 8·0=0 in the preheader. In the body, replace `i=i+1; t1=8*i` with `t=t+8`; the first load uses byte offset 8. The invariant t=8i then holds after each paired update. This is the argument from [[Loop Optimizations and Strength Reduction]], specialized to eight-byte elements.
 
-### Working Through the Solution
-### Step-by-Step Solution
+If i has no other required use, replace `i<100` with `t<800` under the stated integer-range assumptions. Do not delete i if its final value is needed after the loop. Also note that the original body accesses the element corresponding to index 100 before testing whether to repeat; preserving semantics is separate from validating the array's declared capacity.
+
+Any cycle-savings calculation uses the question's instruction-cost assumptions, not a universal claim that multiplication has a fixed cost on all CPUs.
 
 ### Part 1: Identifying Induction Variables
 - **Basic Induction Variable:** Variable $i$, because it is modified exclusively by the constant increment $i = i + 1$ ($c = 1$).
@@ -160,43 +124,13 @@ B:
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+Check the first iteration, the last accessed offset, and the exit condition. They catch a misplaced offset update more effectively than comparing only a middle iteration. Preserve live-out values and overflow behavior when eliminating an induction variable.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Loop Optimizations and Strength Reduction]]
 
 ## Source
 

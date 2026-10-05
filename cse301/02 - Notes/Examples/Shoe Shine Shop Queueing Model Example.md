@@ -12,8 +12,6 @@ order: 89
 
 ---
 
----
-
 ## Problem
 
 A shoe shine shop has two chairs, each staffed by a dedicated server:
@@ -31,8 +29,6 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 
 ---
 
----
-
 ## Given
 
 - Server 1 rate: $\mu_1$ (Chair 1)
@@ -40,8 +36,6 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 - Arrival rate: $\lambda$ (Poisson)
 - Capacity: At most 2 customers total in the shop.
 - Blocking rule: When Chair 1 is done and Chair 2 is busy, Chair 1 enters blocked state $b$.
-
----
 
 ---
 
@@ -55,15 +49,13 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Counting customers is insufficient here. Two customers can mean both chairs are serving, or that chair one has finished but cannot transfer its customer because chair two is occupied. Those situations have different possible next events.
+
+Use a state pair $(s_1,s_2)$ with $s_1$ empty, serving, or blocked, and $s_2$ empty or serving. This creates five feasible states; a blocked first chair with an empty second chair is impossible because transfer is immediate.
+
+For each state, list actual changes and their rates. An arrival to a full shop is rejected, so it does not create a transition to a new state. A blocked first chair cannot complete another service, while a completion at chair two frees transfer. Stationary balance equates total probability flow in and out, followed by normalization. Only after this distribution is known should we calculate occupancy, loss, and throughput.
 
 ### Concepts Used
 
@@ -73,8 +65,6 @@ Identify the random variables, state the conditional distributions, select the a
 - Continuous-Time Markov Chain balance equations
 
 ---
-### Solution
-
 ### Step 1: Choosing the State Space
 Merely counting the total number of customers $N \in \{0, 1, 2\}$ is insufficient, because when 1 customer is present, they could be in Chair 1 or Chair 2. Furthermore, when 2 customers are present, Chair 1 could be actively working or blocked.
 
@@ -170,8 +160,6 @@ Notice that when $\mu_1 \gg \mu_2$ (cleaning is very fast, polishing is slow), C
 
 ---
 
----
-
 ## Result
 
 - Feasible state space requires tracking blocked states: $S = \{(0,0), (1,0), (0,1), (1,1), (b,1)\}$.
@@ -180,37 +168,14 @@ Notice that when $\mu_1 \gg \mu_2$ (cleaning is very fast, polishing is slow), C
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+[[Jackson Networks and Tandem Queues]] does not directly apply to this finite blocking system. [[Little's Law]] remains useful with accepted throughput and consistently defined residence time.
 
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
-
-- [[Queueing Systems and Kendall Notation]]
-- [[PASTA Property and Inspection Paradox]]
+- [[Jackson Networks and Tandem Queues]]
 - [[Little's Law]]
-- [[Finite Capacity M-M-1-N Queue]]
-
----
-
----
 
 ## Sources
 

@@ -12,8 +12,6 @@ order: 90
 
 ---
 
----
-
 ## Problem
 
 An e-commerce order processing pipeline consists of two sequential processing stages in series:
@@ -30,16 +28,12 @@ An e-commerce order processing pipeline consists of two sequential processing st
 
 ---
 
----
-
 ## Given
 
 - Pipeline structure: Tandem queue ($Q_1 \to Q_2$)
 - External arrival rate: $\lambda = 8$ orders/min
 - Server 1 processing rate: $\mu_1 = 12$ orders/min
 - Server 2 processing rate: $\mu_2 = 10$ orders/min
-
----
 
 ---
 
@@ -53,15 +47,13 @@ An e-commerce order processing pipeline consists of two sequential processing st
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Every order visits both stages, so each stage's equilibrium throughput is eight orders per minute. Check each bottleneck separately: $8<12$ and $8<10$, making both unlimited-buffer M/M/1 nodes stable under the tandem assumptions.
+
+Their mean populations are $8/(12-8)=2$ and $8/(10-8)=4$. Add them to get six orders in the pipeline. Their mean residence times are $1/4$ and $1/2$ minute, adding to 0.75 minute. These totals agree with Little's law: $8(0.75)=6$.
+
+For the joint queue-length event, the stationary Jackson product form permits multiplying the two geometric marginals. That is a statement about stationary counts, not general independence of an order's delays at the two stages. Burke's Poisson departure result is used in equilibrium; arbitrary transient departures need not be Poisson.
 
 ### Concepts Used
 
@@ -72,8 +64,6 @@ Identify the random variables, state the conditional distributions, select the a
 - Burke's Theorem
 
 ---
-### Solution
-
 ### Step 1: Stability and Traffic Intensities
 By Burke's Theorem, the departure process from Stage 1 is a Poisson process with rate $\lambda = 8$. Therefore, Stage 2 receives a Poisson arrival stream with rate $\lambda_2 = \lambda = 8$ orders/min.
 
@@ -133,8 +123,6 @@ $$\mathbf{L = \lambda W \quad \checkmark}$$
 
 ---
 
----
-
 ## Result
 
 | Metric | Stage 1 (Validation) | Stage 2 (Payment) | Total Pipeline |
@@ -149,37 +137,13 @@ $$\mathbf{L = \lambda W \quad \checkmark}$$
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+[[Jackson Networks and Tandem Queues]] supplies the assumptions behind the convenient decomposition. Blocking or finite buffers would require reconsidering this calculation.
 
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Jackson Networks and Tandem Queues]]
-- [[M-M-1 Queue]]
-- [[M-M-1 Performance Formulas]]
-- [[Little's Law]]
-
----
-
----
 
 ## Sources
 

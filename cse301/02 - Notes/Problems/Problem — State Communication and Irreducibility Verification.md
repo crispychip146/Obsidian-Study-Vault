@@ -12,8 +12,6 @@ order: 80
 
 ---
 
----
-
 ## Problem
 
 Consider a three-state [[Markov Chain]] with state space $S = \{0, 1, 2\}$ and transition probability matrix:
@@ -31,14 +29,10 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Given
 
 - State space $S = \{0, 1, 2\}$
 - Transition matrix $P$ as specified above.
-
----
 
 ---
 
@@ -51,24 +45,11 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Classification of States in Markov Chains]] (Accessibility, Communication, Communicating Classes, Irreducibility, Periodicity)
 - [[Chapman-Kolmogorov Equations]]
 - [[Markov Chain]]
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-
----
 
 ---
 
@@ -78,18 +59,13 @@ Proof / Conceptual Verification
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+A zero one-step entry forbids a direct transition, not a multi-step route. Here state zero can reach state two through state one, with path probability $(1/2)(1/4)=1/8>0$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+To establish communication, find a positive-probability path in each direction for every pair, or connect them through already established communicating links. States zero and one connect both ways, as do one and two, so transitivity places all three in one class. That makes the chain irreducible.
 
-### Working Through the Solution
-### Solution
+Every diagonal entry is positive, providing a one-step return. A set of return times containing one has greatest common divisor one, so each state is aperiodic. These structural conclusions use positivity, not the exact sizes of the path probabilities; the weights matter later when computing distributions.
 
 ### Step 1: Verify Accessibility $0 \to 2$
 State $2$ is accessible from state $0$ ($0 \to 2$) if there exists an integer $n \ge 1$ such that $P_{02}^n > 0$.
@@ -174,17 +150,6 @@ A staple exam question testing:
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - **Equating $P_{ij} = 0$ with Inaccessibility:** Claiming that $2$ is not accessible from $0$ simply because $P_{02} = 0$.
@@ -193,27 +158,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Classification of States in Markov Chains]] defines reachability, communication, and period. A self-loop is a sufficient route to aperiodicity, though chains without self-loops can also be aperiodic.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Classification of States in Markov Chains]]
 
 ## Source
 

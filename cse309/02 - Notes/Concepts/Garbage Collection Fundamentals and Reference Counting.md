@@ -12,310 +12,29 @@ order: 25
 
 ---
 
----
+## Building the idea
 
----
+An allocated object can remain in memory after the program has lost every way to reach it. **Garbage collection** reclaims objects according to a runtime's liveness criterion, commonly reachability from roots such as active stacks, globals, and registers.
 
----
+Reference counting uses a local proxy: record incoming references and reclaim an object when its count reaches zero, updating the counts of objects it referenced. This can reclaim acyclic structures promptly as their last owners disappear.
 
----
+An illustrative cycle exposes the limitation. A points to B and B points to A; the program drops its only external pointer. Both counts remain one, yet neither object is reachable from a root. Counting incoming edges is not the same as tracing a path from a root.
 
-## Starting Point and the Problem
-
-For decades, systems languages like C and C++ placed complete responsibility for heap memory in the hands of the programmer via manual primitives: `malloc()` / `free()` or `new` / `delete`.
-
-In practice, humans are mathematically incapable of tracking millions of transient object references across complex asynchronous applications without error. Microsoft Security Response Center and Chromium security audits consistently reveal that **over 70% of all high-severity vulnerabilities across major operating systems are memory safety errors**:
-1. **Dangling Pointers (Use-After-Free):** A programmer frees memory chunk $A$, but forgets that pointer $p$ still references it. Later, new object $B$ is placed at that address. When $p$ writes to $A$, it corrupts $B$, causing silent financial miscalculations, erratic crashes, or arbitrary code execution exploits.
-2. **Double-Free Hazards:** Calling `free()` twice on the same pointer corrupts the memory manager's internal free-list linked lists.
-3. **Memory Leaks:** Forgetting to free heap memory when references drop. The process slowly balloons in memory until the operating system's Out-Of-Memory (OOM) killer abruptly terminates it.
-
-**Garbage Collection (GC)** eliminates these bugs by transferring memory reclamation from fallible humans to a mathematically rigorous runtime subsystem.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Compilers formalize automatic memory management as a graph reachability problem:
-
-Let the program heap at any execution instant be modeled as a **Directed Graph**:
-$$G = (V, E)$$
-where:
-- **$V$ (Vertices):** The set of all dynamically allocated heap memory objects.
-- **$E$ (Directed Edges):** The set of active memory references (pointers):
-  $$(u, v) \in E \iff \text{Object } u \text{ contains a field pointing to Object } v$$
-
-### The Root Set ($R$)
-The **Root Set** $R \subseteq V$ consists of all memory locations that can be read **directly by the CPU** without dereferencing any heap pointer:
-1. All physical CPU registers currently holding object addresses.
-2. All global and static reference variables.
-3. All local reference variables residing in any active activation record across the entire call stack.
-
-```mermaid
-graph TD
-    subgraph RootSet ["The Root Set (R) (Stack, Registers, Globals)"]
-        R1["Global Pointer"]
-        R2["Stack Frame (main)"]
-        R3["Stack Frame (calc)"]
-    end
-
-    subgraph HeapMemory ["The Heap Graph G = (V, E)"]
-        ObjA["Object A (Reachable)"]
-        ObjB["Object B (Reachable)"]
-        ObjC["Object C (Reachable)"]
-        Garbage1["Object D (Garbage)"]
-        Garbage2["Object E (Garbage)"]
-    end
-
-    R1 --> ObjA
-    R2 --> ObjB
-    ObjA --> ObjC
-    Garbage1 --> Garbage2
-    Garbage2 --> Garbage1
-```
-
-### Formal Reachability Theorem:
-1. **Reachable Set:**
-   $$\text{Reachable}(G, R) = \{ v \in V \mid \exists r \in R, \; r \rightsquigarrow v \}$$
-   where $r \rightsquigarrow v$ denotes a directed path of length $\ge 0$ from root $r$ to object $v$.
-2. **Garbage Set:**
-   $$\text{Garbage}(G, R) = V \setminus \text{Reachable}(G, R)$$
-
-#### Theorem: Safety of Garbage Reclamation
-*Any object $g \in \text{Garbage}(G, R)$ can never again be read or written by the mutator (program). Reclaiming its physical memory is 100% safe and can never produce a dangling pointer error.*
-
-#### Proof:
-- The CPU can only execute instructions whose operands originate from registers, static memory, or the stack (the Root Set $R$), or via an address dereferenced through an existing pointer.
-- By induction: An object at distance $k$ from $R$ can only be reached if an object at distance $k-1$ is already reached.
-- Since $g \notin \text{Reachable}(G, R)$, there exists no directed path from any node in $R$ to $g$.
-- Therefore, the CPU instruction pointer has no physical sequence of dereferences that could ever resolve the address of $g$.
-- Hence, $g$ is dead to the execution universe, and its storage can be safely repurposed. $\blacksquare$
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Garbage Collection Fundamentals and Reference Counting** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Heap Memory Management and Allocation Strategies]] manages regions; a collector decides which allocations can be returned to that manager. The mutator is the running application that changes references, and the collector must coordinate with those changes.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 The mechanism executes in designated compiler passes.
 
 ---
-### Technical Details
+## What to carry forward
 
-Target architecture and ABI specifications govern low-level alignment and register assignments.
+[[Trace-Based Garbage Collection Algorithms]] solves the unreachable-cycle problem by starting from roots. Reachable objects may still be useless to the programmer, so tracing garbage collection does not prevent every application-level memory leak.
 
----
-### Important Properties and Why They Hold
+## Related notes
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Heap Memory Management and Allocation Strategies]]
+- [[Trace-Based Garbage Collection Algorithms]]
 
 ## Sources
 
@@ -392,7 +111,7 @@ graph LR
 | :--- | :--- |
 | **Deterministic Latency** | Memory is freed the microsecond its count hits zero. Ideal for real-time systems (audio DSP, Apple Swift UI). |
 | **Memory Cycle Leakage** | Leaks cyclic graphs (e.g., doubly linked lists, DOM trees) unless mitigated by manual "Weak References" (`std::weak_ptr`, Swift `unowned`). |
-| **Atomic Cache Contention** | On multi-core CPUs, every increment/decrement requires atomic bus-locking instructions (`LOCK XADD` on x86). In high-concurrency environments, memory bus saturation degrades throughput by 30–50%. |
+| **Atomic Cache Contention** | Shared-reference counts may need atomic updates and generate coherence traffic. Costs depend on ownership, implementation, and contention; thread-local or proven-exclusive counts need not use the same synchronization. |
 | **Cascade Free Latency** | Freeing a large linked list with zero references can cause a long, unexpected recursive cascade pause, destroying predictable frame times in games. |
 
 To conquer cyclic leaks and eliminate pointer assignment overhead, modern runtimes (JVM, Go, .NET, V8) turn to **[[Trace-Based Garbage Collection Algorithms]]**.

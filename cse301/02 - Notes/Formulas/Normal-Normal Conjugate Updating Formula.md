@@ -12,19 +12,13 @@ order: 53
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Suppose observations have a normal mean $\theta$ and known variance $\sigma^2$, while the prior for $\theta$ is normal with mean $m_0$ and variance $\tau_0^2$. Both likelihood and prior penalize squared distance from their preferred centers.
 
-What analytical relationship or closed-form expectation governs Normal-Normal Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Completing the square combines those penalties. Posterior precision is the sum $1/\tau_n^2=1/\tau_0^2+n/\sigma^2$. The posterior mean is the precision-weighted average $m_n=\tau_n^2(m_0/\tau_0^2+n\bar X/\sigma^2)$. Greater precision means greater weight because that source is more concentrated.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Normal-Normal Conjugate Updating Formula compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+Check the limits: a very diffuse prior gives nearly $\bar X$, while a highly concentrated prior pulls the answer toward $m_0$. More independent observations increase data precision. These formulas assume the sampling variance is known; estimating it changes the conjugate model and uncertainty calculation.
 
 ## Formula
 
@@ -54,8 +48,6 @@ where $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning | Role |
@@ -70,15 +62,6 @@ where $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
 | $n/\sigma^2$ | Data precision | Information content of sample |
 | $1/\tau^2$ | Posterior precision | Total information content |
 | $\bar{\theta}$ | Posterior mean | Updated point estimate |
-
----
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -104,11 +87,7 @@ $$\bar{\theta} = \frac{\text{Data Precision} \times \bar{X} + \text{Prior Precis
 
 ---
 
----
-
 ## Derivation
-
-### Derivation
 
 By Bayes' theorem:
 $$f(\theta \mid \mathbf{x}) \propto f(\mathbf{x} \mid \theta) f(\theta)$$
@@ -137,11 +116,7 @@ This is recognized immediately as a Gaussian density $N(\bar{\theta}, \tau^2) \q
 
 ---
 
----
-
 ## Example
-
-### Example
 
 Suppose an instrument measures a physical constant $\theta$. Instrument precision is known with $\sigma = 2$.
 - Prior belief: $\theta \sim N(100, 3^2) \implies a = 100, b = 3, b^2 = 9$.
@@ -162,36 +137,13 @@ Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+[[Bayesian Inference]] explains the update. A prediction for a new observation has variance $\sigma^2+\tau_n^2$: it includes both observation noise and remaining parameter uncertainty.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Bayesian Inference]]
-- [[Credible Intervals]]
-- [[Beta-Binomial Conjugate Updating Formula]]
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

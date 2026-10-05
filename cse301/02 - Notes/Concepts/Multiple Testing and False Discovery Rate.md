@@ -12,29 +12,13 @@ order: 62
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Testing many true null hypotheses creates many chances for a false rejection. With ten independent tests each rejecting with probability 0.05 under its null, the chance of at least one false rejection is $1-0.95^{10}$, about 40.1%.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Multiple Testing and False Discovery Rate, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Family-wise error rate is $P(V\ge1)$, where $V$ counts false rejections. False discovery rate instead averages the false fraction among discoveries: $E[V/\max(R,1)]$, where $R$ is the total number rejected. Set the fraction to zero when there are no discoveries.
 
----
-
-## Developing the Idea
-
-Imagine flipping a fair coin:
-- Getting 5 heads in a row has a small probability: $(0.5)^5 = 0.03125 < 0.05$. In a single test, this would be deemed "statistically significant" ($p < 0.05$).
-- However, if 100 students in a lecture hall all flip fair coins 5 times, on average $\approx 3$ students will achieve 5 straight heads purely by chance!
-
-In modern data science, genomics, and A/B testing:
-- A DNA microarray tests $m = 20,000$ genes simultaneously.
-- If we conduct every test at unadjusted $\alpha = 0.05$:
-  $$\text{Expected False Discoveries} = 20,000 \times 0.05 = 1,000 \text{ fake discoveries!}$$
-Researchers would waste millions of dollars chasing 1,000 ghost genes that have zero actual biological effect.
-
----
-
----
+These control different risks. Bonferroni protects the chance of any false rejection through a union bound and does not require independence. BH targets the expected false fraction under its dependence assumptions, often allowing more discoveries. FDR control does not guarantee that the false fraction in every realized experiment stays below the target.
 
 ## Definition
 
@@ -51,8 +35,6 @@ The **Multiple Testing Problem** arises when a researcher conducts $m > 1$ stati
 - $m$: Total number of hypothesis tests conducted (known).
 - $R$: Number of rejected null hypotheses (observed).
 - $V$: Number of falsely rejected nulls (unobserved random variable).
-
----
 
 ---
 
@@ -76,8 +58,6 @@ To guard against multiple testing inflation, statisticians define two fundamenta
 ```
 
 ---
-### Family-Wise Error Rate (FWER) and the Bonferroni Method
-
 ### Definition
 The **Family-Wise Error Rate (FWER)** is the probability of committing **at least one** Type I error across all $m$ tests:
 $$\text{FWER} = P(V \ge 1)$$
@@ -138,62 +118,13 @@ Controlling FDR at $q = 0.05$ guarantees that **on average, no more than 5% of y
 
 ---
 
----
+## What to carry forward
 
-## Example
+[[Benjamini-Hochberg Procedure Algorithm]] implements rank-based FDR control. State the family of tests and the error criterion before selecting a correction.
 
-See worked numerical applications in the linked example notes.
+## Related notes
 
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
-## Exam Relevance
-
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
-
-- [[Hypothesis Testing Framework]]
-- [[p-Values and Significance]]
 - [[Benjamini-Hochberg Procedure Algorithm]]
-- [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

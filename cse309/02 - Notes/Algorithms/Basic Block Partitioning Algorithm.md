@@ -12,118 +12,21 @@ order: 34
 
 ---
 
----
+## Building the idea
 
----
+Block boundaries are determined by where execution can start or leave. Mark the first instruction, every branch target, and the instruction immediately after each transfer where one exists. These are leaders.
 
----
+Why each rule? The first instruction starts the program fragment. A branch target must begin a block because execution can enter there. A transfer must end its block, so the following instruction starts a new sequence even when it is unreachable by that particular jump.
 
----
+Sort the leaders in instruction order and extend each block up to the next leader. If a branch could enter an internal instruction, that instruction would have been marked as a target. If a transfer occurred before the end, its successor would have been marked. These contradictions establish the intended boundaries in the stated IR model.
 
-## The Problem and Earlier Tools
-
-Before a compiler can apply code generation, instruction scheduling, or local register allocation, it must break down arbitrary Three-Address Code (TAC) into straight-line sequences with no internal branches.
-
-These sequences are **Basic Blocks**:
-- They possess the **Single-Entry, Single-Exit** invariant.
-- Once the first instruction of a basic block executes, **every instruction in that block will execute strictly in order**.
-
-To find these blocks without an exhaustive search, the compiler identifies the boundary instructions that begin each block. These boundary instructions are called **Leaders**.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-Given a linear array of Three-Address Code instructions indexed $1$ to $N$:
-
-```mermaid
-flowchart TD
-    subgraph Rules ["The 3 Fundamental Leader Rules"]
-        direction TB
-        R1["<b>Rule 1: Program Entry Point</b><br/>Instruction 1 is a Leader."]
-        R2["<b>Rule 2: Jump Targets</b><br/>Any instruction that is the TARGET of a conditional or unconditional jump is a Leader."]
-        R3["<b>Rule 3: Post-Branch Instructions</b><br/>Any instruction that IMMEDIATELY FOLLOWS a conditional or unconditional jump is a Leader."]
-    end
-```
-
-### Formal Definitions:
-1. **Rule 1 (First Instruction):** Instruction $1$ is a leader.
-2. **Rule 2 (Target of Jumps):** For any instruction $i$ containing `goto L` or `if ... goto L`, the instruction at target address $L$ is a leader.
-3. **Rule 3 (Following Jumps):** For any instruction $i$ containing `goto L` or `if ... goto L`, the instruction immediately following it ($i + 1$) is a leader (if $i + 1 \le N$).
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+[[Basic Blocks and Control Flow Graphs]] gives the properties we are enforcing. Partitioning identifies blocks; building the CFG then adds edges according to their final instructions.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 The algorithm transitions through defined phases.
 
 ---
-### Properties
-
 ### Formal Proof: Necessity and Sufficiency of the 3 Leader Rules
 
 Why do these three rules guarantee that every generated block is strictly single-entry and single-exit?
@@ -151,87 +54,7 @@ Why do these three rules guarantee that every generated block is strictly single
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Partitioning Algorithm Implementation
 
@@ -284,20 +107,6 @@ class BasicBlockPartitioner:
 
 ---
 
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 - **Time Complexity:** **$O(N)$**, where $N$ is the number of TAC instructions.
@@ -307,75 +116,9 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ---
 
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### End-to-End Walkthrough: Complex 12-Instruction Loop
 
@@ -435,39 +178,19 @@ flowchart TD
 
 ---
 
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Basic Block Partitioning Algorithm on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+List the rule supporting each leader before drawing blocks. A conditional jump's fall-through is an edge, while an unconditional jump has no fall-through edge even though the following instruction can still be a leader.
 
----
-
-## Related Concepts
+## Related notes
 
 - [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
 
 ## Sources
 

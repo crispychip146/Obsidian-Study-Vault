@@ -12,35 +12,13 @@ order: 49
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Bayesian inference represents uncertainty about a parameter by a prior distribution, then updates it using the observed data. The posterior is proportional to prior times likelihood; the normalization divides by the model's total probability or density for the observations.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Bayesian Inference, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+The likelihood rewards parameter values that fit the data, while the prior describes uncertainty before using this dataset. A parameter value with prior probability or density zero cannot gain posterior weight through this update. The prior is therefore a modeling choice with consequences.
 
----
-
-## Developing the Idea
-
-```
-           Prior Belief f(θ)
-                  ↓
-          Collect Data x
-                  ↓
-       Compute Likelihood L(θ)
-                  ↓
-  Combine: Posterior ∝ Likelihood × Prior
-                  ↓
-     Extract Point / Interval Estimates
-```
-
-1. **Before the study:** You believe a coin is probably fair ($\theta \approx 0.5$), but you leave room for some bias (Prior).
-2. **Experiment:** You flip the coin 100 times and observe 80 heads (Likelihood strongly favors $\theta = 0.8$).
-3. **After the study:** Your updated belief (Posterior) is a compromise: you no longer believe the coin is perfectly fair, but because of your prior skepticism, you don't immediately believe it has an $80\%$ bias either. Your posterior centers around $\approx 0.72$.
-
----
-
----
+Posterior summaries answer different questions. A posterior mean minimizes posterior expected squared error; a MAP chooses a density mode; a credible interval contains a chosen posterior probability. Prediction averages the next-observation model over the posterior parameter uncertainty. That last averaging step avoids pretending that a single fitted parameter is known exactly.
 
 ## Definition
 
@@ -61,8 +39,6 @@ where:
 
 ---
 
----
-
 ## How It Works
 
 ### When NOT to Use Bayesian Inference
@@ -73,14 +49,6 @@ where:
    Outside of simple conjugate models, normalizing constants $\int L_n(\theta) f(\theta) d\theta$ in high dimensions require computationally intensive Markov Chain Monte Carlo (MCMC) simulations.
 3. **Legal or Regulatory Contexts:**
    In clinical drug approvals or legal court proceedings, regulators frequently mandate objective frequentist guarantees that are completely immune to subjective investigator biases.
-
----
-
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
 
 ---
 
@@ -143,18 +111,7 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
 
 ---
 
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Treating the posterior as proportional to the prior alone:**
    Forgetting that the likelihood acts as the filter: $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$.
@@ -165,11 +122,7 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
 
 ---
 
----
-
 ## Exam Relevance
-
-### Exam Relevance
 
 In examinations, expect to:
 1. Identify the philosophical differences between frequentist and Bayesian inference.
@@ -187,35 +140,13 @@ In examinations, expect to:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Beta-Binomial Conjugate Updating Formula]] makes the update algebra explicit. A flat prior is flat in a specified parameterization; it is not an automatic absence of modeling assumptions.
 
-- [[Maximum A Posteriori (MAP) Estimation]]
-- [[Credible Intervals]]
+## Related notes
+
 - [[Beta-Binomial Conjugate Updating Formula]]
-- [[Normal-Normal Conjugate Updating Formula]]
-- [[Maximum Likelihood Estimation]]
-
----
-
----
-
-## Prerequisites
-
-- [[Point Estimation]]
-- Bayes' Theorem for events and continuous distributions
-- Probability Density Functions and Expectation Integrals
-
----
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

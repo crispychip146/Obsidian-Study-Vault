@@ -12,8 +12,6 @@ order: 79
 
 ---
 
----
-
 ## Problem
 
 Suppose whether it rains on any given day depends on the weather conditions of the previous two days:
@@ -40,15 +38,11 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Given
 
 - Initial state: $X_0 = 0$ (State 0: rained yesterday and today)
 - Transition probability matrix $P$ as given above.
 - Target event: It rains on day 2 (the day after tomorrow).
-
----
 
 ---
 
@@ -60,24 +54,11 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Markov Chain]] (Higher-Order State Representation)
 - [[Chapman-Kolmogorov Equations]]
 - Law of Total Probability
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Chapman-Kolmogorov Equations]]
-
----
 
 ---
 
@@ -87,18 +68,13 @@ Numerical / Matrix Multiplication
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+The question asks about rain, while the matrix evolves a richer two-day state. Keep those levels distinct. The initial row vector is concentrated on state zero, and multiplying by $P^2$ gives the distribution of the pair two days later.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+Under the stated (today, yesterday) convention, states zero and one both mean rain today. Sum their two-step probabilities, $0.49+0.12=0.61$. Looking only at state zero would demand rain on both relevant days and answer a narrower question.
 
-### Working Through the Solution
-### Solution
+You can check the same answer by conditioning on tomorrow: $0.7(0.7)+0.3(0.4)$. The first product is two successive rainy days; the second is a dry tomorrow followed by rain. This check makes the target event visible and detects a mistaken state convention.
 
 ### Step 1: Compute Row 0 of $P^{(2)} = P \cdot P$
 By the [[Chapman-Kolmogorov Equations]], the two-step transition probabilities from State 0 are given by the dot product of Row 0 of $P$ with each column of $P$:
@@ -159,17 +135,6 @@ Standard exam question testing:
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - **Computing Entire $4 \times 4$ Matrix Unnecessarily:** In an exam with strict time limits, calculating all 16 entries of $P^2$ wastes valuable time. Only **Row 0** is needed since $X_0 = 0$.
@@ -178,27 +143,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Higher-Order State Weather Prediction Example]] explains why the pair is necessary. Always translate a verbal event into a set of states before summing a matrix-power row.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Higher-Order State Weather Prediction Example]]
 
 ## Source
 

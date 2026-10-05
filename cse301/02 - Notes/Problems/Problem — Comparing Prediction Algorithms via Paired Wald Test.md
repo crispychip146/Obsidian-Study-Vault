@@ -12,8 +12,6 @@ order: 66
 
 ---
 
----
-
 ## Problem
 
 A machine learning team compares two image classification models, Algorithm 1 and Algorithm 2.
@@ -39,8 +37,6 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 
 ---
 
----
-
 ## Given
 
 - Sample size: $n = 500$ paired observations
@@ -55,8 +51,6 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 
 ---
 
----
-
 ## Required
 
 1. Explanation of why unpaired test fails.
@@ -64,8 +58,6 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 3. $\bar{D}$, $S_D^2$, and $\widehat{\text{se}}(\bar{D})$.
 4. Paired Wald statistic $W$ and $p$-value.
 5. Final statistical verdict at $\alpha = 0.05$.
-
----
 
 ---
 
@@ -78,38 +70,20 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 
 ---
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-- [[Discrete Probability Distributions]]
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Each image produces two outcomes, so compare algorithms within an image. Set $D_i=X_i-Y_i$: it is $-1$ on the 40 images where only algorithm 2 errs, $+1$ on the 15 where only algorithm 1 errs, and zero on the remaining 445.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+The mean difference is $(15-40)/500=-0.05$. The sum of squared differences is 55, so the unbiased sample variance is $(55-500(0.05)^2)/499=53.75/499$. Dividing its square root by $\sqrt{500}$ gives the standard error, about 0.01468. The Wald statistic is therefore about $-3.41$.
 
-### Working Through the Solution
-### Solution
+Only disagreements contribute to the difference. This explains why pairing matters: easy or difficult images affect both methods and should not be treated as independent trials across algorithms. The large-sample test also assumes suitable independence across sampled images; shared clusters can require a different variance estimate.
 
 ### 1. Why the Unpaired Test Is Invalid
 The unpaired two-sample Wald test assumes that samples $X$ and $Y$ are **statistically independent**.
 Here, both algorithms are evaluated on the exact same test images. Easy images (e.g., clear daylight photos) are easy for both models; difficult images (e.g., foggy, occluded photos) induce errors in both models.
 Consequently, $X_i$ and $Y_i$ are **positively correlated** ($\text{Cov}(X_i, Y_i) > 0$). An unpaired test ignores this covariance, severely overestimating the variance of $\bar{X} - \bar{Y}$:
 $$\text{Var}(\bar{X} - \bar{Y}) = \text{Var}(\bar{X}) + \text{Var}(\bar{Y}) - 2\text{Cov}(\bar{X}, \bar{Y})$$
-Ignoring the positive covariance leads to an artificially large standard error and a catastrophic loss of statistical power.
+Ignoring the positive covariance leads to an artificially large standard error and a serious loss of statistical power.
 
 ---
 
@@ -171,17 +145,6 @@ Notice that $\widehat{\text{se}}$ in the paired test ($0.01468$) is **$30\%$ sma
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Conflating correlation with causation or independence.
@@ -189,25 +152,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
-## Exam Pattern
+## What to carry forward
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+The negative estimate favors algorithm 1's error rate by five percentage points under this design. [[Wald Test Statistic]] gives an approximate two-sided $p$-value, not a posterior superiority probability.
 
----
+## Related notes
 
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Wald Test Statistic]]
 
 ## Source
 

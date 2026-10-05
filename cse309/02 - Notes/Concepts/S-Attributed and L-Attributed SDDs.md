@@ -12,80 +12,15 @@ order: 3
 
 ---
 
----
+## Building the idea
 
----
+A semantic rule is usable only when its inputs exist. **S-attributed** definitions use synthesized attributes, so children can finish before their parent: a postorder traversal supplies the needed schedule.
 
----
+**L-attributed** definitions also permit inherited information, but constrain it so a child's context can be obtained from the parent's inherited information and already available information to its left, with the standard permitted local dependencies remaining acyclic. This supports a depth-first, left-to-right evaluation.
 
----
+An illustrative `D -> T L` makes the scheduling point clear. First evaluate T's type, then pass that type into the identifier list L. If L instead required a not-yet-evaluated right sibling, this simple traversal would have to stop or change strategy.
 
-## Starting Point and the Problem
-
-In theoretical computer science, you can define attributes however you like. But in real-world compiler engineering, you face a brutal practical constraint:
-
-> **You cannot afford to build a 10-million-node concrete parse tree in RAM and perform multiple slow traversal passes over it.**
-
-A production compiler wants to compile **on-the-fly in a single pass**, as tokens stream off the disk or network.
-
-When a parser is running:
-- An **LR (Bottom-Up) parser** maintains a stack of symbols.
-- An **LL (Top-Down) recursive-descent parser** executes a hierarchy of function calls.
-
-How can semantic rules execute naturally within these parsing engines without freezing, crashing, or running in circles?
-
-Compiler designers solved this by defining two mathematically guaranteed, cycle-free classes of Syntax-Directed Definitions:
-1. **S-Attributed Definitions:** Designed for **Bottom-Up LR Parsing Stack** execution.
-2. **L-Attributed Definitions:** Designed for **Top-Down LL Recursive-Descent** execution.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-### Formal Definition:
-An SDD is **S-attributed** if **every single attribute** of every grammar symbol is a **[[Synthesized and Inherited Attributes|Synthesized Attribute]]**. There are zero inherited attributes.
-
-```mermaid
-flowchart BT
-    subgraph S_Attributed ["S-Attributed Execution: Native LR Parser Stack Reduction"]
-        direction BT
-        Child1["val[top-2]: Child X"] --> Rule["Semantic Rule executes upon REDUCE"]
-        Child2["val[top-1]: Child Y"] --> Rule
-        Child3["val[top]:   Child Z"] --> Rule
-        Rule --> Parent["val[top-2]: Parent Head A"]
-    end
-```
-
-### Why S-Attributed is Pure Engineering Elegance:
-Consider an LR parser (like Yacc or Bison). When an LR parser recognizes the right-hand side of a production $A \longrightarrow X \; Y \; Z$, where are the symbols $X, Y, Z$?
-
-**They are sitting right on top of the parser stack!**
-
-The compiler expands each stack slot to hold a pair: `(state, val)`.
-When the parser performs a reduction by $A \to X \; Y \; Z$:
-1. The values of $X, Y, Z$ are located at `val[top - 2]`, `val[top - 1]`, and `val[top]`.
-2. The semantic action fires immediately:
-   $$\text{temp} = \text{val}[top - 2] + \text{val}[top]$$
-3. The parser pops 3 entries off the stack and pushes $A$ with attribute `temp`.
-4. **Zero parse tree in RAM. Zero extra traversal passes.** The entire computation finishes on-the-fly in a single bottom-up sweep!
-
----
-
----
-
----
-
----
-
----
+[[Synthesized and Inherited Attributes]] identifies the direction of individual dependencies. S- and L-attributed classifications answer whether a convenient overall schedule exists. Every S-attributed definition is L-attributed, but an L-attributed definition need not be S-attributed.
 
 ## Definition
 
@@ -126,21 +61,7 @@ An SDD is **L-attributed** if each attribute of every grammar symbol is either:
 
 ---
 
----
-
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Recursive-Descent Mapping (Why L-Attributed Feels Natural)
 
@@ -182,7 +103,7 @@ Look at that code. Does it feel natural? **It is impossible to write this functi
 
 ```mermaid
 flowchart TD
-    All["All Possible SDDs (Arbitrary Dependencies - NP-Complete Cycle Risk)"]
+    All["General SDDs with arbitrary dependencies"]
     L["L-Attributed SDDs (Cycle-Free · Top-Down Compatible)"]
     S["S-Attributed SDDs (Cycle-Free · Pure Bottom-Up LR Stack)"]
     
@@ -203,17 +124,9 @@ flowchart TD
 | **Information Flow** | Bottom-up (Leaves $\to$ Root) | Bottom-up **AND** Left-to-Right |
 | **Underlying Parser Type** | **Bottom-Up LR Parsers** (SLR, LALR, LR(1)) | **Top-Down LL Parsers** (LL(1), Recursive Descent) |
 | **Implementation Vehicle** | Parser Stack values during reduction | Function parameters (inh) and return values (syn) |
-| **LR Compatibility** | $100\%$ native (zero code modifications) | Requires marker non-terminals $\epsilon$ and stack offset tricks |
+| **LR implementation** | Synthesized values can be computed at reductions for a compatible grammar. | Applicable cases need careful timing, markers, and stack access; arbitrary combinations are not guaranteed. |
 
 ---
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
 
 ### The Mathematical Proof of Cycle-Freeness
 
@@ -233,181 +146,14 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ---
 
----
-### Related Concepts
+## What to carry forward
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+Do not infer that every L-attributed SDD works unchanged with every LR parser. [[Bottom-Up Evaluation of L-Attributed SDDs]] considers the extra timing and stack access needed for applicable bottom-up implementations.
 
----
-### Prerequisites
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Synthesized and Inherited Attributes]]
+- [[Bottom-Up Evaluation of L-Attributed SDDs]]
 
 ## Sources
 

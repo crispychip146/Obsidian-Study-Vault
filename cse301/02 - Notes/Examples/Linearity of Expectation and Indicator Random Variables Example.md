@@ -12,8 +12,6 @@ order: 14
 
 ---
 
----
-
 ## Problem
 
 The **Fundamental Bridge** between probability and expectation is the **indicator random variable**:
@@ -32,29 +30,13 @@ We demonstrate the power of this method across two classic problems:
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
 
-### Step-by-Step Solution
+When a complicated quantity counts successes, split it into small yes/no contributions. An indicator $I_A$ equals one if event $A$ occurs and zero otherwise, so $E[I_A]=P(A)$ by its two possible values.
+
+If $X=I_1+\cdots+I_m$, [[Law of the Unconscious Statistician (LOTUS)|expectation]] gives $E[X]=\sum_i P(I_i=1)$. You do not need independence for this step. This is the main advantage: even when the events overlap, a total count can have a simple mean.
+
+For matched cards, let $I_i$ indicate that position $i$ is correct. Each has probability $1/n$, giving one expected match overall. This does not mean every shuffle has one match. Computing the variance is a different question: it involves pairwise probabilities through covariance, so dependencies matter there.
 
 ### Problem 1: Expected White Balls Sampled Without Replacement
 Let $N = w + b$ total balls. Draw a sample of size $n$ without replacement. Let $X$ be the number of white balls drawn.
@@ -110,20 +92,6 @@ Let $D$ be the number of **distinct days** of the year that are someone's birthd
 
 ---
 
----
-
-## Result
-
-The mathematical derivation confirms the target probability or estimator value.
-
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 - **The Indicator Choice Trick:** If asked for "the number of occupied bins", define indicators for the **bins**, not the balls!
@@ -131,23 +99,14 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 ---
 
----
+## What to carry forward
 
-## General Method
+Choose indicators for the things you are counting. To count occupied birthday categories, use one indicator per day rather than one per person; see [[Problem — Indicator Variables for Distinct Birthday Counts]].
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Discrete Probability Distributions]] — Hypergeometric and Binomial properties.
-- [[Law of the Unconscious Statistician (LOTUS)]] — Expectation mechanics.
-- [[Problem — Indicator Variables for Distinct Birthday Counts]] — Full variance calculation via indicator covariance.
-
----
-
----
+- [[Law of the Unconscious Statistician (LOTUS)|expectation]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ## Sources
 

@@ -12,10 +12,9 @@ order: 3
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1a, 2021 Q3d)**
-> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Repeated Verbatim in 2017 and 2021!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q1a, 2021 Q3d)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Writing Down the Exact Steps of Booting a Computer (2017 Q1a & 2021 Q3d verbatim):**
 >    - **The Setup:** "Write down the steps of booting a computer."
 >    - **The 7-Step Full-Credit Answer Key:**
@@ -29,245 +28,67 @@ order: 3
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+There is a puzzle before [[Dual-Mode Operation and System Calls]] can work: the kernel must be loaded before it can provide loading services. At reset, the CPU begins at an architecture-defined address where firmware is available. We therefore need a small first program that can run without the OS.
 
-When a computer's power switch is flipped, main memory (RAM) is completely volatile and holds random, uninitialized bits. The CPU registers hold undefined values, and no operating system is present in memory.
+Booting solves this by transferring responsibility in stages. Firmware initializes enough hardware to choose a boot target. A loader obtains the kernel and any initial filesystem image, places them in memory, and transfers control. The kernel then initializes its own memory management, interrupt handling, drivers, and process machinery. User-space startup services can now begin.
 
-We want the machine to transition reliably from cold, unpowered silicon into a protected, multitasking environment running the OS kernel with memory management, scheduling, and device drivers fully active. The central obstacle is a bootstrap chicken-and-egg dilemma: the CPU can only execute instructions that reside in memory, but the software responsible for loading programs from storage (the OS) is itself sitting unread on disk.
+Keep legacy BIOS and UEFI paths distinct. A traditional BIOS path can start from an MBR boot sector and load a larger second-stage loader. A UEFI boot manager can load an EFI application through firmware services; it does not require that MBR instruction sequence. The shared idea is that each stage establishes the conditions needed by the next.
 
----
+For each stage, ask: **what code is running, what can it already access, and what does it hand over?** That makes the sequence easier to reconstruct than memorizing an unexplained list of addresses.
 
-## Developing the Idea
+## Firmware, loader, and kernel
 
-The solution is **bootstrapping** (pulling oneself up by one's own bootstraps) through a disciplined, multi-stage chain of increasingly sophisticated software layers.
+Booting is a staged transfer of control. At reset, the processor begins at an architecture-defined entry point containing or leading to firmware. Firmware initializes enough hardware to locate the next program. A boot manager or loader selects and loads an operating system; the kernel then establishes its own memory management, drivers, and process environment.
 
-Each stage has just enough capability to initialize the minimum hardware needed to locate and load the next stage:
-1. Non-volatile ROM firmware (BIOS/UEFI) runs first because its code is physically etched into flash silicon.
-2. Firmware loads a tiny 512-byte primary boot sector (MBR Stage 1).
-3. Stage 1 loads a feature-rich bootloader (GRUB2, Stage 2) capable of reading complex disk filesystems.
-4. Stage 2 loads the compressed OS kernel image into RAM and transfers control.
+The details differ by platform:
 
----
+| Stage | Legacy BIOS-style PC boot | UEFI-style boot |
+|---|---|---|
+| Initial software | Platform firmware initializes hardware. | UEFI firmware initializes hardware and exposes firmware services. |
+| Choosing a target | Firmware commonly reads a boot sector from a selected device. | The boot manager follows configured boot options, commonly loading an EFI executable. |
+| Loading the OS | A staged loader locates the kernel and related data. | An EFI loader uses firmware services to prepare the kernel and handoff. |
+| Kernel control | The kernel establishes its runtime environment. | The loader/kernel leaves boot services at the appropriate handoff; supported runtime services are a separate interface. |
 
-## Definition
+A BIOS master boot record and a UEFI executable are different mechanisms. Likewise, reset addresses and CPU mode transitions are architecture-specific. A simplified PC sequence should not be treated as the universal boot path for every computer.
 
-**Booting** (short for *bootstrapping*) is the initial sequential process that starts an operating system when a computer is powered on or restarted.
+## What each component contributes
 
-Because main memory (RAM) is volatile, it contains random, meaningless data at power-on. The CPU cannot immediately run an operating system from RAM. Instead, hardware and firmware must work in a multi-stage chain—each link loading a slightly more complex piece of software—culminating in an initialized OS kernel running in privileged mode.
+- **Firmware storage:** nonvolatile storage retains the startup software while power is off; firmware can often be updated.
+- **RAM:** holds loaded instructions and data during execution. The loader must arrange the memory layout expected by the kernel.
+- **CPU:** fetches instructions from the current program counter. Reset defines an initial execution state; it does not randomly choose an instruction from RAM.
+- **Device controllers:** provide interfaces for accessing storage and other devices. Firmware supplies early access, then OS drivers take over the relevant management.
+- **Hardware description:** platform tables or device descriptions help the kernel discover resources and configure them.
 
----
+## Hardware state that survives into OS reasoning
 
----
+The **program counter** identifies where instruction execution continues. The **stack pointer** identifies the current stack position. General registers hold working values, and status/control registers record conditions and configuration. A context switch must preserve the state required to resume a task; the exact saved set depends on the architecture and software convention.
 
-## How It Works
+Memory forms a hierarchy: registers and caches keep small amounts close to the CPU, RAM holds active data, and storage retains larger persistent data. Their capacities and delays vary by hardware. Virtual memory gives a process an address-space abstraction through translation and protection; it does not make a storage access as fast as a register access.
 
-### The Step-by-Step Boot Sequence
+The **MMU** translates and protects memory references. An **interrupt controller** routes external events to the CPU. Architecture-defined interrupt/exception entry data selects handlers; on x86, an IDT contains gate descriptors rather than just ordinary function pointers. Entry saves return state according to the architecture, and kernel software completes the handler setup.
 
-The modern computer boot sequence follows six precise phases:
+With **DMA**, a device can transfer data to or from memory after software configures the transfer. The CPU need not copy each byte itself, but the OS must still manage buffers, access permissions, completion, and any required cache coordination. An interrupt may report completion, linking the hardware event to a blocked process becoming ready.
 
-```mermaid
-flowchart TD
-    A["1. Power-On & CPU Reset<br/>Hardware forces PC to fixed ROM address (0xFFFF0)"] --> B["2. BIOS / UEFI Execution<br/>POST (Power-On Self-Test) & Hardware Inventory"]
-    B --> C["3. Boot Device Selection<br/>Scans NVMe, SSD, Disk, USB, or Network PXE"]
-    C --> D["4. Master Boot Record (MBR / GPT)<br/>Loads 512-byte Sector 0 (Stage 1 Bootloader)"]
-    D --> E["5. Second-Stage Bootloader (GRUB / Windows Boot Manager)<br/>Loads OS Kernel Image & Initrd into RAM"]
-    E --> F["6. Kernel Initialization<br/>Sets up Page Tables, IDT, Device Drivers & Spawns PID 1 (init/systemd)"]
-```
+## From kernel initialization to user work
 
-### Phase 1: CPU Hardware Reset
-1. Power supply stabilizes and sends a `POWER GOOD` signal to the motherboard chipset.
-2. The CPU hardware reset line is pulsed, resetting all internal registers to default states.
-3. The **Program Counter (PC / Instruction Pointer)** is hardwired to a predetermined, fixed memory address in non-volatile read-only memory (ROM/Flash)—on x86 systems, this is `0xFFFF0`.
+The kernel initializes essential subsystems, establishes the first user processes, and eventually starts system services and user applications. The exact order and process names depend on the OS. A shell or desktop is a later environment, rather than the component responsible for starting the CPU.
 
-### Phase 2: BIOS / UEFI Firmware Execution
-- **POST (Power-On Self-Test):** Firmware verifies basic hardware operational integrity (checks CPU registers, tests RAM chips, verifies keyboard and video controllers).
-- **Device Inventory & Configuration:** Detects connected storage buses (PCIe, NVMe, SATA, USB), initializes display adapters, and loads basic configuration settings from CMOS/NVRAM.
+Secure Boot adds an authentication policy for permitted boot images when enabled and configured. A sequence of loaders does not by itself establish a verified chain of trust. Warm and cold boots may perform different initialization, but both must reach a valid kernel execution environment.
 
-### Phase 3: Reading the Master Boot Record (MBR) / GPT
-- Firmware reads the configured boot order list (e.g., SSD, USB drive, Network).
-- For the primary storage drive, firmware reads **Sector 0** (the very first 512-byte physical sector on disk, known as the **Master Boot Record**):
-  - **Bytes 0–445:** Primary Bootstrap Code (Stage 1 Bootloader).
-  - **Bytes 446–509:** Partition Table (describes up to 4 primary partitions).
-  - **Bytes 510–511:** Magic Boot Signature `0x55AA` (validates that the sector is bootable).
+## What to carry forward
 
-### Phase 4: The Bootloader (GRUB / Windows Boot Manager)
-Because 446 bytes is far too tiny to understand modern file systems (ext4, NTFS) or parse kernel binaries, the bootloader runs in stages:
-- **Stage 1 (MBR code):** Merely knows how to find and load Stage 2 from a fixed sector location.
-- **Stage 2 (GRUB):** Contains disk and file system drivers. Presents the OS selection menu, reads kernel configuration parameters, and loads the compressed OS kernel image (`vmlinuz`) and initial RAM disk (`initrd`) into physical RAM.
+Boot order describes execution dependencies; it does not automatically imply cryptographic verification. Secure Boot adds an explicit verification policy. Once user programs start, [[Process Concepts and Memory Layout]] explains how their code, data, and execution state become a process.
 
-### Phase 5: Kernel Initialization
-Control is handed over to the kernel entry point. The kernel runs in **Kernel Mode**:
-1. **CPU Mode Transition:** Switches the CPU from legacy 16-bit Real Mode into 32-bit Protected Mode or 64-bit Long Mode.
-2. **Memory Setup:** Initializes the Memory Management Unit (MMU), sets up the kernel page tables, and begins virtual memory paging.
-3. **Interrupt Vector Table (IVT / IDT):** Populates the Interrupt Descriptor Table with pointers to the kernel's interrupt and exception handlers.
-4. **Driver Probing:** Detects, probes, and loads drivers for all physical hardware components.
+## Related notes
 
-### Phase 6: Spawning the First User-Space Process (PID 1)
-Once kernel initialization is complete, the kernel mounts the root file system and spawns the ancestor of all user processes:
-- In Linux/UNIX: `/sbin/init` or `/lib/systemd/systemd` (**Process ID = 1**).
-- The kernel sets the hardware mode bit to $1$ (**User Mode**) and transitions to PID 1.
-- PID 1 reads system configuration files to spawn background service daemons (networking, cron, logging) and finally launches graphical login managers or terminal shells (`getty`/`login`).
-
----
-
----
-
-### Essential Hardware Abstractions
-
-To understand process execution and scheduling, an operating system relies on four fundamental hardware abstractions:
-
-```mermaid
-classDiagram
-    class CPU_Registers {
-        +Program Counter (PC)
-        +Stack Pointer (SP)
-        +Program Status Word (PSW)
-        +General Purpose Registers
-    }
-    class Memory_Hierarchy {
-        +L1/L2/L3 Caches
-        +Physical RAM
-        +Secondary Storage (SSD/HDD)
-    }
-    class Control_Units {
-        +Memory Management Unit (MMU)
-        +Interrupt Controller (APIC)
-        +Direct Memory Access (DMA)
-    }
-    CPU_Registers --> Memory_Hierarchy : Reads / Writes
-    Control_Units --> CPU_Registers : Generates Interrupts
-```
-
-### 1. Key CPU Registers
-- **Program Counter (PC / EIP / RIP):** Contains the memory address of the next machine instruction to be fetched and executed.
-- **Stack Pointer (SP / ESP / RSP):** Points to the top of the current execution call stack in memory (used for local variables, parameter passing, and return addresses).
-- **Program Status Word (PSW / Flags):** Holds critical CPU status flags (Carry, Zero, Overflow, Interrupt Enable flag, and the **Kernel/User Mode Bit**).
-
-### 2. The Memory Hierarchy
-Systems trade speed for capacity and cost:
-$$\text{Registers (< 1 ns, < 1 KB)} \to \text{Caches (1–10 ns, MBs)} \to \text{RAM (50–100 ns, GBs)} \to \text{NVMe/SSD (10–100 }\mu\text{s, TBs)} \to \text{HDD (ms, TBs)}$$
-The OS abstracts this entire hierarchy into a clean, uniform **Virtual Address Space** per process.
-
-### 3. Interrupt Descriptor Table (IDT)
-An array of function pointers stored in kernel memory. When interrupt line $k$ triggers, the hardware pauses the current instruction, looks up index $k$ in the IDT, and vectors execution immediately to that address in kernel mode.
-
----
-
----
-
-## Example
-
-Step-by-step trace of booting an x86-64 machine:
-1. Power supply asserts `POWER_GOOD`. CPU hardware initializes the program counter to the reset vector `0xFFFFFFF0`.
-2. BIOS executes Power-On Self-Test (POST), testing memory chips and bus bridges.
-3. BIOS reads Sector 0 (`0x7C00`) from the NVMe SSD and checks for signature `0x55AA`.
-4. MBR code loads GRUB2 from the boot partition.
-5. GRUB2 loads `vmlinuz` and `initramfs`, switches the CPU to 64-bit Long Mode, and jumps to kernel entry.
-6. Kernel initializes page tables, mounts `/`, and executes `/sbin/init` (PID 1).
-
----
-
-## Technical Details
-
-### Essential Hardware Abstractions
-
-To understand process execution and scheduling, an operating system relies on four fundamental hardware abstractions:
-
-```mermaid
-classDiagram
-    class CPU_Registers {
-        +Program Counter (PC)
-        +Stack Pointer (SP)
-        +Program Status Word (PSW)
-        +General Purpose Registers
-    }
-    class Memory_Hierarchy {
-        +L1/L2/L3 Caches
-        +Physical RAM
-        +Secondary Storage (SSD/HDD)
-    }
-    class Control_Units {
-        +Memory Management Unit (MMU)
-        +Interrupt Controller (APIC)
-        +Direct Memory Access (DMA)
-    }
-    CPU_Registers --> Memory_Hierarchy : Reads / Writes
-    Control_Units --> CPU_Registers : Generates Interrupts
-```
-
-### 1. Key CPU Registers
-- **Program Counter (PC / EIP / RIP):** Contains the memory address of the next machine instruction to be fetched and executed.
-- **Stack Pointer (SP / ESP / RSP):** Points to the top of the current execution call stack in memory (used for local variables, parameter passing, and return addresses).
-- **Program Status Word (PSW / Flags):** Holds critical CPU status flags (Carry, Zero, Overflow, Interrupt Enable flag, and the **Kernel/User Mode Bit**).
-
-### 2. The Memory Hierarchy
-Systems trade speed for capacity and cost:
-$$\text{Registers (< 1 ns, < 1 KB)} \to \text{Caches (1–10 ns, MBs)} \to \text{RAM (50–100 ns, GBs)} \to \text{NVMe/SSD (10–100 }\mu\text{s, TBs)} \to \text{HDD (ms, TBs)}$$
-The OS abstracts this entire hierarchy into a clean, uniform **Virtual Address Space** per process.
-
-### 3. Interrupt Descriptor Table (IDT)
-An array of function pointers stored in kernel memory. When interrupt line $k$ triggers, the hardware pauses the current instruction, looks up index $k$ in the IDT, and vectors execution immediately to that address in kernel mode.
-
----
-
----
-
-## Important Properties and Why They Hold
-
-- **Chain-of-Trust Invariant:** Each stage verifies the presence or integrity of the succeeding stage before transferring execution control.
-- **Progressive Mode Elevation:** The CPU begins in legacy 16-bit real mode with flat memory addressing, and is sequentially upgraded by bootloaders into 32-bit protected mode and 64-bit long mode with paging enabled.
-- **Hardware Abstraction Decoupling:** Firmware abstracts low-level motherboard differences so bootloaders and kernels can query system topology via standardized tables (ACPI, SMBIOS).
-
----
-
-## Common Mistakes
-
-1. **Missing Boot Signature:** If sector 0 does not terminate with `0x55AA`, the BIOS refuses to boot and reports: *"No bootable device found"*.
-2. **Volatile vs Non-Volatile Memory:** Beginners often wonder why the kernel isn't kept permanently in RAM. RAM requires continuous electrical power to maintain capacitive charges; turning off power resets RAM to random electrical noise.
-3. **Difference between Reboot (Warm Boot) and Cold Boot:**
-   - Cold Boot: Machine powers on from zero electricity; full POST executed.
-   - Warm Boot (Restart): Memory and CPU reset without cycling physical power; skips several low-level hardware test phases.
-
----
-
----
-
-## Exam Relevance
-
-- **Next Step:** Once the OS is booted and PID 1 is running, how does the OS represent, structure, and isolate individual running programs? (See [[Process Concepts and Memory Layout]]).
-- **Process Trees:** The boot sequence culminates in spawning PID 1, from which all subsequent processes are created via `fork()` (see [[Process Creation and Termination Operations]]).
-- **Exam Testing:** Frequently appears in exam short-answer questions:
-  - "Outline the steps that occur between pressing the power button and the shell prompt."
-  - "What is the purpose of the MBR and its magic signature?"
-  - "Why is the bootloader split into multiple stages?"
-
----
-
----
-
-## Related Concepts
-
-- [[Operating System Structures and Functions]]
 - [[Dual-Mode Operation and System Calls]]
 - [[Process Concepts and Memory Layout]]
-
----
-
-## Prerequisites
-
-- [[Operating System Structures and Functions]]
-
----
-
-## Problems
-
-- [[Problem — Fork Execution Tree and Process Tracing]]
-
----
 
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 7–10, 29–36)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 1 (Section 1.3: Hardware Overview, Section 1.5: Booting)
+
+- **Implementation clarification:** [UEFI boot manager specification](https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html).

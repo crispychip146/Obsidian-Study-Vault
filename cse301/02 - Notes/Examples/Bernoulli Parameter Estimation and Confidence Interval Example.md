@@ -12,8 +12,6 @@ order: 40
 
 ---
 
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} \text{Bernoulli}(p)$ be independent random trials with unknown success probability $p \in (0, 1)$.
@@ -27,8 +25,6 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 
 ---
 
----
-
 ## Given
 
 - Sample: $X_1, \dots, X_n \overset{\text{iid}}{\sim} \text{Bernoulli}(p)$
@@ -36,8 +32,6 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 - Mean of single observation: $E[X_i] = 1 \cdot p + 0 \cdot (1-p) = p$
 - Variance of single observation: $\text{Var}(X_i) = E[X_i^2] - (E[X_i])^2 = p - p^2 = p(1-p)$
 - Numerical data: $n = 100$, $\sum X_i = 60$
-
----
 
 ---
 
@@ -50,15 +44,13 @@ $$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+The sample proportion averages binary outcomes, so start with the mean and variance of one Bernoulli trial. Linearity gives $E[\hat p]=p$; independence gives $\operatorname{Var}(\hat p)=p(1-p)/n$. The first proves unbiasedness, and the second shows how repeated sampling becomes more precise.
+
+For 60 successes in 100 trials, $\hat p=0.60$. Substitute it for the unknown $p$ in the standard error: $\sqrt{0.60(0.40)/100}\approx0.0490$. A 95% normal interval uses a margin $1.96(0.0490)\approx0.0960$, giving approximately $(0.504,0.696)$.
+
+Consistency follows because MSE equals the variance here and tends to zero. That asymptotic fact is separate from the finite-sample interval approximation. The observed successes and failures are both substantial in this example; at a boundary such as zero observed failures, the plug-in Wald interval can misleadingly have zero width.
 
 ### Concepts Used
 
@@ -68,8 +60,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[Normal-Based Large-Sample Confidence Interval]]
 
 ---
-### Solution
-
 ### Step 1: Unbiasedness Proof
 Compute the expected value of $\hat{p}_n$:
 $$E[\hat{p}_n] = E\left[\frac{1}{n}\sum_{i=1}^n X_i\right]$$
@@ -128,8 +118,6 @@ Given $n = 100$ and $\sum_{i=1}^{100} X_i = 60$:
 
 ---
 
----
-
 ## Result
 
 1. $\hat{p}_n$ is strictly unbiased ($\text{bias} = 0$).
@@ -139,13 +127,9 @@ Given $n = 100$ and $\sum_{i=1}^{100} X_i = 60$:
 
 ---
 
----
-
 ## Why This Works
 
 The sample proportion is an average of i.i.d. indicators. By the Law of Large Numbers, it concentrates around the true mean $p$. By the Central Limit Theorem, the distribution of $\hat{p}_n$ converges rapidly to a normal distribution $N(p, \text{se}^2)$, allowing us to use standard normal quantiles to form valid confidence bounds.
-
----
 
 ---
 
@@ -156,23 +140,13 @@ The sample proportion is an average of i.i.d. indicators. By the Law of Large Nu
 
 ---
 
----
+## What to carry forward
 
-## General Method
+Connect each calculation to its purpose: expectation checks the target, variance checks sampling noise, and [[Normal-Based Large-Sample Confidence Interval]] expresses approximate uncertainty around the realized estimate.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Point Estimation]]
-- [[Estimator Consistency and Convergence]]
 - [[Normal-Based Large-Sample Confidence Interval]]
-
----
-
----
 
 ## Sources
 

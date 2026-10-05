@@ -12,13 +12,12 @@ order: 21
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q3c)**
-> **Frequency:** ⭐⭐⭐ **Critical Conceptual Trap in Concurrency Design**
+> [!IMPORTANT] **Exam practice references (Appeared in 2018 Q3c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Why `while` is Mandatory Instead of `if` for Condition Variables (2018 Q3c):**
 >    - **The Setup:** A student or engineer implements monitor methods using `if (count == 0) cond_wait(&nonempty);` with 2 consumers and 1 producer. What fatal bug occurs?
->    - **The "Click" Mechanics (Mesa Semantics / Signal-and-Continue):**
+>    - **The tracing method (Mesa Semantics / Signal-and-Continue):**
 >      1. Buffer is empty ($count = 0$). Consumer $C_1$ executes `if (count == 0)` and sleeps via `cond_wait()`.
 >      2. Consumer $C_2$ enters, also finds $count = 0$, and sleeps.
 >      3. Producer enters, inserts 1 item ($count = 1$), and invokes `cond_signal()`.
@@ -30,62 +29,48 @@ order: 21
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A monitor puts shared data and the procedures that manipulate it behind one mutual-exclusion boundary. That reduces the burden of placing lock operations at every access, but it leaves another problem: what should a consumer do when it enters safely and finds the buffer empty?
 
-While semaphores provide powerful synchronization, they are low-level primitives: every programmer must remember to place `wait()` before every critical section and `signal()` after every critical section in the exact right order.
+Waiting while retaining the monitor lock would stop the producer from entering to fill the buffer. A condition wait therefore **releases the lock and registers the waiter atomically**. When it returns, the waiter holds the lock again and can inspect the protected data.
 
-We want a high-level, language-enforced abstraction where synchronization errors are impossible or caught at compile time. The central obstacle is programmer fallibility: omitting a single `signal()` causes permanent deadlock; calling `wait()` twice freezes the program; swapping the order of two semaphore calls violates mutual exclusion.
+Under Mesa semantics, a signal means that a waiter may compete to resume; it does not reserve an item for that waiter. The signaler or a different eligible consumer can change the buffer first. Thus use `while (count==0) wait(nonempty)`: the predicate is checked again after every return. With `if`, the consumer can continue on an assumption that is no longer true.
 
----
-
-## Developing the Idea
-
-To eliminate manual synchronization errors, C.A.R. Hoare and Per Brinch Hansen invented the **Monitor**: an object-oriented synchronization construct built directly into programming languages (such as Java, C#, or Ada).
-
-A monitor encapsulates shared variables and procedures within a protected boundary:
-- **Automatic Mutual Exclusion:** Only one thread can be actively executing inside any procedure of the monitor at any given moment. The compiler automatically injects lock acquisition and release code at procedure entry and exit.
-- **Condition Variables:** When a thread inside the monitor needs to wait for a specific condition (e.g. `buffer_not_empty`), it calls `cond.wait()`, atomically releasing the monitor lock and sleeping. When another thread satisfies the condition, it calls `cond.signal()`, waking the waiting thread.
-
----
-
-## Definition
-
-
-
----
+[[Semaphores and Synchronization Primitives]] remembers permissions in a count. A condition variable remembers waiting callers, while the shared predicate records the actual condition. That is why a notification sent with no waiter need not be stored: a later caller checks the predicate itself.
 
 ## How It Works
 
-### 2. Monitor Architecture & Syntax
+### A bounded FIFO buffer under Mesa semantics
 
-A monitor encapsulates private shared state variables, initialization code, and public access procedures:
+This is monitor pseudocode: procedure entry holds the monitor lock, and `wait` releases it atomically before sleeping and reacquires it before returning.
 
-```
-monitor ProducerConsumerMonitor {
-    // Shared private variables
-    condition full, empty;
-    int count = 0;
+```text
+monitor BoundedBuffer {
+    condition not_full, not_empty;
     item buffer[N];
+    int count = 0, in = 0, out = 0;
 
-    public procedure insert(item val) {
-        if (count == N) wait(full);
-        buffer[count] = val;
+    procedure insert(item value) {
+        while (count == N) wait(not_full);
+        buffer[in] = value;
+        in = (in + 1) % N;
         count++;
-        if (count == 1) signal(empty);
+        signal(not_empty);
     }
 
-    public procedure remove(item *val) {
-        if (count == 0) wait(empty);
-        *val = buffer[count - 1];
+    procedure remove() returns item {
+        while (count == 0) wait(not_empty);
+        item value = buffer[out];
+        out = (out + 1) % N;
         count--;
-        if (count == N - 1) signal(full);
+        signal(not_full);
+        return value;
     }
 }
 ```
 
----
+The count predicate protects capacity, while `in` and `out` preserve FIFO order. Notify after each successful insertion/removal so eligible waiters can compete; every awakened waiter still checks the predicate. A signal is not a stored item reservation.
 
 ---
 
@@ -102,8 +87,6 @@ A condition variable is a synchronization object (not an integer counter) with t
 2. **`signal(condition_var)`**:
    - Awakens exactly one process currently sleeping on `condition_var`.
    - **Crucial Distinction from Semaphores:** If no process is currently waiting on `condition_var`, the signal is **silently lost and discarded**. Condition variables have **no memory** and do not accumulate counts.
-
----
 
 ---
 
@@ -157,8 +140,6 @@ When process $P$ executes `signal(c)` inside a monitor, waking up sleeping proce
 
 ---
 
----
-
 ### 6. Comprehensive Comparison: Semaphores vs Monitors
 
 | Feature | Semaphore | Monitor |
@@ -172,50 +153,22 @@ When process $P$ executes `signal(c)` inside a monitor, waking up sleeping proce
 
 ---
 
----
-
 ## Important Properties and Why They Hold
 
 - **Mesa vs. Hoare Signaling Semantics:**
   - *Mesa Semantics (Java, POSIX Pthreads):* `signal()` awakens a waiter, but the signaling thread keeps running. The waiter is moved to the ready queue and must re-check its condition via `while (!condition)` due to potential race conditions.
   - *Hoare Semantics:* `signal()` immediately transfers the monitor lock directly to the waiting thread; the signaling thread is suspended. Condition check can use `if (!condition)`.
-- **Compile-Time Safety:** Programmers cannot accidentally bypass mutual exclusion when accessing monitor variables, drastically reducing synchronization bugs.
+- **Encapsulation assumption:** Mutual exclusion protects shared state only when all relevant accesses use the monitor protocol. Exposing references or using unsynchronized access can still introduce errors.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
+Specify Hoare or Mesa semantics before tracing signals. Immediate lock handoff in Hoare's model can support different reasoning from Mesa's eventual reacquisition. Encapsulation helps only when all relevant shared accesses respect the monitor boundary; it cannot repair unsafely exposed state.
 
----
-
-## Exam Relevance
-
-Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
-
----
-
-## Related Concepts
-
-- [[Classic Synchronization Solutions]]
-- [[Message Passing and IPC Models]]
-- [[Producer-Consumer Semaphore Implementation Example]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Semaphores and Synchronization Primitives]]
-- [[Race Conditions and Critical-Section Problem]]
-
----
-
-## Problems
-
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
 
 ## Sources
 

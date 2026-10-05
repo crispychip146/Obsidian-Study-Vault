@@ -12,72 +12,17 @@ order: 16
 
 ---
 
----
+## Building the idea
 
----
+When emitting a forward jump, the compiler may know **why** it jumps before knowing **where** its target will be placed. Backpatching records that unfinished connection instead of delaying all code generation.
 
----
+A true list contains instruction positions whose targets must be the expression's true destination. A false list records the analogous false exits; a next list records a statement's unresolved continuations. These lists contain places to repair, not the target instructions themselves.
 
----
+For `B1 && B2`, patch B1's true exits to B2's start. Combine their false exits because either can make the conjunction false. For OR, patch B1's false exits to B2 and combine true exits. [[Control Flow Translation and Boolean Expressions]] provides the semantic reason for each connection.
 
-## Starting Point and the Problem
-
-Compilers require formal semantic translations to bridge the gap between abstract syntax trees and concrete target machine instructions.
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-**Backpatching** is the foundational technique that resolves forward jumps in a single pass without multi-pass tree traversals:
-
-1. **Emit with Unfilled Slots:** Whenever a branch instruction (conditional or unconditional) must be emitted to a target that is not yet known, the compiler emits the instruction with its target field left **blank** (or placeholder $0$):
-   $$\mathbf{(100) \quad if \; x < 100 \; goto \; \underline{\quad\quad}}$$
-2. **Track in Lists:** The instruction index (quad $100$) is added to a list of incomplete jumps (`truelist` or `falselist`).
-3. **Resolve upon Discovery:** As soon as the parser reaches the actual destination instruction in the source stream (say, at instruction index $105$), the compiler executes a **backpatch operation**: it iterates through the list and fills in the blank slot:
-   $$\mathbf{(100) \quad if \; x < 100 \; goto \; 105}$$
-
-```mermaid
-flowchart LR
-    Emit["Emit Jump with Blank Target:<br><b>(100) if x < 100 goto ___</b>"] --> Track["Add Quad 100 to truelist"]
-    Track --> Parse["Parser processes body...<br>Reaches Target Statement at <b>Quad 105</b>"]
-    Parse --> Patch["Execute <b>backpatch(truelist, 105)</b><br>Slot filled: <b>(100) if x < 100 goto 105</b>"]
-```
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Backpatching in Intermediate Code Generation** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+A marker captures `nextquad` at the precise boundary where a target begins. This replaces an unknown future address with a known instruction position as soon as the necessary code location exists.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Three Synthesized Attributes
 
@@ -141,16 +86,6 @@ $$N \longrightarrow \epsilon \quad \{ N.nextlist = \text{makelist}(nextquad); \;
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-### Formal Proof: Completeness and Soundness of Backpatching
-
 ### Theorem:
 *For any well-formed control flow program, the Backpatching algorithm guarantees that:*
 1. *Every conditional and unconditional branch emitted with a blank destination is backpatched to a valid instruction quad before program code generation terminates.*
@@ -188,181 +123,14 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ---
 
----
-### Related Concepts
+## What to carry forward
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+[[Backpatching Control-Flow Code Generation Algorithm]] turns these meanings into semantic actions. Maintain list ownership so each pending jump receives its intended target exactly once; patching the wrong list can produce valid-looking but incorrect control flow.
 
----
-### Prerequisites
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Control Flow Translation and Boolean Expressions]]
+- [[Backpatching Control-Flow Code Generation Algorithm]]
 
 ## Sources
 

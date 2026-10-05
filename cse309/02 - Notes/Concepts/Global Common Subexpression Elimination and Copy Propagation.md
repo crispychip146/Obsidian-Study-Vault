@@ -12,93 +12,17 @@ order: 52
 
 ---
 
----
+## Building the idea
 
----
+Local CSE can look within one straight-line block. Global CSE must ask whether an earlier computation is available on **every** path reaching a later occurrence and whether its operands remain unchanged along those paths.
 
----
+An illustrative diamond has `a+b` computed on one branch and not the other. At the merge, textual proximity to that computation does not make its result available for all executions. Available-expression information therefore intersects predecessor facts: only facts true on every incoming route survive.
 
----
+Copy propagation has a related requirement. After `x=y`, replacing later x with y is valid only while the relevant value relation holds; redefining x or y can invalidate it. [[Basic Blocks and Control Flow Graphs]] supplies the paths on which these changes must be checked.
 
-## Starting Point and the Problem
-
-An occurrence of an expression $E$ (e.g., $x + y$) at statement $s$ is a **Global Common Subexpression** if:
-1. $E$ was previously evaluated along **every execution path** reaching statement $s$.
-2. None of the operand variables ($x$ or $y$) have been redefined on any path between the prior evaluation and $s$.
-
-```mermaid
-flowchart TD
-    B1["Block B1:<br/>t1 = 4 * i<br/>v = a[t1]"] --> B2["Block B2:<br/>... (i is not modified)"]
-    B2 --> B3["Block B3:<br/>t6 = 4 * i  <-- REDUNDANT!"]
-    B1 --> B3
-```
-
-### The Transformation:
-1. In block $B_1$, assign the computation to a new temporary: $u = 4 * i$.
-2. At statement $s$ in block $B_3$, replace the calculation $4 * i$ with the temporary variable $u$:
-   $$t_6 = u$$
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-### Motivation:
-Notice that eliminating a common subexpression frequently leaves behind a simple **copy statement** of the form:
-$$x = y$$
-(e.g., $t_6 = t_2$). If statement $x = y$ is followed by instructions using $x$ (e.g., $a[t_6] = \dots$), leaving $x$ intact wastes registers and execution cycles.
-
-### Definition and Rule:
-**Copy Propagation** replaces subsequent uses of variable $x$ directly with variable $y$, provided that:
-- Neither $x$ nor $y$ has been modified between the copy statement and the use.
-- The copy reaches the use along all execution paths.
-
-```
-Before Copy Propagation:
-t6 = t2
-a[t6] = val
-
-After Copy Propagation:
-t6 = t2          ; (now dead code!)
-a[t2] = val      ; (direct use of t2)
-```
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Global Common Subexpression Elimination and Copy Propagation** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Removing redundant computations can produce copies, and propagating those copies can expose dead definitions. Apply each pass with updated analysis rather than assuming an earlier fact stays true after arbitrary transformations.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Virtuous Optimization Cycle
 
@@ -138,192 +62,14 @@ flowchart LR
 
 ---
 
----
-### Technical Details
+## What to carry forward
 
-Target architecture and ABI specifications govern low-level alignment and register assignments.
+Availability of an expression and existence of a usable saved result are separate implementation obligations. For loads and calls, include memory effects and aliasing. [[Loop Optimizations and Strength Reduction]] adds repeated execution and loop-entry conditions.
 
----
-### Important Properties and Why They Hold
+## Related notes
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
 - [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Loop Optimizations and Strength Reduction]]
 
 ## Sources
 

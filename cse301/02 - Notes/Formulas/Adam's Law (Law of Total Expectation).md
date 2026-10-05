@@ -12,44 +12,19 @@ order: 20
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+You can compute an overall average by first averaging within groups and then weighting the group averages by group size or probability. This is Adam's law: $E[Y]=E[E[Y\mid X]]$.
 
-What analytical relationship or closed-form expectation governs Adam's Law (Law of Total Expectation), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Why do we need the outer expectation? Group averages are not generally equally weighted. If two groups have means 10 and 100 but probabilities $0.9$ and $0.1$, the overall mean is $0.9(10)+0.1(100)=19$, not 55. The inner expectation answers the question given a group; the outer expectation accounts for which group we actually encounter.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Adam's Law (Law of Total Expectation) compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The proof is regrouping joint probability weights. In a discrete model, $\sum_x\sum_y yP(Y=y\mid X=x)P(X=x)$ becomes $\sum_y yP(Y=y)$ after summing over $x$. For more general variables, the same statement is the tower property of conditional expectation, under the usual integrability condition.
 
 ## Formula
 
 The **Law of Total Expectation**, often referred to as **Adam's Law** (or the **Tower Property**), states that for any two random variables $X$ and $Y$ defined on the same probability space (provided $\mathbb{E}[\lvert Y \rvert] < \infty$):
 
 $$\mathbb{E}[Y] = \mathbb{E}\left[ \mathbb{E}[Y \mid X] \right]$$
-
----
-
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -65,11 +40,7 @@ Adam's Law provides a universal divide-and-conquer strategy for difficult expect
 
 ---
 
----
-
 ## Derivation
-
-### Detailed Mathematical Proof
 
 ### Discrete Case:
 Let $g(x) = \mathbb{E}[Y \mid X = x] = \sum_y y \, P(Y = y \mid X = x)$.
@@ -88,8 +59,6 @@ $$\mathbb{E}[g(X)] = \int_{-\infty}^\infty g(x) f_X(x) \, dx = \int_{-\infty}^\i
 $$= \int_{-\infty}^\infty \int_{-\infty}^\infty y f_{X,Y}(x, y) \, dy \, dx = \int_{-\infty}^\infty y \left( \int_{-\infty}^\infty f_{X,Y}(x, y) \, dx \right) dy$$
 $$= \int_{-\infty}^\infty y f_Y(y) \, dy = \mathbb{E}[Y]$$
 $\blacksquare$
-
----
 
 ---
 
@@ -118,36 +87,13 @@ $$\mathbb{E}\left[ \sum_{i=1}^N X_i \right] = \mathbb{E}[N] \mathbb{E}[X]$$
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+Choose a conditioning variable that makes the inner problem simpler. [[Random Number of Random Variables Sum Example]] conditions on the random number of terms so the inside becomes a fixed-length sum.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Conditional Expectation]] — The theoretical projection framework.
-- [[Eve's Law (Law of Total Variance)]] — Variance companion to Adam's Law.
-- [[Random Number of Random Variables Sum Example]] — Full compound process example.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Random Number of Random Variables Sum Example]]
 
 ## Sources
 

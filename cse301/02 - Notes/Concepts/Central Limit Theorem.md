@@ -12,25 +12,17 @@ order: 32
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+The sample mean approaches $\mu$, so its unscaled distribution collapses rather than becoming a fixed bell curve. To study the remaining fluctuations, subtract $\mu$ and divide by their natural size $\sigma/\sqrt n$.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Central Limit Theorem, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+For iid observations with finite, positive variance, the standardized mean $\sqrt n(\bar X_n-\mu)/\sigma$ converges in distribution to $N(0,1)$. Equivalently, for a large sample we approximate the mean by a normal distribution with mean $\mu$ and variance $\sigma^2/n$.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Central Limit Theorem reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+The theorem does not make the original observations normal. It also gives no universal sample size at which every tail is accurate: skewness, rare events, and the requested probability matter. For integer-valued sums, [[Normal Approximation to Binomial and Poisson Example|continuity correction]] aligns a continuous interval with the discrete values being counted.
 
 ## Definition
 
 The **Central Limit Theorem (CLT)** is one of the most remarkable and foundational theorems in all of mathematics. It states that the standardized sum (or sample average) of a large number of independent, identically distributed (i.i.d.) random variables approaches a **Standard Normal distribution**, regardless of the shape of the underlying population distribution (provided the population has finite variance).
-
----
 
 ---
 
@@ -53,8 +45,6 @@ That is, for any real number $z \in \mathbb{R}$:
 $$\lim_{n \to \infty} P(Z_n \le z) = \Phi(z) = \int_{-\infty}^z \frac{1}{\sqrt{2\pi}} e^{-u^2 / 2} \, du$$
 
 ---
-### Practical Rules of Thumb & Continuity Correction
-
 ### 1. Sample Size Rule:
 - For moderately symmetric, light-tailed distributions, $n \ge 30$ is usually sufficient for accurate Gaussian approximations.
 - For heavily skewed distributions (e.g., Exponential or Pareto), larger samples ($n \ge 100$) may be required.
@@ -66,20 +56,6 @@ When approximating a discrete integer-valued random variable $X$ (like Binomial 
   - $P(X \ge k) \approx P\left( Y_{\text{norm}} \ge k - 0.5 \right)$
   - $P(X = k) \approx P\left( k - 0.5 \le Y_{\text{norm}} \le k + 0.5 \right)$
   - $P(a \le X \le b) \approx P\left( a - 0.5 \le Y_{\text{norm}} \le b + 0.5 \right)$
-
----
-
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
 
 ---
 
@@ -119,15 +95,6 @@ $\blacksquare$
 
 ---
 
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -138,26 +105,14 @@ $\blacksquare$
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Use [[Law of Large Numbers]] for stabilization and the CLT for fluctuations or approximate inference. Infinite-variance observations require other results; the ordinary iid finite-variance CLT does not apply.
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Normal Approximation to Binomial and Poisson Example|continuity correction]]
+- [[Law of Large Numbers]]
 
 ## Sources
 

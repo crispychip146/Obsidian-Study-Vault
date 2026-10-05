@@ -12,87 +12,17 @@ order: 26
 
 ---
 
----
+## Building the idea
 
----
+Tracing starts from the objects the program can directly access, then follows pointers to discover the rest. If an object is not found through any such path, a correct tracing collector can reclaim it even if it participates in a cycle.
 
----
+The three-color view records progress. White objects have not been reached; gray objects are reached but have unexamined outgoing pointers; black objects have been scanned. In a simple stop-the-world trace, scanning a gray object discovers white children and moves them to gray, then marks the parent black.
 
----
+Different collectors use this reachability result differently. Mark-and-sweep keeps survivors in place and frees unmarked blocks. Mark-and-compact relocates survivors within the heap. Copying evacuates survivors into another region. Moving collectors must update all relevant references, not merely move bytes.
 
-## Starting Point and the Problem
-
-Unlike reference counting, which attempts to detect when objects become unreachable at every assignment, **Trace-Based Garbage Collectors** run periodically (e.g., when the heap is exhausted). 
-
-A trace-based collector traverses the graph of heap references starting from the **Root Set**, discovers all live objects, and concludes that **every unvisited object in the heap is garbage**.
-
-### Core Advantages:
-1. **Completely Solves the Cyclic Reference Problem:** Any cyclic island disconnected from the root set is simply never visited and therefore reclaimed automatically!
-2. **Zero Overhead on Pointer Assignments:** Mutators perform regular pointer assignments without incrementing or decrementing reference counts.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-During a trace-based collection cycle, every memory chunk resides in one of four states:
-
-```mermaid
-stateDiagram-v2
-    [*] --> Free: Unallocated Space
-    Free --> Unreached: Mutator Allocates Object
-    Unreached --> Unscanned: Reached from Root or Scanned Node
-    Unscanned --> Scanned: All Outgoing Pointers Examined
-    Scanned --> [*]: Cycle Finishes (Live Object)
-    Unreached --> Free: Sweep / Reclamation (Garbage)
-```
-
-1. **Free:** Memory chunk is unallocated and resides on the free list.
-2. **Unreached (White):** Candidate for reclamation; has not yet been visited by the collector during this cycle.
-3. **Unscanned (Grey):** Object has been reached by the collector, but its outgoing pointer fields have **not yet been examined**. (Acts as the collector's work queue).
-4. **Scanned (Black):** Object has been reached, and **all its outgoing pointer fields have been fully examined**. All objects it points to have transitioned to at least the *Unscanned* state.
-
-### Collector Termination Invariant:
-When the work queue is empty (i.e., **no objects remain in the Unscanned state**), reachability tracing is complete:
-- Objects in the **Scanned** state are live.
-- Objects remaining in the **Unreached** state are unreachable garbage!
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Trace-Based Garbage Collection Algorithms** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Garbage Collection Fundamentals and Reference Counting]] explains why roots matter. [[Mark-and-Sweep Garbage Collection Algorithm]] and [[Copying Garbage Collection Algorithm]] develop the mechanisms and costs separately.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Architectural Comparison Table
 
@@ -106,156 +36,9 @@ When the work queue is empty (i.e., **no objects remain in the Unscanned state**
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### The Three Major Families of Trace-Based Collectors
 
@@ -296,39 +79,15 @@ graph TD
 
 ---
 
----
-### Exam Relevance
+## What to carry forward
 
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
+Compare costs using defined quantities: number of roots, scanned pointers, heap regions swept, and bytes copied. Semispace copying reserves a destination region; “constant auxiliary queue space” does not mean the collector needs no destination memory.
 
----
+## Related notes
 
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Garbage Collection Fundamentals and Reference Counting]]
+- [[Mark-and-Sweep Garbage Collection Algorithm]]
+- [[Copying Garbage Collection Algorithm]]
 
 ## Sources
 

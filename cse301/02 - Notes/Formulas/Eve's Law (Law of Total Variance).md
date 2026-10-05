@@ -12,19 +12,13 @@ order: 21
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Variation can come from two sources: spread within a group and differences between group means. Eve's law separates them: $\operatorname{Var}(Y)=E[\operatorname{Var}(Y\mid X)]+\operatorname{Var}(E[Y\mid X])$.
 
-What analytical relationship or closed-form expectation governs Eve's Law (Law of Total Variance), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+For a proof strategy, write $Y-E[Y]=(Y-E[Y\mid X])+(E[Y\mid X]-E[Y])$. Squaring produces two square terms and a cross term. Conditional on $X$, the first residual has mean zero and the second term is known, so the cross term averages to zero. The two remaining terms give the decomposition.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Eve's Law (Law of Total Variance) compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The first term is an average conditional variance, not the variance of a conditional variance. The second is the variance of the conditional mean. If all groups have the same mean, the second vanishes even if their spreads differ. If each group has no internal randomness, the first vanishes and all variation comes from which group occurs.
 
 ## Formula
 
@@ -36,25 +30,6 @@ $$\operatorname{Var}(Y) = \mathbb{E}\left[ \operatorname{Var}(Y \mid X) \right] 
 $$\mathbf{E}\mathbf{V} + \mathbf{V}\mathbf{E} \quad \text{("EVVE")}$$
 - $\mathbf{E}[\mathbf{V}]$: Expected value of conditional Variance.
 - $\mathbf{V}[\mathbf{E}]$: Variance of conditional Expectation.
-
----
-
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -72,8 +47,6 @@ Eve's Law is the probabilistic foundation of the **Analysis of Variance (ANOVA)*
 Because $\operatorname{Var}(\mathbb{E}[Y \mid X]) \ge 0$:
 $$\operatorname{Var}(Y) \ge \mathbb{E}[\operatorname{Var}(Y \mid X)]$$
 Conditioning **reduces variance on average**. Information never increases uncertainty on average!
-
----
 
 ---
 
@@ -105,8 +78,6 @@ $\blacksquare$
 
 ---
 
----
-
 ## Example
 
 ### Application: Variance of a Compound Random Sum
@@ -128,36 +99,13 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+With finite second moments, both components are nonnegative. In [[Problem — Compound Random Sum via Adam and Eve's Laws]], they represent variable summand sizes and a variable number of summands.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Adam's Law (Law of Total Expectation)]] — Expectation counterpart.
-- [[Random Number of Random Variables Sum Example]] — Practical compound sum calculations.
-- [[Problem — Compound Random Sum via Adam and Eve's Laws]] — Full problem exercise.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ## Sources
 

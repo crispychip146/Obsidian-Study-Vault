@@ -12,8 +12,6 @@ order: 49
 
 ---
 
----
-
 ## Problem
 
 A Just-In-Time compiler computes the following set of live intervals for 6 variables:
@@ -36,49 +34,15 @@ Assume the target processor provides **$R = 2$ physical registers**: $\{ R_0, R_
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+There are only two registers, so the third simultaneously active interval forces a choice. Process intervals by start, expire completed ones, and apply the specified latest-end heuristic to the remaining active set and the newcomer.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+For v3 starting at 3, v1 ends at 4 and v2 at 6, while v3 ends at 8. Keeping the two earlier-ending intervals means v3 is spilled. At later starts, repeat the comparison using the updated state rather than permanently reserving registers for their original owners.
 
-### Working Through the Solution
-### Step-by-Step Solution
+[[Linear Scan Register Allocation Algorithm]] supplies the rule; [[Live Ranges and Live Intervals in Register Allocation]] supplies endpoint meaning. Under closed intervals, an active interval ending at 7 does not expire for another starting at 7. It expires only before a strictly later start.
+
+For every row, show whether the algorithm spills the new interval or evicts an active one. These two actions produce different ownership changes even when both reduce pressure.
 
 ### Intervals Sorted by Start Point:
 1. $v_1: [1, 4]$
@@ -173,43 +137,14 @@ Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+Check overlap against register assignments and verify each free register has no active owner. Latest endpoint is a simple heuristic; practical spill cost also depends on uses, loops, reloads, and target constraints.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Linear Scan Register Allocation Algorithm]]
+- [[Live Ranges and Live Intervals in Register Allocation]]
 
 ## Source
 

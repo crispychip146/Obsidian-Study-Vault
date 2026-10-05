@@ -12,19 +12,13 @@ order: 52
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+A beta prior has density proportional to $p^{\alpha-1}(1-p)^{\beta-1}$. A binomial sample with $s$ successes and $n-s$ failures contributes $p^s(1-p)^{n-s}$. Multiplying adds exponents, giving a posterior $\operatorname{Beta}(\alpha+s,\beta+n-s)$.
 
-What analytical relationship or closed-form expectation governs Beta-Binomial Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+This is conjugacy: the distributional family survives the update. The posterior mean $(\alpha+s)/(\alpha+\beta+n)$ can be written as a weighted average of the prior mean $\alpha/(\alpha+\beta)$ and the observed proportion $s/n$, with weights proportional to prior concentration and sample size.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Beta-Binomial Conjugate Updating Formula compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The pseudo-count language is an interpretation, not a claim that those prior observations were literally collected. The concentration $\alpha+\beta$ controls how strongly the prior mean resists the new data. A flat $\operatorname{Beta}(1,1)$ prior still produces smoothing in the posterior mean, even though its MAP agrees with an interior MLE.
 
 ## Formula
 
@@ -55,8 +49,6 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning | Interpretation |
@@ -70,15 +62,11 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
 
 ---
 
----
-
 ## Conditions
 
 1. The data generating process must be conditionally independent $\text{Bernoulli}(p)$ or $\text{Binomial}(n, p)$ given $p$.
 2. The hyperparameters must satisfy $\alpha > 0$ and $\beta > 0$.
 3. When $\alpha = \beta = 1$, the prior is the standard continuous $\text{Uniform}(0, 1)$ distribution.
-
----
 
 ---
 
@@ -95,11 +83,7 @@ The Beta hyperparameters $\alpha$ and $\beta$ act as **fictitious prior observat
 
 ---
 
----
-
 ## Derivation
-
-### Derivation
 
 By Bayes' theorem, the posterior density satisfies:
 $$f(p \mid \mathbf{x}) \propto f(p) \cdot L_n(p)$$
@@ -124,8 +108,6 @@ $$= w \bar{X} + (1 - w) p_0 \quad \blacksquare$$
 
 ---
 
----
-
 ## Example
 
 ### Example: Laplace's Rule of Succession
@@ -143,40 +125,20 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - Setting $\alpha = 0, \beta = 0$ as a prior. The prior must have $\alpha > 0, \beta > 0$ to be proper. The Haldane prior $\text{Beta}(0, 0)$ is improper.
 - Forgetting to subtract $s$ from $n$ when calculating the second parameter: the second parameter is $\beta + (n - s)$, not $\beta + n$.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Problem — Laplace Rule of Succession and Bayesian Updating]] turns the posterior mean into a predictive probability. The posterior mode has a different formula and boundary cases.
 
-- [[Bayesian Inference]]
-- [[Maximum A Posteriori (MAP) Estimation]]
-- [[Normal-Normal Conjugate Updating Formula]]
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ## Sources
 

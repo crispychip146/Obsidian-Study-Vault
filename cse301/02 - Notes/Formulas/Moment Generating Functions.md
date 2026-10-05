@@ -12,44 +12,19 @@ order: 13
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+A moment generating function packages many expectations into one function: $M_X(t)=E[e^{tX}]$. Expanding the exponential suggests why derivatives at zero reveal moments: the coefficient of $t^k$ contains $E[X^k]/k!$.
 
-What analytical relationship or closed-form expectation governs Moment Generating Functions, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+That suggestion needs an existence condition. If the MGF is finite in a neighborhood of zero, differentiating under the expectation is justified there and $M_X^{(k)}(0)=E[X^k]$. Some distributions have finite moments without an MGF near zero, so an MGF method is not universal.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Moment Generating Functions compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+For independent $X$ and $Y$, $e^{t(X+Y)}=e^{tX}e^{tY}$ and independence lets the expectation factor. Thus $M_{X+Y}=M_XM_Y$. This is useful because sums that are difficult to handle by convolution may have a recognizable product MGF. The same exponential transformation becomes a tail-bounding tool in [[Chernoff Bound]].
 
 ## Formula
 
 The **Moment Generating Function (MGF)** of a random variable $X$ is defined as:
 $$M_X(t) = \mathbb{E}[e^{tX}]$$
 for all real $t$ in some neighborhood $(-h, h)$ with $h > 0$ where the expectation is finite.
-
----
-
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -103,8 +78,6 @@ Specifically:
 
 ---
 
----
-
 ## Derivation
 
 ### Classic Proof Example: Sum of Independent Normals
@@ -117,42 +90,13 @@ By the **Uniqueness Theorem**, $X + Y \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2
 
 ---
 
----
+## What to carry forward
 
-## Example
+Check the domain where the MGF is finite before differentiating or optimizing it. A formula outside that domain is not an expectation that can be used in a proof.
 
-See worked numerical examples in the associated Example and Problem notes.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
-
----
-
-## Related Concepts
-
-- [[Law of the Unconscious Statistician (LOTUS)]] — Used to compute $\mathbb{E}[e^{tX}]$.
-- [[Continuous Probability Distributions]] — Normal and Exponential distributions.
-- [[Chernoff Bound]] — Optimizes over $t > 0$ in $M_X(t)$ to establish exponential tail bounds.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Chernoff Bound]]
 
 ## Sources
 

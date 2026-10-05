@@ -12,8 +12,6 @@ order: 56
 
 ---
 
----
-
 ## Problem
 
 An automated safety verification framework evaluates an autonomous vehicle control module across $n = 5$ independent critical road simulation tests. All $5$ tests pass without incident ($s = 5$ successes, $0$ failures). Let $p \in [0, 1]$ be the unknown true probability of passing a critical test.
@@ -28,15 +26,11 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 
 ---
 
----
-
 ## Given
 
 - Sample: $n = 5$ independent Bernoulli trials
 - Observed successes: $s = 5$, failures: $n - s = 0$
 - Prior: $p \sim \text{Beta}(1, 1)$
-
----
 
 ---
 
@@ -50,8 +44,6 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Bayesian Inference]]
@@ -61,35 +53,19 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 
 ---
 
----
-
-## Prerequisites
-
-- Law of Total Probability for continuous conditioning
-- Properties of the Beta distribution and Gamma function
-
----
-
----
-
 ## Question Type
 
 - Theoretical Proof & Safety-Critical Application
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Five successes give an MLE of one, but a point fit at the boundary is not evidence that failure is impossible. Under a flat beta prior, the posterior is $\operatorname{Beta}(6,1)$, which still expresses uncertainty below one.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+For a new Bernoulli trial, condition on $p$ first: its success probability is $p$. Then average over the posterior, giving $P(X_6=1\mid\text{data})=E[p\mid\text{data}]=6/7$. The predictive failure probability is $1/7$ under this specified model.
 
-### Working Through the Solution
-### Solution
+With $s$ successes in $n$ trials, the same update gives $(s+1)/(n+2)$, Laplace's rule of succession. The extra terms come from the prior, not an arbitrary adjustment after fitting. With all successes, this tends to one as $n$ increases but remains below one for every finite $n$. The iid common-probability model itself still needs justification in an application.
 
 ### 1. Frequentist MLE and the Zero-Probability Trap
 The likelihood function is:
@@ -101,7 +77,7 @@ Under the plug-in MLE model, the estimated probability of failure on the 6th tes
 $$\hat{P}(X_6 = 0) = 1 - \hat{p}_{\text{MLE}} = 1 - 1.0 = 0$$
 
 **Why this is dangerous in safety engineering:**
-Claiming $P(\text{failure}) = 0$ asserts that vehicle failure is physically impossible simply because five trials passed. In reality, $n = 5$ is a tiny sample size. The true reliability could easily be $p = 0.80$ (a catastrophic $20\%$ failure rate), under which five consecutive successes occur with probability $0.8^5 = 0.3277$ (roughly a 1 in 3 chance). The MLE severely overfits to small samples.
+Claiming $P(\text{failure}) = 0$ asserts that vehicle failure is physically impossible simply because five trials passed. In reality, $n = 5$ is a tiny sample size. The true reliability could easily be $p = 0.80$ (a serious $20\%$ failure rate), under which five consecutive successes occur with probability $0.8^5 = 0.3277$ (roughly a 1 in 3 chance). The MLE severely overfits to small samples.
 
 ---
 
@@ -171,17 +147,6 @@ As $n \to \infty$, the Bayesian predictive probability approaches the MLE. For l
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Conflating correlation with causation or independence.
@@ -189,25 +154,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
-## Exam Pattern
+## What to carry forward
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+[[Bayesian Inference]] distinguishes prediction from plugging in a point estimate. The rule expresses uncertainty under a particular prior and sampling model; it is not a universal safety guarantee.
 
----
+## Related notes
 
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Bayesian Inference]]
 
 ## Source
 

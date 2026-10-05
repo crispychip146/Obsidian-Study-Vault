@@ -12,46 +12,23 @@ order: 28
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Cauchy-Schwarz says the average product cannot exceed the product of root-mean-square sizes: $|E[XY]|\le\sqrt{E[X^2]E[Y^2]}$, assuming finite second moments. One proof considers $E[(X-tY)^2]\ge0$ for every real $t$; a quadratic that never becomes negative must have a nonpositive discriminant.
 
-What analytical relationship or closed-form expectation governs Cauchy-Schwarz and Jensen Inequalities, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Jensen's inequality compares transforming before averaging with transforming after averaging. For convex $g$, $g(E[X])\le E[g(X)]$ when the relevant expectations are defined. A convex graph lies above its supporting line; averaging that line leaves its value at the mean, which explains the direction.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Cauchy-Schwarz and Jensen Inequalities compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+For $g(x)=x^2$, Jensen becomes $(E[X])^2\le E[X^2]$, or nonnegative variance. For a concave function such as $\log x$ on positive values, the inequality reverses. Always check the domain and convexity before deciding the direction.
 
 ## Formula
 
-$$\text{Cauchy-Schwarz and Jensen Inequalities}$$
+$$|E[XY]|\le\sqrt{E[X^2]E[Y^2]},\qquad g(E[X])\le E[g(X)]\quad(g\text{ convex}).$$
 
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+For a concave function, Jensen's direction reverses. Check finite moments, existence of expectations, and the function's domain.
 
 ---
 
 ## Intuition
-
-### Cauchy-Schwarz Inequality
 
 ### Mathematical Statement
 For any two random variables $X$ and $Y$ with finite second moments ($\mathbb{E}[X^2] < \infty, \mathbb{E}[Y^2] < \infty$):
@@ -68,7 +45,7 @@ Taking expectations:
 $$h(t) = \mathbb{E}\left[ (tX + Y)^2 \right] = t^2 \mathbb{E}[X^2] + 2t \mathbb{E}[XY] + \mathbb{E}[Y^2] \ge 0$$
 
 $h(t)$ is a quadratic polynomial $At^2 + Bt + C$ where $A = \mathbb{E}[X^2]$, $B = 2\mathbb{E}[XY]$, and $C = \mathbb{E}[Y^2]$.
-Because $h(t) \ge 0$ for all $t \in \mathbb{R}$, the quadratic can have at most one real root, meaning its discriminant $\Delta = B^2 - 4AC \le 0$:
+If $E[X^2]=0$, then $X=0$ almost surely and the inequality is immediate. Otherwise the quadratic has positive leading coefficient and cannot have two distinct real roots with a negative interval between them, so its discriminant satisfies $\Delta=B^2-4AC\le0$:
 $$(2\mathbb{E}[XY])^2 - 4\mathbb{E}[X^2]\mathbb{E}[Y^2] \le 0$$
 $$4(\mathbb{E}[XY])^2 \le 4\mathbb{E}[X^2]\mathbb{E}[Y^2] \implies (\mathbb{E}[XY])^2 \le \mathbb{E}[X^2]\mathbb{E}[Y^2]$$
 Taking square roots on both sides yields the inequality. $\blacksquare$
@@ -84,8 +61,6 @@ Taking square roots on both sides yields the inequality. $\blacksquare$
    $$(\mathbb{E}[X])^2 \le \mathbb{E}[X^2] \implies \mathbb{E}[X] \le \sqrt{\mathbb{E}[X^2]}$$
 
 ---
-### Jensen's Inequality
-
 ### Mathematical Statement
 Let $X$ be a random variable, and let $g: \mathbb{R} \to \mathbb{R}$ be a **convex function** (i.e., $g''(x) \ge 0$ whenever twice differentiable). Provided the expectations exist:
 
@@ -135,48 +110,13 @@ $\blacksquare$
 
 ---
 
----
+## What to carry forward
 
-## Derivation
+Apply Cauchy-Schwarz to centered variables to obtain [[Covariance and Correlation|the correlation bound]]. Equality in Jensen often signals that the variable is constant or that the function is affine on its relevant range.
 
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+## Related notes
 
----
-
-## Example
-
-See worked numerical examples in the associated Example and Problem notes.
-
----
-
-## Common Mistakes
-
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
-
----
-
-## Related Concepts
-
-- [[Covariance and Correlation]] — Bound on correlation from Cauchy-Schwarz.
-- [[Random Variables and Probability Distributions]] — Variance positivity via Jensen.
-- [[Chernoff Bound]] — Convexity of the log-MGF.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Covariance and Correlation|the correlation bound]]
 
 ## Sources
 

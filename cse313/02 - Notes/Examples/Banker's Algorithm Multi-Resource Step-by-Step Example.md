@@ -12,8 +12,6 @@ order: 31
 
 ---
 
----
-
 ## Problem
 
 *(Directly derived from course simulation lecture notes: `Notes on algorithm simulation.pdf`)*
@@ -38,29 +36,15 @@ $$E = (9, 3, 6)$$
 
 ---
 
----
-
-## Given
-
-- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
-
----
-
-## Required
-
-- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
-
----
-
 ## Solution
 
-### 2. Step 1: Compute Available Vector ($A$) and Need Matrix ($R$)
+Read each row as one process's claim and holdings. The first meaningful operation is subtraction: Max minus Allocation tells us what that process could still need. Then read Available as the resources not currently held by any process.
+
+The trace from [[Banker's Algorithm]] maintains a hypothetical Work vector. Compare a row's Need with Work component by component. A small total need is irrelevant if it needs one unavailable unit of a particular resource. When a row fits, record that process and add its Allocation to Work, because completion returns holdings to the pool.
+
+This explains why later rows can become eligible: their requirements have not changed; the pool has grown. A table of Work before and after each chosen finisher exposes the reasoning directly. At the end, every process should be marked finished and Work should equal the system's total resources, assuming all holdings were represented.
+
+The proposed-request part uses the same test after a tentative grant. It asks whether the modified state still has a completion order, rather than merely whether subtracting the request leaves nonnegative availability.
 
 ### 1. Available Vector ($A$):
 The available resources are calculated by subtracting the total allocated resources from the total system capacity:
@@ -78,8 +62,6 @@ R(P_4) &= (4 - 0, 2 - 0, 2 - 2) = \mathbf{(4, 2, 0)}
 
 Summary Table of Remaining Needs:
 $$R = \begin{pmatrix} 2 & 2 & 2 \\ 0 & 0 & 1 \\ 1 & 0 & 3 \\ 4 & 2 & 0 \end{pmatrix}$$
-
----
 
 ---
 
@@ -141,8 +123,6 @@ $$Work_{\text{new}} = Work_{\text{old}} + CA(P_4) = (9, 3, 4) + (0, 0, 2) = \mat
 
 ---
 
----
-
 ## Result
 
 Since $Finish[i] = \text{TRUE}$ for all $i \in \{1, 2, 3, 4\}$, the system is in a **SAFE STATE**.
@@ -154,33 +134,13 @@ $$\mathbf{\langle P_2 \to P_1 \to P_3 \to P_4 \rangle}$$
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+A different eligible row can produce a different valid safe sequence. Justify the componentwise comparison at each step, and use final resource conservation to catch arithmetic mistakes. The hypothetical process finishes and returns its existing allocation; its remaining need is not a permanent addition to the pool.
 
-Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Overlooking state changes between execution phases.
-- Incorrectly calculating intermediate residual capacities or queue offsets.
-
----
-
-## General Method
-
-Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
-
----
-
-## Related Concepts
-
-- [[Operating System Structures and Functions]]
-- [[Process Concepts and Memory Layout]]
-
----
+- [[Banker's Algorithm]]
 
 ## Sources
 

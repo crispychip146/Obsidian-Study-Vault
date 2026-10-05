@@ -12,13 +12,12 @@ order: 30
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 3 exam years, repeated!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q3c, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Executing DFS Cycle Detection on Resource Allocation Graphs (2017 Q3c, 2020 Q3a):**
 >    - **The Setup:** Given a list of directed edges between Processes ($A, B, C, D$) and Resources ($1, 2, \dots, 6$). Run the cycle-detection algorithm starting from a specified node.
->    - **The "Click" Mechanics:**
+>    - **The tracing method:**
 >      - Maintain a visited/active path stack. Follow outgoing edges directed from process to requested resource ($P \to R$) and from allocated resource to holder ($R \to P$).
 >      - **2017 Q3(c) Case (Start at B):** $B \to 1 \to A$. $A$ has no outgoing edges (out-degree 0). Backtrack. Output: **"No cycle found from node B."**
 >      - **2020 Q3(a) Case (Start at C):** $C \to 5 \to D \to 6 \to A \to 1 \to B \to 4 \to C$. A back-edge to ancestor node $C$ is encountered! Output: **"Cycle detected: $C \to 5 \to D \to 6 \to A \to 1 \to B \to 4 \to C$. System is in Deadlock!"**
@@ -28,24 +27,15 @@ order: 30
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+Detection asks whether the **current** outstanding requests can resolve, rather than whether every process could still receive its declared maximum. This separates it from [[Banker's Algorithm]]. In a request-matrix test, use Request, Allocation, and Available, not Max-based Need.
 
-Deadlock prevention severely restricts resource requests; deadlock avoidance requires knowing future maximum claims. Most modern general-purpose operating systems (Linux, macOS, Windows) choose the Ostrich algorithm (ignore the problem) or periodically run deadlock detection algorithms.
+For one-instance resources, follow the wait-for graph with DFS. Mark nodes on the current recursion path. An edge to a node still on that path closes a directed cycle. An edge to a previously finished node does not: it may simply merge two paths. A visited set alone cannot distinguish these cases.
 
-We want an algorithmic mechanism to detect whether the current system state contains deadlocks, identify the deadlocked processes, and restore the system to an operational state. The central obstacle is minimizing detection runtime and deciding which process to terminate or preempt with minimum rollback cost.
+For multiple instances, search for a process whose present request fits the hypothetical Work vector. Assume it finishes and returns its allocation, then repeat. Processes left unable to finish are examined for deadlock under the detection model. This is the same resource-release logic used in safety testing, applied to a different request meaning.
 
----
-
-## Developing the Core Idea
-
-Deadlock detection models current dependencies and searches for unresolvable cycles:
-- **Single-Instance Resources:** Construct the **Wait-For Graph (WFG)** by collapsing resource nodes: a directed edge $P_i \to P_j$ exists if $P_i$ is waiting for a resource held by $P_j$. A cycle detected via Depth-First Search (DFS) strictly proves deadlock!
-- **Multiple-Instance Resources:** Run a matrix reduction algorithm similar to Banker's Safety Check using Available vector $A$, Allocation matrix $CA$, and outstanding Request matrix $Q$. Any process that cannot be marked as finishable is deadlocked.
-- **Recovery:** Terminate processes (all deadlocked vs one at a time) or preempt resources via checkpointing and rollback.
-
----
+Recovery then changes the real system: abort a process, preempt a reclaimable resource, or roll back work where supported. Detection identifies the trap; it does not automatically choose a recovery action without costs or consistency consequences.
 
 ## Inputs
 
@@ -71,9 +61,7 @@ Running the detection algorithm is computationally expensive. Operating systems 
 |---|---|---|---|
 | **Continuous (Per-Request)** | Invoked every time a resource request cannot be granted immediately. | Deadlocks are detected the exact instant they form; fewer processes involved. | Enormous CPU overhead; degrades throughput. |
 | **Periodic Interval** | Invoked every $K$ minutes (e.g., every 30 minutes). | Predictable CPU overhead. | Deadlocked processes remain frozen until the next timer tick. |
-| **Utilization-Based** | Invoked when overall CPU utilization drops below a threshold (e.g., $< 20\%$). | Deadlocks inherently cause processes to sleep, idling the CPU; detects freezes when they actually hurt. | Indirect indicator; low utilization could just mean a quiet workload. |
-
----
+| **Utilization-Based** | Invoked when overall CPU utilization drops below a threshold (e.g., $< 20\%$). | Blocked resource waits can reduce runnable work, though other tasks may keep the CPU busy and some waiting protocols spin. | Indirect indicator; low utilization could just mean a quiet workload. |
 
 ---
 
@@ -100,8 +88,6 @@ Once a deadlock is detected, the OS must break the circular wait using one of th
 
 ---
 
----
-
 ## Pseudocode
 
 ### 1. Algorithmic Overview & Motivation
@@ -109,8 +95,6 @@ Once a deadlock is detected, the OS must break the circular wait using one of th
 In systems where neither static prevention nor dynamic avoidance is enforced, the OS permits processes to request and acquire resources freely. However, to prevent permanent system freezes, the operating system must:
 1. **Detect** whether a deadlock has occurred.
 2. **Recover** from the deadlock by breaking the circular wait.
-
----
 
 ---
 
@@ -123,7 +107,7 @@ Matrix detection: Available $A = [0, 0, 0]$. If $P_1$ requests $[0, 0, 0]$, it f
 ## Complexity
 
 ### Time Complexity
-$O(N^2)$ or $O(V + E)$ for DFS cycle detection in WFG; $O(m \times n^2)$ for multi-instance matrix reduction.
+$O(V+E)$ for conventional adjacency-list DFS cycle detection in a WFG; $O(m \times n^2)$ for multi-instance matrix reduction.
 
 ### Space Complexity
 $O(V + E)$ or $O(m \times n)$ memory.
@@ -132,7 +116,7 @@ $O(V + E)$ or $O(m \times n)$ memory.
 
 ## Properties
 
-- **Detection Completeness:** Accurately identifies all deadlocked processes at the instant the detection algorithm executes.
+- **Snapshot requirement:** Analyze a consistent graph/matrix snapshot. A DFS cycle establishes cyclic waiting for single-instance resources; identifying every indefinitely blocked dependent requires more than stopping at the first cycle.
 - **Victim Selection Cost:** Recovery must balance process priority, computation time already spent, resources held, and number of rollbacks.
 
 ---
@@ -144,40 +128,17 @@ $O(V + E)$ or $O(m \times n)$ memory.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Misunderstanding preemption boundaries during execution.
-- Failing to verify state invariants before granting resource claims.
+Keep algorithm state separate from system state. DFS colors and Work vectors are reasoning tools; recovery mutates the actual allocations or executions. [[Resource Allocation Graph Cycle Detection Example]] shows path tracking, while [[Problem — Resource Allocation Graph Reduction and Cycle Detection]] contrasts the single- and multi-instance conclusions.
 
----
-
-## Exam Relevance
-
-Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Banker's Algorithm]]
 - [[Resource Allocation Graph Cycle Detection Example]]
-
----
-
-## Prerequisites
-
-- [[Deadlock Fundamentals and Coffman Conditions]]
-- [[Resource Allocation Graphs and Deadlock Modeling]]
-
----
-
-## Problems
-
 - [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
 
----
-
-## Sources
+## Detection algorithms
 
 When each resource class has only one instance, the Resource Allocation Graph can be analyzed using a Depth-First Search (DFS) cycle-detection algorithm with backtracking.
 
@@ -230,6 +191,8 @@ Conclusion:
 ```
 
 ---
+
+## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 16–24: Deadlock Detection with One and Multiple Resources, Recovery Methods) and `Notes on algorithm simulation.pdf`.
 - **Previous Topic:** [[Banker's Algorithm]] (Step 29).

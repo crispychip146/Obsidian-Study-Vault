@@ -12,8 +12,6 @@ order: 19
 
 ---
 
----
-
 ## Problem
 
 A high-performance computing library defines a 3-dimensional data cube in C syntax as:
@@ -38,49 +36,15 @@ The compiler targets a 32-bit architecture with the following system characteris
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+For A[10][20][30], the last index counts individual integers. One step in j skips 30 integers; one step in i skips 20·30 integers. Therefore A[i][j][k] lies `(i*600+j*30+k)` elements after the base.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+Each integer occupies four bytes, so the byte displacement is four times that element count. [[Multi-Dimensional Array Addressing Formulas]] compresses the reasoning to `4*((i*20+j)*30+k)`. The outer dimension 10 constrains i's range; it is not i's stride.
 
-### Working Through the Solution
-### In-Depth Solution & Geometric Walkthrough
+Translate the factored calculation into one operation per TAC instruction, then add the base or use the specified base-plus-offset array instruction. [[Intermediate Representations and Three-Address Code]] distinguishes a temporary name from its eventual physical storage.
+
+For the quadruples table, preserve which temporary each operation produces and which later instruction consumes it. A numerically correct formula can still be translated incorrectly if a use points to the wrong temporary.
 
 ### Part 1: Geometric Physical Derivation
 
@@ -204,17 +168,6 @@ Triples avoid creating temporary names (`t1`, `t2`, $\dots$). Previous computati
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
-
----
-
-## Reusable Insight
-
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
 ## Common Mistakes
 
 > [!CAUTION] The 1-Based Indexing Pitfall
@@ -224,27 +177,14 @@ Always follow compiler phase invariants: parse bottom-up or top-down according t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+Check A[0][0][0] at base, successive k values four bytes apart, and the j stride 120 bytes. Bounds checks and address calculation answer separate questions; an address formula alone does not validate indices.
 
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Intermediate Representations and Three-Address Code]]
 
 ## Source
 

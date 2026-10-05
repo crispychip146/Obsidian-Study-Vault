@@ -12,8 +12,6 @@ order: 48
 
 ---
 
----
-
 ## Problem
 
 We trace the exact Register Interference Graph (RIG) and execution of Chaitin's Algorithm presented in the KMS lecture slides (Slides 444–528).
@@ -50,29 +48,15 @@ graph TD
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
 
-### Step-by-Step Execution of Chaitin's Algorithm ($K = 3$)
+With three registers, a node of degree below three is easy to remove because it can be reinserted after its neighbors are colored. Begin with the low-degree nodes in the supplied graph and update neighbor degrees after each removal.
+
+When only higher-degree nodes remain, record that simplification has stalled. Inspect the residual graph before claiming a necessary spill. In this example, a,b,c,d form a four-node clique, so those four mutually conflicting ranges require four colors if all remain intact; three interchangeable registers cannot hold them without some transformation.
+
+[[Chaitin's Graph Coloring Register Allocation Algorithm]] chooses a candidate and continues simplifying. The select phase pops the stack and forbids colors already assigned to neighbors. Keep the candidate status separate from whether selection actually needs spill code.
+
+This example's clique argument is stronger than the generic degree heuristic. Degree at least K alone would not establish impossibility.
 
 ### Phase 1: Simplify (Kempe's Rule: Find Node with Degree $< 3$)
 
@@ -91,7 +75,7 @@ Analyze the input program structure, identify the governing compiler phase algor
    - $\text{degree}(c) = 4$
    - $\text{degree}(d) = 4$
    - $\text{degree}(e) = 3$
-   
+
    **Every single remaining node has degree $\ge 3$! Kempe's rule is stuck.**
 
 ---
@@ -149,8 +133,6 @@ We pop nodes in reverse order: `c -> b -> e -> a -> (d) -> f -> g`:
 
 ---
 
----
-
 ## Result
 
 | Variable | Final Allocation | Physical Location |
@@ -167,33 +149,13 @@ Only 1 variable ($d$) required spilling, while 6 variables were packed perfectly
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+Validate every final edge, then identify any actual spill and the code rewrite it requires. A coloring trace must not assign the same register to clique neighbors merely because one was provisionally removed earlier.
 
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Chaitin's Graph Coloring Register Allocation Algorithm]]
 
 ## Sources
 

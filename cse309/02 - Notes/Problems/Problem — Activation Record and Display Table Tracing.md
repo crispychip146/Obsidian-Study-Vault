@@ -12,8 +12,6 @@ order: 31
 
 ---
 
----
-
 ## Problem
 
 Consider the following recursive, mutually invoking Pascal program featuring nested procedure declarations:
@@ -55,49 +53,15 @@ end.
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+Every recursive call creates another frame, even when the lexical procedure name is the same. Follow the dynamic sequence P→A(2)→B(2)→A(1)→B(1)→A(0)→B(0). At Point X, these calls are still active.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+For each frame, ask two questions separately. Who called it? That gives the dynamic link. In whose declaration environment was its procedure defined? That gives the static link. A(0) is dynamically called by B(1), but A is declared inside P, so A(0)'s static link leads to P. B(0)'s static link leads to A(0).
 
-### Working Through the Solution
-### In-Depth Solution & Step-by-Step Walkthrough
+The display entries are replaced on entry and saved for restoration, as explained in [[Non-Local Variable Access in Static and Dynamic Scopes]]. At Point X, resolving b must select A(0)'s environment, while resolving a selects P's.
+
+This is an environment-resolution exercise. The source leaves some variable values unspecified, so locating their storage does not supply numeric values for a+b.
 
 ### Part 1: Activation Tree Derivation
 
@@ -216,43 +180,13 @@ At Point X inside $B(0)$:
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+Lexical depth does not grow with recursion depth. A correct trace shows all dynamic frames and only the current display choice at each lexical depth. Saved entries explain how earlier choices return as calls unwind.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Non-Local Variable Access in Static and Dynamic Scopes]]
 
 ## Source
 

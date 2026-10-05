@@ -12,36 +12,21 @@ order: 6
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Imagine pausing a program between two instructions. To resume correctly, knowing its filename is useless: we need its next instruction address, register contents, stack position, and relevant kernel bookkeeping. A **process control block (PCB)** is the kernel's record of a particular process. A process table organizes those records.
 
-To create the illusion of simultaneous execution (multitasking) on a uniprocessor or multi-core machine, the CPU scheduler must frequently suspend a running process and assign the CPU core to another process.
+While a thread is running, its current execution values live in physical CPU registers. When it stops, the kernel saves the required context in kernel-owned structures, often split between a PCB or thread structure and a kernel stack. The saved program counter is a value in memory; there is no extra physical CPU register for every inactive process.
 
-We want the suspended process to resume execution later at the exact instruction where it was stopped, with all register values, arithmetic flags, and memory state completely intact. The central obstacle is that the CPU hardware has only one set of architectural registers (Program Counter, Stack Pointer, General Purpose Registers, PSW): loading Process $B$'s values overwrites Process $A$'s values entirely.
+A context switch saves the outgoing task's resumable state, chooses or receives the next task, installs the incoming state and necessary address-space context, and transfers execution. The precise saved registers depend on the kernel and architecture. On one core, application A has stopped while the kernel performs the switch, and B has not yet resumed. The CPU is doing kernel work during that interval.
 
----
-
-## Developing the Idea
-
-To prevent state destruction, the operating system maintains a dedicated kernel data structure for every active process: the **Process Control Block (PCB)**.
-
-The PCB acts as the operating system's comprehensive bookmark and dossier for the process. When the scheduler decides to switch execution from Process $A$ to Process $B$:
-1. The kernel saves the hardware register state of Process $A$ into $A$'s PCB.
-2. The kernel updates $A$'s lifecycle state to Ready or Blocked.
-3. The kernel selects Process $B$, restores $B$'s register values from its PCB into the CPU hardware registers, switches memory page table registers (CR3 on x86), and jumps to $B$'s saved Program Counter.
-
-This fundamental operation is called a **Context Switch**.
-
----
+This makes [[Process Lifecycle and State Transitions]] concrete: a state change says why execution stops or becomes possible; context switching makes the change happen without losing the execution history.
 
 ## Definition
 
 To manage multiple concurrent processes and enable time-sharing on a single CPU, the operating system requires a dedicated data structure to represent each process.
 - **Process Control Block (PCB):** A repository of information stored in kernel memory that contains all metadata and hardware state necessary to track, schedule, and pause/resume a process. (In the Linux kernel, this is implemented as `struct task_struct`).
 - **Context Switch:** The hardware and software procedure of stopping the currently executing process, saving its execution state into its PCB, selecting another process, and loading the saved state from that process's PCB into the CPU registers to resume execution seamlessly.
-
----
 
 ---
 
@@ -84,8 +69,6 @@ sequenceDiagram
 
 ---
 
----
-
 ## Example
 
 Context switch sequence between $P_1$ and $P_2$:
@@ -118,8 +101,6 @@ Context switch costs fall into two categories:
 
 ---
 
----
-
 ## Important Properties and Why They Hold
 
 - **State Transparency:** Context switching is completely transparent to the user application; no process can detect that it was suspended other than by querying physical wall-clock time.
@@ -139,8 +120,6 @@ Context switch costs fall into two categories:
 
 ---
 
----
-
 ## Exam Relevance
 
 - **Next Step:** How are new processes generated, and how does the OS clone PCBs during execution? (See [[Process Creation and Termination Operations]]).
@@ -152,28 +131,14 @@ Context switch costs fall into two categories:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+PCB state belongs to a process instance; thread-specific execution state may have a separate record. Switching threads in one process can share address-space state, whereas switching processes may require changing it. [[Threads and Multithreading Models]] uses that distinction to separate resource ownership from execution paths.
 
-- [[Dual-Mode Operation and System Calls]]
-- [[CPU Scheduling Principles and Criteria]]
-- [[Threads and Multithreading Models]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
 - [[Process Lifecycle and State Transitions]]
-
----
-
-## Problems
-
-- [[Problem — Fork Execution Tree and Process Tracing]]
-
----
+- [[Threads and Multithreading Models]]
 
 ## Sources
 

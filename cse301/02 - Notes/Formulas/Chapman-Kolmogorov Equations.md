@@ -12,19 +12,13 @@ order: 72
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+To move from $i$ to $j$ in $m+n$ steps, the chain must occupy some intermediate state $k$ after $m$ steps. These possible intermediate states form a disjoint partition.
 
-What analytical relationship or closed-form expectation governs Chapman-Kolmogorov Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Given state $k$, the Markov property makes the next $n$-step transition independent of the earlier path; time homogeneity lets us use the same $n$-step matrix. Multiply the probabilities for the two stages and sum over $k$: $P^{(m+n)}_{ij}=\sum_kP^{(m)}_{ik}P^{(n)}_{kj}$. This is exactly matrix multiplication.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Chapman-Kolmogorov Equations compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+A matrix power includes all paths, not just a direct repeated transition. For example, two-day rain probability includes both rain–rain–rain and rain–dry–rain. Writing those paths once makes the formula meaningful before computing larger powers mechanically.
 
 ## Formula
 
@@ -48,8 +42,6 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -63,8 +55,6 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 
 ---
 
----
-
 ## Conditions
 
 1. **Discrete-Time Markov Process:** The underlying process $\{X_n, n \ge 0\}$ must satisfy the Markov property:
@@ -75,11 +65,7 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 To travel from city $i$ to city $j$ in $n+m$ days, you must be in *some* city $k$ at day $n$.
 
@@ -93,11 +79,7 @@ In matrix terms, computing transition probabilities over multiple time steps is 
 
 ---
 
----
-
 ## Derivation
-
-### Derivation
 
 Let $X_0 = i$. We want to compute $P(X_{n+m} = j \mid X_0 = i)$.
 
@@ -125,11 +107,7 @@ $$P_{ij}^{n+m} = \sum_{k=0}^\infty P_{ik}^n P_{kj}^m \quad \blacksquare$$
 
 ---
 
----
-
 ## Example
-
-### Example
 
 Consider the two-state weather chain:
 $$P = \begin{pmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{pmatrix}$$
@@ -154,11 +132,7 @@ Thus, $P_{00}^4 = 0.5749$.
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Element-wise Exponentiation:** Raising individual matrix entries to the power $n$ (i.e., $(P_{ij})^n$) instead of performing matrix multiplication $P^n$.
 - **Summing over Wrong Index:** Summing over destination states $j$ instead of intermediate waypoints $k$.
@@ -167,36 +141,13 @@ Thus, $P_{00}^4 = 0.5749$.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Problem — Four-Day Weather Forecast]] uses repeated squaring and balance. For a time-inhomogeneous chain, compose the matrices for the appropriate times instead of taking one fixed matrix power.
 
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Conditional Probability and Independence|Conditional Probability]]
-
----
-
----
-
-## Problems
+## Related notes
 
 - [[Problem — Four-Day Weather Forecast]]
-- [[Problem — Rain Prediction Two Days Ahead]]
-- [[Problem — State Communication and Irreducibility Verification]]
-
----
-
----
 
 ## Sources
 

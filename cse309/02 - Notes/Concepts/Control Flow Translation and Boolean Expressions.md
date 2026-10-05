@@ -12,105 +12,19 @@ order: 15
 
 ---
 
----
+## Building the idea
 
----
+A Boolean condition can control execution without first materializing 0 or 1. In `if (a<b) S`, the comparison can branch directly to S or to the continuation. **Jumping code** represents truth through the path taken.
 
----
+For `B1 && B2`, false B1 already determines the result, so only B1's true path reaches B2. For `B1 || B2`, only B1's false path needs B2. For `!B`, exchange true and false destinations. These rules explain short-circuit evaluation as control flow rather than an arithmetic combination of two eager results.
 
----
+An illustrative `i<10 && a[i]>max` uses that ordering to avoid the second test when i is already too large, under the array-bound assumptions. [[Translation of Expressions and Array References]] supplies the load, but this translation decides whether it executes.
 
-## Starting Point and the Problem
-
-In high-level languages, boolean expressions have two completely distinct runtime objectives:
-1. **Value Materialization:** Computing a mathematical truth value ($1$ for true, $0$ for false) to store into a variable:
-   ```c
-   bool flag = (x < y) && (z > 0);
-   ```
-2. **Flow-of-Control Branching:** Guiding the CPU instruction pointer through conditional statements:
-   ```c
-   if (p != NULL && p->val > 0) { ... }
-   ```
-
-### Why Naive Value Materialization is Disastrous in Control Flow
-Consider what happens if a compiler translates `if (p != NULL && p->val > 0)` by computing a boolean value in a register:
-1. It computes `t1 = (p != NULL)` ($1$ or $0$).
-2. It computes `t2 = (p->val > 0)` ($1$ or $0$).
-3. It computes `t3 = t1 & t2`.
-4. It checks `if t3 == 1 goto ThenBlock`.
-
-If `p` is `NULL`, Step 2 attempts to dereference `p->val` at memory address `0x00000000`, instantly crashing the operating system process with a Segmentation Fault (`SIGSEGV`)!
-
-Furthermore, burning ALU instructions to compute $0$ or $1$ into a temporary register, only to immediately compare that register against zero to branch, wastes precious CPU clock cycles and pipeline slots.
-
-Modern optimizing compilers solve both safety and performance problems by translating boolean expressions into **Jumping Code (Short-Circuit Evaluation)**. The evaluation branches directly to target labels the exact instant a condition is confirmed true or false!
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-In C, C++, Java, and Python:
-- **In $B_1 \text{ || } B_2$:** If $B_1$ evaluates to `true`, the overall truth value is guaranteed to be `true`. **$B_2$ is never executed.**
-- **In $B_1 \text{ \&\& } B_2$:** If $B_1$ evaluates to `false`, the overall truth value is guaranteed to be `false`. **$B_2$ is never executed.**
-
-```mermaid
-flowchart TD
-    subgraph OrEvaluation ["Short-Circuit OR: B1 || B2"]
-        direction TB
-        B1_or["Evaluate B1"] -->|"True"| TrueTarget["B.true (Success Target)"]
-        B1_or -->|"False"| B2_or["Evaluate B2"]
-        B2_or -->|"True"| TrueTarget
-        B2_or -->|"False"| FalseTarget["B.false (Failure Target)"]
-    end
-
-    subgraph AndEvaluation ["Short-Circuit AND: B1 && B2"]
-        direction TB
-        B1_and["Evaluate B1"] -->|"False"| FalseTarget_and["B.false (Failure Target)"]
-        B1_and -->|"True"| B2_and["Evaluate B2"]
-        B2_and -->|"True"| TrueTarget_and["B.true (Success Target)"]
-        B2_and -->|"False"| FalseTarget_and
-    end
-```
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Control Flow Translation and Boolean Expressions** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+One implementation passes destination labels as inherited context. [[Backpatching in Intermediate Code Generation]] shows another: generate unresolved jumps and connect them later.
 
 ## How It Works
 
-### How It Works
-
-### How It Works
-
-### How It Works
-
-### Why Inherited Attributes Are Mandatory for Boolean Expressions
+### Why this label-passing scheme uses inherited attributes
 
 Notice an essential structural fact:
 - The subexpression `x < 10` has no idea where it should jump when it succeeds or fails!
@@ -126,8 +40,6 @@ Similarly, statement non-terminals $S$ require:
 - `S.next`: The label of the instruction immediately following the execution of statement $S$.
 
 ---
-### Formal SDD for Flow-of-Control Statements
-
 ### Helper Functions:
 - `newlabel()`: Allocates and returns a fresh assembly jump label (`L1`, `L2`, $\dots$).
 - `label(L)`: Emits a label definition `L:` into the instruction stream.
@@ -234,156 +146,9 @@ B.code   = B1.code
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### End-to-End Walkthrough: Complex Conditional
 
@@ -436,39 +201,14 @@ Notice how the control flow strictly mirrors the mathematical truth table while 
 
 ---
 
----
-### Exam Relevance
+## What to carry forward
 
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
+Inherited labels are a method, not mandatory for all Boolean translation. Short-circuit behavior must match the source language, including side effects and evaluation order. A branch expression is not automatically interchangeable with eager bitwise operations.
 
----
+## Related notes
 
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Translation of Expressions and Array References]]
+- [[Backpatching in Intermediate Code Generation]]
 
 ## Sources
 

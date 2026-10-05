@@ -12,8 +12,6 @@ order: 39
 
 ---
 
----
-
 ## Problem
 
 Given the following sequence of Three-Address Code instructions:
@@ -41,29 +39,15 @@ Given the following sequence of Three-Address Code instructions:
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
 
-### Partitioning into Basic Blocks
+The loop has one initialization region, a repeatedly executed body, and a return. Jump `(12)` goes to `(3)`, so `(3)` starts the body. Its successor `(13)` starts the exit region; instruction `(1)` starts the fragment.
+
+Build those blocks before next-use analysis. The body is straight-line until its final branch, so a backward scan has a definite local order. The question supplies live-out assumptions for prod, i, a, and b; use them as boundary data rather than deriving different global facts.
+
+At each instruction, first record the known suffix state. Then kill the assigned result's old value and add its operands as uses. [[Liveness and Next-Use Analysis within Basic Blocks]] explains why the suffix tells us what must survive earlier.
+
+The two `4*i` computations are a later optimization opportunity, but identifying blocks and computing next use should describe the provided program before transformations alter it.
 
 ### Identifying Leaders:
 - **Rule 1 (First Instruction):** Instruction `(1)` is a Leader.
@@ -157,8 +141,6 @@ We scan backwards from instruction (12) to instruction (3).
 
 ---
 
----
-
 ## Result
 
 | Inst # | Statement | Attached Variable Status |
@@ -176,33 +158,14 @@ We scan backwards from instruction (12) to instruction (3).
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+Keep the original instruction numbers through the analysis. A next-use table is tied to that sequence; after optimization, recompute or update it. [[DAG-Based Basic Block Optimization Example]] develops value reuse separately.
 
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
+- [[DAG-Based Basic Block Optimization Example]]
 
 ## Sources
 

@@ -12,8 +12,6 @@ order: 91
 
 ---
 
----
-
 ## Problem
 
 An internet edge router receives incoming network packets according to a Poisson process at an average arrival rate of $\lambda = 800$ packets per second. The router's transmission interface processes packets with exponentially distributed transmission times at an average service rate of $\mu = 1000$ packets per second. The buffer capacity is effectively unlimited.
@@ -27,16 +25,12 @@ An internet edge router receives incoming network packets according to a Poisson
 
 ---
 
----
-
 ## Given
 
 - Model: M/M/1
 - Arrival rate: $\lambda = 800$ packets/sec
 - Service rate: $\mu = 1000$ packets/sec
 - Capacity: $\infty$
-
----
 
 ---
 
@@ -51,8 +45,6 @@ An internet edge router receives incoming network packets according to a Poisson
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[M-M-1 Queue]]
@@ -62,31 +54,13 @@ An internet edge router receives incoming network packets according to a Poisson
 
 ---
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-- [[Discrete Probability Distributions]]
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+First translate rates into the same units: 800 arrivals and 1000 potential services per second. Utilization is 0.8, so the infinite-buffer M/M/1 queue has a stationary regime.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+The geometric count distribution gives $P(N>3)=P(N\ge4)=0.8^4$. Average system population is four, including the packet in service; average waiting population is 3.2. Residence time is $1/(1000-800)=0.005$ seconds, and subtracting one millisecond of mean service gives four milliseconds of mean waiting.
 
-### Working Through the Solution
-### Solution
+Under the stationary FCFS M/M/1 assumptions, total residence time has exponential rate $\mu-\lambda=200$, so its tail at five milliseconds is $e^{-1}$. This is a probability for individual residence times, separate from the mean. The numerical equality of the threshold and the mean does not imply a half-probability tail for an asymmetric exponential distribution.
 
 ### 1. Traffic Intensity and Idle Probability
 $$\rho = \frac{\lambda}{\mu} = \frac{800}{1000} = 0.80 \quad (80\% \text{ utilization})$$
@@ -158,17 +132,6 @@ Because queueing delay is hyperbolic in $(1 - \rho)^{-1}$, a modest $20\%$ incre
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Conflating correlation with causation or independence.
@@ -176,25 +139,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
-## Exam Pattern
+## What to carry forward
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+[[M-M-1 Performance Formulas]] supplies the count summaries. Use both Little's-law checks and units to detect confusion between a rate, a duration, and a queue-only quantity.
 
----
+## Related notes
 
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[M-M-1 Performance Formulas]]
 
 ## Source
 

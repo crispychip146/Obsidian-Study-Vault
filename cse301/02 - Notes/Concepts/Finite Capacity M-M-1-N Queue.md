@@ -12,19 +12,13 @@ order: 87
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Capacity $N$ includes the customer in service, leaving at most $N-1$ waiting places for one server. At state $N$, attempted arrivals are rejected rather than increasing the count.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Finite Capacity M-M-1-N Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Neighbor balance still gives $\pi_n=\rho^n\pi_0$, but normalization now sums only from zero to $N$. A finite sum is normalizable even when $\rho\ge1$. At $\rho=1$, every state has probability $1/(N+1)$; use this limit rather than a formula that produces $0/0$.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Finite Capacity M-M-1-N Queue reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+With external Poisson arrivals, PASTA makes the loss probability $\pi_N$. Accepted throughput is $\lambda_a=\lambda(1-\pi_N)$ and also equals $\mu(1-\pi_0)$ in stationarity. The offered load $\lambda/\mu$ can exceed one; the actual busy fraction cannot. Use accepted throughput in Little's law for admitted-customer residence times.
 
 ## Definition
 
@@ -32,8 +26,6 @@ An **M/M/1/N Queue** (also written M/M/1/K) is a single-server queueing system w
 - At most $N$ customers can be present in the facility simultaneously (1 customer in service and $N - 1$ customers waiting in the buffer).
 - When an arriving customer arrives to find the system completely full (all $N$ positions occupied), the customer is **blocked and turned away** (dropped/lost), entering neither the buffer nor the service mechanism.
 - The state space is finite: $S = \{0, 1, 2, \dots, N\}$.
-
----
 
 ---
 
@@ -56,8 +48,6 @@ Notice the critical difference at the upper boundary:
 - Departures continue at rate $\mu$ from state $N$ to $N - 1$.
 
 ---
-### Derivation of Steady-State Probabilities
-
 ### 1. Balance Equations
 - **State 0:**
   $$\lambda P_0 = \mu P_1$$
@@ -130,20 +120,6 @@ Network router engineers use the M/M/1/N model to balance two competing evils:
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
 ## Important Properties and Why They Hold
 
 ### Little's Law Subtlety: Which $\lambda$ to Use?
@@ -159,43 +135,13 @@ $$\mathbf{W = \frac{L}{\lambda_a} = \frac{L}{\lambda(1 - P_N)}}$$
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+[[Problem — Finite Capacity Queue Loss and Effective Throughput]] illustrates the distinction between attempted traffic and completed traffic. A finite queue prevents unlimited population growth by losing work.
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+## Related notes
 
----
-
-## Exam Relevance
-
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
-
-- [[M-M-1 Queue]]
-- [[Little's Law]]
-- [[PASTA Property and Inspection Paradox]]
 - [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

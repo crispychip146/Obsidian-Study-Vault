@@ -12,19 +12,13 @@ order: 83
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Think of each customer's time in the system as a strip of area one customer wide and its residence time long. Adding these strips over an observation period gives the same customer-time area as integrating the number currently present.
 
-What analytical relationship or closed-form expectation governs Little's Law, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Divide that area by the period length. One viewpoint gives average population $L$; the other gives completed or admitted throughput times average residence time $W$. Under suitable long-run averages and negligible boundary effects, this yields $L=\lambda_a W$.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Little's Law compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The law does not require exponential service or Poisson arrivals. It does require consistent boundaries and population accounting. For a system that rejects arrivals, use admitted throughput rather than all attempted arrivals when $W$ describes admitted customers. Applying it to the waiting line alone gives $L_Q=\lambda_a W_Q$. For a single server, the mean number in service is its busy fraction, not a general multi-server utilization identity.
 
 ## Formula
 
@@ -50,8 +44,6 @@ where:
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -63,15 +55,6 @@ where:
 | $W_Q$ | Expected waiting time in queue | Time |
 | $\mu$ | Server processing rate | Customers / Time |
 | $\rho$ | Server utilization | Dimensionless $\in [0, 1)$ |
-
----
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -90,8 +73,6 @@ The only requirements are:
 1. The system must reach a stationary stochastic steady state.
 2. Customers must eventually depart (no customers trapped forever).
 3. The limits defining long-run averages must exist.
-
----
 
 ---
 
@@ -147,8 +128,6 @@ Choose the cost rule: **"Every customer pays \$1 per unit of time while in servi
 
 ---
 
----
-
 ## Example
 
 ### Example: Fast-Food Drive-Through
@@ -162,41 +141,20 @@ At any random instant, an overhead drone will count an average of **6 cars** in 
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Unit mismatch:** Mixing hours and minutes (e.g., $\lambda$ in customers/hour and $W$ in minutes). Always convert to identical time units!
 - **Gross vs. Effective Arrivals:** Using gross arrival rate $\lambda$ instead of effective arrival rate $\lambda_a = \lambda(1 - P_{\text{blocked}})$ in finite capacity loss systems.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Check dimensions: customers/time times time gives customers. [[Finite Capacity M-M-1-N Queue]] shows why the effective arrival rate matters when loss occurs.
 
-- [[Queueing Systems and Kendall Notation]]
-- [[M-M-1 Queue]]
+## Related notes
+
 - [[Finite Capacity M-M-1-N Queue]]
-- [[M-M-1 Performance Formulas]]
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

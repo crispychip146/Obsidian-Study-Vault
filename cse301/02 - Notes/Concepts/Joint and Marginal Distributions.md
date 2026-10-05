@@ -12,25 +12,17 @@ order: 10
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Knowing the separate distributions of two quantities does not tell us how they move together. For example, two fair binary variables could always agree, always disagree, or be independent. Their marginals are the same in all three cases; their joint distributions differ.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Joint and Marginal Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+A joint table assigns mass to pairs $(x,y)$. To find the marginal probability at $x$, add the entire row over possible $y$ values: these alternatives are disjoint and exhaust all ways that $X=x$ can occur. For joint densities, integrate over the other coordinate for the same reason.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Joint and Marginal Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Conditional distributions focus on a slice and renormalize it. If $P(X=x)>0$, divide the joint row by its row sum. Independence is the stronger property that every joint probability factors into its marginals, so the conditional distribution agrees with the original marginal wherever the conditioning is defined.
 
 ## Definition
 
 When studying two or more random variables simultaneously (e.g., $(X, Y)$), their collective behavior is described by a **joint probability distribution**.
-
----
 
 ---
 
@@ -89,20 +81,6 @@ Random variables $X$ and $Y$ are **independent** ($X \perp Y$) if and only if an
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
 ## Important Properties and Why They Hold
 
 ### 2D Law of the Unconscious Statistician (LOTUS)
@@ -114,8 +92,6 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 - **Continuous:**
   $$\mathbb{E}[g(X, Y)] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x, y) f_{X, Y}(x, y) \, dx \, dy$$
-
----
 
 ---
 
@@ -133,8 +109,6 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 ---
 
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -146,26 +120,13 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Marginalizing removes information about dependence. [[Covariance and Correlation]] summarizes one aspect of that dependence; it cannot reconstruct the entire joint distribution.
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Covariance and Correlation]]
 
 ## Sources
 

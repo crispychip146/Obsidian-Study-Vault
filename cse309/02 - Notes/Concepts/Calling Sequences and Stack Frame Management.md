@@ -12,100 +12,17 @@ order: 22
 
 ---
 
----
+## Building the idea
 
----
+A call must let the callee begin without losing what the caller needs afterward. The **calling sequence** is the agreement about arguments, return values, saved registers, frame layout, and control transfer.
 
----
+Follow an illustrative stack-based call. The caller supplies arguments and preserves any live caller-saved registers. The callee establishes its frame, saves registers it must preserve, and reserves local storage. On return it restores those obligations, removes its frame, and transfers control to the saved return location.
 
----
+The stack pointer tracks changing stack extent; an optional frame pointer provides a stable reference for frame fields. [[Run-Time Storage Organization and Activation Records]] explains why those fields belong to one activation rather than one source function.
 
-## Starting Point and the Problem
-
-In any software ecosystem, a function written in C must be able to call a function compiled from Rust, C++, or raw assembly language. How can two independent pieces of code communicate reliably without clobbering each other's hardware registers or misinterpreting stack data?
-
-The answer is the **Application Binary Interface (ABI)** (such as the System V AMD64 ABI or the classic x86 `cdecl` convention).
-
-A calling sequence is a meticulously synchronized protocol between the **Caller** (the procedure issuing the call) and the **Callee** (the procedure being invoked). The compiler must divide the responsibilities:
-- Who evaluates arguments?
-- Who allocates the stack frame?
-- Who preserves CPU registers?
-- Who cleans up memory upon return?
-
-```
-                     The Calling Protocol Contract
-           CALLER                                CALLEE
-     ┌──────────────────────┐              ┌──────────────────────┐
-     │ Evaluates arguments  │ ──CALL──>    │ Pushes old $fp       │
-     │ Saves caller-saved   │              │ Sets new $fp = $sp   │
-     │ registers            │              │ Saves callee-saved   │
-     │ Pushes return addr   │              │ Allocates locals     │
-     └──────────────────────┘              └──────────────────────┘
-                 ▲                                     │
-                 │                                   EXECUTE
-                 │                                     │
-     ┌──────────────────────┐              ┌──────────────────────┐
-     │ Retrieves return val │ <──RET────── │ Places return value  │
-     │ Restores caller-saved│              │ Restores callee-saved│
-     │ Cleans up arguments  │              │ Pops frame pointer   │
-     └──────────────────────┘              └──────────────────────┘
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Modern CPUs have limited general-purpose hardware registers (e.g., 16 in x86-64, 32 in ARM64). Saving all registers to RAM on every function call would destroy CPU performance, as memory writes take dozens of clock cycles.
-
-To maximize execution speed, ABIs divide hardware registers into two economic categories:
-
-| Category | Typical Registers (x86-64) | Ownership & Invariant Rule | Compiler Strategy |
-| :--- | :--- | :--- | :--- |
-| **Caller-Saved** *(Volatile / Scratch)* | `%rax`, `%rcx`, `%rdx`, `%rsi`, `%rdi`, `%r8`–`%r11` | **The Caller owns them.** The Callee is free to overwrite and destroy them without saving! | Used for short-lived, transient expressions. If the Caller needs the value across a call, the **Caller** must push it to the stack before `CALL`. |
-| **Callee-Saved** *(Non-Volatile / Preserved)* | `%rbx`, `%rsp`, `%rbp`, `%r12`–`%r15` | **The Callee must preserve them.** When the Callee returns, these registers **must** contain their exact original values! | Used for long-lived loop counters and persistent variables. If the Callee wants to use `%r12`, the **Callee** must push `%r12` in its prologue and pop it in its epilogue. |
-
-> [!TIP] Why This Split Saves Thousands of Instructions
-> Consider a function $A$ that calls 10 tiny leaf functions in a loop.
-> - If all registers were *caller-saved*, function $A$ would have to execute 10 separate save-and-restore memory operations around every single call!
-> - By placing $A$'s loop counter in a *callee-saved* register (e.g., `%r12`), the 10 leaf functions simply use caller-saved registers and never touch `%r12`. Function $A$'s variable remains untouched in silicon without a single RAM spill!
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Calling Sequences and Stack Frame Management** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Specific registers in the assembly below describe an ABI example, such as System V AMD64, not every 64-bit system. An ABI tells the caller and callee what they can rely on; hardware instructions alone do not define the entire convention.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Concrete Silicon Execution: Prologue, Body, and Epilogue
 
@@ -164,9 +81,6 @@ ret                     # 5. Pop return address into PC and return to caller!
 
 ---
 
----
-### Technical Details
-
 ### When LIFO Fails: Closures and Escaping Frames
 
 The entire stack allocation model relies on a strict invariant: **A function's activation record is never accessed after the function returns.**
@@ -209,187 +123,14 @@ counter(); // Returns 2
 
 ---
 
----
-### Important Properties and Why They Hold
+## What to carry forward
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
+A frame pointer may be omitted when code can address the frame another way. [[Non-Local Variable Access in Static and Dynamic Scopes]] introduces the separate problem of locating an enclosing activation's variables.
 
----
-### Related Concepts
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Run-Time Storage Organization and Activation Records]]
+- [[Non-Local Variable Access in Static and Dynamic Scopes]]
 
 ## Sources
 

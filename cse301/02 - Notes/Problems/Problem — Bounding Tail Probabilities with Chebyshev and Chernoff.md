@@ -12,8 +12,6 @@ order: 30
 
 ---
 
----
-
 ## Problem
 
 A high-frequency network switch processes incoming packets. The number of packets arriving in a 1-millisecond window follows a Poisson distribution with mean $\lambda = 20$:
@@ -31,54 +29,13 @@ $$P(X \ge 40)$$
 
 ---
 
----
-
-## Given
-
-- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
-
----
-
-## Required
-
-- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
-
----
-
-## Concepts Tested
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
-
-## Prerequisites
-
-- [[Discrete Probability Distributions]] — Poisson distribution moments and MGF.
-- [[Markov Inequality]] — First-moment bounding.
-- [[Chebyshev Inequality]] — Variance-based bounding.
-- [[Chernoff Bound]] — MGF convex optimization.
-
----
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+For a Poisson count of mean 20, the requested event is $X\ge40$. First record $E[X]=\operatorname{Var}(X)=20$. Markov gives $20/40=0.5$, while Chebyshev uses the distance $40-20=20$ to give $20/20^2=0.05$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+The Poisson MGF is $\exp(20(e^t-1))$. The Chernoff log-bound is therefore $20(e^t-1)-40t$. Its derivative is zero at $e^t=2$, so the minimizing positive value is $t=\log2$. Substitution gives $\exp(20-40\log2)\approx0.0004413$.
 
-### Working Through the Solution
-### Full Step-by-Step Solution
+Each step has a purpose: the exponential transform makes Markov sensitive to large counts, the log makes optimization easier, and the derivative selects the strongest member of the bound family. If a physical system can hold 40 items, overflow means $X>40$, not $X\ge40$; preserve the event specified in the question when interpreting the answer.
 
 ### Part 1: Markov's Inequality
 Since $X$ is a count of packets, $X \ge 0$.
@@ -147,17 +104,6 @@ Chernoff exploits the fact that the Poisson distribution has an analytic MGF wit
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 1. **Failure to check $t^* > 0$:** If the requested threshold $a$ is less than the mean ($a < \mu$), the optimal $t^*$ will be negative, meaning one must use the lower tail Chernoff bound ($t < 0$).
@@ -165,27 +111,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+The Chernoff guarantee is about 0.04413%, still an upper bound. [[Comparison of Probability Bounds Example]] explains why it can improve so much on a variance-only guarantee.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Comparison of Probability Bounds Example]]
 
 ## Source
 

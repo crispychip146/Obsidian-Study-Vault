@@ -12,32 +12,13 @@ order: 68
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A random variable records one uncertain quantity. A stochastic process records a collection of them indexed by time or another parameter: $\{X_t:t\in T\}$. A realization is an entire path, such as a queue length changing through a day.
 
-- **Overcoming Static Probability:** Classical probability models static outcomes. Real-world systems require modeling temporal dependencies, long-term trends, and sequential transitions.
-- **Handling History and Memory:** Unlike independent and identically distributed (i.i.d.) random variables—where the past has no bearing on the future—a stochastic process formalizes different degrees of historical dependence.
-- **Unified Framework:** It provides the mathematical foundation for [[Markov Chain]], Poisson processes, Brownian motion, queuing models, and time series analysis.
+Specify two separate features. The time index may be discrete, such as daily observations, or continuous, such as event times. The state space may also be discrete, such as customer counts, or continuous, such as temperature. Continuous time does not imply continuous states.
 
----
-
----
-
-## Developing the Idea
-
-In elementary probability, a random variable gives a single probabilistic snapshot: for example, the roll of a die or the height of an individual.
-
-However, many physical, biological, computational, and financial systems evolve dynamically across time:
-- The price of a stock at 9:30 AM, 9:31 AM, 9:32 AM...
-- The number of packets waiting in a network buffer at each clock cycle.
-- The weather (sunny, rainy) observed each morning.
-
-A stochastic process is simply a sequence of random variables that models how a system changes over time under uncertainty. It is a "random variable with a clock."
-
----
-
----
+One-time distributions describe individual snapshots, while joint distributions describe dependence between snapshots. Without that dependence, you cannot answer a question about a future state conditional on the present. [[Markov Chain]] introduces a model where the current state summarizes the past information relevant to predicting the next step.
 
 ## Definition
 
@@ -53,11 +34,7 @@ defined on a common probability space $(\Omega, \mathcal{F}, P)$, where $T$ is t
 
 ---
 
----
-
 ## How It Works
-
-### How It Works
 
 1. **State Space ($S$):** The set of all possible configurations or values the system can occupy.
    - Example: For a communication channel, $S = \{0, 1\}$.
@@ -79,17 +56,7 @@ defined on a common probability space $(\Omega, \mathcal{F}, P)$, where $T$ is t
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
-
-### Technical Details
 
 ### Memory and Dependence Spectrum
 Stochastic processes can be categorized by how much past history influences the future:
@@ -105,24 +72,11 @@ Stochastic processes can be categorized by how much past history influences the 
 
 ---
 
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Confusing State Space with Time Parameter:** Mixing up the possible values $X_t \in S$ with the indices $t \in T$. For example, a process can have continuous time ($T = [0, \infty)$) but a discrete state space ($S = \{0, 1, 2, \dots\}$), as in a Poisson process.
 - **Assuming All Processes Are Independent:** Treating $X_{n+1}$ as independent of $X_n$. In almost all stochastic models, temporal correlation is the primary object of study.
 - **Overlooking Sample Paths:** Confusing the marginal distribution of $X_t$ at a single time $t$ with the joint distribution across multiple time steps.
-
----
 
 ---
 
@@ -146,34 +100,14 @@ In CSE301 examinations:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+A state is a modeling choice. If the current variable leaves relevant history out, enlarging the state may produce a Markov model, as [[Higher-Order State Weather Prediction Example]] shows.
+
+## Related notes
 
 - [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions|Random Variable]]
-- [[Conditional Probability and Independence|Conditional Probability]]
-
----
-
----
-
-## Problems
-
-- [[Problem — Rain Prediction Two Days Ahead]]
-
----
-
----
+- [[Higher-Order State Weather Prediction Example]]
 
 ## Sources
 

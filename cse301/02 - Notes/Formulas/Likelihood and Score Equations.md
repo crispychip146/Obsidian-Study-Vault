@@ -12,19 +12,13 @@ order: 44
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+The score is the slope of the log-likelihood: it tells us how the fit to the observed data changes when we move the parameter. At an interior differentiable maximum, that slope is zero, so the score equation produces candidates for an MLE.
 
-What analytical relationship or closed-form expectation governs Likelihood and Score Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Candidates still need checking. The parameter domain may have boundaries, the support may depend on the parameter, and a stationary point may be a minimum or local maximum. For vector parameters the score is a gradient and curvature is represented by a matrix.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Likelihood and Score Equations compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+Under regularity assumptions, Fisher information measures expected curvature and also equals the variance of the score. More information typically means a narrower likelihood and a smaller large-sample standard error. The usual inverse-information standard error and identities require those regularity conditions; they are not automatically valid for the uniform endpoint model.
 
 ## Formula
 
@@ -57,8 +51,6 @@ $$\widehat{\text{se}}(\hat{\theta}_n) = \frac{1}{\sqrt{I_n(\hat{\theta}_n)}}$$
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -72,8 +64,6 @@ $$\widehat{\text{se}}(\hat{\theta}_n) = \frac{1}{\sqrt{I_n(\hat{\theta}_n)}}$$
 
 ---
 
----
-
 ## Conditions
 
 1. **Differentiability:** The density $f(x; \theta)$ must be twice continuously differentiable with respect to $\theta$.
@@ -82,22 +72,14 @@ $$\widehat{\text{se}}(\hat{\theta}_n) = \frac{1}{\sqrt{I_n(\hat{\theta}_n)}}$$
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 - The **score function** $S_n(\theta)$ represents the slope of the log-likelihood curve at any candidate parameter $\theta$. If $S_n(\theta) > 0$, increasing $\theta$ increases likelihood; if $S_n(\theta) < 0$, decreasing $\theta$ increases likelihood. At the optimal parameter guess $\hat{\theta}_{\text{MLE}}$, the curve reaches its peak, where the slope is flat ($S_n = 0$).
 - The **Fisher Information** $I_n(\theta)$ measures the **curvature** (concavity) of the log-likelihood peak. If the log-likelihood curve is sharply curved (large second derivative, high Fisher information), the peak is narrowly defined and our estimate $\hat{\theta}$ has very small variance. If the peak is flat and broad (low Fisher information), the data provide little precision and $\hat{\theta}$ has high standard error.
 
 ---
 
----
-
 ## Derivation
-
-### Derivation of Expected Score and Fisher Information Identity
 
 ### Proposition 1: The Expected Score is Always Zero
 Assuming we can interchange derivative and integral:
@@ -124,8 +106,6 @@ $$I_1(\theta) = - E_\theta\left[\frac{\partial^2 \log f(X; \theta)}{\partial \th
 
 ---
 
----
-
 ## Example
 
 ### Example: Poisson Rate Parameter
@@ -145,40 +125,21 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to take the negative expectation when computing Fisher information: $I(\theta) = -E[\ell'']$, not $E[\ell'']$.
 - Forgetting that the score equation requires the support of the distribution to be independent of $\theta$.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Normal Distribution Parameter MLE Derivation Example]] applies the calculus route. [[Uniform Distribution Non-Regular MLE Example]] applies direct constrained maximization instead.
 
-- [[Maximum Likelihood Estimation]]
-- [[Point Estimation]]
-- [[Wald Test Statistic]]
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Normal Distribution Parameter MLE Derivation Example]]
+- [[Uniform Distribution Non-Regular MLE Example]]
 
 ## Sources
 

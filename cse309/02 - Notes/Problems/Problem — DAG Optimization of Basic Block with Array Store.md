@@ -12,8 +12,6 @@ order: 42
 
 ---
 
----
-
 ## Problem
 
 Consider the following basic block containing array operations:
@@ -31,49 +29,15 @@ Consider the following basic block containing array operations:
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+The two reads spell `a[i]` identically, but the store between them can change the answer. If i==j, `x=a[i]` gets the old element and `z=a[i]` gets y after the store. Replacing z's load with x would preserve the wrong memory version.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+[[DAG Construction and Local Optimization of Basic Blocks]] therefore treats the store as a dependency barrier for potentially aliased loads. One representation creates a new version of the array; another invalidates affected load nodes for future reuse. Neither means the already computed scalar x changes retroactively.
 
-### Working Through the Solution
-### Step-by-Step Solution
+Reuse becomes possible if the compiler proves the store cannot affect the loaded location, the relevant index and base values are unchanged, and no other observable behavior prevents elimination. Proving i≠j is the central condition in this simple example.
+
+This is the difference between syntactic equality and semantic value availability. The program's memory state is an input to the load even when it is not printed as an ordinary operand.
 
 ### Part 1: Why Reusing `x` is Semantically Unsound
 In statement (2), the assignment `a[j] = y` modifies an element of array `a`.
@@ -149,43 +113,13 @@ z = x
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+Give the equal-index counterexample before the optimization. It establishes why the general replacement fails. Then state the non-aliasing proof needed for the restricted case, rather than assuming different variable names imply different addresses.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[DAG Construction and Local Optimization of Basic Blocks]]
 
 ## Source
 

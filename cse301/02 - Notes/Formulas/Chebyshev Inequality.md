@@ -12,19 +12,13 @@ order: 26
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Chebyshev's inequality converts variance into a tail guarantee. The event $|X-\mu|\ge\epsilon$ is the same as $(X-\mu)^2\ge\epsilon^2$. This squared variable is nonnegative and has expectation $\sigma^2$, so [[Markov Inequality]] immediately gives $P(|X-\mu|\ge\epsilon)\le\sigma^2/\epsilon^2$.
 
-What analytical relationship or closed-form expectation governs Chebyshev Inequality, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+The result is distribution-free among variables with finite variance. You do not need normality or symmetry. Its price is looseness: it protects against distributions that put relatively substantial mass far from the mean.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Chebyshev Inequality compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+For the mean of iid observations, variance shrinks to $\sigma^2/n$, giving a bound proportional to $1/n$. That supplies a direct finite-variance proof of the weak [[Law of Large Numbers]]. A one-sided event is contained in the two-sided event, so the same bound is valid there, though it may waste information about which tail matters.
 
 ## Formula
 
@@ -47,25 +41,6 @@ $$P(\lvert X - \mu \rvert < k\sigma) \ge 1 - \frac{1}{k^2}$$
 
 ---
 
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
-
----
-
 ## Intuition
 
 ### When Is Chebyshev's Inequality Tight?
@@ -82,8 +57,6 @@ $$P(X - \mu \ge c) \le \frac{\sigma^2}{\sigma^2 + c^2}$$
 Setting $c = k\sigma$:
 $$P(X - \mu \ge k\sigma) \le \frac{1}{1 + k^2}$$
 *(Notice this is strictly tighter than the naive half-Chebyshev bound $\frac{1}{2k^2}$ for large $k$)*.
-
----
 
 ---
 
@@ -118,42 +91,14 @@ This provides a direct, 3-line proof of the **Weak Law of Large Numbers**!
 
 ---
 
----
+## What to carry forward
 
-## Example
+In standard-deviation units use $\epsilon=k\sigma$ when $\sigma>0$. If variance is zero, $X=\mu$ almost surely and positive-distance tail probabilities are already zero.
 
-See worked numerical examples in the associated Example and Problem notes.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
-
----
-
-## Related Concepts
-
-- [[Markov Inequality]] — Foundational inequality.
-- [[Chernoff Bound]] — Exponentially sharper bound when MGF exists.
-- [[Law of Large Numbers]] — Convergence theorem proven by Chebyshev.
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Markov Inequality]]
+- [[Law of Large Numbers]]
 
 ## Sources
 

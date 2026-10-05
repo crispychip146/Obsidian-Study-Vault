@@ -12,19 +12,13 @@ order: 18
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Suppose you want to predict $Y$, but first get to observe $X$. For each possible observed value $x$, average $Y$ within that slice of the population. Call the result $g(x)=E[Y\mid X=x]$. Before observing $X$, the predictor $g(X)=E[Y\mid X]$ is itself a random variable.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Expectation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+This distinction explains the notation: $E[Y\mid X=x]$ is a number for a specified $x$, while $E[Y\mid X]$ changes with the information supplied by $X$. In the discrete case, compute it using conditional masses; in the density case, use the conditional density where defined.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Conditional Expectation reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+For square-integrable $Y$, this conditional mean minimizes expected squared prediction error among functions of $X$. The remaining error has conditional mean zero, which is the key cancellation behind [[Eve's Law (Law of Total Variance)]].
 
 ## Definition
 
@@ -44,8 +38,6 @@ Specifically:
 $$\mathbb{E}[Y \mid X] = g(X)$$
 where $g(x) = \mathbb{E}[Y \mid X = x]$.
 Because $X$ is random, $g(X)$ is random. It has its own distribution, mean, and variance.
-
----
 
 ---
 
@@ -75,14 +67,6 @@ Because $X$ is random, $g(X)$ is random. It has its own distribution, mean, and 
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
 
 ### The Best Mean Squared Error (MSE) Predictor
@@ -109,15 +93,6 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 
 ---
 
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
 
 ### Edge Cases & Common Pitfalls
@@ -131,8 +106,6 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 
 ---
 
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -143,26 +116,14 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Conditioning on more information can change the prediction. Averaging the conditional predictions back over $X$ recovers the unconditional mean, as [[Adam's Law (Law of Total Expectation)]] shows.
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+## Related notes
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Eve's Law (Law of Total Variance)]]
+- [[Adam's Law (Law of Total Expectation)]]
 
 ## Sources
 

@@ -12,158 +12,17 @@ order: 11
 
 ---
 
----
+## Building the idea
 
----
+Seeing the same text twice does not guarantee seeing the same value twice: an operand might have been reassigned. Value numbering gives names to **values** so the compiler can recognize repeated computations using the right identities.
 
----
+For a pure binary operation, form a signature from its operator and the value numbers of its children. Look it up in a table. If the signature exists, reuse that node; otherwise allocate a node and number. When a variable is assigned, update which value its name denotes.
 
----
+An illustrative `a+b` can reuse an earlier node only while a and b denote the same operand values and the operation's semantics permit reuse. This extends [[Abstract Syntax Tree Construction with SDDs]] into a DAG: two parents can refer to one computed child.
 
-## The Problem and Earlier Tools
-
-Consider what happens when a programmer writes:
-$$x = a + a \times (a - b) + (a - b) \times c$$
-If the compiler constructs a standard **Abstract Syntax Tree (AST)**, every textual token becomes a separate tree node:
-- The subexpression $(a - b)$ appears twice.
-- The syntax tree allocates two distinct `-` nodes, each with its own child leaves for $a$ and $b$.
-
-When the compiler generates assembly or Three-Address Code (TAC) from this tree, it emits:
-```text
-t1 = a - b      // First computation of (a - b)
-t2 = a * t1
-t3 = a + t2
-t4 = a - b      // REDUNDANT CPU WORK! Re-subtracting the exact same variables!
-t5 = t4 * c
-t6 = t3 + t5
-```
-Notice instruction `t4`: the CPU burns cycles recalculating $a - b$, consumes an extra physical register, and pollutes cache lines.
-
-A **Directed Acyclic Graph (DAG)** solves this directly during Intermediate Code Generation. Unlike a tree—where every node has at most one parent—a DAG allows a node to have **multiple parents**. Once $(a - b)$ is constructed, any subsequent occurrence simply points to the existing node!
-
-The **Value-Number Method** is the foundational, $O(1)$-per-node algorithm that builds DAGs on-the-fly using a hash table of canonical computational signatures.
-
-```mermaid
-graph TD
-    subgraph Syntax_Tree ["Syntax Tree (Duplicate Subtrees)"]
-        direction TB
-        ST_plus1["+"] --- ST_plus2["+"]
-        ST_plus1 --- ST_mult2["*"]
-        ST_plus2 --- ST_a1["a"]
-        ST_plus2 --- ST_mult1["*"]
-        ST_mult1 --- ST_a2["a"]
-        ST_mult1 --- ST_sub1["- (Instance 1)"]
-        ST_sub1 --- ST_a3["a"]
-        ST_sub1 --- ST_b1["b"]
-        ST_mult2 --- ST_sub2["- (Instance 2: Redundant!)"]
-        ST_mult2 --- ST_c1["c"]
-        ST_sub2 --- ST_a4["a"]
-        ST_sub2 --- ST_b2["b"]
-    end
-
-    subgraph DAG ["DAG Representation (Shared Nodes)"]
-        direction TB
-        DAG_plus1["Node 8: (+)"] --- DAG_plus2["Node 5: (+)"]
-        DAG_plus1 --- DAG_mult2["Node 7: (*)"]
-        DAG_plus2 --- DAG_a["Node 1: id(a)"]
-        DAG_plus2 --- DAG_mult1["Node 4: (*)"]
-        DAG_mult1 --- DAG_a
-        DAG_mult1 --- DAG_sub["Node 3: (-) [SHARED]"]
-        DAG_mult2 --- DAG_sub
-        DAG_mult2 --- DAG_c["Node 6: id(c)"]
-        DAG_sub --- DAG_a
-        DAG_sub --- DAG_b["Node 2: id(b)"]
-    end
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-The algorithm represents the DAG as a compact **Node Array** (indexed by integers called **Value Numbers**) paired with a **Hash Table** for instantaneous $O(1)$ duplicate detection:
-
-### 2.1 The Node Array
-Every unique computational entity receives an integer index $1, 2, 3, \dots, N$:
-1. **Leaf Records:** Store a token type and its symbol name/literal value:
-   $$\text{Leaf Record} = \langle \mathbf{LEAF}, \; \text{symbol\_or\_constant} \rangle$$
-2. **Interior Operator Records:** Store the operator and the integer **value numbers** of its children:
-   $$\text{Interior Record} = \langle \mathbf{INTERIOR}, \; \text{op}, \; \text{left\_val\_num}, \; \text{right\_val\_num} \rangle$$
-
-### 2.2 The Signature Hash Map
-To determine whether an expression has already been evaluated, we define a canonical **Hash Key (Signature)**:
-- For a leaf: $\text{Key} = (\text{LEAF}, \text{identifier\_name})$
-- For an interior node: $\text{Key} = (\text{op}, \text{left\_val\_num}, \text{right\_val\_num})$
-
-The hash map maps:
-$$\text{Signature} \longrightarrow \text{Value Number (Array Index)}$$
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+The correctness argument follows structure. Equal leaf identities denote equal values; matching operators applied to matching child values denote the same expression under the stated pure-operation model. Effects, memory changes, and exceptional behavior require additional checks.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Advanced Compiler Extensions: Commutative Value Numbering
 
@@ -173,139 +32,19 @@ In a naive value-number method:
 - $a + b$ produces key `('+', 1, 2)` $\implies$ Value Number 3.
 - $b + a$ produces key `('+', 2, 1)` $\implies$ Key not found! Creates redundant Value Number 4!
 
-### The Commutative Normalization Rule:
-For any symmetric operator $\oplus \in \{+, *, ==, \neq, \land, \lor\}$:
-$$\text{Signature} = \left( \oplus, \; \min(\text{val}_L, \text{val}_R), \; \max(\text{val}_L, \text{val}_R) \right)$$
-Because $\min(1, 2) = 1$ and $\max(1, 2) = 2$, both $a + b$ and $b + a$ generate the identical signature `('+', 1, 2)`. Modern compilers (LLVM, GCC) enforce this canonical sorting during GVN (Global Value Numbering).
+### Commutative normalization and its limits
 
----
+For an operation known to be commutative under the IR semantics, canonicalize its operand value numbers, for example by placing the smaller first. This lets `a+b` and `b+a` share a signature in a suitable pure arithmetic model.
 
----
-### Properties
+Do not reorder source-language short-circuit operands or computations with side effects. Floating-point, overflow, exception, and memory semantics must also be respected. The optimization acts on justified value identities, not arbitrary matching text.
 
-### Formal Proof of Correctness (Common Subexpression Detection)
+### What the method proves
 
-Why does this simple hash lookup guarantee mathematical equivalence for pure expressions?
+Under the deterministic pure-operation model, matching signatures imply equal expression values. The converse is not generally true: `x+0` and `x` can be equal mathematically while a purely structural algorithm assigns them different numbers. Additional algebraic rules can recognize more equalities.
 
-### Theorem:
-*Assuming deterministic, side-effect-free semantics, two subexpressions $e_1$ and $e_2$ evaluate to identical values for all variable assignments if and only if the Value-Number Algorithm assigns them the same value number:*
-$$\text{ValueNumber}(e_1) = \text{ValueNumber}(e_2) \iff \forall \sigma, \; [\![e_1]\!]_\sigma = [\![e_2]\!]_\sigma$$
+**Proof strategy:** induct on expression structure. Equal leaf value identities refer to the same input value. At an interior node, matching signatures give the same operator and equal child values by the induction hypothesis. Applying the same deterministic operator gives equal parent values. This proves sound reuse for the expressions recognized, rather than completeness for all semantic equivalences.
 
-### Proof by Structural Induction:
-Let height $h(e)$ be the height of expression $e$'s parse tree.
-
-1. **Base Case ($h = 0$, Leaves):**
-   - A leaf is either a constant literal $k$ or a variable identifier $x$.
-   - If $e_1 = x$ and $e_2 = x$, their signatures are identical: $(\mathbf{LEAF}, x)$. The first call creates value number $v$; the second call finds key $(\mathbf{LEAF}, x)$ in `signature_map` and returns $v$. Thus, $\text{val}(e_1) = \text{val}(e_2) = v$. Under any environment $\sigma$, $[\![x]\!]_\sigma = \sigma(x) = [\![x]\!]_\sigma$.
-   - If $e_1 = x$ and $e_2 = y$ ($x \neq y$), their signatures differ. The hash table allocates distinct indices $v_x \neq v_y$. Clearly, there exists $\sigma$ where $\sigma(x) \neq \sigma(y)$.
-   - The base case holds.
-
-2. **Inductive Hypothesis:**
-   - Assume that for all subexpressions of height $h < k$, $\text{ValueNumber}(u) = \text{ValueNumber}(w) \iff \forall \sigma, [\![u]\!]_\sigma = [\![w]\!]_\sigma$.
-
-3. **Inductive Step ($h = k$):**
-   - Consider two interior expressions $e_1 = l_1 \odot r_1$ and $e_2 = l_2 \otimes r_2$, where $h(e_1) \le k$ and $h(e_2) \le k$.
-   - The children $l_1, r_1, l_2, r_2$ all have height $< k$.
-   - **Forward Direction ($\impliedby$):**
-     - Suppose $\forall \sigma, [\![e_1]\!]_\sigma = [\![e_2]\!]_\sigma$.
-     - For free syntactic expressions, equality across all interpretations requires identical root operators ($\odot = \otimes$) and identical component values: $\forall \sigma, [\![l_1]\!]_\sigma = [\![l_2]\!]_\sigma$ and $[\![r_1]\!]_\sigma = [\![r_2]\!]_\sigma$.
-     - By the induction hypothesis, $\text{val}(l_1) = \text{val}(l_2) = v_L$ and $\text{val}(r_1) = \text{val}(r_2) = v_R$.
-     - When $e_1$ is processed, `get_node(op, v_L, v_R)` records signature $(\odot, v_L, v_R)$ and returns value number $V$.
-     - When $e_2$ is processed, its signature lookup key is $(\otimes, \text{val}(l_2), \text{val}(r_2)) = (\odot, v_L, v_R)$.
-     - This key is found in the hash map, returning the exact same value number $V$.
-   - **Reverse Direction ($\implies$):**
-     - Suppose $\text{ValueNumber}(e_1) = \text{ValueNumber}(e_2) = V$.
-     - A single value number $V$ in `node_array` corresponds to a unique record $\langle \mathbf{INTERIOR}, \text{op}, v_L, v_R \rangle$.
-     - Therefore, $e_1$ and $e_2$ must have matched the identical signature:
-       $$\odot = \otimes = \text{op}, \quad \text{val}(l_1) = \text{val}(l_2) = v_L, \quad \text{val}(r_1) = \text{val}(r_2) = v_R$$
-     - By the induction hypothesis, $\forall \sigma, [\![l_1]\!]_\sigma = [\![l_2]\!]_\sigma$ and $[\![r_1]\!]_\sigma = [\![r_2]\!]_\sigma$.
-     - By compositional denotational semantics:
-       $$[\![e_1]\!]_\sigma = [\![l_1]\!]_\sigma \odot [\![r_1]\!]_\sigma = [\![l_2]\!]_\sigma \otimes [\![r_2]\!]_\sigma = [\![e_2]\!]_\sigma$$
-4. By induction, the equivalence holds for all expression trees of any finite height. $\blacksquare$
-
----
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
+The code below is an expression DAG builder. To use it across assignments, maintain a separate mapping from variable names to their current value numbers and update that mapping on every definition. Memory loads additionally need a valid memory-state or aliasing model.
 
 ### The Value-Number Construction Algorithm
 
@@ -351,20 +90,6 @@ class ValueNumberDAGBuilder:
 
 ---
 
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 - **Time Complexity:**
@@ -376,75 +101,9 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ---
 
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### Concrete Execution Trace: Step-by-Step
 
@@ -483,39 +142,20 @@ Index | Type     | Op/Val | Left | Right | Mathematical Meaning
 
 ---
 
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Value-Number Method for DAG Construction on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+Hashing offers expected fast lookup, not guaranteed constant time in every implementation. Normalize commutative operands only when the language's operation and evaluation semantics allow it. [[DAG Construction and Local Optimization of Basic Blocks]] adds assignments and memory dependencies.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Abstract Syntax Tree Construction with SDDs]]
+- [[DAG Construction and Local Optimization of Basic Blocks]]
 
 ## Sources
 

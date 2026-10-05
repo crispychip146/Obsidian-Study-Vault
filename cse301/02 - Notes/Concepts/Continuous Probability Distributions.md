@@ -12,19 +12,13 @@ order: 9
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+For a variable modeled by a density, probability is area. A density may exceed one over a short interval while its total area remains one; that is perfectly valid. At any individual point the probability is zero, so interval probabilities are the meaningful questions.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Continuous Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Each common density encodes a different shape or mechanism. A uniform distribution gives equal density across a bounded interval. An exponential distribution models a waiting time with constant hazard. A normal distribution describes a symmetric bell-shaped quantity, specified by a center and a variance. Gamma distributions extend exponential waiting times, with shape and either rate or scale parameters.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Continuous Probability Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Check units: an exponential rate has units of inverse time, while its mean is time. In a gamma rate parameterization the mean is shape divided by rate; in a scale parameterization it is shape times scale. Writing the density or naming the convention avoids an otherwise easy reciprocal error.
 
 ## Definition
 
@@ -129,34 +123,6 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -167,26 +133,9 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
-
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+Here “continuous distribution” refers to the absolutely continuous, density-based distributions used in the course. In general probability theory, absence of point masses alone does not guarantee a density.
 
 ## Sources
 

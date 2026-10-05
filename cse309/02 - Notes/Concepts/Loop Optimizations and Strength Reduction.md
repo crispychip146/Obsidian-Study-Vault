@@ -12,67 +12,17 @@ order: 53
 
 ---
 
----
+## Building the idea
 
----
+Loops repeat work, so a small legal saving per iteration can accumulate. **Loop-invariant code motion** moves a computation whose value does not change, but must also preserve whether and when observable effects or exceptions occur. Hoisting a possibly trapping division into a preheader can change a zero-iteration execution.
 
----
+**Strength reduction** tracks a value incrementally. If i increases by c and t=a·i+b, then t changes by a·c. Initialize t consistently before the loop, and replace each repeated multiplication with the corresponding addition at the correct point.
 
----
+The proof is an invariant: t=a·i+b holds initially; updating i by c and t by a·c preserves it algebraically. [[Principal Sources of Code Optimization]] supplies the equivalence obligation, and [[Multi-Dimensional Array Addressing Formulas]] explains why address offsets often have this form.
 
-## Starting Point and the Problem
-
-In computer systems, the empirical **90/10 Rule** states:
-> *A computer program spends 90% of its execution time executing only 10% of its code—specifically, inside inner loops!*
-
-Optimizing straight-line code executed once at program startup delivers negligible user-visible impact. In contrast, removing even a **single instruction** or replacing an expensive ALU operation inside an inner loop executed 10,000,000 times saves tens of millions of CPU clock cycles!
-
-Loop optimization focuses on three primary transformations:
-1. **Loop-Invariant Code Motion (Hoisting):** Moving computations that yield the identical result in every iteration outside the loop.
-2. **Induction Variable Strength Reduction:** Replacing expensive CPU operations (multiplication) with cheaper operations (addition).
-3. **Induction Variable Elimination:** Completely eliminating redundant loop counter variables and their branch instructions.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-By establishing clear semantic rules and evaluation invariants, the compiler evaluates attributes, manages memory layouts, or optimizes instruction sequences.
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Loop Optimizations and Strength Reduction** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Removing i afterward is a separate step: all its uses, including the termination test and any live-out value, must be replaced or preserved.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Induction Variables: Basic vs. Derived
 
@@ -131,14 +81,6 @@ Now, the instruction $i = i + 1$ has zero readers! **Dead Code Elimination delet
 3. Physical register holding `i` $\longrightarrow$ **Freed for other variables**, preventing register spilling!
 
 ---
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
 
 ### Loop-Invariant Code Motion (Hoisting)
 
@@ -199,181 +141,15 @@ $$t_k = t_{k-1} + (c_1 \times c) \quad (\text{in loop body})$$
 
 ---
 
----
-### Related Concepts
+## What to carry forward
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+Check overflow and numeric semantics before using an algebraic equivalence as a compiler transformation. [[Quicksort Partition Loop Complete Optimization Example]] shows how several individually justified passes combine.
 
----
-### Prerequisites
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Principal Sources of Code Optimization]]
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Quicksort Partition Loop Complete Optimization Example]]
 
 ## Sources
 

@@ -12,25 +12,13 @@ order: 51
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+After specifying a prior and observing data, a credible interval contains a stated amount of posterior probability for the parameter. A 95% interval satisfies $P(\theta\in C\mid\text{data})=0.95$ under that model.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Credible Intervals, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+There are several ways to choose it. An equal-tailed interval leaves 2.5% posterior probability in each tail. A highest-density region keeps the most dense parameter values until its total mass reaches 95%; it need not be a single interval for a multimodal posterior. These constructions can differ when the posterior is asymmetric.
 
----
-
-## Developing the Idea
-
-A credible interval provides the exact answer to the intuitive question that most non-statisticians mistakenly believe a frequentist confidence interval answers:
-
-> *"Given the data I actually observed, what is a range of values that contains the unknown parameter with 95% probability?"*
-
-Because Bayesian statistics treats $\theta$ as a random variable conditional on the observed data $\mathbf{x}$, we can integrate the posterior density $f(\theta \mid \mathbf{x})$ directly between two endpoints $[a, b]$ to calculate the exact probability that $\theta \in [a, b]$.
-
----
-
----
+The probability statement is conditional on the model, prior, and observations. It does not automatically imply 95% repeated-sample coverage for every fixed true parameter. Conversely, a frequentist confidence procedure does not by itself assign posterior probability to its realized interval.
 
 ## Definition
 
@@ -41,8 +29,6 @@ $$P(\theta \in C \mid \mathbf{X} = \mathbf{x}) = \int_C f(\theta \mid \mathbf{x}
 For a vector parameter $\boldsymbol{\theta} \in \mathbb{R}^d$, $C$ is referred to as a **credible set** or **posterior region**.
 
 Common choices of significance level $\alpha$ include $\alpha = 0.05$ (a $95\%$ credible interval) and $\alpha = 0.10$ (a $90\%$ credible interval).
-
----
 
 ---
 
@@ -88,20 +74,6 @@ where $k$ is the largest constant chosen such that $\int_{C_{\text{HPD}}} f(\the
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
 ## Important Properties and Why They Hold
 
 ### Asymptotic Agreement with Frequentist Intervals (Bernstein-von Mises Theorem)
@@ -115,16 +87,10 @@ As the sample size $n \to \infty$:
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - Setting equal-tail cutoffs on a highly skewed posterior (such as an exponential or heavily skewed Beta) and expecting it to yield the shortest interval (the HPD region is shorter).
 - Believing that credible intervals require large samples (unlike frequentist Wald intervals, Bayesian credible intervals are exact for any sample size $n$, even $n = 1$, provided the prior and likelihood models are correct).
-
----
 
 ---
 
@@ -150,30 +116,13 @@ $$C = \left[\bar{\theta} - 1.96\tau, \quad \bar{\theta} + 1.96\tau\right]$$
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Confidence Intervals and Confidence Sets]] describes a different guarantee. Use posterior quantiles or a stated numerical method rather than assuming every posterior is symmetric and normal.
 
-- [[Bayesian Inference]]
+## Related notes
+
 - [[Confidence Intervals and Confidence Sets]]
-- [[Normal-Normal Conjugate Updating Formula]]
-- [[Beta-Binomial Conjugate Updating Formula]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

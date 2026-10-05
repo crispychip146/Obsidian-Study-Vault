@@ -12,8 +12,6 @@ order: 75
 
 ---
 
----
-
 ## Problem
 
 Suppose whether it rains today depends on the weather conditions of the **past two days**:
@@ -23,8 +21,6 @@ Suppose whether it rains today depends on the weather conditions of the **past t
 - If it did not rain either day, it will rain tomorrow with probability $0.2$.
 
 Given that it rained both yesterday and today, what is the probability that it rains the day after tomorrow?
-
----
 
 ---
 
@@ -45,8 +41,6 @@ Initial condition: We start in **State 0** ($X_0 = 0$, meaning it rained both ye
 
 ---
 
----
-
 ## Required
 
 1. Formulate the $4 \times 4$ one-step transition probability matrix $P$.
@@ -55,15 +49,13 @@ Initial condition: We start in **State 0** ($X_0 = 0$, meaning it rained both ye
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Today's weather alone is not enough because tomorrow depends on yesterday too. Store the ordered pair (today, yesterday). After observing tomorrow, the new pair is (tomorrow, today), so the second coordinate is inherited from the old first coordinate.
+
+That shift explains the zero entries in the four-state matrix: not every pair can follow every other pair. From (rain, rain), rain tomorrow leads back to (rain, rain), while dry tomorrow leads to (dry, rain).
+
+To find rain the day after tomorrow, split by tomorrow's weather. A rainy tomorrow has probability 0.7 and then another rain has probability 0.7. A dry tomorrow has probability 0.3 and then rain has probability 0.4. Add the disjoint routes: $0.7(0.7)+0.3(0.4)=0.61$. In the two-step state distribution, sum all states whose first coordinate is rain.
 
 ### Concepts Used
 
@@ -72,8 +64,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[Stochastic Process]]
 
 ---
-### Solution
-
 ### Step 1: Construct the $4 \times 4$ Transition Probability Matrix
 Notice the temporal shift rule:
 If today's state is $(A, B)$ (meaning today $= A$, yesterday $= B$), then tomorrow's state must be $(\text{Tomorrow}, A)$.
@@ -160,8 +150,6 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 
 ---
 
----
-
 ## Result
 
 - Two-step transition probabilities from State 0:
@@ -171,14 +159,10 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 
 ---
 
----
-
 ## Why This Works
 
 - Systems whose dynamics depend on a finite window of past history of length $k$ can always be modeled as a first-order Markov chain by defining the state as a $k$-tuple of consecutive values.
 - In this expanded state space, each transition automatically preserves continuity (the second element of the past tuple becomes the first element of the next tuple), ensuring the Markov property holds strictly.
-
----
 
 ---
 
@@ -190,23 +174,13 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Stochastic Process]] treats state choice as part of modeling. Enlarging the state restores a first-order Markov description without claiming that the underlying weather lost its two-day dependence.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Markov Chain]]
-- [[Chapman-Kolmogorov Equations]]
-- [[Weather Forecasting Markov Chain Example]]
-
----
-
----
+- [[Stochastic Process]]
 
 ## Sources
 

@@ -12,10 +12,9 @@ order: 5
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3b, 2018 Q1a, 2020 Q4a)**
-> **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, verbatim repeated!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q3b, 2018 Q1a, 2020 Q4a)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **The 5 xv6/UNIX Process States & Transitions (2018 Q1a):**
 >    - **EMBRYO:** Memory and PCB allocated, but not yet fully initialized or runnable.
 >    - **RUNNABLE (Ready):** Ready to execute, waiting in the ready queue for CPU time.
@@ -28,26 +27,15 @@ order: 5
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Follow a process that asks for a disk read. Before the request it is running. Once it needs unavailable data, giving it more CPU time cannot help; it is **blocked**. When the read completes, it can make progress again, but another process might currently own the CPU. It becomes **ready** before the scheduler dispatches it.
 
-In any modern computing system, there are typically hundreds or thousands of processes configured, but only a small number of physical CPU cores (e.g. 4 to 16 cores).
+That distinction is the heart of the state diagram: **ready means waiting for CPU time; blocked means waiting for a condition that CPU time alone cannot satisfy.** Preemption sends a running process back to ready because it still has executable work. Blocking sends it to a wait queue because something necessary is missing.
 
-We want the system to multiplex these cores fairly and efficiently so that all active programs make progress, interactive applications respond instantly to user input, and batch computations utilize spare cycles. The central obstacle is that processes have radically different immediate needs: some are actively computing, some are waiting for slow disk or network I/O, and others are waiting for timer alarms.
+Read each arrow as an event with a reason. Dispatch grants execution. A timer interrupt may lead to preemption. A blocking request suspends eligibility. An event completion restores eligibility. Termination ends execution, though the kernel may retain exit information until it is collected.
 
----
-
-## Developing the Idea
-
-The operating system structures process management around a formal **Finite State Machine (FSM)**: the **Process Lifecycle**.
-
-By categorizing every process into one of several well-defined states, the OS CPU scheduler only ever considers processes that are genuinely ready to run:
-- A process waiting for disk data cannot consume CPU cycles even if the CPU is completely idle.
-- When an I/O operation completes, a hardware interrupt signals the kernel, transitioning that process from Blocked back to Ready.
-- Under memory pressure, the OS extends this model with **Suspended States**, paging out entire processes to secondary storage to reclaim physical RAM frames.
-
----
+[[Process Concepts and Memory Layout]] describes what the process owns. The lifecycle adds what it can do at this instant. A process's state is therefore neither a property of its executable nor a permanent description of its behavior.
 
 ## Definition
 
@@ -59,8 +47,6 @@ The standard representation is the **Five-State Process Model**:
 3. **Running:** The process's machine instructions are currently being fetched, decoded, and executed on a physical CPU core.
 4. **Waiting (Blocked):** The process cannot execute even if the CPU were completely free, because it is awaiting an asynchronous external event (e.g., disk I/O completion, a network packet, user keyboard input, a semaphore signal, or a child process termination).
 5. **Terminated (Exit):** The process has finished executing its code (or was killed), its memory and file descriptors are released, but its exit status remains in the process table until its parent collects it.
-
----
 
 ---
 
@@ -102,8 +88,6 @@ stateDiagram-v2
 
 ---
 
----
-
 ### The Extended 7-State Model (Suspended States)
 
 When physical RAM is heavily overcommitted (thrashing), the OS must free up memory by swapping entire processes out of physical RAM and onto secondary storage (the swap partition/file). This introduces two **Suspended States**:
@@ -122,8 +106,6 @@ flowchart TD
 
 ---
 
----
-
 ## Example
 
 Tracing a text editor process:
@@ -136,24 +118,11 @@ Tracing a text editor process:
 
 ---
 
-## Technical Details
-
-See related modules for microarchitectural implementation details.
-
----
-
 ## Important Properties and Why They Hold
 
 - **Strict Invariance of Transitions:** A process cannot jump directly from Blocked to Running; it *must* first enter the Ready state so the scheduler can evaluate priorities fairly.
 - **Uniprocessor Running Uniqueness:** On a system with $C$ CPU cores, at most $C$ processes can occupy the Running state simultaneously at any instant.
 - **State Determinism:** Every state transition is triggered either by a hardware interrupt (timer, I/O device) or an explicit software trap/system call.
-
----
-
-## Common Mistakes
-
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
 
@@ -168,27 +137,15 @@ See related modules for microarchitectural implementation details.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+The five-state diagram is a model. Kernel implementations use their own state names and may dispatch a just-woken task immediately; conceptually it still becomes eligible before running. [[CPU Scheduling Principles and Criteria]] decides among eligible tasks, while [[Process Control Block and Context Switching]] explains the mechanics of resumption.
 
-- [[Process Control Block and Context Switching]]
-- [[CPU Scheduling Principles and Criteria]]
-- [[CPU Multiprogramming Utilization Formula]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Process Concepts and Memory Layout]]
-
----
-
-## Problems
-
-- [[Problem — Fork Execution Tree and Process Tracing]]
-
----
+- [[CPU Scheduling Principles and Criteria]]
+- [[Process Control Block and Context Switching]]
 
 ## Sources
 

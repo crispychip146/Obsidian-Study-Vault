@@ -12,8 +12,6 @@ order: 47
 
 ---
 
----
-
 ## Problem
 
 We trace the exact register allocation example presented in the KMS lecture slides (Slides 368–425).
@@ -51,27 +49,15 @@ Sorted by starting point: `[a, b, c, d, e, f, g]`.
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+Treat the supplied live intervals as the input to this allocation trace. They use a particular program-point convention; deriving them independently from textual instruction numbers would require stating that convention and control-flow assumptions first.
+
+Run [[Linear Scan Register Allocation Algorithm]] once with four registers, then again with two. At each interval's start, expire finished intervals, list freed registers, and assign or choose a spill. Keep active intervals sorted by end so the latest-finishing candidate is visible.
+
+The difference between runs is capacity, not a change to the input lifetimes. With fewer registers, more intervals overlap than can be held, and the spill heuristic chooses which required value leaves register storage.
+
+An expiration releases ownership only when the endpoint convention permits it. An interval ending at the next interval's start may still conflict under closed intervals, so do not silently switch conventions during the trace.
 
 ### Allocation Simulation with $R = 4$ Registers: $\{ R_0, R_1, R_2, R_3 \}$
 
@@ -139,8 +125,6 @@ Now let us trace Linear Scan with only $R = 2$ registers: $\{ R_0, R_1 \}$.
 
 ---
 
----
-
 ## Result
 
 | Variable | Live Interval | Allocation Status | Assigned Physical Register |
@@ -155,33 +139,13 @@ Now let us trace Linear Scan with only $R = 2$ registers: $\{ R_0, R_1 \}$.
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+Check that no overlapping allocated intervals share a register. A table of assignments is valid only with spill actions preserving evicted values and later uses accessing their assigned storage.
 
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Linear Scan Register Allocation Algorithm]]
 
 ## Sources
 

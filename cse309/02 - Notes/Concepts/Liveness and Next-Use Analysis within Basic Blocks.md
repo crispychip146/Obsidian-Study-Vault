@@ -12,83 +12,17 @@ order: 35
 
 ---
 
----
+## Building the idea
 
----
+A value is **live** at a point when some possible continuation uses that value before overwriting it. **Next use** identifies the next relevant read in the chosen local instruction order. This information tells a generator which register contents can be discarded.
 
----
+Scan backward because the suffix has already been analyzed when you reach an earlier instruction. For `x=y+z`, the assignment kills the incoming value of x, while the right-hand-side uses require y and z immediately before the instruction. In set form, `live_before = uses ∪ (live_after - defs)`.
 
----
+Record the after-state for the instruction, then compute its before-state. This order matters for `x=x+1`: the new x is defined, but the old x is read. Applying uses after the definition kill restores that required incoming value.
 
-## Starting Point and the Problem
-
-Imagine you are the compiler generating machine code for a CPU with only 4 physical registers ($R_0, R_1, R_2, R_3$).
-
-You are compiling the instruction:
-$$t = a + b$$
-All 4 registers currently hold values:
-- $R_0$ holds variable $x$
-- $R_1$ holds variable $y$
-- $R_2$ holds variable $z$
-- $R_3$ holds variable $w$
-
-To perform the addition, you must place $t$ into a register. You have no choice: **you must kick one variable out of silicon back into slow RAM (spilling)**.
-
-Which variable should you spill?
-1. **The Liveness Test:** Is the variable currently in the register *ever going to be read again* in the future? If $x$ is never read again (it is **dead**), you can overwrite $R_0$ instantly with zero memory writes! If you had chosen $y$, and $y$ was still needed, you would have burned memory bus cycles writing $y$ to RAM and reading it back later!
-2. **The Next-Use Test (Belady's Principle):** If all 4 variables are alive, which one should you evict? According to László Bélády's optimal replacement algorithm, you should evict the variable **whose next read occurs farthest in the future**!
-
-To make optimal local register allocation choices, the code generator must compute **Liveness** and **Next-Use** for every variable at every single instruction.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Let $i$ be an intermediate instruction of the form:
-$$i: \quad x = y + z$$
-
-1. **Definition of Variable Use:** An instruction $j$ **uses** variable $v$ if $v$ appears as an argument on the right-hand side of $j$ (e.g., $j: w = v * 2$).
-2. **Definition of Variable Definition:** Instruction $i$ **defines** variable $x$ if it writes a new value into $x$.
-3. **Liveness:** A variable $v$ is **live** at statement $i$ if there exists an execution path starting immediately after statement $i$ along which the value of $v$ is used at some subsequent statement $j$ *before* any intervening statement redefines $v$. If no such use exists, $v$ is **dead** at statement $i$.
-4. **Next-Use:** The **next-use** of variable $v$ at statement $i$ is the instruction index of the *earliest* statement $j > i$ that reads $v$ before $v$ is redefined.
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Liveness and Next-Use Analysis within Basic Blocks** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Basic Blocks and Control Flow Graphs]] supplies the straight-line region. Live-out assumptions come from surrounding code or global analysis; user variables are not automatically all live and temporaries are not automatically all dead.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Backward Scan: Traveling Against the Arrow of Time
 
@@ -109,8 +43,6 @@ flowchart BT
 ```
 
 ---
-### The Backward Scanning Algorithm
-
 ### Step 1: Initialization at Block Exit
 Inspect the symbol table at the exit boundary of basic block $B$:
 - **User / Named Variables (`a, b, x`):** Assume they are **live** at block exit (since other basic blocks in the CFG might read them later), with next-use set to **none**.
@@ -147,16 +79,6 @@ For each instruction $i: x = y + z$, scanning from the last instruction of $B$ b
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-### Formal Proof: Invariant Correctness of Backward Scan
-
 ### Theorem:
 *At the instant the backward scan reaches statement $i$, the symbol table correctly reflects the liveness and next-use of every variable at the program point immediately preceding statement $i$.*
 
@@ -176,145 +98,9 @@ Let the basic block contain $N$ instructions: $\langle I_1, I_2, \dots, I_N \ran
 
 ---
 
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### Comprehensive Trace: 3-Instruction Block
 
@@ -368,39 +154,14 @@ Symbol Table: { a: (L, -),  b: (L, -),  c: (L, -),  d: (L, -),  t1: (D, -),  t2:
 
 ---
 
----
-### Exam Relevance
+## What to carry forward
 
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
+[[A Simple Code Generator Algorithm]] uses the resulting information to preserve needed values and reuse dead registers. Specify whether each table row describes the state before or after its instruction; otherwise two correct conventions can appear contradictory.
 
----
+## Related notes
 
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
 - [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[A Simple Code Generator Algorithm]]
 
 ## Sources
 

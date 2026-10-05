@@ -12,8 +12,6 @@ order: 7
 
 ---
 
----
-
 ## Problem
 
 Imagine building an interactive mathematical calculator or an interpreter for a language like Python or C. When a user enters:
@@ -30,27 +28,15 @@ A **Syntax-Directed Definition (SDD)** solves this by marrying the context-free 
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+The expression `(2+3)*4+7` asks for grouping before arithmetic. The E/T/F grammar encodes that grouping: E handles addition, T multiplication, and F numbers or parenthesized expressions.
+
+Start at the leaves, where the lexer supplies numeric values. The inner addition combines 2 and 3 into 5. Parentheses pass that value as one factor. Multiplication combines 5 and 4 into 20, then the outer addition combines 20 and 7 into 27. Each result belongs to a specific tree occurrence.
+
+[[S-Attributed and L-Attributed SDDs]] explains why this leaf-to-root schedule is legal: a parent's rule reads child values that are already available. The dependency graph documents that requirement; it is not a second, different parse tree.
+
+To test that the grammar matters, remove the parentheses. The tree for `2+3*4+7` computes multiplication first and yields 21. The changed result follows from changed grouping, not from a different addition rule.
 
 ### Formal Grammar and Semantic Rules (The SDD)
 
@@ -239,39 +225,14 @@ Because every edge flows monotonically upward, evaluation is deterministic, robu
 
 ---
 
----
+## What to carry forward
 
-## Result
+Annotate each occurrence, including pass-through E/T/F nodes. A correct root value alone can hide an incorrect tree. [[Problem — Desk Calculator SDD and Annotated Parse Tree]] adds right-associative exponentiation to test the same skill.
 
-The compilation pass finishes with verified intermediate representations and correct register assignments.
+## Related notes
 
----
-
-## Why This Works
-
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
-
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[S-Attributed and L-Attributed SDDs]]
+- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
 
 ## Sources
 

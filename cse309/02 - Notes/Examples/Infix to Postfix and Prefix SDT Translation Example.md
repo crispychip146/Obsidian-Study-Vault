@@ -12,33 +12,21 @@ order: 8
 
 ---
 
----
-
 ## Problem
 
 Demonstrate and trace the compiler execution of Infix to Postfix and Prefix SDT Translation Example.
 
 ---
 
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+For `a+b*c`, postfix output is `a b c * +`: emit an operator after its operands. Prefix is `+ a * b c`: emit the parent operator before the operand representations. Both encode the same expression tree.
+
+A bottom-up parser naturally learns child translations before reducing their parent, so appending an operator fits postfix streaming. Prefix creates a timing problem: by the time an enclosing operator is recognized, an unbuffered output stream may already contain operand text that should follow it.
+
+The solution is to retain structure or buffered translations. An AST can be traversed in preorder for prefix and postorder for postfix. Alternatively, synthesized strings combine child strings in the required order. [[Abstract Syntax Tree Construction with SDDs]] provides that structural route.
+
+The limitation is specifically immediate, irreversible output with no buffering or rearrangement. It does not mean prefix translation is impossible, nor that stack virtual machines literally execute printed postfix strings as their instruction format.
 
 ### The Real-World Engineering Motivation
 
@@ -143,8 +131,6 @@ This is NOT prefix! It is still infix!
 Why? Because the action for the outer `+` was delayed until after $E_1$ (which is $9 - 5$) had already completed! The `9` and `5` were already printed before the `+` was ever encountered.
 
 ---
-### Formal Proof: Impossibility of Streaming Infix-to-Prefix Translation
-
 ### Theorem:
 *No deterministic one-pass compiler with finite lookahead $k$ can translate arbitrary infix expressions into prefix notation using streaming output side-effects (i.e., without memory buffering or AST construction).*
 
@@ -229,39 +215,13 @@ The outer `"+"` is correctly prepended to the entire accumulated left substring.
 
 ---
 
----
+## What to carry forward
 
-## Result
+Distinguish information availability from output order. A tree or buffer separates the two. Check the expression's precedence first, then choose the traversal that produces the desired representation.
 
-The compilation pass finishes with verified intermediate representations and correct register assignments.
+## Related notes
 
----
-
-## Why This Works
-
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
-
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Abstract Syntax Tree Construction with SDDs]]
 
 ## Sources
 

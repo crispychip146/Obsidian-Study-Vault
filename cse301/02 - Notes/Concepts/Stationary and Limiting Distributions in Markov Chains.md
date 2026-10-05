@@ -12,31 +12,13 @@ order: 71
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A stationary distribution $\pi$ satisfies $\pi P=\pi$. If the chain starts with this distribution, one step preserves it and every later marginal remains the same. That is a balance property, not by itself a statement that every initial distribution converges to it.
 
-- **Predicting Steady-State Performance:** In queuing models, web browsing (PageRank), and computer systems, we need to know the steady-state load, average buffer occupancy, or server utilization without simulating infinitely many individual transitions.
-- **Handling Asymptotic Behavior:** Powers of transition matrices $P^n$ become computationally prohibitive for large $n$. Finding $\pi$ reduces the limit of matrix powers to solving a system of linear equations.
-- **MCMC Sampling:** Algorithms like Metropolis-Hastings construct a Markov chain whose unique stationary distribution matches a desired complex target distribution.
+A limiting distribution describes what happens after many steps from an initial state. A finite irreducible chain has a unique stationary distribution. Aperiodicity additionally gives convergence of its step-by-step distributions to that stationary distribution. A two-state chain that alternates deterministically has stationary weights $(1/2,1/2)$ but oscillates forever when started at one state.
 
----
-
----
-
-## Developing the Idea
-
-1. **Forgetting the Past:** Over long time horizons, the chain "forgets" where it started. Whether it began in state 0 or state 5, the probability of finding it in state $j$ after millions of steps approaches $\pi_j$.
-2. **Self-Consistent Equilibrium:** Imagine pouring a fluid across the state graph. At each step, a fraction $P_{ij}$ of the fluid at node $i$ flows along the edge to node $j$. If the distribution of fluid is $\pi$, the amount leaving each node is exactly replaced by the inflows from neighboring nodes. Applying one more transition leaves the distribution unchanged: $\pi P = \pi$.
-3. **Long-Run Fraction of Time:** $\pi_j$ represents the proportion of time the process spends in state $j$ over an infinite horizon:
-   $$\pi_j = \lim_{N \to \infty} \frac{1}{N} \sum_{n=1}^N \mathbf{1}_{\{X_n = j\}}$$
-4. **Mean Return Time:** If you are currently in state $j$, the expected number of steps until the chain returns to state $j$, denoted $\mu_{jj}$, is inversely proportional to its stationary probability:
-   $$\pi_j = \frac{1}{\mu_{jj}}$$
-   (Rare states have tiny $\pi_j$ and huge return times; frequently visited states have large $\pi_j$ and short return times).
-
----
-
----
+Reducible chains can have several stationary distributions, with the eventual outcome depending on which closed class is reached. For countably infinite chains, positive recurrence enters the existence of a normalizable stationary distribution. Always state the conditions that connect stationarity and convergence.
 
 ## Definition
 
@@ -61,8 +43,6 @@ In matrix notation, treating $\pi$ as a row vector:
 $$\pi P = \pi, \quad \pi \mathbf{1} = 1$$
 
 where $\mathbf{1}$ is a column vector of ones.
-
----
 
 ---
 
@@ -127,37 +107,12 @@ To find the stationary / limiting distribution for an $m$-state chain:
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Forgetting the Normalization Condition ($\sum \pi_j = 1$):** Trying to solve $\pi(P - I) = 0$ directly without $\sum \pi_j = 1$, yielding the trivial all-zero vector $\pi = 0$.
 - **Not Dropping a Redundant Balance Equation:** Attempting to solve all $m$ balance equations plus the normalization equation simultaneously with standard inversion without recognizing linear dependence.
 - **Treating Periodic Chains as having Limiting Probabilities:** Stating that $\lim_{n \to \infty} P_{ij}^n = \pi_j$ when the chain has period $d \ge 2$. (Long-run average time proportions still equal $\pi_j$, but point-wise limit $\lim P_{ij}^n$ does not exist).
 - **Writing $\pi$ as a Column Vector in $P \pi = \pi$:** In Markov chains, $\pi$ is a **row vector** on the left: $\pi P = \pi$. Writing $P \pi = \pi$ solves for right eigenvectors (which is simply the all-ones vector $\mathbf{1}$, since $P \mathbf{1} = \mathbf{1}$).
-
----
 
 ---
 
@@ -196,36 +151,13 @@ In CSE301 examinations:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Weather Forecasting Markov Chain Example]] satisfies the finite irreducible aperiodic conditions. Solving the balance equations alone does not establish convergence for every chain.
 
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-- [[Chapman-Kolmogorov Equations]]
+## Related notes
+
 - [[Weather Forecasting Markov Chain Example]]
-- [[Hardy-Weinberg Law Markov Chain Example]]
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-
----
-
----
-
-## Problems
-
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
----
 
 ## Sources
 

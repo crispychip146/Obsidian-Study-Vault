@@ -12,37 +12,13 @@ order: 35
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A parameter describes the population; an estimator is a rule that uses a sample to guess it. Before collecting data, $\hat\theta_n$ is random because the sample is random. After plugging in the observed sample, the estimate is a specific number.
 
-In the real world, we rarely or never observe an entire population:
-- We cannot measure the exact blood pressure of every human on Earth.
-- We cannot test every microchip produced by a semiconductor fab until destruction.
-- We cannot observe infinite flips of a coin.
+For a Bernoulli population, $p$ is the unknown success probability and the sample proportion is one estimator of it. Its quality cannot be judged from one lucky dataset alone. We examine its behavior across repeated samples: bias asks whether its average target is correct, variance asks how much it fluctuates, and mean squared error combines both.
 
-Instead, we collect a finite random sample of size $n$. Point estimation provides a principled mathematical framework for extracting a single optimal guess of the underlying true data-generating parameter from noisy, incomplete observations.
-
----
-
----
-
-## Developing the Idea
-
-Imagine you are an archer shooting arrows at a hidden bullseye ($\theta$):
-- Each sample dataset $X_1, \dots, X_n$ represents one shot.
-- Because each sample contains different random data points, your arrow lands at a different spot $\hat{\theta}_n$ each time.
-- If you repeat the experiment many times with new datasets, you generate a scatter of arrow marks.
-
-Point estimation asks two intuitive questions:
-1. **Is your aim centered on the bullseye?** If your arrows cluster symmetrically around the bullseye without systematic drift, your estimator is **unbiased**. If your arrows consistently veer to the upper-right, your estimator is **biased**.
-2. **How tightly clustered are your shots?** Even if you are aimed at the center, do your arrows scatter all over the target (high standard error) or land in a tight cluster (low standard error)?
-
-A great estimator has both **zero bias** (centered on truth) and **low standard error** (tightly clustered).
-
----
-
----
+Choosing an estimator also involves a loss function. Squared error penalizes large misses strongly, while absolute error or asymmetric costs can favor another rule. [[Bias-Variance Decomposition]] explains squared-error risk; it does not prove that one estimator is best for every purpose.
 
 ## Definition
 
@@ -60,11 +36,7 @@ A crucial distinction in statistical theory:
 
 ---
 
----
-
 ## How It Works
-
-### How It Works
 
 Point estimation evaluates estimators using several fundamental statistical metrics:
 
@@ -107,17 +79,7 @@ $$\text{MSE}(\hat{\theta}_n) = \text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
-
-### Technical Details
 
 ### Point Estimation Targets
 Point estimation applies far beyond scalar distribution parameters:
@@ -131,18 +93,7 @@ Unbiasedness is often considered an overrated property in modern statistics. An 
 
 ---
 
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Confusing parameter $\theta$ with estimator $\hat{\theta}_n$:** 
    Treating $\theta$ as a random variable. Under classical frequentist inference, $\theta$ is a fixed number. $\hat{\theta}_n$ is the random variable because it changes from sample to sample.
@@ -150,8 +101,6 @@ Unbiasedness is often considered an overrated property in modern statistics. An 
    Standard deviation $\sigma$ measures the spread of individual data points in the population. Standard error $\text{se} = \sigma / \sqrt{n}$ measures the spread of the sample average $\hat{\theta}_n$ across multiple datasets.
 3. **Believing unbiasedness implies consistency:**
    An estimator can be completely unbiased for every $n$ yet fail to converge to the truth (e.g., ignoring all data except the first observation: $\hat{\mu} = X_1$).
-
----
 
 ---
 
@@ -189,37 +138,14 @@ In exam problems, you will typically be asked to:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+An estimate should usually be accompanied by a measure of uncertainty. [[Confidence Intervals and Confidence Sets]] extends a point guess into a procedure with a stated coverage property.
 
-- [[Estimator Consistency and Convergence]]
+## Related notes
+
 - [[Bias-Variance Decomposition]]
 - [[Confidence Intervals and Confidence Sets]]
-- [[Maximum Likelihood Estimation]]
-- [[Bayesian Inference]]
-
----
-
----
-
-## Prerequisites
-
-- [[Stochastic Process]] (Random Variables, Expectation, Variance)
-- Linearity of Expectation and Properties of Variance
-
----
-
----
-
-## Problems
-
-- [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
-- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
----
-
----
 
 ## Sources
 

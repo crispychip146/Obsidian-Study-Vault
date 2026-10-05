@@ -12,8 +12,6 @@ order: 55
 
 ---
 
----
-
 ## Problem
 
 A clinical trial evaluates an experimental drug against a standard control treatment:
@@ -30,15 +28,11 @@ $$\tau = g(p_1, p_2) = p_2 - p_1$$
 
 ---
 
----
-
 ## Given
 
 - Control data: $n_1 = 50, X_1 = 30 \implies X_1 \sim \text{Binomial}(n_1, p_1)$
 - Treatment data: $n_2 = 50, X_2 = 40 \implies X_2 \sim \text{Binomial}(n_2, p_2)$
 - Independent priors: $f(p_1, p_2) = f(p_1)f(p_2) = 1 \cdot 1 = 1$ on $[0, 1] \times [0, 1]$
-
----
 
 ---
 
@@ -50,15 +44,13 @@ $$\tau = g(p_1, p_2) = p_2 - p_1$$
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+We want uncertainty about a difference, so retain uncertainty in both probabilities. Independent flat priors and independent group data give $p_1\mid\text{data}\sim\operatorname{Beta}(31,21)$ and $p_2\mid\text{data}\sim\operatorname{Beta}(41,11)$.
+
+Draw one value from each posterior and subtract to get a possible $\tau=p_2-p_1$. Repeating that pairwise draw approximates the posterior distribution of the difference. Its sample mean estimates the posterior mean, its 2.5% and 97.5% quantiles give an equal-tailed interval, and the fraction of positive draws estimates $P(\tau>0\mid\text{data})$.
+
+The posterior mean is available exactly by linearity: $41/52-31/52=10/52\approx0.1923$, a difference of 19.23 percentage points. A normal approximation to the difference gives another useful summary, but it must be labeled an approximation rather than a simulated exact posterior quantile or probability. Monte Carlo results also have sampling error and depend on the number of draws.
 
 ### Concepts Used
 
@@ -68,8 +60,6 @@ Identify the random variables, state the conditional distributions, select the a
 - Monte Carlo simulation of posterior distributions
 
 ---
-### Solution
-
 ### Step 1: Joint and Marginal Posterior Distributions
 Because the trials are conducted independently and the priors are independent, the joint likelihood factorizes:
 $$L(p_1, p_2) = L_1(p_1) \cdot L_2(p_2) = \left[ p_1^{X_1} (1 - p_1)^{n_1 - X_1} \right] \cdot \left[ p_2^{X_2} (1 - p_2)^{n_2 - X_2} \right]$$
@@ -133,21 +123,17 @@ We can verify the simulation analytically:
    $$\text{Var}(\tau \mid \text{data}) = \text{Var}(p_2) + \text{Var}(p_1) \approx 0.00315 + 0.00454 = 0.00769$$
    $$\text{SD}(\tau \mid \text{data}) = \sqrt{0.00769} \approx 0.0877$$
 5. **Posterior Probability that Treatment is Superior:**
-   Because both Beta distributions are unimodal and moderately sized ($n = 50$), the difference $\tau$ is extremely well approximated by a Gaussian distribution $N(0.1923, 0.0877^2)$:
+   Because both Beta distributions are unimodal and moderately sized ($n = 50$), we can compare the difference $\tau$ with a Gaussian approximation $N(0.1923, 0.0877^2)$:
    $$P(\tau > 0 \mid \text{data}) \approx P\left(Z > \frac{0 - 0.1923}{0.0877}\right) = P(Z > -2.19) = \Phi(2.19) \approx 0.9857 \quad (98.57\%)$$
-
----
 
 ---
 
 ## Result
 
 - Marginal posteriors: $p_1 \sim \text{Beta}(31, 21)$ and $p_2 \sim \text{Beta}(41, 11)$.
-- Posterior mean of treatment benefit: $\hat{\tau}_{\text{Bayes}} \approx +19.23\%$.
-- $95\%$ Credible Interval: $0.1923 \pm 1.96(0.0877) \implies [0.0204, 0.3642]$ (strictly positive).
-- Probability that treatment outperforms control: **$98.57\%$**.
-
----
+- Posterior mean of treatment benefit: $\hat{\tau}_{\text{Bayes}} \approx0.1923$, or 19.23 percentage points.
+- $95\%$ interval from a **normal approximation** to the posterior difference: approximately $[0.0204,0.3642]$. This is not an exact beta-difference interval or a reported Monte Carlo quantile.
+- Normal-approximation posterior probability that treatment outperforms control: about **$98.57\%$**. Exact integration or a specified simulation can refine this approximation.
 
 ---
 
@@ -157,30 +143,21 @@ In frequentist statistics, evaluating a non-linear or multi-parameter hypothesis
 
 ---
 
----
+## A numerical check beyond the normal approximation
 
-## Common Mistakes
+Under the specified independent beta posteriors, the difference CDF is
 
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
+$$F_\tau(t)=\int_0^1 f_{\operatorname{Beta}(31,21)}(x)F_{\operatorname{Beta}(41,11)}(x+t)\,dx,$$
 
----
+where the second CDF is zero below zero and one above one. Numerical quadrature and inversion give an equal-tailed 95% posterior interval of approximately $(0.01842,0.36197)$ and $P(\tau>0\mid\text{data})\approx0.98477$. These are numerical integration results, separate from the normal approximation and from a Monte Carlo run. The exact posterior mean is $10/52$ and its standard deviation is approximately 0.08769.
 
-## General Method
+## What to carry forward
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+[[Credible Intervals]] describes the posterior interpretation. Report the prior, numerical method, draw count, and uncertainty when claiming a numerical simulation result.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Bayesian Inference]]
 - [[Credible Intervals]]
-- [[Beta-Binomial Conjugate Updating Formula]]
-
----
-
----
 
 ## Sources
 

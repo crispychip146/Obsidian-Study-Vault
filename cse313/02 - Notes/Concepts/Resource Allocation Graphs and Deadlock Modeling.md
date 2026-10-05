@@ -12,10 +12,9 @@ order: 27
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2018 Q2b, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q3c, 2018 Q2b, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **The Graph Cycle Theorem (Single vs Multi-Instance):**
 >    - **Single-Unit Resources:** A directed cycle is both **necessary and sufficient** for deadlock. (Cycle $\iff$ Deadlock).
 >    - **Multi-Unit Resources:** A directed cycle is **necessary but NOT sufficient**. A cycle can exist without deadlock if processes outside the cycle hold and eventually release resources needed inside the cycle.
@@ -26,35 +25,15 @@ order: 27
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+The story in [[Deadlock Fundamentals and Coffman Conditions]] can become a graph. Draw a request edge from a process to a resource it is waiting for. Draw an assignment edge from a resource instance to the process holding it. Following alternating edges means following who must wait for whom.
 
-In real-world operating systems with dozens of processes and hundreds of heterogeneous resources (some with multiple identical instances, like 4 tape drives or 8 memory buffers), informal reasoning about deadlocks quickly becomes impossible.
+With one instance of each resource, a cycle traps every participant: each resource needed on the cycle is held by the next process, which is itself waiting. With several instances, a cycle can coexist with an outside holder that can finish and release another instance. The picture then shows a potential dependency, not necessarily a deadlock.
 
-We want a formal mathematical model to precisely represent system allocation state and detect whether deadlock exists. The central obstacle is distinguishing harmless resource contention from true deadlock when resources have multiple instances: a cycle in dependency may or may not mean deadlock.
+An illustrative counterexample is a resource R with two instances: A holds one and waits for S held by B; B waits for R; C holds the other R and can finish. There is a cycle through A and B, but C's release can let B finish, then A. The extra instance changes the conclusion.
 
----
-
-## Developing the Idea
-
-Computer scientists solve this by modeling resource allocations as a directed bipartite graph: the **Resource Allocation Graph (RAG)** $G = (V, E)$.
-
-The vertices $V$ are partitioned into:
-- Process nodes $P = \{P_1, P_2, \dots, P_n\}$ (represented as circles).
-- Resource nodes $R = \{R_1, R_2, \dots, R_m\}$ (represented as squares containing dots for each instance).
-
-The edges $E$ represent dependencies:
-- **Request Edge ($P_i 	o R_j$):** Process $P_i$ is waiting for an instance of resource $R_j$.
-- **Assignment Edge ($R_j 	o P_i$):** An instance of resource $R_j$ is allocated to process $P_i$.
-
----
-
-## Definition
-
-
-
----
+That is why multi-instance analysis asks which process's current outstanding request can be met, lets that process finish hypothetically, returns its allocations, and repeats. This reduction follows the actual release mechanism rather than using a cycle as an unconditional verdict.
 
 ## How It Works
 
@@ -84,8 +63,6 @@ graph LR
 
 ---
 
----
-
 ## Example
 
 Cycle analysis on RAGs:
@@ -94,23 +71,10 @@ Cycle analysis on RAGs:
 
 ---
 
-## Technical Details
-
-See related modules for microarchitectural implementation details.
-
----
-
 ## Important Properties and Why They Hold
 
 - **Graph Reduction Theorem:** A RAG is deadlocked if and only if it cannot be completely reduced. The **Graph Reduction Algorithm** repeatedly finds unblocked processes, satisfies their requests, and deletes all their edges until no more processes can be reduced.
 - **Bipartite Invariant:** Edges strictly alternate between Process nodes and Resource nodes; an edge can never directly connect two processes or two resources.
-
----
-
-## Common Mistakes
-
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
 
@@ -161,28 +125,15 @@ The cycle dissolved completely!
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Arrow direction matters: requesting and holding are opposite relationships. [[Deadlock Detection and Recovery Algorithms]] turns the graph into a traversal or matrix procedure. [[Banker's Algorithm]] uses remaining declared maximum needs for a different question: whether future completion can still be guaranteed.
 
-- [[Deadlock Prevention and Avoidance Strategies]]
-- [[Banker's Algorithm]]
-- [[Deadlock Detection and Recovery Algorithms]]
-- [[Resource Allocation Graph Cycle Detection Example]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Deadlock Fundamentals and Coffman Conditions]]
-
----
-
-## Problems
-
-- [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
-
----
+- [[Deadlock Detection and Recovery Algorithms]]
+- [[Banker's Algorithm]]
 
 ## Sources
 

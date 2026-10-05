@@ -12,26 +12,15 @@ order: 13
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+A multidimensional array is laid out in linear memory. In row-major order, advancing the last index by one advances by one element; advancing an earlier index skips an entire suffix-shaped block.
 
-How does a compiler map high-dimensional array references (such as `A[i][j]` or `A[i][j][k]`) down into linear physical byte memory addresses, and how can the emitted Three-Address Code compute these offsets using minimum runtime instructions?
+For zero-based A[i][j][k] with dimensions d1,d2,d3, i skips i·d2·d3 elements, j skips j·d3, and k skips k. Add these counts, multiply by element width w to convert elements to bytes, then add the base address. The factored form `((i*d2)+j)*d3+k` performs the same counting through Horner's rule.
 
-Physical memory is a flat, one-dimensional array of bytes indexed from $0$ to $2^{64}-1$. The central obstacle is that high-level programmers conceptualize multi-dimensional matrices as 2D grids or 3D cubes. The compiler must squash this high-dimensional coordinate system into a flat memory ribbon while evaluating indexing expressions efficiently at runtime.
+[[Type Expressions and Storage Layout]] supplies the dimensions and widths. Nonzero lower bounds change the counts to index-minus-lower-bound; column-major order changes which index varies fastest. Neither change can be handled by substituting numbers into a row-major zero-based formula unchanged.
 
----
-
-## Developing the Formula
-
-In row-major order (used by C, C++, Java), arrays are stored row by contiguous row:
-- In a 2D array $A[d_1][d_2]$ with element width $w$, each complete row consists of $d_2$ elements.
-- To access element $A[i][j]$, we must skip $i$ full rows of size $d_2 \times w$, plus $j$ individual elements of size $w$.
-- This gives the offset formula: $\text{Offset} = (i \times d_2 + j) \times w$.
-- For $k$ dimensions, Horner's polynomial recurrence computes the offset incrementally without repetitive high-degree multiplications:
-  $$\text{Offset} = ((\dots ((i_1 \times d_2 + i_2) \times d_3 + i_3) \dots) \times d_k + i_k) \times w$$
-
----
+Check the last-index step: it should change the address by w bytes. This simple check catches swapped dimensions and duplicate width multiplication.
 
 ## Formula
 
@@ -138,8 +127,6 @@ The compiler evaluates this in a simple linear loop during parsing, multiplying 
 
 ---
 
----
-
 ## Example
 
 Consider array `int A[2][3]` with $w = 4$ bytes starting at base address $1000$:
@@ -157,24 +144,14 @@ Verified against manual memory walk: Row 0 spans 1000-1011 (12 bytes), A[1][0] a
 
 ---
 
-## Related Concepts
+## What to carry forward
+
+[[Translation of Expressions and Array References]] emits TAC for this address calculation. First decide whether an intermediate quantity counts elements, bytes, or an absolute address; its units determine the next valid operation.
+
+## Related notes
 
 - [[Type Expressions and Storage Layout]]
 - [[Translation of Expressions and Array References]]
-
----
-
-## Prerequisites
-
-- [[Type Expressions and Storage Layout]]
-
----
-
-## Problems
-
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ## Sources
 

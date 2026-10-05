@@ -12,8 +12,6 @@ order: 6
 
 ---
 
----
-
 ## Problem
 
 Suppose $k$ distinct keys are inserted uniformly and independently at random into a hash table with $m$ buckets (numbered $1, 2, \dots, m$).
@@ -25,54 +23,13 @@ Suppose $k$ distinct keys are inserted uniformly and independently at random int
 
 ---
 
----
-
-## Given
-
-- Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
-
----
-
-## Required
-
-- Derive the exact closed-form probability, expectation, or test statistic, and verify asymptotic convergence.
-
----
-
-## Concepts Tested
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
-
-## Prerequisites
-
-- [[Combinatorics and Counting Principles]] — Multiplication rule, permutations.
-- [[Probability Axioms and Naive Probability]] — Complement rule.
-- [[Birthday Problem and Collisions Example]] — Birthday paradox mechanics.
-- Linearity of expectation via indicator random variables.
-
----
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Start by deciding what “collision” means: at least two of the sampled birthdays or identifiers agree. The exact answer comes from avoiding all previously occupied categories at each draw. This is the product developed in [[Birthday Problem and Collisions Example]], under independent uniform sampling.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+When solving for a threshold, the complement approximation makes the inverse problem manageable. A collision probability near $1/2$ means $e^{-k(k-1)/(2n)}\approx1/2$, hence $k(k-1)\approx2n\log2$. Solve this quadratic, round to a candidate integer, and check nearby integers with the exact product. Rounding an approximation alone does not establish the first integer that crosses the threshold.
 
-### Working Through the Solution
-### Full Step-by-Step Solution
+For numerical work, sum $\log(1-j/n)$ instead of multiplying many small factors. This preserves precision and keeps the same underlying argument. If $k>n$, stop: the exact probability is already one.
 
 ### Part 1: Exact Collision Probability
 Total ways to place $k$ keys into $m$ buckets:
@@ -144,17 +101,6 @@ $$\mathbb{E}[C] \approx \frac{2m \ln 2}{2m} = \ln 2 \approx 0.693$$
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 1. **Confusing number of items with number of pairs:** Forgetting that collisions happen between *pairs*. The relevant quantity is $\binom{k}{2} \approx k^2/2$, not $k$.
@@ -162,27 +108,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+Use the approximation to see the scale and the exact expression to verify the requested cutoff. The size of the category space, rather than its label as birthdays or hash values, drives the calculation.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Birthday Problem and Collisions Example]]
 
 ## Source
 

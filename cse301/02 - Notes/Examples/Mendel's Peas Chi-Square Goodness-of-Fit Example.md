@@ -12,8 +12,6 @@ order: 64
 
 ---
 
----
-
 ## Problem
 
 In his historic 1865 genetics experiments on dihybrid inheritance, Gregor Mendel crossed pea plants and predicted four progeny phenotypes based on his Law of Independent Assortment:
@@ -32,8 +30,6 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 
 ---
 
----
-
 ## Given
 
 - Categories: $k = 4$
@@ -41,8 +37,6 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 - Null Hypothesis:
   $$H_0: \mathbf{p} = \left(\frac{9}{16}, \frac{3}{16}, \frac{3}{16}, \frac{1}{16}\right) = (0.5625, 0.1875, 0.1875, 0.0625)$$
 - Significance level: $\alpha = 0.05$
-
----
 
 ---
 
@@ -55,15 +49,13 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+The null specifies the four proportions before fitting anything to these counts. Multiply each proportion by 556 to obtain expected counts, then measure the scaled squared deviations using [[Pearson's Chi-Square Goodness-of-Fit Test]].
+
+Because the four observed counts must sum to 556, only three deviations are independent, giving three degrees of freedom. The statistic is approximately 0.470 and the upper-tail $p$-value is about 0.925. At level 0.05, the data do not provide evidence to reject the specified ratio.
+
+That decision is narrower than proving the theory. The test measures compatibility of these category frequencies with this null under the sampling model; it does not assign a 92.5% probability that the theory is true. The distinction matters especially when a result is described as scientific confirmation.
 
 ### Concepts Used
 
@@ -72,8 +64,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[p-Values and Significance]]
 
 ---
-### Solution
-
 ### Step 1: Calculate Expected Counts
 Under $H_0$, expected count is $E_j = n \cdot p_{0j}$:
 
@@ -130,48 +120,24 @@ In 1936, the great statistician Ronald Fisher analyzed all of Mendel's published
 
 ---
 
----
-
 ## Result
 
 - Pearson statistic: $V = 0.470$
 - Degrees of freedom: $df = 3$
 - Critical value: $\chi^2_{3, 0.05} = 7.815$
 - $p$-value: $0.925$
-- Decision: Retain $H_0$. Strong empirical confirmation of Mendel's Law of Independent Assortment.
+- Decision: Do not reject $H_0$ at level 0.05. The observed counts are compatible with the specified ratio under this test; non-rejection is not proof of the theory.
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+Report the expected counts, statistic, degrees of freedom, and decision together. [[p-Values and Significance]] supplies the correct interpretation of the unusually small discrepancy.
 
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Pearson's Chi-Square Goodness-of-Fit Test]]
-- [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
-
----
-
----
 
 ## Sources
 

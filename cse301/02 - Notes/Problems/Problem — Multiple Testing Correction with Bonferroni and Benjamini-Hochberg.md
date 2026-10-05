@@ -12,8 +12,6 @@ order: 67
 
 ---
 
----
-
 ## Problem
 
 A bioinformatics researcher evaluates $m = 10$ genes to determine whether their expression levels differ between cancer patients and healthy controls. The $10$ independent hypothesis tests produce the following ordered $p$-values:
@@ -33,8 +31,6 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 
 ---
 
----
-
 ## Given
 
 - Number of tests: $m = 10$
@@ -42,8 +38,6 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 - Ordered $p$-values:
   $P_{(1)} = 0.00017$, $P_{(2)} = 0.00448$, $P_{(3)} = 0.00671$, $P_{(4)} = 0.00907$, $P_{(5)} = 0.01220$,
   $P_{(6)} = 0.33626$, $P_{(7)} = 0.39341$, $P_{(8)} = 0.53882$, $P_{(9)} = 0.58125$, $P_{(10)} = 0.98617$.
-
----
 
 ---
 
@@ -56,8 +50,6 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Multiple Testing and False Discovery Rate]]
@@ -67,31 +59,13 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 
 ---
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-- [[Discrete Probability Distributions]]
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+The three methods answer different error-control questions. Unadjusted 0.05 testing rejects the first five listed $p$-values, but it does not control family-wise error at 0.05. Under ten independent true nulls with exact 0.05 rejection probabilities, that rate is $1-0.95^{10}\approx0.4013$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+Bonferroni divides the family-wise target by ten, giving 0.005, so only the first two pass. This follows from a union bound and remains valid without independence for valid individual tests.
 
-### Working Through the Solution
-### Solution
+BH compares ranks with $0.005i$. Rank five passes because $0.01220\le0.025$, while all later ranks fail; its largest passing rank is five. Reject those first five hypotheses under the procedure's FDR assumptions. Finding more discoveries is not a contradiction: expected false fraction and probability of any false rejection are different control targets.
 
 ### 1. Unadjusted Hypothesis Testing
 Each test is compared against the raw threshold $\alpha = 0.05$.
@@ -172,17 +146,6 @@ The Bonferroni correction is so harsh that it discards genes 3, 4, and 5 ($p$-va
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Conflating correlation with causation or independence.
@@ -190,25 +153,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
-## Exam Pattern
+## What to carry forward
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+[[Multiple Testing and False Discovery Rate]] defines the risks. The independent-test expression is exact for continuous exact-size tests under the complete null; valid conservative $p$-values can give a smaller rate.
 
----
+## Related notes
 
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Multiple Testing and False Discovery Rate]]
 
 ## Source
 

@@ -12,123 +12,17 @@ order: 36
 
 ---
 
----
+## Building the idea
 
----
+A basic-block DAG records computed values and their dependencies. Leaf nodes denote incoming values; operation nodes combine child values; variable labels show which names currently denote each result.
 
----
+When assigning x, move x's label to its new value node. This is why identical names in repeated text do not automatically identify the same expression: the names may now refer to different nodes. Matching operator and child-value identities permits local common-subexpression reuse under the expression's semantic assumptions.
 
----
+Dead-result removal also needs care. A pure unused computation may disappear, but stores, calls, volatile accesses, or operations with observable exceptions cannot be erased merely because an ordinary result label is dead.
 
-## The Problem and Earlier Tools
-
-In [[Value-Number Method for DAG Construction]], we saw how a DAG eliminates common subexpressions within single mathematical expressions where variables are immutable.
-
-However, inside a **Basic Block**, variables are dynamically reassigned:
-```text
-(1)  t1 = a + b
-(2)  a = c + d       // Variable 'a' is redefined!
-(3)  t2 = a + b      // Looks identical to line 1, but is NOT a common subexpression!
-```
-If a compiler naively reused `t1` for `t2`, it would produce a fatal bug because `a` has changed!
-
-Furthermore, consider array assignments:
-```text
-(1)  x = a[i]
-(2)  a[j] = y        // Could index 'j' be equal to 'i'?
-(3)  z = a[i]        // Can we reuse 'x' for 'z'?
-```
-At compile time, the values of $i$ and $j$ are unknown runtime variables. If $i == j$, then $z$ must read the new value $y$! If the compiler naively reused $x$, it would read stale data.
-
-To optimize basic blocks safely, compilers employ **DAG Construction with Dynamic Label Re-attachment and Array Kill Rules**.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-A basic block DAG consists of:
-1. **Leaf Nodes:** Represent the initial values of variables entering the block (labeled $a_0, b_0, \dots$) or constant literals.
-2. **Interior Nodes:** Represent arithmetic, relational, or memory operations.
-3. **Attached Variable Names:** Every node maintains a list of variable names whose current value is held by that node:
-   - When instruction $x = y + z$ is processed, name $x$ is attached to the node for $y + z$.
-   - **The Detach Invariant:** If $x$ was previously attached to any other node, **$x$ is deleted from that node's label list**! A variable name can label at most one node in the DAG at any point during construction.
-
-```
-       Visualizing Variable Reassignment in the DAG:
-       
-         (+) Node 1                     (+) Node 2
-        /   \                          /   \
-       a0    b0                       c0    d0
-       [ Labels: t1, a ] <── (1)      [ Labels: a ] <── (2) 'a' moved here!
-```
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+An array store changes memory on which later loads may depend. [[Value-Number Method for DAG Construction]] handles pure structural identity; this optimization adds a memory version or conservative kill rule so a later `a[i]` is not silently tied to a stale load.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### The Array Store "Kill" Rule & Memory Dependencies
 
@@ -196,223 +90,34 @@ Once all statements of the basic block have been processed into the DAG:
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 ### Time Complexity
-$O(N)$ to $O(N^2)$ depending on basic block length, graph density, or live intervals.
+Hash-consing pure expressions can give expected linear work in block operations; memory invalidation and conservative alias checks can add work. State the chosen implementation before claiming a tighter bound.
 
 ### Space Complexity
-$O(N)$ for auxiliary state tables, stacks, or free lists.
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
+The DAG and variable-value mappings use space proportional to distinct retained values and names in the block.
 
 ---
 
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of DAG Construction and Local Optimization of Basic Blocks on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+[[Problem — DAG Optimization of Basic Block with Array Store]] exposes the i==j case. Reassemble code in dependency order while preserving side-effect order and all live-out values, not merely the remaining variable labels.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Value-Number Method for DAG Construction]]
+- [[Problem — DAG Optimization of Basic Block with Array Store]]
 
 ## Sources
 

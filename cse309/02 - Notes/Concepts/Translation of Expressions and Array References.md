@@ -12,95 +12,17 @@ order: 14
 
 ---
 
----
+## Building the idea
 
----
+Expression translation answers where the result will be available. For a scalar addition, translate both operands, create a temporary for the sum, and emit an instruction referring to their resulting locations.
 
----
+An array reference adds a second task: compute the element's location. [[Multi-Dimensional Array Addressing Formulas]] supplies the offset calculation. Reading `x=a[i]` then loads from that location; writing `a[i]=x` stores to it. The address calculation can be shared, but a value and an address are different results.
 
----
+In an illustrative four-byte integer array, `t1=4*i` counts byte displacement. `t2=a[t1]` in the classroom TAC notation loads the element at that displacement. Do not multiply by four again if the operand already represents bytes.
 
-## Starting Point and the Problem
-
-Consider a typical high-level language assignment involving multi-dimensional arrays:
-$$\mathbf{a[i][j] = b[k][m] + 5}$$
-
-Look carefully at the two array accesses in this single line of code:
-1. **$b[k][m]$ is an R-Value (Right-hand value / "Read" context):**
-   - The program needs the **contents** stored in memory at the computed address of $b[k][m]$.
-   - The compiler must calculate the offset, issue a memory load instruction into a temporary register (`t_load = b[offset]`), and feed that temporary to the arithmetic addition operator.
-2. **$a[i][j]$ is an L-Value (Left-hand value / "Location" context):**
-   - The program does **not** care about what is currently stored inside $a[i][j]$.
-   - Instead, the program requires the **memory destination address** of $a[i][j]$ so that the evaluated right-hand side sum can be written into RAM (`a[offset] = t_sum`).
-
-```
-                    a[i][j]             =             b[k][m] + 5
-                   ─────────                          ───────────
-                   L-VALUE                              R-VALUE
-              (Target Location)                     (Evaluated Data)
-                     │                                     │
-          Calculates byte offset                 Calculates byte offset
-         Issues STORE instruction                Issues LOAD instruction
-```
-
-> [!CAUTION] The Naive Grammar Trap
-> If a compiler naively treats all expressions uniformly as $E$, reducing $a[i][j]$ to $E$ would immediately emit a load instruction: `t1 = a[offset]`. When the parser subsequently encounters the `=` token, it would be faced with `t1 = RHS`. But assigning to a temporary variable `t1` only overwrites a register; it completely fails to update the actual array in memory!
-> 
-> To solve this, the compiler grammar separates **array references ($L$)** from general **expressions ($E$)**.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-To emit Three-Address Code (TAC) during syntax-directed translation, the compiler attaches two primary synthesized attributes to grammar symbols:
-
-1. **`addr`:** Represents the runtime location holding the value. It can be:
-   - A source identifier (`x`, `y`).
-   - A constant literal (`5`, `3.14`).
-   - A compiler-allocated temporary register (`t1`, `t2`, generated via `newtemp()`).
-2. **`code`:** The linear sequence of TAC instructions generated to compute the subexpression. In practice, compilers either concatenate code strings or immediately stream instructions to disk/memory via helper function `gen(...)`.
-
-### Core Helper Functions:
-- `newtemp()`: Allocates and returns a fresh temporary name (`t1`, `t2`, $\dots$).
-- `gen(instruction_string)`: Emits a single TAC instruction into the compiler's intermediate representation buffer.
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Translation of Expressions and Array References** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Intermediate Representations and Three-Address Code]] makes these steps explicit. The attribute named `.addr` can denote an IR result name rather than a physical pointer, so read its definition before interpreting the generated code.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### SDD for Arithmetic Expressions
 
@@ -181,14 +103,6 @@ graph BT
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
 ### Mathematical Equivalence: How the SDD Implements Horner's Rule
 
 Why do the rules for $L \to L_1 [ E ]$ generate the exact row-major byte offset?
@@ -210,145 +124,9 @@ The grammar calculates Horner's polynomial accumulation incrementally during bot
 
 ---
 
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### Comprehensive Trace: $x = a[i][j]$ vs. $a[i][j] = x$
 
@@ -364,7 +142,7 @@ sequenceDiagram
     autonumber
     participant Parser as Parser Actions
     participant TAC as Emitted Three-Address Code
-    
+
     Parser->>TAC: Parse a[i] (L1 -> id[E])
     Note over TAC: L1.type.width = 80 bytes
     TAC-->>TAC: t1 = i * 80
@@ -395,39 +173,15 @@ Look at the elegance: The exact same sub-productions $L$ compute the byte offset
 
 ---
 
----
-### Exam Relevance
+## What to carry forward
 
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
+Track temporaries by purpose: operand value, byte offset, element address, or loaded element. [[Control Flow Translation and Boolean Expressions]] adds expressions whose useful result may be a branch destination rather than a stored Boolean.
 
----
+## Related notes
 
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Multi-Dimensional Array Addressing Formulas]]
 - [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Control Flow Translation and Boolean Expressions]]
 
 ## Sources
 

@@ -12,19 +12,13 @@ order: 86
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+The formula table has a short chain of reasoning. First normalize the geometric state probabilities to get $\pi_n=(1-\rho)\rho^n$. Summing their weighted counts gives $L=\rho/(1-\rho)$.
 
-What analytical relationship or closed-form expectation governs M-M-1 Performance Formulas, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+An arriving customer is admitted in the infinite-buffer stable model, so [[Little's Law]] gives $W=L/\lambda=1/(\mu-\lambda)$. Subtract the mean service time $1/\mu$ to obtain queue waiting time $W_Q$. Multiplying that wait by $\lambda$ gives $L_Q$. The tail sum of the geometric distribution gives $P(N\ge k)=\rho^k$.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, M-M-1 Performance Formulas compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+These are stationary averages under the stated M/M/1 assumptions, not deadlines for individual customers. If $\lambda$ rises toward $\mu$, the denominator $\mu-\lambda$ shrinks and delay grows rapidly. Keep units consistent; a service rate of 1000 per second corresponds to a mean service time of one millisecond.
 
 ## Formula
 
@@ -40,25 +34,6 @@ For an M/M/1 queue with Poisson arrival rate $\lambda$, exponential service rate
 | **Average Number of Customers in Queue** | $L_Q$ | $\frac{\lambda^2}{\mu(\mu - \lambda)}$ | $\frac{\rho^2}{1 - \rho}$ |
 | **Average Time Spent in System** | $W$ | $\frac{1}{\mu - \lambda}$ | $\frac{1}{\mu(1 - \rho)}$ |
 | **Average Time Spent Waiting in Queue** | $W_Q$ | $\frac{\lambda}{\mu(\mu - \lambda)}$ | $\frac{\rho}{\mu(1 - \rho)}$ |
-
----
-
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -94,8 +69,6 @@ W_Q &= \rho W
 
 ---
 
----
-
 ## Derivation
 
 ### Derivation of $P(N \ge k)$
@@ -106,8 +79,6 @@ Factor out $\rho^k$:
 $$= (1 - \rho)\rho^k \sum_{m=0}^\infty \rho^m$$
 Since $\sum_{m=0}^\infty \rho^m = \frac{1}{1 - \rho}$:
 $$P(N \ge k) = (1 - \rho)\rho^k \left(\frac{1}{1 - \rho}\right) = \mathbf{\rho^k} \quad \blacksquare$$
-
----
 
 ---
 
@@ -126,37 +97,13 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+Use $L-L_Q=\rho$ and $W-W_Q=1/\mu$ as consistency checks. Apply the table only after checking $\rho<1$ and the system boundary.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[M-M-1 Queue]]
 - [[Little's Law]]
-- [[Queueing Systems and Kendall Notation]]
-- [[Problem — M-M-1 Queue Performance Metrics Calculation]]
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

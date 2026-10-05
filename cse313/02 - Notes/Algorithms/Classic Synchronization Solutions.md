@@ -12,10 +12,9 @@ order: 23
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2b, 2017 Q2c, 2018 Q3a, 2019 Q2b, 2020 Q1b, 2020 Q2b, 2021 Q4b)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q2b, 2017 Q2c, 2018 Q3a, 2019 Q2b, 2020 Q1b, 2020 Q2b, 2021 Q4b)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Tanenbaum's Dining Philosophers Bug Traps (2017 Q2c & 2021 Q4b verbatim):**
 >    - **Trap 1: Placing `state[i] = THINKING;` AFTER `test(LEFT)` and `test(RIGHT)` inside `put_forks()`:**
 >      - *The "Click":* Look at the test condition inside `test(k)`:
@@ -39,29 +38,15 @@ order: 23
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+The classic synchronization problems make different demands on the same tools. For producer-consumer, capacity and data protection are separate: `empty` counts slots, `full` counts items, and `mutex` protects the buffer update. For readers-writers, several readers may coexist, but a writer needs exclusive access. Dining philosophers asks whether acquiring several individually safe resources can create a cycle of waiting.
 
-Concurrent systems feature recurring interaction patterns: producer-consumer pipelines, reader-heavy databases, resource sharing amongst philosophers, and customer-service queues. Without disciplined synchronization templates, developers introduce race conditions, deadlocks, and starvation.
+Start each design by stating its invariant. A bounded buffer must never exceed capacity or remove a nonexistent item. Readers must not overlap a writer. Adjacent philosophers must not use the same fork simultaneously. Then distinguish that **safety** condition from progress: a safe design can still block everyone or starve one participant.
 
-We want standardized, deadlock-free algorithmic solutions to the classic synchronization benchmarks:
-1. **Producer-Consumer (Bounded Buffer)**
-2. **Readers-Writers Problem**
-3. **Dining Philosophers Problem**
-4. **Sleeping Barber Problem**
+For a producer, wait for an empty-slot permission before taking the buffer mutex. Reversing the order can let a producer hold the mutex while waiting for capacity; a consumer then cannot acquire the mutex to remove an item and create that capacity. The count operations are not decoration around a lock: their order prevents a specific wait dependency.
 
----
-
-## Developing the Core Idea
-
-Each classic problem is solved using a combination of counting semaphores (for tracking resource inventory) and binary semaphores/mutexes (for mutual exclusion of critical regions):
-- Bounded Buffer: `empty` counts free slots, `full` counts filled slots, `mutex` serializes buffer access.
-- Readers-Writers: `readcount` allows unlimited concurrent readers while `wrt` blocks writers when any reader is present.
-- Dining Philosophers: State array (`THINKING, HUNGRY, EATING`) with atomic neighbor testing prevents circular waiting.
-- Sleeping Barber: `customers` semaphore signals waiting clients; `barbers` semaphore signals barber readiness.
-
----
+Use [[Semaphores and Synchronization Primitives]] for remembered counts and [[Monitors and Condition Variables]] for predicate-based waiting. Trace each wait according to its meaning, not just its name.
 
 ## Inputs
 
@@ -77,8 +62,6 @@ Each classic problem is solved using a combination of counting semaphores (for t
 ---
 
 ## How It Works
-
-### 2. The Producer-Consumer (Bounded Buffer) Problem
 
 ### Invariants:
 - A shared circular buffer holds at most $N$ items.
@@ -138,10 +121,6 @@ void consumer(void) {
 
 ---
 
----
-
-### 3. The Readers-Writers Problem
-
 ### Invariants:
 - Multiple readers may read shared data concurrently without interference.
 - Only one writer may access the shared data at a time.
@@ -186,8 +165,6 @@ void reader(void) {
 - **Advantage:** Maximum concurrency for readers.
 - **Flaw (Writer Starvation):** If readers arrive continuously such that `read_count` never drops to 0, waiting writers will **starve indefinitely**.
 - **Alternative:** Writer-preference solutions ensure that once a writer requests access, new incoming readers are queued until the writer completes.
-
----
 
 ---
 
@@ -273,8 +250,6 @@ void philosopher(int i) {
 
 ---
 
----
-
 ### 5. The Sleeping Barber Problem
 
 A barbershop has 1 barber, 1 barber chair, and $N$ waiting chairs.
@@ -317,8 +292,6 @@ void customer(void) {
 
 ---
 
----
-
 ## Pseudocode
 
 ### 1. Algorithmic Overview & Motivation
@@ -328,8 +301,6 @@ To evaluate and design synchronization primitives, computer scientists formalize
 2. **Readers-Writers:** Distinguishing shared read-only access from exclusive write access.
 3. **Dining Philosophers:** Resource contention, deadlock prevention, and starvation freedom.
 4. **Sleeping Barber:** Asymmetric customer-server coordination with finite waiting capacity.
-
----
 
 ---
 
@@ -362,38 +333,16 @@ $O(1)$ or $O(N)$ state memory.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Misunderstanding preemption boundaries during execution.
-- Failing to verify state invariants before granting resource claims.
+A deadlock-free readers-writers or dining-philosophers scheme may still need a fairness policy. [[Deadlock Fundamentals and Coffman Conditions]] makes resource dependencies explicit, while [[Producer-Consumer Semaphore Implementation Example]] follows the buffer permissions through one concrete run.
 
----
-
-## Exam Relevance
-
-Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
-
----
-
-## Related Concepts
-
-- [[Monitors and Condition Variables]]
-- [[Producer-Consumer Semaphore Implementation Example]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Semaphores and Synchronization Primitives]]
-- [[Race Conditions and Critical-Section Problem]]
-
----
-
-## Problems
-
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
+- [[Monitors and Condition Variables]]
+- [[Deadlock Fundamentals and Coffman Conditions]]
+- [[Producer-Consumer Semaphore Implementation Example]]
 
 ## Sources
 

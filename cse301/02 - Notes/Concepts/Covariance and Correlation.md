@@ -12,19 +12,15 @@ order: 11
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Center each variable by subtracting its mean. When both centered values usually have the same sign, their product tends to be positive; when their signs oppose, it tends to be negative. The expectation of this product is covariance.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Covariance and Correlation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Dividing covariance by the two standard deviations removes measurement units and produces correlation. This makes a relationship measured in meters comparable with the same relationship measured in centimeters, provided both variances are finite and positive.
 
----
+Covariance detects linear association. It can be zero while dependence remains: if $X$ is symmetric about zero and $Y=X^2$, the positive and negative contributions to $E[X^3]$ cancel even though $Y$ is determined by $X$. Independence implies zero covariance when the moments exist; the reverse does not generally follow.
 
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Covariance and Correlation reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Covariance also tells us what is missing when we add variances: $\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)+2\operatorname{Cov}(X,Y)$.
 
 ## Definition
 
@@ -36,8 +32,6 @@ $$\operatorname{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]$$
 
 **Correlation** (Pearson's correlation coefficient) is the dimensionless, standardized measure of linear relationship:
 $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\operatorname{SD}(X)\operatorname{SD}(Y)} = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}}$$
-
----
 
 ---
 
@@ -82,34 +76,6 @@ $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\oper
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -123,42 +89,13 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Cauchy-Schwarz and Jensen Inequalities]] explains why correlation lies between $-1$ and $1$. Zero variance makes the usual correlation undefined rather than zero.
 
-- **Independence implies Uncorrelatedness:**
-  If $X$ and $Y$ are independent ($X \perp Y$), then $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$. Therefore:
-  $$\operatorname{Cov}(X, Y) = 0 \implies \rho(X, Y) = 0$$
-- **Uncorrelatedness DOES NOT Imply Independence:**
-  $\operatorname{Cov}(X, Y) = 0$ only means there is no *linear* relationship; there can still be a perfect non-linear deterministic relationship.
+## Related notes
 
-### Classic Counterexample:
-Let $X \sim \operatorname{Unif}(-1, 1)$ (symmetric around 0, so $\mathbb{E}[X] = 0$).
-Let $Y = X^2$ (clearly $Y$ is completely dependent on $X$).
-Compute covariance:
-$$\mathbb{E}[XY] = \mathbb{E}[X \cdot X^2] = \mathbb{E}[X^3] = \int_{-1}^1 \frac{x^3}{2} \, dx = 0$$
-$$\mathbb{E}[X]\mathbb{E}[Y] = 0 \times \mathbb{E}[Y] = 0$$
-$$\operatorname{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = 0 - 0 = 0$$
-Thus, $X$ and $Y$ are **uncorrelated ($\rho = 0$), yet completely dependent**!
-
-*(Exception: If $(X, Y)$ have a **Bivariate Normal distribution**, then uncorrelatedness DOES imply independence!)*.
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Cauchy-Schwarz and Jensen Inequalities]]
 
 ## Sources
 

@@ -12,77 +12,17 @@ order: 51
 
 ---
 
----
+## Building the idea
 
----
+Optimization changes how a program computes while preserving the behavior the language and compiler are required to preserve. It begins with redundancy: repeated expressions, unnecessary copies, unused results, or work repeated inside a loop despite unchanged inputs.
 
----
+An illustrative array update can calculate its address twice in naive TAC. Reusing that address can remove work, provided the operands and relevant memory assumptions remain valid. One optimization can expose another: eliminating a repeated calculation creates a copy, propagating the copy can make a temporary unused, and dead-code elimination can then remove its definition.
 
----
+[[Intermediate Representations and Three-Address Code]] exposes those opportunities. [[Basic Blocks and Control Flow Graphs]] determines whether the supporting facts hold locally or across multiple paths.
 
-## Starting Point and the Problem
-
-High-level programming languages encourage abstraction, modularity, and clean software engineering (e.g., multi-dimensional arrays, objects, encapsulation). However, when a front end naively translates each high-level construct independently into Three-Address Code, it generates massive runtime overhead:
-- Array indexing introduces repeated multiplications by element widths ($i \times 4$).
-- Field accesses introduce repeated pointer offsets.
-- Macro expansions and inlined code create redundant subexpressions and unreachable dead code.
-
-The **Machine-Independent Optimizer** inspects the program's Control Flow Graph and applies semantics-preserving transformations to eliminate these redundancies without altering the observable behavior of the program.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Any optimizing transformation implemented in a compiler must satisfy three inviolable criteria:
-
-```mermaid
-flowchart TD
-    Criteria["Criteria for Compiler Optimizations"]
-    Criteria --> C1["1. Semantic Correctness (Safety)<br/>Must preserve the exact observable behavior and output for ALL inputs."]
-    Criteria --> C2["2. Meaningful Performance Improvement<br/>Must demonstrably reduce execution time or memory footprint."]
-    Criteria --> C3["3. Reasonable Compilation Overhead<br/>The compiler should not take excessive time or memory to optimize."]
-```
-
-> [!CAUTION] The Golden Rule of Compiler Optimization
-> An optimization must **never change the meaning of the program**. For example, hoisting a division out of a loop (`t = x / y`) is illegal if $y$ could be zero when the loop executes zero times, because hoisting it introduces a division-by-zero crash that would never have occurred in the original program!
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Principal Sources of Code Optimization** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+Three questions guide every transformation: is it legal, what cost can it reduce, and is the analysis itself affordable? “Optimal” in an optimization label usually names a goal or local criterion, not a promise of the best possible machine program.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Causes of Redundancy
 
@@ -122,192 +62,16 @@ graph TD
 
 ---
 
----
-### Technical Details
+## What to carry forward
 
-Target architecture and ABI specifications govern low-level alignment and register assignments.
+[[Global Common Subexpression Elimination and Copy Propagation]] follows values across paths. [[Loop Optimizations and Strength Reduction]] targets repeatedly executed work. Preserve side effects, exceptions, overflow, and memory semantics rather than comparing only ordinary arithmetic outputs.
 
----
-### Important Properties and Why They Hold
+## Related notes
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
 - [[Intermediate Representations and Three-Address Code]]
 - [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Global Common Subexpression Elimination and Copy Propagation]]
+- [[Loop Optimizations and Strength Reduction]]
 
 ## Sources
 

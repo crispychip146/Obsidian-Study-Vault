@@ -12,19 +12,13 @@ order: 12
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Suppose you know the distribution of a die roll $X$ and want the expected square $E[X^2]$. You could first derive the distribution of $Y=X^2$, but that would be extra bookkeeping. Each value $x$ already arrives with its probability, so weight $x^2$ directly by that probability.
 
-What analytical relationship or closed-form expectation governs Law of the Unconscious Statistician (LOTUS), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+This is LOTUS: $E[g(X)]=\sum_x g(x)p_X(x)$ in the discrete case and $\int g(x)f_X(x)\,dx$ in the density case, whenever the expectation is defined. It works even if several $x$ values produce the same transformed value; their weights are simply accumulated by the sum or integral.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Law of the Unconscious Statistician (LOTUS) compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The function is applied before averaging. Usually $E[g(X)]\ne g(E[X])$: squaring first retains the spread in the data, which is why $E[X^2]$ contains both variance and squared mean. Joint LOTUS applies the same reasoning to $g(X,Y)$ and the joint distribution.
 
 ## Formula
 
@@ -37,25 +31,6 @@ Let $X$ be a random variable, and let $g: \mathbb{R} \to \mathbb{R}$ be a measur
   $$\mathbb{E}[g(X)] = \int_{-\infty}^\infty g(x) \, f_X(x) \, dx$$
 
 *(Subject to absolute convergence: $\mathbb{E}[\lvert g(X) \rvert] < \infty$)*.
-
----
-
----
-
-## Variables
-
-| Symbol | Meaning |
-|---|---|
-| $X, Y$ | Random variables governed by underlying probability distributions |
-| $\mathbb{E}[\cdot]$ | Expected value operator |
-| $\text{Var}(\cdot)$ | Variance operator |
-
----
-
-## Conditions
-
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
 
 ---
 
@@ -84,8 +59,6 @@ This proves that **linearity of expectation holds for ANY random variables**, wh
 
 ---
 
----
-
 ## Derivation
 
 ### Proof Sketch (Discrete Case)
@@ -105,11 +78,7 @@ $\blacksquare$
 
 ---
 
----
-
 ## Example
-
-### Application Examples
 
 ### 1. Second Moment and Variance
 To calculate $\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$, set $g(x) = x^2$:
@@ -119,8 +88,6 @@ Without LOTUS, one would have to derive the PDF of $Y = X^2$ using change of var
 ### 2. Moment Generating Function Evaluation
 Evaluating $M_X(t) = \mathbb{E}[e^{tX}]$ uses $g(x) = e^{tx}$:
 $$M_X(t) = \int_{-\infty}^\infty e^{tx} f_X(x) \, dx$$
-
----
 
 ---
 
@@ -135,29 +102,13 @@ $$M_X(t) = \int_{-\infty}^\infty e^{tx} f_X(x) \, dx$$
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+Use LOTUS when the target is an expectation rather than a full transformed distribution. [[Moment Generating Functions]] uses it with $g(x)=e^{tx}$.
 
-- [[Random Variables and Probability Distributions]] — Foundational expectation definitions.
-- [[Joint and Marginal Distributions]] — Joint integration and 2D LOTUS.
-- [[Moment Generating Functions]] — Applied to $g(x) = e^{tx}$.
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Moment Generating Functions]]
 
 ## Sources
 

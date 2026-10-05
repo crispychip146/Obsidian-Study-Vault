@@ -12,34 +12,13 @@ order: 58
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A $p$-value is calculated in a world where the null model is assumed true. It is the probability, under that model, of a statistic at least as extreme as the observed one, using the test's specified direction or discrepancy measure.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to p-Values and Significance, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+It is not the probability that the null is true. That latter question reverses the conditioning and would require a model for hypotheses, such as a Bayesian prior. Nor is $1-p$ the chance that a finding will replicate.
 
----
-
-## Developing the Idea
-
-Reporting a binary verdict ("reject at $\alpha = 0.05$" or "fail to reject") throws away valuable evidentiary nuance:
-- Did you reject with overwhelming, undeniable evidence ($p = 0.00001$)?
-- Or did you barely scrape past the arbitrary threshold ($p = 0.049$)?
-
-Imagine the critical rejection cutoff $c_\alpha$ as a sliding high-jump bar:
-1. When you demand a very strict significance level (tiny $\alpha = 0.001$), the required cutoff $c_\alpha$ is set extremely high.
-2. As you relax $\alpha$ (making the rejection region larger), the bar $c_\alpha$ slides lower and lower.
-3. The **$p$-value is the exact point at which the sliding bar touches your observed statistic $t_{\text{obs}}$**.
-
-```
-  Decision Rule:
-  • If p ≤ α  ===> Reject H₀  (observed data are sufficiently rare under H₀)
-  • If p > α  ===> Retain H₀  (observed data are plausibly consistent with H₀)
-```
-
----
-
----
+For a two-sided normal statistic, extremeness is distance from zero, giving $2[1-\Phi(|w|)]$. For a chi-square discrepancy, larger values alone are more extreme. The reference distribution and tail definition must match the statistic. Discrete tests can yield conservative $p$-values because not every significance level is attainable exactly.
 
 ## Definition
 
@@ -52,8 +31,6 @@ $$p = \sup_{\theta \in \Theta_0} P_\theta\left(T(\mathbf{X}) \ge t_{\text{obs}}\
 ### Alternative Operational Definition
 The $p$-value is the **smallest significance level $\alpha$** at which a hypothesis test would reject the null hypothesis $H_0$:
 $$p = \inf\big\{\alpha \in (0, 1) : T(\mathbf{x}) \in R_\alpha\big\}$$
-
----
 
 ---
 
@@ -71,8 +48,6 @@ While modern statistics encourages reporting exact numerical $p$-values rather t
 | $p \ge 0.10$ | **Little to No Evidence** against $H_0$ (consistent with chance) |
 
 ---
-### How to Compute the $p$-Value
-
 ### 1. One-Sided Right-Tail Test
 For $H_0: \theta \le \theta_0$ vs $H_1: \theta > \theta_0$:
 $$p = P_{\theta_0}\left(T(\mathbf{X}) \ge t_{\text{obs}}\right) = 1 - F_{T}(t_{\text{obs}})$$
@@ -125,62 +100,13 @@ This beautiful result explains why setting a threshold $\alpha = 0.05$ guarantee
 
 ---
 
----
+## What to carry forward
 
-## Example
+The significance threshold controls an error rate across repetitions when the procedure is valid. [[Multiple Testing and False Discovery Rate]] shows why repeatedly applying it creates an additional problem.
 
-See worked numerical applications in the linked example notes.
+## Related notes
 
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
-## Exam Relevance
-
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
-
-- [[Hypothesis Testing Framework]]
-- [[Wald Test Statistic]]
 - [[Multiple Testing and False Discovery Rate]]
-- [[Permutation Test Algorithm]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

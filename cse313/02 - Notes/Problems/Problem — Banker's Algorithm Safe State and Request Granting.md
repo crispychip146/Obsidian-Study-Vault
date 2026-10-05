@@ -12,8 +12,6 @@ order: 33
 
 ---
 
----
-
 ## Problem
 
 Consider a system with **5 processes** ($P_0, P_1, P_2, P_3, P_4$) and **4 resource types** ($A, B, C, D$).  
@@ -42,31 +40,10 @@ At time $t_0$, the resource allocation state is as follows:
 
 ---
 
----
-
-## Given
-
-- Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
-
----
-
-## Required
-
-- Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
-
----
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
-
----
-
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
-- [[Process Control Block and Context Switching]]
 
 ---
 
@@ -78,14 +55,13 @@ Algorithm Simulation / Deadlock Avoidance
 
 ## Solution
 
-### Understanding the Situation
-Interpret the given problem state, identify all participating entities (processes, resources, semaphores), and establish the operational rules governing their interactions.
+The tables describe resources already held, maximum claims, and the free pool. First establish Need for every process; then use [[Banker's Algorithm]] to find a possible order of completion. The order is an argument that the state is safe, not a prediction of the scheduler's next decisions.
 
-### Developing the Key Idea
-Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffman cycle conditions, Gantt timeline rules) and verify that all prerequisites hold.
+At each step, show Work, identify one row whose Need fits every resource component, and update Work by that row's Allocation. This makes the result checkable. A statement such as “$P_2$ can finish” needs the vector comparison that supports it.
 
-### Working Through the Solution
-### Detailed Step-by-Step Solutions
+For a request, the two preliminary checks answer different questions. Request no greater than Need means the process is staying within its declared claim. Request no greater than Available means the resources physically exist now. Neither establishes safety. Apply the tentative grant and test the resulting Need, Allocation, and Available values.
+
+If the test cannot finish all processes, undo the tentative change and leave the requester waiting. The denial preserves a guaranteed completion route; it does not assert that granting the request would produce an immediate deadlock in every possible execution.
 
 ### Part 1: Available Vector and Need Matrix
 
@@ -194,43 +170,13 @@ The request **cannot be granted immediately** because the system does not posses
 
 ---
 
-### Result and Interpretation
-The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
+## What to carry forward
 
----
+Safe sequences may differ because several rows can fit Work at once. Validate the sequence's componentwise inequalities and returned allocations instead of matching one printed sequence. Refusing an unsafe grant is distinct from detecting an existing deadlock.
 
-## Reusable Insight
+## Related notes
 
-Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
-
----
-
-## Common Mistakes
-
-- Misinterpreting the initial state vector or indexing offsets.
-- Confusing necessary conditions with sufficient conditions during analysis.
-
----
-
-## Exam Pattern
-
-Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
-
----
-
-## Related Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
-
-## Related Concepts
-
-- [[CPU Scheduling Principles and Criteria]]
-- [[Deadlock Fundamentals and Coffman Conditions]]
-
----
+- [[Banker's Algorithm]]
 
 ## Source
 

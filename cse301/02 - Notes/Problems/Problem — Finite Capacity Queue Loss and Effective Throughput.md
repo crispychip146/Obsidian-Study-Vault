@@ -12,8 +12,6 @@ order: 92
 
 ---
 
----
-
 ## Problem
 
 A cloud microservice endpoint handles incoming API requests using a single database worker thread.
@@ -32,16 +30,12 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 
 ---
 
----
-
 ## Given
 
 - Model: M/M/1/3
 - Capacity: $N = 3$
 - Arrival rate: $\lambda = 6$ req/s
 - Service rate: $\mu = 4$ req/s
-
----
 
 ---
 
@@ -56,8 +50,6 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Finite Capacity M-M-1-N Queue]]
@@ -67,31 +59,13 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 
 ---
 
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-- [[Discrete Probability Distributions]]
-
----
-
-## Question Type
-
-Probability / Statistical Inference / Markov Chain Analysis
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Attempted arrivals exceed potential service, but capacity three prevents unlimited accumulation by rejecting requests. Normalize four weights, $1,1.5,1.5^2,1.5^3$, giving stationary probabilities $(8,12,18,27)/65$.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+By PASTA, an attempted arrival is rejected with probability $27/65$. The accepted rate is $6(1-27/65)=228/65$ requests per second. Check it against service throughput: $4(1-8/65)=228/65$. Both describe the same equilibrium flow.
 
-### Working Through the Solution
-### Solution
+Compute mean population from the weighted states, then divide by this accepted rate for mean residence time of admitted requests. Dividing by all six attempted requests per second would count rejected customers in the denominator while omitting them from the population. Also distinguish offered load 1.5 from busy fraction $57/65$, which is below one.
 
 ### 1. Stability with $\rho > 1$
 In an infinite capacity queue (M/M/1), $\lambda > \mu$ causes the queue to grow to infinity because arrivals can accumulate without bound.
@@ -182,17 +156,6 @@ $$W = \frac{L}{\lambda_{\text{eff}}} = \frac{129 / 65}{228 / 65} = \frac{129}{22
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Conflating correlation with causation or independence.
@@ -200,25 +163,14 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
-## Exam Pattern
+## What to carry forward
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+[[Finite Capacity M-M-1-N Queue]] explains why overload leads to loss here. [[Little's Law]] requires the same customer population in its count, rate, and time definitions.
 
----
+## Related notes
 
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Finite Capacity M-M-1-N Queue]]
+- [[Little's Law]]
 
 ## Source
 

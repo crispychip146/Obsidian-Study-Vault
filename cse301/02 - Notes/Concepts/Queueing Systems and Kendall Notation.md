@@ -12,19 +12,13 @@ order: 82
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A queueing model specifies how customers arrive, how service takes place, how many servers work, and what happens when there is no room. The notation is a compact description of those assumptions, not merely a name for a formula sheet.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Queueing Systems and Kendall Notation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+In $A/S/c/K$, $A$ describes interarrival times, $S$ service times, $c$ the number of servers, and $K$ total system capacity, including service positions. “M” denotes memoryless exponential times; Poisson arrivals are the associated counting process. “D” denotes deterministic times, and “G” a general distribution. Omitted capacity is commonly infinite, but check the stated convention.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Queueing Systems and Kendall Notation reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Keep the system and waiting line separate. A customer in service contributes to system population $N$ but not queue population $N_Q$. Likewise, system time includes both waiting and service. These boundaries determine how [[Little's Law]] and performance formulas should be applied.
 
 ## Definition
 
@@ -48,8 +42,6 @@ where:
 4. **$K$ (System Capacity):** Maximum number of customers allowed in the system (queue + servers). Default is $\infty$ if omitted.
 5. **$N$ (Population Size):** Size of the customer source population. Default is $\infty$ if omitted.
 6. **$D$ (Queue Discipline):** Order of service. Default is FIFO (First-In, First-Out).
-
----
 
 ---
 
@@ -112,63 +104,13 @@ Queueing phenomena govern virtually every shared computing resource:
 
 ---
 
----
+## What to carry forward
 
-## Example
+Write arrival and service rates with the same time units. A queueing formula only describes the selected assumptions; variable workloads or blocking may require a richer state model.
 
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
-## Exam Relevance
-
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Little's Law]]
-- [[PASTA Property and Inspection Paradox]]
-- [[M-M-1 Queue]]
-- [[Finite Capacity M-M-1-N Queue]]
-- [[Jackson Networks and Tandem Queues]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

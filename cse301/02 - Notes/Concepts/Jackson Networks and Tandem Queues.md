@@ -12,19 +12,13 @@ order: 88
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+In an open Jackson network, customers enter, receive service at nodes, and either move to another node or leave. Solve traffic equations first: each node's total arrival rate includes external input plus routed departures from other nodes.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Jackson Networks and Tandem Queues, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Under the classical assumptions of Poisson external arrivals, independent exponential service, appropriate routing, and stable nodes, the stationary joint queue-length distribution has product form. This lets us compute node marginals as suitable queues while retaining the routing in their effective rates.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Jackson Networks and Tandem Queues reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+For a simple unlimited-buffer tandem, every admitted customer visits both servers, so both have throughput $\lambda$. Total mean time is the sum of node mean times by linearity, even though the times experienced by one customer need not be independent. Finite buffers with upstream blocking can destroy this simple Jackson description; [[Shoe Shine Shop Queueing Model Example]] then needs an explicit joint state.
 
 ## Definition
 
@@ -36,8 +30,6 @@ A network of queues is called a **Jackson Network** if:
 3. Upon completing service at station $i$, a customer transitions to station $j$ with routing probability $P_{ij}$, or exits the entire network with probability:
    $$P_{i, \text{exit}} = 1 - \sum_{j=1}^k P_{ij}$$
 4. All service times and routing transitions are mutually independent.
-
----
 
 ---
 
@@ -107,8 +99,6 @@ where:
 - $(\mathbf{I} - \mathbf{P})^{-1}$ is the fundamental Leontief inverse matrix.
 
 ---
-### Network Performance Measures
-
 ### 1. Total Average Number of Customers in the Network ($L$)
 $$L = \sum_{j=1}^k L_j = \sum_{j=1}^k \frac{\rho_j}{1 - \rho_j} = \sum_{j=1}^k \frac{\lambda_j}{\mu_j - \lambda_j}$$
 
@@ -117,20 +107,6 @@ By [[Little's Law]] applied to the entire network:
 $$W = \frac{L}{\gamma}$$
 where $\gamma = \sum_{j=1}^k r_j$ is the **total external arrival rate** into the network:
 $$W = \frac{\sum_{j=1}^k L_j}{\sum_{j=1}^k r_j}$$
-
----
-
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
 
 ---
 
@@ -150,47 +126,20 @@ Yet, Jackson's theorem proves that the joint equilibrium distribution behaves **
 
 ---
 
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - Using the gross internal rate $\lambda_j$ instead of total external rate $\sum r_i$ in the denominator of network Little's Law $W = L / \gamma$.
 - Forgetting that $\rho_j = \lambda_j / \mu_j$ uses the total traffic $\lambda_j$ solved from the traffic equations, not merely the external arrival rate $r_j$.
 
 ---
 
----
+## What to carry forward
 
-## Exam Relevance
+Product-form queue lengths refer to the stationary distribution under specified conditions. They do not assert that all events, sojourn times, or sample paths at different nodes are independent.
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[M-M-1 Queue]]
-- [[Little's Law]]
-- [[Queueing Systems and Kendall Notation]]
-- [[Tandem Two-Server Queue Performance Example]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Shoe Shine Shop Queueing Model Example]]
 
 ## Sources
 

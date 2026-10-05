@@ -12,8 +12,6 @@ order: 81
 
 ---
 
----
-
 ## Problem
 
 Consider a discrete-time [[Markov Chain]] with four states $S = \{0, 1, 2, 3\}$ and transition probability matrix:
@@ -33,14 +31,10 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Given
 
 - State space $S = \{0, 1, 2, 3\}$
 - Transition matrix $P$ as given above.
-
----
 
 ---
 
@@ -54,24 +48,11 @@ $$P = \begin{pmatrix}
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Classification of States in Markov Chains]]
 - [[Markov Chain]]
 - Absorbing states, recurrence, transience, irreducibility
-
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Classification of States in Markov Chains]]
-
----
 
 ---
 
@@ -81,18 +62,13 @@ Conceptual / State Space Decomposition
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Begin with the directed transition graph. States zero and one reach each other and have no edges leaving their pair, so $\{0,1\}$ is a closed communicating class. State three has a self-loop of probability one, making $\{3\}$ an absorbing class.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+State two can reach the other classes, but they cannot return to it. It therefore forms its own communicating class without being closed. After leaving it, the chain is gone from it forever; the probability of staying there for $n$ consecutive steps is $(1/4)^n$, which tends to zero. This directly shows transience.
 
-### Working Through the Solution
-### Solution
+The two closed finite classes are recurrent. Reaching state zero from two does not create communication because the reverse path is absent. Since there are three classes, the whole chain is reducible.
 
 ### Step 1: Analyze State Reachability
 Examine the row transitions of $P$:
@@ -180,17 +156,6 @@ Exam questions frequently provide a $3 \times 3$ or $4 \times 4$ matrix and ask 
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - **Confusing Accessibility with Communication:** Grouping states $0, 1, 2$ into one class simply because state 2 can jump to states 0 and 1.
@@ -199,27 +164,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Classification of States in Markov Chains]] distinguishes closed classes from absorbing individual states. States zero and one are recurrent without either being absorbing by itself.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Classification of States in Markov Chains]]
 
 ## Source
 

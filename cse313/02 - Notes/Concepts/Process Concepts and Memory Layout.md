@@ -12,129 +12,57 @@ order: 4
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Suppose you start the same executable twice. The instructions can be identical, yet one instance may be reading input while the other is calculating. They need separate current values, separate call histories, and separate positions in the instructions. These active instances are **processes**.
 
-On storage media, a computer program is merely an inert, passive sequence of bytes: compiled machine code instructions and static data constants stored inside an ELF or PE binary file.
+A process combines an address space with an execution context and OS-managed resources. Its code tells the CPU what operations are possible. Its program counter and registers tell us where this particular execution has reached. Its stack records active function calls; its heap holds dynamically allocated objects; its data regions hold longer-lived program data.
 
-We want the CPU to execute this program, track its dynamic variables as they change during execution, maintain its function call history, and allow multiple instances of the same program to run simultaneously without interfering with one another. The central obstacle is that a static binary has no runtime state: it has no program counter, no dynamic stack frames, and no allocated heap.
+Here is an illustrative way to place variables: a global initialized integer belongs to initialized data; a zero-initialized global belongs to BSS; a function's automatic local often occupies its stack frame; an object obtained through `malloc` belongs to a heap allocation. Optimizing compilers can keep a local in a register, so source-level lifetime does not guarantee a particular address.
 
----
+Private virtual address spaces let two processes use the same numeric address for different data. The protection and translation machinery from [[Dual-Mode Operation and System Calls]] supplies the separation. Physical pages can still be shared intentionally or shared until a copy-on-write update occurs.
 
-## Developing the Idea
+## What a process owns
 
-To bridge this gap, the operating system creates the **Process** abstraction: an active instance of a program in execution.
+A process is a running program instance with an address space, execution state, and managed resources. A program file can be used by several processes; each execution may be at a different instruction with different data.
 
-A process encapsulates both the static program and its complete dynamic operational environment:
-- As Tanenbaum's cake baking analogy illustrates: the recipe is the program, the baker is the CPU, the ingredients are the input data, and the activity of mixing and baking is the process.
-- To prevent conflicts, the OS assigns each process a private, continuous **Virtual Address Space** partitioned into distinct logical segments: Text (read-only code), Initialized Data, Uninitialized Data (BSS), Heap (growing dynamically upward), and Stack (growing dynamically downward).
+The following is a conventional layout, not a promise about exact addresses or growth directions:
 
----
-
-## Definition
-
-A **process** is a **program in execution**. It is the fundamental unit of computation and resource allocation in an operating system.
-
-While a **program** is a passive, inert collection of instructions stored on disk (an executable binary such as `/bin/ls` or `firefox.exe`), a **process** is an active, dynamic entity that possesses:
-- An allocated address space in physical/virtual memory.
-- An execution context, including a Program Counter (PC), CPU registers, and call stack.
-- Dedicated operating system resources (open file descriptors, network sockets, child process references).
-
-Multiple distinct processes can run instances of the same underlying program simultaneously (e.g., opening three separate terminal windows or browser tabs running the same binary).
-
----
-
----
-
-## How It Works
-
-The mechanism operates through coordinated hardware execution and operating system kernel protocols.
-
----
-
-## Example
-
-Consider running two separate terminal windows each executing `./my_program`:
-- Both processes share the exact same physical memory frames for their read-only Text segment (code instructions).
-- Each process has completely independent physical memory frames for their Data, Heap, and Stack segments.
-- If Process 1 modifies variable `x = 100`, Process 2 still reads `x = 0`. Each operates within its own private address space.
-
----
-
-## Technical Details
-
-### Stack vs. Heap: Critical Comparison
-
-| Dimension | Stack Segment | Heap Segment |
+| Region | Typical contents | Lifetime and purpose |
 |---|---|---|
-| **Allocation Mechanism** | Automatic by compiler instructions (`sub esp, N`) | Explicit by programmer (`malloc()`, `free()`) |
-| **Growth Direction** | Grows **downward** (toward lower addresses) | Grows **upward** (toward higher addresses) |
-| **Deallocation** | Automatic on function return | Manual (or via garbage collection); risk of memory leaks |
-| **Access Speed** | Blazing fast (contiguous, cached in L1/L2) | Slower (pointer dereferencing, fragmentation) |
-| **Size Limit** | Fixed default limit (e.g., 8 MB in Linux; exceeds $\to$ **Stack Overflow**) | Bounded only by available virtual memory and swap space |
+| Text | Machine instructions | Provides the executable program; permissions usually prohibit ordinary writes. |
+| Initialized data | Initialized globals and static objects | Retains program-wide state. |
+| BSS | Zero-initialized globals and static objects | Receives zeroed storage without storing every zero in the executable file. |
+| Heap/dynamic regions | Allocated objects | Lifetime follows the allocator or runtime's rules rather than function return. |
+| Stack | Active call frames, saved state, some automatic locals | Follows nested calls; a multithreaded process usually has a stack per thread. |
 
----
+A compiler may keep a local variable in a register or optimize it away. Memory-mapped files, shared libraries, and other mappings also occupy address space beyond this simplified picture.
 
----
+## Stack and heap costs
 
-## Important Properties and Why They Hold
+Stack allocation often adjusts a pointer, while dynamic allocation manages storage with a runtime allocator. This can make their **allocation** costs differ. Access to an object is not intrinsically faster just because it is on a stack: locality, caching, indirection, and generated instructions determine the cost.
 
-- **Address Space Isolation:** Memory protection hardware (MMU page tables) ensures that Process $A$ cannot read or alter memory in Process $B$ without explicit shared-memory IPC primitives.
-- **Stack-Heap Separation:** The stack grows downward toward lower memory addresses with every function call; the heap grows upward via `brk()` / `sbrk()` or `mmap()`. Collision between them results in out-of-memory errors or stack overflow exceptions.
-- **Reentrancy of Code:** The text segment is marked execute-only and read-only, allowing multiple concurrent processes to safely share the same physical code frames.
+Common diagrams show a downward-growing stack and an upward-growing heap. Actual platforms may use other layouts, multiple dynamic regions, randomization, guard pages, and explicit resource limits. There is no universal eight-megabyte stack limit.
 
----
+## Sharing without losing isolation
 
-## Common Mistakes
+Virtual memory can map the same numeric address to different physical pages in different processes. Read-only code pages may be shared. After `fork`, writable pages can also remain physically shared through copy-on-write until a modification requires a private copy. Explicit shared mappings are another case.
 
-1. **Stack Overflow:**
-   - Caused by infinite or deeply nested recursion, or allocating large arrays locally on the stack (e.g., `char huge[10000000];` inside a function).
-   - The stack pointer collides with the guard page or heap, generating a segmentation fault (`SIGSEGV`).
-2. **Buffer Overflow Attacks:**
-   - Writing beyond the bounds of a stack-allocated buffer can overwrite the saved function return address, hijacking the CPU's Program Counter to execute malicious code (mitigated by stack canaries, ASLR, and non-executable stack bits).
-3. **Memory Leaks and Dangling Pointers:**
-   - Failure to `free()` heap memory exhausts available virtual addresses over time.
-   - Accessing heap memory after calling `free()` leads to undefined behavior.
+Thus private writable **behavior** does not require every page to be physically separate at every moment. Modifying an ordinary private variable in one process does not modify the corresponding variable in another.
 
----
+## Failure cases to distinguish
 
----
+Deep recursion can exhaust stack capacity. A buffer overrun accesses beyond an object's bounds and may corrupt data or violate memory protection. A memory leak retains allocations longer than intended; a dangling pointer refers to storage whose lifetime has ended. These are different errors even though all involve memory.
 
-## Exam Relevance
+## What to carry forward
 
-- **Next Step:** As a process executes through its memory segments, how does its status change between waiting for I/O and running on the CPU? (See [[Process Lifecycle and State Transitions]]).
-- **Process Context:** The hardware registers and segment pointers are tracked inside the [[Process Control Block and Context Switching]].
-- **Process Duplication:** When `fork()` is called, how are these memory segments replicated? (See [[Process Creation and Termination Operations]] and [[Process Forking and Zombie Orphan Example]]).
-- **Exam Testing:** Standard exam questions include:
-  - Drawing and labeling the 5 segments of a process memory layout from low to high memory.
-  - Identifying which segment a given variable resides in (e.g., global, static, local, or dynamically allocated).
+A process is an execution instance, not an executable file. [[Process Lifecycle and State Transitions]] tracks whether it can run now; [[Process Control Block and Context Switching]] tracks the saved information needed to resume it. Growth directions and segment layouts are conventional diagrams, not universal memory-layout laws.
 
----
+## Related notes
 
----
-
-## Related Concepts
-
+- [[Dual-Mode Operation and System Calls]]
 - [[Process Lifecycle and State Transitions]]
 - [[Process Control Block and Context Switching]]
-- [[Process Creation and Termination Operations]]
-- [[Threads and Multithreading Models]]
-
----
-
-## Prerequisites
-
-- [[Computer Booting and Hardware Abstractions]]
-- [[Operating System Structures and Functions]]
-
----
-
-## Problems
-
-- [[Problem — Fork Execution Tree and Process Tracing]]
-
----
 
 ## Sources
 

@@ -12,36 +12,13 @@ order: 63
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+Sort the $m$ $p$-values from smallest to largest. Compare rank $i$ with the increasing threshold $iq/m$, then find the largest rank $k$ that passes. Reject every hypothesis at ranks 1 through $k$.
 
-The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
+The last passing rank determines the whole rejection set. Do not stop at the first failure: a later threshold is larger and may pass. Also preserve the mapping from sorted positions back to original hypotheses so the discoveries can be identified correctly.
 
-It ensures that the expected proportion of false positives among all declared discoveries does not exceed a user-specified threshold $q \in (0, 1)$ (typically $q = 0.05$):
-$$\text{FDR} = E\left[\frac{V}{\max(R, 1)}\right] \le \frac{m_0}{m} q \le q$$
-
-It solves the excessive conservatism of the classical [[Multiple Testing and False Discovery Rate|Bonferroni correction]], dramatically increasing statistical power to detect real effects in large-scale data science and bioinformatics experiments.
-
----
-
----
-
-## Developing the Core Idea
-
-Rather than comparing every $p$-value against a fixed, brutally small threshold $\alpha/m$ (as Bonferroni does), the BH procedure compares ordered $p$-values against a **linearly increasing threshold**:
-
-$$\ell_i = \frac{i}{m} q, \quad i = 1, 2, \dots, m$$
-
-- The smallest $p$-value ($i = 1$) is compared against $\frac{1}{m}q$ (same as Bonferroni).
-- The 10th smallest $p$-value ($i = 10$) is compared against $\frac{10}{m}q$ (10 times more lenient!).
-- The largest $p$-value ($i = m$) is compared against $q$.
-
-By finding the largest index $k$ where the data still fall below the threshold line, the algorithm safely rejects **all** hypotheses up to rank $k$.
-
----
-
----
+The usual BH guarantee holds for independent valid $p$-values and certain forms of positive dependence. Arbitrary dependence needs another justified method or adjustment. The target $q$ concerns the expected false discovery proportion across repetitions, not the posterior probability that each individual rejected hypothesis is false.
 
 ## Inputs
 
@@ -56,8 +33,6 @@ By finding the largest index $k$ where the data still fall below the threshold l
 ---
 
 ## How It Works
-
-### How It Works
 
 1. **Sort:** Order the $m$ raw $p$-values from smallest to largest:
    $$P_{(1)} \le P_{(2)} \le \dots \le P_{(m)}$$
@@ -82,11 +57,7 @@ By finding the largest index $k$ where the data still fall below the threshold l
 
 ---
 
----
-
 ## Pseudocode
-
-### Pseudocode
 
 ```python
 def benjamini_hochberg(p_values, q=0.05):
@@ -119,8 +90,6 @@ def benjamini_hochberg(p_values, q=0.05):
 
 ---
 
----
-
 ## Example
 
 ### Worked Example: 10 Tests Comparison
@@ -148,14 +117,10 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 
 ---
 
----
-
 ## Complexity
 
 - **Time Complexity:** $O(m \log m)$ dominated by sorting the $m$ $p$-values. The subsequent linear scan is $O(m)$.
 - **Space Complexity:** $O(m)$ to store sorted indices and threshold comparisons.
-
----
 
 ---
 
@@ -166,8 +131,6 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 1. **Exact FDR Bound:** Under independence of test statistics (or positive regression dependency PRDS), Benjamini and Hochberg proved that:
    $$\text{FDR} = E\left[\frac{V}{R}\right] = \frac{m_0}{m} q \le q$$
 2. **Monotonicity:** Any hypothesis rejected by Bonferroni is guaranteed to also be rejected by Benjamini-Hochberg ($R_{\text{Bonferroni}} \subseteq R_{\text{BH}}$).
-
----
 
 ---
 
@@ -190,24 +153,13 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 
 ---
 
-## Related Concepts
+## What to carry forward
 
-- [[Hypothesis Testing Framework]]
-- [[Multiple Testing and False Discovery Rate]]
+[[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]] compares the rejection sets for the same data. Sorting takes $O(m\log m)$ time; the threshold scan is linear.
 
----
-
-## Prerequisites
-
-- [[Hypothesis Testing Framework]]
-
----
-
-## Problems
+## Related notes
 
 - [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
-
----
 
 ## Sources
 

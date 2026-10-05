@@ -12,34 +12,13 @@ order: 43
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Maximum likelihood asks which parameter value makes the observed data most compatible with the sampling model. The data are held fixed while the parameter varies. The likelihood is therefore a function of the parameter, even though it is built from the model's probability mass or density.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum Likelihood Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+For independent observations, multiply their masses or densities. Taking a logarithm preserves maximizers and converts that product into a sum, making derivatives easier. Parameters impossible under the observed data receive likelihood zero; support restrictions are part of the calculation.
 
----
-
-## Developing the Idea
-
-Think of maximum likelihood estimation through the lens of a detective investigating a crime scene:
-- You have already observed the clues (the dataset $X_1, \dots, X_n$).
-- There are several plausible suspects or explanations (hypotheses / parameters $\theta$).
-- For each suspect $\theta$, you compute the probability that their actions would have generated the exact physical evidence found at the scene.
-- The MLE picks the suspect under whose hypothesis the observed evidence is **most probable**.
-
-### Connection to Bayes' Rule
-Why is maximizing $P(\text{data} \mid \theta)$ a sensible way to choose $\theta$?
-By Bayes' rule:
-$$P(\theta \mid \text{data}) = \frac{P(\text{data} \mid \theta) P(\theta)}{P(\text{data})}$$
-
-If we assume a priori that all parameter values $\theta$ are equally likely (a flat, non-informative uniform prior $P(\theta) = c$), then:
-$$P(\theta \mid \text{data}) \propto P(\text{data} \mid \theta) = L_n(\theta)$$
-Thus, **the MLE is exactly the parameter value that maximizes the posterior probability under a uniform prior!**
-
----
-
----
+A likelihood is not a probability distribution over parameter values and need not integrate to one over the parameter space. To obtain such a distribution in [[Bayesian Inference]], combine it with a prior and normalize. For an MLE, find the global maximum over the admissible parameter space, checking boundaries as well as stationary points.
 
 ## Definition
 
@@ -55,8 +34,6 @@ $$\hat{\theta}_n = \arg\max_{\theta \in \Theta} L_n(\theta)$$
 Because the natural logarithm is a strictly monotonically increasing function, maximizing $L_n(\theta)$ is mathematically equivalent to maximizing the **log-likelihood function** $\ell_n(\theta)$:
 $$\ell_n(\theta) = \log L_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta)$$
 $$\hat{\theta}_n = \arg\max_{\theta \in \Theta} \ell_n(\theta)$$
-
----
 
 ---
 
@@ -130,30 +107,7 @@ Maximum likelihood optimizes for making the observed data likely; it makes zero 
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 1. **Attempting to differentiate without checking support:**
    Trying to differentiate the likelihood of $\text{Uniform}(0, \theta)$ with respect to $\theta$ and setting it to zero yields $-n/\theta^{n+1} = 0$, which has no solution!
@@ -164,11 +118,7 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
-
 ## Exam Relevance
-
-### Exam Relevance
 
 MLE is one of the most heavily tested topics in computing and data science examinations. Expected questions include:
 1. Setting up likelihood and log-likelihood functions for common distributions (Normal, Bernoulli, Poisson, Exponential, Geometric, Uniform).
@@ -187,34 +137,14 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Uniform Distribution Non-Regular MLE Example]] shows why setting a derivative to zero can miss the answer. The support condition can determine the maximizing boundary.
 
-- [[Likelihood and Score Equations]]
-- [[Point Estimation]]
-- [[Estimator Consistency and Convergence]]
-- [[Maximum A Posteriori (MAP) Estimation]]
+## Related notes
+
 - [[Bayesian Inference]]
-
----
-
----
-
-## Prerequisites
-
-- Calculus (derivatives, partial derivatives, critical points, logarithmic differentiation)
-- Probability density functions and joint distributions of independent random variables
-
----
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Uniform Distribution Non-Regular MLE Example]]
 
 ## Sources
 

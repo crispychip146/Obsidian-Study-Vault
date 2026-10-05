@@ -12,8 +12,6 @@ order: 10
 
 ---
 
----
-
 ## Problem
 
 Understanding process creation, variable isolation, and process termination in UNIX requires analyzing real POSIX C implementations.
@@ -25,29 +23,15 @@ We examine three fundamental scenarios:
 
 ---
 
----
-
-## Given
-
-- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
-
----
-
-## Required
-
-- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
-
----
-
 ## Solution
 
-### Scenario 1: Standard `fork()` and Variable Isolation
+Read the fork examples as histories of **two identities**. In [[Process Creation and Termination Operations]], a successful fork produces two return paths. Each process then updates its own ordinary variables. Thus the child's `global_counter=65` and the parent's `global_counter=50` can coexist without contradiction: they belong to distinct address spaces.
+
+For termination, ask which side ends first. If the child exits while the parent has not collected its status, the child becomes a **zombie**: it is no longer executing, but an exit record remains. If the parent exits while the child is still running, the child becomes an **orphan**: its execution continues under a new parent or reaper.
+
+The distinction is about relationships and lifetime, not two kinds of running background jobs. In a controlled trace, mark the fork, each branch's updates, each exit, and each wait. Scheduling can change the order of messages, but it cannot make a child's ordinary private variable update change the parent's copy.
+
+The printed PIDs below are illustrative. They identify roles in the trace; they are not outputs that every run must reproduce.
 
 ### C Implementation:
 ```c
@@ -93,8 +77,6 @@ int main() {
 
 ---
 
----
-
 ### Scenario 2: Creating a Zombie Process in C
 
 A zombie occurs when a child terminates, but its parent is sleeping or busy and fails to call `wait()`.
@@ -132,8 +114,6 @@ UID   PID  PPID  C STIME TTY          TIME CMD
 - The child (PID 4521) is marked **`<defunct>`** (state `Z`).
 - It has released its memory and file descriptors, but its PCB remains in the Process Table waiting for PID 4520 to invoke `wait()`.
 - When the parent finishes its 30-second sleep and exits, the zombie child is adopted by `systemd` (PID 1), which reaps it instantly.
-
----
 
 ---
 
@@ -178,8 +158,6 @@ $
 
 ---
 
----
-
 ### How to Properly Reap Child Exit Status
 
 To prevent zombies, a parent should always use `wait(&status)` or `waitpid(pid, &status, options)`:
@@ -201,20 +179,6 @@ if (WIFEXITED(status)) {
 
 ---
 
----
-
-## Result
-
-The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
-
----
-
-## Why This Works
-
-Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
-
----
-
 ## Common Mistakes
 
 - **Output Order Non-Determinism:** Never assume the child will print before the parent or vice versa. Process scheduling order depends entirely on the CPU scheduler!
@@ -222,22 +186,14 @@ Each state transformation follows the operational semantics of kernel execution,
 
 ---
 
----
+## What to carry forward
 
-## General Method
+Check both execution and cleanup. A live orphan can still need CPU time; a zombie cannot execute. Reparenting may use an eligible subreaper rather than PID 1. [[Problem — Fork Execution Tree and Process Tracing]] develops the same branch reasoning when several fork calls are reachable.
 
-Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Process Creation and Termination Operations]] — Theoretical foundations of `fork()`, `exec()`, zombies, and orphans.
-- [[Problem — Fork Execution Tree and Process Tracing]] — Tracing multi-level nested `fork()` call trees.
-
----
-
----
+- [[Process Creation and Termination Operations]]
+- [[Problem — Fork Execution Tree and Process Tracing]]
 
 ## Sources
 

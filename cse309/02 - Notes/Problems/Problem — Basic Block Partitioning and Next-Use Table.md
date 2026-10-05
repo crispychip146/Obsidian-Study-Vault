@@ -12,8 +12,6 @@ order: 41
 
 ---
 
----
-
 ## Problem
 
 Given the following intermediate code fragment:
@@ -40,49 +38,15 @@ Given the following intermediate code fragment:
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+The branch at `(4)` creates two possible routes; `(7)` jumps over the alternative; `(11)` returns to the beginning or falls through to halt. Each target and each following instruction marks a potential block boundary.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+Use [[Basic Block Partitioning Algorithm]] to identify leaders with their supporting rules, then add CFG edges from block-ending instructions. Do not draw an unconditional-jump fall-through edge merely because the next instruction is textually adjacent.
 
-### Working Through the Solution
-### Step-by-Step Solution
+For the block `(5),(6),(7)`, initialize the suffix state using the stated live-out set. The jump has no ordinary arithmetic operands; assignments define p and q while reading x and y. Apply the backward transfer from [[Liveness and Next-Use Analysis within Basic Blocks]] and state whether the row describes before or after.
+
+The live-out set is an explicit assumption for the local exercise. A future global analysis could compute a more precise boundary, but changing it mid-solution would answer a different question.
 
 ### Part 1: Identifying Leaders
 
@@ -172,43 +136,14 @@ Block $B_2$ contains:
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+First solve control-flow boundaries, then solve values within the selected block. An instruction number can identify a jump target or a next use; explain which relationship your table is recording.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Basic Block Partitioning Algorithm]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
 
 ## Source
 

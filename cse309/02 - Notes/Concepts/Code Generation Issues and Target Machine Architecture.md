@@ -12,102 +12,17 @@ order: 32
 
 ---
 
----
+## Building the idea
 
----
+TAC says what values to compute. Code generation decides which target instructions implement those computations and where their operands live. A source-level addition may need loads, an arithmetic instruction, and a store depending on the target and the current register state.
 
----
+Separate **instruction selection** from **register allocation** and **assignment**. Selection chooses an instruction pattern; allocation determines which live values remain in registers; assignment chooses particular registers subject to constraints. Their choices interact, but they answer different questions.
 
----
+The target model below defines instructions and addressing costs for classroom reasoning. Its cost units need not be literal cycles on a modern processor. Use that model consistently when comparing two instruction sequences.
 
-## Starting Point and the Problem
-
-The final phase in a compiler is the **Code Generator**. It takes as input the optimized intermediate representation (Three-Address Code, AST, or DAG) along with symbol table information, and maps it into semantically equivalent, efficient **target machine code** (assembly or machine code).
-
-```mermaid
-flowchart LR
-    IR["Intermediate Representation (TAC / Quadruples)"] --> CG["Code Generator"]
-    ST["Symbol Table (Types, Offsets)"] --> CG
-    CG --> Target["Target Machine Assembly / Machine Code"]
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Generating optimal code is mathematically **undecidable** in the general case and **NP-complete** for most practical sub-problems. Code generators therefore rely on carefully designed heuristics to balance five fundamental issues:
-
-```mermaid
-graph TD
-    Issues["Code Generator Design Issues"]
-    Issues --> I1["1. Input IR Format"]
-    Issues --> I2["2. Target Machine Architecture"]
-    Issues --> I3["3. Instruction Selection"]
-    Issues --> I4["4. Register Allocation & Assignment"]
-    Issues --> I5["5. Evaluation Order"]
-```
-
-### 1. Input to the Code Generator
-The input IR must be type-checked and syntactically validated. The code generator assumes the IR is correct and free of syntactic/semantic errors.
-
-### 2. Target Machine Architecture
-The instruction-set architecture (ISA) dictates the difficulty of code generation:
-- **RISC (Reduced Instruction Set Computer):** Fixed-length instructions, load-store architecture (arithmetic operates exclusively on registers), large uniform register set. Easier for compiler code generation.
-- **CISC (Complex Instruction Set Computer, e.g., x86):** Variable-length instructions, two-address instructions, memory-to-register arithmetic, specialized registers with non-uniform constraints (e.g., `%eax` for multiplication/division).
-
-### 3. Instruction Selection
-Choosing the best machine instruction sequence to implement each IR statement.
-- *Example:* For $x = x + 1$:
-  - Option A: `LD R0, x; ADD R0, R0, #1; ST x, R0` (Cost: 3)
-  - Option B: `INC x` (Cost: 1)
-Poor instruction selection produces bloated, slow binaries.
-
-### 4. Register Allocation and Assignment
-Registers are the fastest storage units in a computer (sub-nanosecond access). 
-- **Register Allocation:** Deciding *which values* should reside in registers at each program point.
-- **Register Assignment:** Deciding *which specific physical register* (e.g., `R0` vs. `R1`) each variable will occupy.
-- Because hardware registers are strictly limited, excess variables must be spilled to RAM.
-
-### 5. Evaluation Order
-The order in which independent computations are executed significantly affects register pressure. Evaluating expressions in one order may require 2 registers, whereas evaluating in another order may require 4 registers!
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Code Generation Issues and Target Machine Architecture** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Intermediate Representations and Three-Address Code]] supplies input operations. [[Liveness and Next-Use Analysis within Basic Blocks]] tells us which values must survive, so the generator can avoid discarding needed operands while reusing scarce registers.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### A Simple Target Machine Model
 
@@ -139,161 +54,9 @@ $$\text{Cost} = 1 + \sum (\text{Cost of Addressing Modes})$$
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 ### Code Generation Example
 
@@ -313,38 +76,19 @@ If $y$ is already in register $R_0$ from a preceding operation:
 ADD  R0, R0, z    /* Cost: 2 */
 ST   x, R0        /* Cost: 2 */
 ```
-**Total Cost:** $4$ (a $33\%$ speed improvement purely from register reuse!).
+**Total Cost:** $4$ (one-third less cost in this instruction model; this is not a universal execution-time speedup).
 
 ---
 
----
+## What to carry forward
 
----
+A shorter sequence is not automatically faster on every target. Compare legal instructions, dependencies, memory accesses, and the stated cost model. [[A Simple Code Generator Algorithm]] keeps explicit descriptors to make these choices traceable.
 
----
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
 - [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
+- [[A Simple Code Generator Algorithm]]
 
 ## Sources
 

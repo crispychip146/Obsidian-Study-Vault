@@ -12,134 +12,17 @@ order: 17
 
 ---
 
----
+## Building the idea
 
----
+Treat every pending jump as an unfinished edge in the control-flow graph. `makelist` records the edge's instruction position; `merge` combines edges needing the same destination; `backpatch` supplies that destination when it becomes known.
 
----
+The Boolean rules follow [[Control Flow Translation and Boolean Expressions]]. AND connects the left true path to the right test; OR connects the left false path. Statement rules connect normal continuation, alternatives, and loop-back edges according to the source construct.
 
----
+Trace a marker when encountered, before translating the following subtree. Its `quad` is the first instruction of that subtree, not the last one eventually emitted. For a loop, the condition start and body start are different boundaries, and confusing them can skip a test or create the wrong cycle.
 
-## The Problem and Earlier Tools
-
-The **Backpatching Algorithm** generates intermediate Three-Address Code (represented as quadruples or tuples indexed by integers called **quads**) for boolean expressions and control-flow statements in a **single pass**.
-
-### 1.1 Global State & Primitives
-The compiler maintains:
-1. `quad[]`: An array of instruction tuples `(op, arg1, arg2, target)`.
-2. `nextquad`: An integer counter initialized to `1` (or `100`), pointing to the array slot where the next instruction will be placed.
-
-```python
-class BackpatchEngine:
-    def __init__(self, start_quad=100):
-        self.quad = {}           # quad_index -> instruction_string
-        self.nextquad = start_quad
-
-    def emit(self, instruction_template: str) -> int:
-        """Emits an instruction with an optional placeholder '_' for target.
-        Returns the quad index where the instruction was recorded."""
-        q = self.nextquad
-        self.quad[q] = instruction_template
-        self.nextquad += 1
-        return q
-
-    def makelist(self, i: int) -> list:
-        """Creates and returns a new list containing single instruction quad i."""
-        return [i]
-
-    def merge(self, p1: list, p2: list) -> list:
-        """Concatenates two lists of quads. Cost: O(1) if using linked lists."""
-        return p1 + p2
-
-    def backpatch(self, p: list, target_quad: int) -> None:
-        """Patches target_quad into every instruction on list p."""
-        for q in p:
-            # Replace placeholder '_' with the concrete target quad
-            self.quad[q] = self.quad[q].replace('_', str(target_quad))
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-Why must the grammar include marker non-terminals $M$ and $N$?
-- In a bottom-up LR parser, semantic actions execute only when a production **reduces**.
-- If an action needs to fire in the middle of a production (for instance, recording `nextquad` right before statement $S_1$ begins), an ordinary production cannot execute code until the entire statement finishes!
-- Inserting an $\epsilon$-marker non-terminal $M \to \epsilon$ forces the parser to reduce $M$ the exact moment the tokens preceding $M$ are consumed.
-
-### The Two Standard Markers:
-1. **Address Snapshot Marker $M$:**
-   $$M \longrightarrow \epsilon \quad \{ M.quad = nextquad; \}$$
-2. **Unconditional Escape Marker $N$:**
-   $$N \longrightarrow \epsilon \quad \{ N.nextlist = \text{makelist}(nextquad); \; \text{emit}(\text{'goto _'}); \}$$
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+The linear-time argument depends on constant-time list concatenation and each pending edge being traversed only a bounded number of times. A copying merge implementation can repeatedly traverse growing lists and lose that bound.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### SDT Specification: Boolean Expressions
 
@@ -209,110 +92,6 @@ Production                                      Semantic Actions
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 ### Time Complexity
@@ -350,109 +129,23 @@ $O(N)$ auxiliary memory for data structures.
 
 ---
 
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Backpatching Control-Flow Code Generation Algorithm on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+Prove correctness through list meaning: every member represents an exit of the indicated kind, and patching sends it to the required continuation. A completed trace is evidence for one input; the list invariant explains the general method.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Control Flow Translation and Boolean Expressions]]
 
 ## Sources
 

@@ -12,97 +12,17 @@ order: 43
 
 ---
 
----
+## Building the idea
 
----
+A computed value needs storage only while some future use may still require it. Its **live range** consists of the relevant program points; different definitions of one source variable may form different ranges.
 
----
+A **live interval** approximates that range along a chosen linear instruction order, from an early required point to a late one. If the true range has holes, the interval includes them, creating conservative overlaps that may increase register pressure.
 
----
+An illustrative value used at positions 2 and 10 may not be needed on every path or at every intervening point. A single interval hides those details; splitting can create separate register-resident pieces joined by copies or spills.
 
-## Starting Point and the Problem
-
-In high-level languages, programs can contain hundreds or thousands of variables and temporaries. However, physical microprocessors typically possess only a modest number of general-purpose hardware registers (e.g., 16 in x86-64, 32 in ARM64 or RISC-V).
-
-To execute the program without running out of registers, the compiler must allocate physical registers so that **two variables share the same hardware register if and only if they are never needed at the same time**.
-
-To determine when variables are in use, compilers compute **Live Ranges** and **Live Intervals**.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-```mermaid
-flowchart TD
-    subgraph DefUse ["Timeline of Variable v"]
-        direction LR
-        Def["Definition Point (def)"] --> P1["Point 1 (Live)"]
-        P1 --> P2["Point 2 (Live)"]
-        P2 --> LastUse["Last Use Point (kill)"]
-        LastUse --> Dead["Dead (Available for other variables)"]
-    end
-```
-
-### 1. Live Variable
-A variable $v$ is **live** at a program point $p$ if its current value may be read along some future execution path before it is overwritten by a new definition.
-
-### 2. Live Range
-The exact set of program points $\{ p_1, p_2, \dots, p_k \}$ where variable $v$ is live. In general flow graphs with branches and loops, a live range may have holes or disjoint branches.
-
-### 3. Live Interval
-A 1-dimensional, contiguous approximation of a variable's live range represented as a numeric interval:
-$$[ \text{start}, \text{end} ]$$
-- $\text{start}$: The earliest instruction index where the variable is defined or becomes live.
-- $\text{end}$: The latest instruction index where the variable is used for the last time.
-
-```
-Program Point: 0    1    2    3    4    5    6    7    8    9    10
-a:             |====|                                                [0, 1]
-b:             |=========|                                           [0, 3]
-c:             |========================|                            [0, 7]
-d:             |=============================|                       [0, 8]
-e:                  |=============================|                  [1, 9]
-f:                       |========================|                  [2, 9]
-g:                                                |====|             [9, 10]
-```
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Live Ranges and Live Intervals in Register Allocation** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Liveness and Next-Use Analysis within Basic Blocks]] develops the local need information. Register allocation uses that information to decide which values may share a physical register without overwriting one another while both are required.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Live Range Splitting
 
@@ -117,9 +37,6 @@ If we must spill $x$, spilling $x$ across the *entire* program generates heavy m
 **Live Range Splitting** divides the long interval of $x$ into smaller independent sub-intervals $[s_1, e_1]$ and $[s_2, e_2]$ separated by explicit spill stores and loads. This allows $x$ to occupy a register during critical inner loops and spill to memory only during intermediate dormant periods.
 
 ---
-
----
-### Technical Details
 
 ### Register Interference
 
@@ -139,187 +56,15 @@ If two variables interfere, they **CANNOT** be assigned the same physical hardwa
 
 ---
 
----
-### Important Properties and Why They Hold
+## What to carry forward
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
+[[Linear Scan Register Allocation Algorithm]] exploits linear intervals. [[Register Interference Graphs and Graph Coloring Principles]] represents conflicts more directly. State endpoint conventions: inclusive and half-open intervals require different expiration comparisons.
 
----
-### Related Concepts
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
+- [[Linear Scan Register Allocation Algorithm]]
+- [[Register Interference Graphs and Graph Coloring Principles]]
 
 ## Sources
 

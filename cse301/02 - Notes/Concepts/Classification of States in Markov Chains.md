@@ -12,31 +12,13 @@ order: 70
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Think of positive-probability transitions as directed edges. State $j$ is accessible from $i$ if some finite path leads from $i$ to $j$. Communication requires paths in both directions and partitions the state space into communicating classes.
 
-- **Decomposing Complex Systems:** Real-world Markov chains with thousands of states can be decomposed into smaller, self-contained sub-chains (communicating classes) that can be analyzed independently.
-- **Determining Long-Run Fate:** Knowing whether states are recurrent, transient, or absorbing tells us whether the system settles into an equilibrium, drifts to infinity, or gets trapped in absorbing barriers (as in [[Gambler's Ruin Formula]]).
-- **Prerequisite for Limiting Distributions:** A Markov chain possesses a unique, starting-state-independent limiting distribution if and only if it is irreducible, aperiodic, and positive recurrent (see [[Stationary and Limiting Distributions in Markov Chains]]).
+A class is closed when no transition can leave it. An absorbing state is the special case of a closed single state with $P_{ii}=1$. A recurrent state is returned to with probability one after departure; a transient state has a positive chance of never returning. In a finite chain, closed irreducible classes are recurrent, while states outside all closed classes are transient.
 
----
-
----
-
-## Developing the Idea
-
-Think of the Markov chain as a directed graph where vertices are states and directed edges exist wherever $P_{ij} > 0$:
-
-1. **Accessibility ($i \to j$):** A one-way road. You can drive from town $i$ to town $j$, but you might get stuck in town $j$ with no route back.
-2. **Communication ($i \leftrightarrow j$):** A two-way connection. You can drive from $i$ to $j$ and also return from $j$ to $i$, even if the outgoing and return routes take different roads and different lengths of time.
-3. **Irreducibility:** A fully connected transit network. From any station, every other station on the map is reachable, and you can always return home.
-4. **Absorbing State:** A black hole or dead-end cul-de-sac. Once you step into it, there are no outgoing roads.
-5. **Period ($d$):** A rhythmic clock. If a pendulum swings left and right, it can only return to the left side after an even number of ticks ($d = 2$). If a state has period $d=3$, you can only visit it on step $3, 6, 9, 12, \dots$.
-
----
-
----
+Period is the greatest common divisor of possible positive return times. A self-loop makes the period one, but is not necessary for aperiodicity. All states in an irreducible class share a period, so classify the class structure before studying limiting probabilities.
 
 ## Definition
 
@@ -90,11 +72,7 @@ $$f_i = P(\text{process ever returns to state } i \mid X_0 = i) = \sum_{n=1}^\in
 
 ---
 
----
-
 ## How It Works
-
-### How It Works
 
 ### Step-by-Step Procedure to Classify States
 
@@ -131,17 +109,7 @@ $$f_i = P(\text{process ever returns to state } i \mid X_0 = i) = \sum_{n=1}^\in
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
-
-### Technical Details
 
 ### Fundamental Theorems on Finite State Spaces
 1. **At Least One Recurrent State:** In any finite-state Markov chain, not all states can be transient. At least one state (and thus at least one closed communicating class) must be recurrent.
@@ -153,18 +121,7 @@ See worked numerical applications in the linked example notes.
 
 ---
 
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Assuming $P_{ij} = 0 \implies j$ is not accessible from $i$:** Forgetting that accessibility depends on $P_{ij}^n > 0$ for *some* $n \ge 1$ (multi-step path), not just direct one-step transitions.
 - **Confusing Closed Classes with Absorbing States:** An absorbing state is a *single* state with $P_{ii} = 1$. A closed class can have multiple communicating states (e.g., $\{0, 1\}$ with transitions between each other, but no transitions escaping the set).
@@ -173,11 +130,7 @@ See worked numerical applications in the linked example notes.
 
 ---
 
----
-
 ## Exam Relevance
-
-### Example
 
 ### Example 1: Verifying Irreducibility (3 States)
 $$P = \begin{pmatrix}
@@ -217,36 +170,13 @@ In CSE301 examinations:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Problem — Identification of Communicating Classes and Absorbing States]] separates reaching a state from communicating with it. Infinite chains require care: recurrence need not imply finite expected return time.
 
-- [[Markov Chain]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
-- [[Chapman-Kolmogorov Equations]]
-- [[Gambler's Ruin Formula]]
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Stochastic Process]]
-
----
-
----
-
-## Problems
-
-- [[Problem — State Communication and Irreducibility Verification]]
 - [[Problem — Identification of Communicating Classes and Absorbing States]]
-
----
-
----
 
 ## Sources
 

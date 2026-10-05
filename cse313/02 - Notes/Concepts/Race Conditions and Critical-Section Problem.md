@@ -12,10 +12,9 @@ order: 18
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q2a, 2019 Q2c)**
-> **Frequency:** ⭐⭐⭐⭐ **Foundational Theory of Concurrency**
+> [!IMPORTANT] **Exam practice references (Appeared in 2018 Q2a, 2019 Q2c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **The Four Essential Requirements for a Valid Critical Section Solution (2019 Q2c):**
 >    - **Mutual Exclusion:** If process $P_i$ is in its critical section, no other processes can enter their critical sections.
 >    - **Progress:** If the CS is empty and processes want to enter, only processes outside their remainder sections participate in selecting who enters next; selection cannot be postponed indefinitely.
@@ -26,34 +25,15 @@ order: 18
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A single line of source code can hide several machine operations. In an illustrative shared-counter update, one thread loads 5, computes 6, and stores 6. If another thread performs its own load before that store, it also starts from 5. Both can finish without either update having had the intended combined effect.
 
-When multiple concurrent processes or threads execute simultaneously on multi-core hardware or are interleaved via preemptive scheduling, they often read and write shared data structures in memory (such as a shared buffer count or account balance).
+A **race condition** means the outcome depends on an uncontrolled execution ordering. A language-level **data race** is a more specific notion involving unsynchronized conflicting accesses; in C and C++, it can cause undefined behavior rather than merely one of a few tidy interleavings. The classroom load/add/store trace explains the hazard under its machine model.
 
-We want the final state of the shared data and program outputs to remain strictly correct, predictable, and deterministic regardless of thread scheduling order. The central obstacle is that high-level programming language statements (like `count++` or `count--`) are **not atomic** at the machine instruction level: they decompose into separate Load, Modify, and Store instructions that can be arbitrarily interrupted.
+The critical section is the operation whose shared-state invariant needs protection. Locking only the final store does not protect a read-modify-write update, because the decision was already made using stale data. Protect the full relevant operation.
 
----
-
-## Developing the Idea
-
-If thread execution interleaves between the Load and Store instructions of a shared variable, updates are silently lost—a bug known as a **Race Condition**.
-
-To eliminate race conditions, computer scientists formalized the **Critical-Section Problem**:
-Any portion of code that accesses shared memory or shared resources is designated a **Critical Section (CS)**. The system must enforce an execution protocol:
-1. **Entry Section:** Requests permission to enter.
-2. **Critical Section:** Executes shared memory operations with guaranteed **Mutual Exclusion** (at most one thread inside at any time).
-3. **Exit Section:** Releases access and notifies waiting threads.
-4. **Remainder Section:** Executes non-critical local operations.
-
----
-
-## Definition
-
-
-
----
+[[Threads and Multithreading Models]] explains why memory can be shared; [[Process Control Block and Context Switching]] explains why execution can interleave. Mutual exclusion prevents overlap, but a useful solution also needs progress and a stated waiting/fairness guarantee. Those are separate properties to prove.
 
 ## How It Works
 
@@ -92,22 +72,18 @@ do {
 
 ---
 
----
+### Comparing entry mechanisms
 
-### 6. Summary Comparison of Fundamental Locking Primitives
+| Mechanism | Exclusion argument | Waiting and fairness limits |
+|---|---|---|
+| Disable interrupts | Prevents local interrupt-driven preemption in a suitable single-core kernel context. | Does not stop another core; keep the protected interval short. |
+| Ordinary check/set variable | Separate reads and writes can interleave. | Does not establish mutual exclusion. |
+| Strict alternation | Only the designated turn can enter. | A participant in its remainder section can block the other, violating progress. |
+| Peterson | Intent flags plus tie-breaking establish exclusion under the stated memory model. | Two participants; progress assumes eventual execution and finite critical sections. |
+| Test-and-set spinlock | Atomic acquisition prevents two successful owners. | Basic spinning does not guarantee bounded waiting. |
+| Mutex/semaphore protocol | Correct acquisition and release protect the relevant invariant. | Blocking behavior and fairness depend on the implementation and policy. |
 
-| Mechanism | Software/Hardware | Satisfies Mutual Exclusion? | Satisfies Progress? | Satisfies Bounded Waiting? | CPU Utilization During Wait |
-|---|---|---|---|---|---|
-| **Disabling Interrupts** | Hardware (Privileged) | Yes (single core only) | Yes | Yes | High (runs unhindered) |
-| **Lock Variable** | Pure Software | **No** (race condition) | N/A | N/A | Wasted (Busy-wait) |
-| **Strict Alternation** | Pure Software | Yes | **No** (outside blocking) | No (forced lock-step) | Wasted (Busy-wait) |
-| **Peterson's Algorithm** | Pure Software | **Yes** | **Yes** | **Yes** | Wasted (Busy-wait) |
-| **Hardware TSL / XCHG** | Hardware Atomic | **Yes** | **Yes** | Yes (with fair queuing) | Wasted (Spinlock) |
-| **Semaphores / Mutexes** | OS Kernel + Hardware | **Yes** | **Yes** | **Yes** | **Optimal** (Puts to Sleep) |
-
----
-
----
+Prove safety separately from progress and bounded overtaking. An atomic primitive alone does not supply all three.
 
 ## Example
 
@@ -121,23 +97,6 @@ The correct result was 5; the actual result is 6! One update was completely dest
 
 ---
 
-## Technical Details
-
-### 6. Summary Comparison of Fundamental Locking Primitives
-
-| Mechanism | Software/Hardware | Satisfies Mutual Exclusion? | Satisfies Progress? | Satisfies Bounded Waiting? | CPU Utilization During Wait |
-|---|---|---|---|---|---|
-| **Disabling Interrupts** | Hardware (Privileged) | Yes (single core only) | Yes | Yes | High (runs unhindered) |
-| **Lock Variable** | Pure Software | **No** (race condition) | N/A | N/A | Wasted (Busy-wait) |
-| **Strict Alternation** | Pure Software | Yes | **No** (outside blocking) | No (forced lock-step) | Wasted (Busy-wait) |
-| **Peterson's Algorithm** | Pure Software | **Yes** | **Yes** | **Yes** | Wasted (Busy-wait) |
-| **Hardware TSL / XCHG** | Hardware Atomic | **Yes** | **Yes** | Yes (with fair queuing) | Wasted (Spinlock) |
-| **Semaphores / Mutexes** | OS Kernel + Hardware | **Yes** | **Yes** | **Yes** | **Optimal** (Puts to Sleep) |
-
----
-
----
-
 ## Important Properties and Why They Hold
 
 - **The 4 Criteria Invariant:** A valid solution to the critical-section problem must strictly satisfy:
@@ -145,43 +104,20 @@ The correct result was 5; the actual result is 6! One update was completely dest
   2. *Progress:* Only processes attempting to enter CS participate in deciding who enters next; decision cannot be postponed indefinitely.
   3. *Bounded Waiting:* A bound exists on how many times other processes can enter CS after a process requests entry (prevents starvation).
   4. *Arbitrary Speed:* No assumptions can be made regarding CPU clock speed or scheduling quantum.
-- **Hardware Atomicity Foundation:** Pure software solutions require atomic hardware read/write memory semantics; on modern out-of-order processors, hardware atomic instructions (Test-and-Set, Compare-and-Swap) or memory barriers are mandatory.
+- **Memory-model assumption:** Shared reads and writes need a defined atomicity and ordering model. Use suitable language atomics or synchronization primitives; fences alone do not make data-racing ordinary C/C++ variables valid.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
+Atomicity describes an indivisible operation, not an entire application. [[Peterson's Algorithm and Hardware Mutual Exclusion]] develops ways to control entry. [[Semaphores and Synchronization Primitives]] adds waiting and signaling. A mutex or semaphore does not automatically promise bounded waiting unless its scheduling policy supplies that guarantee.
 
----
-
-## Exam Relevance
-
-Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
-
----
-
-## Related Concepts
-
-- [[Peterson's Algorithm and Hardware Mutual Exclusion]]
-- [[Semaphores and Synchronization Primitives]]
-- [[Monitors and Condition Variables]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[Threads and Multithreading Models]]
-- [[Process Concepts and Memory Layout]]
-
----
-
-## Problems
-
-- [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
+- [[Process Control Block and Context Switching]]
+- [[Peterson's Algorithm and Hardware Mutual Exclusion]]
+- [[Semaphores and Synchronization Primitives]]
 
 ## Sources
 

@@ -12,433 +12,79 @@ order: 6
 
 ---
 
----
+## Building the idea
 
----
+An LR parser normally acts on completed right-hand sides. An inherited value, however, may be needed **before** a child finishes parsing. Bottom-up evaluation must therefore make that value available at the appropriate earlier point.
 
----
+For a declaration `D -> T L`, T's type is known when T has been reduced. A marker nonterminal with an empty production can execute an action before L, copying the available type into a place L's actions can access. In applicable schemes, an action can also read already available attribute values at known parser-stack offsets.
 
----
+The marker does not consume input. Its role is scheduling a computation between grammar symbols. [[S-Attributed and L-Attributed SDDs]] explains the dependency constraint; the transformed grammar and LR states determine whether the required actions can actually be scheduled without parsing conflicts.
 
-## The Problem and Earlier Tools
+Draw the stack immediately before the action. Then locate the occurrence carrying the needed value. A memorized negative offset without that stack picture is easy to apply to the wrong occurrence.
 
-Most industry-standard compiler front-ends (such as Yacc, Bison, and CUP) are **Bottom-Up LALR(1) Parsers**.
+## Deriving the stack accesses
 
-As we learned in [[S-Attributed and L-Attributed SDDs]], bottom-up parsers are perfectly designed for **S-attributed definitions**: whenever a reduction occurs ($A \to X Y Z$), the children $X, Y, Z$ are sitting on top of the stack, their synthesized values are popped, and the result is pushed.
+Consider `D -> T L`, `T -> int | float`, and `L -> L , id | id`. T has a synthesized type; each identifier in L must receive it. The notation `top` below indexes semantic-value entries only, rather than an implementation's interleaved parser states.
 
-**The Dilemma:**  
-What happens when your programming language naturally requires **Inherited Attributes** (e.g., passing variable types down in `int a, b, c;` or passing code labels into loops)?
+Immediately before reducing `L -> id`, the relevant stack is:
 
-In bottom-up parsing, reductions occur at the **very end** of a production. But an inherited attribute must be evaluated **before** the children are parsed! 
+| Relative index | Symbol | Available value |
+|---|---|---|
+| `top - 1` | T | The declaration type |
+| `top` | id | The identifier entry |
 
-How can a bottom-up parser evaluate inherited attributes without building an explicit parse tree?
+The action needs the identifier at `top` and type at `top-1`. In Bison, however, dollar references are indexed relative to the **current right-hand side**, not directly by distance from the top. For this one-symbol rule, `$1` is id and `$0` is the symbol just before it, T. `$-1` would go one symbol farther back and is wrong for this stack.
 
-Compiler designers invented two foundational techniques:
-1. **Marker Non-Terminals ($\epsilon$-productions):** To force semantic actions to fire mid-production.
-2. **Parser Stack Relative Indexing (Negative Offsets):** To reach down into the runtime parser stack and retrieve attributes computed by earlier siblings!
+For `L -> L , id`, the previously reduced L can carry the type as a synthesized value. Then `$1` is the earlier L and `$3` is the new identifier. An educational action scheme is:
 
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-Suppose you have an action that must execute in the middle of a production:
-$$A \longrightarrow X \; \{ \text{action} \} \; Y$$
-
-An LR parser cannot execute actions mid-production because it only executes code upon a reduction!
-
-### The Marker Transformation:
-To force an LR parser to execute an action mid-stream, we introduce a dummy non-terminal $M$ that derives the empty string $\epsilon$:
-$$A \longrightarrow X \; M \; Y$$
-$$M \longrightarrow \epsilon \quad \{ \text{action} \}$$
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Parser as LR Parser Engine
-    actor Stack as LR Parser Stack
-    Note over Parser, Stack: 1. Shift symbols for X onto stack
-    Parser->>Stack: Push X
-    Note over Parser, Stack: 2. Force Mid-Stream Action via Marker Reduction!
-    Parser->>Stack: Reduce M -> epsilon (Fires embedded action!)
-    Note over Parser, Stack: 3. Shift symbols for Y onto stack
-    Parser->>Stack: Push Y
-    Note over Parser, Stack: 4. Final Reduction of Head
-    Parser->>Stack: Reduce A -> X M Y
-```
-
-### The Dark Side: The Marker Conflict Hazard
-> [!WARNING] The LALR(1) Marker Conflict Trap
-> Introducing $\epsilon$-markers is not free! Because the parser must decide to reduce $M \to \epsilon$ based on only 1 token of lookahead, introducing markers often creates **Shift/Reduce** or **Reduce/Reduce conflicts** in a grammar that was previously conflict-free. Always test whether an $\epsilon$-marker breaks LALR(1) compliance!
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-
-## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Technique 2: Finding Inherited Attributes on the Parser Stack
-
-In an LR parser, the parser stack does not just hold grammatical symbols; it holds an array of attribute values:
-$$\text{val}[0 \dots top]$$
-
-If an inherited attribute is passed from a symbol $C$ to a sibling $B$ to its right, **symbol $C$ is already sitting on the stack beneath $B$!**
-
-### Walkthrough: Type Declarations on the LR Stack
-Consider the standard variable declaration grammar:
-1. $D \longrightarrow T \; L$
-2. $T \longrightarrow \mathbf{int} \quad \{ T.type = \text{'integer'}; \}$
-3. $T \longrightarrow \mathbf{float} \quad \{ T.type = \text{'float'}; \}$
-4. $L \longrightarrow L_1 , \; \mathbf{id} \quad \{ \text{addType}(\mathbf{id}.entry, L.inh); \}$
-5. $L \longrightarrow \mathbf{id} \quad \{ \text{addType}(\mathbf{id}.entry, L.inh); \}$
-
-Notice that $L.inh = T.type$.
-
-Let us trace the parser stack for the input string:
-```c
-int a, b, c;
-```
-
-When the parser has shifted `int` and reduced $T \to \mathbf{int}$, and then shifted `a` and is about to reduce $L \to \mathbf{id}$:
-
-```
-Physical Parser Stack Layout:
-Index:        ... |  top - 1              |  top
---------------------------------------------------------------
-Grammar Sym:  ... |  T                    |  id ('a')
-Stack Value:  ... |  val[top-1] = 'int'   |  val[top] = entry('a')
---------------------------------------------------------------
-```
-
-Look at where $T.type$ is located!
-It is sitting at:
-$$\text{val}[top - 1]$$
-
-Therefore, the semantic action for $L \to \mathbf{id}$ does **NOT** need an explicit variable $L.inh$. It can reach directly into the stack at index `top - 1`!
-$$L \longrightarrow \mathbf{id} \quad \{ \text{addType}(\text{val}[top].entry, \; \text{val}[top - 1]); \}$$
-
-In Yacc / Bison syntax, this is written using **negative offset notation**:
 ```yacc
-L : ID  { addType($1, $-1); }  /* $-1 accesses the symbol immediately below L on the stack! */
+/* Schematic semantic values; declarations/types are omitted. */
+L : ID         { $$ = $0; addType($1, $$); }
+  | L ',' ID   { $$ = $1; addType($3, $1); }
+  ;
 ```
 
----
-### Generalizing Stack Access: Copy Rules and Constant Offsets
+The `$0` access is valid only when every relevant application of the base rule has the specified T immediately before it. Context-dependent stack access must be verified across all uses of L. This is why an attribute dependency is not safely implemented by memorizing a negative index.
 
-Can you always access inherited attributes at a fixed offset like `val[top - 1]`?
+## What an empty marker does
 
-Only if the distance between the target symbol and the provider symbol is a **compile-time constant across all productions**.
+An action needed before a child is parsed can sometimes be represented by an empty marker production. In `S -> A B M L`, the stack before reducing `M -> epsilon` ends in A, B. At that point `$0` denotes B and `$-1` denotes A. The action can set M's new synthesized value to a value obtained from A; reducing M pushes that value rather than overwriting B.
 
-### Case A: Constant Distance
-Consider:
-$$A \longrightarrow B \; C \; D$$
-If $D$ needs an inherited attribute from $B$:
-- When reducing $D$, $C$ is at `top - 1`, and $B$ is at `top - 2`.
-- Distance is always $2$. $D$ can safely access `val[top - 2]`!
+Once M has been pushed, a later base reduction within L can access it at the justified contextual position. Draw the stack at the actual action time: when reducing a multi-symbol production for L, the distance from the top also depends on that production's right-hand-side length.
 
-### Case B: Variable Distance (The Problem)
-What if symbol $L$ appears in two productions with different stack depths?
-- Production 1: $S \longrightarrow T \; L$ (distance to $T$ is $1$)
-- Production 2: $S \longrightarrow A \; B \; T \; L$ (distance to $T$ is $1$, but what if $L$ needs $A$? Distance is $3$!)
-
-### The Marker Non-Terminal Solution for Variable Distances:
-If the distance to the needed attribute varies, insert a marker non-terminal $M$ whose only job is to **copy the attribute to a predictable stack position**:
-$$S \longrightarrow A \; B \; M \; L$$
-$$M \longrightarrow \epsilon \quad \{ \text{val}[top] = \text{val}[top - 2]; \}$$
-
-Now, $M$ sits at a fixed offset immediately below $L$, guaranteeing that $L$ can always find the value at `val[top - 1]`!
-
----
-### Summary: Rules for Bottom-Up L-Attributed Evaluation
-
-| Grammar Pattern | Bottom-Up LR Stack Mechanism | Code Notation (Yacc/Bison) |
-| :--- | :--- | :--- |
-| **Action in middle of production** | Insert empty marker non-terminal $M \to \epsilon$ | Embedded `{ action }` |
-| **Inherited attribute at constant distance $k$** | Direct stack index access: `val[top - k]` | Negative dollar index: `$-k` |
-| **Inherited attribute at variable distance** | Insert marker non-terminal to copy attribute to fixed slot | Marker `{ \$\$ = \$-(k); }` |
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
+Markers schedule computations without consuming input. They can introduce LR conflicts, so attribute availability and parser compatibility must both be checked. The technique handles suitable L-attributed schemes; it is not an unconditional guarantee for every LR grammar/SDD combination.
 
 ## Complexity
 
 ### Time Complexity
-$O(N)$ to $O(N^2)$ depending on basic block length, graph density, or live intervals.
+With a valid evaluation schedule and constant-time actions, attribute work is linear in the number of production occurrences. Marker actions and stack offsets must preserve the required dependencies.
 
 ### Space Complexity
-$O(N)$ for auxiliary state tables, stacks, or free lists.
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
+Attribute/parser-stack storage depends on the parse depth and retained values.
 
 ---
 
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Bottom-Up Evaluation of L-Attributed SDDs on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+Check both attribute availability and parser compatibility. Adding empty markers can introduce LR conflicts, so the technique is not an unconditional conversion of every L-attributed definition to any bottom-up parser.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[S-Attributed and L-Attributed SDDs]]
 
 ## Sources
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 76–80).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.5.
+
+- **Implementation clarification:** [GNU Bison semantic action indexing](https://www.gnu.org/software/bison/manual/html_node/Actions.html).

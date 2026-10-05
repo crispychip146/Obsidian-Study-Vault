@@ -12,8 +12,6 @@ order: 46
 
 ---
 
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a continuous uniform distribution on the interval $[0, \theta]$:
@@ -27,16 +25,12 @@ $$X_i \overset{\text{iid}}{\sim} \text{Uniform}(0, \theta), \quad \theta > 0$$
 
 ---
 
----
-
 ## Given
 
 - Probability density function:
   $$f(x; \theta) = \frac{1}{\theta} \mathbf{1}_{\{0 \le x \le \theta\}} = \begin{cases} \frac{1}{\theta} & \text{if } 0 \le x \le \theta \\ 0 & \text{otherwise} \end{cases}$$
 - Sample order statistics:
   $$X_{(1)} = \min_{1 \le i \le n} X_i, \quad X_{(n)} = \max_{1 \le i \le n} X_i$$
-
----
 
 ---
 
@@ -50,15 +44,13 @@ $$X_i \overset{\text{iid}}{\sim} \text{Uniform}(0, \theta), \quad \theta > 0$$
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+For a uniform distribution on $[0,\theta]$, the largest observation immediately rules out every $\theta<X_{(n)}$. The support restriction carries information, even though the density is flat within its support.
+
+Among admissible values $\theta\ge X_{(n)}$, the likelihood is $\theta^{-n}$, which decreases as the interval widens. Thus the smallest admissible endpoint, $X_{(n)}$, maximizes it under the displayed endpoint convention. Differentiating only $-n\log\theta$ and solving a score equation ignores where the likelihood jumps from zero to positive.
+
+The maximum tends to fall short of the true endpoint. Its CDF is $P(X_{(n)}\le x)=(x/\theta)^n$ for $0\le x\le\theta$, since every observation must lie below $x$. This gives $E[X_{(n)}]=n\theta/(n+1)$ and suggests the unbiased adjustment $(n+1)X_{(n)}/n$.
 
 ### Concepts Used
 
@@ -67,8 +59,6 @@ Identify the random variables, state the conditional distributions, select the a
 - Non-regular estimation (parameter-dependent support)
 
 ---
-### Solution
-
 ### Step 1: Why Standard Calculus Fails
 If one ignores the support indicator and writes:
 $$L_n(\theta) = \prod_{i=1}^n \frac{1}{\theta} = \frac{1}{\theta^n} \implies \ell_n(\theta) = -n \log \theta$$
@@ -139,8 +129,6 @@ When parameters define the support boundary:
 
 ---
 
----
-
 ## Result
 
 - $\hat{\theta}_{\text{MLE}} = X_{(n)} = \max_{1 \le i \le n} X_i$
@@ -149,36 +137,13 @@ When parameters define the support boundary:
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+[[Likelihood and Score Equations]] requires checking support and boundaries. Parameter-dependent support also explains why the usual regular MLE asymptotic conclusions need special care here.
 
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
-
-- [[Maximum Likelihood Estimation]]
-- [[Point Estimation]]
-- [[Discrete and Continuous Parameter MLE Reference Examples]]
-
----
-
----
+- [[Likelihood and Score Equations]]
 
 ## Sources
 

@@ -12,33 +12,13 @@ order: 69
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A Markov chain predicts the next state from the current state without needing additional past history, conditional on that current state. This does not say consecutive states are independent; the present usually influences the future strongly.
 
-1. **Tractable Modeling of Sequential Dependency:** Modeling systems where full memory creates an exponential state explosion ($|S|^n$). The Markov property collapses this history into the current state alone.
-2. **Foundation for Algorithmic Analysis:** Markov chains provide the bedrock for PageRank, Markov Chain Monte Carlo (MCMC), randomized algorithms, queuing systems, speech recognition (HMMs), and reinforcement learning (MDPs).
-3. **Analytical Solvability:** By reducing temporal dynamics to linear algebraic operations on the transition matrix $P$, long-run equilibria and multi-step behaviors can be computed using matrix powers and eigenvectors.
+For a time-homogeneous discrete-time chain, $P_{ij}$ is the probability of moving from $i$ to $j$ in one step and does not change with the step number. Each row sums to one because the next state must be somewhere. With row-vector convention, an initial distribution $\nu$ evolves to $\nu P$ after one step and $\nu P^n$ after $n$ steps.
 
----
-
----
-
-## Developing the Idea
-
-When modeling a system that evolves over time, two extremes exist:
-- **Complete Independence:** What happens tomorrow has zero correlation with today. (Often unrealistic: tomorrow's weather or stock price obviously depends on today's).
-- **Full Historical Memory:** To predict tomorrow, you must inspect every single event since the dawn of time ($X_0, X_1, \dots, X_n$). (Computationally intractable and often unnecessary).
-
-A **Markov chain** strikes the sweet spot: **the future is conditionally independent of the past, given the present**.
-If you know where the system is *right now* ($X_n = i$), the exact historical trajectory that brought it there provides no additional information about where it will go next ($X_{n+1} = j$).
-
-In plain terms:
-> *"The future depends on the past only through the present."*
-
----
-
----
+Check what the state remembers. Daily weather may be modeled by today's weather alone, but if yesterday also matters, a one-day state is insufficient. The Markov property is an assumption about the chosen state and model, not a fact created merely by writing a transition matrix.
 
 ## Definition
 
@@ -66,11 +46,7 @@ P_{i0} & P_{i1} & P_{i2} & \cdots \\
 
 ---
 
----
-
 ## How It Works
-
-### How It Works
 
 1. **Specify State Space ($S$):** Identify all distinct, mutually exclusive situations the system can occupy.
 2. **Determine Transition Probabilities ($P_{ij}$):** For every pair of states $(i, j)$, determine the probability that the system moves from $i$ to $j$ in one discrete time step.
@@ -93,17 +69,7 @@ P_{i0} & P_{i1} & P_{i2} & \cdots \\
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
-
-### Technical Details
 
 ### Time Homogeneity (Stationary Transitions)
 A Markov chain is called **time-homogeneous** if the transition probabilities do not depend on the absolute time index $n$:
@@ -119,18 +85,7 @@ See [[Higher-Order State Weather Prediction Example]] for a concrete application
 
 ---
 
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
 
 - **Confusing Row Sums with Column Sums:** Summing columns to 1 instead of rows. $P$ is row-stochastic ($\sum_j P_{ij} = 1$), not necessarily column-stochastic.
 - **Assuming Symmetry ($P_{ij} = P_{ji}$):** Transition probabilities are directed. The probability of transitioning from rain to sun is rarely equal to the probability of transitioning from sun to rain.
@@ -139,11 +94,7 @@ See [[Higher-Order State Weather Prediction Example]] for a concrete application
 
 ---
 
----
-
 ## Exam Relevance
-
-### Example
 
 ### 1. Two-State Weather Model
 Suppose the chance of rain tomorrow depends solely on whether it rains today:
@@ -175,39 +126,13 @@ In CSE301 examinations:
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Chapman-Kolmogorov Equations]] explains matrix multiplication as summing over possible intermediate states. Keep row/column conventions consistent throughout a calculation.
 
-- [[Stochastic Process]]
-- [[Classification of States in Markov Chains]]
-- [[Stationary and Limiting Distributions in Markov Chains]]
+## Related notes
+
 - [[Chapman-Kolmogorov Equations]]
-- [[Gambler's Ruin Formula]]
-
----
-
----
-
-## Prerequisites
-
-- [[Stochastic Process]]
-- [[Conditional Probability and Independence|Conditional Probability]]
-- [[Random Variables and Probability Distributions|Random Variable]]
-
----
-
----
-
-## Problems
-
-- [[Problem — Four-Day Weather Forecast]]
-- [[Problem — Rain Prediction Two Days Ahead]]
-- [[Problem — State Communication and Irreducibility Verification]]
-
----
-
----
 
 ## Sources
 

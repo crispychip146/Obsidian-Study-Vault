@@ -12,8 +12,6 @@ order: 74
 
 ---
 
----
-
 ## Problem
 
 Suppose that the chance of rain tomorrow depends only on whether it is raining today and not on previous days' weather:
@@ -23,8 +21,6 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 1. Formulate the system as a two-state [[Markov Chain]] and write its transition probability matrix $P$.
 2. Given that it is raining today, calculate the probability that it rains four days from now.
 3. Compute the long-run proportion of days that are rainy.
-
----
 
 ---
 
@@ -40,8 +36,6 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 
 ---
 
----
-
 ## Required
 
 1. One-step transition probability matrix $P$.
@@ -50,15 +44,13 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+The row for today's weather lists tomorrow's alternatives. With states rain and dry, the rainy row is $(0.7,0.3)$ and the dry row is $(0.4,0.6)$. Each totals one.
+
+Let $r_n$ be the probability of rain $n$ days from now. Partition by weather on day $n$: $r_{n+1}=0.7r_n+0.4(1-r_n)=0.4+0.3r_n$. The fixed point is $r_*=4/7$, and subtracting it gives $r_{n+1}-r_*=0.3(r_n-r_*)$. Thus the deviation contracts by a factor of 0.3 each day.
+
+Starting from rain, $r_0=1$, so $r_4=4/7+(3/7)(0.3)^4=0.5749$. This recurrence explains both the matrix-power answer and why it is close to the long-run value. It is a deliberately simple weather model, not a validated meteorological forecast.
 
 ### Concepts Used
 
@@ -67,8 +59,6 @@ Identify the random variables, state the conditional distributions, select the a
 - [[Stationary and Limiting Distributions in Markov Chains]]
 
 ---
-### Solution
-
 ### Step 1: Formulate the Transition Probability Matrix
 Using states $\{0, 1\}$:
 $$P = \begin{pmatrix}
@@ -137,8 +127,6 @@ For any 2-state Markov chain $P = \begin{pmatrix} \alpha & 1-\alpha \\ \beta & 1
 
 ---
 
----
-
 ## Result
 
 1. Transition matrix:
@@ -152,14 +140,10 @@ Notice how close $P_{00}^4 = 0.5749$ is to the limiting value $\pi_0 \approx 0.5
 
 ---
 
----
-
 ## Why This Works
 
 - The Chapman-Kolmogorov equations guarantee that multi-step probabilities correspond to powers of the transition matrix. Computing $P^4 = (P^2)^2$ reduces computational complexity from 3 matrix multiplications to 2.
 - Because all entries of $P$ are strictly positive ($P_{ij} > 0$), the chain is irreducible and aperiodic (primitive), guaranteeing geometric convergence of $P^n$ to a rank-1 matrix where every row equals $\pi = (4/7, 3/7)$.
-
----
 
 ---
 
@@ -171,24 +155,13 @@ Notice how close $P_{00}^4 = 0.5749$ is to the limiting value $\pi_0 \approx 0.5
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Stationary and Limiting Distributions in Markov Chains]] distinguishes the balance value from its convergence. The contraction supplies a direct convergence argument in this two-state case.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Markov Chain]]
-- [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
-- [[Higher-Order State Weather Prediction Example]]
-
----
-
----
 
 ## Sources
 

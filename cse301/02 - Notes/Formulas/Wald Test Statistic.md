@@ -12,19 +12,13 @@ order: 59
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+A Wald statistic measures how far an estimate is from the null value in units of its own standard error: $W=(\hat\theta-\theta_0)/\widehat{\mathrm{se}}$. A difference of 0.1 can be strong or weak evidence depending on whether the sampling noise is 0.01 or 1.
 
-What analytical relationship or closed-form expectation governs Wald Test Statistic, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Under suitable large-sample conditions and the null, $W$ is approximately standard normal. For a two-sided test, compare $|W|$ with a normal critical value or compute its two-tail $p$-value. A directional alternative uses the appropriate single tail chosen in advance.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Wald Test Statistic compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The denominator must reflect the actual design. Paired measurements have covariance, so treating them as independent can give the wrong standard error. Boundary parameters, small samples, and unstable variance estimates also weaken the approximation. For several constraints, a quadratic form can have an approximate chi-square reference distribution rather than a scalar normal one.
 
 ## Formula
 
@@ -61,8 +55,6 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -73,8 +65,6 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 | $W$ | Wald test statistic | Standardized score |
 | $z_{\alpha/2}$ | Normal critical threshold | $1.96$ for $\alpha = 0.05$ |
 | $p$ | Two-sided $p$-value | $(0, 1)$ |
-
----
 
 ---
 
@@ -90,11 +80,7 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 The Wald test measures how many **standard errors** the empirical estimate $\hat{\theta}_n$ sits away from the hypothesized center $\theta_0$:
 $$\text{Wald Statistic} = \frac{\text{Observed Deviation}}{\text{Standard Error of the Deviation}}$$
@@ -111,8 +97,6 @@ $$\lvert W \rvert \le z_{\alpha/2} \iff -z_{\alpha/2} \le \frac{\hat{\theta}_n -
 Therefore:
 $$\text{The size } \alpha \text{ Wald test rejects } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
 where $C_n = \hat{\theta}_n \pm z_{\alpha/2}\widehat{\text{se}}$ is the standard $1 - \alpha$ confidence interval!
-
----
 
 ---
 
@@ -138,8 +122,6 @@ $$\lim_{n \to \infty} P_{\theta_0}(\lvert W \rvert > z_{\alpha/2}) = \frac{\alph
 
 ---
 
----
-
 ## Example
 
 ### Example: Comparing Prediction Algorithms (Unpaired)
@@ -162,37 +144,13 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+[[Problem — Comparing Prediction Algorithms via Paired Wald Test]] constructs the standard error from within-image differences, preserving the pairing in the experiment.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Hypothesis Testing Framework]]
-- [[p-Values and Significance]]
-- [[Normal-Based Large-Sample Confidence Interval]]
 - [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

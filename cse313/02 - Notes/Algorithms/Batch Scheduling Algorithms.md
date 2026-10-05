@@ -12,13 +12,12 @@ order: 13
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2017 Q4b, 2017 Q4c, 2019 Q1a, 2019 Q1b, 2020 Q2a, 2021 Q2b, 2021 Q2c, 2021 Q2d)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q4a, 2017 Q4b, 2017 Q4c, 2019 Q1a, 2019 Q1b, 2020 Q2a, 2021 Q2b, 2021 Q2c, 2021 Q2d)**
 >
 > ### What Exam Questions Expect & How to Think:
 > 1. **Batch Job Burst Range Ordering for Parameter $X$ (2019 Q1b, 2021 Q2d verbatim):**
 >    - **The Setup:** 4 jobs arrive at the same time with burst lengths $9, 3, 5, X$. Determine SJF execution order for all possible ranges of $X$.
->    - **The "Click" Rule:** Sort the known numbers ($3, 5, 9$). Then systematically position $X$ across the 4 partition intervals:
+>    - **The decision rule:** Sort the known numbers ($3, 5, 9$). Then systematically position $X$ across the 4 partition intervals:
 >      - If $X \le 3 \implies \mathbf{X \to 3 \to 5 \to 9}$
 >      - If $3 < X \le 5 \implies \mathbf{3 \to X \to 5 \to 9}$
 >      - If $5 < X \le 9 \implies \mathbf{3 \to 5 \to X \to 9}$
@@ -32,24 +31,15 @@ order: 13
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+Start with several ready jobs sharing one CPU. FCFS chooses by arrival order. SJF chooses the shortest next burst when the CPU becomes free. SRTF reconsiders the choice when new work arrives, comparing it with what remains of the current burst.
 
-In batch processing environments (scientific clusters, payroll processing, video rendering), queues of non-interactive jobs await execution on the CPU. Earlier uniprogrammed systems executed jobs strictly in manual order, leaving the CPU idle during tape/disk transfers.
+Why can short jobs first reduce total waiting? Consider two simultaneous jobs of lengths 8 and 2. Running 8 first makes the short job wait 8; running 2 first makes the long job wait 2. Both schedules do 10 units of work, but one creates less waiting for the other job. More generally, exchanging adjacent jobs $a>b$ reduces their combined waiting by $a-b$ while leaving later jobs' start times unchanged. Repeating such exchanges produces sorted order. That proves the SJF claim for simultaneous arrivals, known bursts, and negligible switching costs.
 
-We want an algorithmic scheduling policy that minimizes average waiting time and turnaround time across all jobs. The central obstacle is the **Convoy Effect**: under simple First-Come First-Served scheduling, a single massive CPU-bound job can block dozens of tiny I/O-bound jobs behind it, sending average waiting time soaring.
+SRTF adds another observation: work already executed should not count against a job's current priority. Compare **remaining** times, not original bursts. At each arrival, update the running job's remaining work before deciding whether to preempt.
 
----
-
-## Developing the Core Idea
-
-To minimize average waiting time, we must schedule jobs according to their required burst lengths:
-- **FCFS (First-Come, First-Served):** Non-preemptive FIFO queue; simplest but vulnerable to convoy effect.
-- **SJF (Shortest Job First):** Provably optimal for minimizing average waiting time by prioritizing jobs with the smallest burst time.
-- **SRTF (Shortest Remaining Time First):** Preemptive version of SJF; if a newly arriving job has a shorter remaining burst than the running job, the CPU is immediately preempted.
-
----
+These policies apply the criteria in [[CPU Scheduling Principles and Criteria]], but shortest-job preference is not a fairness guarantee: continued short arrivals can postpone long jobs.
 
 ## Inputs
 
@@ -80,10 +70,6 @@ Three foundational algorithms govern batch scheduling:
 
 ---
 
----
-
-### 1. First-Come, First-Served (FCFS)
-
 ### Algorithmic Logic
 - **Type:** Non-Preemptive.
 - **Data Structure:** Standard First-In, First-Out (FIFO) queue.
@@ -106,10 +92,6 @@ The fatal weakness of FCFS is the **Convoy Effect**:
 - Average waiting time skyrockets. The short processes are "dragged like a convoy" behind the slow truck.
 
 ---
-
----
-
-### 2. Shortest Job First (SJF)
 
 ### Algorithmic Logic
 - **Type:** Non-Preemptive.
@@ -153,10 +135,6 @@ Hence, executing the shortest jobs first minimizes average waiting time! $\black
 
 ---
 
----
-
-### 3. Shortest Remaining Time First (SRTF)
-
 ### Algorithmic Logic
 - **Type:** Preemptive version of SJF.
 - **Rule:** Whenever a new process arrives in the Ready Queue, the scheduler compares its required burst time against the **remaining CPU burst time** of the currently running process:
@@ -167,11 +145,14 @@ Hence, executing the shortest jobs first minimizes average waiting time! $\black
 ```text
 event On_Process_Arrival(new_process):
     ready_queue.insert(new_process)
-    if running_process is not None:
-        if new_process.burst_time < running_process.remaining_time:
-            preempt(running_process)
-            ready_queue.insert(running_process)
-            dispatch(new_process)
+    if running_process is None:
+        ready_queue.remove(new_process)
+        dispatch(new_process)
+    elif new_process.burst_time < running_process.remaining_time:
+        preempt(running_process)
+        ready_queue.insert(running_process)
+        ready_queue.remove(new_process)
+        dispatch(new_process)
 
 event On_Process_Termination_Or_Block(process):
     if ready_queue is not empty:
@@ -179,8 +160,6 @@ event On_Process_Termination_Or_Block(process):
         ready_queue.remove(next_proc)
         dispatch(next_proc)
 ```
-
----
 
 ---
 
@@ -193,8 +172,6 @@ event On_Process_Termination_Or_Block(process):
 | **Overhead** | Minimal (O(1) queue ops) | Low (sorting burst times) | Moderate (frequent context switches) |
 | **Starvation Risk** | None (FIFO guarantees service) | **Yes** (long jobs starve) | **Yes** (long jobs starve) |
 | **Implementation Complexity** | Trivial | Difficult (burst prediction) | Difficult (tracks remaining times) |
-
----
 
 ---
 
@@ -244,8 +221,6 @@ $O(n)$ space for ready queue descriptors and timeline structures.
 
 ---
 
----
-
 ## Exam Relevance
 
 - **Next Step:** Interactive systems require time-sliced sharing where processes cannot monopolize the CPU (see [[Interactive Scheduling Algorithms]]).
@@ -254,27 +229,14 @@ $O(n)$ space for ready queue descriptors and timeline structures.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+The optimality statement needs its model; it is not a claim about every real workload. FCFS queue operations can be constant time, while shortest-job selection depends on the data structure. [[Scheduling Metrics and Burst Estimation Formulas]] explains how a scheduler can estimate an unknown future burst.
 
-- [[Interactive Scheduling Algorithms]]
-- [[Scheduling Metrics and Burst Estimation Formulas]]
-- [[Comprehensive CPU Scheduling Simulation Example]]
-
----
-
-## Prerequisites
+## Related notes
 
 - [[CPU Scheduling Principles and Criteria]]
-
----
-
-## Problems
-
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
+- [[Scheduling Metrics and Burst Estimation Formulas]]
 
 ## Sources
 

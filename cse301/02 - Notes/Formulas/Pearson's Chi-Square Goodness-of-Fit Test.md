@@ -12,19 +12,13 @@ order: 60
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+Under a specified categorical null, category $i$ has expected count $E_i=np_i$. The observed discrepancy is $O_i-E_i$. Squaring removes its sign, and dividing by $E_i$ scales the discrepancy relative to the count's typical variability.
 
-What analytical relationship or closed-form expectation governs Pearson's Chi-Square Goodness-of-Fit Test, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
+Summing gives Pearson's statistic $\sum_i(O_i-E_i)^2/E_i$. There are only $k-1$ freely varying counts because they sum to $n$, explaining the usual $k-1$ degrees of freedom when the category probabilities are fully specified. Estimating parameters from these same data generally subtracts further degrees of freedom under regular conditions.
 
----
-
-## Developing the Formula
-
-By decomposing joint distributions into conditional components, expanding algebraic products, or applying geometric series sums, Pearson's Chi-Square Goodness-of-Fit Test compresses complex probabilistic reasoning into a clean, reusable formula.
-
----
+The chi-square calibration is asymptotic. Categories with small expected counts can make it inaccurate, so check that approximation rather than blindly using a table. A large statistic is evidence against the specified probabilities; a small statistic alone does not prove the generating theory.
 
 ## Formula
 
@@ -54,8 +48,6 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 
 ---
 
----
-
 ## Variables
 
 | Symbol | Meaning | Role |
@@ -70,8 +62,6 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 
 ---
 
----
-
 ## Conditions
 
 1. **Independent Observations:** The $n$ trials must be independent.
@@ -83,11 +73,7 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 
 ---
 
----
-
 ## Intuition
-
-### Intuition
 
 Each term in the sum:
 $$\frac{(O_j - E_j)^2}{E_j} = \left( \frac{O_j - E_j}{\sqrt{E_j}} \right)^2$$
@@ -114,14 +100,6 @@ If $V \approx k - 1$, the observed data match theoretical expectations. If $V \g
 
 ---
 
----
-
-## Derivation
-
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
-
----
-
 ## Example
 
 ### Example: Rolling a Die for Fairness
@@ -140,36 +118,13 @@ Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with
 
 ---
 
----
+## What to carry forward
 
-## Common Mistakes
+[[Mendel's Peas Chi-Square Goodness-of-Fit Example]] makes the expected-count and degrees-of-freedom calculations explicit. Keep the observed and expected columns separate to avoid changing the null while testing it.
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Hypothesis Testing Framework]]
-- [[p-Values and Significance]]
 - [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
-
----
-
----
-
-## Prerequisites
-
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

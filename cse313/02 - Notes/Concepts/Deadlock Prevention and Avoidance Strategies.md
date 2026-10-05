@@ -12,10 +12,9 @@ order: 28
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q1c, 2019 Q3c, 2021 Q1c, 2021 Q3a)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2019 Q1c, 2019 Q3c, 2021 Q1c, 2021 Q3a)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Differentiating Safe, Unsafe, and Deadlock States (2019 Q1c & 2021 Q3a):**
 >    - **Safe State:** A state from which there exists at least one order $\langle P_1, P_2, \dots, P_n \rangle$ where all processes can satisfy their peak claims, execute to completion, and return their resources.
 >    - **Unsafe State:** A state where NO such guaranteed sequence exists. **Crucial point:** An unsafe state is **NOT** necessarily deadlocked! Deadlock will only materialize if processes actually exercise their maximum claims simultaneously.
@@ -30,33 +29,15 @@ order: 28
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+There are two ways to avoid getting stuck. **Prevention** changes the rules so at least one necessary deadlock condition cannot arise. **Avoidance** permits those conditions but checks whether a proposed allocation preserves a safe route to completion.
 
-Once deadlock occurs, processes freeze, hardware resources sit idle, and human intervention or process killing is typically required to restore system function.
+A fixed resource order illustrates prevention. A process may request only resources later in the order than those it holds. A circular wait would require a strict increase around the circle and back to its start, which cannot happen. The rule is easy to justify, but it may constrain how an application works.
 
-We want the operating system to guarantee that deadlocks never occur in the first place. The central obstacle is balancing safety against system efficiency: overly restrictive policies prevent deadlock by crippling concurrency and wasting hardware capacity.
+Avoidance uses more information. A safe state has a sequence in which every process could obtain its remaining declared maximum need, finish, and release its allocations. The OS does not have to run that sequence immediately; its existence is evidence that a completion route remains available.
 
----
-
-## Developing the Idea
-
-Operating system designers developed two distinct proactive strategies:
-1. **Deadlock Prevention:** A static design-time approach that eliminates deadlocks by constraining how requests are made, ensuring that at least one of the four Coffman conditions can never hold.
-   - Attack Mutual Exclusion: Spooling.
-   - Attack Hold and Wait: Require processes to request all resources upfront.
-   - Attack No Preemption: Forcibly seize resources if a process cannot get what it needs.
-   - Attack Circular Wait: Establish a global total ordering $F: R 	o \mathbb{N}$ and require processes to request resources in strictly increasing order.
-2. **Deadlock Avoidance:** A dynamic runtime approach where the OS inspects every request in real time, granting it only if the resulting system state remains **Safe** (a guaranteed safe sequence exists).
-
----
-
-## Definition
-
-
-
----
+An **unsafe** state has no such guaranteed route under the maximum-claim model. It is not necessarily already deadlocked, because actual future requests might be smaller. [[Resource Allocation Graphs and Deadlock Modeling]] describes current dependencies; safety also considers what processes are allowed to ask for later.
 
 ## How It Works
 
@@ -100,8 +81,6 @@ flowchart TD
 
 ---
 
----
-
 ## Example
 
 Havender's Global Resource Ordering ($F(R)$):
@@ -109,13 +88,7 @@ Let Disk $= 1$, Printer $= 2$, Tape Drive $= 3$.
 - Rule: A process holding Resource $i$ may only request Resource $j$ if $F(j) > F(i)$.
 - Suppose $P_1$ holds Disk ($1$) and wants Printer ($2$): Valid! ($2 > 1$).
 - Suppose $P_2$ holds Printer ($2$) and wants Disk ($1$): Rejected by compiler/kernel! ($1 < 2$).
-Circular wait is mathematically impossible because a cycle would require $i_1 < i_2 < \dots < i_k < i_1$, a logical contradiction.
-
----
-
-## Technical Details
-
-See related modules for microarchitectural implementation details.
+Circular wait is impossible under these assumptions because a cycle would require $i_1 < i_2 < \dots < i_k < i_1$, a logical contradiction.
 
 ---
 
@@ -127,39 +100,14 @@ See related modules for microarchitectural implementation details.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Assuming user mode code can execute privileged instructions directly without a system call trap.
-- Overlooking race conditions in shared variables without explicit synchronization.
+[[Banker's Algorithm]] makes the completion-route test mechanical. Distinguish physical availability from safety: a request may fit in the free resources now and still remove every guaranteed future completion sequence.
 
----
+## Related notes
 
-## Exam Relevance
-
-Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
-
----
-
-## Related Concepts
-
-- [[Banker's Algorithm]]
-- [[Deadlock Detection and Recovery Algorithms]]
-- [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
-
----
-
-## Prerequisites
-
-- [[Deadlock Fundamentals and Coffman Conditions]]
 - [[Resource Allocation Graphs and Deadlock Modeling]]
-
----
-
-## Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-
----
+- [[Banker's Algorithm]]
 
 ## Sources
 

@@ -12,10 +12,9 @@ order: 1
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q2d, 2020 Q4c)**
-> **Frequency:** ⭐⭐⭐ **Recurring Architectural Comparison**
+> [!IMPORTANT] **Exam practice references (Appeared in 2019 Q2d, 2020 Q4c)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Differentiating Monolithic vs Microkernel Architectures (2019 Q2d):**
 >    - **Kernel Boundary:** In Monolithic OS (Linux, Windows NT core), file systems, network stacks, and device drivers run inside Kernel Space (Ring 0). In Microkernel OS (Minix, seL4, QNX), only minimal primitives (IPC, low-level scheduling, basic paging) remain in Ring 0; drivers and file systems run as isolated servers in User Space (Ring 3).
 >    - **Performance vs Reliability Tradeoff:** Monolithic has higher performance (services communicate via direct function calls without context switching), but poor fault isolation (one buggy GPU or Wi-Fi driver crashes the entire machine). Microkernel has superior fault isolation (crashed driver server restarts transparently), but higher overhead due to frequent IPC context switches between Ring 3 and Ring 0.
@@ -25,25 +24,13 @@ order: 1
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Imagine a browser waiting for a network packet while your compiler has calculations ready to do. They need the same CPU, but at different moments. They also need memory and devices without being allowed to damage each other. Someone must decide who may use each resource and provide a safe way to request it. That is the operating system's job.
 
-Before the operating system existed, programmers wrote machine instructions directly against bare hardware, manually toggling console switches and reading punch cards. If a programmer made a memory indexing mistake, the hardware halted. If a program needed to read from a disk or tape, it had to implement low-level drive timing and controller commands from scratch.
+There are two questions to keep separate. **What interface does a program see?** A file, rather than a collection of disk-controller commands. **Who controls the resource behind that interface?** The OS checks permissions, schedules requests, and manages storage. Abstraction makes the machine usable; resource management makes sharing it workable.
 
-We want a system where multiple programs can execute reliably, share expensive CPU and memory resources, and access storage without programmers reinventing physical hardware controllers. The central obstacle is hardware vulnerability and resource contention: without a central arbiter, one rogue or buggy program can overwrite memory belonging to another program or monopolize hardware indefinitely.
-
----
-
-## Developing the Idea
-
-To overcome hardware vulnerability, computer architects and systems designers introduced a software intermediary running in privileged execution mode: the **Operating System (OS)**.
-
-The OS resolves the obstacle by presenting two complementary faces:
-1. **Top-Down (The Extended Machine):** It replaces messy, timing-sensitive physical hardware (I/O ports, interrupt lines, disk cylinder addresses) with clean, high-level abstractions: files, directories, processes, and virtual memory.
-2. **Bottom-Up (The Resource Manager):** It acts as an impartial controller that allocates CPU cores, memory frames, and I/O bandwidth across competing tasks according to policies of fairness, efficiency, and security.
-
----
+Kernel architecture asks where these responsibilities live. In a monolithic design, many services share privileged memory, making direct calls convenient but sharing the consequences of a serious bug. A microkernel puts more services in separate processes: requests cross protection boundaries, but a service's memory is isolated. Neither label alone establishes a universal performance or reliability result. Follow one file request through the components, then ask which boundaries it crosses and what a failed component could affect.
 
 ## Definition
 
@@ -66,8 +53,6 @@ flowchart TD
     SYS --> OS
     OS --> HW
 ```
-
----
 
 ---
 
@@ -109,8 +94,6 @@ The architectural organization of the kernel governs how OS components interact,
 
 ---
 
----
-
 ## Example
 
 Consider two applications running concurrently: a web browser downloading an image over Wi-Fi and a compiler building a C project:
@@ -133,8 +116,6 @@ Consider two applications running concurrently: a web browser downloading an ima
 
 ---
 
----
-
 ## Important Properties and Why They Hold
 
 - **Fault Isolation:** In microkernel systems, servers run in isolated user-space address spaces; a crash in a device driver server does not corrupt the kernel or halt other processes.
@@ -154,8 +135,6 @@ Consider two applications running concurrently: a web browser downloading an ima
 
 ---
 
----
-
 ## Exam Relevance
 
 - **Next Step:** To enforce protection, hardware provides CPU execution rings (see [[Dual-Mode Operation and System Calls]]).
@@ -164,27 +143,14 @@ Consider two applications running concurrently: a web browser downloading an ima
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Dual-Mode Operation and System Calls]] explains how hardware enforces the protection boundary. [[Process Concepts and Memory Layout]] explains the entity whose CPU time and memory the OS manages. The kernel is the protected core of an OS; the broader OS can also include services that run in user mode.
+
+## Related notes
 
 - [[Dual-Mode Operation and System Calls]]
 - [[Process Concepts and Memory Layout]]
-- [[Computer Booting and Hardware Abstractions]]
-
----
-
-## Prerequisites
-
-- [[Computer Booting and Hardware Abstractions]]
-
----
-
-## Problems
-
-- [[Problem — Fork Execution Tree and Process Tracing]]
-
----
 
 ## Sources
 

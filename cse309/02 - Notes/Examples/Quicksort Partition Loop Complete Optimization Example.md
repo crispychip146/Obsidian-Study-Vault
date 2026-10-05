@@ -12,33 +12,21 @@ order: 54
 
 ---
 
----
-
 ## Problem
 
 Demonstrate and trace the compiler execution of Quicksort Partition Loop Complete Optimization Example.
 
 ---
 
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+The partition loop repeatedly advances indices, computes array offsets, compares with the pivot, and swaps elements. Begin by preserving that behavior in TAC and a CFG; optimization should explain which repeated work can be removed, not skip directly to compact code.
+
+Follow one index. When i advances by one, an element-width-scaled address advances by a fixed byte count. [[Loop Optimizations and Strength Reduction]] can maintain that address incrementally. Repeated offsets or values can be reused only while their inputs and relevant memory versions remain unchanged.
+
+The swap writes array memory, so later loads cannot reuse old element values without checking their locations. [[DAG Construction and Local Optimization of Basic Blocks]] explains this dependency. Copy propagation and dead-code elimination clean up intermediates after safe substitutions.
+
+The source fragment also relies on its partition routine's boundary/sentinel conventions. Optimizing it does not establish those conventions or prove the general safety of scanning beyond arbitrary array bounds.
 
 ### The Classic Dragon Book / BUET Lecture Example
 
@@ -149,8 +137,6 @@ In Block $B_4$:
 
 ---
 
----
-
 ## Result
 
 ```mermaid
@@ -171,33 +157,14 @@ flowchart TD
 
 ---
 
----
+## What to carry forward
 
-## Why This Works
+For each transformed block, map its surviving operations back to the source actions. Confirm index advancement, comparisons, swaps, exit paths, and final partition behavior remain equivalent under the stated setup.
 
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
+## Related notes
 
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Loop Optimizations and Strength Reduction]]
+- [[DAG Construction and Local Optimization of Basic Blocks]]
 
 ## Sources
 

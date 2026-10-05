@@ -12,19 +12,13 @@ order: 8
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A discrete distribution assigns probability mass to individual possible values. Its probability mass function $p_X(x)$ answers “how much probability sits at exactly $x$?” The masses must be nonnegative and sum to one.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Discrete Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Choose a distribution by identifying the experiment. A Bernoulli variable records one yes/no trial; a binomial variable counts successes in a fixed number of independent Bernoulli trials with the same success probability. A geometric variable counts how long we wait for the first success, so check whether the counting starts at zero failures or at one trial. A Poisson model counts events in a window under its rate assumptions; its parameter is the expected count for that window.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Discrete Probability Distributions reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+These distinctions explain the support and formulas. For instance, the binomial coefficient chooses the successful trial positions, while $p^k(1-p)^{n-k}$ gives the probability of each such arrangement.
 
 ## Definition
 
@@ -131,34 +125,6 @@ In probability, many real-world phenomena share underlying structures known as *
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -169,26 +135,9 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
-
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+Read the parameterization and support together. A geometric mean or a Poisson rate can appear different across books because they measure different quantities, not because probability rules changed.
 
 ## Sources
 

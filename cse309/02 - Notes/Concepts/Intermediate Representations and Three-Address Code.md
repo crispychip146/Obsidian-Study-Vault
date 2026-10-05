@@ -12,137 +12,17 @@ order: 10
 
 ---
 
----
+## Building the idea
 
----
+Source expressions are convenient for programmers, while machine instructions are specific to one target. An **intermediate representation (IR)** gives the compiler a common structure on which to analyze and transform programs before selecting target instructions.
 
----
+Three-address code breaks an illustrative `a=b+c*d` into `t1=c*d` followed by `a=b+t1`. Each step exposes an operation and its inputs. A temporary name connects the produced value with later uses; it is not necessarily a physical register or memory slot yet.
 
----
+Quadruples store explicit result names. Triples refer to results through instruction positions, making rearrangement require careful reference maintenance. Indirect triples add a separate instruction ordering structure. These are storage choices for the IR, not different meanings of the expression.
 
-## Starting Point and the Problem
-
-To appreciate why Intermediate Representations (IR) exist, imagine life without them.
-
-Suppose you want to build compilers for 5 modern source languages (C, C++, Rust, Swift, Go) targeting 4 different hardware microprocessors (x86-64, ARM64, RISC-V, MIPS).
-
-### The $M \times N$ Nightmare:
-If you translate source code directly to machine assembly, you must write a dedicated compiler for every single (Language, Architecture) pair:
-$$\text{Compilers to write} = 5 \times 4 = \mathbf{20 \text{ monolithic compilers!}}$$
-
-```mermaid
-flowchart TD
-    subgraph Direct_Translation ["The M x N Translation Nightmare (20 Compilers)"]
-        direction LR
-        L1["C"] & L2["Rust"] & L3["Swift"] & L4["Go"] --> T1["x86-64"] & T2["ARM64"] & T3["RISC-V"] & T4["MIPS"]
-    end
-```
-
-Every time someone invents a new language (like Julia), they must write 4 separate back ends. Every time hardware engineers release a new chip architecture, they must rewrite 5 separate front ends!
-
-Even worse: where do you put code optimization? If you discover a brilliant algorithm to optimize loops, you would have to reimplement it 20 times!
-
----
-
-### The Hourglass Architectural Breakthrough:
-Instead of direct translation, we introduce a universal, machine-independent pivot point in the middle: the **Intermediate Representation (IR)**.
-
-```mermaid
-flowchart TD
-    subgraph Front_Ends ["M Front Ends (Analysis)"]
-        direction LR
-        C["C"] & Cpp["C++"] & Rust["Rust"] & Swift["Swift"] & Go["Go"]
-    end
-
-    subgraph The_Pivot ["The Universal IR (Hourglass Neck)"]
-        IR["Common Intermediate Representation (e.g., LLVM IR / TAC)"]
-    end
-
-    subgraph Optimizer ["Machine-Independent Optimizer"]
-        Opt["Loop Unrolling · Dead Code Elimination · CSE"]
-    end
-
-    subgraph Back_Ends ["N Back Ends (Synthesis)"]
-        direction LR
-        x86["x86-64"] & ARM["ARM64"] & RISCV["RISC-V"] & MIPS["MIPS"]
-    end
-
-    Front_Ends --> IR
-    IR --> Optimizer
-    Optimizer --> Back_Ends
-```
-
-Now, the total number of components drops from $M \times N$ to:
-$$M + N = 5 + 4 = \mathbf{9 \text{ components!}}$$
-
-This is the architectural foundation of the **LLVM Compiler Infrastructure**:
-- Clang (C/C++), `rustc` (Rust), and `swiftc` (Swift) all compile down to the **exact same LLVM IR**.
-- A single optimizer optimizes LLVM IR for everyone.
-- The back ends translate optimized LLVM IR into machine code for all CPUs.
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Idea
-
-Why do compilers linearize trees into **Three-Address Code**? Why specifically **THREE** addresses?
-
-### The Silicon Hardware Reality:
-Look inside a physical microprocessor. At the center of the CPU sits the **Arithmetic Logic Unit (ALU)**. 
-- An ALU has **two input buses** and **one output bus**.
-- It can add two numbers and produce one result:
-  $$\text{Input}_1 + \text{Input}_2 \longrightarrow \text{Output}$$
-
-```mermaid
-flowchart LR
-    In1["Input Bus 1: y"] --> ALU["ALU (+)"]
-    In2["Input Bus 2: z"] --> ALU
-    ALU --> Out["Output Bus: x"]
-```
-
-A hardware ALU **cannot** evaluate $a + b * c - d / e$ all at once! 
-
-Therefore, a compiler must decompose complex high-level expressions into an assembly-like stream of atomic operations where each instruction references **at most two operands and one result**:
-$$\mathbf{x = y \text{ op } z}$$
-
-To hold intermediate results between steps, the compiler invents synthetic variables called **temporaries** (`t1`, `t2`, etc.).
-
----
-
----
-
----
-
----
-
----
-
-## Definition
-
-**Intermediate Representations and Three-Address Code** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
-
----
-
----
-
----
-
----
+[[Abstract Syntax Tree Construction with SDDs]] retains expression hierarchy. TAC instead exposes an execution sequence, preparing for [[Basic Blocks and Control Flow Graphs]] and later register allocation.
 
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The 3 Physical Data Structures for Three-Address Code
 
@@ -213,9 +93,6 @@ flowchart LR
 
 ---
 
----
-### Technical Details
-
 ### Static Single Assignment (SSA) Form: The Modern Compiler Revolution
 
 In traditional code, a variable can be assigned multiple times:
@@ -269,187 +146,14 @@ SSA form is the foundational representation inside GCC, LLVM, Java HotSpot, and 
 
 ---
 
----
-### Important Properties and Why They Hold
+## What to carry forward
 
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
+“Three-address” describes the usual bounded operand/result structure, not a requirement that every instruction contain exactly three addresses. Jumps, copies, calls, and loads have their own forms.
 
----
-### Related Concepts
+## Related notes
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
+- [[Abstract Syntax Tree Construction with SDDs]]
 - [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
-
----
-
----
-
----
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ## Sources
 

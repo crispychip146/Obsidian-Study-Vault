@@ -12,8 +12,6 @@ order: 4
 
 ---
 
----
-
 ## Problem
 
 Consider a group of $k$ individuals gathered in a room. Assuming:
@@ -28,29 +26,13 @@ Consider a group of $k$ individuals gathered in a room. Assuming:
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
 
-### Step-by-Step Solution
+The surprising part of the birthday problem is the number of opportunities for a match. With $k$ people, there are $\binom{k}{2}$ pairs. Nobody needs to match your particular birthday; any pair may collide.
+
+Directly combining pair-match events creates overlaps, so use [[Probability Axioms and Naive Probability|the complement rule]]. For no shared birthdays, the first person may use any of $n$ days, the second must avoid one occupied day, and the third must avoid two. Independent uniform birthdays therefore give $P(\text{no collision})=\prod_{j=0}^{k-1}(1-j/n)$ for $k\le n$.
+
+For a rough scale, take logarithms and use $\log(1-x)\approx-x$ when the factors are close to one. The product becomes approximately $e^{-k(k-1)/(2n)}$. The approximation explains why collisions become likely around $\sqrt n$ people rather than $n$ people. Real birthdays are not perfectly uniform; this is an explicit simplifying model.
 
 ### Step 1: Use the Complement Rule
 Calculating the probability of "at least one shared birthday" directly is cumbersome because there could be pairs, triplets, multiple pairs, etc.
@@ -120,20 +102,6 @@ In computer science, this is the foundation of **hash table collision analysis**
 
 ---
 
----
-
-## Result
-
-The mathematical derivation confirms the target probability or estimator value.
-
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 - **Intuition behind the small $k$:** People intuitively compare themselves to others ($22$ comparisons). But the number of distinct *pairs* in the room is $\binom{23}{2} = \frac{23 \times 22}{2} = 253$ pairs! With 253 opportunities for a match, exceeding 50% is natural.
@@ -141,23 +109,14 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 ---
 
----
+## What to carry forward
 
-## General Method
+For $k>n$, a collision is certain by the pigeonhole principle. Distinguish a birthday collision from the number of distinct birthdays in [[Problem — Indicator Variables for Distinct Birthday Counts]].
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Combinatorics and Counting Principles]] — Multiplication rule and permutations.
-- [[Probability Axioms and Naive Probability]] — Complement rule and naive probability definition.
-- [[Problem — Birthday Collisions and Approximation]] — Full problem and proof exercises.
-
----
-
----
+- [[Probability Axioms and Naive Probability|the complement rule]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ## Sources
 

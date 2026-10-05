@@ -12,33 +12,13 @@ order: 47
 
 ---
 
----
-
-## Problem
-
-Solve the probability and statistical problem: Discrete and Continuous Parameter MLE Reference Examples.
-
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Use these reference examples to practice one repeated question: how does changing the parameter change the weights assigned to this fixed dataset?
+
+For a Bernoulli sample with $s$ successes in $n$ trials, the likelihood is proportional to $p^s(1-p)^{n-s}$; maximizing gives $s/n$, including boundary estimates when every trial agrees. For Poisson observations, the log-likelihood contains $\sum_i X_i\log\lambda-n\lambda$, so the estimated rate is the sample mean. For exponential observations in the rate convention, it contains $n\log\lambda-\lambda\sum_iX_i$, giving $n/\sum_iX_i$ when the sum is positive.
+
+Do not transfer an answer just because symbols look similar. A normal location is a center, an exponential rate is inverse time, and a uniform endpoint constrains support. Check units and the allowed domain, then compare likelihood values at stationary points and boundaries.
 
 ### Overview
 
@@ -47,8 +27,6 @@ This note provides complete, step-by-step Maximum Likelihood Estimator derivatio
 Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sample mean $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$, minimum $X_{(1)} = \min_i X_i$, and maximum $X_{(n)} = \max_i X_i$.
 
 ---
-### Bernoulli($p$) Distribution
-
 ### Setup
 - Support: $X_i \in \{0, 1\}$, parameter $p \in (0, 1)$.
 - PMF: $P(X = x) = p^x (1 - p)^{1-x}$.
@@ -65,8 +43,6 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
    $$\hat{p}_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n X_i = \bar{X}$$
 
 ---
-### Binomial($m, p$) Distribution ($m$ Known)
-
 ### Setup
 - Support: $X_i \in \{0, 1, \dots, m\}$, parameter $p \in (0, 1)$, $m$ known.
 - PMF: $P(X = x) = \binom{m}{x} p^x (1 - p)^{m - x}$.
@@ -82,8 +58,6 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
    $$\hat{p}_{\text{MLE}} = \frac{\sum X_i}{n m} = \frac{\bar{X}}{m}$$
 
 ---
-### Geometric($p$) Distribution
-
 ### Setup (Convention: Trials until First Success)
 - Support: $X_i \in \{1, 2, 3, \dots\}$, parameter $p \in (0, 1)$.
 - PMF: $P(X = x) = p (1 - p)^{x - 1}$.
@@ -103,8 +77,6 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
 > $$\hat{p}_{\text{MLE}} = \frac{1}{1 + \bar{X}}$$
 
 ---
-### Poisson($\lambda$) Distribution
-
 ### Setup
 - Support: $X_i \in \{0, 1, 2, \dots\}$, parameter $\lambda > 0$.
 - PMF: $P(X = x) = \frac{e^{-\lambda}\lambda^x}{x!}$.
@@ -120,8 +92,6 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
    $$\hat{\lambda}_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n X_i = \bar{X}$$
 
 ---
-### Exponential($\lambda$) Distribution (Rate Parameterization)
-
 ### Setup
 - Support: $X_i \ge 0$, rate parameter $\lambda > 0$.
 - PDF: $f(x; \lambda) = \lambda e^{-\lambda x}$.
@@ -140,8 +110,6 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
 > $$\hat{\theta}_{\text{MLE}} = \frac{1}{\hat{\lambda}_{\text{MLE}}} = \bar{X}$$
 
 ---
-### Uniform($a, b$) Distribution
-
 ### Setup
 - Support: $a \le X_i \le b$, parameters $a < b$.
 - PDF: $f(x; a, b) = \frac{1}{b - a} \mathbf{1}_{\{a \le x \le b\}}$.
@@ -172,43 +140,13 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
 
 ---
 
----
+## What to carry forward
 
-## Result
+[[Maximum Likelihood Estimation]] supplies the general method. The reference results are model-specific; state the density or mass function when parameter conventions could be ambiguous.
 
-The mathematical derivation confirms the target probability or estimator value.
-
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
-## Common Mistakes
-
-- Forgetting normalization constants when evaluating continuous posterior densities.
-- Misidentifying degrees of freedom in chi-square tests.
-
----
-
-## General Method
-
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Maximum Likelihood Estimation]]
-- [[Likelihood and Score Equations]]
-- [[Normal Distribution Parameter MLE Derivation Example]]
-- [[Uniform Distribution Non-Regular MLE Example]]
-
----
-
----
 
 ## Sources
 

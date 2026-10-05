@@ -12,8 +12,6 @@ order: 20
 
 ---
 
----
-
 ## Problem
 
 A compiler frontend parses the following conditional statement with mixed boolean operators:
@@ -39,49 +37,15 @@ else
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+The condition groups as `a<b || (c<d && e<f)`. Determine that tree before building patch lists; changing the grouping changes when each comparison executes.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+If a<b succeeds, the whole OR succeeds and skips the right subtree. If it fails, test c<d. Only a successful c<d reaches e<f; a failed c<d makes the conjunction false immediately. These are the destinations that [[Backpatching in Intermediate Code Generation]] must eventually supply.
 
-### Working Through the Solution
-### In-Depth Solution & Step-by-Step Walkthrough
+Write each comparison's true and false list beside its emitted instructions. At the AND marker, patch the left true list to the second comparison. At the OR marker, patch the left false list to the conjunction's first comparison. Merge the exits that represent the same final outcome.
+
+Finally attach true exits to the selected statement and false exits to its continuation. List operations are bookkeeping for the semantic paths, so explain the path before writing the operation.
 
 ### Part 1: Grammar Restructuring with Precedence & Markers
 
@@ -256,43 +220,13 @@ Every single branch path strictly satisfies the Boolean operational semantics wi
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+Verify three revealing routes: first comparison true, first false and second false, and first false with both right comparisons true. They test skipped evaluations and final destinations without replacing the general list-invariant argument.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Backpatching in Intermediate Code Generation]]
 
 ## Source
 

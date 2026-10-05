@@ -12,8 +12,6 @@ order: 32
 
 ---
 
----
-
 ## Problem
 
 *(Directly derived from course simulation lecture notes: `Notes on algorithm simulation.pdf` and `5. Deadlocks-week6-7-RRR.pdf`, Slide 17)*
@@ -29,29 +27,15 @@ Consider a single-instance Resource Allocation Graph $G = (V, E)$ containing pro
 
 ---
 
----
-
-## Given
-
-- System state matrices, resource vectors, and process workload parameters as specified in problem setup.
-
----
-
-## Required
-
-- Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
-
----
-
 ## Solution
 
-### 2. Simulation Trace 1: Starting Node $D$
+A graph can contain branching and merged paths without a cycle. The DFS trace therefore needs more information than whether a node has ever been visited: it needs the current unfinished path.
+
+Start at the source used in the example and append each entered node to the path. An outgoing edge to a new node extends that path. An edge to a node already on the path closes a cycle: the portion from that earlier node to the current node, followed by the new edge, is the certificate. When a branch is exhausted, remove its node from the active path before exploring a sibling branch.
+
+This is the mechanism behind [[Deadlock Detection and Recovery Algorithms]]. A node visited in an earlier completed branch is not an active ancestor, so reaching it again does not prove a cycle. The path stack or gray/black coloring preserves exactly this distinction.
+
+After finding a cycle, use [[Resource Allocation Graphs and Deadlock Modeling]] to interpret it. It establishes deadlock for the specified single-instance model; a multi-instance graph needs an allocation/request reduction rather than that conclusion alone.
 
 ### Initial Setup:
 - `Initial Node` $\leftarrow D$
@@ -100,10 +84,6 @@ Because this is a single-instance resource system, **a deadlock strictly exists*
 
 ---
 
----
-
-### 3. Simulation Trace 2: Starting Node $R$
-
 ### Initial Setup:
 - `Initial Node` $\leftarrow R$
 - $L = \emptyset$
@@ -136,20 +116,6 @@ No deadlocked cycles are reachable from starting node $R$.
 
 ---
 
----
-
-## Result
-
-The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
-
----
-
-## Why This Works
-
-Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
-
----
-
 ## Common Mistakes
 
 1. **Unmarked Edges:** Whenever an edge is traversed, it is marked so it will not be traversed again in the same path.
@@ -158,20 +124,14 @@ Each state transformation follows the operational semantics of kernel execution,
 
 ---
 
----
+## What to carry forward
 
-## General Method
+Show the cycle's actual edges, not just a repeated node name. Keep the persistent visited set and current-path set separate. One remembers completed exploration; the other supports the back-edge argument.
 
-Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Operating System Structures and Functions]]
-- [[Process Concepts and Memory Layout]]
-
----
+- [[Deadlock Detection and Recovery Algorithms]]
+- [[Resource Allocation Graphs and Deadlock Modeling]]
 
 ## Sources
 

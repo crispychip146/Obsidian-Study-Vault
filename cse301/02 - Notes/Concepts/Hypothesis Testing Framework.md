@@ -12,19 +12,13 @@ order: 57
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A hypothesis test asks whether the observed data look sufficiently incompatible with a specified null model to reject it by a prechosen rule. The null and alternative describe parameter values or distributions; the statistic turns data into a measure of discrepancy.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Hypothesis Testing Framework, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Choose a significance level before seeing the outcome. A level-$\alpha$ test controls the probability of rejecting when the null is true, with the precise guarantee depending on the model and calibration. Failing to reject does not prove the null: weak data can fail to distinguish an important alternative.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Hypothesis Testing Framework reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Power is the probability of rejecting under a particular alternative. It depends on effect size, sample size, noise, and the rule. A small $p$-value may indicate a statistically detectable effect while its practical size remains modest. Report the estimated effect and uncertainty alongside the decision.
 
 ## Definition
 
@@ -40,8 +34,6 @@ A hypothesis test is defined by:
 2. A **rejection region** (or **critical region**) $R \subset \mathbb{R}$, such that:
    $$\text{Reject } H_0 \iff T(\mathbf{X}) \in R$$
    $$\text{Retain (Fail to Reject) } H_0 \iff T(\mathbf{X}) \notin R$$
-
----
 
 ---
 
@@ -82,8 +74,6 @@ Because of random sampling variability, any statistical decision rule can make t
 - **Statistical Power ($1 - \beta$):** The probability of correctly rejecting a false null hypothesis.
 
 ---
-### Power Function, Size, and Significance Level
-
 ### Definition: Power Function
 The **power function** $\beta(\theta)$ of a test with rejection region $R$ is the probability of rejecting $H_0$ when the true parameter value is $\theta$:
 $$\beta(\theta) = P_\theta(\mathbf{X} \in R)$$
@@ -125,14 +115,6 @@ Hypothesis testing and interval estimation are two sides of the same mathematica
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
 ## Technical Details
 
 ### Hypotheses Classifications
@@ -150,51 +132,13 @@ See worked numerical applications in the linked example notes.
 
 ---
 
----
+## What to carry forward
 
-## Important Properties and Why They Hold
+[[p-Values and Significance]] explains how evidence is calibrated under the null. Testing answers a different question from assigning posterior probabilities to hypotheses.
 
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
-## Exam Relevance
-
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[p-Values and Significance]]
-- [[Wald Test Statistic]]
-- [[Multiple Testing and False Discovery Rate]]
-- [[Permutation Test Algorithm]]
-- [[Confidence Intervals and Confidence Sets]]
-
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
 
 ## Sources
 

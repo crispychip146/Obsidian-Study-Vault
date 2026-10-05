@@ -12,8 +12,6 @@ order: 33
 
 ---
 
----
-
 ## Problem
 
 The [[Central Limit Theorem]] allows us to approximate complicated discrete probability sums with simple standard normal CDF evaluations $\Phi(z)$.
@@ -24,27 +22,13 @@ We examine two classic applications:
 
 ---
 
----
-
-## Given
-
-- Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
-
----
-
-## Required
-
-- Calculate posterior distributions, point estimates, confidence intervals, or stationary distributions.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Approximating a count by a normal variable requires matching its mean and variance first. For $X\sim\operatorname{Binomial}(400,0.52)$, these are 208 and 99.84. The event $X\le200$ includes the full probability mass at integer 200, so the matching continuous cutoff is 200.5.
+
+Thus standardize $(200.5-208)/\sqrt{99.84}$ before using the normal CDF. The added half-unit is a continuity correction, not a change to the original count threshold.
+
+For a Poisson count of mean 100, the standard deviation is 10. The inclusive integer range 90 through 110 corresponds to the continuous interval 89.5 through 110.5. Compute the difference of the two standardized CDF values. In both examples, the approximation depends on the count not being too skewed and the requested region not being an exceptionally sensitive tail.
 
 ### Part 1: Binomial Normal Approximation
 
@@ -103,20 +87,6 @@ The error is just $0.03\%$!
 
 ---
 
----
-
-## Result
-
-The mathematical derivation confirms the target probability or estimator value.
-
----
-
-## Why This Works
-
-The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
-
----
-
 ## Common Mistakes
 
 - **When is the Normal Approximation Valid?**
@@ -130,23 +100,13 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Central Limit Theorem]] motivates the shape; continuity correction matches the event. If the question needs an exact cutoff or a rigorous guarantee, use the exact distribution or a valid bound instead.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Central Limit Theorem]] — Foundational limit theorem.
-- [[Continuous Probability Distributions]] — Standard normal distribution and $\Phi(z)$.
-- [[Discrete Probability Distributions]] — Binomial and Poisson definitions.
-
----
-
----
+- [[Central Limit Theorem]]
 
 ## Sources
 

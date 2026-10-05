@@ -12,26 +12,15 @@ order: 9
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+[[Process Lifecycle and State Transitions]] explains why a process can be unable to use the CPU while waiting for I/O. Multiprogramming keeps other processes available to fill that gap. How much idle time can that remove?
 
-How much CPU computing capacity is actively utilized when $n$ independent processes are loaded concurrently into main memory, and what fraction of CPU time is wasted idling during I/O waits?
+Use an illustrative model: each of $n$ resident processes is blocked at a randomly observed instant with probability $p$, independently of the others. The CPU has no useful process to run only when **all** are blocked. For two processes that probability is $p\times p$; for $n$ it is $p^n$. Taking the complement gives useful-work availability $U=1-p^n$.
 
-We already know that processes alternate between CPU bursts and I/O bursts. When only a single process is resident in memory ($n=1$), any time it blocks on slow disk or network I/O, the expensive CPU has nothing to do and sits completely idle. The obstacle to calculating multi-process CPU utilization directly is modeling the complex concurrent scheduling interactions among multiple processes without running an intractable minute-by-minute simulation.
+The multiplication expresses the independence assumption. The complement expresses the scheduler's opportunity to run at least one unblocked process. Those are separate pieces of reasoning, and both are needed. If the processes wait together on the same event, multiplying their marginal probabilities can badly misdescribe the system.
 
----
-
-## Developing the Formula
-
-We model the system using probabilistic analysis:
-1. Let $p$ be the average fraction of time each process spends waiting for I/O ($0 \le p \le 1$).
-2. For a single process, the probability it is waiting on I/O at any random instant is $p$.
-3. Assuming processes behave independently, the probability that **all $n$ processes are simultaneously blocked on I/O** is the product of their individual probabilities: $p \times p \times \dots \times p = p^n$.
-4. The CPU is completely idle if and only if every single resident process is blocked on I/O.
-5. Therefore, by the complement rule of probability, at least one process is ready to execute with probability $1 - p^n$.
-
----
+At $n=1$, the result reduces to $1-p$. At $p=0$, there is always work; at $p=1$, there is none. These checks support the interpretation, while the probability argument establishes the formula under the model.
 
 ## Formula
 
@@ -70,8 +59,6 @@ While invaluable for conceptual modeling, the formula makes simplifying assumpti
 
 ---
 
----
-
 ## Derivation
 
 1. Consider a single process running in isolation ($n = 1$). By definition, it spends fraction $p$ of its time blocked on I/O. Therefore:
@@ -85,8 +72,6 @@ While invaluable for conceptual modeling, the formula makes simplifying assumpti
 5. Therefore, by the complement rule of probability, the CPU has at least one ready process to execute with probability:
    $$\text{CPU Utilization} = 1 - P(\text{All } n \text{ processes blocked}) = 1 - p^n$$
 $\blacksquare$
-
----
 
 ---
 
@@ -118,8 +103,6 @@ xychart-beta
 
 ---
 
----
-
 ### Practical Hardware Design Implication: Sizing RAM
 
 This formula guides physical memory capacity planning in operating systems:
@@ -128,10 +111,8 @@ This formula guides physical memory capacity planning in operating systems:
   $$n = \frac{2048 - 512}{256} = 6 \text{ processes}$$
   With $p = 0.80$, CPU utilization is $1 - 0.8^6 \approx 73.8\%$.
 - Upgrading RAM to $4\text{ GB}$ allows $n = \frac{4096 - 512}{256} \approx 14$ processes.
-  CPU utilization surges from $73.8\%$ to $1 - 0.8^{14} \approx 95.6\%$, yielding a **$21.8\%$ increase in total computational throughput** simply by adding memory!
+  CPU utilization surges from $73.8\%$ to $1 - 0.8^{14} \approx 95.6\%$, an increase of approximately **21.8 percentage points in modeled CPU utilization**. This calculation alone does not establish a corresponding throughput improvement.
 - **Law of Diminishing Returns:** Upgrading beyond $15$ processes produces negligible CPU gains ($< 2\%$), while consuming expensive memory and increasing scheduling overhead.
-
----
 
 ---
 
@@ -142,25 +123,14 @@ This formula guides physical memory capacity planning in operating systems:
 
 ---
 
-## Related Concepts
+## What to carry forward
 
-- [[CPU Scheduling Principles and Criteria]]
-- [[Process Forking and Zombie Orphan Example]]
+Increasing $n$ has diminishing benefit: adding one more process improves the model by $p^n(1-p)$. Actual useful CPU utilization also depends on switching costs, memory pressure, and resource contention. [[CPU Scheduling Principles and Criteria]] asks how to use the available work, rather than only whether some work exists.
 
----
+## Related notes
 
-## Prerequisites
-
-- [[Process Concepts and Memory Layout]]
 - [[Process Lifecycle and State Transitions]]
-
----
-
-## Problems
-
-- [[Comprehensive CPU Scheduling Simulation Example]]
-
----
+- [[CPU Scheduling Principles and Criteria]]
 
 ## Sources
 

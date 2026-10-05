@@ -12,8 +12,6 @@ order: 76
 
 ---
 
----
-
 ## Problem
 
 In population genetics, consider a gene with two alleles, $A$ and $a$. An individual's genotype consists of a pair of these genes: $AA$, $aa$, or $Aa$.
@@ -24,8 +22,6 @@ In a large population, suppose the initial fractions of individuals with genotyp
 2. Derive the genotype proportions $p, q, r$ in the next generation.
 3. Prove that the allele frequencies remain constant in all subsequent generations (**Hardy-Weinberg Law**).
 4. Model the genetic lineage of a single individual across generations as a three-state [[Markov Chain]], determine its transition probability matrix $P$, and prove that the stationary distribution is $\pi = (p, q, r)$.
-
----
 
 ---
 
@@ -40,8 +36,6 @@ In a large population, suppose the initial fractions of individuals with genotyp
 
 ---
 
----
-
 ## Required
 
 1. Allele frequencies $P(A)$ and $P(a)$.
@@ -51,15 +45,13 @@ In a large population, suppose the initial fractions of individuals with genotyp
 
 ---
 
----
-
-## Understanding the Problem and Choosing the Method
-
-Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
-
----
-
 ## Solution
+
+Separate allele frequency from genotype frequency. An $AA$ individual contributes only $A$, an $aa$ individual only $a$, and an $Aa$ individual contributes each with probability one-half. The allele frequency is therefore $u=p_0+r_0/2$ for $A$ and $v=1-u$ for $a$.
+
+Under the idealized random-mating assumptions, independently combining two parental alleles gives genotype probabilities $u^2$, $v^2$, and $2uv$. Their next-generation allele frequency is $u^2+(2uv)/2=u(u+v)=u$, showing invariance. The algebra explains why genotype proportions can change in one generation while allele frequency stays fixed.
+
+A lineage chain adds another modeling layer: one parent follows the tracked lineage while the other is sampled from the population. Its rows depend on what allele the tracked parent can transmit. State these assumptions when deriving the transition matrix; mutation, selection, migration, or finite-population drift are outside this idealization.
 
 ### Concepts Used
 
@@ -69,8 +61,6 @@ Identify the random variables, state the conditional distributions, select the a
 - Conditional Probability
 
 ---
-### Solution
-
 ### Step 1: Probability that a Random Gene Is Type $A$ or $a$
 Selecting a gene from a randomly chosen parent is mathematically equivalent to drawing a gene uniformly at random from the population's entire gene pool.
 
@@ -192,8 +182,6 @@ Thus, $\pi P = \pi$, confirming that $\pi = (p, q, r)$ is indeed the stationary 
 
 ---
 
----
-
 ## Result
 
 1. Allele frequencies: $P(A) = p_0 + r_0/2$, $P(a) = q_0 + r_0/2$.
@@ -203,13 +191,9 @@ Thus, $\pi P = \pi$, confirming that $\pi = (p, q, r)$ is indeed the stationary 
 
 ---
 
----
-
 ## Why This Works
 
 The stability of the gene pool mirrors the convergence of a Markov chain to its stationary distribution: once the population reaches random-mating equilibrium, the probability distribution of an individual descendant's genotype matches the macroscopic composition of the entire population.
-
----
 
 ---
 
@@ -221,23 +205,13 @@ The stability of the gene pool mirrors the convergence of a Markov chain to its 
 
 ---
 
----
+## What to carry forward
 
-## General Method
+[[Stationary and Limiting Distributions in Markov Chains]] supplies the balance check for the lineage model. If either allele frequency is zero, irreducibility claims for all three genotypes no longer apply.
 
-Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Markov Chain]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
-- [[Stochastic Process]]
-
----
-
----
 
 ## Sources
 

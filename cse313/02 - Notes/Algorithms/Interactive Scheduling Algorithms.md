@@ -12,13 +12,12 @@ order: 14
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4b, 2018 Q3b, 2018 Q4b, 2018 Q4c, 2019 Q1a, 2020 Q1a, 2020 Q4c, 2021 Q2a)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q4b, 2018 Q3b, 2018 Q4b, 2018 Q4c, 2019 Q1a, 2020 Q1a, 2020 Q4c, 2021 Q2a)**
 >
 > ### What Exam Questions Expect & How to Think:
 > 1. **Priority Scheduling with Round Robin Tie-Breaking (2017 Q4b, 2019 Q1a, 2020 Q1a, 2021 Q2a):**
 >    - **The Setup:** Processes have both numerical priority and arrival times. The scheduler always runs highest-priority processes first. Processes with identical priority share the CPU using Round Robin with time quantum $q$.
->    - **The "Click" Rule:** Check whether priority convention states *higher number = higher priority* (e.g., 2020 Q1a) or *lower number = higher priority* (e.g., 2017 Q4b, 2019 Q1a). Read the prompt carefully!
+>    - **The decision rule:** Check whether priority convention states *higher number = higher priority* (e.g., 2020 Q1a) or *lower number = higher priority* (e.g., 2017 Q4b, 2019 Q1a). Read the prompt carefully!
 > 2. **Dynamic / Tiered Quanta (2020 Q1a):**
 >    - If the problem specifies *"The first 5 quanta use $q=20$, subsequent quanta use $q=30$,"* track elapsed time slices across the entire system. Once 5 slices (100 ms of CPU time) are consumed, switch your slice limit to 30 ms.
 > 3. **Non-Preemptive Quantum Completion Clause (2021 Q2a):**
@@ -32,25 +31,15 @@ order: 14
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+An interactive user wants evidence that the application is responding before it completes all its work. Round Robin addresses this by limiting a turn to a **quantum** $q$. The ready queue, rather than the original burst length, determines who runs next.
 
-In interactive desktop, mobile, and server environments, users interact with multiple GUI windows and terminals simultaneously. Batch algorithms (FCFS, SJF) minimize average turnaround time, but produce unacceptable response times (often seconds or minutes), making interactive systems feel completely frozen.
+Follow a job with 10 units remaining and $q=3$. It runs 3, keeps 7, and rejoins the queue behind jobs already waiting. A job with only 2 units remaining finishes after 2; it does not consume a fictional extra unit. This is why a trace must track both queue order and remaining work.
 
-We want scheduling algorithms that guarantee fast, bounded response times (under 50–100 ms) and fair CPU sharing. The central obstacle is that long-running computations will starve interactive tasks unless the operating system forcefully preempts the running process.
+A smaller quantum creates more frequent opportunities to run, but also more switching. A larger quantum reduces that overhead while making jobs wait longer between turns. With a fixed set of $n$ ready jobs and negligible overhead, the other $n-1$ jobs can each use at most $q$ before our job's next turn.
 
----
-
-## Developing the Core Idea
-
-The foundational mechanism for interactive scheduling is **Time Slicing via Hardware Timer Interrupts**:
-- **Round Robin (RR):** Allocates each ready process a fixed time quantum $q$. When the timer ticks after $q$ ms, the running process is preempted and appended to the tail of the ready queue.
-- **Priority Scheduling:** Assigns priority ranks to processes; dynamic aging increments priority over time to prevent starvation.
-- **Multilevel Feedback Queue (MLFQ):** Automatically learns process characteristics without advance knowledge: short bursts stay in high-priority queues; long bursts migrate down to lower-priority, larger-quantum queues.
-- **Lottery Scheduling:** Probabilistic proportional-share scheduling using randomized tickets.
-
----
+Priority scheduling instead ranks importance. MLFQ uses observed behavior to revise that ranking: sustained CPU use suggests a long burst, while periodic boosts give postponed jobs another opportunity. Read each rule as a policy decision; implementations differ, and a simplified MLFQ is not a universal description of desktop kernels.
 
 ## Inputs
 
@@ -80,10 +69,6 @@ The dominant interactive algorithms are:
 4. **Lottery Scheduling (Proportional Share)**
 
 ---
-
----
-
-### 1. Round Robin (RR) Scheduling
 
 ### Algorithmic Logic
 - **Type:** Preemptive time-slicing.
@@ -119,13 +104,9 @@ CPU wastes time swapping registers       Degrades into FCFS (Convoy Effect)
 - **If $q$ is extremely large (e.g., $1000\text{ ms}$):**
   Short interactive tasks must wait behind long tasks. The system feels sluggish and non-responsive; RR degenerates into [[Batch Scheduling Algorithms|FCFS]].
 - **Golden Rule of Thumb:**  
-  Set the time quantum $q$ such that **$80\%$ of all CPU bursts are shorter than $q$**, while keeping context switch overhead below $1\%$ of the quantum. (Modern desktop kernels set $q \approx 10\text{–}50\text{ ms}$ with context switch overhead $\approx 1\text{–}5\text{ }\mu\text{s}$).
+  Set the time quantum $q$ such that **$80\%$ of all CPU bursts are shorter than $q$**, while keeping context switch overhead below $1\%$ of the quantum. Treat these percentages as a design heuristic to evaluate for a specified workload, rather than universal kernel settings.
 
 ---
-
----
-
-### 2. Priority Scheduling (Static & Dynamic)
 
 ### Algorithmic Logic
 - Each process is assigned an integer **priority level**.
@@ -149,11 +130,9 @@ Consider three processes: High ($H$), Medium ($M$), Low ($L$):
 
 ---
 
----
-
 ### 3. Multilevel Feedback Queue (MLFQ)
 
-Created by Fernando Corbató (Turing Award winner), the **Multilevel Feedback Queue (MLFQ)** is the gold-standard scheduling framework adopted by modern general-purpose operating systems (Linux CFS, Windows NT, macOS).
+A **Multilevel Feedback Queue (MLFQ)** is a family of policies that adapts priority using observed CPU behavior. The classroom rules below define one model; real operating systems use varied and evolving scheduling policies.
 
 ### Why MLFQ?
 SJF is optimal, but requires knowing the future. MLFQ **learns from process history** to approximate SJF dynamically without knowing burst lengths in advance!
@@ -174,19 +153,15 @@ flowchart TD
 2. **Rule 2:** If $\text{Priority}(A) == \text{Priority}(B)$, $A$ and $B$ run in Round Robin using the quantum of that queue.
 3. **Rule 3:** When a job enters the system, it is placed at the **highest priority queue** (Queue 0).
 4. **Rule 4 (Demotion):** If a job uses up its entire time quantum without voluntarily yielding, its priority is **reduced by 1 level** (demoted to the next lower queue with a larger quantum). If a job yields for I/O before its quantum expires, it stays at the same priority level.
-5. **Rule 5 (Priority Boost):** After some time period $S$, move **all jobs in the system to Queue 0**. (This guarantees CPU-bound jobs will not starve, and handles processes that transition from compute-bound to interactive).
-
----
+5. **Rule 5 (Priority Boost):** After some time period $S$, move **all jobs in the system to Queue 0**. This improves opportunities for delayed jobs under suitable scheduling and workload assumptions; a full starvation bound needs those assumptions. It also handles changing job behavior.
 
 ---
 
 ### 4. Lottery Scheduling (Proportional Share)
 
 - **Mechanism:** The OS allocates each process a set of discrete **lottery tickets**. Whenever a scheduling decision is made, the OS generates a pseudo-random number between $1$ and $T_{\text{total}}$. Whichever process holds the winning ticket gets the CPU!
-- **Proportional Share Property:** If Process $A$ holds 75 tickets and Process $B$ holds 25 tickets, over time Process $A$ receives exactly $75\%$ of CPU cycles and Process $B$ receives $25\%$.
+- **Proportional Share Property:** If Process $A$ holds 75 tickets and Process $B$ holds 25 tickets, each equal-length lottery opportunity selects A with probability 0.75 and B with probability 0.25. Finite-run shares fluctuate; long-run proportions approach these values under the sampling assumptions.
 - **Ticket Transfers:** A client can temporarily transfer its lottery tickets to a server process while waiting for an RPC, preventing server bottlenecks.
-
----
 
 ---
 
@@ -198,8 +173,6 @@ flowchart TD
 | **Priority with Aging** | Differentiates critical system daemons from background jobs | Risk of priority inversion without inheritance | Real-time and server kernels |
 | **MLFQ** | Automatic learning, approximates SJF, optimizes both response & turnaround time | Complex parameter tuning (number of queues, quanta, boost frequency) | General desktop and mobile OSes |
 | **Lottery Scheduling** | Mathematically simple proportional sharing, flexible ticket delegation | Non-deterministic in short time horizons | Virtual machine hypervisors, cloud multi-tenancy |
-
----
 
 ---
 
@@ -229,7 +202,7 @@ $O(n)$ space for priority queue headers and ready lists.
 
 ## Properties
 
-- **Bounded Response Guarantee:** Under Round Robin with quantum $q$ and $n$ processes, no process waits longer than $(n - 1)q$ time units for its next turn.
+- **Bounded Response Guarantee:** For a fixed set of $n$ ready jobs, FIFO Round Robin with quantum $q$ and zero scheduling overhead bounds the intervening CPU time before the next turn by $(n-1)q$. Arrivals, priority rules, and overhead require their own accounting.
 - **Quantum Sensitivity:** If $q \to \infty$, RR degenerates into FCFS; if $q \to 0$, context switch overhead dominates and system throughput drops toward zero.
 
 ---
@@ -237,13 +210,6 @@ $O(n)$ space for priority queue headers and ready lists.
 ## Limitations
 
 - Priority inversion can occur when a high-priority process waits for a resource held by a low-priority process (resolved by Priority Inheritance).
-
----
-
-## Common Mistakes
-
-- Misunderstanding preemption boundaries during execution.
-- Failing to verify state invariants before granting resource claims.
 
 ---
 
@@ -258,27 +224,13 @@ $O(n)$ space for priority queue headers and ready lists.
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+At a quantum boundary, arrivals and requeueing can occur at the same timestamp. State the exercise's tie rule before tracing. [[Comprehensive CPU Scheduling Simulation Example]] shows how responsiveness can improve even when average turnaround gets worse. Lottery shares are probabilistic expectations, not exact guarantees for every finite run.
 
-- [[Scheduling Metrics and Burst Estimation Formulas]]
+## Related notes
+
 - [[Comprehensive CPU Scheduling Simulation Example]]
-
----
-
-## Prerequisites
-
-- [[CPU Scheduling Principles and Criteria]]
-- [[Batch Scheduling Algorithms]]
-
----
-
-## Problems
-
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
 
 ## Sources
 

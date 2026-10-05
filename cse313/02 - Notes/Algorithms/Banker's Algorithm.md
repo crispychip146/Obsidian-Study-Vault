@@ -12,15 +12,14 @@ order: 29
 
 ---
 
-> [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3a, 2019 Q3a, 2020 Q3b, 2021 Q1a, 2021 Q3a)**
-> **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
+> [!IMPORTANT] **Exam practice references (Appeared in 2017 Q3a, 2019 Q3a, 2020 Q3b, 2021 Q1a, 2021 Q3a)**
 >
-> ### What Exam Questions Expect & How to Master Them:
+> ### Practice tasks and reasoning:
 > 1. **Solving for Unknown Resource Parameter $x$ (2017 Q3a):**
 >    - **The Setup:** Available vector has an unknown variable: $Available = [0, 0, x, 1, 1]$. You must find the minimum $x$ so the system is safe.
->    - **The "Click" Insight:** Always compute $Need = Max - Allocation$ first. Find which process can execute *first* using only the fixed numeric values. Here, $Need_D = [0,0,1,1,1]$ requires $x \ge 1$. After $D$ completes, it frees its allocation, boosting $Work$ to $[1, 1, x+1, 2, 1]$. Next, $Need_C = [1,0,3,0,0]$ requires $x+1 \ge 3 \implies x \ge 2$. Thus, the minimum value is $x=2$!
+>    - **The key insight:** Always compute $Need = Max - Allocation$ first. Find which process can execute *first* using only the fixed numeric values. Here, $Need_D = [0,0,1,1,1]$ requires $x \ge 1$. After $D$ completes, it frees its allocation, boosting $Work$ to $[1, 1, x+1, 2, 1]$. Next, $Need_C = [1,0,3,0,0]$ requires $x+1 \ge 3 \implies x \ge 2$. Thus, the minimum value is $x=2$!
 > 2. **Proving an UNSAFE State (2021 Q1a):**
->    - **Exam Trap:** Students often assume every Banker's question must yield a valid safe sequence. In 2021 Q1(a), $Available = [0, 0, 1]$. $P_2$ runs ($Work \to [2, 0, 2]$), then $P_1$ runs ($Work \to [6, 2, 5]$). Now inspect remaining processes: $Need_{P3} = [0, 3, 1]$ (requires 3 of resource $B$, but $Work[B]=2$) and $Need_{P4} = [1, 1, 6]$ (requires 6 of $C$, but $Work[C]=5$). **Neither can proceed!** The correct, full-mark answer is: **"No safe sequence exists. The system is in an UNSAFE STATE."**
+>    - **Exam Trap:** Students often assume every Banker's question must yield a valid safe sequence. In 2021 Q1(a), $Available = [0, 0, 1]$. $P_2$ runs ($Work \to [2, 0, 2]$), then $P_1$ runs ($Work \to [6, 2, 5]$). Now inspect remaining processes: $Need_{P3} = [0, 3, 1]$ (requires 3 of resource $B$, but $Work[B]=2$) and $Need_{P4} = [1, 1, 6]$ (requires 6 of $C$, but $Work[C]=5$). **Neither can proceed!** The conclusion is: **"No safe sequence exists. The system is in an UNSAFE STATE."**
 > 3. **Single-Resource Capacity Problem (2020 Q3b):**
 >    - Given total capacity $E=20$ and allocations $[4, 5, 3, 4]$, calculate $Available = 20 - \sum Allocation = 20 - 16 = 4$. Compare $Available$ with $Need_i = Max_i - Alloc_i$. Since every process has $Need=4$, execute them sequentially, releasing their allocations until $Available = 20$.
 > 4. **Safe vs. Unsafe vs. Deadlock Distinction (2019 Q1c, 2021 Q3a):**
@@ -30,29 +29,21 @@ order: 29
 
 ---
 
----
+## Building the idea
 
-## The Problem and Earlier Tools
+A banker cannot promise every customer everything at once, but can ask whether customers can finish in some order and return what they borrowed. Here the customers are processes, and resources are vectors because a unit of A cannot replace a unit of B.
 
-In multiprogrammed systems, processes request multiple resource types dynamically. Earlier techniques—such as static deadlock prevention—force processes to request all resources upfront or impose strict linear acquisition ordering, leading to severe resource underutilization.
+Compute `Need = Max - Allocation`. Start a hypothetical pool `Work = Available`. A process can be marked finishable only when **every component** of its Need is at most Work. If it finishes, it returns the resources it already holds: update `Work += Allocation[i]`. Do not add Max or Need; those are requirements, not resources owned at the start of the test.
 
-We want an algorithm that dynamically evaluates resource requests in real time and decides whether granting a request is safe. The central obstacle is worst-case concurrency: granting a request that leaves resources available right now might still lead to deadlock later if all processes suddenly claim their maximum declared demands simultaneously.
+Why is greedy selection valid? Completing an eligible process only increases Work, so it cannot make another unfinished process less eligible. If repeated selection finishes all processes, the recorded order is a safe sequence. If none is eligible while some remain, there is no possible first finisher among them under the declared-need model.
 
----
-
-## Developing the Core Idea
-
-Dijkstra's key insight is the **Town Banker Analogy**: A banker with a fixed pool of cash never allocates money such that the remaining vault cash cannot satisfy the maximum remaining credit line of at least one client.
-
-By maintaining this **Safe State Invariant**, the operating system guarantees that at least one process can finish, return all its held resources to the available pool, and thereby allow the remaining processes to finish sequentially without deadlock.
-
----
+For a new request, first check its legality and current availability. Then tentatively update the allocation and rerun safety. [[Deadlock Prevention and Avoidance Strategies]] explains why immediate availability alone is insufficient.
 
 ## Inputs
 
 - $E = [e_1, e_2, \dots, e_m]$: Total existing resource vector.
-- $CA = [n 	imes m]$: Current Allocation matrix ($CA[i][j]$ = instances of $R_j$ held by $P_i$).
-- $MaxReq = [n 	imes m]$: Maximum Requirement matrix.
+- $CA = [n \times m]$: Current Allocation matrix ($CA[i][j]$ = instances of $R_j$ held by $P_i$).
+- $MaxReq = [n \times m]$: Maximum Requirement matrix.
 - $Request_i = [r_1, r_2, \dots, r_m]$: Dynamic request vector from process $P_i$.
 
 ---
@@ -74,15 +65,13 @@ Let $n$ be the number of processes in the system, and $m$ be the number of disti
 Total Resources:      E = (e_1, e_2, ..., e_m)
 Current Allocation:   CA = [ n x m matrix ]  (CA[i][j] = instances of Rj held by Pi)
 Maximum Requirements: MaxReq = [ n x m matrix ]
-Request / Need:       R = MaxReq - CA
+Remaining Need:      R = MaxReq - CA
 Available Resources:  A = E - \sum_{i=1}^n CA_i
 ```
 
 ### Vector Comparison Notation:
 For vectors $X, Y \in \mathbb{R}^m$, we define:
 $$X \le Y \iff X_j \le Y_j \quad \forall j \in \{1, 2, \dots, m\}$$
-
----
 
 ---
 
@@ -97,9 +86,7 @@ A small-town banker has a fixed total pool of cash. Several business clients req
 - Each client declares their **maximum credit limit** upfront.
 - A client takes loans in small installments over time.
 - The banker knows that once a client receives their maximum limit, they will finish their project and pay back the entire loan.
-- **Banker's Invariant:** The banker will **never** approve a loan request if granting it would leave the vault with less cash than the maximum remaining need of at least one client. As long as one client can finish, their repaid funds can be used to satisfy the next, avoiding bankruptcy (deadlock).
-
----
+- **Safety invariant:** Grant only when the resulting state admits an order in which **all** clients can finish and return their allocations. One initially finishable client is necessary for a nonempty safe sequence, but is not sufficient: the pool can still be too small for every remaining client after that client finishes.
 
 ---
 
@@ -132,8 +119,6 @@ Algorithm Safety_Check:
 
 ---
 
----
-
 ### 5. Algorithmic Complexity & Limitations
 
 - **Time Complexity:** The safety check requires $O(m \times n^2)$ operations in the worst case (searching through $n$ rows up to $n$ times, each taking $m$ comparisons).
@@ -141,8 +126,6 @@ Algorithm Safety_Check:
   1. *A priori knowledge:* Real-world processes rarely know their exact peak resource demands before execution.
   2. *Static assumptions:* Assumes fixed process counts and fixed resource counts; modern systems dynamically add/remove hardware and fork/terminate processes.
   3. *Overhead:* Running an $O(m \cdot n^2)$ safety simulation on **every single system resource call** would cripple OS performance.
-
----
 
 ---
 
@@ -155,7 +138,7 @@ Suppose $Available = [3, 3, 2]$, and 5 processes have need vectors. The safety a
 ## Complexity
 
 ### Time Complexity
-$O(m 	imes n^2)$ where $n$ is the number of processes and $m$ is the number of resource types.
+$O(m \times n^2)$ where $n$ is the number of processes and $m$ is the number of resource types.
 
 ### Space Complexity
 $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
@@ -166,7 +149,7 @@ $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
 
 - **Deadlock-Free Guarantee:** The algorithm strictly guarantees that the system will never enter a deadlocked state.
 - **Conservatism (Incompleteness):** An unsafe state does NOT mean deadlock is inevitable; it merely means the OS cannot guarantee deadlock prevention in the worst case.
-- **Termination:** The safety algorithm terminates in at most $n$ iterations.
+- **Termination:** At most $n$ successful selections mark processes finished. A straightforward implementation can inspect up to $n$ rows on each selection and then perform a final unsuccessful scan.
 
 ---
 
@@ -178,41 +161,15 @@ $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
 
 ---
 
-## Common Mistakes
+## What to carry forward
 
-- Misunderstanding preemption boundaries during execution.
-- Failing to verify state invariants before granting resource claims.
+The safety loop is a hypothetical proof, not actual simultaneous allocation to every customer. Restore tentative changes if the request is refused. A safe sequence need not be unique; the goal is to establish one, under valid maximum claims and eventual resource release.
 
----
-
-## Exam Relevance
-
-Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
-
----
-
-## Related Concepts
+## Related notes
 
 - [[Deadlock Prevention and Avoidance Strategies]]
-- [[Deadlock Detection and Recovery Algorithms]]
-- [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
 
----
-
-## Prerequisites
-
-- [[Deadlock Fundamentals and Coffman Conditions]]
-- [[Resource Allocation Graphs and Deadlock Modeling]]
-
----
-
-## Problems
-
-- [[Problem — Banker's Algorithm Safe State and Request Granting]]
-
----
-
-## Sources
+## Resource-request algorithm
 
 When a running process $P_i$ issues a new resource request vector $Request_i$:
 
@@ -248,6 +205,8 @@ flowchart TD
    - **If Unsafe:** The OS undoes the tentative modifications (restores old $A, CA_i, R_i$) and forces $P_i$ to wait.
 
 ---
+
+## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 28–31: Banker's Algorithm for Single and Multiple Resources) and `Notes on algorithm simulation.pdf`.
 - **Previous Topic:** [[Deadlock Prevention and Avoidance Strategies]] (Step 28).

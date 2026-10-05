@@ -12,8 +12,6 @@ order: 18
 
 ---
 
----
-
 ## Problem
 
 Consider the classic searching and filtering loop found in systems programming:
@@ -32,27 +30,15 @@ Look at the array boundary: `a` is allocated with 10 elements (indices $0$ to $9
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+The loop condition has two tests, and the second needs an array load. Before generating instructions, follow the source execution: test `i<10`; only on success evaluate `a[i]>max`; only if both succeed run the body; then return to the first test.
+
+[[Control Flow Translation and Boolean Expressions]] determines these paths. [[Multi-Dimensional Array Addressing Formulas]] determines the byte displacement for a[i]. [[Backpatching Control-Flow Code Generation Algorithm]] connects the initially unresolved jumps at the condition, body, and exit boundaries.
+
+Inside the body, reading the old a[i], subtracting one, and storing the new value are separate IR operations. Updating i happens afterward. On the next iteration, both the comparison and address calculation must use the updated index.
+
+The first guard addresses the upper bound under the stated setup. It is not a general proof of all array safety if i could be negative or other assumptions change.
 
 ### Compilation Mechanics: Step-by-Step Backpatching Trace
 
@@ -226,39 +212,15 @@ To overcome the reordering defect of Triples, compilers use **Indirect Triples**
 
 ---
 
----
+## What to carry forward
 
-## Result
+Read generated TAC by walking a true iteration and a false condition. Verify the load occurs only after the first guard succeeds, the update occurs only in the body, and the back edge returns to the condition.
 
-The compilation pass finishes with verified intermediate representations and correct register assignments.
+## Related notes
 
----
-
-## Why This Works
-
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
-
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Control Flow Translation and Boolean Expressions]]
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Backpatching Control-Flow Code Generation Algorithm]]
 
 ## Sources
 

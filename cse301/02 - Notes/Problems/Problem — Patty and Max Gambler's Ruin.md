@@ -12,8 +12,6 @@ order: 77
 
 ---
 
----
-
 ## Problem
 
 Patty and Max flip pennies in successive independent rounds. On each flip, Patty wins with probability $p = 0.6$ and loses with probability $q = 1 - p = 0.4$. 
@@ -23,8 +21,6 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 1. What is the probability that Patty wipes Max out (wins all 15 pennies)?
 2. What is the probability that Patty is ruined?
 3. Compare Patty's initial fraction of the total wealth with her winning probability, and interpret the result.
-
----
 
 ---
 
@@ -39,15 +35,11 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 
 ---
 
----
-
 ## Required
 
 1. Win probability $P_5 = P(\text{fortune reaches } 15 \mid X_0 = 5)$.
 2. Ruin probability $Q_5 = 1 - P_5$.
 3. Comparison between initial stake proportion $i/N$ and win probability $P_5$.
-
----
 
 ---
 
@@ -59,35 +51,19 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 
 ---
 
----
-
-## Prerequisites
-
-- [[Markov Chain]]
-- [[Gambler's Ruin Formula]]
-
----
-
----
-
 ## Question Type
 
 Numerical / Applied Probability
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+Track Patty's fortune only. Max's fortune is the complementary amount because their total 15 pennies is conserved. The boundary states are zero and 15, and Patty starts at five.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+Each round changes her fortune by one, with upward probability 0.6 and downward probability 0.4. Therefore use [[Gambler's Ruin Formula]] with $q/p=2/3$: $h_5=[1-(2/3)^5]/[1-(2/3)^{15}]$. The ruin probability is $1-h_5$, because this finite absorbing game eventually reaches a boundary with probability one.
 
-### Working Through the Solution
-### Solution
+Her initial wealth fraction is $5/15=1/3$, which would equal the winning probability in the fair game. Her favorable per-round probability raises the winning chance substantially. Starting wealth still matters because she can reach zero before the long-run advantage has enough opportunities to help.
 
 ### Step 1: Identify the Parameter Ratio $q/p$
 $$\frac{q}{p} = \frac{0.4}{0.6} = \frac{4}{6} = \frac{2}{3}$$
@@ -158,17 +134,6 @@ This is a classic examination problem testing:
 
 ---
 
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - **Incorrect Boundary Value ($N$):** Setting $N = 10$ (Max's pennies) instead of the total pennies in play $N = 5 + 10 = 15$.
@@ -177,27 +142,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+Check that the ratio is loss probability divided by win probability and that the numerator exponent is initial wealth. Reversing either choice can produce a plausible-looking but wrong result.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Gambler's Ruin Formula]]
 
 ## Source
 

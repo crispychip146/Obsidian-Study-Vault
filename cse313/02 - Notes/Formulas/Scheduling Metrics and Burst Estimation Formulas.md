@@ -12,25 +12,15 @@ order: 15
 
 ---
 
----
+## Building the idea
 
-## The Question and Earlier Knowledge
+A Gantt chart records who executes and when. The metrics in [[CPU Scheduling Principles and Criteria]] are different readings of that same timeline. Subtract arrival from completion to measure the whole stay; subtract arrival from first execution to measure the initial delay.
 
-How can an operating system quantitatively measure scheduling performance across different algorithms, and how can a scheduler estimate future CPU burst lengths when future bursts cannot be known in advance?
+For a CPU-only job, the whole stay consists of its CPU service and its ready-queue waiting. Removing service gives $WT=CT-AT-BT$. If the model includes blocking for I/O, removing CPU service alone also leaves blocked time, so it no longer isolates ready waiting.
 
-Earlier we established that Shortest Job First (SJF) is provably optimal for minimizing average waiting time. However, the fundamental obstacle to running SJF in practice is that the operating system cannot know how long a process will compute before its next I/O call without executing it first.
+Burst prediction answers a separate question: how should a scheduler guess the next burst? Let its old estimate be $\tau_n$ and the newest observation be $t_n$. The update can be written $\tau_{n+1}=\tau_n+\alpha(t_n-\tau_n)$. It moves the estimate partway toward what just happened. Expanding the recurrence explains the familiar weighted-sum form: each older observation is multiplied by another factor of $1-\alpha$, so its influence fades.
 
----
-
-## Developing the Formula
-
-To resolve this obstacle, we apply **Exponential Smoothing** to predict the next CPU burst ($\tau_{n+1}$) using the historical average of previous bursts:
-- Let $t_n$ be the actual length of the $n$-th CPU burst just observed.
-- Let $\tau_n$ be our predicted estimate for that $n$-th burst.
-- We form the new prediction as a weighted average: $\tau_{n+1} = \alpha t_n + (1 - \alpha) \tau_n$, where $\alpha \in [0, 1]$ controls responsiveness to recent history.
-Expanding this recurrence shows that older bursts contribute with geometrically decaying weights $(1 - \alpha)^j$.
-
----
+At $\alpha=0$, no observation changes the estimate. At $\alpha=1$, the next prediction is simply the last burst. These endpoints explain the parameter without treating a chosen intermediate value as a universal OS setting.
 
 ## Formula
 
@@ -83,8 +73,6 @@ The value of $\alpha$ controls how rapidly the scheduler adapts to changing proc
 
 ---
 
----
-
 ## Derivation
 
 To see why this formula is called *exponential*, expand the recurrence relation backwards:
@@ -107,8 +95,6 @@ Past history is remembered, but its influence fades away exponentially! $\blacks
 
 ---
 
----
-
 ## Example
 
 ### Worked Numerical Example of Exponential Smoothing
@@ -127,8 +113,6 @@ Notice how the prediction smoothly adjusts from $10 \to 8 \to 6$, and then climb
 
 ---
 
----
-
 ## Common Mistakes
 
 - Calculating Waiting Time as $T_{\text{completion}} - T_{\text{arrival}}$ (which is Turnaround Time!). Waiting Time is strictly Turnaround Time minus Burst Time.
@@ -136,24 +120,14 @@ Notice how the prediction smoothly adjusts from $10 \to 8 \to 6$, and then climb
 
 ---
 
-## Related Concepts
+## What to carry forward
 
-- [[Batch Scheduling Algorithms]]
-- [[Interactive Scheduling Algorithms]]
+Check metrics against units and the chart: waiting must be nonnegative, first execution cannot precede arrival, and total executed service must match each burst. [[Comprehensive CPU Scheduling Simulation Example]] turns these bookkeeping identities into an algorithm comparison.
 
----
-
-## Prerequisites
+## Related notes
 
 - [[CPU Scheduling Principles and Criteria]]
-
----
-
-## Problems
-
-- [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
+- [[Comprehensive CPU Scheduling Simulation Example]]
 
 ## Sources
 

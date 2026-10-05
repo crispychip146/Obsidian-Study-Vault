@@ -12,8 +12,6 @@ order: 29
 
 ---
 
----
-
 ## Problem
 
 Consider a program written in a block-structured language with nested procedure declarations:
@@ -55,27 +53,15 @@ $$\text{Main} \longrightarrow P \longrightarrow R \longrightarrow Q$$
 
 ---
 
----
-
-## Given
-
-- Grammar productions, semantic rules, basic blocks, or register sets as specified in the problem setup.
-
----
-
-## Required
-
-- Full step-by-step annotated tree derivation, TAC generation, DAG reduction, or register assignment trace.
-
----
-
-## Understanding the Problem and Choosing the Method
-
-Analyze the input program structure, identify the governing compiler phase algorithms, and simulate the execution step by step while maintaining all internal invariants.
-
----
-
 ## Solution
+
+Main, P, R, and Q have two structures: their **declaration nesting** and their **call order**. R calls Q, but both are declared inside P. Q's lexical environment is therefore P's activation, not R's frame.
+
+At each call, save the current display entry for the callee's depth before replacing it. When R calls Q, both occupy depth 3, so Q temporarily replaces display[3] and remembers R's old pointer. Entries for Main and P remain in place.
+
+At `z:=x+y`, use the declaration depths: x is in Main and y in P. Index the display to those frames, then add each variable's relative offset. [[Non-Local Variable Access in Static and Dynamic Scopes]] explains why this selects the lexical bindings despite the dynamic caller being R.
+
+On Q's return, restore R's depth-3 entry. This is the step that makes the table describe the active environment again rather than a discarded activation.
 
 ### Step-by-Step Display Tracing
 
@@ -173,39 +159,13 @@ The Display mechanism maintains perfect $O(1)$ access invariant across arbitrary
 
 ---
 
----
+## What to carry forward
 
-## Result
+Draw the call stack and display separately. The stack records all active calls; the display keeps selected frame pointers by depth. Restoring the saved entry matters even when the returning frame's depth is unchanged.
 
-The compilation pass finishes with verified intermediate representations and correct register assignments.
+## Related notes
 
----
-
-## Why This Works
-
-Every transformation maintains semantic program equivalence while optimizing instruction counts, memory foot-print, or register usage.
-
----
-
-## Common Mistakes
-
-- Incorrectly calculating stack frame offsets or TAC temporaries.
-- Forgetting to spill registers when register demand exceeds hardware pool size.
-
----
-
-## General Method
-
-Extract the general procedure: parse/partition input, construct intermediate data structures, apply optimizations iteratively, and emit final code.
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Non-Local Variable Access in Static and Dynamic Scopes]]
 
 ## Sources
 

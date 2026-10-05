@@ -12,19 +12,13 @@ order: 84
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+A time observer and an arriving customer need not see the same system. PASTA says that suitable external Poisson arrivals see time-average state probabilities. The Poisson arrival mechanism must not anticipate the system's future or preferentially arrive in selected states.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to PASTA Property and Inspection Paradox, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+Thus, in a stationary finite-capacity queue, the probability an arrival finds the system full equals the stationary full-state probability. This connects a time-average state distribution to customer loss.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, PASTA Property and Inspection Paradox reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+The inspection paradox is a different sampling effect. Observing an ongoing interval at a random time favors longer intervals because they occupy more of the timeline. Consequently the interval you encounter can be longer on average than one sampled uniformly from completed intervals. For a renewal process with suitable finite moments, mean residual life is $E[S^2]/(2E[S])$. Exponential intervals are special because memorylessness preserves their residual distribution.
 
 ## Definition
 
@@ -39,8 +33,6 @@ In queueing systems, the state of the system can look vastly different depending
 3. **Departure-Seen Probability ($d_n$):**
    The long-run proportion of departing customers who leave behind exactly $n$ customers in the system upon their departure:
    $$d_n = \lim_{t \to \infty} \frac{\text{number of departures in } [0, t] \text{ that leave } n \text{ customers}}{\text{total departures in } [0, t]}$$
-
----
 
 ---
 
@@ -95,34 +87,6 @@ PASTA provides the magical bridge that allows queueing theorists to solve comple
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
-## Common Mistakes
-
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
-
----
-
 ## Exam Relevance
 
 ### When Does PASTA Fail? (Counterexample)
@@ -149,30 +113,13 @@ This discrepancy occurs because deterministic arrivals are synchronized with the
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
+[[Exponential Distribution Memorylessness Example]] explains the exponential case. PASTA concerns arrivals observing states; length bias concerns sampling intervals. Neither follows just from calling a system “random.”
 
-- [[Queueing Systems and Kendall Notation]]
-- [[M-M-1 Queue]]
-- [[Finite Capacity M-M-1-N Queue]]
-- [[Little's Law]]
+## Related notes
 
----
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+- [[Exponential Distribution Memorylessness Example]]
 
 ## Sources
 

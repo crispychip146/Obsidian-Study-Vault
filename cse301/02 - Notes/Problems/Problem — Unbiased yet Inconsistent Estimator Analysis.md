@@ -12,8 +12,6 @@ order: 42
 
 ---
 
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a population distribution with unknown mean $\mu$ and known finite variance $\sigma^2 > 0$.
@@ -30,16 +28,12 @@ That is, the analyst simply records the first observed value and discards the re
 
 ---
 
----
-
 ## Given
 
 - $X_1, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$
 - $E[X_i] = \mu$ for all $i$
 - $\text{Var}(X_i) = \sigma^2 > 0$ for all $i$
 - Estimator: $\hat{\mu}_n = X_1$
-
----
 
 ---
 
@@ -53,24 +47,11 @@ That is, the analyst simply records the first observed value and discards the re
 
 ---
 
----
-
 ## Concepts Tested
 
 - [[Point Estimation]]
 - [[Estimator Consistency and Convergence]]
 - [[Bias-Variance Decomposition]]
-
----
-
----
-
-## Prerequisites
-
-- [[Point Estimation]]
-- Basic Definition of Expectation, Variance, and Convergence in Probability
-
----
 
 ---
 
@@ -80,18 +61,13 @@ That is, the analyst simply records the first observed value and discards the re
 
 ---
 
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given sample space, random variables, and event conditions.
+This estimator receives an expanding sample but keeps using the same first observation. Thus $E[\hat\mu_n]=\mu$ for every $n$, while its distribution stays that of $X_1$. More data never changes its rule.
 
-### Developing the Key Idea
-Select the governing probabilistic principle (e.g. Chapman-Kolmogorov, Adam's Law, Central Limit Theorem, or likelihood maximization) and verify that conditions hold.
+To disprove consistency, find one fixed $\epsilon>0$ for which the error probability stays positive. Since $\operatorname{Var}(X_1)>0$, $X_1$ is not equal to $\mu$ almost surely. The union of events $\{|X_1-\mu|>1/k\}$ over positive integers $k$ has positive probability, so at least one such event has positive probability. That same probability persists for every $n$.
 
-### Working Through the Solution
-### Solution
+The normal example below supplies a concrete number, but normality is unnecessary for the general argument. Constant positive MSE illustrates the failure to improve; it alone is not a general proof of inconsistency, because rare large errors can keep MSE positive for other, consistent estimators.
 
 ### 1. Bias Calculation
 The expected value of $\hat{\mu}_n$ is:
@@ -153,7 +129,7 @@ Because the probability of deviating from $\mu$ by more than $\epsilon$ never go
 ---
 ### Key Idea
 
-Unbiasedness only guarantees that the *expected center* of the estimator equals the true parameter on average across infinite hypothetical repetitions of size $n$. It says **nothing** about whether the estimator concentrates around that center as $n$ grows. Consistency requires the variance (or MSE) to shrink to zero, which requires pooling information across all $n$ data points.
+Unbiasedness only guarantees that the *expected center* of the estimator equals the true parameter on average across infinite hypothetical repetitions of size $n$. It says **nothing** about whether the estimator concentrates around that center as $n$ grows. Vanishing MSE is a sufficient route to consistency, not a necessary one in general. Here inconsistency follows from the unchanged nondegenerate distribution of $X_1$; using the sample mean instead makes the variance shrink under the stated assumptions.
 
 ---
 ### Exam Pattern
@@ -166,25 +142,6 @@ This question frequently appears in midterm and final examinations to test wheth
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
 
 ---
-### Related Concepts
-
-- [[Point Estimation]]
-- [[Estimator Consistency and Convergence]]
-- [[Bias-Variance Decomposition]]
-
----
-
-### Result and Interpretation
-The final analytical solution and numerical metrics are rigorously verified against probability axioms.
-
----
-
-## Reusable Insight
-
-Always decompose complex event probabilities by conditioning on a partition of the sample space (Law of Total Probability), or by writing indicator random variables to exploit linearity of expectation.
-
----
-
 ## Common Mistakes
 
 - Concluding that an estimator must be consistent simply because it is unbiased.
@@ -192,27 +149,13 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 ---
 
----
+## What to carry forward
 
-## Exam Pattern
+[[Estimator Consistency and Convergence]] asks whether error probabilities shrink. Compare $X_1$ with the sample mean, which uses all observations and reduces variance under independence.
 
-Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
+## Related notes
 
----
-
-## Related Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-- [[Problem — Four-Day Weather Forecast]]
-
----
-
-## Related Concepts
-
-- [[Random Variables and Probability Distributions]]
-- [[Law of Total Probability and Bayes' Rule]]
-
----
+- [[Estimator Consistency and Convergence]]
 
 ## Source
 

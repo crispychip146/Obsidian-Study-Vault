@@ -7,161 +7,30 @@ order: 5
 
 # Eliminating Left Recursion from SDTs
 
-> 📖 **Reading Order:** Step 55 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 5 of 55 | **Module 1:** Syntax-Directed Translation
 > ◄ **Previous:** [[Abstract Syntax Tree Construction with SDDs]] | ► **Next:** [[Bottom-Up Evaluation of L-Attributed SDDs]]
 
 ---
 
----
+## Building the idea
 
----
+Removing left recursion changes the grammar's shape, but translation must preserve the program's meaning and action order. For `9-5-2`, a left-recursive grammar naturally builds `(9-5)-2=2`. A naive right-recursive evaluation can instead build `9-(5-2)=6`.
 
----
+Carry the accumulated result as inherited information into the new tail nonterminal. After reading 9, the accumulator is 9; after `-5`, it becomes 4; after `-2`, it becomes 2. The tail then returns the completed value. The parse proceeds rightward while evaluation retains left association.
 
----
+For actions that emit output, preserve where the action occurs relative to consuming operands. For attribute computations, preserve which values feed each computation. These are different transformation obligations, even when the syntactic left-recursion elimination is the same.
 
-## The Problem and Earlier Tools
-
-Top-down parsers (LL(1) and recursive-descent) cannot parse **left-recursive** grammars. If a production contains $A \longrightarrow A \alpha$, a top-down parser attempting to expand $A$ will call $A$ again without consuming any input tokens, entering an **infinite recursive loop**.
-
-In pure syntax parsing, removing immediate left recursion is a standard textbook formula:
-$$A \longrightarrow A \alpha \mid \beta \quad \Longrightarrow \quad A \longrightarrow \beta R, \quad R \longrightarrow \alpha R \mid \epsilon$$
-
-However, in real-world compilers, we do not have pure context-free grammars. We have **Syntax-Directed Translation Schemes (SDTs)** where executable semantic actions $\{ \dots \}$ are embedded directly inside the productions!
-
-If you blindly eliminate left recursion without accounting for semantic actions, you break the compiler:
-- Output strings print out of order.
-- Synthesized attribute calculations lose their operands.
-- Mathematical operations like subtraction evaluate right-to-left instead of left-to-right!
-
-To eliminate left recursion safely, we must distinguish two fundamentally different cases:
-1. **Case 1:** Semantic actions perform **side effects** (e.g., printing tokens).
-2. **Case 2:** Semantic actions compute **synthesized attributes** (e.g., evaluating arithmetic or building ASTs).
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-When semantic actions merely print text or produce external output without returning attributes, we can use a brilliant conceptual insight:
-
-> **The Dummy Terminal Trick:**  
-> Treat every semantic action block $\{ a_i \}$ as if it were a regular grammar terminal symbol (like a comma or letter). Since the standard left-recursion elimination algorithm works for *any* arbitrary sequence of grammar symbols, it will mechanically place the actions in the exact positions required to preserve their execution order!
-
-### Mathematical Formulation:
-Given the left-recursive SDT:
-$$A \longrightarrow A \, \{ a_1 \} \, \alpha \, \{ a_2 \} \mid \beta \, \{ a_3 \}$$
-
-Let $X = \{ a_1 \} \, \alpha \, \{ a_2 \}$ be the recursive tail, and let $Y = \beta \, \{ a_3 \}$ be the non-recursive base.
-
-Applying the standard left-recursion elimination rule ($A \to Y R, \; R \to X R \mid \epsilon$):
-$$\mathbf{A \longrightarrow \beta \, \{ a_3 \} \, R}$$
-$$\mathbf{R \longrightarrow \{ a_1 \} \, \alpha \, \{ a_2 \} \, R \mid \epsilon}$$
-
-### Walkthrough: Infix to Postfix Translation
-Consider translating infix subtraction into postfix notation:
-```
-E -> E1 - T  { print('-'); }
-E -> T
-T -> num     { print(num.val); }
-```
-
-Here:
-- Non-recursive base: $T$
-- Recursive tail: `- T { print('-'); }`
-
-Applying the formula:
-```
-E -> T R
-R -> - T { print('-'); } R | epsilon
-T -> num { print(num.val); }
-```
-
-### Trace on Input `9 - 5 - 2`:
-1. $E$ expands to $T \; R$.
-2. $T$ matches `9` $\implies$ executes $\{ \text{print}(9) \}$. **Output: `9`**
-3. $R$ matches `-`, $T$ matches `5` $\implies$ executes $\{ \text{print}(5) \}$. **Output: `9 5`**
-4. Action in $R$ executes $\{ \text{print}('-') \}$. **Output: `9 5 -`**
-5. Next $R$ matches `-`, $T$ matches `2` $\implies$ executes $\{ \text{print}(2) \}$. **Output: `9 5 - 2`**
-6. Action in $R$ executes $\{ \text{print}('-') \}$. **Output: `9 5 - 2 -`**
-7. Final $R$ matches $\epsilon$.
-
-The postfix output `9 5 - 2 -` is generated in the **exact same order** as the original grammar!
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+[[Synthesized and Inherited Attributes]] supplies the accumulator mechanism. Compare old and new translations on a non-associative operator; addition alone can conceal an incorrect regrouping.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Case 2: Actions Computing Synthesized Attributes
 
 What if the semantic actions do *not* print strings, but instead calculate a mathematical value ($E.val = E_1.val - T.val$)?
 
-Now, the "dummy terminal" trick fails catastrophically. In right-recursive grammar $E \to T R, \; R \to - T R \mid \epsilon$, the second operand is parsed by $R$, but the first operand was parsed by $T$! 
+Moving the output actions as if they were extra grammar symbols does not, by itself, preserve attribute computations. In $E \to T R$ and $R \to - T R \mid \epsilon$, each operand is parsed by a T occurrence; the tail R must combine them with the earlier accumulated value.
 
-If you make $R$ synthesize its value bottom-up, it evaluates from right to left:
+A naive rule that recursively subtracts a synthesized tail can regroup the operands from right to left:
 $$9 - (5 - 2) = 9 - 3 = 6 \quad \text{\bf (WRONG! Correct is } (9 - 5) - 2 = 2\text{\bf)}$$
 
 ### The Master Solution: The Inherited Accumulator
@@ -186,11 +55,6 @@ flowchart TD
 
 ---
 
----
-### Properties
-
-### The Transformation Template and Mathematical Proof
-
 ### Original Left-Recursive SDT:
 $$A \longrightarrow A_1 \; Y \quad \{ A.val = f(A_1.val, Y.val); \}$$
 $$A \longrightarrow X \quad \{ A.val = g(X.val); \}$$
@@ -206,7 +70,7 @@ $$R \longrightarrow \epsilon \quad \{ R.syn = R.inh; \}$$
 > **Theorem:** For any input sequence $X \; Y_1 \; Y_2 \dots Y_k$, the transformed SDT computes the exact same value as the original left-recursive SDT.
 >
 > **Proof by Induction on $k$:**
-> 
+>
 > **Original SDT Evaluation:**  
 > In the original left-recursive grammar, the parse tree is left-heavy. The reduction sequence evaluates:
 > $$\text{val}_0 = g(X.val)$$
@@ -225,193 +89,26 @@ $$R \longrightarrow \epsilon \quad \{ R.syn = R.inh; \}$$
 > Each parent copies its child's synthesized attribute:
 > $$R^{(j-1)}.syn = R^{(j)}.syn = \dots = R^{(0)}.syn = \text{val}_k$$
 > Finally, $A.val = R^{(0)}.syn = \text{val}_k$.
-> 
+>
 > Because $\text{val}_k$ in both systems satisfies the identical recurrence relation:
 > $$\text{val}_j = f(\text{val}_{j-1}, Y_j), \quad \text{with } \text{val}_0 = g(X)$$
 > the values computed for all inputs are mathematically identical. $\blacksquare$
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
-## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 ### Time Complexity
-$O(N)$ to $O(N^2)$ depending on basic block length, graph density, or live intervals.
+Transforming productions/actions costs time proportional to the grammar material copied or generated. The transformed parser's input-processing cost depends on its parsing method and semantic actions.
 
 ### Space Complexity
-$O(N)$ for auxiliary state tables, stacks, or free lists.
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
+Storage is proportional to the transformed grammar and its action data.
 
 ---
 
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 ### Concrete Worked Example: Desk Calculator Subtraction
 
@@ -443,34 +140,13 @@ $$E \longrightarrow E_1 - T \quad \{ E.val = E_1.val - T.val; \} \mid T \quad \{
 
 ---
 
----
+## What to carry forward
 
----
+Language equivalence is insufficient: the transformed SDT must also preserve its specified translation. Trace subtraction, emitted output, and accumulator updates to verify action timing and associativity.
 
----
+## Related notes
 
----
-
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
+- [[Synthesized and Inherited Attributes]]
 
 ## Sources
 

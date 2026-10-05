@@ -12,113 +12,17 @@ order: 37
 
 ---
 
----
+## Building the idea
 
----
+The simple generator tracks where current values are stored. A **register descriptor** records values held by a register; an **address descriptor** records locations holding a variable's current value. The descriptors must describe the emitted code, not what the compiler hopes is still present.
 
----
+For `x=y+z`, obtain the operands, select a destination register, emit the operation, and update the descriptors. If a register's old content will be overwritten and contains the only copy of a needed value, store that value first. If it is dead or available elsewhere, the store is unnecessary.
 
----
+[[Liveness and Next-Use Analysis within Basic Blocks]] explains the “needed” test. At block exit, preserve live-out values required by successor code; a simple memory-based boundary convention stores dirty live values not already current in memory.
 
-## The Problem and Earlier Tools
-
-The Dragon Book defines a classic, robust code generation algorithm that translates a basic block of Three-Address Code into machine instructions statement-by-statement. 
-
-To track where values are currently located without redundant loads and stores, the algorithm maintains two dynamic tracking structures:
-1. **Register Descriptors:** For each physical register $R$, tracks the set of variable names whose current values are currently held in $R$.
-2. **Address Descriptors:** For each variable name $x$, tracks the set of memory locations (registers, stack slots, memory addresses) where the current value of $x$ can currently be found.
-
-```mermaid
-flowchart LR
-    RegDesc["Register Descriptors<br/>R0 -> {x, y}<br/>R1 -> {z}"] <--> Generator["Code Generator Engine<br/>getReg(I)"]
-    AddrDesc["Address Descriptors<br/>x -> {R0, mem_x}<br/>y -> {R0}<br/>z -> {R1}"] <--> Generator
-```
-
----
-
----
-
----
-
----
-
----
-
-## Developing the Core Idea
-
-For a three-address instruction $I: x = y + z$, the function `getReg(I)` selects a physical register $R_x$ to hold the result $x$:
-
-1. If $y$ is currently stored in a register $R_y$, and $R_y$ holds *only* $y$, and $y$ has **no next use** after statement $I$ (i.e., $y$ is dead):
-   - Allocate $R_y$ as $R_x$! (Reuse $y$'s register for $x$).
-2. Else, if there is an **empty (unallocated) register** $R$:
-   - Return $R$.
-3. Else, if all registers are full, pick an occupied register $R$ to **spill**:
-   - For every variable $v$ currently in $R$:
-     - If the address descriptor for $v$ shows that $v$ is *not* already in memory, emit:
-       $$\text{ST } v, R$$
-       and add memory location $v$ to $v$'s address descriptor.
-     - Remove $R$ from the address descriptor of $v$.
-   - Clear register descriptor for $R$ and return $R$.
-
----
-
----
-
----
-
----
-
----
-
-## Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-
-## Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
+Trace an illustrative operand through load, use, overwrite, and possible store. The physical register may change ownership several times, but each live value must retain an accessible correct copy.
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### End of Basic Block Actions
 
@@ -130,93 +34,7 @@ At the end of a basic block:
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Code Generation Algorithm for $x = y + z$
 
@@ -237,20 +55,6 @@ At the end of a basic block:
 
 ---
 
----
-
----
-
----
-
----
-
-## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
 ## Complexity
 
 - **Time Complexity:** $O(N \cdot K)$ where $N$ is the number of TAC statements in the basic block and $K$ is the number of hardware registers (scanning register descriptors takes $O(K)$ time).
@@ -258,111 +62,24 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ---
 
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
 ---
-### Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
 ### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of A Simple Code Generator Algorithm on given code fragments or graphs.
 
 ---
 
----
+## What to carry forward
 
----
+Descriptors are invariants maintained after every instruction. [[Live Ranges and Live Intervals in Register Allocation]] extends the allocation problem beyond this local generator's choices. Calls and target register constraints require additional preservation rules.
 
----
+## Related notes
 
-## Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
 - [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
-## Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-
-## Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
 
 ## Sources
 

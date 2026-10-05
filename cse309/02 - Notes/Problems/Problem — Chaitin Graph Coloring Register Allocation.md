@@ -12,8 +12,6 @@ order: 50
 
 ---
 
----
-
 ## Problem
 
 Consider the following Register Interference Graph (RIG) for 5 variables $\{ u, v, w, x, y \}$ in a compiler back-end:
@@ -38,49 +36,15 @@ The target machine architecture has **$K = 3$ hardware registers**: $\{ R_1, R_2
 
 ---
 
----
-
-## Given
-
-- Source program code, SDD grammar rules, TAC instructions, or flow graph.
-
----
-
-## Required
-
-- Formal step-by-step derivation, intermediate code generation, and optimization proofs.
-
----
-
-## Concepts Tested
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-
----
-
-## Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-
-## Question Type
-
-Compiler Analysis / SDD Construction / Code Generation
-
----
-
 ## Solution
 
-### Understanding the Situation
-Interpret the given grammar productions, program constructs, and optimization objectives.
+The graph initially has no node of degree below three, but that does not establish that three colors are impossible. Simplification's sufficient condition has stalled; an optimistic algorithm can remove a candidate and try to color it later.
 
-### Developing the Key Idea
-Apply the appropriate compiler technique (e.g. S-attributed bottom-up evaluation, leader identification, DAG value numbering, or Kempe's graph coloring heuristic).
+Use [[Register Interference Graphs and Graph Coloring Principles]] to separate those claims. Provisional removal reduces neighbor degrees, enabling the rest of the stack to be built. On selection, pop nodes and forbid only the colors actually used by their already colored neighbors.
 
-### Working Through the Solution
-### Step-by-Step Solution
+A node with many neighbors can still find a color if several neighbors share colors. That is why the degree bound is sufficient for easy insertion but not necessary for successful insertion. The example exposes precisely this gap.
+
+Distinguish [[Chaitin's Graph Coloring Register Allocation Algorithm]] variants: optimistic selection may rescue the candidate, whereas an eager spill policy can rewrite it immediately. State which policy the solution uses before interpreting the result.
 
 ### Part 1: Initial Graph Degrees
 
@@ -175,43 +139,14 @@ Zero spills! All 5 variables are colored with 3 registers.
 
 ---
 
-### Result and Interpretation
-The final annotated tree, TAC sequence, or optimized basic block is rigorously verified.
+## What to carry forward
 
----
+A complete legal coloring, checked against every edge, is a certificate of colorability. Choosing a candidate is not a certificate of uncolorability. If spilling occurs, show how loads/stores and new live ranges replace the original range.
 
-## Reusable Insight
+## Related notes
 
-Always follow compiler phase invariants: parse bottom-up or top-down according to attribute classes, build dependency graphs to verify evaluation order, and track next-use pointers backwards.
-
----
-
-## Common Mistakes
-
-- Prematurely evaluating expressions before operand definitions are processed.
-- Neglecting array store kill rules in basic block DAGs.
-
----
-
-## Exam Pattern
-
-Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7, 8, or 9.
-
----
-
-## Related Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
-## Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
+- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Chaitin's Graph Coloring Register Allocation Algorithm]]
 
 ## Source
 

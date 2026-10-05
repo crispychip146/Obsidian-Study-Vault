@@ -12,19 +12,13 @@ order: 17
 
 ---
 
----
+## Building the idea
 
-## Starting Point and the Problem
+Conditioning changes the reference population. If we know $B$ occurred, outcomes outside $B$ are no longer candidates. For $P(B)>0$, dividing $P(A\cap B)$ by $P(B)$ rescales the remaining weights to total one.
 
-Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Probability and Independence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
+For instance, among students known to take statistics, the probability of also taking compilers uses the statistics class as its denominator. It need not equal the probability among all students. Independence is precisely the situation where this new information leaves the probability of $A$ unchanged.
 
----
-
-## Developing the Idea
-
-By formalizing sample spaces, probability measures, state transitions, or likelihood ratios, Conditional Probability and Independence reveals the underlying structural mechanics that govern random variables and estimation errors.
-
----
+Multiplying the conditional formula back out gives $P(A\cap B)=P(B)P(A\mid B)$. Repeating this step gives the chain rule, useful when an outcome is built through several stages. Pairwise independence checks two events at a time; mutual independence also requires the appropriate factorizations for larger collections.
 
 ## Definition
 
@@ -35,8 +29,6 @@ $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
 
 ### Intuition: Shrinking the Sample Space
 Conditioning on $B$ discards all outcomes outside of $B$. The event $B$ becomes the **new sample space (universe)**. The only part of $A$ that can still occur is $A \cap B$, whose original probability must be normalized by dividing by $P(B)$ so that $P(B \mid B) = 1$.
-
----
 
 ---
 
@@ -116,27 +108,6 @@ $$P(A \mid B \cap C) = P(A \mid C)$$
 
 ---
 
----
-
-## Example
-
-See worked numerical applications in the linked example notes.
-
----
-
-## Technical Details
-
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
-
----
-
-## Important Properties and Why They Hold
-
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
-
----
-
 ## Common Mistakes
 
 ### Edge Cases & Common Pitfalls
@@ -150,8 +121,6 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -162,26 +131,9 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
+## What to carry forward
 
-## Related Concepts
-
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
-
----
-
-## Prerequisites
-
-- [[Probability Axioms and Naive Probability]]
-
----
-
-## Problems
-
-- [[Problem — Birthday Collisions and Approximation]]
-
----
+For continuous variables, an event such as $X=x$ may have probability zero. Conditional densities or conditional expectations define the intended notion; the elementary event ratio cannot be used with a zero denominator.
 
 ## Sources
 

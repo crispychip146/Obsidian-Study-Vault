@@ -79,7 +79,25 @@ Because $X$ is random, $g(X)$ is random. It has its own distribution, mean, and 
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Random Number of Coin Flips
+
+Suppose a fair 6-sided die is rolled, yielding outcome $N \in \{1, 2, 3, 4, 5, 6\}$ with equal probability ($P(N = n) = 1/6$).
+We then flip a fair coin $N$ times, and let $Y$ be the total number of heads observed.
+
+1. **Conditional Expectation as a Function of $N$:**
+   Given $N = n$, $Y \mid (N = n) \sim \operatorname{Bin}(n, 0.5)$.
+   The conditional expectation as a scalar given $N = n$ is:
+   $$\mathbb{E}[Y \mid N = n] = n \cdot 0.5 = \frac{n}{2}$$
+   Therefore, the conditional expectation as a **random variable** is:
+   $$\mathbb{E}[Y \mid N] = \frac{N}{2}$$
+
+2. **Unconditional Expectation via Adam's Law:**
+   Using [[Adam's Law (Law of Total Expectation)]]:
+   $$\mathbb{E}[Y] = \mathbb{E}\left[ \mathbb{E}[Y \mid N] \right] = \mathbb{E}\left[ \frac{N}{2} \right] = \frac{1}{2} \mathbb{E}[N] = \frac{1}{2} (3.5) = 1.75$$
+
+For comprehensive worked derivations of compound branching sums and variance decompositions, see:
+- [[Random Number of Random Variables Sum Example]] — Applying conditional expectation and variance to random customer workloads.
+- [[Monty Hall Problem Example]] — Conditional probability and expectation under switching decisions.
 
 ---
 
@@ -100,7 +118,7 @@ $$Y - g(X) = (Y - \mathbb{E}[Y \mid X]) + (\mathbb{E}[Y \mid X] - g(X))$$
 Square both sides and take expectations:
 $$\mathbb{E}\left[(Y - g(X))^2\right] = \mathbb{E}\left[(Y - \mathbb{E}[Y \mid X])^2\right] + \mathbb{E}\left[(\mathbb{E}[Y \mid X] - g(X))^2\right] + 2\mathbb{E}\left[(Y - \mathbb{E}[Y \mid X])(\mathbb{E}[Y \mid X] - g(X))\right]$$
 
-By Adam's Law and conditioning on $X$, the cross-term vanishes identically:
+By [[Adam's Law (Law of Total Expectation)]] and conditioning on $X$, the cross-term vanishes identically:
 $$\mathbb{E}\left[ (Y - \mathbb{E}[Y \mid X]) h(X) \right] = \mathbb{E}\left[ \mathbb{E}[(Y - \mathbb{E}[Y \mid X])h(X) \mid X] \right] = \mathbb{E}\left[ h(X) (\mathbb{E}[Y \mid X] - \mathbb{E}[Y \mid X]) \right] = 0$$
 
 Therefore:
@@ -109,12 +127,11 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 
 ---
 
----
-
 ## Important Properties and Why They Hold
 
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+- **Tower Property:** $\mathbb{E}[\mathbb{E}[Y \mid X_1, X_2] \mid X_1] = \mathbb{E}[Y \mid X_1]$ (coarser conditioning wins).
+- **Taking Out What Is Known:** $\mathbb{E}[h(X)Y \mid X] = h(X)\mathbb{E}[Y \mid X]$.
+- **Variance Decomposition:** $\operatorname{Var}(Y) = \mathbb{E}[\operatorname{Var}(Y \mid X)] + \operatorname{Var}(\mathbb{E}[Y \mid X])$ (see [[Eve's Law (Law of Total Variance)]]).
 
 ---
 
@@ -147,20 +164,24 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
+- [[Conditional Probability and Independence]]
+- [[Adam's Law (Law of Total Expectation)]]
+- [[Eve's Law (Law of Total Variance)]]
 - [[Random Variables and Probability Distributions]]
+- [[Point Estimation]]
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Conditional Probability and Independence]]
+- [[Random Variables and Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ---
 

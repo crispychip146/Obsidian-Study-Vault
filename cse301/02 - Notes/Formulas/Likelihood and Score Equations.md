@@ -163,6 +163,8 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
 - [[Maximum Likelihood Estimation]]
 - [[Point Estimation]]
 - [[Wald Test Statistic]]
+- [[Discrete and Continuous Parameter MLE Reference Examples]]
+- [[Normal Distribution Parameter MLE Derivation Example]]
 
 ---
 
@@ -170,13 +172,15 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
 
 ## Prerequisites
 
+- [[Point Estimation]]
 - [[Random Variables and Probability Distributions]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
 
 ---
 

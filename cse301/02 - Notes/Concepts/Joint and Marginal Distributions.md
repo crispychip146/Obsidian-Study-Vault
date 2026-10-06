@@ -93,19 +93,55 @@ Random variables $X$ and $Y$ are **independent** ($X \perp Y$) if and only if an
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Marginalization and Conditional Densities
+
+Consider the joint continuous density:
+$$f_{X, Y}(x, y) = 2, \quad \text{for } 0 \le x \le y \le 1$$
+
+1. **Marginal Density of $X$:**
+   Integrate over the allowable range of $y$ (from $x$ to $1$):
+   $$f_X(x) = \int_x^1 2 \, dy = 2(1 - x), \quad 0 \le x \le 1$$
+
+2. **Marginal Density of $Y$:**
+   Integrate over the allowable range of $x$ (from $0$ to $y$):
+   $$f_Y(y) = \int_0^y 2 \, dx = 2y, \quad 0 \le y \le 1$$
+
+3. **Check Independence:**
+   $$f_X(x) f_Y(y) = 2(1 - x) \cdot 2y = 4y(1 - x) \ne 2 = f_{X, Y}(x, y)$$
+   The variables are **dependent**, as also evidenced by the coupled support constraint $x \le y$.
+
+4. **Conditional Density $f_{X \mid Y}(x \mid y)$:**
+   $$f_{X \mid Y}(x \mid y) = \frac{f_{X, Y}(x, y)}{f_Y(y)} = \frac{2}{2y} = \frac{1}{y}, \quad 0 \le x \le y$$
+   Given $Y = y$, $X$ is distributed uniformly as $\operatorname{Unif}(0, y)$!
+
+For extended worked applications, see:
+- [[Linearity of Expectation and Indicator Random Variables Example]] — Bivariate indicator interactions and covariance.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Fubini-Tonelli Theorem for Joint Distributions
+When integrating joint probability densities over non-rectangular domains, the Tonelli theorem guarantees that the order of integration can be interchanged since $f_{X, Y}(x, y) \ge 0$:
+$$\int_{-\infty}^\infty \left( \int_{-\infty}^\infty f_{X, Y}(x, y) \, dy \right) dx = \int_{-\infty}^\infty \left( \int_{-\infty}^\infty f_{X, Y}(x, y) \, dx \right) dy = 1$$
+However, limits of integration must carefully track the boundary curves of the coupled support.
+
+### The Convolution Formula for Independent Sums
+If $X$ and $Y$ are independent continuous random variables with PDFs $f_X$ and $f_Y$, the PDF of their sum $Z = X + Y$ is given by the convolution integral:
+$$f_Z(z) = \int_{-\infty}^\infty f_X(x) f_Y(z - x) \, dx = (f_X * f_Y)(z)$$
+For discrete variables, the convolution sum is $P(Z = z) = \sum_x P(X = x) P(Y = z - x)$.
+
+### 2D Change of Variables (Jacobian Transformation)
+If $(U, V) = g(X, Y)$ is an invertible, continuously differentiable mapping from $(x, y) \to (u, v)$:
+$$f_{U, V}(u, v) = f_{X, Y}(x(u, v), y(u, v)) \left\lvert \det J \right\rvert, \quad J = \begin{pmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\ \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{pmatrix}$$
+
+For moments of joint functions, see [[Law of the Unconscious Statistician (LOTUS)]].
 
 ---
 
 ## Important Properties and Why They Hold
 
-### 2D Law of the Unconscious Statistician (LOTUS)
+### 2D [[Law of the Unconscious Statistician (LOTUS)]]
 
 To compute the expected value of a function $g(X, Y)$ of two random variables without first deriving the distribution of $g(X, Y)$:
 
@@ -114,8 +150,6 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 - **Continuous:**
   $$\mathbb{E}[g(X, Y)] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x, y) f_{X, Y}(x, y) \, dx \, dy$$
-
----
 
 ---
 
@@ -133,37 +167,34 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 ---
 
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
 
 - **Covariance:** Linear association measured by integrating against the joint density (see [[Covariance and Correlation]]).
 - **Conditioning:** Conditional density $f_{Y \mid X}(y \mid x)$ forms the foundation for [[Conditional Expectation]] and Adam's / Eve's laws.
-- **Transformations:** Joint 2D transformations require the 2D Jacobian determinant:
-  $$f_{U, V}(u, v) = f_{X, Y}(x(u, v), y(u, v)) \left\lvert \det \frac{\partial(x, y)}{\partial(u, v)} \right\rvert$$
-
----
+- **Transformations:** Joint 2D transformations require the 2D Jacobian determinant.
 
 ---
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
 - [[Random Variables and Probability Distributions]]
+- [[Covariance and Correlation]]
+- [[Conditional Expectation]]
+- [[Law of the Unconscious Statistician (LOTUS)]]
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ---
 

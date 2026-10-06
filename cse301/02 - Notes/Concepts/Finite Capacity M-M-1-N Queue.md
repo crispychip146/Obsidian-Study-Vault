@@ -134,13 +134,53 @@ Network router engineers use the M/M/1/N model to balance two competing evils:
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Packet Router Buffer Analysis ($M/M/1/3$)
+
+A network router buffer can hold at most 2 waiting packets plus 1 packet currently transmitting, giving a total system capacity of $N = 3$.
+Packets arrive at Poisson rate $\lambda = 4$ packets/ms, and transmission speed is $\mu = 5$ packets/ms.
+Traffic intensity: $\rho = \frac{\lambda}{\mu} = \frac{4}{5} = 0.80$.
+
+1. **Stationary State Distribution:**
+   - Normalizing probability $P_0$:
+     $$P_0 = \frac{1 - \rho}{1 - \rho^{N+1}} = \frac{1 - 0.8}{1 - 0.8^4} = \frac{0.2}{1 - 0.4096} = \frac{0.2}{0.5904} \approx 0.33875$$
+   - Probability of each state $n \in \{0, 1, 2, 3\}$:
+     $$P_1 = P_0 \rho = 0.33875(0.8) \approx 0.2710$$
+     $$P_2 = P_0 \rho^2 = 0.33875(0.64) \approx 0.2168$$
+     $$P_3 = P_0 \rho^3 = 0.33875(0.512) \approx 0.1734$$
+
+2. **Packet Blocking (Drop) Probability:**
+   By the [[PASTA Property and Inspection Paradox]], arriving packets observe the state distribution. Thus the packet loss probability is:
+   $$P_{\text{loss}} = a_3 = P_3 \approx 0.1734 \quad (17.34\% \text{ loss})$$
+
+3. **Effective Carried Load ($\lambda_a$):**
+   $$\lambda_a = \lambda(1 - P_3) = 4(1 - 0.1734) = 4(0.8266) \approx 3.3064 \text{ packets/ms}$$
+
+4. **Average Backlog and Residence Time:**
+   - Mean packets in system:
+     $$L = \sum_{n=0}^3 n P_n = 0(P_0) + 1(0.2710) + 2(0.2168) + 3(0.1734) = 1.2248 \text{ packets}$$
+   - Latency experienced by admitted packets via Little's Law:
+     $$W = \frac{L}{\lambda_a} = \frac{1.2248}{3.3064} \approx 0.3704 \text{ ms}$$
+
+For complete throughput maximization problems and loss rate proofs, see [[Problem — Finite Capacity Queue Loss and Effective Throughput]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Finite State Truncation and Stability under Overload ($\rho \ge 1$)
+
+1. **Finite State Birth-Death Truncation:**
+   - The state space is bounded: $S = \{0, 1, \dots, N\}$.
+   - Arrival transition rate: $\lambda_n = \lambda$ for $0 \le n < N$, and $\lambda_N = 0$.
+   - Departure transition rate: $\mu_n = \mu$ for $1 \le n \le N$.
+   - Because the state space is finite, irreducible, and aperiodic, a unique stationary distribution exists **unconditionally**, even if $\rho = 1$ or $\rho > 1$!
+2. **Behavior under Heavy Overload ($\rho \ge 1$):**
+   - **Case $\rho = 1$ ($\lambda = \mu$):**
+     By L'Hôpital's rule:
+     $$P_n = \frac{1}{N + 1} \quad \text{for all } n \in \{0, 1, \dots, N\}$$
+     All states are equally likely, and loss probability is simply $P_N = \frac{1}{N+1}$.
+   - **Case $\rho > 1$ ($\lambda > \mu$):**
+     The probability mass concentrates near capacity $N$. As $N \to \infty$, $P_N \to 1 - \frac{1}{\rho}$. The system naturally protects the server from diverging by dropping the excess arrival load $\lambda - \mu$, ensuring $\lambda_a = \lambda(1 - P_N) \to \mu$.
 
 ---
 
@@ -163,14 +203,15 @@ $$\mathbf{W = \frac{L}{\lambda_a} = \frac{L}{\lambda(1 - P_N)}}$$
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Using Gross Arrival Rate $\lambda$ in Little's Law:** Dividing $L$ by $\lambda$ instead of effective arrival rate $\lambda_a = \lambda(1 - P_N)$.
+- **Assuming Stability Fails for $\rho \ge 1$:** Applying infinite-queue restrictions to $M/M/1/N$. Finite capacity queues are always stable and ergodic for any finite $\lambda, \mu > 0$.
+- **Forgetting Geometric Series Power in Denominator:** Writing $1 - \rho^N$ instead of $1 - \rho^{N+1}$ in the $P_0$ formula.
 
 ---
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing via [[Little's Law]].
 
 ---
 
@@ -187,13 +228,15 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[M-M-1 Queue]]
+- [[Queueing Systems and Kendall Notation]]
+- [[Little's Law]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
 
 ---
 

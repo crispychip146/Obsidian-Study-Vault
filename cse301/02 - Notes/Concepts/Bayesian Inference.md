@@ -80,7 +80,33 @@ where:
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Beta-Binomial Conjugate Updating for Click-Through Rates
+
+Suppose a software engineering team tests a new feature layout. Let $p \in (0, 1)$ be the true click-through probability.
+
+1. **Prior Belief:**
+   Engineers set a weakly informative prior $p \sim \operatorname{Beta}(\alpha = 2, \beta = 8)$ (prior mean $\mathbb{E}[p] = \frac{2}{2+8} = 0.20$ based on historical layouts, with equivalent prior pseudocount weight $\alpha + \beta = 10$).
+   Prior density: $f(p) \propto p^{\alpha - 1}(1 - p)^{\beta - 1} = p^1 (1 - p)^7$.
+
+2. **Observed Data:**
+   In $n = 50$ observed visitor sessions, $k = 15$ clicks occur ($X \sim \operatorname{Bin}(50, p)$).
+   Likelihood function: $L(p) = \binom{50}{15} p^{15} (1 - p)^{35} \propto p^{15}(1 - p)^{35}$.
+
+3. **Posterior Distribution:**
+   $$f(p \mid x) \propto L(p) f(p) \propto p^{15}(1 - p)^{35} \cdot p^1(1 - p)^7 = p^{16}(1 - p)^{42}$$
+   This is immediately recognized as the kernel of a $\operatorname{Beta}(\alpha', \beta')$ distribution with updated hyperparameters:
+   $$\alpha' = \alpha + k = 2 + 15 = 17, \quad \beta' = \beta + n - k = 8 + 35 = 43$$
+
+4. **Posterior Mean (Bayes Estimator under Squared Error Loss):**
+   $$\hat{p}_{\text{Bayes}} = \mathbb{E}[p \mid x] = \frac{\alpha'}{\alpha' + \beta'} = \frac{17}{17 + 43} = \frac{17}{60} \approx 0.2833$$
+   Notice that the posterior mean is an exact weighted average between the prior mean ($0.20$) and the maximum likelihood estimate ($\hat{p}_{\text{MLE}} = 15/50 = 0.30$):
+   $$\hat{p}_{\text{Bayes}} = \frac{10}{10 + 50}(0.20) + \frac{50}{10 + 50}(0.30) = \frac{1}{6}(0.20) + \frac{5}{6}(0.30) \approx 0.2833$$
+
+For complete code examples, multi-hypothesis testing, and Laplace succession derivations, see:
+- [[Bernoulli Bayesian Inference with Beta Prior Example]]
+- [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
+- [[Beta-Binomial Conjugate Updating Formula]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 
@@ -204,8 +230,9 @@ In examinations, expect to:
 ## Prerequisites
 
 - [[Point Estimation]]
-- Bayes' Theorem for events and continuous distributions
-- Probability Density Functions and Expectation Integrals
+- [[Law of Total Probability and Bayes' Rule]]
+- [[Continuous Probability Distributions]]
+- [[Random Variables and Probability Distributions]]
 
 ---
 
@@ -213,7 +240,7 @@ In examinations, expect to:
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 

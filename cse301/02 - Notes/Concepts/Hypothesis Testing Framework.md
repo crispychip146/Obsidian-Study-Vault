@@ -129,26 +129,51 @@ Hypothesis testing and interval estimation are two sides of the same mathematica
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Two-Sided Test of Coin Fairness
+
+A coin is flipped $n = 100$ times, resulting in $X = 62$ heads. Test whether the coin is biased at significance level $\alpha = 0.05$.
+
+1. **State Hypotheses:**
+   $$H_0: p = 0.5 \quad \text{versus} \quad H_1: p \ne 0.5$$
+
+2. **Compute Test Statistic under $H_0$:**
+   Under $H_0$, the null mean is $\mu_0 = n p_0 = 50$, and null standard deviation is $\sigma_0 = \sqrt{n p_0(1 - p_0)} = \sqrt{25} = 5$.
+   By the [[Central Limit Theorem]], the standardized Wald $z$-statistic is:
+   $$Z = \frac{X - \mu_0}{\sigma_0} = \frac{62 - 50}{5} = \frac{12}{5} = 2.40$$
+
+3. **Rejection Region:**
+   For a two-sided test at $\alpha = 0.05$, the critical cutoff is $z_{\alpha/2} = z_{0.025} = 1.96$.
+   Rejection rule: Reject $H_0$ if $|Z| \ge 1.96$.
+
+4. **Decision:**
+   Since $|Z| = 2.40 > 1.96$, we reject $H_0$ at the $\alpha = 0.05$ significance level.
+
+5. **$p$-Value:**
+   $$p = 2 \cdot P(Z \ge 2.40) = 2(1 - \Phi(2.40)) \approx 2(1 - 0.9918) = 0.0164$$
+   Because $p = 0.0164 < 0.05$, there is statistically significant evidence that the coin is biased.
+
+For worked non-parametric permutation tests and multinomial tests, see [[Toy Permutation Test Example]], [[Mendel's Peas Chi-Square Goodness-of-Fit Example]], and [[Problem — Comparing Prediction Algorithms via Paired Wald Test]].
 
 ---
 
 ## Technical Details
 
-### Hypotheses Classifications
+### Neyman-Pearson Lemma, Likelihood Ratio Tests, and Power Functions
 
-1. **Simple Hypothesis:** Specifies a single exact distribution:
-   $$H_0: \theta = \theta_0$$
-2. **Composite Hypothesis:** Specifies a family of distributions:
-   $$H_0: \theta \le \theta_0 \quad \text{or} \quad H_1: \theta \ne \theta_0$$
-3. **One-Sided Test:** Tests directional deviation:
-   $$H_0: \theta \le \theta_0 \quad \text{versus} \quad H_1: \theta > \theta_0$$
-   Rejection region: $R = \{T(\mathbf{X}) > c\}$.
-4. **Two-Sided Test:** Tests deviation in either direction:
-   $$H_0: \theta = \theta_0 \quad \text{versus} \quad H_1: \theta \ne \theta_0$$
-   Rejection region: $R = \{\lvert T(\mathbf{X}) \rvert > c\}$.
-
----
+1. **The Neyman-Pearson Lemma (Optimal Tests for Simple Hypotheses):**
+   - For simple hypotheses $H_0: \theta = \theta_0$ versus $H_1: \theta = \theta_1$, the Likelihood Ratio Test rejecting when:
+     $$\frac{L(\theta_1; \mathbf{x})}{L(\theta_0; \mathbf{x})} \ge k$$
+     is the **Most Powerful** test of size $\alpha$. No competing test with Type I error rate $\le \alpha$ can achieve higher statistical power ($1 - \beta$).
+2. **Generalized Likelihood Ratio Tests and Wilks' Theorem:**
+   - For composite hypotheses $H_0: \theta \in \Theta_0$ versus $H_1: \theta \in \Theta \setminus \Theta_0$:
+     $$\Lambda(\mathbf{x}) = \frac{\sup_{\theta \in \Theta_0} L(\theta; \mathbf{x})}{\sup_{\theta \in \Theta} L(\theta; \mathbf{x})}$$
+   - **Wilks' Theorem:** Under $H_0$ and standard MLE regularity conditions:
+     $$-2 \ln \Lambda(\mathbf{X}) \xrightarrow{d} \chi^2_r$$
+     where degrees of freedom $r = \dim(\Theta) - \dim(\Theta_0)$.
+3. **Power Function $\beta(\theta)$:**
+   - The power curve $\beta(\theta) = P_\theta(\text{Reject } H_0)$ measures the sensitivity of the test across the entire parameter space.
+   - For $\theta \in \Theta_0$, $\beta(\theta) \le \alpha$ (Type I error bound).
+   - For $\theta \in \Theta_1$, $\beta(\theta) = 1 - \beta$ denotes the true positive detection rate, monotonically increasing with sample size $n$ and effect distance $|\theta - \theta_0|$.
 
 ---
 
@@ -161,14 +186,15 @@ See worked numerical applications in the linked example notes.
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Transposition of Conditionals:** Interpreting the $p$-value as $P(H_0 \mid \text{data})$. The $p$-value is $P(\text{data as extreme} \mid H_0)$.
+- **"Accepting" the Null Hypothesis:** Failing to reject $H_0$ never proves $H_0$ is true. It merely indicates that the data does not provide sufficient evidence to rule out random chance.
+- **Conflating Significance with Effect Size:** A tiny difference can achieve $p < 0.001$ in large samples while being practically irrelevant.
 
 ---
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing via [[Wald Test Statistic]] and [[p-Values and Significance]].
 
 ---
 
@@ -179,6 +205,8 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Multiple Testing and False Discovery Rate]]
 - [[Permutation Test Algorithm]]
 - [[Confidence Intervals and Confidence Sets]]
+- [[Toy Permutation Test Example]]
+- [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
 
 ---
 
@@ -186,13 +214,16 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Continuous Probability Distributions]]
+- [[Central Limit Theorem]]
+- [[Confidence Intervals and Confidence Sets]]
+- [[Point Estimation]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
 
 ---
 

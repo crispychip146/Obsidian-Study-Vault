@@ -120,13 +120,47 @@ $$P(A \mid B \cap C) = P(A \mid C)$$
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Diagnostic Testing and the Base Rate Fallacy
+
+A diagnostic medical test evaluates a rare condition with prevalence $P(D) = 0.01$ (1% of population).
+- **Sensitivity:** $P(T^+ \mid D) = 0.95$ (true positive rate)
+- **Specificity:** $P(T^- \mid D^c) = 0.95 \implies P(T^+ \mid D^c) = 0.05$ (false positive rate)
+
+A patient tests positive ($T^+$). What is the updated probability that the patient actually has the disease?
+
+1. **Calculate Total Probability of a Positive Test:**
+   $$P(T^+) = P(T^+ \cap D) + P(T^+ \cap D^c) = P(D) P(T^+ \mid D) + P(D^c) P(T^+ \mid D^c)$$
+   $$P(T^+) = (0.01)(0.95) + (0.99)(0.05) = 0.0095 + 0.0495 = 0.0590$$
+
+2. **Compute Conditional Probability via Bayes' Rule:**
+   $$P(D \mid T^+) = \frac{P(T^+ \cap D)}{P(T^+)} = \frac{0.0095}{0.0590} \approx 0.1610 \quad (16.1\%)$$
+
+Despite a 95% accurate test, an individual who tests positive only has a 16.1% chance of having the disease because the condition's low base rate makes false positives outnumber true positives by over 5 to 1!
+
+For extended worked conditioning applications, see:
+- [[Monty Hall Problem Example]] — Conditional probability and decision strategy in the classic 3-door puzzle.
+- [[Random Number of Random Variables Sum Example]] — Conditioning on random variables in compound processes.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Conditional Probability as a Valid Probability Measure
+For any fixed conditioning event $B$ with $P(B) > 0$, the function $Q(A) = P(A \mid B)$ is a strictly valid probability measure on $(\Omega, \mathcal{F})$ satisfying all three Kolmogorov axioms:
+1. **Non-negativity:** $Q(A) = \frac{P(A \cap B)}{P(B)} \ge 0$ since $P(A \cap B) \ge 0$ and $P(B) > 0$.
+2. **Normalization:** $Q(\Omega) = \frac{P(\Omega \cap B)}{P(B)} = \frac{P(B)}{P(B)} = 1$.
+3. **Countable Additivity:** For mutually disjoint events $A_1, A_2, \dots$:
+   $$Q\left(\bigcup_{i=1}^\infty A_i\right) = \frac{P\left((\bigcup A_i) \cap B\right)}{P(B)} = \frac{\sum_{i=1}^\infty P(A_i \cap B)}{P(B)} = \sum_{i=1}^\infty Q(A_i)$$
+Therefore, all classical probability theorems (e.g. complement rule, inclusion-exclusion, Boole's inequality) hold identically when conditioned on $B$.
+
+### Semi-Graphoid Axioms of Conditional Independence
+For random variables (or $\sigma$-algebras), conditional independence satisfies four structural properties:
+1. **Symmetry:** $X \perp Y \mid Z \implies Y \perp X \mid Z$
+2. **Decomposition:** $X \perp (Y, W) \mid Z \implies X \perp Y \mid Z$ and $X \perp W \mid Z$
+3. **Weak Union:** $X \perp (Y, W) \mid Z \implies X \perp Y \mid (Z, W)$
+4. **Contraction:** $(X \perp Y \mid Z) \text{ and } (X \perp W \mid (Y, Z)) \implies X \perp (Y, W) \mid Z$
+
+For inversion of conditioning, see [[Law of Total Probability and Bayes' Rule]]; for expectation conditioning, see [[Conditional Expectation]].
 
 ---
 
@@ -167,7 +201,10 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 ## Related Concepts
 
 - [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+- [[Law of Total Probability and Bayes' Rule]]
+- [[Conditional Expectation]]
+- [[Markov Chain]]
+- [[Bayesian Inference]]
 
 ---
 
@@ -179,7 +216,7 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ---
 

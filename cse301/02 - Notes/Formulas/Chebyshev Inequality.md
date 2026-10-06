@@ -122,14 +122,31 @@ This provides a direct, 3-line proof of the **Weak Law of Large Numbers**!
 
 ## Example
 
-See worked numerical examples in the associated Example and Problem notes.
+### Application: Bounding Deviation in Binomial Flips
+
+Suppose a fair coin is tossed $n = 100$ times. Let $X \sim \operatorname{Bin}(100, 0.5)$ denote the number of heads.
+- Mean: $\mu = n p = 100(0.5) = 50$
+- Variance: $\sigma^2 = n p (1 - p) = 100(0.5)(0.5) = 25 \implies \sigma = 5$
+
+Suppose we want to bound the probability that the number of heads differs from 50 by at least 15 (i.e., $X \le 35$ or $X \ge 65$).
+Here the deviation threshold is $c = 15 = 3\sigma$ ($k = 3$).
+
+Applying Chebyshev's inequality:
+$$P(|X - 50| \ge 15) \le \frac{\sigma^2}{c^2} = \frac{25}{15^2} = \frac{25}{225} = \frac{1}{9} \approx 0.1111$$
+
+By contrast:
+- Markov's inequality on $X$ cannot provide a symmetric two-sided bound around the mean.
+- The exact binomial tail sum is $\approx 0.0035$.
+- As seen in [[Comparison of Probability Bounds Example]], Chebyshev provides an immediate, distribution-free guarantee ($< 11.1\%$) using only the mean and variance, without requiring calculation of combinatorial coefficients.
+- For further comparative calculations across distributions, see [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]].
 
 ---
 
 ## Common Mistakes
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+- **Assuming One-Sided Bounds:** Chebyshev provides a two-sided bound $P(|X - \mu| \ge c) \le \sigma^2 / c^2$. Dividing by 2 to bound a one-sided probability $P(X - \mu \ge c)$ is only valid for symmetric distributions; for general asymmetric distributions, use **Cantelli's inequality** $P(X - \mu \ge c) \le \frac{\sigma^2}{\sigma^2 + c^2}$.
+- **Infinite Variance:** Chebyshev's inequality requires $\sigma^2 < \infty$. It cannot be applied to heavy-tailed distributions with infinite or undefined variance (such as Cauchy or Pareto with shape $\alpha \le 2$).
+- **Omitting the Square in the Denominator:** Writing $\sigma^2 / c$ instead of $\sigma^2 / c^2$ when using absolute deviations.
 
 ---
 
@@ -138,6 +155,7 @@ See worked numerical examples in the associated Example and Problem notes.
 - [[Markov Inequality]] — Foundational inequality.
 - [[Chernoff Bound]] — Exponentially sharper bound when MGF exists.
 - [[Law of Large Numbers]] — Convergence theorem proven by Chebyshev.
+- [[Comparison of Probability Bounds Example]] — Side-by-side numerical comparison.
 
 ---
 
@@ -146,12 +164,14 @@ See worked numerical examples in the associated Example and Problem notes.
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
+- [[Markov Inequality]]
+- [[Covariance and Correlation]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
 
 ---
 

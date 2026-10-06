@@ -134,13 +134,60 @@ Maximum likelihood optimizes for making the observed data likely; it makes zero 
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Maximum Likelihood Estimator for Exponential Lifetimes
+
+Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} \operatorname{Exp}(\lambda)$ with PDF $f(x; \lambda) = \lambda e^{-\lambda x}$ for $x \ge 0$ and $\lambda > 0$.
+
+1. **Likelihood Function:**
+   $$L(\lambda) = \prod_{i=1}^n f(X_i; \lambda) = \prod_{i=1}^n \lambda e^{-\lambda X_i} = \lambda^n \exp\left(-\lambda \sum_{i=1}^n X_i\right)$$
+
+2. **Log-Likelihood Function:**
+   $$\ell(\lambda) = \ln L(\lambda) = n \ln \lambda - \lambda \sum_{i=1}^n X_i$$
+
+3. **Score Equation:**
+   Setting the score function $S(\lambda) = \ell'(\lambda)$ to zero:
+   $$S(\lambda) = \frac{\partial \ell}{\partial \lambda} = \frac{n}{\lambda} - \sum_{i=1}^n X_i = 0 \implies \frac{n}{\lambda} = \sum_{i=1}^n X_i$$
+   Solving for $\lambda$:
+   $$\hat{\lambda}_{\text{MLE}} = \frac{n}{\sum_{i=1}^n X_i} = \frac{1}{\bar{X}}$$
+
+4. **Second-Order Condition Check:**
+   $$\frac{\partial^2 \ell}{\partial \lambda^2} = -\frac{n}{\lambda^2} < 0 \quad \text{for all } \lambda > 0$$
+   The negative second derivative confirms $\hat{\lambda}_{\text{MLE}} = 1/\bar{X}$ is the unique global maximum.
+
+5. **Functional Equivariance:**
+   By equivariance, the MLE for the mean lifetime $\tau = \mathbb{E}[X] = 1/\lambda$ is:
+   $$\hat{\tau}_{\text{MLE}} = g(\hat{\lambda}_{\text{MLE}}) = \frac{1}{\hat{\lambda}_{\text{MLE}}} = \bar{X}$$
+
+For complete worked derivations across parametric families, including boundary cases where differential calculus fails, see:
+- [[Normal Distribution Parameter MLE Derivation Example]]
+- [[Uniform Distribution Non-Regular MLE Example]]
+- [[Discrete and Continuous Parameter MLE Reference Examples]]
+- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Regularity Conditions and Asymptotic Normality Proof Sketch
+
+1. **Cramér Regularity Conditions for MLE Optimality:**
+   - The support $\{x : f(x; \theta) > 0\}$ does not depend on $\theta$ (violating this makes the score equation inapplicable, as in Uniform$(0, \theta)$).
+   - The true parameter $\theta_0$ lies in an open interior of the parameter space $\Theta \subset \mathbb{R}^k$.
+   - The log-likelihood function is three times continuously differentiable in a neighborhood of $\theta_0$.
+   - The Fisher Information $I_1(\theta_0) = \mathbb{E}_\theta\left[-\frac{\partial^2}{\partial \theta^2}\ln f(X; \theta)\right]$ is positive and finite.
+
+2. **Taylor Expansion Proof Sketch of Asymptotic Normality:**
+   - Expanding the score $S_n(\hat{\theta}_n) = 0$ around $\theta_0$:
+     $$0 = S_n(\hat{\theta}_n) \approx S_n(\theta_0) + S'_n(\theta_0)(\hat{\theta}_n - \theta_0)$$
+   - Rearranging terms:
+     $$\sqrt{n}(\hat{\theta}_n - \theta_0) \approx \frac{\frac{1}{\sqrt{n}} S_n(\theta_0)}{-\frac{1}{n} S'_n(\theta_0)}$$
+   - By the [[Central Limit Theorem]], the numerator converges in distribution: $\frac{1}{\sqrt{n}} S_n(\theta_0) \xrightarrow{d} \mathcal{N}(0, I_1(\theta_0))$ because $\mathbb{E}[S_1(\theta_0)] = 0$ and $\operatorname{Var}(S_1(\theta_0)) = I_1(\theta_0)$.
+   - By the [[Law of Large Numbers]], the denominator converges in probability: $-\frac{1}{n} S'_n(\theta_0) \xrightarrow{P} I_1(\theta_0)$.
+   - By Slutsky's theorem:
+     $$\sqrt{n}(\hat{\theta}_n - \theta_0) \xrightarrow{d} \frac{\mathcal{N}(0, I_1(\theta_0))}{I_1(\theta_0)} = \mathcal{N}\left(0, \frac{1}{I_1(\theta_0)}\right)$$
+
+3. **Non-Regular Boundary Failures:**
+   - For $X_i \sim \operatorname{Unif}(0, \theta)$, $\hat{\theta}_{\text{MLE}} = X_{(n)}$. The rate of convergence is super-efficient $O(1/n)$ rather than $O(1/\sqrt{n})$, and $n(\theta - X_{(n)}) \xrightarrow{d} \operatorname{Exp}(1/\theta)$, completely bypassing normal asymptotics (see [[Uniform Distribution Non-Regular MLE Example]]).
 
 ---
 
@@ -203,8 +250,10 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 ## Prerequisites
 
-- Calculus (derivatives, partial derivatives, critical points, logarithmic differentiation)
-- Probability density functions and joint distributions of independent random variables
+- [[Point Estimation]]
+- [[Continuous Probability Distributions]]
+- [[Joint and Marginal Distributions]]
+- [[Likelihood and Score Equations]]
 
 ---
 
@@ -212,7 +261,7 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
 
 ---
 

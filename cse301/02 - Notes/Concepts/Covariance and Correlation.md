@@ -86,27 +86,65 @@ $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\oper
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Zero Covariance Does NOT Imply Independence
+
+A common pitfall is assuming that uncorrelated variables ($\operatorname{Cov}(X, Y) = 0$) are independent. Covariance only measures *linear* dependency.
+
+Let $X \sim \operatorname{Unif}(-1, 1)$ with PDF $f_X(x) = \frac{1}{2}$ on $[-1, 1]$. Because $X$ is symmetric about $0$:
+$$\mathbb{E}[X] = 0$$
+
+Now define $Y = X^2$. Here, $Y$ is completely deterministically dependent on $X$ (knowing $X$ uniquely determines $Y$).
+
+1. **Evaluate $\mathbb{E}[XY]$:**
+   $$\mathbb{E}[XY] = \mathbb{E}[X \cdot X^2] = \mathbb{E}[X^3] = \int_{-1}^1 \frac{x^3}{2} \, dx = \left[ \frac{x^4}{8} \right]_{-1}^1 = \frac{1}{8} - \frac{1}{8} = 0$$
+
+2. **Evaluate Product of Means $\mathbb{E}[X]\mathbb{E}[Y]$:**
+   $$\mathbb{E}[X]\mathbb{E}[Y] = 0 \times \mathbb{E}[Y] = 0$$
+
+3. **Compute Covariance:**
+   $$\operatorname{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = 0 - 0 = 0 \implies \rho(X, Y) = 0$$
+
+Thus, $X$ and $Y$ are **strictly uncorrelated ($\rho = 0$), yet completely dependent**!
+
+For indicator-based covariance derivations in combinatorial settings, see:
+- [[Linearity of Expectation and Indicator Random Variables Example]] — Computing negative covariance among birthday indicator variables.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Inner Product Space Structure of $L^2(\Omega)$
+For zero-mean random variables ($\mathbb{E}[X] = \mathbb{E}[Y] = 0$), covariance defines an inner product on the Hilbert space $L^2(\Omega, \mathcal{F}, P)$:
+$$\langle X, Y \rangle = \operatorname{Cov}(X, Y) = \mathbb{E}[XY], \quad \|X\| = \sqrt{\operatorname{Var}(X)} = \sigma_X$$
+The correlation coefficient is the cosine of the angle $\theta$ between the random vectors:
+$$\rho(X, Y) = \frac{\langle X, Y \rangle}{\|X\| \|Y\|} = \cos \theta$$
+The condition $-1 \le \rho \le 1$ follows directly from the [[Cauchy-Schwarz and Jensen Inequalities|Cauchy-Schwarz Inequality]]. Two variables are uncorrelated ($\rho = 0$) if and only if they are **orthogonal** ($\theta = \pi/2$).
+
+### Positive Semi-Definiteness of Covariance Matrices
+For any random vector $\mathbf{X} = (X_1, \dots, X_n)^T$, the covariance matrix $\Sigma = [\operatorname{Cov}(X_i, X_j)]$ is symmetric and **positive semi-definite** ($\Sigma \succeq 0$).
+*Proof:* For any deterministic vector $\mathbf{v} \in \mathbb{R}^n$:
+$$\mathbf{v}^T \Sigma \mathbf{v} = \operatorname{Var}\left( \sum_{i=1}^n v_i X_i \right) \ge 0$$
+Consequently, all eigenvalues of $\Sigma$ are non-negative, and $\det \Sigma \ge 0$.
+
+### Jointly Gaussian Exception
+If $(X, Y)$ have a **Bivariate Normal distribution**, then and only then:
+$$\operatorname{Cov}(X, Y) = 0 \iff X \perp Y$$
+because the cross-term in the bivariate Gaussian exponent vanishes when $\rho = 0$.
 
 ---
 
 ## Important Properties and Why They Hold
 
-- **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
-- **Convergence / Consistency:** Guarantees stability under large sample limits or repeated independent trials.
+- **Bilinearity:** $\operatorname{Cov}(\sum a_i X_i, \sum b_j Y_j) = \sum \sum a_i b_j \operatorname{Cov}(X_i, Y_j)$.
+- **Variance of Sums:** $\operatorname{Var}(\sum X_i) = \sum \operatorname{Var}(X_i) + 2\sum_{i < j} \operatorname{Cov}(X_i, X_j)$.
 
 ---
 
 ## Common Mistakes
 
 - Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- Assuming $\operatorname{Cov}(X, Y) = 0$ implies independence outside the Gaussian family.
+- Forgetting that $\operatorname{Var}(X - Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) - 2\operatorname{Cov}(X, Y)$ (variances add, they do not subtract).
 
 ---
 
@@ -123,40 +161,26 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ---
 
----
-
 ## Related Concepts
 
-- **Independence implies Uncorrelatedness:**
-  If $X$ and $Y$ are independent ($X \perp Y$), then $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$. Therefore:
-  $$\operatorname{Cov}(X, Y) = 0 \implies \rho(X, Y) = 0$$
-- **Uncorrelatedness DOES NOT Imply Independence:**
-  $\operatorname{Cov}(X, Y) = 0$ only means there is no *linear* relationship; there can still be a perfect non-linear deterministic relationship.
-
-### Classic Counterexample:
-Let $X \sim \operatorname{Unif}(-1, 1)$ (symmetric around 0, so $\mathbb{E}[X] = 0$).
-Let $Y = X^2$ (clearly $Y$ is completely dependent on $X$).
-Compute covariance:
-$$\mathbb{E}[XY] = \mathbb{E}[X \cdot X^2] = \mathbb{E}[X^3] = \int_{-1}^1 \frac{x^3}{2} \, dx = 0$$
-$$\mathbb{E}[X]\mathbb{E}[Y] = 0 \times \mathbb{E}[Y] = 0$$
-$$\operatorname{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y] = 0 - 0 = 0$$
-Thus, $X$ and $Y$ are **uncorrelated ($\rho = 0$), yet completely dependent**!
-
-*(Exception: If $(X, Y)$ have a **Bivariate Normal distribution**, then uncorrelatedness DOES imply independence!)*.
-
----
+- [[Joint and Marginal Distributions]]
+- [[Random Variables and Probability Distributions]]
+- [[Cauchy-Schwarz and Jensen Inequalities]]
+- [[Conditional Expectation]]
+- [[Bias-Variance Decomposition]]
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+- [[Joint and Marginal Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ---
 

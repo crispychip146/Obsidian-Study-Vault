@@ -148,13 +148,15 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 
 ## Prerequisites
 
-- [[Random Variables and Probability Distributions]]
+- [[M-M-1 Queue]]
+- [[Queueing Systems and Kendall Notation]]
+- [[Little's Law]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — M-M-1 Queue Performance Metrics Calculation]]
 
 ---
 

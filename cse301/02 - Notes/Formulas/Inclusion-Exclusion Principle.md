@@ -46,22 +46,12 @@ There are $\binom{n}{k}$ terms in each sum $S_k$, yielding a total of $2^n - 1$ 
 
 ## Variables
 
-The cleanest and most rigorous proof uses indicator random variables:
-Let $I_{A_i}$ be the indicator variable for event $A_i$ (i.e., $I_{A_i} = 1$ if $A_i$ occurs, and $0$ otherwise).
-
-Consider the complement event: none of the $A_i$ occur, which means $\bigcap_{i=1}^n A_i^c$ occurs:
-$$I_{\left(\bigcup_{i=1}^n A_i\right)^c} = \prod_{i=1}^n (1 - I_{A_i})$$
-
-Expanding this algebraic product:
-$$\prod_{i=1}^n (1 - I_{A_i}) = 1 - \sum_{i=1}^n I_{A_i} + \sum_{i < j} I_{A_i} I_{A_j} - \sum_{i < j < k} I_{A_i} I_{A_j} I_{A_k} + \dots + (-1)^n I_{A_1} I_{A_2} \dots I_{A_n}$$
-
-Subtracting both sides from $1$:
-$$I_{\bigcup_{i=1}^n A_i} = 1 - \prod_{i=1}^n (1 - I_{A_i}) = \sum_{i=1}^n I_{A_i} - \sum_{i < j} I_{A_i \cap A_j} + \dots + (-1)^{n+1} I_{\bigcap_{i=1}^n A_i}$$
-
-Taking the expectation $\mathbb{E}[\cdot]$ on both sides, and using the fundamental fact that $\mathbb{E}[I_E] = P(E)$ and that expectation is strictly linear:
-$$P\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n P(A_i) - \sum_{i < j} P(A_i \cap A_j) + \dots + (-1)^{n+1} P\left( \bigcap_{i=1}^n A_i \right)$$
-
-$\blacksquare$
+| Symbol | Meaning |
+|---|---|
+| $A_i$ | Arbitrary events in sample space $S$ ($i = 1, \dots, n$) |
+| $\bigcup_{i=1}^n A_i$ | Event that *at least one* of $A_1, \dots, A_n$ occurs |
+| $S_k$ | Sum of probabilities of all distinct $k$-way intersections $\sum_{i_1 < \dots < i_k} P(A_{i_1} \cap \dots \cap A_{i_k})$ |
+| $I_{A_i}$ | Indicator random variable for event $A_i$ ($1$ if occurred, $0$ otherwise) |
 
 ---
 
@@ -94,7 +84,23 @@ In general, stopping after an **odd** number of sums gives an **upper bound**, w
 
 ## Derivation
 
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+### Proof via Indicator Random Variables
+
+Let $I_{A_i}$ be the indicator variable for event $A_i$ ($I_{A_i} = 1$ if $A_i$ occurs, and $0$ otherwise).
+
+Consider the complement event: none of the $A_i$ occur, which means $\bigcap_{i=1}^n A_i^c$ occurs:
+$$I_{\left(\bigcup_{i=1}^n A_i\right)^c} = \prod_{i=1}^n (1 - I_{A_i})$$
+
+Expanding this algebraic product:
+$$\prod_{i=1}^n (1 - I_{A_i}) = 1 - \sum_{i=1}^n I_{A_i} + \sum_{i < j} I_{A_i} I_{A_j} - \sum_{i < j < k} I_{A_i} I_{A_j} I_{A_k} + \dots + (-1)^n I_{A_1} I_{A_2} \dots I_{A_n}$$
+
+Subtracting both sides from $1$:
+$$I_{\bigcup_{i=1}^n A_i} = 1 - \prod_{i=1}^n (1 - I_{A_i}) = \sum_{i=1}^n I_{A_i} - \sum_{i < j} I_{A_i \cap A_j} + \dots + (-1)^{n+1} I_{\bigcap_{i=1}^n A_i}$$
+
+Taking the expectation $\mathbb{E}[\cdot]$ on both sides, using $\mathbb{E}[I_E] = P(E)$, and invoking the linearity of expectation:
+$$P\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n P(A_i) - \sum_{i < j} P(A_i \cap A_j) + \dots + (-1)^{n+1} P\left( \bigcap_{i=1}^n A_i \right)$$
+
+$\blacksquare$
 
 ---
 
@@ -116,6 +122,8 @@ As $n \to \infty$:
 $$P(\text{at least one match}) \to 1 - e^{-1} \approx 0.6321$$
 $$P(\text{no matches / derangement}) \to e^{-1} \approx 0.3679$$
 Remarkably, for $n \ge 7$, this probability is essentially constant!
+
+For the complete standalone worked analysis and variations, see [[Derangements and Card Matching Example]].
 
 ---
 
@@ -140,7 +148,8 @@ Remarkably, for $n \ge 7$, this probability is essentially constant!
 
 ## Prerequisites
 
-- [[Random Variables and Probability Distributions]]
+- [[Probability Axioms and Naive Probability]]
+- [[Combinatorics and Counting Principles]]
 
 ---
 

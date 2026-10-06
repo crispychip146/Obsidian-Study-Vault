@@ -75,13 +75,41 @@ A frequent psychological error is the **Gambler's Fallacy**: believing that afte
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Empirical Convergence of Bernoulli Coin Flips
+
+Consider tossing a fair coin with $X_i \sim \operatorname{Bernoulli}(p = 0.5)$, where $\mu = 0.5$ and $\sigma^2 = p(1-p) = 0.25$.
+Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ denote the proportion of heads after $n$ flips.
+Suppose we demand that the sample proportion be within $\epsilon = 0.02$ of $0.5$ (i.e., between $0.48$ and $0.52$) with probability at least $0.95$.
+
+Using the [[Chebyshev Inequality]] bound established in the WLLN proof:
+$$P(|\bar{X}_n - 0.5| \ge 0.02) \le \frac{\sigma^2}{n \epsilon^2} = \frac{0.25}{n (0.02)^2} = \frac{0.25}{0.0004 n} = \frac{625}{n}$$
+Setting $\frac{625}{n} \le 0.05$ yields:
+$$n \ge \frac{625}{0.05} = 12,500$$
+
+While Chebyshev's distribution-free bound provides an upper bound of $n = 12,500$, applying the [[Central Limit Theorem]] (see [[Normal Approximation to Binomial and Poisson Example]]) reveals that standard normal tails require only $n \approx (1.96 \times 0.5 / 0.02)^2 \approx 2,401$ flips.
+This illustrates how the WLLN guarantees certainty in the limit $n \to \infty$, while concentration inequalities and the CLT quantify the rate of convergence.
+
+For a detailed problem walking through Chebyshev sample-sizing versus CLT asymptotics, see [[Problem — CLT Implications for the Weak Law of Large Numbers]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Modes of Convergence and Measure-Theoretic Foundations
+
+1. **Convergence in Probability vs. Almost Sure Convergence:**
+   - **WLLN ($\bar{X}_n \xrightarrow{P} \mu$):** For all $\epsilon > 0$, $\lim_{n \to \infty} P(\{\omega : |\bar{X}_n(\omega) - \mu| \ge \epsilon\}) = 0$. In measure-theoretic terms, the measure of the set of exceptional sample paths shrinks to zero at each fixed $n$.
+   - **SLLN ($\bar{X}_n \xrightarrow{\text{a.s.}} \mu$):** $P(\{\omega : \lim_{n \to \infty} \bar{X}_n(\omega) = \mu\}) = 1$. The set of paths along which $\bar{X}_n(\omega)$ fails to converge to $\mu$ is a null set.
+   - By the Borel-Cantelli lemma, if $\sum_{n=1}^\infty P(|\bar{X}_n - \mu| \ge \epsilon) < \infty$ for all $\epsilon > 0$, then $\bar{X}_n \xrightarrow{\text{a.s.}} \mu$.
+
+2. **Khinchin's Weak Law vs. Kolmogorov's Strong Law:**
+   - **Khinchin's WLLN:** Requires only that $X_i$ are i.i.d. with finite mean $\mathbb{E}[|X_i|] < \infty$. Finite variance is **not** required. This is proved using characteristic functions: $\phi_{\bar{X}_n}(t) = (\phi_X(t/n))^n = (1 + i\mu t/n + o(t/n))^n \to e^{i\mu t}$.
+   - **Kolmogorov's Strong Law of Large Numbers:** For i.i.d. $X_i$, $\bar{X}_n \xrightarrow{\text{a.s.}} \mu$ if and only if $\mathbb{E}[|X_i|] < \infty$. If $\mathbb{E}[|X_i|] = \infty$, then $\limsup_{n \to \infty} |\bar{X}_n| = \infty$ almost surely.
+
+3. **Failure of LLN: The Cauchy Distribution:**
+   - If $X_i \sim \operatorname{Cauchy}(0, \gamma)$, the characteristic function is $\phi_X(t) = e^{-\gamma |t|}$.
+   - Then $\phi_{\bar{X}_n}(t) = (e^{-\gamma |t/n|})^n = e^{-\gamma |t|}$.
+   - The sample average $\bar{X}_n$ has the exact same Cauchy distribution as a single draw! Averaging 1,000,000 Cauchy variables does not reduce the variance or converge to any constant because the mean is undefined ($\mathbb{E}[|X_i|] = \infty$).
 
 ---
 
@@ -127,8 +155,9 @@ $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Believing in Compensation (Gambler's Fallacy):** Believing that the sample mean converges because future flips compensate for past imbalances. The LLN works through dilution (growing denominator $n$), not compensation.
+- **Confusing Sample Mean with Sample Sum:** Forgetting that while $\bar{X}_n \xrightarrow{P} \mu$, the sum $S_n = \sum X_i$ diverges with variance $n\sigma^2$, so deviations $|S_n - n\mu|$ grow on the order of $O(\sqrt{n})$.
+- **Applying LLN without Finite Expectation:** Assuming every empirical average converges. If $\mathbb{E}[|X|] = \infty$ (e.g., Cauchy distribution), LLN fails completely.
 
 ---
 
@@ -145,20 +174,24 @@ $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+- [[Central Limit Theorem]] — Asymptotic distribution of deviations.
+- [[Estimator Consistency and Convergence]] — Statistical consistency formalization.
+- [[Chebyshev Inequality]] — Non-parametric concentration tool.
+- [[Normal Approximation to Binomial and Poisson Example]] — Application of normal approximations.
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+- [[Chebyshev Inequality]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — CLT Implications for the Weak Law of Large Numbers]]
 
 ---
 

@@ -161,6 +161,7 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 - [[Bayesian Inference]]
 - [[Maximum A Posteriori (MAP) Estimation]]
 - [[Normal-Normal Conjugate Updating Formula]]
+- [[Bernoulli Bayesian Inference with Beta Prior Example]]
 
 ---
 
@@ -168,13 +169,15 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 
 ## Prerequisites
 
+- [[Bayesian Inference]]
 - [[Random Variables and Probability Distributions]]
+- [[Discrete Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 

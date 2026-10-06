@@ -161,13 +161,16 @@ Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with
 
 ## Prerequisites
 
+- [[Hypothesis Testing Framework]]
 - [[Random Variables and Probability Distributions]]
+- [[Discrete Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
+- [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
 
 ---
 

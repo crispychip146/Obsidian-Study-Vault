@@ -150,12 +150,15 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
+- [[Covariance and Correlation]]
+- [[Conditional Expectation]]
+- [[Adam's Law (Law of Total Expectation)]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ---
 

@@ -92,13 +92,42 @@ where $k$ is the largest constant chosen such that $\int_{C_{\text{HPD}}} f(\the
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Normal-Normal Conjugate Model Credible Interval
+
+Let $X_1, \dots, X_n \overset{\text{iid}}{\sim} \mathcal{N}(\theta, \sigma^2)$ with known variance $\sigma^2$.
+Assign a Gaussian prior $\theta \sim \mathcal{N}(\mu_0, \sigma_0^2)$.
+From [[Normal-Normal Conjugate Updating Formula]], the posterior distribution is Gaussian:
+$$\theta \mid \mathbf{X} \sim \mathcal{N}(\mu_n, \sigma_n^2)$$
+where the posterior precision is $\frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}$ and posterior mean is $\mu_n = \sigma_n^2 \left( \frac{\mu_0}{\sigma_0^2} + \frac{n\bar{X}}{\sigma^2} \right)$.
+
+Because the posterior density is symmetric and unimodal:
+1. The equal-tailed credible interval and the Highest Posterior Density (HPD) interval are **identical**.
+2. Standardizing the posterior:
+   $$\frac{\theta - \mu_n}{\sigma_n} \;\Bigg|\; \mathbf{X} \sim \mathcal{N}(0, 1)$$
+3. The exact $1 - \alpha$ Bayesian credible interval is:
+   $$C = \left[\mu_n - z_{\alpha/2} \sigma_n, \quad \mu_n + z_{\alpha/2} \sigma_n\right]$$
+
+For a $95\%$ credible interval ($\alpha = 0.05, z_{0.025} = 1.96$):
+$$C_{0.95} = \left[\mu_n - 1.96\sigma_n, \quad \mu_n + 1.96\sigma_n\right]$$
+
+**Bayesian Interpretation:** Conditional on the observed data $\mathbf{X}$, the probability that $\theta$ lies inside $C_{0.95}$ is precisely $0.95$. Contrast this with frequentist [[Confidence Intervals and Confidence Sets]], where $\theta$ is fixed and only the interval bounds are random before data observation.
+
+For worked discrete and conjugate interval examples, see [[Bernoulli Bayesian Inference with Beta Prior Example]] and [[Normal-Normal Conjugate Updating Formula]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Equal-Tailed vs. HPD Regions and Bernstein-von Mises Theorem
+
+1. **Equal-Tailed vs. Highest Posterior Density (HPD) Regions:**
+   - **Equal-Tailed:** Sets cutoffs $q_{\alpha/2}$ and $q_{1 - \alpha/2}$ such that $P(\theta < q_{\alpha/2} \mid x) = \alpha/2$ and $P(\theta > q_{1 - \alpha/2} \mid x) = \alpha/2$. Computationally trivial via posterior CDF quantiles, but suboptimal for skewed posteriors.
+   - **HPD Region:** Defined as $C_{\text{HPD}} = \{\theta : f(\theta \mid x) \ge k_\alpha\}$. By the Neyman-Pearson-style lemma for sets, $C_{\text{HPD}}$ has the **smallest volume (length)** among all sets with posterior probability $1 - \alpha$. If the posterior is multimodal, the HPD set naturally splits into disconnected intervals.
+2. **Bernstein-von Mises Theorem (Bayesian-Frequentist Asymptotics):**
+   - As $n \to \infty$, under standard regularity conditions:
+     $$\lVert f(\theta \mid \mathbf{X}) - \mathcal{N}\left(\hat{\theta}_{\text{MLE}}, [n I_1(\hat{\theta}_{\text{MLE}})]^{-1}\right) \rVert_{\text{TV}} \xrightarrow{P} 0$$
+   - The effect of the prior distribution washes out completely at rate $O(1/\sqrt{n})$.
+   - As a consequence, a Bayesian $1 - \alpha$ credible interval asymptotically has exact frequentist coverage probability $1 - \alpha$.
 
 ---
 
@@ -130,23 +159,10 @@ As the sample size $n \to \infty$:
 
 ## Exam Relevance
 
-### Example: Normal-Normal Model
-
-Let $X_1, \dots, X_n \sim N(\theta, \sigma^2)$ with known variance $\sigma^2$.
-Assign a Gaussian prior $\theta \sim N(a, b^2)$.
-As derived in [[Normal-Normal Conjugate Updating Formula]], the posterior distribution is Gaussian:
-$$\theta \mid \mathbf{X} \sim N(\bar{\theta}, \tau^2)$$
-where $\bar{\theta}$ is the posterior mean and $\tau^2$ is the posterior variance.
-
-Because the normal distribution is perfectly symmetric and unimodal:
-1. The equal-tailed credible interval and the HPD interval are **identical**.
-2. Standardizing the posterior:
-   $$\frac{\theta - \bar{\theta}}{\tau} \;\Bigg|\; \mathbf{X} \sim N(0, 1)$$
-3. The exact $1 - \alpha$ Bayesian credible interval is:
-   $$C = \left(\bar{\theta} - z_{\alpha/2} \tau, \quad \bar{\theta} + z_{\alpha/2} \tau\right)$$
-
-For a $95\%$ credible interval ($\alpha = 0.05, z_{0.025} = 1.96$):
-$$C = \left[\bar{\theta} - 1.96\tau, \quad \bar{\theta} + 1.96\tau\right]$$
+In exam problems, expect to:
+1. Contrast the philosophical interpretations of Bayesian credible intervals ($P(\theta \in C \mid x) = 1 - \alpha$) and frequentist confidence intervals ($P_\theta(\theta \in C(X)) = 1 - \alpha$).
+2. Compute equal-tailed credible intervals using Gaussian and Beta quantiles.
+3. State conditions under which equal-tailed and HPD credible intervals coincide (symmetry and unimodality).
 
 ---
 
@@ -165,13 +181,15 @@ $$C = \left[\bar{\theta} - 1.96\tau, \quad \bar{\theta} + 1.96\tau\right]$$
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Bayesian Inference]]
+- [[Confidence Intervals and Confidence Sets]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 

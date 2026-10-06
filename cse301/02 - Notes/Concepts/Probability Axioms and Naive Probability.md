@@ -79,13 +79,41 @@ $$P(A_1 \cup A_2 \cup \dots \cup A_n) = \sum_{i=1}^n P(A_i) \quad \text{when } A
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Applying Complement and Addition Rules
+
+Consider rolling two fair 6-sided dice ($D_1, D_2$). The sample space is $S = \{(i, j) : 1 \le i, j \le 6\}$ with $|S| = 36$ equally likely outcomes.
+
+1. **Event $A$ (Sum is 7):**
+   Favorable outcomes: $\{(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)\}$ ($|A| = 6$).
+   $$P(A) = \frac{|A|}{|S|} = \frac{6}{36} = \frac{1}{6}$$
+
+2. **Event $B$ (At least one die is a 6):**
+   Using the complement rule: $B^c$ is the event that *neither* die is a 6 ($5 \times 5 = 25$ outcomes).
+   $$P(B) = 1 - P(B^c) = 1 - \frac{25}{36} = \frac{11}{36}$$
+
+3. **Union $P(A \cup B)$:**
+   Notice $A \cap B = \{(1,6), (6,1)\}$ ($|A \cap B| = 2$).
+   $$P(A \cup B) = P(A) + P(B) - P(A \cap B) = \frac{6}{36} + \frac{11}{36} - \frac{2}{36} = \frac{15}{36} = \frac{5}{12}$$
+
+For extended worked applications, see:
+- [[Birthday Problem and Collisions Example]] — Complement rule applied to matching events.
+- [[Derangements and Card Matching Example]] — Application of union and inclusion-exclusion.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Formal Probability Spaces $(\Omega, \mathcal{F}, P)$
+In rigorous measure-theoretic probability:
+1. **Sample Space ($\Omega$):** The set of all possible outcomes $\omega$.
+2. **$\sigma$-Algebra ($\mathcal{F}$):** A collection of subsets of $\Omega$ closed under complements and countable unions, containing $\emptyset$ and $\Omega$. Events are precisely the members of $\mathcal{F}$.
+3. **Probability Measure ($P$):** A countably additive measure mapping $\mathcal{F} \to [0, 1]$ with $P(\Omega) = 1$.
+
+### Finite Additivity vs. Countable Additivity
+- Kolmogorov Axiom 3 requires **countable additivity**: $P\left(\bigcup_{i=1}^\infty A_i\right) = \sum_{i=1}^\infty P(A_i)$ for pairwise disjoint events.
+- Finite additivity alone ($P(A \cup B) = P(A) + P(B)$) is insufficient for analysis because it cannot guarantee the **Continuity of Probability Measures**:
+  $$\lim_{n \to \infty} P(A_n) = P\left(\lim_{n \to \infty} A_n\right)$$
+  which is necessary to analyze infinite sequences of coin flips, continuous random variables, and asymptotic limit theorems like the [[Law of Large Numbers]] and [[Central Limit Theorem]].
 
 ---
 
@@ -165,14 +193,16 @@ From the three axioms, all foundational properties of probability follow deducti
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
+- [[Combinatorics and Counting Principles]]
+- [[Inclusion-Exclusion Principle]]
+- [[Conditional Probability and Independence]]
 - [[Random Variables and Probability Distributions]]
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Combinatorics and Counting Principles]]
 
 ---
 

@@ -188,13 +188,15 @@ At any random instant, an overhead drone will count an average of **6 cars** in 
 
 ## Prerequisites
 
+- [[Queueing Systems and Kendall Notation]]
 - [[Random Variables and Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Shoe Shine Shop Queueing Model Example]]
+- [[Problem — M-M-1 Queue Performance Metrics Calculation]]
 
 ---
 

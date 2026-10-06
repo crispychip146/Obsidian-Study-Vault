@@ -184,13 +184,16 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 
 ## Prerequisites
 
-- [[Random Variables and Probability Distributions]]
+- [[Hypothesis Testing Framework]]
+- [[Point Estimation]]
+- [[Central Limit Theorem]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
 
 ---
 

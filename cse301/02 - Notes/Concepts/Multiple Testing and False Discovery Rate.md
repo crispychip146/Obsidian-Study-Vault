@@ -142,13 +142,51 @@ Controlling FDR at $q = 0.05$ guarantees that **on average, no more than 5% of y
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Comparing Bonferroni vs. Benjamini-Hochberg on $m = 5$ Hypotheses
+
+Suppose a high-throughput screening pipeline executes $m = 5$ independent hypothesis tests with target significance level $\alpha = q = 0.05$.
+The sorted $p$-values in ascending order $P_{(1)} \le P_{(2)} \le \dots \le P_{(5)}$ are:
+$$P_{(1)} = 0.005, \quad P_{(2)} = 0.012, \quad P_{(3)} = 0.028, \quad P_{(4)} = 0.035, \quad P_{(5)} = 0.120$$
+
+1. **Unadjusted Testing (Threshold $\alpha = 0.05$):**
+   - Rejects $H_{(1)}, H_{(2)}, H_{(3)}, H_{(4)}$ (4 rejections).
+   - The overall probability of at least one false positive (FWER) is inflated to $1 - (1 - 0.05)^5 \approx 22.6\%$.
+
+2. **Bonferroni FWER Correction (Threshold $\alpha / m = 0.05 / 5 = 0.010$):**
+   - $P_{(1)} = 0.005 \le 0.010 \implies$ **Reject** $H_{(1)}$.
+   - $P_{(2)} = 0.012 > 0.010 \implies$ **Fail to Reject**.
+   - Tests $H_{(3)}, H_{(4)}, H_{(5)}$ also fail to meet $0.010$.
+   - **Total Rejections = 1**. Bonferroni is excessively conservative and incurs severe Type II error (false negatives).
+
+3. **Benjamini-Hochberg FDR Control (Thresholds $T_i = \frac{i}{m} q = \frac{i}{5}(0.05) = 0.010 \cdot i$):**
+   - $i = 1$: $P_{(1)} = 0.005 \le 0.010$ (Condition holds)
+   - $i = 2$: $P_{(2)} = 0.012 \le 0.020$ (Condition holds)
+   - $i = 3$: $P_{(3)} = 0.028 \le 0.030$ (Condition holds!)
+   - $i = 4$: $P_{(4)} = 0.035 > 0.040$ (Condition fails)
+   - $i = 5$: $P_{(5)} = 0.120 > 0.050$ (Condition fails)
+   - The largest index where $P_{(i)} \le \frac{i}{m}q$ is $k^* = 3$.
+   - **BH Decision:** Reject all $H_{(i)}$ for $i \le 3$, yielding rejections $\{H_{(1)}, H_{(2)}, H_{(3)}\}$.
+   - **Total Rejections = 3**. BH discovers two additional real effects while mathematically bounding $\text{FDR} \le 0.05$.
+
+For step-by-step pseudo-code and practice problems, see [[Benjamini-Hochberg Procedure Algorithm]] and [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Proof Foundations of BH, Simes' Inequality, and Arbitrary Dependence
+
+1. **Benjamini-Hochberg FDR Theorem:**
+   - When test statistics are independent (or satisfy Positive Regression Dependency on a Subset, PRDS), the BH procedure guarantees:
+     $$\text{FDR} = \mathbb{E}\left[\frac{V}{\max(R, 1)}\right] = \frac{m_0}{m} q \le q$$
+     where $m_0$ is the number of true nulls. When all nulls are true ($m_0 = m$), controlling FDR automatically controls FWER at level $q$.
+2. **Simes' Global Test:**
+   - Under the global intersection null $H_0 = \bigcap_{i=1}^m H_{0,i}$, Simes' (1986) inequality establishes that:
+     $$P\left( \min_{1 \le i \le m} \frac{m P_{(i)}}{i} \le \alpha \right) = \alpha$$
+   - The Benjamini-Hochberg procedure essentially inverts Simes' test sequentially to identify the maximum non-null subset.
+3. **Arbitrary Dependence: The Benjamini-Yekutieli (BY) Procedure:**
+   - If test statistics have arbitrary or unknown dependencies (e.g. complex negative correlations), standard BH can exceed $q$. The **Benjamini-Yekutieli (BY)** variant restores strict FDR control by dividing the threshold by the harmonic sum:
+     $$T_i = \frac{i}{m \cdot c(m)} q, \quad \text{where } c(m) = \sum_{j=1}^m \frac{1}{j} \approx \ln(m) + 0.5772$$
 
 ---
 
@@ -161,14 +199,15 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Confusing FDR with FWER:** FWER guarantees the probability of making *even one* false positive is $\le \alpha$. FDR guarantees the expected *proportion* of false positives among all declared discoveries is $\le q$.
+- **Ignoring Multiple Testing in Feature Selection:** Running hundreds of univariate regressions or correlation tests without adjustment, cherry-picking tests with $p < 0.05$.
+- **Sorting Direction:** Forgetting that Benjamini-Hochberg thresholds compare sorted $p$-values against an increasing line $\frac{i}{m}q$, and identifying the *largest* index $k^*$ satisfying the bound.
 
 ---
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing via [[Benjamini-Hochberg Procedure Algorithm]].
 
 ---
 
@@ -185,13 +224,15 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Hypothesis Testing Framework]]
+- [[p-Values and Significance]]
+- [[Inclusion-Exclusion Principle]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
 
 ---
 

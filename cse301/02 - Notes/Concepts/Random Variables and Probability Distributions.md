@@ -107,13 +107,44 @@ $$\operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}$$
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Expectation and Variance from CDF / PMF
+
+Let $X$ denote the number of heads obtained in two independent tosses of a fair coin ($p = 0.5$).
+The PMF is:
+$$p_X(0) = \frac{1}{4}, \quad p_X(1) = \frac{1}{2}, \quad p_X(2) = \frac{1}{4}$$
+
+1. **Calculate Expectation $\mathbb{E}[X]$:**
+   $$\mathbb{E}[X] = \sum_{x} x \, p_X(x) = 0\left(\frac{1}{4}\right) + 1\left(\frac{1}{2}\right) + 2\left(\frac{1}{4}\right) = 0 + \frac{1}{2} + \frac{1}{2} = 1$$
+
+2. **Calculate Second Moment $\mathbb{E}[X^2]$ via LOTUS:**
+   $$\mathbb{E}[X^2] = \sum_{x} x^2 \, p_X(x) = 0^2\left(\frac{1}{4}\right) + 1^2\left(\frac{1}{2}\right) + 2^2\left(\frac{1}{4}\right) = 0 + \frac{1}{2} + 1 = \frac{3}{2}$$
+
+3. **Calculate Variance $\operatorname{Var}(X)$:**
+   $$\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{3}{2} - 1^2 = \frac{1}{2}$$
+
+For detailed indicator decomposition and expectation proofs, see:
+- [[Linearity of Expectation and Indicator Random Variables Example]] — Decomposing complex counting variables into indicator sums.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Formal Definition (Borel Measurability)
+A random variable $X$ is mathematically a **measurable function** from the probability space $(\Omega, \mathcal{F}, P)$ to the real numbers $(\mathbb{R}, \mathcal{B})$:
+$$X: \Omega \to \mathbb{R} \quad \text{such that} \quad \{\omega \in \Omega : X(\omega) \le x\} \in \mathcal{F}, \quad \forall x \in \mathbb{R}$$
+This condition guarantees that the probability $P(X \le x) = P(\{\omega : X(\omega) \le x\})$ is well-defined under the measure $P$.
+
+### Properties of Cumulative Distribution Functions (CDF)
+Any valid CDF $F_X(x) = P(X \le x)$ must satisfy three fundamental axioms:
+1. **Monotone non-decreasing:** $x_1 < x_2 \implies F_X(x_1) \le F_X(x_2)$.
+2. **Normalized limits:** $\lim_{x \to -\infty} F_X(x) = 0$ and $\lim_{x \to \infty} F_X(x) = 1$.
+3. **Right-continuity with left limits (CÀDLÀG):** $\lim_{h \to 0^+} F_X(x + h) = F_X(x)$.
+The jump discontinuity magnitude at any point equals the point probability: $P(X = x) = F_X(x) - F_X(x^-)$.
+
+### Lebesgue Existence Condition for Expectation
+The expectation $\mathbb{E}[X]$ exists if and only if $\mathbb{E}[\lvert X \rvert] < \infty$ (absolute convergence). If $\mathbb{E}[X^+] = \infty$ and $\mathbb{E}[X^-] = \infty$, the expectation is undefined (e.g. the standard Cauchy distribution).
+
+For distributions of functions of random variables, see [[Law of the Unconscious Statistician (LOTUS)]].
 
 ---
 
@@ -158,7 +189,10 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 ## Related Concepts
 
 - [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+- [[Discrete Probability Distributions]]
+- [[Continuous Probability Distributions]]
+- [[Joint and Marginal Distributions]]
+- [[Covariance and Correlation]]
 
 ---
 
@@ -170,7 +204,7 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ---
 

@@ -129,13 +129,38 @@ This beautiful result explains why setting a threshold $\alpha = 0.05$ guarantee
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### One-Sided vs. Two-Sided $p$-Value Calculation
+
+Suppose a software benchmark evaluates runtime improvement over a baseline system, yielding a standard normal test statistic $Z = 2.15$.
+
+1. **One-Sided Upper-Tail Test ($H_0: \mu \le \mu_0$ vs $H_1: \mu > \mu_0$):**
+   The $p$-value represents only the area in the upper tail:
+   $$p_{\text{one-sided}} = P(Z \ge 2.15) = 1 - \Phi(2.15) = 1 - 0.9842 = 0.0158$$
+   Since $p = 0.0158 < 0.05$, $H_0$ is rejected.
+
+2. **Two-Sided Test ($H_0: \mu = \mu_0$ vs $H_1: \mu \ne \mu_0$):**
+   Because deviations in either direction provide evidence against $H_0$:
+   $$p_{\text{two-sided}} = 2 \cdot P(Z \ge |2.15|) = 2(0.0158) = 0.0316$$
+
+Notice that $p_{\text{two-sided}} = 2 \cdot p_{\text{one-sided}}$. A result with $Z = 1.80$ gives $p_{\text{one-sided}} = 0.0359$ (significant at $\alpha = 0.05$) but $p_{\text{two-sided}} = 0.0718$ (not significant). Choosing a one-sided test after inspecting the sample data is a form of data dredging ($p$-hacking) that doubles the true Type I error rate.
+
+For empirical resampling and permutation $p$-value algorithms, see [[Toy Permutation Test Example]] and [[Problem — Comparing Prediction Algorithms via Paired Wald Test]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Probability Integral Transform, Discrete Conservatism, and Lindley's Paradox
+
+1. **Continuous vs. Discrete Null Distributions:**
+   - When the test statistic $T$ is continuous, the Probability Integral Transform guarantees $P \sim \operatorname{Unif}(0, 1)$ exactly under $H_0$. Thus $P(P \le \alpha) = \alpha$.
+   - When $T$ is discrete (e.g., Binomial counts or Fisher's Exact Test), $P$ has jump discontinuities. Consequently, $P(P \le \alpha) \le \alpha$. Discrete tests are strictly **conservative**, meaning the empirical Type I error rate is strictly less than nominal $\alpha$.
+2. **Behavior under the Alternative Hypothesis ($H_1$):**
+   - Under $H_1$, the cumulative distribution of $P$ is strictly concave, and its density $f_P(p \mid H_1)$ spikes sharply near $p = 0$.
+   - The probability $P(P \le \alpha \mid H_1)$ corresponds exactly to the statistical power $1 - \beta$.
+3. **Lindley's Paradox (Jeffreys-Lindley Paradox):**
+   - In massive datasets ($n \gg 1$), a realization can simultaneously yield a frequentist $p$-value of $p = 0.01$ (rejecting $H_0$) and a Bayesian posterior probability $P(H_0 \mid \mathbf{x}) > 0.95$ (strongly supporting $H_0$).
+   - This occurs because standard errors shrink to 0 as $O(1/\sqrt{n})$, making tiny trivial differences statistically distinguishable even when the point null is far more parsimonious than a diffuse prior.
 
 ---
 
@@ -148,14 +173,15 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Transposition Fallacy:** Believing $p = P(H_0 \mid \text{data})$ rather than $P(\text{extreme data} \mid H_0)$.
+- **Switching Hypotheses Post-Hoc:** Selecting a one-sided test after observing that the sample statistic landed in that direction (inflates false positive rate).
+- **Treating $0.05$ as an Ontological Boundary:** Thinking $p = 0.049$ proves an effect while $p = 0.051$ proves no effect.
 
 ---
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing via [[Hypothesis Testing Framework]] and [[Wald Test Statistic]].
 
 ---
 
@@ -165,6 +191,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Wald Test Statistic]]
 - [[Multiple Testing and False Discovery Rate]]
 - [[Permutation Test Algorithm]]
+- [[Toy Permutation Test Example]]
 
 ---
 
@@ -172,13 +199,15 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Hypothesis Testing Framework]]
+- [[Continuous Probability Distributions]]
+- [[Central Limit Theorem]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
 
 ---
 

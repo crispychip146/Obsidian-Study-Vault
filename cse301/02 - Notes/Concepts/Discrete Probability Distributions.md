@@ -135,13 +135,40 @@ In probability, many real-world phenomena share underlying structures known as *
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Poisson Traffic and Binomial Convergence
+
+Suppose an API gateway receives incoming requests at an average rate of $\lambda = 3$ requests per second modeled as $X \sim \operatorname{Pois}(3)$.
+
+1. **Probability of Exactly 2 Requests in a Second:**
+   $$P(X = 2) = \frac{e^{-3} 3^2}{2!} = \frac{9 e^{-3}}{2} \approx \frac{9 \times 0.049787}{2} \approx 0.2240 \quad (22.40\%)$$
+
+2. **Probability of at Least 1 Request:**
+   Using the complement rule:
+   $$P(X \ge 1) = 1 - P(X = 0) = 1 - \frac{e^{-3} 3^0}{0!} = 1 - e^{-3} \approx 1 - 0.0498 = 0.9502 \quad (95.02\%)$$
+
+For indicator-based derivations of means and variances of discrete distributions, see:
+- [[Linearity of Expectation and Indicator Random Variables Example]] — Decomposing Hypergeometric and Binomial counts into indicator sums.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### The Law of Rare Events (Poisson Limit Theorem)
+If $n \to \infty$ and $p \to 0$ such that $np \to \lambda$ (a constant), then the Binomial distribution converges pointwise to the Poisson distribution:
+$$\lim_{n \to \infty} \binom{n}{k} p^k (1 - p)^{n - k} = \frac{e^{-\lambda} \lambda^k}{k!}$$
+*Proof Idea:* Expand $\binom{n}{k} = \frac{n(n-1)\cdots(n-k+1)}{k!} \sim \frac{n^k}{k!}$, replace $p = \lambda/n$, and use $\lim (1 - \lambda/n)^n = e^{-\lambda}$.
+
+### Memoryless Property of the Geometric Distribution
+The Geometric distribution is the **unique discrete probability distribution** with the memoryless property:
+$$P(X > s + t \mid X > s) = P(X > t) \quad \text{for all integers } s, t \ge 0$$
+*Proof:* $P(X > k) = (1 - p)^k$. Hence:
+$$P(X > s + t \mid X > s) = \frac{P(X > s + t)}{P(X > s)} = \frac{(1 - p)^{s+t}}{(1 - p)^s} = (1 - p)^t = P(X > t)$$
+Its continuous analog is the Exponential distribution (see [[Continuous Probability Distributions]]).
+
+### Convolution / Additivity of Independent Poisson Variables
+If $X_1 \sim \operatorname{Pois}(\lambda_1)$ and $X_2 \sim \operatorname{Pois}(\lambda_2)$ are independent:
+$$X_1 + X_2 \sim \operatorname{Pois}(\lambda_1 + \lambda_2)$$
+Verified immediately using [[Moment Generating Functions]]: $M_{X_1+X_2}(t) = M_{X_1}(t) M_{X_2}(t) = \exp(\lambda_1(e^t - 1)) \exp(\lambda_2(e^t - 1)) = \exp((\lambda_1 + \lambda_2)(e^t - 1))$.
 
 ---
 
@@ -173,20 +200,23 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
 - [[Random Variables and Probability Distributions]]
+- [[Continuous Probability Distributions]]
+- [[Moment Generating Functions]]
+- [[M-M-1 Queue]]
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
+- [[Combinatorics and Counting Principles]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ---
 

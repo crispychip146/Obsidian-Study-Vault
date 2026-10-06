@@ -183,13 +183,15 @@ Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior
 
 ## Prerequisites
 
+- [[Bayesian Inference]]
 - [[Random Variables and Probability Distributions]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 

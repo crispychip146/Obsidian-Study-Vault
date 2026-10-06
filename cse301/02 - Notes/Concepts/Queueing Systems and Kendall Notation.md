@@ -116,13 +116,50 @@ Queueing phenomena govern virtually every shared computing resource:
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Kendall Classification and Little's Law Application
+
+Consider a cloud database read-replica server:
+- Queries arrive according to a Poisson process with rate $\lambda = 80$ queries per second.
+- Query processing durations are exponentially distributed with average latency $\mathbb{E}[S] = 10\text{ ms} = 0.010\text{ s} \implies \mu = 100$ queries per second.
+- The replica processes queries sequentially on a single thread ($c = 1$) with unbounded buffer space ($K = \infty$).
+
+1. **Kendall Notation Classification:**
+   - Arrival process: Poisson / Exponential interarrivals $\implies M$.
+   - Service distribution: Exponential $\implies M$.
+   - Number of parallel servers: $1 \implies 1$.
+   - Queue capacity: $\infty$.
+   - Kendall designation: **$M/M/1$**.
+
+2. **System Utilization:**
+   $$\rho = \frac{\lambda}{\mu} = \frac{80}{100} = 0.80$$
+   Because $\rho < 1$, the queue reaches a stable stationary distribution.
+
+3. **Performance Metrics via Little's Law:**
+   If the average number of queries in the system is $L = \frac{\rho}{1 - \rho} = \frac{0.80}{1 - 0.80} = 4$ queries:
+   - Total System Time (latency): $W = \frac{L}{\lambda} = \frac{4}{80} = 0.050\text{ s} = 50\text{ ms}$.
+   - Average Waiting Time in Queue: $W_Q = W - \frac{1}{\mu} = 50\text{ ms} - 10\text{ ms} = 40\text{ ms}$.
+   - Average Number of Waiting Queries: $L_Q = \lambda W_Q = 80 \times 0.040 = 3.2$ queries.
+   Notice that $L = L_Q + \rho = 3.2 + 0.8 = 4.0$, satisfying Little's conservation law.
+
+For multi-stage systems, see [[Shoe Shine Shop Queueing Model Example]], [[Tandem Two-Server Queue Performance Example]], and [[Problem — M-M-1 Queue Performance Metrics Calculation]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Little's Law Invariance and Operational Assumptions
+
+1. **Universality of Little's Law ($L = \lambda W$):**
+   - Holds for *any* black-box queuing system in steady-state, regardless of arrival distribution $A$, service distribution $B$, server count $c$, or queue discipline (FIFO, LIFO, Priority, Processor Sharing).
+   - Requires only that the system is stable ($\lambda < c\mu$) and that customer flow is conserved (no creation or destruction of jobs inside).
+2. **Subsystem Partitioning:**
+   - Applied to the waiting buffer alone: $L_Q = \lambda W_Q$.
+   - Applied to the server facility alone: $L_S = \lambda \mathbb{E}[S] = \frac{\lambda}{\mu} = \rho$.
+   - By linearity of expectation:
+     $$L = L_Q + L_S \iff W = W_Q + \mathbb{E}[S]$$
+3. **Queue Stability Boundaries:**
+   - For infinite capacity queues ($M/M/c$), a stationary distribution exists if and only if $\rho = \frac{\lambda}{c\mu} < 1$.
+   - If $\rho = 1$, the underlying Continuous-Time Markov Chain is null recurrent ($L \to \infty$). If $\rho > 1$, it is transient and diverges to infinity.
 
 ---
 
@@ -135,14 +172,15 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Applying Little's Law with Incompatible Units:** Mixing seconds and hours when computing $L = \lambda W$ (e.g. $\lambda$ in customers/minute and $W$ in seconds).
+- **Confusing Waiting Time $W_Q$ with Total Response Time $W$:** Omitting the service time $\mathbb{E}[S] = 1/\mu$ when calculating the total customer delay.
+- **Assuming $\rho \ge 1$ Queues Can Reach Equilibrium:** Computing formulas like $L = \rho/(1-\rho)$ when $\rho \ge 1$ yields negative or nonsensical numbers.
 
 ---
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and performance metrics via [[Little's Law]] and [[M-M-1 Queue]].
 
 ---
 
@@ -153,6 +191,8 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[M-M-1 Queue]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[Jackson Networks and Tandem Queues]]
+- [[Shoe Shine Shop Queueing Model Example]]
+- [[Tandem Two-Server Queue Performance Example]]
 
 ---
 
@@ -160,13 +200,15 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Continuous Probability Distributions]]
+- [[Stochastic Process]]
+- [[Markov Chain]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — M-M-1 Queue Performance Metrics Calculation]]
 
 ---
 

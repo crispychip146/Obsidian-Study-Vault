@@ -97,7 +97,34 @@ P_{i0} & P_{i1} & P_{i2} & \cdots \\
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### 1. Two-State Weather Model
+Suppose weather transitions satisfy the Markov property:
+- If it rains today (State 0), it rains tomorrow with probability $\alpha = 0.7$, and stays clear with probability $1 - \alpha = 0.3$.
+- If it is dry today (State 1), it rains tomorrow with probability $\beta = 0.2$, and stays dry with probability $1 - \beta = 0.8$.
+
+The one-step transition probability matrix is:
+$$P = \begin{pmatrix}
+0.7 & 0.3 \\
+0.2 & 0.8
+\end{pmatrix}$$
+
+If today is dry ($X_0 = 1$), the probability that it rains two days from now is found by the $(1, 0)$ entry of $P^2$:
+$$P^2 = \begin{pmatrix} 0.7 & 0.3 \\ 0.2 & 0.8 \end{pmatrix} \begin{pmatrix} 0.7 & 0.3 \\ 0.2 & 0.8 \end{pmatrix} = \begin{pmatrix} 0.55 & 0.45 \\ 0.30 & 0.70 \end{pmatrix}$$
+Thus $P(X_2 = 0 \mid X_0 = 1) = P_{10}^{(2)} = 0.30$.
+
+### 2. Binary Communications Channel
+A transmitter sends binary digits ($0$ or $1$) through a series of transmission repeaters. At each stage, the bit is transmitted correctly with probability $p$, and flips with error probability $1 - p$:
+$$P = \begin{pmatrix}
+p & 1 - p \\
+1 - p & p
+\end{pmatrix}$$
+
+For detailed multi-day forecasts, genetics models, and higher-order historical expansions, see:
+- [[Weather Forecasting Markov Chain Example]]
+- [[Higher-Order State Weather Prediction Example]]
+- [[Hardy-Weinberg Law Markov Chain Example]]
+- [[Problem — Four-Day Weather Forecast]]
+- [[Problem — Rain Prediction Two Days Ahead]]
 
 ---
 
@@ -143,35 +170,11 @@ See [[Higher-Order State Weather Prediction Example]] for a concrete application
 
 ## Exam Relevance
 
-### Example
-
-### 1. Two-State Weather Model
-Suppose the chance of rain tomorrow depends solely on whether it rains today:
-- If it rains today, it rains tomorrow with probability $\alpha$, and clears up with probability $1 - \alpha$.
-- If it does not rain today, it rains tomorrow with probability $\beta$, and stays dry with probability $1 - \beta$.
-
-Let State 0 = "Rain", State 1 = "No Rain".
-The transition probability matrix is:
-$$P = \begin{pmatrix}
-\alpha & 1 - \alpha \\
-\beta & 1 - \beta
-\end{pmatrix}$$
-
-### 2. Binary Communications Channel
-A transmitter sends binary digits ($0$ or $1$) through successive transmission stages. At each stage, the bit survives intact with probability $p$, and flips with probability $1 - p$:
-$$P = \begin{pmatrix}
-p & 1 - p \\
-1 - p & p
-\end{pmatrix}$$
-
----
-### Exam Relevance
-
 In CSE301 examinations:
 1. **Transition Matrix Formulation:** Constructing $P$ from narrative problem descriptions (e.g., weather models, genetic processes, customer brand switching).
 2. **Validating Stochastic Matrices:** Verifying non-negativity and row-sum normalization.
-3. **Joint Path Probability Calculations:** Computing $P(X_0 = i_0, X_1 = i_1, \dots, X_n = i_n)$ by multiplying transition entries.
-4. **Higher-Order State Expansion:** Converting 2-day or multi-day weather dependencies into a valid first-order transition matrix.
+3. **Joint Path Probability Calculations:** Computing $P(X_0 = i_0, X_1 = i_1, \dots, X_n = i_n)$ by multiplying transition entries via [[Chapman-Kolmogorov Equations]].
+4. **Higher-Order State Expansion:** Converting 2-day or multi-day weather dependencies into a valid first-order transition matrix (see [[Higher-Order State Weather Prediction Example]]).
 
 ---
 

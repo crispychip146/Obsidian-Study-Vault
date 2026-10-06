@@ -111,23 +111,52 @@ $$\text{MSE}(\hat{\theta}_n) = \text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Bernoulli Parameter Estimation and Standard Error
+
+Consider estimating the success probability $p$ of a $\text{Bernoulli}(p)$ process from $n$ independent trials $X_1, \dots, X_n \sim \text{Bernoulli}(p)$, where $\mathbb{E}[X_i] = p$ and $\operatorname{Var}(X_i) = p(1-p)$.
+
+Define the sample mean estimator:
+$$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
+
+1. **Unbiasedness Verification:**
+   $$\mathbb{E}[\hat{p}_n] = \mathbb{E}\left[\frac{1}{n}\sum_{i=1}^n X_i\right] = \frac{1}{n}\sum_{i=1}^n \mathbb{E}[X_i] = \frac{1}{n}(np) = p$$
+   $$\text{bias}(\hat{p}_n) = \mathbb{E}[\hat{p}_n] - p = p - p = 0 \implies \hat{p}_n \text{ is strictly unbiased.}$$
+
+2. **Standard Error Derivation:**
+   Because $X_i$ are independent:
+   $$\operatorname{Var}(\hat{p}_n) = \operatorname{Var}\left(\frac{1}{n}\sum_{i=1}^n X_i\right) = \frac{1}{n^2}\sum_{i=1}^n \operatorname{Var}(X_i) = \frac{1}{n^2} n p(1-p) = \frac{p(1-p)}{n}$$
+   $$\text{se}(\hat{p}_n) = \sqrt{\frac{p(1-p)}{n}}$$
+
+3. **Plug-in Estimated Standard Error:**
+   Since $p$ is unknown, substituting $\hat{p}_n$ yields:
+   $$\widehat{\text{se}}(\hat{p}_n) = \sqrt{\frac{\hat{p}_n(1 - \hat{p}_n)}{n}}$$
+
+For a full numerical demonstration comparing sample proportion point estimates and interval bounds, see [[Bernoulli Parameter Estimation and Confidence Interval Example]].
 
 ---
 
 ## Technical Details
 
-### Technical Details
-
 ### Point Estimation Targets
-Point estimation applies far beyond scalar distribution parameters:
-1. **Parametric parameters:** Mean $\mu$, variance $\sigma^2$, rate $\lambda$, probability $p$.
-2. **Nonparametric functions:** Empirical Cumulative Distribution Function $\hat{F}_n(x)$, probability density function $\hat{f}(x)$ via kernel density estimation.
-3. **Regression functions:** Conditional expectation $r(x) = E[Y \mid X = x]$.
-4. **Predictive estimation:** Guessing the value of an unobserved future outcome $Y_{n+1}$.
+Point estimation applies to a diverse hierarchy of statistical objectives:
+1. **Parametric parameters:** Mean $\mu$, variance $\sigma^2$, rate $\lambda$, success probability $p$.
+2. **Nonparametric functions:** Empirical Cumulative Distribution Function $\hat{F}_n(x) = \frac{1}{n}\sum_{i=1}^n I(X_i \le x)$, kernel density estimators $\hat{f}_h(x)$.
+3. **Regression functions:** Conditional expectation $r(x) = \mathbb{E}[Y \mid X = x]$.
+4. **Predictive estimation:** Bounding errors on an unobserved future outcome $Y_{n+1}$.
 
-### Bias vs. Variance Trade-off
-Unbiasedness is often considered an overrated property in modern statistics. An unbiased estimator can have immense variance, making it practically useless on any individual dataset. Conversely, introducing a tiny amount of bias can substantially reduce the variance, leading to a much smaller total $\text{MSE}$.
+### Cramér-Rao Lower Bound (CRLB) and Efficiency
+Let $X_1, \dots, X_n \overset{\text{iid}}{\sim} f(x; \theta)$. The **Fisher Information** in a single observation is:
+$$I_1(\theta) = \mathbb{E}_\theta\left[ \left( \frac{\partial}{\partial \theta} \ln f(X; \theta) \right)^2 \right] = -\mathbb{E}_\theta\left[ \frac{\partial^2}{\partial \theta^2} \ln f(X; \theta) \right]$$
+For an i.i.d. sample of size $n$, $I_n(\theta) = n I_1(\theta)$.
+Under mild regularity conditions, the variance of any **unbiased estimator** $\hat{\theta}_n$ satisfies the **Cramér-Rao Lower Bound**:
+$$\operatorname{Var}(\hat{\theta}_n) \ge \frac{1}{n I_1(\theta)}$$
+- An unbiased estimator whose variance achieves the CRLB for all $\theta$ is termed **efficient**.
+- An estimator that attains minimum variance among all unbiased estimators is a **Uniformly Minimum Variance Unbiased Estimator (UMWUE)**.
+
+### Bias vs. Variance Trade-off in MSE
+Unbiasedness alone is insufficient for practical optimality:
+$$\text{MSE}(\hat{\theta}_n) = \text{bias}^2(\hat{\theta}_n) + \operatorname{Var}(\hat{\theta}_n)$$
+An unbiased estimator with huge variance is inferior to a slightly biased shrinkage estimator with substantially reduced variance (e.g. Ridge regression or Bayesian posterior means).
 
 ---
 
@@ -157,34 +186,11 @@ Unbiasedness is often considered an overrated property in modern statistics. An 
 
 ## Exam Relevance
 
-### Example
-
-Consider estimating the success probability $p$ of a $\text{Bernoulli}(p)$ coin from $n$ independent flips $X_1, \dots, X_n \sim \text{Bernoulli}(p)$, where $E[X_i] = p$ and $\text{Var}(X_i) = p(1-p)$.
-
-Define the sample mean estimator:
-$$\hat{p}_n = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$$
-
-1. **Check Bias:**
-   $$E[\hat{p}_n] = E\left[\frac{1}{n}\sum_{i=1}^n X_i\right] = \frac{1}{n}\sum_{i=1}^n E[X_i] = \frac{1}{n}(np) = p$$
-   $$\text{bias}(\hat{p}_n) = E[\hat{p}_n] - p = p - p = 0 \implies \hat{p}_n \text{ is strictly unbiased.}$$
-
-2. **Calculate Standard Error:**
-   Because $X_i$ are mutually independent:
-   $$\text{Var}(\hat{p}_n) = \text{Var}\left(\frac{1}{n}\sum_{i=1}^n X_i\right) = \frac{1}{n^2}\sum_{i=1}^n \text{Var}(X_i) = \frac{1}{n^2} n p(1-p) = \frac{p(1-p)}{n}$$
-   $$\text{se}(\hat{p}_n) = \sqrt{\frac{p(1-p)}{n}}$$
-
-3. **Compute Estimated Standard Error:**
-   Since $p$ is unknown, plug in the estimate $\hat{p}_n$:
-   $$\widehat{\text{se}}(\hat{p}_n) = \sqrt{\frac{\hat{p}_n(1 - \hat{p}_n)}{n}}$$
-
----
-### Exam Relevance
-
 In exam problems, you will typically be asked to:
-1. Determine whether an estimator is unbiased by computing $E[\hat{\theta}_n]$.
+1. Determine whether an estimator is unbiased by computing $\mathbb{E}[\hat{\theta}_n]$.
 2. Compute the exact standard error $\text{se}(\hat{\theta}_n)$ using independence and variance rules.
 3. Construct the plug-in estimated standard error $\widehat{\text{se}}$.
-4. Evaluate Mean Squared Error and discuss the trade-off between bias and variance.
+4. Evaluate Mean Squared Error and discuss the trade-off between bias and variance via [[Bias-Variance Decomposition]].
 5. Contrast point estimation with interval estimation ([[Confidence Intervals and Confidence Sets]]).
 
 ---
@@ -205,8 +211,9 @@ In exam problems, you will typically be asked to:
 
 ## Prerequisites
 
-- [[Stochastic Process]] (Random Variables, Expectation, Variance)
-- Linearity of Expectation and Properties of Variance
+- [[Random Variables and Probability Distributions]]
+- [[Covariance and Correlation]]
+- [[Law of Large Numbers]]
 
 ---
 

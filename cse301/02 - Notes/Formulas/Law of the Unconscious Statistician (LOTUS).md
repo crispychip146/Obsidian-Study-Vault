@@ -120,6 +120,9 @@ Without LOTUS, one would have to derive the PDF of $Y = X^2$ using change of var
 Evaluating $M_X(t) = \mathbb{E}[e^{tX}]$ uses $g(x) = e^{tx}$:
 $$M_X(t) = \int_{-\infty}^\infty e^{tx} f_X(x) \, dx$$
 
+For detailed indicator and expectation applications, see:
+- [[Linearity of Expectation and Indicator Random Variables Example]] — Applying LOTUS to indicator polynomials.
+
 ---
 
 ---
@@ -155,7 +158,7 @@ $$M_X(t) = \int_{-\infty}^\infty e^{tx} f_X(x) \, dx$$
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Indicator Variables for Distinct Birthday Counts]]
 
 ---
 

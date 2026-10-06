@@ -120,16 +120,18 @@ $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 
 
 ## Common Mistakes
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+- **Base Rate Fallacy:** Ignoring prior probabilities when evaluating posterior likelihoods, assuming $P(D \mid +) \approx P(+ \mid D)$.
+- **Transposition of Conditionals:** Confusing $P(A \mid B)$ with $P(B \mid A)$ (e.g., probability of having a symptom given a disease versus probability of having the disease given the symptom).
+- **Non-Exhaustive or Overlapping Partitions:** Applying the Law of Total Probability over partitions $B_1, \dots, B_k$ that do not satisfy $\sum P(B_i) = 1$ or are not mutually disjoint ($B_i \cap B_j \ne \emptyset$).
 
 ---
 
 ## Related Concepts
 
-- [[Conditional Probability and Independence]] — Definition of conditioning and multiplication rule.
-- [[Bayesian Inference]] — Statistical inference paradigm built on Bayes' Rule.
+- [[Conditional Probability and Independence]] — Foundational axioms of conditional probability.
+- [[Bayesian Inference]] — Statistical framework built on Bayes' Rule.
 - [[Monty Hall Problem Example]] — Bayesian solution to the famous game show puzzle.
+- [[Problem — Patty and Max Gambler's Ruin]] — Boundary conditioning with total probability.
 
 ---
 
@@ -137,13 +139,15 @@ $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 
 
 ## Prerequisites
 
-- [[Random Variables and Probability Distributions]]
+- [[Probability Axioms and Naive Probability]]
+- [[Conditional Probability and Independence]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Patty and Max Gambler's Ruin]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 

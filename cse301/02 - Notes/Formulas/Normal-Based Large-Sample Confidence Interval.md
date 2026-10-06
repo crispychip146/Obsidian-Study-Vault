@@ -167,7 +167,8 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 ## Prerequisites
 
 - [[Point Estimation]]
-- Normal Distribution Properties and Central Limit Theorem
+- [[Continuous Probability Distributions]]
+- [[Central Limit Theorem]]
 
 ---
 

@@ -162,13 +162,48 @@ $$\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Proving Consistency of Sample Mean via MSE Criterion
+
+Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$ with finite variance $\sigma^2 < \infty$.
+Consider the sample mean estimator $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$.
+
+1. **Bias Evaluation:**
+   $$\mathbb{E}[\bar{X}_n] = \frac{1}{n}\sum_{i=1}^n \mathbb{E}[X_i] = \frac{n\mu}{n} = \mu \implies \text{bias}(\bar{X}_n) = \mathbb{E}[\bar{X}_n] - \mu = 0$$
+
+2. **Variance Evaluation:**
+   Because the observations are independent:
+   $$\operatorname{Var}(\bar{X}_n) = \frac{1}{n^2}\sum_{i=1}^n \operatorname{Var}(X_i) = \frac{n\sigma^2}{n^2} = \frac{\sigma^2}{n}$$
+
+3. **MSE Limit:**
+   $$\lim_{n \to \infty} \text{MSE}(\bar{X}_n) = \lim_{n \to \infty} \left[ \text{bias}^2(\bar{X}_n) + \operatorname{Var}(\bar{X}_n) \right] = \lim_{n \to \infty} \left( 0 + \frac{\sigma^2}{n} \right) = 0$$
+
+Since $\text{MSE}(\bar{X}_n) \to 0$ as $n \to \infty$, it follows that $\bar{X}_n \xrightarrow{qm} \mu$, which by Markov's inequality guarantees convergence in probability:
+$$\bar{X}_n \xrightarrow{P} \mu$$
+Hence $\bar{X}_n$ is a **consistent estimator** of $\mu$.
+
+For a comparative exercise constructing an unbiased estimator that is inconsistent, see [[Problem — Unbiased yet Inconsistent Estimator Analysis]] and [[Bernoulli Parameter Estimation and Confidence Interval Example]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Asymptotic Tools: Slutsky, Continuous Mapping, and Asymptotic Normality
+
+1. **Continuous Mapping Theorem (CMT):**
+   - If $\hat{\theta}_n \xrightarrow{P} \theta$ and $g$ is continuous at $\theta$, then $g(\hat{\theta}_n) \xrightarrow{P} g(\theta)$.
+   - *Application:* If the sample variance $S_n^2 \xrightarrow{P} \sigma^2$, then the sample standard deviation $S_n = \sqrt{S_n^2} \xrightarrow{P} \sigma$ by continuity of the square root function.
+
+2. **Slutsky's Theorem and Large-Sample Pivots:**
+   - Lets us substitute consistent estimators for unknown nuisance parameters in asymptotic pivots.
+   - If $W_n = \frac{\bar{X}_n - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)$ by the [[Central Limit Theorem]], and $S_n \xrightarrow{P} \sigma$, then $\sigma / S_n \xrightarrow{P} 1$.
+   - Applying Slutsky's theorem:
+     $$Z_n = \frac{\bar{X}_n - \mu}{S_n/\sqrt{n}} = W_n \cdot \left(\frac{\sigma}{S_n}\right) \xrightarrow{d} \mathcal{N}(0, 1) \cdot 1 = \mathcal{N}(0, 1)$$
+   - This mathematically justifies the standard error plug-in for [[Normal-Based Large-Sample Confidence Interval]].
+
+3. **Consistent and Asymptotically Normal (CAN) Estimators:**
+   - An estimator $\hat{\theta}_n$ is CAN if:
+     $$\sqrt{n}(\hat{\theta}_n - \theta) \xrightarrow{d} \mathcal{N}(0, V(\theta))$$
+     where $V(\theta)$ denotes the asymptotic variance. Regular Maximum Likelihood estimators achieve $V(\theta) = 1/I_1(\theta)$.
 
 ---
 
@@ -219,7 +254,8 @@ Exam questions often test:
 ## Prerequisites
 
 - [[Point Estimation]]
-- Markov Inequality and Probability Bounds
+- [[Markov Inequality]]
+- [[Law of Large Numbers]]
 
 ---
 

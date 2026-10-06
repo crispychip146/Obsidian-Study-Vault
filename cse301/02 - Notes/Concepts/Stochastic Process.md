@@ -83,25 +83,44 @@ defined on a common probability space $(\Omega, \mathcal{F}, P)$, where $T$ is t
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### One-Dimensional Simple Random Walk
+
+Consider tossing a fair coin repeatedly at discrete time epochs $n = 1, 2, 3, \dots$:
+- Let $Y_n = +1$ if Heads (probability $p = 0.5$) and $-1$ if Tails (probability $1 - p = 0.5$).
+- Let the initial starting position be $X_0 = 0$.
+- Define the process as the cumulative position:
+  $$X_n = \sum_{k=1}^n Y_k, \quad n \ge 1$$
+Here $\{X_n, n \ge 0\}$ is a discrete-time, discrete-state stochastic process with state space $S = \mathbb{Z}$ and index set $T = \{0, 1, 2, \dots\}$.
+
+1. **Marginal Moments at Step $n$:**
+   $$\mathbb{E}[X_n] = \sum_{k=1}^n \mathbb{E}[Y_k] = 0$$
+   $$\operatorname{Var}(X_n) = \sum_{k=1}^n \operatorname{Var}(Y_k) = n \cdot 1 = n$$
+   The dispersion grows at rate $\sqrt{n}$, spreading across integers.
+
+2. **Markovian Transition Structure:**
+   $$P(X_{n+1} = j \mid X_n = i) = \begin{cases} 0.5 & \text{if } j = i + 1 \\ 0.5 & \text{if } j = i - 1 \\ 0 & \text{otherwise} \end{cases}$$
+   Conditional on the current position $X_n = i$, the past trajectory $(X_0, \dots, X_{n-1})$ provides zero additional predictive information about $X_{n+1}$.
+
+For concrete applications and multi-state modeling, see [[Weather Forecasting Markov Chain Example]], [[Higher-Order State Weather Prediction Example]], and [[Problem — Patty and Max Gambler's Ruin]].
 
 ---
 
 ## Technical Details
 
-### Technical Details
+### Kolmogorov Consistency Theorem and Filtrations
 
-### Memory and Dependence Spectrum
-Stochastic processes can be categorized by how much past history influences the future:
-
-1. **Independent Process:**
-   $$P(X_{n+1} = j \mid X_n = i, X_{n-1} = i_{n-1}, \dots, X_0 = i_0) = P(X_{n+1} = j)$$
-   No past information provides predictive power (too restrictive for most real systems).
-2. **Markov Process:**
-   $$P(X_{n+1} = j \mid X_n = i, X_{n-1} = i_{n-1}, \dots, X_0 = i_0) = P(X_{n+1} = j \mid X_n = i)$$
-   The future depends only on the present state, rendering the prior trajectory irrelevant once the present state is known.
-3. **General Non-Markov Process:**
-   The conditional distribution of $X_{n+1}$ depends non-trivially on the entire path $(X_0, X_1, \dots, X_n)$.
+1. **Kolmogorov Extension (Consistency) Theorem:**
+   - A stochastic process $\{X_t\}_{t \in T}$ exists on a rigorous probability space $(\Omega, \mathcal{F}, P)$ if and only if its finite-dimensional distributions $\{F_{t_1, \dots, t_k}\}$ satisfy:
+     - *Permutation Symmetry:* $F_{t_{\pi(1)}, \dots, t_{\pi(k)}}(x_{\pi(1)}, \dots, x_{\pi(k)}) = F_{t_1, \dots, t_k}(x_1, \dots, x_k)$ for any permutation $\pi$.
+     - *Marginal Consistency:* $\lim_{x_k \to \infty} F_{t_1, \dots, t_{k-1}, t_k}(x_1, \dots, x_{k-1}, x_k) = F_{t_1, \dots, t_{k-1}}(x_1, \dots, x_{k-1})$.
+2. **Filtrations and Adapted Processes:**
+   - The information accumulated up to step $n$ is formalized by the **filtration** $\mathcal{F}_n = \sigma(X_0, X_1, \dots, X_n)$, the history $\sigma$-algebra.
+   - The Markov property can be stated compactly in measure-theoretic notation as:
+     $$\mathbb{E}[f(X_{n+1}) \mid \mathcal{F}_n] = \mathbb{E}[f(X_{n+1}) \mid \sigma(X_n)]$$
+3. **Memory and Dependence Spectrum:**
+   - **Independent Process:** $P(X_{n+1} = j \mid \mathcal{F}_n) = P(X_{n+1} = j)$.
+   - **Markov Process:** $P(X_{n+1} = j \mid \mathcal{F}_n) = P(X_{n+1} = j \mid X_n)$.
+   - **Higher-Order Process:** Future depends on the last $k$ states $\sigma(X_n, \dots, X_{n-k+1})$ (can be converted to a first-order Markov chain by state vector augmentation).
 
 ---
 
@@ -127,17 +146,6 @@ Stochastic processes can be categorized by how much past history influences the 
 ---
 
 ## Exam Relevance
-
-### Example
-
-Consider flipping a fair coin repeatedly at times $n = 1, 2, 3, \dots$:
-- Let $Y_n = +1$ if heads, and $-1$ if tails ($P(Y_n = 1) = P(Y_n = -1) = 0.5$).
-- Let $X_0 = 0$, and define $X_n = \sum_{k=1}^n Y_k$ for $n \ge 1$.
-
-Here, $\{X_n, n \ge 0\}$ is a discrete-time, discrete-state stochastic process known as a **one-dimensional simple random walk**. The value $X_n$ represents the position of a particle (or fortune of a gambler) at step $n$.
-
----
-### Exam Relevance
 
 In CSE301 examinations:
 - Questions frequently ask students to classify a process by its time set (discrete vs continuous) and state space (discrete vs continuous).

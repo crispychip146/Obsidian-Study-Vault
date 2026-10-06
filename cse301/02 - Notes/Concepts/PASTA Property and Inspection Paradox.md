@@ -99,13 +99,46 @@ PASTA provides the magical bridge that allows queueing theorists to solve comple
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Counterexample: Regular Deterministic Arrivals ($D/D/1$) Demonstrating Failure of PASTA
+
+To understand why Poisson arrivals are required, consider a doctor's office with 1 server:
+- Patients arrive punctually every $10$ minutes (deterministic arrival process $D$).
+- Every appointment takes exactly $9$ minutes (deterministic service duration $D$).
+
+1. **What an arriving customer sees ($a_n$):**
+   - Patients arrive at minutes $0, 10, 20, 30, \dots$.
+   - The prior patient completed service at minutes $9, 19, 29, 39, \dots$.
+   - Consequently, **every arriving patient sees an empty clinic**:
+     $$a_0 = 1.0 \quad (100\%), \quad a_1 = 0, \quad a_2 = 0, \dots$$
+
+2. **What a continuous camera sees ($P_n$):**
+   - Across every 10-minute interval, the office is occupied for 9 minutes and vacant for 1 minute:
+     $$P_1 = \frac{9}{10} = 0.90 \quad (90\%), \quad P_0 = \frac{1}{10} = 0.10 \quad (10\%)$$
+
+Notice the severe divergence:
+$$a_0 = 1.0 \ne P_0 = 0.10$$
+While patients experience zero waiting time and observe an idle system 100% of the time, an external auditor records an occupied server 90% of the time. This occurs because deterministic arrivals are synchronized with system states. **PASTA holds if and only if arrivals cannot anticipate future states (Poisson).**
+
+For applications in loss systems and buffer blocking, see [[Shoe Shine Shop Queueing Model Example]] and [[Problem — Finite Capacity Queue Loss and Effective Throughput]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Wolff's Lack of Anticipation Assumption (LAA) and Renewal Residual Life
+
+1. **Wolff's PASTA Theorem (1982):**
+   - Formal theorem establishes that PASTA holds for any process $\{X(t)\}$ and point arrival process $A(t)$ satisfying the **Lack of Anticipation Assumption (LAA)**:
+     $$\text{For all } t \ge 0 \text{ and } h > 0, \quad \{A(t + h) - A(t)\} \text{ is independent of } \{X(s) : s \le t\} \text{ and } \{A(s) : s \le t\}$$
+   - Poisson arrivals satisfy LAA unconditionally due to independent and memoryless increments.
+2. **Renewal Theory and the Inspection Paradox Formula:**
+   - Let interarrival times between successive events have mean $\mathbb{E}[X]$ and variance $\operatorname{Var}(X)$.
+   - A random observer lands in an interarrival interval with probability proportional to its length (length-biased sampling). The expected length of the sampled interval is:
+     $$\mathbb{E}[X_{\text{inspected}}] = \frac{\mathbb{E}[X^2]}{\mathbb{E}[X]} = \mathbb{E}[X] + \frac{\operatorname{Var}(X)}{\mathbb{E}[X]} \ge \mathbb{E}[X]$$
+   - The **mean residual waiting time** until the next event is:
+     $$\mathbb{E}[R] = \frac{\mathbb{E}[X^2]}{2\mathbb{E}[X]} = \frac{\mathbb{E}[X]}{2}\left(1 + C_V^2\right)$$
+     where $C_V = \frac{\sigma}{\mathbb{E}[X]}$ is the coefficient of variation.
+   - For exponential interarrivals ($C_V = 1$), $\mathbb{E}[R] = \mathbb{E}[X]$ (memorylessness). For deterministic intervals ($C_V = 0$), $\mathbb{E}[R] = \mathbb{E}[X]/2$.
 
 ---
 
@@ -118,36 +151,19 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Assuming PASTA Holds for Any Queue:** Applying $a_n = P_n$ to deterministic, general renewal ($G/M/1$), or bursty non-Poisson arrivals.
+- **Forgetting Length-Biased Sampling in the Inspection Paradox:** Assuming the average waiting time until the next bus is $\mathbb{E}[X]/2$ without adding the variance term $\frac{\operatorname{Var}(X)}{2\mathbb{E}[X]}$.
+- **Confusing Time Average $P_n$ with Arrival Average $a_n$:** Believing that system utilization $\rho = 1 - P_0$ guarantees that $(1 - \rho)$ fraction of arriving customers find an empty server when arrivals are not Poisson.
 
 ---
 
 ## Exam Relevance
 
-### When Does PASTA Fail? (Counterexample)
-
-When arrivals do **not** follow a Poisson process, $a_n$ and $P_n$ can be wildly divergent.
-
-### Counterexample: Regular Deterministic Arrivals (D/D/1)
-Consider a doctor's office with 1 server:
-- Patients arrive punctually every $10$ minutes (deterministic $D$).
-- Each appointment takes exactly $9$ minutes (deterministic $D$).
-
-1. **What an arrival sees ($a_n$):**
-   Every patient arrives at minute $0, 10, 20, \dots$. The previous patient departed at minute $9, 19, 29, \dots$.
-   Therefore, **every single arriving patient finds an empty office**:
-   $$a_0 = 1.0 \quad (100\%), \quad a_1 = 0, \quad a_2 = 0, \dots$$
-2. **What a continuous camera sees ($P_n$):**
-   During every 10-minute block, the office is occupied for 9 minutes and empty for 1 minute:
-   $$P_1 = \frac{9}{10} = 0.90 \quad (90\%), \quad P_0 = \frac{1}{10} = 0.10 \quad (10\%)$$
-
-Notice the stark contradiction:
-$$a_0 = 1.0 \ne P_0 = 0.10$$
-Arriving patients believe the office is empty 100% of the time, while an external observer sees the office full 90% of the time!
-This discrepancy occurs because deterministic arrivals are synchronized with the system state, destroying independence. **PASTA holds only when arrivals are Poisson.**
-
----
+In CSE301 examinations:
+- Proving $a_n = d_n$ using step-crossing conservation arguments.
+- Stating the PASTA theorem and its core independence / memoryless assumptions.
+- Constructing or analyzing counterexamples (such as $D/D/1$) where PASTA fails.
+- Applying PASTA to compute customer blocking probabilities $P_{\text{loss}} = a_N = P_N$ in [[Finite Capacity M-M-1-N Queue]].
 
 ---
 
@@ -157,6 +173,7 @@ This discrepancy occurs because deterministic arrivals are synchronized with the
 - [[M-M-1 Queue]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[Little's Law]]
+- [[Shoe Shine Shop Queueing Model Example]]
 
 ---
 
@@ -164,13 +181,15 @@ This discrepancy occurs because deterministic arrivals are synchronized with the
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Discrete Probability Distributions]]
+- [[Continuous Probability Distributions]]
+- [[Queueing Systems and Kendall Notation]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
 
 ---
 

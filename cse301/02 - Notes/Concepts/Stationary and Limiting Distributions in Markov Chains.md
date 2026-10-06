@@ -131,13 +131,55 @@ To find the stationary / limiting distribution for an $m$-state chain:
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Two-State Stationary Balance Equations
+
+Consider the general two-state Markov chain:
+$$P = \begin{pmatrix} \alpha & 1 - \alpha \\ \beta & 1 - \beta \end{pmatrix}$$
+where $0 < \alpha, \beta < 1$, with State 0 = "Rain" and State 1 = "Dry".
+
+1. **Balance Equations ($\pi = \pi P$):**
+   $$\pi_0 = \alpha \pi_0 + \beta \pi_1$$
+   $$\pi_1 = (1 - \alpha) \pi_0 + (1 - \beta) \pi_1$$
+
+2. **Solving for $\pi_1$ in Terms of $\pi_0$:**
+   $$\pi_0 (1 - \alpha) = \beta \pi_1 \implies \pi_1 = \frac{1 - \alpha}{\beta} \pi_0$$
+
+3. **Applying Normalization $\pi_0 + \pi_1 = 1$:**
+   $$\pi_0 + \frac{1 - \alpha}{\beta} \pi_0 = 1 \implies \pi_0 \left( \frac{\beta + 1 - \alpha}{\beta} \right) = 1$$
+   $$\pi_0 = \frac{\beta}{1 + \beta - \alpha}$$
+   $$\pi_1 = 1 - \pi_0 = \frac{1 - \alpha}{1 + \beta - \alpha}$$
+
+4. **Numerical Application:**
+   Let $\alpha = 0.70$ and $\beta = 0.40$:
+   $$\pi_0 = \frac{0.40}{1 + 0.40 - 0.70} = \frac{0.40}{0.70} = \frac{4}{7} \approx 0.5714$$
+   $$\pi_1 = \frac{1 - 0.70}{0.70} = \frac{0.30}{0.70} = \frac{3}{7} \approx 0.4286$$
+   In the long run, the process spends $57.14\%$ of time in State 0 and $42.86\%$ in State 1, regardless of whether day 0 started with rain or sun.
+
+For multi-state systems, asymptotic convergence proofs, and genetic stationarity, see:
+- [[Weather Forecasting Markov Chain Example]]
+- [[Hardy-Weinberg Law Markov Chain Example]]
+- [[Problem — Four-Day Weather Forecast]]
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Perron-Frobenius Theorem, Spectral Gap, and Detailed Balance
+
+1. **Perron-Frobenius Theorem for Primitive Matrices:**
+   - A transition matrix $P$ is **primitive** if $P^k > 0$ entrywise for some integer $k \ge 1$ (equivalent to being irreducible and aperiodic).
+   - The largest eigenvalue of $P$ is $\lambda_1 = 1$ with algebraic and geometric multiplicity 1.
+   - All other eigenvalues satisfy $|\lambda_i| < 1$.
+   - The unique normalized left eigenvector associated with $\lambda_1 = 1$ is the stationary distribution $\pi$ ($\pi P = \pi, \sum \pi_i = 1$).
+2. **Mixing Time and the Spectral Gap:**
+   - The rate of convergence of $P^n$ to the rank-1 matrix $\mathbf{1}\pi$ is governed by the second-largest eigenvalue in absolute value, $|\lambda_2|$:
+     $$\lVert P_{ij}^n - \pi_j \rVert \le C \cdot \lvert \lambda_2 \rvert^n$$
+   - The quantity $1 - |\lambda_2|$ is the **spectral gap**. A large spectral gap implies rapid exponential convergence to stationarity (fast mixing time).
+3. **Reversibility and Detailed Balance Equations:**
+   - A Markov chain is **reversible** with respect to $\pi$ if it satisfies the **detailed balance equations**:
+     $$\pi_i P_{ij} = \pi_j P_{ji} \quad \text{for all } i, j$$
+   - Detailed balance means the probability flux from $i$ to $j$ equals the reverse flux from $j$ to $i$.
+   - Any probability distribution $\pi$ satisfying detailed balance automatically satisfies full balance ($\sum_i \pi_i P_{ij} = \pi_j \sum_i P_{ji} = \pi_j$), making it a stationary distribution.
 
 ---
 
@@ -162,30 +204,6 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 ---
 
 ## Exam Relevance
-
-### Example: Two-State Weather Chain
-
-$$P = \begin{pmatrix} \alpha & 1 - \alpha \\ \beta & 1 - \beta \end{pmatrix}$$
-where $0 < \alpha, \beta < 1$.
-
-1. **Balance equations:**
-   $$\pi_0 = \alpha \pi_0 + \beta \pi_1$$
-   $$\pi_1 = (1 - \alpha) \pi_0 + (1 - \beta) \pi_1$$
-2. **From first equation:**
-   $$\pi_0 (1 - \alpha) = \beta \pi_1 \implies \pi_1 = \frac{1 - \alpha}{\beta} \pi_0$$
-3. **Using normalization $\pi_0 + \pi_1 = 1$:**
-   $$\pi_0 + \frac{1 - \alpha}{\beta} \pi_0 = 1 \implies \pi_0 \left( \frac{\beta + 1 - \alpha}{\beta} \right) = 1$$
-   $$\pi_0 = \frac{\beta}{1 + \beta - \alpha}$$
-   $$\pi_1 = 1 - \pi_0 = \frac{1 - \alpha}{1 + \beta - \alpha}$$
-
-**Numerical Check:**
-If $\alpha = 0.7, \beta = 0.4$:
-$$\pi_0 = \frac{0.4}{1 + 0.4 - 0.7} = \frac{0.4}{0.7} = \frac{4}{7} \approx 0.5714$$
-$$\pi_1 = \frac{1 - 0.7}{0.7} = \frac{0.3}{0.7} = \frac{3}{7} \approx 0.4286$$
-In the long run, it rains $57.14\%$ of days.
-
----
-### Exam Relevance
 
 In CSE301 examinations:
 - Setting up and solving balance equations for 2-state and 3-state chains.

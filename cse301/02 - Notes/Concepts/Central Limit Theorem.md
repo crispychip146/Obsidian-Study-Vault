@@ -73,13 +73,47 @@ When approximating a discrete integer-valued random variable $X$ (like Binomial 
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Quality Control Inspection via Continuity-Corrected CLT
+
+An electronic component factory has an average defect rate of $p = 0.05$. In a random production batch of $n = 400$ independent components:
+Let $X \sim \operatorname{Bin}(400, 0.05)$ denote the number of defective units.
+- Mean: $\mu = n p = 400(0.05) = 20$
+- Variance: $\sigma^2 = n p (1 - p) = 400(0.05)(0.95) = 19 \implies \sigma = \sqrt{19} \approx 4.359$
+
+Suppose quality control rejects the batch if 26 or more components are defective ($X \ge 26$).
+What is the approximate probability $P(X \ge 26)$?
+
+Applying the Central Limit Theorem with **continuity correction**:
+$$P(X \ge 26) = P(X \ge 25.5)$$
+Standardizing to standard normal $Z$:
+$$Z = \frac{X - \mu}{\sigma} \approx \frac{25.5 - 20}{4.359} = \frac{5.5}{4.359} \approx 1.2618$$
+Using the standard normal CDF $\Phi(z)$:
+$$P(X \ge 26) \approx 1 - \Phi(1.26) \approx 1 - 0.8962 = 0.1038 \approx 10.4\%$$
+
+Without continuity correction, standardizing 26 directly yields $z = (26 - 20)/4.359 = 1.376 \implies P \approx 0.0844$, underestimating the rejection risk by more than $18\%$.
+
+For complete side-by-side demonstrations of Poisson and Binomial approximations, see [[Normal Approximation to Binomial and Poisson Example]].
+For theoretical problem work on the relationship between CLT scaling and the weak law, see [[Problem — CLT Implications for the Weak Law of Large Numbers]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Convergence Theorems, Bounds, and Generalizations
+
+1. **Convergence in Distribution ($\xrightarrow{d}$):**
+   - $Z_n \xrightarrow{d} \mathcal{N}(0, 1)$ means that for every point $z \in \mathbb{R}$, $\lim_{n \to \infty} F_{Z_n}(z) = \Phi(z)$. It does **not** imply that the discrete probability mass function or density converges pointwise to $\phi(z)$ (a Local Limit Theorem is required for density convergence).
+2. **Berry-Esseen Theorem (Rate of Convergence):**
+   - If $\mathbb{E}[|X_i|^3] = \rho < \infty$, the maximum uniform error between the exact CDF and the Gaussian approximation is bounded by:
+     $$\sup_{z \in \mathbb{R}} \lvert F_{Z_n}(z) - \Phi(z) \rvert \le \frac{C \rho}{\sigma^3 \sqrt{n}}$$
+     where $C < 0.4748$. The convergence rate is strictly $O(1/\sqrt{n})$. Heavy skewness increases $\rho$ and slows convergence.
+3. **Lindeberg-Feller Central Limit Theorem:**
+   - Relaxes the identical distribution assumption. For independent variables with variances $\sigma_i^2$ and cumulative variance $s_n^2 = \sum_{i=1}^n \sigma_i^2$, asymptotic normality holds if no single variable dominates the total variance:
+     $$\lim_{n \to \infty} \frac{1}{s_n^2} \sum_{i=1}^n \mathbb{E}\left[(X_i - \mu_i)^2 I_{|X_i - \mu_i| > \epsilon s_n}\right] = 0 \quad \forall \epsilon > 0$$
+4. **The Delta Method (Asymptotics of Non-linear Transformations):**
+   - If $\sqrt{n}(\bar{X}_n - \mu) \xrightarrow{d} \mathcal{N}(0, \sigma^2)$ and $g$ is continuously differentiable at $\mu$ with $g'(\mu) \ne 0$, then Taylor expansion yields:
+     $$\sqrt{n}(g(\bar{X}_n) - g(\mu)) \xrightarrow{d} \mathcal{N}\left(0, [g'(\mu)]^2 \sigma^2\right)$$
+     This forms the mathematical backbone of asymptotic variance and confidence interval calculations throughout [[Maximum Likelihood Estimation]].
 
 ---
 
@@ -123,8 +157,9 @@ $\blacksquare$
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Assuming Data Distribution Becomes Normal:** Confusing the distribution of the sample mean $\bar{X}_n$ with the distribution of the individual observations $X_i$. A histogram of 1,000,000 exponential observations remains exponential; only their sample average is Gaussian.
+- **Omitting Continuity Correction:** Forgetting the $\pm 0.5$ adjustment when approximating discrete integer random variables with continuous normal distributions.
+- **Confusing $\sigma/\sqrt{n}$ with $\sigma/n$:** Mixing up standard deviation (standard error $\sigma/\sqrt{n}$) with variance ($\sigma^2/n$).
 
 ---
 
@@ -142,20 +177,24 @@ $\blacksquare$
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
-- [[Random Variables and Probability Distributions]]
+- [[Law of Large Numbers]] — Zero-order limit convergence of $\bar{X}_n \to \mu$.
+- [[Continuous Probability Distributions]] — Standard normal properties.
+- [[Normal-Based Large-Sample Confidence Interval]] — Direct application of CLT to inferential bounds.
+- [[Normal Approximation to Binomial and Poisson Example]] — Worked distribution approximations.
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Continuous Probability Distributions]]
+- [[Moment Generating Functions]]
+- [[Law of Large Numbers]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — CLT Implications for the Weak Law of Large Numbers]]
 
 ---
 

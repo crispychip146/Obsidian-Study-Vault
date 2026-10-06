@@ -133,13 +133,44 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Gaussian Standardization and Exponential Waiting Times
+
+1. **Gaussian Standardization:**
+   Suppose server response time follows $X \sim \mathcal{N}(\mu = 120\text{ ms}, \sigma^2 = 400\text{ ms}^2)$, so $\sigma = 20\text{ ms}$.
+   To find the probability that a query takes longer than $150\text{ ms}$:
+   $$Z = \frac{X - \mu}{\sigma} = \frac{150 - 120}{20} = 1.5$$
+   $$P(X > 150) = P(Z > 1.5) = 1 - \Phi(1.5) \approx 1 - 0.9332 = 0.0668 \quad (6.68\%)$$
+
+2. **Exponential Waiting Probability:**
+   Let $T \sim \operatorname{Exp}(\lambda = 0.5)$ minutes be the inter-arrival time of network packets.
+   $$P(T > 4) = e^{-\lambda \times 4} = e^{-0.5 \times 4} = e^{-2} \approx 0.1353 \quad (13.53\%)$$
+
+For extended worked applications, see:
+- [[Exponential Distribution Memorylessness Example]] — Analytical proof and server queue applications of memorylessness.
+- [[Normal Approximation to Binomial and Poisson Example]] — Large-sample Gaussian approximations with continuity correction.
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Universality of the Uniform (Probability Integral Transform)
+Let $F$ be any continuous, strictly increasing CDF with inverse $F^{-1}$.
+1. **Forward Transformation:** If $U \sim \operatorname{Unif}(0, 1)$, then $X = F^{-1}(U)$ has CDF $F$:
+   $$P(X \le x) = P(F^{-1}(U) \le x) = P(U \le F(x)) = F(x)$$
+2. **Probability Integral Transform:** If $X$ has continuous CDF $F$, then $Y = F(X) \sim \operatorname{Unif}(0, 1)$.
+This universality underpins all pseudo-random simulation, Monte Carlo methods, and copula modeling.
+
+### Gaussian Tail Bounds (Mills' Ratio)
+For a standard normal variable $Z \sim \mathcal{N}(0, 1)$ and $z > 0$:
+$$\left(\frac{1}{z} - \frac{1}{z^3}\right) \phi(z) < P(Z > z) < \frac{1}{z} \phi(z)$$
+where $\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$. Asymptotically as $z \to \infty$, $P(Z > z) \sim \frac{\phi(z)}{z}$.
+
+### Duality Between Poisson and Gamma Processes
+If events occur according to a Poisson process with rate $\lambda$, let $T_a$ be the arrival time of the $a$-th event ($T_a \sim \operatorname{Gamma}(a, \lambda)$) and $N(t)$ be the count of arrivals in $[0, t]$ ($N(t) \sim \operatorname{Pois}(\lambda t)$):
+$$P(T_a \le t) = P(N(t) \ge a) = \sum_{k=a}^\infty \frac{e^{-\lambda t}(\lambda t)^k}{k!}$$
+This identity connects continuous waiting times with discrete event counts.
+
+For Bayesian prior applications, see [[Beta-Binomial Conjugate Updating Formula]] and [[Normal-Normal Conjugate Updating Formula]].
 
 ---
 
@@ -171,20 +202,23 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Related Concepts
 
-- [[Probability Axioms and Naive Probability]]
+- [[Discrete Probability Distributions]]
 - [[Random Variables and Probability Distributions]]
+- [[Central Limit Theorem]]
+- [[M-M-1 Queue]]
+- [[Beta-Binomial Conjugate Updating Formula]]
 
 ---
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Random Variables and Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ---
 

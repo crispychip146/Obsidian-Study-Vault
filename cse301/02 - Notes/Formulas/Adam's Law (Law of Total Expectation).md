@@ -122,8 +122,8 @@ $$\mathbb{E}\left[ \sum_{i=1}^N X_i \right] = \mathbb{E}[N] \mathbb{E}[X]$$
 
 ## Common Mistakes
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+- **Treating $\mathbb{E}[X \mid Y]$ as a Number:** $\mathbb{E}[X \mid Y]$ is a random variable (a function of $Y$), not a constant number. Only after taking the outer expectation $\mathbb{E}[\mathbb{E}[X \mid Y]]$ does it become the deterministic scalar $\mathbb{E}[X]$.
+- **Conditioning on the Wrong Variable:** For compound sums $S_N = \sum_{i=1}^N X_i$, failing to condition on the random index $N$ first leaves the sum bounds indeterminate.
 
 ---
 
@@ -140,12 +140,13 @@ $$\mathbb{E}\left[ \sum_{i=1}^N X_i \right] = \mathbb{E}[N] \mathbb{E}[X]$$
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
+- [[Conditional Expectation]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 
 ---
 

@@ -120,13 +120,58 @@ This is precisely **Lasso Regression** ($L_1$ regularization), which induces exa
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Mode Derivation of Beta-Bernoulli MAP Estimator
+
+Let $X_1, \dots, X_n \overset{\text{iid}}{\sim} \text{Bernoulli}(p)$ with number of successes $s = \sum_{i=1}^n X_i$.
+Assign a conjugate prior $p \sim \text{Beta}(\alpha, \beta)$ with hyperparameters $\alpha, \beta > 1$:
+$$f(p) \propto p^{\alpha - 1}(1 - p)^{\beta - 1}$$
+The posterior distribution is:
+$$f(p \mid \mathbf{x}) \propto p^{(\alpha + s) - 1} (1 - p)^{(\beta + n - s) - 1} \iff \text{Beta}(\alpha + s, \beta + n - s)$$
+
+### Finding the Posterior Mode
+To find the mode of a $\text{Beta}(a, b)$ density with $a, b > 1$, differentiate $h(p) = p^{a-1}(1-p)^{b-1}$ with respect to $p$ and set to zero:
+$$\frac{dh}{dp} = (a-1)p^{a-2}(1-p)^{b-1} - (b-1)p^{a-1}(1-p)^{b-2} = 0$$
+Dividing by $p^{a-2}(1-p)^{b-2}$:
+$$(a-1)(1-p) = (b-1)p \implies a - 1 = (a + b - 2)p \implies p^* = \frac{a - 1}{a + b - 2}$$
+
+Substituting the posterior hyperparameters $a = \alpha + s$ and $b = \beta + n - s$:
+$$\hat{p}_{\text{MAP}} = \frac{(\alpha + s) - 1}{(\alpha + s) + (\beta + n - s) - 2} = \frac{\alpha + s - 1}{\alpha + \beta + n - 2}$$
+
+### Comparison with MLE and Bayes Posterior Mean
+
+| Estimator | Formula | Value under Flat Prior ($\alpha = \beta = 1$) |
+|---|---|---|
+| **MLE** | $\hat{p}_{\text{MLE}} = \frac{s}{n}$ | $\frac{s}{n}$ |
+| **MAP** | $\hat{p}_{\text{MAP}} = \frac{\alpha + s - 1}{\alpha + \beta + n - 2}$ | $\frac{s}{n}$ (Matches MLE!) |
+| **Posterior Mean (Bayes)** | $\hat{p}_{\text{Bayes}} = \frac{\alpha + s}{\alpha + \beta + n}$ | $\frac{s + 1}{n + 2}$ (Laplace's Rule) |
+
+Notice that for a uniform prior ($\alpha = 1, \beta = 1$), the MAP estimator reduces **exactly** to the sample proportion $\frac{s}{n} = \hat{p}_{\text{MLE}}$, whereas the Bayes posterior mean yields Laplace's smoothed estimate $\frac{s+1}{n+2}$.
+
+For detailed worked examples comparing MAP, MLE, and Posterior Means across sample sizes, see:
+- [[Bernoulli Bayesian Inference with Beta Prior Example]]
+- [[Beta-Binomial Conjugate Updating Formula]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Loss Foundations, Regularization Duality, and Reparameterization
+
+1. **Loss Function Foundations:**
+   - The MAP estimator is the Bayes optimal decision under **0-1 loss**:
+     $$L(\theta, \hat{\theta}) = \lim_{\epsilon \to 0} \mathbf{1}_{\{|\theta - \hat{\theta}| > \epsilon\}}$$
+   - Because 0-1 loss penalizes all non-zero deviations equally regardless of magnitude, it picks the point of highest probability density (the mode), in contrast to squared error loss ($L_2$) which yields the posterior mean.
+2. **Equivalence to Regularized Loss Minimization:**
+   - Maximizing $\ell_n(\theta) + \ln f(\theta)$ is mathematically identical to minimizing negative log-likelihood plus a regularizer $R(\theta) = -\ln f(\theta)$:
+     $$\hat{\theta}_{\text{MAP}} = \arg\min_\theta \left[ -\ell_n(\theta) + R(\theta) \right]$$
+   - Gaussian Prior $\theta \sim \mathcal{N}(0, \tau^2) \iff L_2$ Ridge Penalty $\frac{1}{2\tau^2} \|\theta\|_2^2$.
+   - Laplace Prior $\theta \sim \operatorname{Laplace}(0, b) \iff L_1$ Lasso Penalty $\frac{1}{b} \|\theta\|_1$.
+3. **Lack of Reparameterization Invariance:**
+   - Unlike the MLE, which satisfies $g(\hat{\theta}_{\text{MLE}}) = \widehat{g(\theta)}_{\text{MLE}}$ for any bijection $g$, MAP estimation is **not equivariant under reparameterization**.
+   - If $\eta = g(\theta)$ is a nonlinear transformation, changing variables requires multiplying the posterior density by the Jacobian $|d\theta / d\eta|$:
+     $$f_\eta(\eta \mid x) = f_\theta(g^{-1}(\eta) \mid x) \left\lvert \frac{d}{d\eta} g^{-1}(\eta) \right\rvert$$
+   - The Jacobian changes the slope and shifts the maximum of the density, meaning $\hat{\eta}_{\text{MAP}} \ne g(\hat{\theta}_{\text{MAP}})$.
 
 ---
 
@@ -150,32 +195,10 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Exam Relevance
 
-### Example: Bernoulli with Beta Prior
-
-Let $X_1, \dots, X_n \sim \text{Bernoulli}(p)$ with number of successes $s = \sum X_i$.
-Assign a conjugate prior $p \sim \text{Beta}(\alpha, \beta)$ with $\alpha, \beta > 1$:
-$$f(p) \propto p^{\alpha - 1}(1 - p)^{\beta - 1}$$
-The posterior distribution is:
-$$f(p \mid \mathbf{x}) \propto p^{(\alpha + s) - 1} (1 - p)^{(\beta + n - s) - 1} \iff \text{Beta}(\alpha + s, \beta + n - s)$$
-
-### Finding the MAP Estimator (Mode of Beta)
-To find the mode of a $\text{Beta}(a, b)$ density with $a, b > 1$, differentiate $h(x) = x^{a-1}(1-x)^{b-1}$ and set to zero:
-$$\frac{dh}{dx} = (a-1)x^{a-2}(1-x)^{b-1} - (b-1)x^{a-1}(1-x)^{b-2} = 0$$
-Dividing by $x^{a-2}(1-x)^{b-2}$:
-$$(a-1)(1-x) = (b-1)x \implies (a-1) = (a + b - 2)x \implies x = \frac{a - 1}{a + b - 2}$$
-
-Substituting the posterior parameters $a = \alpha + s$ and $b = \beta + n - s$:
-$$\hat{p}_{\text{MAP}} = \frac{(\alpha + s) - 1}{(\alpha + s) + (\beta + n - s) - 2} = \frac{\alpha + s - 1}{\alpha + \beta + n - 2}$$
-
-### Comparison with MLE and Posterior Mean
-
-| Estimator | Formula | Value under Flat Prior ($\alpha = \beta = 1$) |
-|---|---|---|
-| **MLE** | $\hat{p}_{\text{MLE}} = \frac{s}{n}$ | $\frac{s}{n}$ |
-| **MAP** | $\hat{p}_{\text{MAP}} = \frac{\alpha + s - 1}{\alpha + \beta + n - 2}$ | $\frac{s}{n}$ (Matches MLE!) |
-| **Posterior Mean (Bayes)** | $\hat{p}_{\text{Bayes}} = \frac{\alpha + s}{\alpha + \beta + n}$ | $\frac{s + 1}{n + 2}$ (Laplace's Rule) |
-
-Notice that for a uniform prior ($\alpha = 1, \beta = 1$), the MAP estimator reduces **exactly** to the sample proportion $\frac{s}{n} = \hat{p}_{\text{MLE}}$, whereas the Bayes posterior mean gives Laplace's smoothed estimate $\frac{s+1}{n+2}$.
+In exam problems, expect to:
+1. Maximize posterior kernels to compute closed-form MAP estimators for Gaussian, Poisson, and Beta models.
+2. Explain the duality between Gaussian/Laplace priors and Ridge/Lasso regularization penalties.
+3. Compare MAP estimates against MLE and Bayes posterior means under flat priors.
 
 ---
 
@@ -194,13 +217,15 @@ Notice that for a uniform prior ($\alpha = 1, \beta = 1$), the MAP estimator red
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Bayesian Inference]]
+- [[Maximum Likelihood Estimation]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 
 ---
 

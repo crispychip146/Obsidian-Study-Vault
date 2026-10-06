@@ -135,7 +135,34 @@ $$f_i = P(\text{process ever returns to state } i \mid X_0 = i) = \sum_{n=1}^\in
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Example 1: Verifying Irreducibility and Aperiodicity (3 States)
+Consider the transition matrix:
+$$P = \begin{pmatrix}
+1/2 & 1/2 & 0 \\
+1/2 & 1/4 & 1/4 \\
+0 & 1/3 & 2/3
+\end{pmatrix}$$
+- Accessibility $0 \to 2$: Direct transition $P_{02} = 0$, but path $0 \to 1 \to 2$ has probability:
+  $$P_{01} P_{12} = \left(\frac{1}{2}\right)\left(\frac{1}{4}\right) = \frac{1}{8} > 0 \implies 0 \to 2$$
+- Accessibility $2 \to 0$: Path $2 \to 1 \to 0$ has probability:
+  $$P_{21} P_{10} = \left(\frac{1}{3}\right)\left(\frac{1}{2}\right) = \frac{1}{6} > 0 \implies 2 \to 0$$
+- States $0, 1, 2$ communicate mutually ($0 \leftrightarrow 1 \leftrightarrow 2$).
+- **Conclusion:** There is exactly 1 communicating class $\{0, 1, 2\}$, so the chain is **irreducible**.
+- Because $P_{00} = 1/2 > 0$, state 0 has a self-loop, so its period is $\gcd(1, 2, \dots) = 1$ (aperiodic). By the class property, all states in the chain are **aperiodic**.
+
+### Example 2: Decomposing a Reducible Chain (4 States)
+$$P = \begin{pmatrix}
+1/2 & 1/2 & 0 & 0 \\
+1/2 & 1/2 & 0 & 0 \\
+1/4 & 1/4 & 1/4 & 1/4 \\
+0 & 0 & 0 & 1
+\end{pmatrix}$$
+- States $0$ and $1$ communicate mutually ($0 \leftrightarrow 1$), but cannot escape to $2$ or $3$. Class $C_1 = \{0, 1\}$ is a recurrent, closed class.
+- State $2$ can reach $\{0, 1, 3\}$, but cannot be re-entered once left. Class $C_2 = \{2\}$ is **transient**.
+- State $3$ has $P_{33} = 1$. Class $C_3 = \{3\}$ is an **absorbing state**.
+- **Summary of Communicating Classes:** $\{0, 1\}$ (closed, recurrent), $\{2\}$ (open, transient), and $\{3\}$ (closed, absorbing).
+
+For full step-by-step matrix verification exercises, see [[Weather Forecasting Markov Chain Example]], [[Problem — State Communication and Irreducibility Verification]], and [[Problem — Identification of Communicating Classes and Absorbing States]].
 
 ---
 
@@ -176,37 +203,6 @@ See worked numerical applications in the linked example notes.
 ---
 
 ## Exam Relevance
-
-### Example
-
-### Example 1: Verifying Irreducibility (3 States)
-$$P = \begin{pmatrix}
-1/2 & 1/2 & 0 \\
-1/2 & 1/4 & 1/4 \\
-0 & 1/3 & 2/3
-\end{pmatrix}$$
-- Can $0$ reach $2$? Direct transition $P_{02} = 0$, but path $0 \to 1 \to 2$ has probability:
-  $$P_{01} P_{12} = \left(\frac{1}{2}\right)\left(\frac{1}{4}\right) = \frac{1}{8} > 0 \implies 0 \to 2$$
-- Can $2$ reach $0$? Path $2 \to 1 \to 0$ has probability:
-  $$P_{21} P_{10} = \left(\frac{1}{3}\right)\left(\frac{1}{2}\right) = \frac{1}{6} > 0 \implies 2 \to 0$$
-- States $0, 1, 2$ all communicate mutually.
-- **Conclusion:** There is exactly 1 communicating class $\{0, 1, 2\}$, so the chain is **irreducible**.
-- Because $P_{00} = 1/2 > 0$, state 0 is aperiodic ($d=1$). By the class property, all states in the chain are **aperiodic**.
-
-### Example 2: Decomposing a Reducible Chain (4 States)
-$$P = \begin{pmatrix}
-1/2 & 1/2 & 0 & 0 \\
-1/2 & 1/2 & 0 & 0 \\
-1/4 & 1/4 & 1/4 & 1/4 \\
-0 & 0 & 0 & 1
-\end{pmatrix}$$
-- States $0$ and $1$ communicate ($0 \leftrightarrow 1$), but cannot reach $2$ or $3$. Class $C_1 = \{0, 1\}$ is closed.
-- State $2$ can reach $0, 1, 3$, but no state can reach $2$. Class $C_2 = \{2\}$ is transient.
-- State $3$ has $P_{33} = 1$. Class $C_3 = \{3\}$ is an **absorbing state**.
-- **Classes:** $\{0, 1\}$, $\{2\}$, and $\{3\}$.
-
----
-### Exam Relevance
 
 In CSE301 examinations:
 - Identifying all communicating classes from a given transition matrix $P$.

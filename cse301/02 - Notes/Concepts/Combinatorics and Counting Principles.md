@@ -81,7 +81,21 @@ $$\binom{n + k - 1}{k} = \binom{n + k - 1}{n - 1}$$
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Worked Example: Distributing Server Jobs (Stars & Bars Application)
+
+Suppose $k = 8$ identical batch jobs need to be assigned to $n = 3$ distinct processing servers ($S_1, S_2, S_3$).
+
+1. **Unrestricted Case (Servers can receive 0 jobs):**
+   Using the Stars and Bars formula with $k = 8$ stars and $n - 1 = 2$ bars:
+   $$\binom{n + k - 1}{k} = \binom{3 + 8 - 1}{8} = \binom{10}{8} = \frac{10 \times 9}{2 \times 1} = 45 \text{ ways}$$
+
+2. **Positive Load Case (Every server receives at least 1 job):**
+   Pre-allocate 1 job to each of the 3 servers, leaving $k' = 8 - 3 = 5$ jobs to distribute freely:
+   $$\binom{n + k' - 1}{k'} = \binom{3 + 5 - 1}{5} = \binom{7}{5} = \frac{7 \times 6}{2 \times 1} = 21 \text{ ways}$$
+
+For dedicated in-depth worked example applications, see:
+- [[Birthday Problem and Collisions Example]] — Multi-object collision analysis via sampling with replacement.
+- [[Derangements and Card Matching Example]] — Permutations, fixed points, and asymptotic limits.
 
 ---
 
@@ -95,6 +109,17 @@ When drawing $k$ items from a set of $n$ distinct objects:
 |---|---|---|
 | **With Replacement** | $n^k$ | $\binom{n + k - 1}{k}$ (Bose-Einstein / Stars & Bars) |
 | **Without Replacement** | $\frac{n!}{(n - k)!}$ | $\binom{n}{k}$ |
+
+### Multinomial Coefficients
+When partitioning $n$ distinct objects into $r$ distinct labeled categories of sizes $k_1, k_2, \dots, k_r$ where $\sum_{i=1}^r k_i = n$:
+$$\binom{n}{k_1, k_2, \dots, k_r} = \frac{n!}{k_1! \, k_2! \, \cdots \, k_r!}$$
+This generalizes the binomial coefficient $\binom{n}{k} = \binom{n}{k, n-k}$ and connects directly to discrete distributions like the Multinomial distribution.
+
+### Boundary Cases and Stars-and-Bars Variants
+1. **Weak compositions ($x_i \ge 0$):** Solutions to $x_1 + \dots + x_n = k$ in non-negative integers equal $\binom{n + k - 1}{k}$.
+2. **Strict compositions ($x_i \ge 1$):** Solutions to $x_1 + \dots + x_n = k$ in positive integers equal $\binom{k - 1}{n - 1}$ (choosing $n - 1$ dividers among $k - 1$ spaces between stars).
+
+For extensions to unions of non-disjoint counting sets, see the [[Inclusion-Exclusion Principle]].
 
 ---
 

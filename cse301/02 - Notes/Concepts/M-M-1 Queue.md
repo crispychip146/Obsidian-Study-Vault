@@ -161,13 +161,49 @@ As utilization approaches $100\%$, waiting time does **not** increase linearly; 
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Numerical Server Performance Calculation ($\lambda = 3, \mu = 5$)
+
+A web service gateway receives HTTP requests at an average Poisson arrival rate of $\lambda = 3$ requests per second. A single backend thread processes requests with exponential service time at rate $\mu = 5$ requests per second.
+
+1. **Traffic Intensity and Idle Fraction:**
+   $$\rho = \frac{\lambda}{\mu} = \frac{3}{5} = 0.60$$
+   The server is busy $60\%$ of the time and idle with probability $P_0 = 1 - \rho = 0.40$ ($40\%$).
+
+2. **Occupancy Probabilities:**
+   - Probability of finding exactly $n$ requests in the system: $P_n = (1 - \rho)\rho^n = (0.40)(0.60)^n$.
+   - Probability of finding 2 or more requests (server busy plus at least 1 waiting):
+     $$P(N \ge 2) = \rho^2 = (0.60)^2 = 0.36 \quad (36\%)$$
+
+3. **Queue Lengths and Delays:**
+   - Average number of requests in system:
+     $$L = \frac{\rho}{1 - \rho} = \frac{0.60}{1 - 0.60} = \frac{0.60}{0.40} = 1.50 \text{ requests}$$
+   - Average number waiting in buffer:
+     $$L_Q = \frac{\rho^2}{1 - \rho} = \frac{0.36}{0.40} = 0.90 \text{ requests}$$
+   - Total latency (sojourn time):
+     $$W = \frac{1}{\mu - \lambda} = \frac{1}{5 - 3} = 0.50 \text{ seconds}$$
+   - Average queue waiting time:
+     $$W_Q = W - \frac{1}{\mu} = 0.50 - \frac{1}{5} = 0.30 \text{ seconds}$$
+
+For further parametric evaluations and performance formula summaries, see [[M-M-1 Performance Formulas]], [[Shoe Shine Shop Queueing Model Example]], and [[Problem — M-M-1 Queue Performance Metrics Calculation]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### CTMC Generator, Exponential Sojourn Distribution, and Heavy-Traffic Limits
+
+1. **Continuous-Time Markov Chain (CTMC) Infinitesimal Generator:**
+   - The queue length process $N(t)$ is a continuous-time birth-death process with birth rates $\lambda_n = \lambda$ and death rates $\mu_n = \mu$ for $n \ge 1$.
+   - The infinitesimal generator $Q$ satisfies:
+     $$q_{n, n+1} = \lambda, \quad q_{n, n-1} = \mu \quad (n \ge 1), \quad q_{n, n} = -(\lambda + \mu)$$
+   - The steady-state equation $\pi Q = \mathbf{0}$ yields the detailed balance equations $\lambda \pi_n = \mu \pi_{n+1}$, producing $\pi_n = (1 - \rho)\rho^n$.
+2. **Distribution of Total Sojourn Time ($T$):**
+   - In an $M/M/1$ queue with FIFO discipline, the total time a customer spends in the system $T$ is **strictly exponentially distributed**:
+     $$f_T(t) = (\mu - \lambda) e^{-(\mu - \lambda) t}, \quad t \ge 0$$
+   - Despite being a compound sum of a random geometric number of exponential service phases, the distribution collapses into a pure exponential distribution with effective clearance rate $\mu - \lambda$.
+3. **Heavy-Traffic Approximation ($\rho \to 1$):**
+   - As $\rho \uparrow 1$, the normalized queue length $(1 - \rho) N(t)$ converges in distribution to an exponential random variable with mean $1$.
+   - Transient fluctuations converge weakly to a reflected Brownian motion with negative drift.
 
 ---
 
@@ -180,14 +216,15 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Common Mistakes
 
-- Confusing conditional probabilities with unconditional joint probabilities.
-- Misapplying asymptotic normal approximations when sample sizes are small or distributions are heavily skewed.
+- **Confusing $\mu - \lambda$ with $\lambda - \mu$:** Denominators in $W = \frac{1}{\mu - \lambda}$ require service rate $\mu > \lambda$ to stay positive.
+- **Assuming $L_Q = L - 1$:** The difference between $L$ and $L_Q$ is $\rho = \lambda/\mu$ (the average number in service), which is strictly $< 1$, not $1$.
+- **Applying $M/M/1$ Formulas to Bounded Buffers:** Infinite queue formulas overestimate queue lengths when finite capacities drop packets (see [[Finite Capacity M-M-1-N Queue]]).
 
 ---
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and performance metrics via [[M-M-1 Performance Formulas]].
 
 ---
 
@@ -198,6 +235,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[PASTA Property and Inspection Paradox]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[M-M-1 Performance Formulas]]
+- [[Shoe Shine Shop Queueing Model Example]]
 
 ---
 
@@ -205,13 +243,15 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[Queueing Systems and Kendall Notation]]
+- [[Continuous Probability Distributions]]
+- [[Stationary and Limiting Distributions in Markov Chains]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — M-M-1 Queue Performance Metrics Calculation]]
 
 ---
 

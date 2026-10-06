@@ -131,13 +131,39 @@ Conversely, the set of all null hypotheses $\theta_0$ that are **not** rejected 
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Opinion Poll Margin of Error and Confidence Interval
+
+Suppose a survey of $n = 1,000$ randomly sampled voters finds that $k = 540$ support a ballot initiative.
+- Point estimate: $\hat{p}_n = \frac{540}{1000} = 0.54$
+- Estimated standard error:
+  $$\widehat{\text{se}}(\hat{p}_n) = \sqrt{\frac{\hat{p}_n(1 - \hat{p}_n)}{n}} = \sqrt{\frac{0.54(0.46)}{1000}} = \sqrt{\frac{0.2484}{1000}} \approx 0.01576$$
+- For a $95\%$ confidence level ($\alpha = 0.05$), the critical value is $z_{\alpha/2} = z_{0.025} \approx 1.96$:
+  $$\text{Margin of Error } (\text{MoE}) = 1.96 \times 0.01576 \approx 0.0309 \approx 3.09\%$$
+- The resulting $95\%$ confidence interval is:
+  $$C_n = [0.54 - 0.0309, \, 0.54 + 0.0309] = [0.5091, \, 0.5709] \approx [50.9\%, \, 57.1\%]$$
+
+**Frequentist Interpretation:** In $95\%$ of repeated random samples from the same population, the random interval $C_n$ will trap the true, fixed population parameter $p$. It does **not** mean that $P(p \in [0.5091, 0.5709]) = 0.95$, because $p$ is a deterministic constant.
+
+For full derivations and edge cases where nominal coverage drops, see [[Bernoulli Parameter Estimation and Confidence Interval Example]] and [[Berger-Wolpert Confidence Set Puzzle Example]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Exact Pivotal Quantities, Asymptotic Pivots, and Inversion
+
+1. **Pivotal Quantities:**
+   - A function $Q(X_1, \dots, X_n; \theta)$ whose probability distribution is independent of $\theta$ and all nuisance parameters is a **pivot**.
+   - *Example (Normal data, known $\sigma$):* $Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim \mathcal{N}(0, 1)$ is an exact pivot.
+   - *Example (Normal data, unknown $\sigma$):* $T = \frac{\bar{X} - \mu}{S/\sqrt{n}} \sim t_{n-1}$ is an exact pivot.
+2. **Inversion of Hypothesis Test Acceptance Regions:**
+   - For every $\theta_0 \in \Theta$, let $A(\theta_0)$ be the acceptance region of a size $\alpha$ test of $H_0: \theta = \theta_0$.
+   - The confidence set $C(X) = \{\theta : X \in A(\theta)\}$ satisfies $P_\theta(\theta \in C(X)) = P_\theta(X \in A(\theta)) = 1 - \alpha$.
+   - Most powerful tests invert into uniformly shortest/most accurate confidence intervals.
+3. **Wald, Score, and Likelihood-Ratio Confidence Intervals:**
+   - **Wald Interval:** $\hat{\theta} \pm z_{\alpha/2}\widehat{\text{se}}$ relies on the quadratic approximation to log-likelihood. Can produce absurdities (e.g. negative probabilities) when $\theta$ is near boundaries.
+   - **Score (Wilson) Interval:** Inverts the score test; avoids plug-in estimated variance in the denominator.
+   - **Profile Likelihood Interval:** Inverts the likelihood-ratio test $\{\theta : 2(\ell(\hat{\theta}) - \ell(\theta)) \le \chi^2_{1, 1-\alpha}\}$; invariant to parameter transformations.
 
 ---
 
@@ -165,26 +191,13 @@ Refer to Blitzstein & Hwang for measure-theoretic details and moment generating 
 
 ## Exam Relevance
 
-### Example: Opinion Polls
-
-A headline states:
-> *"83% of surveyed citizens favor policy X, accurate to within 4 percentage points 19 times out of 20 (95% confidence level)."*
-
-**Statistical translation:**
-- Sample size: $n$
-- Point estimate: $\hat{p}_n = 0.83$
-- Margin of error: $z_{0.025}\widehat{\text{se}} = 0.04$
-- The computed interval is $[0.83 - 0.04, 0.83 + 0.04] = [0.79, 0.87]$.
-- We have used a measurement procedure that successfully traps the true population proportion $p$ in $95\%$ of all applications.
-
----
 ### Exam Relevance
 
 Common exam questions include:
-1. Deriving large-sample confidence intervals for proportions, means, and general MLEs.
+1. Deriving large-sample confidence intervals for proportions, means, and general MLEs using [[Normal-Based Large-Sample Confidence Interval]].
 2. Explaining the precise philosophical interpretation of confidence intervals and correcting common fallacies.
 3. Solving confidence set puzzles (such as the Berger-Wolpert puzzle).
-4. Explaining and applying the test-CI duality theorem.
+4. Explaining and applying the test-CI duality theorem with [[Hypothesis Testing Framework]].
 
 ---
 ### Examples & Problems
@@ -212,8 +225,8 @@ Common exam questions include:
 ## Prerequisites
 
 - [[Point Estimation]]
-- Standard Normal Distribution and Quantiles ($z$-scores)
-- Central Limit Theorem
+- [[Continuous Probability Distributions]]
+- [[Central Limit Theorem]]
 
 ---
 
@@ -221,7 +234,7 @@ Common exam questions include:
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
 
 ---
 

@@ -121,14 +121,35 @@ By the **Uniqueness Theorem**, $X + Y \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2
 
 ## Example
 
-See worked numerical examples in the associated Example and Problem notes.
+### Worked Example: Moment Extraction for the Exponential Distribution
+
+Let $X \sim \operatorname{Exp}(\lambda)$ with PDF $f_X(x) = \lambda e^{-\lambda x}$ for $x \ge 0$.
+Its MGF is:
+$$M_X(t) = \mathbb{E}[e^{tX}] = \int_0^\infty e^{tx} \lambda e^{-\lambda x} \, dx = \lambda \int_0^\infty e^{-(\lambda - t)x} \, dx = \frac{\lambda}{\lambda - t} = \left( 1 - \frac{t}{\lambda} \right)^{-1}, \quad \text{for } t < \lambda$$
+
+1. **Extract First Moment $\mathbb{E}[X]$:**
+   $$M_X'(t) = \frac{d}{dt} \left( 1 - \frac{t}{\lambda} \right)^{-1} = -1 \left( 1 - \frac{t}{\lambda} \right)^{-2} \left( -\frac{1}{\lambda} \right) = \frac{1}{\lambda} \left( 1 - \frac{t}{\lambda} \right)^{-2}$$
+   Evaluating at $t = 0$:
+   $$\mathbb{E}[X] = M_X'(0) = \frac{1}{\lambda}$$
+
+2. **Extract Second Moment $\mathbb{E}[X^2]$:**
+   $$M_X''(t) = \frac{d}{dt} \left[ \frac{1}{\lambda} \left( 1 - \frac{t}{\lambda} \right)^{-2} \right] = \frac{2}{\lambda^2} \left( 1 - \frac{t}{\lambda} \right)^{-3}$$
+   Evaluating at $t = 0$:
+   $$\mathbb{E}[X^2] = M_X''(0) = \frac{2}{\lambda^2}$$
+
+3. **Compute Variance $\operatorname{Var}(X)$:**
+   $$\operatorname{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2 = \frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}$$
+
+For asymptotic convergence proofs and exponential tail bounds using MGFs, see:
+- [[Comparison of Probability Bounds Example]] — Optimizing $M_X(t)$ in the Chernoff bound.
+- [[Central Limit Theorem]] — Proof sketch via Taylor series of MGFs.
 
 ---
 
 ## Common Mistakes
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+- Evaluating $M_X(t)$ outside its radius of convergence (e.g., $t \ge \lambda$ for Exponential).
+- Forgetting to evaluate derivatives at $t = 0$.
 
 ---
 
@@ -137,8 +158,7 @@ See worked numerical examples in the associated Example and Problem notes.
 - [[Law of the Unconscious Statistician (LOTUS)]] — Used to compute $\mathbb{E}[e^{tX}]$.
 - [[Continuous Probability Distributions]] — Normal and Exponential distributions.
 - [[Chernoff Bound]] — Optimizes over $t > 0$ in $M_X(t)$ to establish exponential tail bounds.
-
----
+- [[Central Limit Theorem]] — Asymptotic normality proven via MGF convergence.
 
 ---
 
@@ -150,7 +170,7 @@ See worked numerical examples in the associated Example and Problem notes.
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
 
 ---
 

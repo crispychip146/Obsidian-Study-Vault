@@ -28,7 +28,19 @@ By decomposing joint distributions into conditional components, expanding algebr
 
 ## Formula
 
-$$\text{Cauchy-Schwarz and Jensen Inequalities}$$
+### Cauchy-Schwarz Inequality
+For random variables $X, Y$ with finite second moments ($\mathbb{E}[X^2] < \infty, \mathbb{E}[Y^2] < \infty$):
+$$\lvert \mathbb{E}[XY] \rvert \le \sqrt{\mathbb{E}[X^2] \, \mathbb{E}[Y^2]}$$
+
+Equivalently for centered random variables:
+$$(\operatorname{Cov}(X, Y))^2 \le \operatorname{Var}(X)\operatorname{Var}(Y) \implies -1 \le \rho_{X,Y} \le 1$$
+
+### Jensen's Inequality
+For any random variable $X$ and convex function $g: \mathbb{R} \to \mathbb{R}$:
+$$\mathbb{E}[g(X)] \ge g(\mathbb{E}[X])$$
+
+For any concave function $h: \mathbb{R} \to \mathbb{R}$ (where $-h$ is convex, e.g. $\ln(x), \sqrt{x}$):
+$$\mathbb{E}[h(X)] \le h(\mathbb{E}[X])$$
 
 ---
 
@@ -139,20 +151,56 @@ $\blacksquare$
 
 ## Derivation
 
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+### Proof of Cauchy-Schwarz via Quadratic Discriminant
+For any real scalar $t \in \mathbb{R}$, consider the non-negative random variable $(tX + Y)^2 \ge 0$.
+Taking expectations:
+$$h(t) = \mathbb{E}\left[ (tX + Y)^2 \right] = t^2 \mathbb{E}[X^2] + 2t \mathbb{E}[XY] + \mathbb{E}[Y^2] \ge 0$$
+
+$h(t)$ is a quadratic polynomial $A t^2 + B t + C$ with $A = \mathbb{E}[X^2]$, $B = 2\mathbb{E}[XY]$, and $C = \mathbb{E}[Y^2]$.
+Because $h(t) \ge 0$ for all $t \in \mathbb{R}$, this parabola cannot have two distinct real roots. Hence its discriminant $\Delta = B^2 - 4AC \le 0$:
+$$(2\mathbb{E}[XY])^2 - 4\mathbb{E}[X^2]\mathbb{E}[Y^2] \le 0 \implies (\mathbb{E}[XY])^2 \le \mathbb{E}[X^2]\mathbb{E}[Y^2]$$
+Taking square roots yields $\lvert \mathbb{E}[XY] \rvert \le \sqrt{\mathbb{E}[X^2]\mathbb{E}[Y^2]}$. $\blacksquare$
+
+### Proof of Jensen via Supporting Tangent
+Let $\mu = \mathbb{E}[X]$. Because $g$ is convex, there exists a supporting line $L(x) = g(\mu) + m(x - \mu)$ such that $g(x) \ge L(x)$ for all $x \in \mathbb{R}$ (where $m = g'(\mu)$ if differentiable).
+Substituting the random variable $X$:
+$$g(X) \ge g(\mu) + m(X - \mu)$$
+Taking expectations on both sides:
+$$\mathbb{E}[g(X)] \ge g(\mu) + m(\mathbb{E}[X] - \mu) = g(\mu) + m(\mu - \mu) = g(\mathbb{E}[X])$$
+$\blacksquare$
 
 ---
 
 ## Example
 
-See worked numerical examples in the associated Example and Problem notes.
+### Example 1: Jensen's Inequality on the Reciprocal Function
+Let $X \sim \operatorname{Unif}(1, 3)$. The expected value is $\mathbb{E}[X] = 2$.
+Consider the reciprocal function $g(x) = \frac{1}{x}$, which is strictly convex on $(0, \infty)$ because $g''(x) = \frac{2}{x^3} > 0$.
+- Plugged into expected value: $g(\mathbb{E}[X]) = \frac{1}{\mathbb{E}[X]} = \frac{1}{2} = 0.5$
+- Expectation of function:
+  $$\mathbb{E}[g(X)] = \mathbb{E}\left[\frac{1}{X}\right] = \int_1^3 \frac{1}{x} \cdot \frac{1}{3 - 1}\, dx = \frac{1}{2} [\ln 3 - \ln 1] = \frac{\ln 3}{2} \approx \frac{1.0986}{2} \approx 0.5493$$
+
+Notice that $\mathbb{E}[1/X] \approx 0.5493 > 0.5000 = 1/\mathbb{E}[X]$, directly demonstrating Jensen's inequality with strict gap caused by the variance of $X$.
+
+### Example 2: Cauchy-Schwarz on Standard Normal Moments
+Let $Z \sim \mathcal{N}(0, 1)$. Set $X = Z$ and $Y = Z^3$.
+- $\mathbb{E}[X^2] = \mathbb{E}[Z^2] = 1$
+- $\mathbb{E}[Y^2] = \mathbb{E}[Z^6] = 1 \cdot 3 \cdot 5 = 15$
+- $\mathbb{E}[XY] = \mathbb{E}[Z^4] = 3$
+
+Cauchy-Schwarz predicts:
+$$|\mathbb{E}[XY]| = 3 \le \sqrt{\mathbb{E}[X^2]\mathbb{E}[Y^2]} = \sqrt{1 \times 15} = \sqrt{15} \approx 3.873$$
+which confirms the inequality $3 \le 3.873$. Strict inequality holds because $Y = Z^3$ is not a linear function of $X$.
+
+For complete bounds comparisons across distributions, see [[Comparison of Probability Bounds Example]] and [[Covariance and Correlation]].
 
 ---
 
 ## Common Mistakes
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+- **Reversing the Inequality for Concave Functions:** Applying $\mathbb{E}[g(X)] \ge g(\mathbb{E}[X])$ to concave functions like $\ln(x)$ or $\sqrt{x}$. For concave functions, the inequality is reversed: $\mathbb{E}[\ln X] \le \ln(\mathbb{E}[X])$ and $\mathbb{E}[\sqrt{X}] \le \sqrt{\mathbb{E}[X]}$.
+- **Assuming Commutativity of Expectation with Inversion:** Assuming $\mathbb{E}[1/X] = 1/\mathbb{E}[X]$. By Jensen's inequality, $\mathbb{E}[1/X] \ge 1/\mathbb{E}[X]$ for positive random variables.
+- **Applying Cauchy-Schwarz without Moment Guarantees:** Applying Cauchy-Schwarz when random variables lack finite second moments ($\mathbb{E}[X^2] = \infty$).
 
 ---
 
@@ -161,6 +209,7 @@ See worked numerical examples in the associated Example and Problem notes.
 - [[Covariance and Correlation]] — Bound on correlation from Cauchy-Schwarz.
 - [[Random Variables and Probability Distributions]] — Variance positivity via Jensen.
 - [[Chernoff Bound]] — Convexity of the log-MGF.
+- [[Comparison of Probability Bounds Example]] — Side-by-side numerical comparison.
 
 ---
 
@@ -169,12 +218,13 @@ See worked numerical examples in the associated Example and Problem notes.
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
+- [[Covariance and Correlation]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
 
 ---
 

@@ -124,13 +124,56 @@ $$W = \frac{\sum_{j=1}^k L_j}{\sum_{j=1}^k r_j}$$
 
 ## Example
 
-See worked numerical applications in the linked example notes.
+### Two-Station Tandem Feed-Forward Queue
+
+Consider a two-stage transaction processing system:
+- External transactions arrive at Station 1 according to a Poisson process with rate $r_1 = 6$ requests/sec ($r_2 = 0$).
+- Station 1 processes requests at exponential rate $\mu_1 = 10$ requests/sec.
+- Upon completing Station 1, every transaction moves immediately to Station 2 ($P_{12} = 1.0$).
+- Station 2 processes transactions at exponential rate $\mu_2 = 8$ requests/sec, after which transactions exit the system ($P_{20} = 1.0$).
+
+1. **Traffic Rate Equations:**
+   $$\lambda_1 = r_1 = 6 \text{ requests/sec}$$
+   $$\lambda_2 = r_2 + \lambda_1 P_{12} = 0 + 6(1.0) = 6 \text{ requests/sec}$$
+
+2. **Station Utilizations:**
+   $$\rho_1 = \frac{\lambda_1}{\mu_1} = \frac{6}{10} = 0.60 < 1$$
+   $$\rho_2 = \frac{\lambda_2}{\mu_2} = \frac{6}{8} = 0.75 < 1$$
+   Both stations operate well below saturation.
+
+3. **Product-Form Joint Stationary Distribution:**
+   By Burke's Theorem and Jackson's Theorem, the joint distribution of queue sizes factors independently:
+   $$P(n_1, n_2) = (1 - \rho_1)\rho_1^{n_1} \cdot (1 - \rho_2)\rho_2^{n_2} = (0.40)(0.60)^{n_1} (0.25)(0.75)^{n_2}$$
+
+4. **Network Backlog and Total Residence Time:**
+   - Station 1 backlog: $L_1 = \frac{\rho_1}{1 - \rho_1} = \frac{0.60}{0.40} = 1.50$ transactions.
+   - Station 2 backlog: $L_2 = \frac{\rho_2}{1 - \rho_2} = \frac{0.75}{0.25} = 3.00$ transactions.
+   - Total network backlog: $L = L_1 + L_2 = 1.50 + 3.00 = 4.50$ transactions.
+   - Total system response time via Little's Law:
+     $$W = \frac{L}{\gamma} = \frac{L}{r_1 + r_2} = \frac{4.50}{6} = 0.75 \text{ seconds}$$
+   Notice this matches the sum of individual station latencies: $W = W_1 + W_2 = \frac{1}{10 - 6} + \frac{1}{8 - 6} = 0.25 + 0.50 = 0.75\text{ s}$.
+
+For full multi-server tandem queue derivations, see [[Tandem Two-Server Queue Performance Example]], [[Shoe Shine Shop Queueing Model Example]], and [[Problem — M-M-1 Queue Performance Metrics Calculation]].
 
 ---
 
 ## Technical Details
 
-Refer to Blitzstein & Hwang for measure-theoretic details and moment generating properties.
+### Burke's Output Theorem, Matrix Traffic Routing, and Product-Form Proof
+
+1. **Burke's Output Theorem (1956):**
+   - For an $M/M/1$ queue in steady state with arrival rate $\lambda$ and service rate $\mu$:
+     - The output process (departures) is a Poisson process of rate $\lambda$.
+     - At any time $t$, the state of the queue $N(t)$ is independent of the past departure process prior to $t$.
+   - This ensures feed-forward tandem networks with Poisson input remain Poisson throughout every stage.
+2. **Matrix Traffic Equations:**
+   - For a general $k$-station open network with routing matrix $P = (P_{ij})$ and external arrival vector $\mathbf{r} = (r_1, \dots, r_k)$:
+     $$\boldsymbol{\lambda} = \mathbf{r} + \boldsymbol{\lambda} P \iff \boldsymbol{\lambda}(I - P) = \mathbf{r} \implies \boldsymbol{\lambda} = \mathbf{r}(I - P)^{-1}$$
+   - The matrix $(I - P)^{-1} = \sum_{n=0}^\infty P^n$ represents the total expected visits to each station per injected customer.
+3. **Global Balance Proof Sketch for Jackson's Theorem:**
+   - Substituting $\pi(\mathbf{n}) = \prod_{j=1}^k (1 - \rho_j)\rho_j^{n_j}$ into the multidimensional CTMC balance equations:
+     $$\pi(\mathbf{n})\left[\sum r_j + \sum \mu_j I(n_j > 0)\right] = \sum \pi(\mathbf{n} - \mathbf{e}_j) r_j + \sum \pi(\mathbf{n} + \mathbf{e}_j)\mu_j P_{j0} + \sum_{i,j} \pi(\mathbf{n} + \mathbf{e}_i - \mathbf{e}_j)\mu_i P_{ij}$$
+   - Because $\lambda_j = r_j + \sum_i \lambda_i P_{ij}$ and $\rho_j = \lambda_j / \mu_j$, every flux term balances pairwise, confirming exact product-form equilibrium.
 
 ---
 
@@ -165,7 +208,7 @@ Yet, Jackson's theorem proves that the joint equilibrium distribution behaves **
 
 ## Exam Relevance
 
-Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
+Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and performance metrics via [[Little's Law]] and [[Tandem Two-Server Queue Performance Example]].
 
 ---
 
@@ -175,6 +218,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Little's Law]]
 - [[Queueing Systems and Kendall Notation]]
 - [[Tandem Two-Server Queue Performance Example]]
+- [[Shoe Shine Shop Queueing Model Example]]
 
 ---
 
@@ -182,13 +226,16 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Prerequisites
 
-- [[Probability Axioms and Naive Probability]]
+- [[M-M-1 Queue]]
+- [[Queueing Systems and Kendall Notation]]
+- [[Stationary and Limiting Distributions in Markov Chains]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Tandem Two-Server Queue Performance Example]]
+- [[Problem — M-M-1 Queue Performance Metrics Calculation]]
 
 ---
 

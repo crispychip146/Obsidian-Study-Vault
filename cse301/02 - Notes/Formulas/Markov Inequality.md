@@ -41,31 +41,20 @@ $$P(X \ge c \mathbb{E}[X]) \le \frac{1}{c}$$
 
 ## Variables
 
-Consider the indicator random variable $I_{X \ge a}$, defined as:
-$$I_{X \ge a} = \begin{cases} 1 & \text{if } X \ge a \\ 0 & \text{if } X < a \end{cases}$$
-
-Notice the fundamental pointwise inequality:
-$$a I_{X \ge a} \le X$$
-
-**Verification:**
-- If $X < a$, the left-hand side is $a \cdot 0 = 0$. Since $X \ge 0$, $0 \le X$ holds.
-- If $X \ge a$, the left-hand side is $a \cdot 1 = a$. Since $X \ge a$, $a \le X$ holds.
-
-Taking the expectation on both sides and using monotonicity and linearity of expectation:
-$$\mathbb{E}[a I_{X \ge a}] \le \mathbb{E}[X]$$
-$$a \mathbb{E}[I_{X \ge a}] \le \mathbb{E}[X]$$
-Since $\mathbb{E}[I_{X \ge a}] = P(X \ge a)$:
-$$a P(X \ge a) \le \mathbb{E}[X] \implies P(X \ge a) \le \frac{\mathbb{E}[X]}{a}$$
-$\blacksquare$
-
----
+| Symbol | Meaning |
+|---|---|
+| $X$ | Non-negative random variable ($P(X \ge 0) = 1$) |
+| $\mathbb{E}[X]$ | Expected value of $X$ (assumed finite, $\mathbb{E}[X] < \infty$) |
+| $a$ | Positive threshold value ($a > 0$) |
+| $I_{X \ge a}$ | Indicator random variable for the event $\{X \ge a\}$ |
 
 ---
 
 ## Conditions
 
-- Random variables must possess finite first and second moments (well-defined expectations).
-- Probability distributions must satisfy standard non-negativity and total probability integration axioms.
+- Random variables must be non-negative almost surely: $P(X \ge 0) = 1$.
+- The expected value $\mathbb{E}[X]$ must be finite.
+- Threshold $a > 0$ must be strictly positive.
 
 ---
 
@@ -94,13 +83,39 @@ This generalization is the mother of all major concentration inequalities:
 
 ## Derivation
 
-Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
+Consider the indicator random variable $I_{X \ge a}$, defined as:
+$$I_{X \ge a} = \begin{cases} 1 & \text{if } X \ge a \\ 0 & \text{if } X < a \end{cases}$$
+
+Notice the fundamental pointwise inequality holding for all values of $X \ge 0$:
+$$a I_{X \ge a} \le X$$
+
+**Verification:**
+- If $X < a$, the left-hand side is $a \cdot 0 = 0$. Since $X \ge 0$, $0 \le X$ holds.
+- If $X \ge a$, the left-hand side is $a \cdot 1 = a$. Since $X \ge a$, $a \le X$ holds.
+
+Taking expectations on both sides and using monotonicity and linearity of expectation:
+$$\mathbb{E}[a I_{X \ge a}] \le \mathbb{E}[X]$$
+$$a \mathbb{E}[I_{X \ge a}] \le \mathbb{E}[X]$$
+Since $\mathbb{E}[I_{X \ge a}] = P(X \ge a)$:
+$$a P(X \ge a) \le \mathbb{E}[X] \implies P(X \ge a) \le \frac{\mathbb{E}[X]}{a}$$
+$\blacksquare$
 
 ---
 
 ## Example
 
-See worked numerical examples in the associated Example and Problem notes.
+### Application: Server Latency Bounding
+
+Suppose the response time $X$ of an API server is non-negative ($X \ge 0$) with average latency $\mathbb{E}[X] = 25\text{ ms}$, but the variance and underlying distribution are completely unknown.
+
+What is an upper bound on the probability that a query takes at least $100\text{ ms}$?
+
+Applying Markov's inequality with $a = 100$:
+$$P(X \ge 100) \le \frac{\mathbb{E}[X]}{100} = \frac{25}{100} = 0.25$$
+
+At most $25\%$ of queries can take $100\text{ ms}$ or longer. If we only know the first moment, this bound is guaranteed to hold regardless of whether the latency is skewed, multimodal, or heavy-tailed.
+
+For a concrete comparison of how this bound compares against second-moment ([[Chebyshev Inequality]]) and exponential-moment ([[Chernoff Bound]]) guarantees on the same underlying distribution, see [[Comparison of Probability Bounds Example]] and [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]].
 
 ---
 
@@ -130,12 +145,14 @@ See worked numerical examples in the associated Example and Problem notes.
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
+- [[Discrete Probability Distributions]]
+- [[Continuous Probability Distributions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
 
 ---
 

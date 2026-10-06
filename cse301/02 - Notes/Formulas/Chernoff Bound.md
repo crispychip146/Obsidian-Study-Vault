@@ -127,8 +127,9 @@ $$P(\lvert Z \rvert \ge c) \le 2e^{-c^2 / 2}$$
 
 ## Common Mistakes
 
-- Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
-- Forgetting that linearity of expectation holds unconditionally, whereas $\mathbb{E}[XY] = \mathbb{E}[X]\mathbb{E}[Y]$ requires independence.
+- **Sign of Parameter $t$:** Minimizing over unconstrained $t \in \mathbb{R}$. For upper-tail bounds $P(X \ge a)$, optimization must be restricted to $t > 0$; for lower-tail bounds $P(X \le a)$, optimization must use $t < 0$.
+- **Non-existent MGF:** Attempting to apply Chernoff bounds to heavy-tailed distributions whose MGF diverges for all $t > 0$ (e.g., Cauchy, Log-Normal, or Pareto).
+- **Sub-optimal $t$ Choice:** Failing to differentiate the exponent to find $t^* = \arg\min_t \{M_X(t)e^{-ta}\}$, resulting in loose bounds.
 
 ---
 
@@ -146,12 +147,14 @@ $$P(\lvert Z \rvert \ge c) \le 2e^{-c^2 / 2}$$
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
+- [[Markov Inequality]]
+- [[Moment Generating Functions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Birthday Collisions and Approximation]]
+- [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
 
 ---
 

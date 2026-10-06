@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 4
 ---
-
 # Process Concepts and Memory Layout
 
-> 📖 **Reading Order:** Step 04 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 04 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Computer Booting and Hardware Abstractions]] | ► **Next:** [[Process Lifecycle and State Transitions]]
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 On storage media, a computer program is merely an inert, passive sequence of bytes: compiled machine code instructions and static data constants stored inside an ELF or PE binary file.
@@ -21,7 +17,6 @@ On storage media, a computer program is merely an inert, passive sequence of byt
 We want the CPU to execute this program, track its dynamic variables as they change during execution, maintain its function call history, and allow multiple instances of the same program to run simultaneously without interfering with one another. The central obstacle is that a static binary has no runtime state: it has no program counter, no dynamic stack frames, and no allocated heap.
 
 ---
-
 ## Developing the Idea
 
 To bridge this gap, the operating system creates the **Process** abstraction: an active instance of a program in execution.
@@ -31,7 +26,6 @@ A process encapsulates both the static program and its complete dynamic operatio
 - To prevent conflicts, the OS assigns each process a private, continuous **Virtual Address Space** partitioned into distinct logical segments: Text (read-only code), Initialized Data, Uninitialized Data (BSS), Heap (growing dynamically upward), and Stack (growing dynamically downward).
 
 ---
-
 ## Definition
 
 A **process** is a **program in execution**. It is the fundamental unit of computation and resource allocation in an operating system.
@@ -44,15 +38,11 @@ While a **program** is a passive, inert collection of instructions stored on dis
 Multiple distinct processes can run instances of the same underlying program simultaneously (e.g., opening three separate terminal windows or browser tabs running the same binary).
 
 ---
-
----
-
 ## How It Works
 
 The mechanism operates through coordinated hardware execution and operating system kernel protocols.
 
 ---
-
 ## Example
 
 Consider running two separate terminal windows each executing `./my_program`:
@@ -61,7 +51,6 @@ Consider running two separate terminal windows each executing `./my_program`:
 - If Process 1 modifies variable `x = 100`, Process 2 still reads `x = 0`. Each operates within its own private address space.
 
 ---
-
 ## Technical Details
 
 ### Stack vs. Heap: Critical Comparison
@@ -75,9 +64,6 @@ Consider running two separate terminal windows each executing `./my_program`:
 | **Size Limit** | Fixed default limit (e.g., 8 MB in Linux; exceeds $\to$ **Stack Overflow**) | Bounded only by available virtual memory and swap space |
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Address Space Isolation:** Memory protection hardware (MMU page tables) ensures that Process $A$ cannot read or alter memory in Process $B$ without explicit shared-memory IPC primitives.
@@ -85,7 +71,6 @@ Consider running two separate terminal windows each executing `./my_program`:
 - **Reentrancy of Code:** The text segment is marked execute-only and read-only, allowing multiple concurrent processes to safely share the same physical code frames.
 
 ---
-
 ## Common Mistakes
 
 1. **Stack Overflow:**
@@ -98,9 +83,6 @@ Consider running two separate terminal windows each executing `./my_program`:
    - Accessing heap memory after calling `free()` leads to undefined behavior.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** As a process executes through its memory segments, how does its status change between waiting for I/O and running on the CPU? (See [[Process Lifecycle and State Transitions]]).
@@ -111,9 +93,6 @@ Consider running two separate terminal windows each executing `./my_program`:
   - Identifying which segment a given variable resides in (e.g., global, static, local, or dynamically allocated).
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Process Lifecycle and State Transitions]]
@@ -122,20 +101,17 @@ Consider running two separate terminal windows each executing `./my_program`:
 - [[Threads and Multithreading Models]]
 
 ---
-
 ## Prerequisites
 
 - [[Computer Booting and Hardware Abstractions]]
 - [[Operating System Structures and Functions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Fork Execution Tree and Process Tracing]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 1–7)

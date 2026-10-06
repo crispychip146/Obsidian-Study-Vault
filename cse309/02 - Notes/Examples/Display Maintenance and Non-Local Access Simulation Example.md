@@ -12,8 +12,6 @@ order: 29
 
 ---
 
----
-
 ## Problem
 
 Consider a program written in a block-structured language with nested procedure declarations:
@@ -52,8 +50,6 @@ $$\text{Main} \longrightarrow P \longrightarrow R \longrightarrow Q$$
 1. Show the state of the **Display Array** at each step of the call sequence.
 2. For the statement $z := x + y$ in procedure $Q$, show how $x$ and $y$ are resolved in $O(1)$ time using the Display.
 3. Show how the Display is restored as procedures return.
-
----
 
 ---
 
@@ -170,8 +166,6 @@ Inside $Q$:
    - Display returns to: `[1]->1000, [2]->null, [3]->null`.
 
 The Display mechanism maintains perfect $O(1)$ access invariant across arbitrary dynamic call trees!
-
----
 
 ---
 

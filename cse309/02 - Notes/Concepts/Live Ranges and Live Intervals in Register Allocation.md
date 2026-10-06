@@ -7,16 +7,8 @@ order: 43
 
 # Live Ranges and Live Intervals in Register Allocation
 
-> 📖 **Reading Order:** Step 43 of 55 | **Module 5:** Register Allocation  
+> 📖 **Reading Order:** Step 43 of 55 | **Module 5: Register Allocation**  
 > ◄ **Previous:** [[Problem — DAG Optimization of Basic Block with Array Store]] | ► **Next:** [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -27,14 +19,6 @@ In high-level languages, programs can contain hundreds or thousands of variables
 To execute the program without running out of registers, the compiler must allocate physical registers so that **two variables share the same hardware register if and only if they are never needed at the same time**.
 
 To determine when variables are in use, compilers compute **Live Ranges** and **Live Intervals**.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -76,33 +60,13 @@ g:                                                |====|             [9, 10]
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Live Ranges and Live Intervals in Register Allocation** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Live Range Splitting
 
@@ -118,7 +82,6 @@ If we must spill $x$, spilling $x$ across the *entire* program generates heavy m
 
 ---
 
----
 ### Technical Details
 
 ### Register Interference
@@ -130,102 +93,13 @@ $$[ \text{start}_u, \text{end}_u ] \cap [ \text{start}_v, \text{end}_v ] \ne \em
 If two variables interfere, they **CANNOT** be assigned the same physical hardware register. If their live intervals are completely disjoint ($[ \text{start}_u, \text{end}_u ] \cap [ \text{start}_v, \text{end}_v ] = \emptyset$), they can safely share the same physical register!
 
 ---
+
 ### Trade-Off: Precise Live Ranges vs. Live Intervals
 
 | Representation | Precision | Algorithmic Paradigm | Primary Use Case |
 | :--- | :--- | :--- | :--- |
 | **Live Intervals** ($[s, e]$) | Conservative (ignores holes between uses) | [[Linear Scan Register Allocation Algorithm]] | Just-In-Time (JIT) Compilers (V8, JVM HotSpot) where compilation speed is paramount. |
 | **Exact Live Ranges** | Highly precise | [[Chaitin's Graph Coloring Register Allocation Algorithm]] | Ahead-of-Time (AOT) Compilers (GCC, Clang/LLVM) optimizing for maximum execution performance. |
-
----
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -250,74 +124,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Linear Scan Register Allocation Algorithm]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Linear Scan Register Allocation Simulation]]
 
 ---
 

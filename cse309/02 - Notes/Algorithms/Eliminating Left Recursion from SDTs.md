@@ -7,16 +7,8 @@ order: 5
 
 # Eliminating Left Recursion from SDTs
 
-> 📖 **Reading Order:** Step 55 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 05 of 55 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[Abstract Syntax Tree Construction with SDDs]] | ► **Next:** [[Bottom-Up Evaluation of L-Attributed SDDs]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -37,14 +29,6 @@ If you blindly eliminate left recursion without accounting for semantic actions,
 To eliminate left recursion safely, we must distinguish two fundamentally different cases:
 1. **Case 1:** Semantic actions perform **side effects** (e.g., printing tokens).
 2. **Case 2:** Semantic actions compute **synthesized attributes** (e.g., evaluating arithmetic or building ASTs).
-
----
-
----
-
----
-
----
 
 ---
 
@@ -84,7 +68,7 @@ R -> - T { print('-'); } R | epsilon
 T -> num { print(num.val); }
 ```
 
-### Trace on Input `9 - 5 - 2`:
+### Trace for Translation Actions (Postfix Emission on `9 - 5 - 2`):
 1. $E$ expands to $T \; R$.
 2. $T$ matches `9` $\implies$ executes $\{ \text{print}(9) \}$. **Output: `9`**
 3. $R$ matches `-`, $T$ matches `5` $\implies$ executes $\{ \text{print}(5) \}$. **Output: `9 5`**
@@ -97,63 +81,19 @@ The postfix output `9 5 - 2 -` is generated in the **exact same order** as the o
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Left-recursive context-free grammar with embedded semantic actions and synthesized attribute calculations.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Equivalent right-recursive L-Attributed SDT utilizing inherited accumulator attributes.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Case 2: Actions Computing Synthesized Attributes
 
@@ -186,7 +126,6 @@ flowchart TD
 
 ---
 
----
 ### Properties
 
 ### The Transformation Template and Mathematical Proof
@@ -232,186 +171,13 @@ $$R \longrightarrow \epsilon \quad \{ R.syn = R.inh; \}$$
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 The complete algorithmic procedure is detailed in the sections above.
 
 ---
 
----
-
----
-
----
-
 ## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
-## Complexity
-
-### Time Complexity
-$O(N)$ to $O(N^2)$ depending on basic block length, graph density, or live intervals.
-
-### Space Complexity
-$O(N)$ for auxiliary state tables, stacks, or free lists.
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 ### Concrete Worked Example: Desk Calculator Subtraction
 
@@ -423,7 +189,7 @@ $$E \longrightarrow E_1 - T \quad \{ E.val = E_1.val - T.val; \} \mid T \quad \{
 2. $R \longrightarrow - \; T \quad \{ R_1.inh = R.inh - T.val; \} \quad R_1 \quad \{ R.syn = R_1.syn; \}$
 3. $R \longrightarrow \epsilon \quad \{ R.syn = R.inh; \}$
 
-### Trace on Input `9 - 5 - 2`:
+### Trace for Synthesized Values (Accumulator Evaluation on `9 - 5 - 2`):
 1. $E$ expands to $T \; R$. $T$ evaluates `9` $\implies T.val = 9$.
 2. Action initializes: $R.inh = 9$.
 3. First $R$ matches `-`, $T$ evaluates `5` $\implies T.val = 5$.
@@ -443,32 +209,59 @@ $$E \longrightarrow E_1 - T \quad \{ E.val = E_1.val - T.val; \} \mid T \quad \{
 
 ---
 
----
+## Complexity
+
+### Time Complexity
+$O(N)$ to $O(N^2)$ depending on basic block length, graph density, or live intervals.
+
+### Space Complexity
+$O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ---
 
+## Properties
+
+- **Termination:** Provably terminates on all well-formed compiler inputs.
+- **Correctness:** Preserves the underlying language semantics and program data dependencies.
+
 ---
+
+## Limitations
+
+- Transforms synthesized attributes into inherited attributes, necessitating top-down LL parsing or augmented LR stack manipulation.
+
+---
+
+## Common Mistakes
+
+- Forgetting to update liveness information or next-use pointers.
+- Misinterpreting index bounds during stack or interval scans.
+
+---
+
+## Exam Relevance
+
+Frequently tested on final examinations via hand-simulation of Eliminating Left Recursion from SDTs on given code fragments or graphs.
 
 ---
 
 ## Related Concepts
 
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[S-Attributed and L-Attributed SDDs]]
+- [[Bottom-Up Evaluation of L-Attributed SDDs]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[S-Attributed and L-Attributed SDDs]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
 
 ---
 

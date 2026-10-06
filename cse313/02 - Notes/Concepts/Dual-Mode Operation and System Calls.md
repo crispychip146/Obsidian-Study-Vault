@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 2
 ---
-
 # Dual-Mode Operation and System Calls
 
-> 📖 **Reading Order:** Step 02 of 34 | **Module 1:** OS Architecture & Kernel Fundamentals  
+> 📖 **Reading Order:** Step 02 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
 > ◄ **Previous:** [[Operating System Structures and Functions]] | ► **Next:** [[Computer Booting and Hardware Abstractions]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1c, 2019 Q4a, 2021 Q3b)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, repeated!)**
 >
@@ -30,9 +28,6 @@ order: 2
 >    - **User Space vs Kernel Space (Memory Address Segmentation):** Division of the virtual address space. User space (lower addresses) is mapped per-process; Kernel space (upper addresses) is reserved for the OS core, page tables, and drivers, guarded by supervisor bit flags in page table entries.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 In an operating system supporting multiple processes, user code must share the CPU with kernel code. If any running program could execute arbitrary machine instructions—such as disabling hardware timer interrupts, clearing device controllers, or rewriting memory page tables—a single malicious or flawed application could take over the entire system.
@@ -40,7 +35,6 @@ In an operating system supporting multiple processes, user code must share the C
 We want to guarantee that user applications can execute computational code at full hardware speed, yet remain strictly prohibited from performing dangerous low-level hardware manipulations. The central obstacle is that software checks alone are too slow: checking every instruction in software before executing it would cause catastrophic performance degradation.
 
 ---
-
 ## Developing the Idea
 
 The breakthrough insight is **hardware-enforced protection levels**. Rather than checking instructions in software, CPU architects built a physical **Mode Bit** directly into the CPU's Program Status Word (PSW) register.
@@ -50,7 +44,6 @@ When the Mode Bit is $0$ (**Kernel Mode / Privileged Mode**), the CPU executes a
 To request privileged operations (such as reading a file or sending network data), user processes must execute a dedicated software interrupt or trap instruction (`syscall` / `sysenter` / `int 0x80`), transferring control through fixed, immutable kernel entry points.
 
 ---
-
 ## Definition
 
 To prevent user programs from interfering with the proper operation of the system, crashing other programs, or taking exclusive control of hardware, modern computer architectures implement **Dual-Mode Operation**:
@@ -62,9 +55,6 @@ To prevent user programs from interfering with the proper operation of the syste
 The boundary between these two worlds is crossed safely and strictly via **System Calls**, **Interrupts**, and **Exceptions**.
 
 ---
-
----
-
 ## How It Works
 
 ### Hardware Mechanism: The Mode Bit
@@ -86,9 +76,6 @@ stateDiagram-v2
 ```
 
 ---
-
----
-
 ### Step-by-Step Mechanics of a System Call
 
 When a user program calls a library function such as `read(fd, buffer, nbytes)`, the execution proceeds through a precise sequence:
@@ -120,9 +107,6 @@ System calls require arguments (file descriptors, buffer pointers, lengths). Sin
 3. **Stack:** Parameters are pushed onto the user stack by the calling program and popped by the operating system.
 
 ---
-
----
-
 ## Example
 
 A C program calls `read(fd, buffer, 1024)`:
@@ -133,13 +117,11 @@ A C program calls `read(fd, buffer, 1024)`:
 5. The kernel executes `sysret`, restoring User Mode ($1$) and returning to user code.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Hardware-Enforced Atomicity:** The transition from User Mode to Kernel Mode via `syscall` atomically saves the return address and elevates privileges, preventing race conditions during mode switches.
@@ -147,7 +129,6 @@ See related modules for microarchitectural implementation details.
 - **Controlled Entry Point Invariant:** User applications cannot jump to arbitrary kernel addresses; entry is restricted to predefined handlers registered in the IDT.
 
 ---
-
 ## Common Mistakes
 
 1. **Confusing Function Calls with System Calls:**
@@ -159,9 +140,6 @@ See related modules for microarchitectural implementation details.
    - Allowing a user program to disable interrupts would allow a rogue `while(1)` loop to seize the CPU forever, destroying time-sharing. Therefore, `cli` (clear interrupt flag) is strictly privileged.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** How the hardware and OS bootstrap themselves into dual-mode operation (see [[Computer Booting and Hardware Abstractions]]).
@@ -173,9 +151,6 @@ See related modules for microarchitectural implementation details.
   - Tracing the exact sequence of events during a system call transition.
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Operating System Structures and Functions]]
@@ -183,20 +158,17 @@ See related modules for microarchitectural implementation details.
 - [[Process Creation and Termination Operations]]
 
 ---
-
 ## Prerequisites
 
 - [[Operating System Structures and Functions]]
 - [[Computer Booting and Hardware Abstractions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Fork Execution Tree and Process Tracing]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 13–28)

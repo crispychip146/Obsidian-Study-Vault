@@ -7,16 +7,8 @@ order: 32
 
 # Code Generation Issues and Target Machine Architecture
 
-> 📖 **Reading Order:** Step 32 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 32 of 55 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Problem — Activation Record and Display Table Tracing]] | ► **Next:** [[Basic Blocks and Control Flow Graphs]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -30,14 +22,6 @@ flowchart LR
     ST["Symbol Table (Types, Offsets)"] --> CG
     CG --> Target["Target Machine Assembly / Machine Code"]
 ```
-
----
-
----
-
----
-
----
 
 ---
 
@@ -81,33 +65,13 @@ The order in which independent computations are executed significantly affects r
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Code Generation Issues and Target Machine Architecture** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### A Simple Target Machine Model
 
@@ -139,101 +103,6 @@ $$\text{Cost} = 1 + \sum (\text{Cost of Addressing Modes})$$
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -255,94 +124,34 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Code Generation Example
-
-Consider generating target machine code for:
-$$x = y + z$$
-Assuming variables $x, y, z$ reside in memory:
-
-```
-LD   R0, y        /* Cost: 2 (1 opcode + 1 memory word for y) */
-ADD  R0, R0, z    /* Cost: 2 (1 opcode + 1 memory word for z) */
-ST   x, R0        /* Cost: 2 (1 opcode + 1 memory word for x) */
-```
-**Total Instruction Cost:** $2 + 2 + 2 = 6$.
-
-If $y$ is already in register $R_0$ from a preceding operation:
-```
-ADD  R0, R0, z    /* Cost: 2 */
-ST   x, R0        /* Cost: 2 */
-```
-**Total Cost:** $4$ (a $33\%$ speed improvement purely from register reuse!).
-
----
-
----
-
----
-
----
+Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
 - [[Basic Blocks and Control Flow Graphs]]
+- [[A Simple Code Generator Algorithm]]
+- [[Peephole Optimization Techniques]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Intermediate Representations and Three-Address Code]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Basic Block Partitioning and Next-Use Table]]
 
 ---
 

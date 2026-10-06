@@ -7,16 +7,8 @@ order: 37
 
 # A Simple Code Generator Algorithm
 
-> 📖 **Reading Order:** Step 37 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 37 of 55 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[DAG Construction and Local Optimization of Basic Blocks]] | ► **Next:** [[Peephole Optimization Techniques]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -33,14 +25,6 @@ flowchart LR
     RegDesc["Register Descriptors<br/>R0 -> {x, y}<br/>R1 -> {z}"] <--> Generator["Code Generator Engine<br/>getReg(I)"]
     AddrDesc["Address Descriptors<br/>x -> {R0, mem_x}<br/>y -> {R0}<br/>z -> {R1}"] <--> Generator
 ```
-
----
-
----
-
----
-
----
 
 ---
 
@@ -62,63 +46,19 @@ For a three-address instruction $I: x = y + z$, the function `getReg(I)` selects
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Sequence of Three-Address Code (TAC) instructions within a basic block, initial register descriptor, and address descriptor.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Target machine assembly instructions (loads, operations, stores) with updated descriptor state.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### End of Basic Block Actions
 
@@ -130,93 +70,7 @@ At the end of a basic block:
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Code Generation Algorithm for $x = y + z$
 
@@ -237,14 +91,6 @@ At the end of a basic block:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Example
 
 Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
@@ -258,14 +104,6 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ---
 
----
-
----
-
----
-
----
-
 ## Properties
 
 - **Termination:** Provably terminates on all well-formed compiler inputs.
@@ -275,92 +113,41 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ## Limitations
 
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
+- Greedy, local decision making; does not optimize across basic block boundaries.
+- Can emit redundant stores if variable liveness is computed conservatively.
 
 ---
 
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to update liveness information or next-use pointers.
 - Misinterpreting index bounds during stack or interval scans.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
 
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
 Frequently tested on final examinations via hand-simulation of A Simple Code Generator Algorithm on given code fragments or graphs.
-
----
-
----
-
----
 
 ---
 
 ## Related Concepts
 
 - [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
+- [[Peephole Optimization Techniques]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — Basic Block Partitioning and Next-Use Table]]
 
 ---
 

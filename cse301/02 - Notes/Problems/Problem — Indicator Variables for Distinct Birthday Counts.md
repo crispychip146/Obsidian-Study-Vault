@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 16
+order: 24
 ---
 
 # Problem — Indicator Variables for Distinct Birthday Counts
 
-> 📖 **Reading Order:** Step 16 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Exponential Distribution Memorylessness Example]] | ► **Next:** [[Conditional Probability and Independence]]
-
+> 📖 **Reading Order:** Step 24 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Exponential Distribution Memorylessness Example]] | ► **Next:** [[Problem — Expected Number of Local Maxima in Random Permutations]]
 ---
-
----
-
 ## Problem
 
 Consider $k$ individuals whose birthdays are independent and uniformly distributed across $n$ days of the year (where $n = 365$). Let $D$ be the random variable representing the number of distinct days that are the birthday of at least one person in the group.
@@ -22,11 +18,7 @@ Consider $k$ individuals whose birthdays are independent and uniformly distribut
 2. **Expectation:** Calculate the exact expected value $\mathbb{E}[D]$ in terms of $n$ and $k$.
 3. **Indicator Covariance:** For any two distinct days $i \ne j$, compute the joint expectation $\mathbb{E}[I_i I_j]$ and the covariance $\operatorname{Cov}(I_i, I_j)$. Explain intuitively why the covariance is negative.
 4. **Exact Variance:** Derive a closed-form formula for the variance $\operatorname{Var}(D)$.
-
 ---
-
----
-
 ## Given
 
 - Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
@@ -51,11 +43,7 @@ Consider $k$ individuals whose birthdays are independent and uniformly distribut
 - [[Discrete Probability Distributions]] — Indicators and Bernoulli variables.
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Method of indicators.
 - [[Covariance and Correlation]] — Covariance of indicators and variance of a sum.
-
 ---
-
----
-
 ## Question Type
 
 Probability / Statistical Inference / Markov Chain Analysis
@@ -172,11 +160,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 1. **Forgetting Covariances:** Assuming $\operatorname{Var}(D) = \sum \operatorname{Var}(I_i) = np(1-p)$. This is invalid because the indicators $I_i$ are NOT independent.
 2. **Sign of Covariance:** Missing the fact that competition for a fixed number of people creates negative dependence ($\operatorname{Cov} < 0$), which makes the true variance *smaller* than it would be under independent trials.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.

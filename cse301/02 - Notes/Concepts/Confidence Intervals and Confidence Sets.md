@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 38
+order: 49
 ---
 
 # Confidence Intervals and Confidence Sets
 
-> 📖 **Reading Order:** Step 38 of 92 | **Module 6:** Statistical Inference  
+> 📖 **Reading Order:** Step 49 of 103 | **Module 6:** Statistical Inference  
 > ◄ **Previous:** [[Estimator Consistency and Convergence]] | ► **Next:** [[Normal-Based Large-Sample Confidence Interval]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Confidence Intervals and Confidence Sets, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -34,11 +30,7 @@ $$\mathbf{C_n \text{ is random; } \theta \text{ is fixed.}}$$
 - The true parameter $\theta$ does **not** move. It is an immovable fact of nature.
 - The interval $C_n = (a(\mathbf{X}), b(\mathbf{X}))$ is a random pair of brackets tossed onto the real line like a horseshoe at a peg.
 - In repeated experiments, the brackets land in different positions. In a fraction $1 - \alpha$ of experiments, the random brackets successfully trap the fixed peg $\theta$.
-
 ---
-
----
-
 ## Definition
 
 A **$1 - \alpha$ confidence interval** for a scalar parameter $\theta \in \Theta$ is a random interval $C_n = (a, b)$, where the endpoints $a = a(X_1, \dots, X_n)$ and $b = b(X_1, \dots, X_n)$ are statistics calculated from the sample data, such that:
@@ -47,11 +39,7 @@ $$P_\theta(\theta \in C_n) \ge 1 - \alpha \quad \text{for all } \theta \in \Thet
 - $1 - \alpha$ is called the **coverage probability** or **confidence level** (e.g., $1 - \alpha = 0.95$ for a $95\%$ confidence interval, where $\alpha = 0.05$).
 - $\alpha$ is the **significance level** or error budget.
 - For multidimensional parameters $\boldsymbol{\theta} \in \mathbb{R}^d$, the interval generalizes to a **confidence set** (such as an ellipsoid, sphere, or convex region) $C_n \subset \mathbb{R}^d$ satisfying $P_{\boldsymbol{\theta}}(\boldsymbol{\theta} \in C_n) \ge 1 - \alpha$.
-
 ---
-
----
-
 ## How It Works
 
 ### How to Interpret Confidence Intervals
@@ -124,11 +112,7 @@ Confidence intervals and two-sided [[Hypothesis Testing Framework|hypothesis tes
 > is a test with significance level $\alpha$.
 
 Conversely, the set of all null hypotheses $\theta_0$ that are **not** rejected by a size $\alpha$ test forms a $1 - \alpha$ confidence interval for $\theta$.
-
 ---
-
----
-
 ## Example
 
 ### Opinion Poll Margin of Error and Confidence Interval
@@ -184,11 +168,7 @@ For full derivations and edge cases where nominal coverage drops, see [[Bernoull
    Higher confidence (e.g., $99\%$ vs $95\%$) requires a larger critical value ($z_{0.005} = 2.576$ vs $z_{0.025} = 1.96$), making the interval **wider**. To be more certain of capturing the truth, you must cast a wider net.
 3. **Asserting that two intervals that overlap have no statistically significant difference:**
    Two $95\%$ confidence intervals can slightly overlap even when the difference between the two sample means is statistically significant at the $\alpha = 0.05$ level. A formal two-sample test or difference CI should be constructed instead.
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Exam Relevance
@@ -205,11 +185,7 @@ Common exam questions include:
 - [[Bernoulli Parameter Estimation and Confidence Interval Example]]
 - [[Berger-Wolpert Confidence Set Puzzle Example]]
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Point Estimation]]
@@ -217,21 +193,13 @@ Common exam questions include:
 - [[Hypothesis Testing Framework]]
 - [[Credible Intervals]]
 - [[Wald Test Statistic]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Point Estimation]]
 - [[Continuous Probability Distributions]]
 - [[Central Limit Theorem]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
@@ -240,4 +208,4 @@ Common exam questions include:
 
 ## Sources
 
-- [[01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+- [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]

@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 30
+order: 41
 ---
 
 # Problem — Bounding Tail Probabilities with Chebyshev and Chernoff
 
-> 📖 **Reading Order:** Step 30 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> 📖 **Reading Order:** Step 41 of 103 | **Module 4:** Probability Bounds and Inequalities  
 > ◄ **Previous:** [[Comparison of Probability Bounds Example]] | ► **Next:** [[Law of Large Numbers]]
-
 ---
-
----
-
 ## Problem
 
 A high-frequency network switch processes incoming packets. The number of packets arriving in a 1-millisecond window follows a Poisson distribution with mean $\lambda = 20$:
@@ -28,11 +24,7 @@ $$P(X \ge 40)$$
    - Differentiate the exponent to find the exact optimal value $t^*$ that minimizes the bound.
    - Calculate the resulting Chernoff upper bound on $P(X \ge 40)$.
 4. **Analysis:** Compare the resulting bounds and explain why the Chernoff bound achieves exponential tightness.
-
 ---
-
----
-
 ## Given
 
 - Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
@@ -58,11 +50,7 @@ $$P(X \ge 40)$$
 - [[Markov Inequality]] — First-moment bounding.
 - [[Chebyshev Inequality]] — Variance-based bounding.
 - [[Chernoff Bound]] — MGF convex optimization.
-
 ---
-
----
-
 ## Question Type
 
 Probability / Statistical Inference / Markov Chain Analysis
@@ -162,11 +150,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 1. **Failure to check $t^* > 0$:** If the requested threshold $a$ is less than the mean ($a < \mu$), the optimal $t^*$ will be negative, meaning one must use the lower tail Chernoff bound ($t < 0$).
 2. **Algebraic error in $h(t)$:** Forgetting to subtract the $-40t$ term when substituting $t^* = \ln 2$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.

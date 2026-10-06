@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 44
+order: 55
 ---
 
 # Likelihood and Score Equations
 
-> 📖 **Reading Order:** Step 44 of 92 | **Module 7:** Parametric Inference  
+> 📖 **Reading Order:** Step 55 of 103 | **Module 7:** Parametric Inference  
 > ◄ **Previous:** [[Maximum Likelihood Estimation]] | ► **Next:** [[Normal Distribution Parameter MLE Derivation Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Likelihood and Score Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -54,11 +50,7 @@ $$I_n(\theta) = n I_1(\theta) = - E_\theta\left[\frac{\partial^2 \ell_n(\theta)}
 $$\text{se}(\hat{\theta}_n) \approx \frac{1}{\sqrt{I_n(\theta)}} = \frac{1}{\sqrt{n I_1(\theta)}}$$
 The plug-in estimated standard error is:
 $$\widehat{\text{se}}(\hat{\theta}_n) = \frac{1}{\sqrt{I_n(\hat{\theta}_n)}}$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -69,32 +61,20 @@ $$\widehat{\text{se}}(\hat{\theta}_n) = \frac{1}{\sqrt{I_n(\hat{\theta}_n)}}$$
 | $I_1(\theta)$ | Fisher Information from one observation | Positive scalar / Pos-def matrix |
 | $I_n(\theta)$ | Total Fisher Information from $n$ samples | $n I_1(\theta)$ |
 | $\hat{\theta}_n$ | Root of the score equation (MLE) | Parameter space $\Theta$ |
-
 ---
-
----
-
 ## Conditions
 
 1. **Differentiability:** The density $f(x; \theta)$ must be twice continuously differentiable with respect to $\theta$.
 2. **Common Support:** The support $\{x : f(x; \theta) > 0\}$ must **not** depend on the parameter $\theta$ (this allows differentiation under the integral sign).
 3. **Identifiability:** Distinct parameter values must yield distinct probability distributions: $\theta_1 \ne \theta_2 \implies f(x; \theta_1) \ne f(x; \theta_2)$.
-
 ---
-
----
-
 ## Intuition
 
 ### Intuition
 
 - The **score function** $S_n(\theta)$ represents the slope of the log-likelihood curve at any candidate parameter $\theta$. If $S_n(\theta) > 0$, increasing $\theta$ increases likelihood; if $S_n(\theta) < 0$, decreasing $\theta$ increases likelihood. At the optimal parameter guess $\hat{\theta}_{\text{MLE}}$, the curve reaches its peak, where the slope is flat ($S_n = 0$).
 - The **Fisher Information** $I_n(\theta)$ measures the **curvature** (concavity) of the log-likelihood peak. If the log-likelihood curve is sharply curved (large second derivative, high Fisher information), the peak is narrowly defined and our estimate $\hat{\theta}$ has very small variance. If the peak is flat and broad (low Fisher information), the data provide little precision and $\hat{\theta}$ has high standard error.
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation of Expected Score and Fisher Information Identity
@@ -121,11 +101,7 @@ $$E_\theta\left[\frac{\partial^2 \log f(X; \theta)}{\partial \theta^2}\right] + 
 
 Since $E_\theta[S_1(\theta)] = 0$, $\text{Var}_\theta(S_1(\theta)) = E_\theta[S_1(\theta)^2]$. Therefore:
 $$I_1(\theta) = - E_\theta\left[\frac{\partial^2 \log f(X; \theta)}{\partial \theta^2}\right] = \text{Var}_\theta(S_1(\theta)) \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example: Poisson Rate Parameter
@@ -142,22 +118,14 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
    $$I_n(\lambda) = -E\left[-\frac{\sum X_i}{\lambda^2}\right] = \frac{n E[X_i]}{\lambda^2} = \frac{n \lambda}{\lambda^2} = \frac{n}{\lambda}$$
 4. **Asymptotic Standard Error:**
    $$\text{se}(\hat{\lambda}) = \frac{1}{\sqrt{I_n(\lambda)}} = \sqrt{\frac{\lambda}{n}} \implies \widehat{\text{se}} = \sqrt{\frac{\bar{X}}{n}}$$
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
 
 - Forgetting to take the negative expectation when computing Fisher information: $I(\theta) = -E[\ell'']$, not $E[\ell'']$.
 - Forgetting that the score equation requires the support of the distribution to be independent of $\theta$.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Maximum Likelihood Estimation]]
@@ -165,11 +133,7 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
 - [[Wald Test Statistic]]
 - [[Discrete and Continuous Parameter MLE Reference Examples]]
 - [[Normal Distribution Parameter MLE Derivation Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Point Estimation]]
@@ -186,5 +150,5 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
-- [[01 - Sources/Lectures/MLE.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/MLE.pdf]]

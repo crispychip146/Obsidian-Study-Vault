@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 50
+order: 61
 ---
 
 # Maximum A Posteriori (MAP) Estimation
 
-> 📖 **Reading Order:** Step 50 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 61 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Bayesian Inference]] | ► **Next:** [[Credible Intervals]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum A Posteriori (MAP) Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -26,11 +22,7 @@ If the posterior distribution $f(\theta \mid \mathbf{x})$ is a landscape of hill
 
 It answers the question:
 > *"What is the single most probable parameter value given both my prior scientific knowledge and my collected data?"*
-
 ---
-
----
-
 ## Definition
 
 The **Maximum A Posteriori (MAP)** estimator is a Bayesian point estimation method that selects the value of the parameter $\theta \in \Theta$ that maximizes the posterior probability density function:
@@ -45,11 +37,7 @@ $$\hat{\theta}_{\text{MAP}} = \arg\max_{\theta \in \Theta} \Big[ L_n(\theta) f(\
 
 Taking the natural logarithm, MAP maximizes the sum of the log-likelihood and the log-prior:
 $$\hat{\theta}_{\text{MAP}} = \arg\max_{\theta \in \Theta} \Big[ \ell_n(\theta) + \log f(\theta) \Big]$$
-
 ---
-
----
-
 ## How It Works
 
 ### MAP vs. MLE: The Key Distinction
@@ -113,11 +101,7 @@ This is precisely **Lasso Regression** ($L_1$ regularization), which induces exa
 ### Limitations of MAP
 1. **Not Invariant under Reparameterization:** Unlike MLE, MAP depends on the parameterization chosen because the Jacobian of the transformation alters the prior density.
 2. **Ignores Posterior Uncertainty:** MAP returns only a single point and ignores the spread or skewness of the posterior distribution.
-
 ---
-
----
-
 ## Example
 
 ### Mode Derivation of Beta-Bernoulli MAP Estimator
@@ -188,33 +172,21 @@ For detailed worked examples comparing MAP, MLE, and Posterior Means across samp
 
 - Concluding that MAP and Posterior Mean are always the same. They only coincide when the posterior distribution is symmetric and unimodal.
 - Forgetting that when $\alpha \le 1$ or $\beta \le 1$, the Beta mode can occur at the boundary $0$ or $1$.
-
 ---
-
----
-
 ## Exam Relevance
 
 In exam problems, expect to:
 1. Maximize posterior kernels to compute closed-form MAP estimators for Gaussian, Poisson, and Beta models.
 2. Explain the duality between Gaussian/Laplace priors and Ridge/Lasso regularization penalties.
 3. Compare MAP estimates against MLE and Bayes posterior means under flat priors.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Bayesian Inference]]
 - [[Maximum Likelihood Estimation]]
 - [[Beta-Binomial Conjugate Updating Formula]]
 - [[Credible Intervals]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Bayesian Inference]]
@@ -231,5 +203,5 @@ In exam problems, expect to:
 
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]

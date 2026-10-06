@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 8
 ---
-
 # Threads and Multithreading Models
 
-> 📖 **Reading Order:** Step 08 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 08 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Process Creation and Termination Operations]] | ► **Next:** [[CPU Multiprogramming Utilization Formula]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1d, 2019 Q4b, 2019 Q4c, 2020 Q1c, 2020 Q2c, 2021 Q1b, 2021 Q3c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
 >
@@ -31,9 +29,6 @@ order: 8
 >    - Non-blocking: if one user thread blocks, the user-space scheduler switches runnable user threads onto remaining available kernel threads.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 Modern CPUs feature multi-core architectures capable of executing multiple instruction streams in parallel. While spawning separate processes enables concurrency, every process requires its own private address space, page tables, open file tables, and PCB.
@@ -41,7 +36,6 @@ Modern CPUs feature multi-core architectures capable of executing multiple instr
 We want concurrent tasks within an application (e.g. rendering UI, spell-checking text, and downloading files in a document editor) to cooperate with minimal creation and context-switch overhead, while directly sharing common memory data structures. The central obstacle is that traditional process isolation makes memory sharing slow and cumbersome, requiring explicit IPC channels and frequent kernel boundary crossings.
 
 ---
-
 ## Developing the Idea
 
 To enable lightweight concurrency within a single application, the OS decomposes the process abstraction into two separate units:
@@ -51,7 +45,6 @@ To enable lightweight concurrency within a single application, the OS decomposes
 All threads belonging to the same process share the identical address space and heap. This enables blazing-fast communication via shared variables, but introduces synchronization risks: threads can overwrite each other's data if not synchronized.
 
 ---
-
 ## Definition
 
 A **thread** (often called a **Lightweight Process (LWP)**) is the smallest basic unit of CPU execution and scheduling within an operating system.
@@ -91,9 +84,6 @@ flowchart TD
 ```
 
 ---
-
----
-
 ## How It Works
 
 ### Multithreading Implementation Models
@@ -139,9 +129,6 @@ flowchart TD
 - **Disadvantages:** Extremely complex to implement; requires continuous kernel-to-user coordination (scheduler activations).
 
 ---
-
----
-
 ## Example
 
 A multithreaded web server:
@@ -152,13 +139,11 @@ A multithreaded web server:
 - Context switching between worker threads avoids TLB invalidation because both threads share the same page table.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Shared vs. Private State Invariant:** Threads share Code, Data, Heap, and File Descriptors, but maintain strictly private Stacks, Program Counters, and Register sets.
@@ -166,7 +151,6 @@ See related modules for microarchitectural implementation details.
 - **Context Switch Efficiency:** Thread switching is substantially faster than process switching because memory page tables (CR3 register) remain unchanged, preserving CPU cache and TLB warm states.
 
 ---
-
 ## Common Mistakes
 
 1. **Race Conditions on Shared Memory:**
@@ -178,9 +162,6 @@ See related modules for microarchitectural implementation details.
    - Each thread is allocated a private stack inside the process's virtual address space. Because multiple stacks share the space, stack sizes are fixed and smaller (often 1–2 MB), increasing the danger of thread stack overflows colliding with neighbor stacks.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** How does the degree of multiprogramming and thread concurrency affect total CPU throughput? (See [[CPU Multiprogramming Utilization Formula]]).
@@ -191,9 +172,6 @@ See related modules for microarchitectural implementation details.
   - "Contrast the Many-to-One and One-to-One multithreading models."
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Race Conditions and Critical-Section Problem]]
@@ -201,20 +179,17 @@ See related modules for microarchitectural implementation details.
 - [[Monitors and Condition Variables]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Problems
 
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 29–42)

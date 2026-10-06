@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 33
 ---
-
 # Problem — Banker's Algorithm Safe State and Request Granting
 
-> 📖 **Reading Order:** Step 33 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 33 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Resource Allocation Graph Cycle Detection Example]] | ► **Next:** [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
 
 ---
-
----
-
 ## Problem
 
 Consider a system with **5 processes** ($P_0, P_1, P_2, P_3, P_4$) and **4 resource types** ($A, B, C, D$).  
@@ -41,41 +37,33 @@ At time $t_0$, the resource allocation state is as follows:
    Can this request be granted immediately? Explain step-by-step why or why not.
 
 ---
-
----
-
 ## Given
 
 - Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
 
 ---
-
 ## Required
 
 - Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
 
 ---
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Question Type
 
 Algorithm Simulation / Deadlock Avoidance
 
 ---
-
 ## Solution
 
 ### Understanding the Situation
@@ -111,7 +99,6 @@ $$A = (7 - 5, \; 6 - 5, \; 8 - 8, \; 5 - 4) = \mathbf{(2, 1, 0, 1)}$$
 | **$P_4$** | $(4, 3, 3, 2)$ | $(3, 0, 1, 1)$ | $(1, 3, 2, 1)$ |
 
 ---
-
 ### Part 2: Initial Safety Check
 
 Initialize $Work = A = (2, 1, 0, 1)$ and $Finish = [F, F, F, F, F]$.
@@ -150,7 +137,6 @@ Initialize $Work = A = (2, 1, 0, 1)$ and $Finish = [F, F, F, F, F]$.
 $$\mathbf{\langle P_0, P_2, P_1, P_3, P_4 \rangle}$$
 
 ---
-
 ### Part 3: Scenario 1 Evaluation ($Request_1 = (1, 1, 0, 0)$)
 
 1. **Check Condition 1:** $Request_1 \le Need_1$?
@@ -179,7 +165,6 @@ $$\mathbf{\langle P_0, P_2, P_1, P_3, P_4 \rangle}$$
 **Decision: GRANT THE REQUEST IMMEDIATELY.**
 
 ---
-
 ### Part 4: Scenario 2 Evaluation ($Request_4 = (1, 2, 0, 1)$)
 
 1. **Check Condition 1:** $Request_4 \le Need_4$?
@@ -193,45 +178,38 @@ $$\mathbf{\langle P_0, P_2, P_1, P_3, P_4 \rangle}$$
 The request **cannot be granted immediately** because the system does not possess enough free instances of Resource $B$. Process $P_4$ is placed in a waiting queue.
 
 ---
-
 ### Result and Interpretation
 The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
 
 ---
-
 ## Reusable Insight
 
 Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
 
 ---
-
 ## Common Mistakes
 
 - Misinterpreting the initial state vector or indexing offsets.
 - Confusing necessary conditions with sufficient conditions during analysis.
 
 ---
-
 ## Exam Pattern
 
 Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
 
 ---
-
 ## Related Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Related Concepts
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
 ## Source
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 28–31: Banker's Algorithm) and `Notes on algorithm simulation.pdf`.

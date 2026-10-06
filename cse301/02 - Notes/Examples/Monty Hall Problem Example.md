@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 22
+order: 32
 ---
 
 # Monty Hall Problem Example
 
-> 📖 **Reading Order:** Step 22 of 92 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Eve's Law (Law of Total Variance)]] | ► **Next:** [[Random Number of Random Variables Sum Example]]
-
+> 📖 **Reading Order:** Step 32 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Eve's Law (Law of Total Variance)]] | ► **Next:** [[Ace of Spades Conditioning Paradox Example]]
 ---
-
----
-
 ## Problem
 
 On a game show, you are presented with three closed doors ($1, 2, 3$):
@@ -27,11 +23,7 @@ The game proceeds as follows:
 4. Monty then offers you a choice: **"Do you want to stick with Door 1, or switch to the remaining closed door?"**
 
 **Question:** Does switching increase your probability of winning the car? If so, what is the winning probability under switching?
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -108,11 +100,7 @@ People instinctively assume: *"Two doors are left, so the probability must be 50
 The fallacy overlooks the **host's protocol and knowledge**:
 - Monty is not opening a door at random (which might reveal a car).
 - Monty acts as an informational funnel: all $2/3$ probability that the car was in $\{ \text{Door 2, Door 3} \}$ gets concentrated into whichever of those two doors Monty did **not** open!
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -142,11 +130,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[Conditional Probability and Independence]] — Sample space reduction.
 - [[Law of Total Probability and Bayes' Rule]] — The mathematical machinery used in Method 2.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 5, pages 15–16)

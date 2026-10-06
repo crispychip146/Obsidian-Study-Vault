@@ -7,16 +7,8 @@ order: 27
 
 # Mark-and-Sweep Garbage Collection Algorithm
 
-> 📖 **Reading Order:** Step 27 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 27 of 55 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Trace-Based Garbage Collection Algorithms]] | ► **Next:** [[Copying Garbage Collection Algorithm]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -50,14 +42,6 @@ flowchart TD
     end
     Mark_Phase --> Sweep_Phase
 ```
-
----
-
----
-
----
-
----
 
 ---
 
@@ -111,63 +95,19 @@ class MarkSweepCollector:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Managed heap memory space, free list, and root pointer references from active stack frames and static globals.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Reclaimed heap blocks merged into the free list; mark bits reset for surviving live objects.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Performance Bottlenecks & Modern Industrial Optimizations
 
@@ -190,7 +130,6 @@ Modern production runtimes (such as Go and the Java HotSpot JVM) do **not** stor
 
 ---
 
----
 ### Properties
 
 ### Formal Proof of Correctness
@@ -220,95 +159,9 @@ Modern production runtimes (such as Go and the Java HotSpot JVM) do **not** stor
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
 
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
 The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
 
 ---
 
@@ -328,12 +181,6 @@ $O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ---
 
----
-
----
-
----
-
 ## Properties
 
 - **Termination:** Provably terminates on all well-formed compiler inputs.
@@ -343,92 +190,41 @@ $O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ## Limitations
 
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
+- Sweep phase cost is proportional to entire heap size rather than live objects.
+- Causes heap fragmentation because memory is not compacted.
 
 ---
 
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to update liveness information or next-use pointers.
 - Misinterpreting index bounds during stack or interval scans.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Mark-and-Sweep Garbage Collection Algorithm on given code fragments or graphs.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Garbage Collection Fundamentals and Reference Counting]]
+- [[Trace-Based Garbage Collection Algorithms]]
+- [[Copying Garbage Collection Algorithm]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Trace-Based Garbage Collection Algorithms]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — Activation Record and Display Table Tracing]]
 
 ---
 

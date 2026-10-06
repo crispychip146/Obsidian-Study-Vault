@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 29
+order: 40
 ---
 
 # Comparison of Probability Bounds Example
 
-> 📖 **Reading Order:** Step 29 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> 📖 **Reading Order:** Step 40 of 103 | **Module 4:** Probability Bounds and Inequalities  
 > ◄ **Previous:** [[Cauchy-Schwarz and Jensen Inequalities]] | ► **Next:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
-
 ---
-
----
-
 ## Problem
 
 Suppose a fair coin is flipped $n = 100$ times independently. Let $X$ denote the total number of heads observed:
@@ -28,11 +24,7 @@ We will compare the bounds given by:
 3. **Cantelli's Inequality (One-Sided Chebyshev)**
 4. **Chernoff Bound** (utilizing the complete MGF)
 5. **Exact Probability** (sum of binomial coefficients)
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -99,11 +91,7 @@ $$e^{-12.5} \approx 3.727 \times 10^{-6} \approx 0.000373\%$$
 
 ### 5. Exact Calculation
 $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \times 10^{-7}$$
-
 ---
-
----
-
 ## Result
 
 | Method | Information Leveraged | Bound for $P(X \ge 75)$ | Relative Ratio to Exact |
@@ -113,11 +101,7 @@ $$P(X \ge 75) = \sum_{k=75}^{100} \binom{100}{k} (0.5)^{100} \approx 2.824 \time
 | **Cantelli** | First 2 moments (one-sided) | $\le 0.0385$ | $\approx 1.36 \times 10^5 \times$ |
 | **Chernoff** | Entire MGF (all moments) | $\le 3.73 \times 10^{-6}$ | $\approx 13.2 \times$ |
 | **Exact** | Complete PMF | $= 2.82 \times 10^{-7}$ | $1.0 \times$ (exact) |
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -128,11 +112,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 - **Information Principle:** Every additional statistical moment integrated into an inequality tightens the bound by orders of magnitude.
 - **Tail Behavior:** For deviations far out in the tail ($k \ge 3$ standard deviations), polynomial bounds (Chebyshev) are very conservative, while Chernoff's exponential decay closely mirrors the true tail probability.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -145,11 +125,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Chebyshev Inequality]] — Variance-based concentration.
 - [[Chernoff Bound]] — MGF optimization.
 - [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]] — Multi-tier bounding exercises.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17 & 18, pages 54–59)

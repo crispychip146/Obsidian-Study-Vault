@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 26
 ---
-
 # Deadlock Fundamentals and Coffman Conditions
 
-> 📖 **Reading Order:** Step 26 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 26 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]] | ► **Next:** [[Resource Allocation Graphs and Deadlock Modeling]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2a, 2017 Q2b, 2018 Q2b, 2019 Q3c, 2020 Q1b, 2021 Q1c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
 >
@@ -32,9 +30,6 @@ order: 26
 >    - $T_1(L_1, L_2), T_2(L_2, L_3), T_3(L_3, L_4), T_4(L_4, L_1)$. If each thread acquires its first lock, a closed wait-for cycle $T_1 \to L_2 \to T_2 \to L_3 \to T_3 \to L_4 \to T_4 \to L_1 \to T_1$ is established. Since locks are single-unit and non-preemptable, deadlock is guaranteed.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 In any multitasking system, processes compete for exclusive access to shared resources: disk drives, database record locks, printer queues, and memory buffers.
@@ -42,7 +37,6 @@ In any multitasking system, processes compete for exclusive access to shared res
 We want every process to obtain the resources it needs, execute its computation, and release those resources back to the pool. The central obstacle is the phenomenon of **Deadlock**: a circular waiting condition where two or more processes are permanently frozen, each holding a resource the other needs and waiting for a resource the other holds, such that none can ever proceed.
 
 ---
-
 ## Developing the Idea
 
 In 1971, **Edward G. Coffman Jr.** established the theoretical foundation of deadlock analysis by proving that a system deadlock can occur if and only if **four necessary conditions** hold simultaneously:
@@ -52,7 +46,6 @@ In 1971, **Edward G. Coffman Jr.** established the theoretical foundation of dea
 4. **Circular Wait:** A closed chain of processes $\{P_0, P_1, \dots, P_n\}$ exists such that $P_0$ waits for a resource held by $P_1$, $P_1$ waits for $P_2$, and $P_n$ waits for $P_0$.
 
 ---
-
 ## Definition
 
 In a multiprogramming system, processes execute concurrently and compete for a finite set of hardware and software resources (such as CPU, memory pages, disk drives, printers, mutex locks, and database records).
@@ -74,9 +67,6 @@ Any legitimate process must interact with a resource through three sequential ph
 3. **Release:** Explicitly relinquish the resource back to the OS.
 
 ---
-
----
-
 ## How It Works
 
 ### 2. The Four Coffman Conditions (1971)
@@ -94,9 +84,6 @@ In 1971, Edward G. Coffman Jr. proved that a resource deadlock can occur **if an
 > **All four conditions are necessary.** If an operating system successfully invalidates or breaks **even one** of these four conditions, a deadlock is mathematically impossible!
 
 ---
-
----
-
 ## Example
 
 Two processes $P_1$ and $P_2$, and two resources: Tape Drive $R_1$ and Printer $R_2$:
@@ -107,13 +94,11 @@ Two processes $P_1$ and $P_2$, and two resources: Tape Drive $R_1$ and Printer $
 Both processes are permanently blocked. Neither will ever call `release()`.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Coffman Equivalence Theorem:** A deadlock state occurs if and only if all four Coffman conditions are simultaneously satisfied. Eliminating even one single condition completely guarantees that deadlock cannot occur.
@@ -123,20 +108,17 @@ See related modules for microarchitectural implementation details.
   - *Livelock:* Processes actively change state in response to each other, but make zero forward progress (consuming 100% CPU).
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
 
 ---
-
 ## Related Concepts
 
 - [[Resource Allocation Graphs and Deadlock Modeling]]
@@ -145,21 +127,18 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 - [[Deadlock Detection and Recovery Algorithms]]
 
 ---
-
 ## Prerequisites
 
 - [[Semaphores and Synchronization Primitives]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 1–15, 38–41: Resources, Conditions for Deadlocks, Ostrich Algorithm, Livelock, Starvation).

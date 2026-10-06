@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 9
+order: 11
 ---
 
 # Continuous Probability Distributions
 
-> 📖 **Reading Order:** Step 09 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Discrete Probability Distributions]] | ► **Next:** [[Joint and Marginal Distributions]]
-
+> 📖 **Reading Order:** Step 11 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Multinomial Distribution]] | ► **Next:** [[Cauchy and Student-t Distributions]]
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Continuous Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -126,11 +122,7 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 | **Exponential** | $\operatorname{Exp}(\lambda)$ | $\lambda > 0$ | $\lambda e^{-\lambda x}$ | $[0, \infty)$ | $\frac{1}{\lambda}$ | $\frac{1}{\lambda^2}$ |
 | **Gamma** | $\operatorname{Gamma}(a, \lambda)$ | $a > 0, \lambda > 0$ | $\frac{\lambda^a}{\Gamma(a)}x^{a-1}e^{-\lambda x}$ | $(0, \infty)$ | $\frac{a}{\lambda}$ | $\frac{a}{\lambda^2}$ |
 | **Beta** | $\operatorname{Beta}(a, b)$ | $a > 0, b > 0$ | $\frac{p^{a-1}(1-p)^{b-1}}{B(a, b)}$ | $(0, 1)$ | $\frac{a}{a+b}$ | $\frac{ab}{(a+b)^2(a+b+1)}$ |
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Gaussian Standardization and Exponential Waiting Times
@@ -148,10 +140,15 @@ with $f_X(x) \ge 0$ everywhere and $\int_{-\infty}^\infty f_X(x) \, dx = 1$.
 For extended worked applications, see:
 - [[Exponential Distribution Memorylessness Example]] — Analytical proof and server queue applications of memorylessness.
 - [[Normal Approximation to Binomial and Poisson Example]] — Large-sample Gaussian approximations with continuity correction.
+- [[Gaussian Normalizing Constant Polar Derivation Example]] — Full multivariable calculus and polar Jacobian proof of the Gaussian $1/\sqrt{2\pi}$ factor.
+- [[Expected Absolute Distance of Random Variables Example]] — Expected Euclidean distance $E|X-Y|$ for Uniform and Normal variables.
 
 ---
 
 ## Technical Details
+
+### Gaussian Normalizing Constant Proof
+Evaluating the 1D integral $\int_{-\infty}^\infty e^{-z^2/2} dz = \sqrt{2\pi}$ requires squaring the integral and transforming to polar coordinates in 2D $\mathbb{R}^2$ with Jacobian $|J| = r$. See [[Gaussian Normalizing Constant Polar Derivation Example]] for the full step-by-step derivation.
 
 ### Universality of the Uniform (Probability Integral Transform)
 Let $F$ be any continuous, strictly increasing CDF with inverse $F^{-1}$.
@@ -164,6 +161,9 @@ This universality underpins all pseudo-random simulation, Monte Carlo methods, a
 For a standard normal variable $Z \sim \mathcal{N}(0, 1)$ and $z > 0$:
 $$\left(\frac{1}{z} - \frac{1}{z^3}\right) \phi(z) < P(Z > z) < \frac{1}{z} \phi(z)$$
 where $\phi(z) = \frac{1}{\sqrt{2\pi}} e^{-z^2/2}$. Asymptotically as $z \to \infty$, $P(Z > z) \sim \frac{\phi(z)}{z}$.
+
+### Heavy-Tailed & Sampling Distributions: Cauchy and Student's $t$
+When continuous variables are formed as ratios of normals ($X = W/Y$), moments may diverge completely. See [[Cauchy and Student-t Distributions]] for heavy-tailed distributions and finite sample inference.
 
 ### Duality Between Poisson and Gamma Processes
 If events occur according to a Poisson process with rate $\lambda$, let $T_a$ be the arrival time of the $a$-th event ($T_a \sim \operatorname{Gamma}(a, \lambda)$) and $N(t)$ be the count of arrivals in $[0, t]$ ($N(t) \sim \operatorname{Pois}(\lambda t)$):
@@ -195,16 +195,16 @@ For Bayesian prior applications, see [[Beta-Binomial Conjugate Updating Formula]
 - **Queueing Theory:** Inter-arrival and service times in [[M-M-1 Queue]] are exponentially distributed due to memorylessness.
 - **Inference:** Normal and Beta distributions form the pillars of [[Normal-Normal Conjugate Updating Formula]] and [[Maximum Likelihood Estimation]].
 - **Asymptotics:** The [[Central Limit Theorem]] guarantees that sums of arbitrary finite-variance distributions converge to the Normal distribution.
-
+- **Heavy Tails:** [[Cauchy and Student-t Distributions]] illustrates the boundary where LLN and CLT fail due to undefined moments.
 ---
-
----
-
 ## Related Concepts
 
 - [[Discrete Probability Distributions]]
 - [[Random Variables and Probability Distributions]]
 - [[Central Limit Theorem]]
+- [[Cauchy and Student-t Distributions]]
+- [[Gaussian Normalizing Constant Polar Derivation Example]]
+- [[Expected Absolute Distance of Random Variables Example]]
 - [[M-M-1 Queue]]
 - [[Beta-Binomial Conjugate Updating Formula]]
 

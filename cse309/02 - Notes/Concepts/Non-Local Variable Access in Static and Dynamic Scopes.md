@@ -7,16 +7,8 @@ order: 23
 
 # Non-Local Variable Access in Static and Dynamic Scopes
 
-> 📖 **Reading Order:** Step 23 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 23 of 55 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Calling Sequences and Stack Frame Management]] | ► **Next:** [[Heap Memory Management and Allocation Strategies]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -66,14 +58,6 @@ graph TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 Under **Static Scope (Lexical Scope)**, variable bindings are determined entirely by the textual nesting of procedures in the source code, independent of runtime call sequences.
@@ -118,33 +102,13 @@ Suppose procedure $P$ at nesting depth $n_P$ references a variable $v$ declared 
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Non-Local Variable Access in Static and Dynamic Scopes** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### High-Performance Static Scope: The Display Array
 
@@ -195,6 +159,7 @@ When procedure $Q$ at nesting depth $d$ is invoked:
 5. Therefore, by structural induction on the call graph, the display invariant is maintained across all calls and returns. $\blacksquare$
 
 ---
+
 ### Dynamic Scoping: Deep Access vs. Shallow Access
 
 Under **Dynamic Scope** (used in early Lisp, Emacs Lisp, Perl, and Unix shell scripts), non-local names are resolved based on the **runtime call stack**, not textual placement:
@@ -226,6 +191,7 @@ Dynamic Scoping Implementation Approaches:
 - **Trade-off:** Variable access is instantaneous ($O(1)$), but function calls and returns incur overhead saving and restoring symbol bindings.
 
 ---
+
 ### Architectural Comparison Matrix
 
 | Method | Scoping Discipline | Non-Local Access Time | Call/Return Overhead | Memory Overhead |
@@ -234,101 +200,6 @@ Dynamic Scoping Implementation Approaches:
 | **Display Array** | Static (Lexical) | **$O(1)$ direct indexed load** | $O(1)$ save/restore entry | Small global array ($D_{max}$ words) |
 | **Deep Access** | Dynamic | $O(\text{Call Stack Depth})$ | **$O(1)$ zero setup** | Zero extra memory |
 | **Shallow Access** | Dynamic | **$O(1)$ central table lookup**| $O(\text{number of locals})$ | Central name directory + binding stacks |
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -353,74 +224,34 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Run-Time Storage Organization and Activation Records]]
+- [[Calling Sequences and Stack Frame Management]]
+- [[Display Maintenance and Non-Local Access Simulation Example]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Run-Time Storage Organization and Activation Records]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Activation Record and Display Table Tracing]]
 
 ---
 

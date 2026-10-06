@@ -7,13 +7,9 @@ order: 2
 
 # Probability Axioms and Naive Probability
 
-> 📖 **Reading Order:** Step 02 of 92 | **Module 1:** Counting and Discrete Probability  
+> 📖 **Reading Order:** Step 02 of 103 | **Module 1:** Counting and Discrete Probability  
 > ◄ **Previous:** [[Combinatorics and Counting Principles]] | ► **Next:** [[Inclusion-Exclusion Principle]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Probability Axioms and Naive Probability, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -34,11 +30,7 @@ By formalizing sample spaces, probability measures, state transitions, or likeli
 - $P$ is a **probability function** (a real-valued measure assigning a number $P(A) \in [0, 1]$ to each event $A \in \mathcal{F}$).
 
 Historically and pedagogically, probability began with the **naive definition**, which applies when the sample space $S$ is finite and all basic outcomes are equally likely.
-
 ---
-
----
-
 ## How It Works
 
 ### The Naive Definition of Probability
@@ -72,11 +64,7 @@ $$P\left( \bigcup_{i=1}^\infty A_i \right) = \sum_{i=1}^\infty P(A_i)$$
 
 For finite collections, this implies **finite additivity**:
 $$P(A_1 \cup A_2 \cup \dots \cup A_n) = \sum_{i=1}^n P(A_i) \quad \text{when } A_i \cap A_j = \emptyset$$
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Applying Complement and Addition Rules
@@ -155,11 +143,7 @@ From the three axioms, all foundational properties of probability follow deducti
      $$\lim_{n \to \infty} P(A_n) = P(A)$$
    - If $A_1 \supseteq A_2 \supseteq A_3 \supseteq \dots$ (decreasing sequence) with $A = \bigcap_{n=1}^\infty A_n$, then:
      $$\lim_{n \to \infty} P(A_n) = P(A)$$
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Edge Cases & Common Pitfalls
@@ -173,11 +157,7 @@ From the three axioms, all foundational properties of probability follow deducti
    - *Key Distinction:* If two non-trivial events ($P(A) > 0, P(B) > 0$) are mutually exclusive, they **cannot** be independent, because knowing $A$ occurred tells you $B$ definitely did not occur!
 3. **Double Counting in Unions:**
    - Always subtract intersections when computing $P(A \cup B)$ unless sets are known to be disjoint. For multiple sets, apply the [[Inclusion-Exclusion Principle]].
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -186,11 +166,7 @@ From the three axioms, all foundational properties of probability follow deducti
 - **Conditional Probability:** Axioms extend directly into conditional probability spaces $P(\cdot \mid B)$ (see [[Conditional Probability and Independence]]).
 - **Inclusion-Exclusion:** Generalizes the two-set union rule to $n$ sets (see [[Inclusion-Exclusion Principle]]).
 - **Exam Patterns:** Frequently tested in warm-up problems, proof derivations (e.g., proving $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ from axioms), and assessing the validity of probability functions.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Combinatorics and Counting Principles]]

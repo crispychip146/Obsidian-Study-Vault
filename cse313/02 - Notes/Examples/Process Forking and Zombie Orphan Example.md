@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 10
 ---
-
 # Process Forking and Zombie Orphan Example
 
-> 📖 **Reading Order:** Step 10 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 10 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[CPU Multiprogramming Utilization Formula]] | ► **Next:** [[Problem — Fork Execution Tree and Process Tracing]]
 
 ---
-
----
-
 ## Problem
 
 Understanding process creation, variable isolation, and process termination in UNIX requires analyzing real POSIX C implementations.
@@ -24,27 +20,21 @@ We examine three fundamental scenarios:
 3. **Scenario 3:** Constructing and observing an **Orphan Process** adopted by `init`/`systemd`.
 
 ---
-
----
-
 ## Given
 
 - System state matrices, resource vectors, and process workload parameters as specified in problem setup.
 
 ---
-
 ## Required
 
 - Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
 
 ---
-
 ## Understanding the Problem and Choosing the Method
 
 Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
 
 ---
-
 ## Solution
 
 ### Scenario 1: Standard `fork()` and Variable Isolation
@@ -92,9 +82,6 @@ int main() {
 - This proves that `fork()` creates an **independent copy** of the address space. Child and parent do NOT share memory variables!
 
 ---
-
----
-
 ### Scenario 2: Creating a Zombie Process in C
 
 A zombie occurs when a child terminates, but its parent is sleeping or busy and fails to call `wait()`.
@@ -134,9 +121,6 @@ UID   PID  PPID  C STIME TTY          TIME CMD
 - When the parent finishes its 30-second sleep and exits, the zombie child is adopted by `systemd` (PID 1), which reaps it instantly.
 
 ---
-
----
-
 ### Scenario 3: Creating an Orphan Process in C
 
 An orphan occurs when the parent terminates while the child continues executing.
@@ -177,9 +161,6 @@ $
 - The shell prompt `$` returned early because the parent exited, but the child continued running safely in the background as an orphan.
 
 ---
-
----
-
 ### How to Properly Reap Child Exit Status
 
 To prevent zombies, a parent should always use `wait(&status)` or `waitpid(pid, &status, options)`:
@@ -200,45 +181,33 @@ if (WIFEXITED(status)) {
 ```
 
 ---
-
----
-
 ## Result
 
 The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
 
 ---
-
 ## Why This Works
 
 Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
 
 ---
-
 ## Common Mistakes
 
 - **Output Order Non-Determinism:** Never assume the child will print before the parent or vice versa. Process scheduling order depends entirely on the CPU scheduler!
 - **Memory Copy Rule:** Any modification to variables in the child process is strictly local to the child. The parent will **never** see variable mutations made by the child.
 
 ---
-
----
-
 ## General Method
 
 Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
 
 ---
-
 ## Related Concepts
 
 - [[Process Creation and Termination Operations]] — Theoretical foundations of `fork()`, `exec()`, zombies, and orphans.
 - [[Problem — Fork Execution Tree and Process Tracing]] — Tracing multi-level nested `fork()` call trees.
 
 ---
-
----
-
 ## Sources
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)

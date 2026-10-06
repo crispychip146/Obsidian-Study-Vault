@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 33
+order: 44
 ---
 
 # Normal Approximation to Binomial and Poisson Example
 
-> 📖 **Reading Order:** Step 33 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> 📖 **Reading Order:** Step 44 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
 > ◄ **Previous:** [[Central Limit Theorem]] | ► **Next:** [[Problem — CLT Implications for the Weak Law of Large Numbers]]
-
 ---
-
----
-
 ## Problem
 
 The [[Central Limit Theorem]] allows us to approximate complicated discrete probability sums with simple standard normal CDF evaluations $\Phi(z)$.
@@ -21,11 +17,7 @@ The [[Central Limit Theorem]] allows us to approximate complicated discrete prob
 We examine two classic applications:
 1. **Election Polling (Binomial / de Moivre–Laplace):** A polling organization samples $n = 400$ registered voters at random. The true proportion supporting Candidate A is $p = 0.52$. What is the probability that the poll incorrectly shows Candidate A with at most $50\%$ of the vote ($X \le 200$)?
 2. **Web Server Burst (Poisson Approximation):** A web server receives $X \sim \operatorname{Pois}(100)$ requests in an hour. What is the probability that the traffic stays within $\pm 10\%$ of its mean ($90 \le X \le 110$)?
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -100,11 +92,7 @@ $$P(90 \le X \le 110) \approx 2(0.8531) - 1 = 1.7062 - 1 = 0.7062 \quad (70.62\%
 ### Step 3: Comparison with Exact Poisson Sum
 The exact sum $\sum_{k=90}^{110} \frac{e^{-100}100^k}{k!} \approx 0.7065$.
 The error is just $0.03\%$!
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -127,11 +115,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
   - $P(X < k) = P(X \le k - 1) \to k - 0.5$
   - $P(X \ge k) \to k - 0.5$
   - $P(X > k) = P(X \ge k + 1) \to k + 0.5$
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -143,11 +127,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Central Limit Theorem]] — Foundational limit theorem.
 - [[Continuous Probability Distributions]] — Standard normal distribution and $\Phi(z)$.
 - [[Discrete Probability Distributions]] — Binomial and Poisson definitions.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 20–21, pages 61–63)

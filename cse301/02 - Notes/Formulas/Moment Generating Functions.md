@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 13
+order: 17
 ---
 
 # Moment Generating Functions
 
-> 📖 **Reading Order:** Step 13 of 92 | **Module 2:** Random Variables and Distributions  
+> 📖 **Reading Order:** Step 17 of 103 | **Module 2:** Random Variables and Distributions  
 > ◄ **Previous:** [[Law of the Unconscious Statistician (LOTUS)]] | ► **Next:** [[Linearity of Expectation and Indicator Random Variables Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Moment Generating Functions, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -31,11 +27,7 @@ By decomposing joint distributions into conditional components, expanding algebr
 The **Moment Generating Function (MGF)** of a random variable $X$ is defined as:
 $$M_X(t) = \mathbb{E}[e^{tX}]$$
 for all real $t$ in some neighborhood $(-h, h)$ with $h > 0$ where the expectation is finite.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -100,11 +92,7 @@ Specifically:
 | **Exponential** | $\lambda > 0$ | $\frac{\lambda}{\lambda - t} = \left( 1 - \frac{t}{\lambda} \right)^{-1}$ | $t < \lambda$ |
 | **Gamma** | $a, \lambda$ | $\left( 1 - \frac{t}{\lambda} \right)^{-a}$ | $t < \lambda$ |
 | **Normal** | $\mathcal{N}(\mu, \sigma^2)$ | $\exp\left( \mu t + \frac{1}{2}\sigma^2 t^2 \right)$ | $t \in \mathbb{R}$ |
-
 ---
-
----
-
 ## Derivation
 
 ### Classic Proof Example: Sum of Independent Normals
@@ -114,11 +102,7 @@ $$M_X(t) = e^{\mu_1 t + \frac{1}{2}\sigma_1^2 t^2}, \quad M_Y(t) = e^{\mu_2 t + 
 $$M_{X+Y}(t) = M_X(t) M_Y(t) = \exp\left( (\mu_1 + \mu_2)t + \frac{1}{2}(\sigma_1^2 + \sigma_2^2)t^2 \right)$$
 By inspection, this matches the MGF of a Normal distribution with mean $\mu_1 + \mu_2$ and variance $\sigma_1^2 + \sigma_2^2$.
 By the **Uniqueness Theorem**, $X + Y \sim \mathcal{N}(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$! $\blacksquare$
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Moment Extraction for the Exponential Distribution

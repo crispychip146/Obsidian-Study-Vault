@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 87
+order: 98
 ---
 
 # Finite Capacity M-M-1-N Queue
 
-> 📖 **Reading Order:** Step 87 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 98 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[M-M-1 Performance Formulas]] | ► **Next:** [[Jackson Networks and Tandem Queues]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Finite Capacity M-M-1-N Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -32,11 +28,7 @@ An **M/M/1/N Queue** (also written M/M/1/K) is a single-server queueing system w
 - At most $N$ customers can be present in the facility simultaneously (1 customer in service and $N - 1$ customers waiting in the buffer).
 - When an arriving customer arrives to find the system completely full (all $N$ positions occupied), the customer is **blocked and turned away** (dropped/lost), entering neither the buffer nor the service mechanism.
 - The state space is finite: $S = \{0, 1, 2, \dots, N\}$.
-
 ---
-
----
-
 ## How It Works
 
 ### State Transition Diagram (Truncated Birth-Death Process)
@@ -127,11 +119,7 @@ Network router engineers use the M/M/1/N model to balance two competing evils:
 2. **Large Buffer ($N$ large):**
    - ✅ Low packet drop rate ($P_N$ is small).
    - ❌ High latency and jitter ($W$ becomes massive under congestion).
-
 ---
-
----
-
 ## Example
 
 ### Packet Router Buffer Analysis ($M/M/1/3$)
@@ -196,11 +184,7 @@ $$\mathbf{W = \frac{L}{\lambda_a} = \frac{L}{\lambda(1 - P_N)}}$$
 ### Why You Must Use $\lambda_a$ Instead of $\lambda$
 - Little's Law relates the average number of customers **in the system** ($L$) to the average time spent **in the system** ($W$).
 - Blocked customers spend exactly **$0$ seconds** in the system. If you divided $L$ by the gross arrival rate $\lambda$, you would dilute the residence time of entering customers with phantom customers who were rejected at the door.
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Using Gross Arrival Rate $\lambda$ in Little's Law:** Dividing $L$ by $\lambda$ instead of effective arrival rate $\lambda_a = \lambda(1 - P_N)$.
@@ -221,11 +205,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Little's Law]]
 - [[PASTA Property and Inspection Paradox]]
 - [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[M-M-1 Queue]]
@@ -242,4 +222,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

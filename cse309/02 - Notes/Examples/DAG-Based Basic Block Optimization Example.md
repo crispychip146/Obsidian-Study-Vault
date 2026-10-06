@@ -12,8 +12,6 @@ order: 40
 
 ---
 
----
-
 ## Problem
 
 Consider the following basic block containing redundant computations and array references:
@@ -36,8 +34,6 @@ Assume that at the exit of this basic block:
 2. Identify and eliminate local common subexpressions.
 3. Perform dead code elimination on the DAG.
 4. Reassemble the optimal Three-Address Code from the simplified DAG.
-
----
 
 ---
 
@@ -150,8 +146,6 @@ f = b
 - Original code: **6 statements**.
 - Optimized code: **4 statements**.
 - The redundant common subexpressions `b + c` (statement 3) and `a - d` (statement 5) were completely eliminated, and dead computation `g = b + c` was purged!
-
----
 
 ---
 

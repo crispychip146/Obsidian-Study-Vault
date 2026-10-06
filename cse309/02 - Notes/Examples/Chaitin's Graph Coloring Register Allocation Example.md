@@ -12,8 +12,6 @@ order: 48
 
 ---
 
----
-
 ## Problem
 
 We trace the exact Register Interference Graph (RIG) and execution of Chaitin's Algorithm presented in the KMS lecture slides (Slides 444–528).
@@ -47,8 +45,6 @@ graph TD
     c --- a
     b --- a
 ```
-
----
 
 ---
 
@@ -149,8 +145,6 @@ We pop nodes in reverse order: `c -> b -> e -> a -> (d) -> f -> g`:
 
 ---
 
----
-
 ## Result
 
 | Variable | Final Allocation | Physical Location |
@@ -164,8 +158,6 @@ We pop nodes in reverse order: `c -> b -> e -> a -> (d) -> f -> g`:
 | **$g$** | Register | **$R_1$** |
 
 Only 1 variable ($d$) required spilling, while 6 variables were packed perfectly into just 3 physical registers!
-
----
 
 ---
 

@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 67
+order: 78
 ---
 
 # Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg
 
-> 📖 **Reading Order:** Step 67 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 78 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]] | ► **Next:** [[Stochastic Process]]
-
 ---
-
----
-
 ## Problem
 
 A bioinformatics researcher evaluates $m = 10$ genes to determine whether their expression levels differ between cancer patients and healthy controls. The $10$ independent hypothesis tests produce the following ordered $p$-values:
@@ -30,11 +26,7 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
    - Tabulate each rank $i$, observed $p$-value $P_{(i)}$, and adaptive threshold $\ell_i = \frac{i}{m} q$.
    - Identify the maximum index $k$ and state which hypotheses are rejected.
 4. Contrast the trade-off between Type I error control and statistical discovery power across the three methods.
-
 ---
-
----
-
 ## Given
 
 - Number of tests: $m = 10$
@@ -42,33 +34,21 @@ $$0.00017, \; 0.00448, \; 0.00671, \; 0.00907, \; 0.01220, \; 0.33626, \; 0.3934
 - Ordered $p$-values:
   $P_{(1)} = 0.00017$, $P_{(2)} = 0.00448$, $P_{(3)} = 0.00671$, $P_{(4)} = 0.00907$, $P_{(5)} = 0.01220$,
   $P_{(6)} = 0.33626$, $P_{(7)} = 0.39341$, $P_{(8)} = 0.53882$, $P_{(9)} = 0.58125$, $P_{(10)} = 0.98617$.
-
 ---
-
----
-
 ## Required
 
 1. Unadjusted rejections and theoretical FWER.
 2. Bonferroni threshold and rejections.
 3. Benjamini-Hochberg rank table, threshold comparison, and rejections.
 4. Methodological comparison.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Multiple Testing and False Discovery Rate]]
 - [[p-Values and Significance]]
 - [[Benjamini-Hochberg Procedure Algorithm]]
 - Family-Wise Error Rate vs. False Discovery Rate
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]
@@ -212,4 +192,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 12
 ---
-
 # CPU Scheduling Principles and Criteria
 
-> 📖 **Reading Order:** Step 12 of 34 | **Module 3:** CPU Scheduling  
+> 📖 **Reading Order:** Step 12 of 68 | **Module 3:** CPU Scheduling  
 > ◄ **Previous:** [[Problem — Fork Execution Tree and Process Tracing]] | ► **Next:** [[Batch Scheduling Algorithms]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2020 Q2a)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Tested with Burst Diagram Analysis)**
 >
@@ -29,9 +27,6 @@ order: 12
 >      ```
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 In a multiprogrammed operating system, multiple runnable processes populate the Ready Queue simultaneously, all competing for execution time on the available CPU cores.
@@ -39,7 +34,6 @@ In a multiprogrammed operating system, multiple runnable processes populate the 
 We want an algorithmic policy to decide which process receives the CPU next, how long it runs, and when it should be preempted, in order to maximize overall system productivity and user satisfaction. The central obstacle is that different scheduling goals conflict directly: minimizing response time for interactive users hurts batch job throughput, while minimizing context-switch overhead hurts fairness.
 
 ---
-
 ## Developing the Idea
 
 The CPU scheduling subsystem resolves this conflict by leveraging the fundamental empirical property of computing workloads: the **CPU–I/O Burst Cycle**.
@@ -51,7 +45,6 @@ Processes alternate between bursts of intensive CPU computation and waiting for 
 By designing schedulers that track burst characteristics, the OS can prioritize I/O-bound jobs to keep peripheral devices busy while interleaving compute-bound jobs during idle periods.
 
 ---
-
 ## Definition
 
 In a multiprogramming operating system, multiple processes reside simultaneously in the Ready state competing for execution time. **CPU Scheduling** is the core operating system mechanism that selects one process from the Ready Queue and allocates a physical CPU core to it.
@@ -59,9 +52,6 @@ In a multiprogramming operating system, multiple processes reside simultaneously
 The component of the operating system that performs this selection is the **Scheduler**, and the algorithm it executes is the **Scheduling Algorithm**.
 
 ---
-
----
-
 ## How It Works
 
 ### The CPU–I/O Burst Cycle
@@ -93,9 +83,6 @@ flowchart LR
 *Key Scheduler Goal:* Prioritize I/O-bound processes to keep I/O devices fully utilized while keeping CPU latency low.
 
 ---
-
----
-
 ## Example
 
 Scheduling decisions at 4 critical points:
@@ -105,13 +92,11 @@ Scheduling decisions at 4 critical points:
 4. Process terminates $	o$ Non-preemptive scheduling.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Preemption vs. Overhead Invariant:** Preemption guarantees bounded response times for interactive applications, but increases total CPU overhead due to frequent context switches and cache thrashing.
@@ -119,7 +104,6 @@ See related modules for microarchitectural implementation details.
 - **Workload Trade-Off Invariant:** No single scheduling algorithm can simultaneously optimize all criteria (Throughput, Turnaround, Waiting Time, Response Time, and CPU Utilization).
 
 ---
-
 ## Common Mistakes
 
 1. **Confusing Waiting Time with Turnaround Time:**
@@ -129,9 +113,6 @@ See related modules for microarchitectural implementation details.
    - Providing instantaneous response times (via tiny Round Robin time quanta) incurs severe context switch overhead, degrading overall throughput.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** How batch systems optimize turnaround time using non-preemptive and shortest-burst strategies (see [[Batch Scheduling Algorithms]]).
@@ -140,9 +121,6 @@ See related modules for microarchitectural implementation details.
 - **Exam Testing:** Frequently tested by asking students to define the 5 scheduling criteria and categorize an algorithm as preemptive vs non-preemptive.
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Batch Scheduling Algorithms]]
@@ -150,20 +128,17 @@ See related modules for microarchitectural implementation details.
 - [[Scheduling Metrics and Burst Estimation Formulas]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Lifecycle and State Transitions]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Problems
 
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 1–14)

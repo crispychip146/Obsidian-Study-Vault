@@ -7,16 +7,8 @@ order: 52
 
 # Global Common Subexpression Elimination and Copy Propagation
 
-> 📖 **Reading Order:** Step 52 of 55 | **Module 6:** Machine-Independent Optimization  
+> 📖 **Reading Order:** Step 52 of 55 | **Module 6: Machine-Independent Optimization**  
 > ◄ **Previous:** [[Principal Sources of Code Optimization]] | ► **Next:** [[Loop Optimizations and Strength Reduction]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -37,14 +29,6 @@ flowchart TD
 1. In block $B_1$, assign the computation to a new temporary: $u = 4 * i$.
 2. At statement $s$ in block $B_3$, replace the calculation $4 * i$ with the temporary variable $u$:
    $$t_6 = u$$
-
----
-
----
-
----
-
----
 
 ---
 
@@ -72,33 +56,13 @@ a[t2] = val      ; (direct use of t2)
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Global Common Subexpression Elimination and Copy Propagation** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Virtuous Optimization Cycle
 
@@ -117,6 +81,7 @@ flowchart LR
 4. **Step 4:** Dead Code Elimination deletes `t6 = t2`, removing an entire instruction from the program!
 
 ---
+
 ### Constant Propagation and Constant Folding
 
 - **Constant Folding:** Deducing at compile time that an expression involves only constant literals, and evaluating it directly at compile time:
@@ -135,101 +100,6 @@ flowchart LR
   // After Dead Code Elimination:
   // (print_log block is completely deleted!)
   ```
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -254,74 +124,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[DAG Construction and Local Optimization of Basic Blocks]]
+- [[Loop Optimizations and Strength Reduction]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Principal Sources of Code Optimization]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Quicksort Loop Induction Variable Strength Reduction]]
 
 ---
 

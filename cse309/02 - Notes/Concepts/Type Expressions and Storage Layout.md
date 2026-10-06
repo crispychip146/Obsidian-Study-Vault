@@ -7,16 +7,8 @@ order: 12
 
 # Type Expressions and Storage Layout
 
-> 📖 **Reading Order:** Step 12 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 12 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Value-Number Method for DAG Construction]] | ► **Next:** [[Multi-Dimensional Array Addressing Formulas]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -31,14 +23,6 @@ To the central processing unit (CPU) and random-access memory (RAM), memory is n
 During semantic analysis and intermediate code generation, the compiler's type system performs two indispensable tasks:
 1. **Type Checking & Safety:** Validating that every operator receives operands of compatible mathematical types, preventing runtime memory corruption.
 2. **Storage Layout & Relative Addressing:** Calculating the exact footprint (width in bytes) of every data structure and computing the relative byte offset of every variable within an activation record or global data segment.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -83,33 +67,13 @@ graph TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Type Expressions and Storage Layout** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Syntax-Directed Translation for Declarations and Offsets
 
@@ -156,6 +120,7 @@ Let us trace how the compiler calculates widths and assigns offsets:
 Total activation record memory reserved for this block: **32 bytes**.
 
 ---
+
 ### Nested Scopes and Symbol Table Environments (`Env`)
 
 Block-structured languages (C, C++, Java) permit nested scopes where inner variables shadow outer variables:
@@ -208,7 +173,6 @@ class Env:
 
 ---
 
----
 ### Technical Details
 
 ### Storage Layout and Relative Addressing
@@ -232,7 +196,6 @@ N \times \text{width}(T') & \text{if } T = \mathbf{array}(N, T') \\
 
 ---
 
----
 ### Important Properties and Why They Hold
 
 ### Type Equivalence: Structural vs. Name Equivalence
@@ -272,90 +235,6 @@ Under **Structural Equivalence**, `PointA` and `PointB` are identical because th
 
 ---
 
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -377,73 +256,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Translation of Expressions and Array References]]
+- [[Run-Time Storage Organization and Activation Records]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Intermediate Representations and Three-Address Code]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
 - [[Problem — Array Reference Three-Address Code Generation]]
 
 ---

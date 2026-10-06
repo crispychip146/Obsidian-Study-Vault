@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 41
+order: 52
 ---
 
 # Berger-Wolpert Confidence Set Puzzle Example
 
-> 📖 **Reading Order:** Step 41 of 92 | **Module 6:** Statistical Inference  
+> 📖 **Reading Order:** Step 52 of 103 | **Module 6:** Statistical Inference  
 > ◄ **Previous:** [[Bernoulli Parameter Estimation and Confidence Interval Example]] | ► **Next:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
-
 ---
-
----
-
 ## Problem
 
 Let $\theta$ be an unknown, fixed real number. Let $X_1, X_2$ be independent random variables with:
@@ -27,32 +23,20 @@ $$C = \begin{cases} \{Y_1 - 1\} & \text{if } Y_1 = Y_2 \\ \left\{\frac{Y_1 + Y_2
 1. Verify that $P_\theta(\theta \in C) = \frac{3}{4} = 75\%$ for all $\theta$, proving that $C$ is a valid $75\%$ confidence set.
 2. Suppose we observe the data $(Y_1, Y_2) = (15, 17)$. Evaluate $C$, determine whether $\theta$ is in $C$, and explain the resulting philosophical puzzle between frequentist coverage and post-data certainty.
 3. Explain how Bayesian inference resolves this paradox.
-
 ---
-
----
-
 ## Given
 
 - Observation model: $Y_i = \theta + X_i$
 - Perturbations: $X_1, X_2 \overset{\text{iid}}{\sim} \text{Uniform}(\{-1, +1\})$
 - Four equally likely combinations: $(+1, +1), (+1, -1), (-1, +1), (-1, -1)$, each with probability $1/4$.
 - Realized observations: $Y_1 = 15, Y_2 = 17$.
-
 ---
-
----
-
 ## Required
 
 1. Prove $P_\theta(\theta \in C) = 0.75$.
 2. Compute realized set $C$ and analyze certainty.
 3. Compare frequentist procedure guarantee with Bayesian posterior distribution.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -127,38 +111,22 @@ For any prior $f(\theta) > 0$ at $\theta = 16$:
 $$f(\theta \mid Y_1 = 15, Y_2 = 17) = \begin{cases} 1 & \text{if } \theta = 16 \\ 0 & \text{if } \theta \ne 16 \end{cases}$$
 The Bayesian **posterior probability** is:
 $$P(\theta = 16 \mid \text{data}) = 1.0 \quad (100\%)$$
-
 ---
-
----
-
 ## Result
 
 - Pre-experimental frequentist coverage: $P_\theta(\theta \in C) = 75\%$
 - Post-data realized set: $C = \{16\}$
 - Actual probability that $\theta \in \{16\}$ given observed data: $100\%$
-
 ---
-
----
-
 ## Why This Works
 
 The confidence coefficient ($75\%$) is a pre-experimental average over all possible future datasets. It reflects the fact that across many random runs, the procedure fails when $(X_1, X_2) = (-1, -1)$. But when the realized data reveal $Y_1 \ne Y_2$, we know with certainty that we are in Rows 2 or 3, where failure is impossible. Frequentist confidence intervals do not condition on the observed ancillary statistic $\lvert Y_1 - Y_2 \rvert$.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing the pre-data coverage probability $P_\theta(\theta \in C) = 0.75$ with the post-data posterior probability $P(\theta \in C \mid \mathbf{Y})$.
 - Assuming the failure in Row 4 occurs because the formula is wrong; it fails because when both errors are $-1$, the rule shifts the wrong way, missing $\theta$ by 2 units.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -170,12 +138,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Confidence Intervals and Confidence Sets]]
 - [[Bayesian Inference]]
 - [[Credible Intervals]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 80
+order: 91
 ---
 
 # Problem — State Communication and Irreducibility Verification
 
-> 📖 **Reading Order:** Step 80 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 91 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Problem — Rain Prediction Two Days Ahead]] | ► **Next:** [[Problem — Identification of Communicating Classes and Absorbing States]]
-
 ---
-
----
-
 ## Problem
 
 Consider a three-state [[Markov Chain]] with state space $S = \{0, 1, 2\}$ and transition probability matrix:
@@ -28,58 +24,34 @@ $$P = \begin{pmatrix}
 2. Prove that all pairs of states communicate with each other ($i \leftrightarrow j$ for all $i, j \in \{0, 1, 2\}$).
 3. Determine whether the Markov chain is irreducible.
 4. Find the period of each state.
-
 ---
-
----
-
 ## Given
 
 - State space $S = \{0, 1, 2\}$
 - Transition matrix $P$ as specified above.
-
 ---
-
----
-
 ## Required
 
 1. Verification of accessibility $0 \to 2$.
 2. Proof of mutual communication for all pairs.
 3. Determination of irreducibility.
 4. Periodicity $d(i)$ for $i \in \{0, 1, 2\}$.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Classification of States in Markov Chains]] (Accessibility, Communication, Communicating Classes, Irreducibility, Periodicity)
 - [[Chapman-Kolmogorov Equations]]
 - [[Markov Chain]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]]
-
 ---
-
----
-
 ## Question Type
 
 Proof / Conceptual Verification
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -190,11 +162,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 - **Equating $P_{ij} = 0$ with Inaccessibility:** Claiming that $2$ is not accessible from $0$ simply because $P_{02} = 0$.
 - **Recomputing the Period for Every State Independently:** Manually calculating cycle combinations for states 1 and 2 instead of invoking the class property of periodicity once $d(0) = 1$ is established.
 - **Forgetting Transitivity Proof:** Claiming $0 \leftrightarrow 2$ without either citing the transitivity theorem or providing the two-step Chapman-Kolmogorov calculation.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -217,5 +185,5 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 14)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–204)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 14)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–204)

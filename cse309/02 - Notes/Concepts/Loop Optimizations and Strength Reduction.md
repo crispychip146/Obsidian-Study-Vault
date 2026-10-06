@@ -7,16 +7,8 @@ order: 53
 
 # Loop Optimizations and Strength Reduction
 
-> 📖 **Reading Order:** Step 53 of 55 | **Module 6:** Machine-Independent Optimization  
+> 📖 **Reading Order:** Step 53 of 55 | **Module 6: Machine-Independent Optimization**  
 > ◄ **Previous:** [[Global Common Subexpression Elimination and Copy Propagation]] | ► **Next:** [[Quicksort Partition Loop Complete Optimization Example]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -34,23 +26,9 @@ Loop optimization focuses on three primary transformations:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 By establishing clear semantic rules and evaluation invariants, the compiler evaluates attributes, manages memory layouts, or optimizes instruction sequences.
-
----
-
----
-
----
 
 ---
 
@@ -60,19 +38,7 @@ By establishing clear semantic rules and evaluation invariants, the compiler eva
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Induction Variables: Basic vs. Derived
 
@@ -102,6 +68,7 @@ where $c_1$ and $c_2$ are loop-invariant constants.
 - *Origin:* Derived induction variables are automatically synthesized in intermediate code whenever source code indexes an array: `a[i]` generates `t = 4 * i`.
 
 ---
+
 ### Induction Variable Elimination: Deleting the Loop Counter
 
 Once strength reduction converts all array index multiplications into additions:
@@ -132,157 +99,6 @@ Now, the instruction $i = i + 1$ has zero readers! **Dead Code Elimination delet
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-### Loop-Invariant Code Motion (Hoisting)
-
-An expression $x + y$ is **loop-invariant** if neither operand $x$ nor $y$ is modified anywhere inside the loop body.
-
-```c
-// Before Optimization:
-for (int i = 0; i < 1000000; i++) {
-    a[i] = x + y;       // CPU re-adds x and y ONE MILLION TIMES!
-}
-
-// After Code Motion (Hoisted to Loop Pre-Header):
-int t = x + y;          // Added ONCE outside!
-for (int i = 0; i < 1000000; i++) {
-    a[i] = t;
-}
-```
-
-### Formal Safety Criteria for Code Motion:
-Moving an assignment $s: x = y + z$ out of loop $L$ into its pre-header is safe if and only if:
-1. Statement $s$ **dominates all loop exits** where variable $x$ is live after the loop. (Otherwise, if the loop executed zero times, hoisting would execute $s$ when it shouldn't have!).
-2. No other statement in loop $L$ assigns to $x$.
-3. All uses of $x$ inside loop $L$ are reached solely by the definition in $s$.
-
----
-### Formal Proof: Strength Reduction Equivalence
-
-In CPU silicon, an integer multiplication instruction (`IMUL`) requires 3 to 4 clock cycles and consumes significant arithmetic logic unit (ALU) circuitry, whereas an integer addition (`ADD`) requires only **1 clock cycle**.
-
-**Strength Reduction** replaces the repeated multiplication of a derived induction variable with a simple, rapid addition.
-
-### Theorem: Mathematical Equivalence of Strength Reduction
-*Let $i$ be a basic induction variable updated in each iteration as $i_{k} = i_{k-1} + c$. Replacing the derived calculation $t_k = c_1 \times i_k + c_2$ with the recurrence:*
-$$t_0 = c_1 \times i_0 + c_2 \quad (\text{in pre-header})$$
-$$t_k = t_{k-1} + (c_1 \times c) \quad (\text{in loop body})$$
-*produces an identical numerical value for $t_k$ in every iteration $k \ge 0$.*
-
-### Proof by Mathematical Induction:
-1. **Base Case ($k = 0$, Loop Entry):**
-   - The loop pre-header computes:
-     $$t_0 = c_1 \times i_0 + c_2$$
-   - This matches the closed-form definition for $k = 0$. The base case holds.
-2. **Inductive Hypothesis:**
-   - Assume that at iteration $k - 1$, the value in $t$ matches the closed-form definition:
-     $$t_{k-1} = c_1 \times i_{k-1} + c_2$$
-3. **Inductive Step (Iteration $k$):**
-   - In iteration $k$, the basic variable is updated:
-     $$i_k = i_{k-1} + c$$
-   - The true mathematical value of the derived induction variable is:
-     $$t_k^{\text{true}} = c_1 \times i_k + c_2 = c_1 \times (i_{k-1} + c) + c_2$$
-   - Distributing the multiplication:
-     $$t_k^{\text{true}} = (c_1 \times i_{k-1} + c_2) + (c_1 \times c)$$
-   - By the inductive hypothesis, the parenthesized term $(c_1 \times i_{k-1} + c_2)$ is precisely $t_{k-1}$:
-     $$t_k^{\text{true}} = t_{k-1} + (c_1 \times c)$$
-   - Notice that $(c_1 \times c)$ is the product of two loop-invariant constants, which the compiler evaluates **once at compile time** (constant folding)!
-   - Therefore, executing the addition $t = t + (c_1 \times c)$ inside the loop yields the exact mathematical value of $c_1 \times i_k + c_2$.
-4. By induction, the transformation is sound for all iterations. $\blacksquare$
-
----
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -304,74 +120,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Global Common Subexpression Elimination and Copy Propagation]]
+- [[Quicksort Partition Loop Complete Optimization Example]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Principal Sources of Code Optimization]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Quicksort Loop Induction Variable Strength Reduction]]
 
 ---
 

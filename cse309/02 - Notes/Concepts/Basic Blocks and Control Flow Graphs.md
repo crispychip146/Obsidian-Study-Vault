@@ -7,16 +7,8 @@ order: 33
 
 # Basic Blocks and Control Flow Graphs
 
-> 📖 **Reading Order:** Step 33 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 33 of 55 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Code Generation Issues and Target Machine Architecture]] | ► **Next:** [[Basic Block Partitioning Algorithm]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -44,14 +36,6 @@ If the first instruction of a basic block executes, **every instruction in that 
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 Once a program's Three-Address Code is partitioned into basic blocks $B_1, B_2, \dots, B_k$, the compiler connects them into a directed graph called a **Control Flow Graph (CFG)**:
@@ -75,33 +59,13 @@ There is a directed edge from $B_i$ to $B_j$ if and only if:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Basic Blocks and Control Flow Graphs** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Predecessors and Successors
 
@@ -110,6 +74,7 @@ In a CFG:
 - **Successors of $B$ ($\text{Succ}(B)$):** All blocks that can be reached directly via an outgoing edge from $B$.
 
 ---
+
 ### Loops in Control Flow Graphs
 
 Loops are the most critical regions for compiler optimization because programs spend an estimated $90\%$ of execution time executing loops (the *90/10 Rule*).
@@ -121,6 +86,7 @@ A set of basic blocks $L$ forms a **loop** if:
 3. Every node in $L$ is reachable from the loop header.
 
 ---
+
 ### Scope of Compiler Optimizations
 
 Partitioning a program into basic blocks and CFGs establishes a three-tiered hierarchy of compiler optimizations:
@@ -132,101 +98,6 @@ graph TD
     Hierarchy --> L2["2. Global Optimization<br/>Applied across basic blocks within a single function CFG<br/>(Data-flow analysis, loop invariant code motion)"]
     Hierarchy --> L3["3. Interprocedural Optimization<br/>Applied across multiple functions/modules<br/>(Inlining, whole-program analysis)"]
 ```
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -251,74 +122,34 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Basic Block Partitioning Algorithm]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
+- [[DAG Construction and Local Optimization of Basic Blocks]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Code Generation Issues and Target Machine Architecture]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Basic Block Partitioning and Next-Use Table]]
 
 ---
 

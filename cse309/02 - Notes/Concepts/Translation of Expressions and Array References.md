@@ -7,16 +7,8 @@ order: 14
 
 # Translation of Expressions and Array References
 
-> 📖 **Reading Order:** Step 14 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 14 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Multi-Dimensional Array Addressing Formulas]] | ► **Next:** [[Control Flow Translation and Boolean Expressions]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -50,14 +42,6 @@ Look carefully at the two array accesses in this single line of code:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 To emit Three-Address Code (TAC) during syntax-directed translation, the compiler attaches two primary synthesized attributes to grammar symbols:
@@ -74,33 +58,13 @@ To emit Three-Address Code (TAC) during syntax-directed translation, the compile
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Translation of Expressions and Array References** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### SDD for Arithmetic Expressions
 
@@ -116,6 +80,7 @@ For pure arithmetic, translation synthesizes temporaries bottom-up:
 | $E \longrightarrow \mathbf{num}$ | $E.addr = \mathbf{num}.val;$ | Returns literal constant. |
 
 ---
+
 ### SDD for Multi-Dimensional Array Addressing
 
 To correctly implement the Row-Major addressing formula proved in [[Multi-Dimensional Array Addressing Formulas]], the compiler uses a dedicated non-terminal $L$ with three synthesized attributes:
@@ -152,6 +117,7 @@ L -> L1 [ E ]                /* Inductive Multi-Dimensional Step: A[i1]...[ik] *
 ```
 
 ---
+
 ### Type Coercions in Expressions: Widening and Narrowing
 
 Real-world languages permit mixed-mode arithmetic (e.g., `float x; int y; x = x + y;`). The CPU ALU cannot add an integer directly to a floating-point register without hardware conversion.
@@ -181,119 +147,6 @@ graph BT
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-### Mathematical Equivalence: How the SDD Implements Horner's Rule
-
-Why do the rules for $L \to L_1 [ E ]$ generate the exact row-major byte offset?
-
-### The Recurrence Proof:
-Recall from [[Multi-Dimensional Array Addressing Formulas]] that for an array $A[d_1][d_2]\dots[d_k]$ of elements of width $w$:
-$$\text{Offset}(i_1, i_2, \dots, i_k) = \sum_{m=1}^k \left( i_m \times \prod_{j=m+1}^k d_j \right) \times w$$
-Notice what the type system gives us at each level of grammar reduction:
-1. When indexing dimension $m$, the remaining type is $T_m = \mathbf{array}(d_{m+1}, \mathbf{array}(\dots, \mathbf{elem}))$.
-2. The width of an element of this type is:
-   $$\text{width}(T_m) = d_{m+1} \times d_{m+2} \times \dots \times d_k \times w = \left( \prod_{j=m+1}^k d_j \right) \times w$$
-3. When the grammar executes $L \to L_1 [ E ]$:
-   - $E.addr = i_m$.
-   - It computes: $t = i_m \times \text{width}(T_m) = i_m \times \left( \prod_{j=m+1}^k d_j \right) \times w$.
-   - It accumulates: $L.addr = L_1.addr + t$.
-4. By finite induction over dimensions $1 \le m \le k$:
-   $$L.addr = \sum_{m=1}^k \left( i_m \times \text{width}(T_m) \right) = \text{Exact Row-Major Byte Offset!}$$
-The grammar calculates Horner's polynomial accumulation incrementally during bottom-up parsing without needing a loop!
-
----
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -315,116 +168,34 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-### Comprehensive Trace: $x = a[i][j]$ vs. $a[i][j] = x$
-
-Assume array `a` is declared as: `int a[10][20];` (where $\text{width}(\mathbf{int}) = 4$).
-- Type of `a`: $\mathbf{array}(10, \mathbf{array}(20, \mathbf{int}))$.
-- Subarray type after 1st index: $\mathbf{array}(20, \mathbf{int})$, width $= 20 \times 4 = 80$ bytes.
-- Element type after 2nd index: $\mathbf{int}$, width $= 4$ bytes.
-
-### Scenario A: R-Value Load ($x = a[i][j]$)
-
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Parser as Parser Actions
-    participant TAC as Emitted Three-Address Code
-    
-    Parser->>TAC: Parse a[i] (L1 -> id[E])
-    Note over TAC: L1.type.width = 80 bytes
-    TAC-->>TAC: t1 = i * 80
-    Parser->>TAC: Parse a[i][j] (L -> L1[E])
-    Note over TAC: L.type.width = 4 bytes
-    TAC-->>TAC: t2 = j * 4
-    TAC-->>TAC: t3 = t1 + t2
-    Parser->>TAC: Context is RHS (E -> L)
-    TAC-->>TAC: t4 = a[t3] (MEMORY LOAD)
-    Parser->>TAC: Statement Assignment (S -> x = E)
-    TAC-->>TAC: x = t4
-```
-
-### Scenario B: L-Value Store ($a[i][j] = x$)
-Notice what happens when the exact same expression $a[i][j]$ appears on the **left-hand side**:
-1. $L_1 \to a[i]$ emits: `t1 = i * 80`.
-2. $L \to L_1[j]$ emits:
-   ```text
-   t2 = j * 4
-   t3 = t1 + t2
-   ```
-3. Now, the statement production matches $S \to L = E;$:
-   Instead of emitting a load, it emits an **indexed memory store**:
-   ```text
-   a[t3] = x
-   ```
-Look at the elegance: The exact same sub-productions $L$ compute the byte offset `t3`. The enclosing context ($E \to L$ vs $S \to L = E$) determines whether the hardware issues an indexed load or an indexed store!
-
----
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Type Expressions and Storage Layout]]
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Control Flow Translation and Boolean Expressions]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Multi-Dimensional Array Addressing Formulas]]
+- [[Intermediate Representations and Three-Address Code]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
 - [[Problem — Array Reference Three-Address Code Generation]]
 
 ---

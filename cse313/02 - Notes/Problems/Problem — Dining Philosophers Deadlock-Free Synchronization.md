@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 25
 ---
-
 # Problem — Dining Philosophers Deadlock-Free Synchronization
 
-> 📖 **Reading Order:** Step 25 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 25 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Producer-Consumer Semaphore Implementation Example]] | ► **Next:** [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
----
-
 ## Problem
 
 Consider the classic Dining Philosophers problem where five philosophers ($P_0, P_1, P_2, P_3, P_4$) sit around a circular table. Between each pair of philosophers is a single chopstick ($C_0, C_1, C_2, C_3, C_4$). A philosopher needs two chopsticks to eat:
@@ -50,41 +46,33 @@ Philosopher 3 --- Chop 2 --- Philosopher 2
 4. **Comparative Analysis:** Compare the three strategies in terms of maximum concurrent eaters, starvation susceptibility, and runtime overhead.
 
 ---
-
----
-
 ## Given
 
 - Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
 
 ---
-
 ## Required
 
 - Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
 
 ---
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Question Type
 
 Synchronization Protocol Design / Deadlock Prevention
 
 ---
-
 ## Solution
 
 ### Understanding the Situation
@@ -133,7 +121,6 @@ void philosopher(int i) {
   - Hence, circular wait is impossible. $\blacksquare$
 
 ---
-
 ### Part 2: Strategy B (Room Capacity Limiter & Pigeonhole Proof)
 
 #### Algorithm Formulation:
@@ -165,7 +152,6 @@ void philosopher(int i) {
 - Deadlock is strictly impossible. $\blacksquare$
 
 ---
-
 ### Part 3: Strategy C (State-Based Solution Trace)
 
 Recall Tanenbaum's protocol:
@@ -185,7 +171,6 @@ Recall Tanenbaum's protocol:
 | $t_5$ | $P_2$ finishes eating | `[T, E, T, T, T]` | `[0, 0, 0, 0, 0]` | $P_2$ calls `put_forks(2)`: sets `state[2] = THINKING`. Calls `test(LEFT)` $\to$ `test(1)`: Now left neighbor $P_0$ is T, and right neighbor $P_2$ is T! Condition met! `state[1] = EATING`, `signal(&s[1])` awakens $P_1$. **$P_1$ finally eats!** |
 
 ---
-
 ### Part 4: Comparative Strategy Evaluation
 
 | Metric | Strategy A (Asymmetric) | Strategy B (Room Semaphore) | Strategy C (State-Based) |
@@ -197,45 +182,38 @@ Recall Tanenbaum's protocol:
 | **Implementation Complexity** | Minimal (simple branching) | Very low | Moderate (helper `test()` routine) |
 
 ---
-
 ### Result and Interpretation
 The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
 
 ---
-
 ## Reusable Insight
 
 Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
 
 ---
-
 ## Common Mistakes
 
 - Misinterpreting the initial state vector or indexing offsets.
 - Confusing necessary conditions with sufficient conditions during analysis.
 
 ---
-
 ## Exam Pattern
 
 Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
 
 ---
-
 ## Related Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Related Concepts
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
 ## Source
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 44–48: The Dining Philosophers Problem).

@@ -7,16 +7,8 @@ order: 34
 
 # Basic Block Partitioning Algorithm
 
-> 📖 **Reading Order:** Step 34 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 34 of 55 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Basic Blocks and Control Flow Graphs]] | ► **Next:** [[Liveness and Next-Use Analysis within Basic Blocks]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -29,14 +21,6 @@ These sequences are **Basic Blocks**:
 - Once the first instruction of a basic block executes, **every instruction in that block will execute strictly in order**.
 
 To find these blocks without an exhaustive search, the compiler identifies the boundary instructions that begin each block. These boundary instructions are called **Leaders**.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -61,67 +45,20 @@ flowchart TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Linear sequence of Three-Address Code instructions ($1 \dots N$).
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Set of maximal basic blocks $B_1, B_2, \dots, B_k$ satisfying the single-entry, single-exit property.
 
 ---
 
 ## How It Works
 
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-The algorithm transitions through defined phases.
-
----
 ### Properties
 
 ### Formal Proof: Necessity and Sufficiency of the 3 Leader Rules
@@ -151,87 +88,7 @@ Why do these three rules guarantee that every generated block is strictly single
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Partitioning Algorithm Implementation
 
@@ -284,98 +141,7 @@ class BasicBlockPartitioner:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
-## Complexity
-
-- **Time Complexity:** **$O(N)$**, where $N$ is the number of TAC instructions.
-  - Phase 1 scans instructions $1 \dots N$ once to identify leaders.
-  - Phase 2 slices the instruction array into blocks in $O(N)$ time.
-- **Space Complexity:** **$O(N)$** to store block descriptor records.
-
----
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### End-to-End Walkthrough: Complex 12-Instruction Loop
 
@@ -435,24 +201,46 @@ flowchart TD
 
 ---
 
+## Complexity
+
+- **Time Complexity:** **$O(N)$**, where $N$ is the number of TAC instructions.
+  - Phase 1 scans instructions $1 \dots N$ once to identify leaders.
+  - Phase 2 slices the instruction array into blocks in $O(N)$ time.
+- **Space Complexity:** **$O(N)$** to store block descriptor records.
+
 ---
-### Exam Relevance
+
+## Properties
+
+- **Termination:** Provably terminates on all well-formed compiler inputs.
+- **Correctness:** Preserves the underlying language semantics and program data dependencies.
+
+---
+
+## Limitations
+
+- Basic blocks isolate straight-line code; inter-block optimizations require global data-flow analysis over a full Control Flow Graph.
+
+---
+
+## Common Mistakes
+
+- Forgetting to update liveness information or next-use pointers.
+- Misinterpreting index bounds during stack or interval scans.
+
+---
+
+## Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Basic Block Partitioning Algorithm on given code fragments or graphs.
-
----
-
----
-
----
 
 ---
 
 ## Related Concepts
 
 - [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Liveness and Next-Use Analysis within Basic Blocks]]
+- [[DAG Construction and Local Optimization of Basic Blocks]]
 
 ---
 
@@ -464,8 +252,7 @@ Frequently tested on final examinations via hand-simulation of Basic Block Parti
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — Basic Block Partitioning and Next-Use Table]]
 
 ---
 

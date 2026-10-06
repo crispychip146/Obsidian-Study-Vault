@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 8
+order: 9
 ---
 
 # Discrete Probability Distributions
 
-> 📖 **Reading Order:** Step 08 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Random Variables and Probability Distributions]] | ► **Next:** [[Continuous Probability Distributions]]
-
+> 📖 **Reading Order:** Step 09 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Random Variables and Probability Distributions]] | ► **Next:** [[Multinomial Distribution]]
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Discrete Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -128,11 +124,7 @@ In probability, many real-world phenomena share underlying structures known as *
 | **Geometric** | $\operatorname{Geom}(p)$ | $p \in (0, 1]$ | $(1-p)^k p,\; k \ge 0$ | $\frac{1-p}{p}$ | $\frac{1-p}{p^2}$ |
 | **Negative Binomial** | $\operatorname{NBin}(r, p)$ | $r \in \mathbb{N}, p \in (0, 1]$ | $\binom{k+r-1}{r-1} p^r (1-p)^k,\; k \ge 0$ | $\frac{r(1-p)}{p}$ | $\frac{r(1-p)}{p^2}$ |
 | **Poisson** | $\operatorname{Pois}(\lambda)$ | $\lambda > 0$ | $\frac{e^{-\lambda}\lambda^k}{k!},\; k \ge 0$ | $\lambda$ | $\lambda$ |
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Poisson Traffic and Binomial Convergence
@@ -146,12 +138,17 @@ Suppose an API gateway receives incoming requests at an average rate of $\lambda
    Using the complement rule:
    $$P(X \ge 1) = 1 - P(X = 0) = 1 - \frac{e^{-3} 3^0}{0!} = 1 - e^{-3} \approx 1 - 0.0498 = 0.9502 \quad (95.02\%)$$
 
-For indicator-based derivations of means and variances of discrete distributions, see:
+For indicator-based derivations of means and variances of discrete distributions and worked applications, see:
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Decomposing Hypergeometric and Binomial counts into indicator sums.
+- [[Newton-Pepys Dice Problem Example]] — Comparing Binomial tail probabilities for fair dice.
+- [[Poisson Triplet Birthday Collisions Example]] — 3-way birthday collisions evaluated via the Poisson paradigm.
 
 ---
 
 ## Technical Details
+
+### Multinomial Extension ($k \ge 3$ Categories)
+When independent trials result in $k \ge 3$ distinct categorical outcomes rather than binary success/failure, the distribution generalizes to the [[Multinomial Distribution]].
 
 ### The Law of Rare Events (Poisson Limit Theorem)
 If $n \to \infty$ and $p \to 0$ such that $np \to \lambda$ (a constant), then the Binomial distribution converges pointwise to the Poisson distribution:
@@ -192,16 +189,14 @@ Verified immediately using [[Moment Generating Functions]]: $M_{X_1+X_2}(t) = M_
 
 - **Queueing Theory:** Poisson arrivals directly define Markovian arrival streams in the [[M-M-1 Queue]].
 - **Estimation:** Binomial and Poisson parameter estimation are central paradigms in [[Maximum Likelihood Estimation]] and [[Beta-Binomial Conjugate Updating Formula]].
-- **Indicator Variables:** Expectation and variance proofs for these distributions are standard exam questions relying on indicator decomposition.
-
+- **Indicator Variables:** Expectation and variance proofs for these distributions are standard exam questions relying on indicator decomposition (e.g. [[Problem — Expected Number of Local Maxima in Random Permutations]]).
+- **Multicategory Generalization:** The [[Multinomial Distribution]] extends the Binomial distribution to categorical vectors and forms the foundation of [[Pearson's Chi-Square Goodness-of-Fit Test]].
 ---
-
----
-
 ## Related Concepts
 
 - [[Random Variables and Probability Distributions]]
 - [[Continuous Probability Distributions]]
+- [[Multinomial Distribution]]
 - [[Moment Generating Functions]]
 - [[M-M-1 Queue]]
 
@@ -217,6 +212,7 @@ Verified immediately using [[Moment Generating Functions]]: $M_{X_1+X_2}(t) = M_
 ## Problems
 
 - [[Problem — Indicator Variables for Distinct Birthday Counts]]
+- [[Problem — Expected Number of Local Maxima in Random Permutations]]
 
 ---
 

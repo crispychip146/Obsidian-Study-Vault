@@ -7,16 +7,8 @@ order: 25
 
 # Garbage Collection Fundamentals and Reference Counting
 
-> 📖 **Reading Order:** Step 25 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 25 of 55 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Heap Memory Management and Allocation Strategies]] | ► **Next:** [[Trace-Based Garbage Collection Algorithms]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -30,14 +22,6 @@ In practice, humans are mathematically incapable of tracking millions of transie
 3. **Memory Leaks:** Forgetting to free heap memory when references drop. The process slowly balloons in memory until the operating system's Out-Of-Memory (OOM) killer abruptly terminates it.
 
 **Garbage Collection (GC)** eliminates these bugs by transferring memory reclamation from fallible humans to a mathematically rigorous runtime subsystem.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -100,128 +84,15 @@ graph TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Garbage Collection Fundamentals and Reference Counting** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
 
-### How It Works
-
-### How It Works
-
-### How It Works
-
 The mechanism executes in designated compiler passes.
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -246,74 +117,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Trace-Based Garbage Collection Algorithms]]
+- [[Heap Memory Management and Allocation Strategies]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Heap Memory Management and Allocation Strategies]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Activation Record and Display Table Tracing]]
 
 ---
 
@@ -356,6 +186,7 @@ Whenever pointers change, the compiler inserts code to adjust counts:
 2. **Stack Frame Pop:** When a function exits, `refcount` is decremented for every local pointer variable.
 
 ---
+
 Why cannot pure reference counting be used as the sole memory manager in general-purpose languages?
 
 ### Theorem: Inability to Collect Cyclic Structures
@@ -388,6 +219,7 @@ graph LR
 10. Therefore, the entire subgraph $C$ remains permanently uncollected in heap memory, leaking space for the lifetime of the process. $\blacksquare$
 
 ---
+
 | Feature | Engineering Reality |
 | :--- | :--- |
 | **Deterministic Latency** | Memory is freed the microsecond its count hits zero. Ideal for real-time systems (audio DSP, Apple Swift UI). |
@@ -398,5 +230,6 @@ graph LR
 To conquer cyclic leaks and eliminate pointer assignment overhead, modern runtimes (JVM, Go, .NET, V8) turn to **[[Trace-Based Garbage Collection Algorithms]]**.
 
 ---
+
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 253–265).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.5 (Introduction to Garbage Collection).

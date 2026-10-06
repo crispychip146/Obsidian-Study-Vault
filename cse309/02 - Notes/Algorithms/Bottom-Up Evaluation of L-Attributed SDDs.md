@@ -7,16 +7,8 @@ order: 6
 
 # Bottom-Up Evaluation of L-Attributed SDDs
 
-> 📖 **Reading Order:** Step 6 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 06 of 55 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[Eliminating Left Recursion from SDTs]] | ► **Next:** [[Arithmetic Expression Desk Calculator SDD Example]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -36,14 +28,6 @@ How can a bottom-up parser evaluate inherited attributes without building an exp
 Compiler designers invented two foundational techniques:
 1. **Marker Non-Terminals ($\epsilon$-productions):** To force semantic actions to fire mid-production.
 2. **Parser Stack Relative Indexing (Negative Offsets):** To reach down into the runtime parser stack and retrieve attributes computed by earlier siblings!
-
----
-
----
-
----
-
----
 
 ---
 
@@ -80,63 +64,19 @@ sequenceDiagram
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- L-Attributed SDD grammar productions, underlying LR parsing table, and input token stream.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- LR parse stack augmented with attribute values and marker non-terminals for synthesized and inherited attribute evaluations.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Technique 2: Finding Inherited Attributes on the Parser Stack
 
@@ -184,6 +124,7 @@ L : ID  { addType($1, $-1); }  /* $-1 accesses the symbol immediately below L on
 ```
 
 ---
+
 ### Generalizing Stack Access: Copy Rules and Constant Offsets
 
 Can you always access inherited attributes at a fixed offset like `val[top - 1]`?
@@ -210,6 +151,7 @@ $$M \longrightarrow \epsilon \quad \{ \text{val}[top] = \text{val}[top - 2]; \}$
 Now, $M$ sits at a fixed offset immediately below $L$, guaranteeing that $L$ can always find the value at `val[top - 1]`!
 
 ---
+
 ### Summary: Rules for Bottom-Up L-Attributed Evaluation
 
 | Grammar Pattern | Bottom-Up LR Stack Mechanism | Code Notation (Yacc/Bison) |
@@ -220,101 +162,9 @@ Now, $M$ sits at a fixed offset immediately below $L$, guaranteeing that $L$ can
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
 
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
 The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
 
 ---
 
@@ -334,12 +184,6 @@ $O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ---
 
----
-
----
-
----
-
 ## Properties
 
 - **Termination:** Provably terminates on all well-formed compiler inputs.
@@ -349,92 +193,40 @@ $O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ## Limitations
 
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
+- Variable attribute distances require marker non-terminals, which can introduce reduce/reduce or shift/reduce grammar conflicts in LR parsers.
 
 ---
 
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to update liveness information or next-use pointers.
 - Misinterpreting index bounds during stack or interval scans.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Bottom-Up Evaluation of L-Attributed SDDs on given code fragments or graphs.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[S-Attributed and L-Attributed SDDs]]
+- [[Eliminating Left Recursion from SDTs]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[S-Attributed and L-Attributed SDDs]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
 
 ---
 

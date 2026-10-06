@@ -12,8 +12,6 @@ order: 54
 
 ---
 
----
-
 ## Problem
 
 Demonstrate and trace the compiler execution of Quicksort Partition Loop Complete Optimization Example.
@@ -149,8 +147,6 @@ In Block $B_4$:
 
 ---
 
----
-
 ## Result
 
 ```mermaid
@@ -168,8 +164,6 @@ flowchart TD
 - **Inner loop $B_3$:** Reduced from 4 instructions to **3 instructions**.
 - **Loop body $B_5$:** Reduced from 9 instructions to **3 instructions**.
 - **Memory accesses:** Cut by more than $50\%$.
-
----
 
 ---
 

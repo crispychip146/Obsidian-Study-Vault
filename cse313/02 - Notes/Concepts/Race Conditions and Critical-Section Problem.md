@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 18
 ---
-
 # Race Conditions and Critical-Section Problem
 
-> 📖 **Reading Order:** Step 18 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 18 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]] | ► **Next:** [[Peterson's Algorithm and Hardware Mutual Exclusion]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q2a, 2019 Q2c)**
 > **Frequency:** ⭐⭐⭐⭐ **Foundational Theory of Concurrency**
 >
@@ -25,9 +23,6 @@ order: 18
 >    - An unsynchronized `counter++` operation expands at machine level into 3 non-atomic instructions: `LOAD R, [counter]`, `ADD R, 1`, `STORE [counter], R`. Interleaving between concurrent threads produces lost updates.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 When multiple concurrent processes or threads execute simultaneously on multi-core hardware or are interleaved via preemptive scheduling, they often read and write shared data structures in memory (such as a shared buffer count or account balance).
@@ -35,7 +30,6 @@ When multiple concurrent processes or threads execute simultaneously on multi-co
 We want the final state of the shared data and program outputs to remain strictly correct, predictable, and deterministic regardless of thread scheduling order. The central obstacle is that high-level programming language statements (like `count++` or `count--`) are **not atomic** at the machine instruction level: they decompose into separate Load, Modify, and Store instructions that can be arbitrarily interrupted.
 
 ---
-
 ## Developing the Idea
 
 If thread execution interleaves between the Load and Store instructions of a shared variable, updates are silently lost—a bug known as a **Race Condition**.
@@ -48,13 +42,11 @@ Any portion of code that accesses shared memory or shared resources is designate
 4. **Remainder Section:** Executes non-critical local operations.
 
 ---
-
 ## Definition
 
 
 
 ---
-
 ## How It Works
 
 ### 2. The Critical-Section Problem Architecture
@@ -91,9 +83,6 @@ do {
 ```
 
 ---
-
----
-
 ### 6. Summary Comparison of Fundamental Locking Primitives
 
 | Mechanism | Software/Hardware | Satisfies Mutual Exclusion? | Satisfies Progress? | Satisfies Bounded Waiting? | CPU Utilization During Wait |
@@ -106,9 +95,6 @@ do {
 | **Semaphores / Mutexes** | OS Kernel + Hardware | **Yes** | **Yes** | **Yes** | **Optimal** (Puts to Sleep) |
 
 ---
-
----
-
 ## Example
 
 Interleaving of `count++` ($P_1$) and `count--` ($P_2$) starting with `count = 5`:
@@ -120,7 +106,6 @@ Interleaving of `count++` ($P_1$) and `count--` ($P_2$) starting with `count = 5
 The correct result was 5; the actual result is 6! One update was completely destroyed.
 
 ---
-
 ## Technical Details
 
 ### 6. Summary Comparison of Fundamental Locking Primitives
@@ -135,9 +120,6 @@ The correct result was 5; the actual result is 6! One update was completely dest
 | **Semaphores / Mutexes** | OS Kernel + Hardware | **Yes** | **Yes** | **Yes** | **Optimal** (Puts to Sleep) |
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **The 4 Criteria Invariant:** A valid solution to the critical-section problem must strictly satisfy:
@@ -148,20 +130,17 @@ The correct result was 5; the actual result is 6! One update was completely dest
 - **Hardware Atomicity Foundation:** Pure software solutions require atomic hardware read/write memory semantics; on modern out-of-order processors, hardware atomic instructions (Test-and-Set, Compare-and-Swap) or memory barriers are mandatory.
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
 
 ---
-
 ## Related Concepts
 
 - [[Peterson's Algorithm and Hardware Mutual Exclusion]]
@@ -169,20 +148,17 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 - [[Monitors and Condition Variables]]
 
 ---
-
 ## Prerequisites
 
 - [[Threads and Multithreading Models]]
 - [[Process Concepts and Memory Layout]]
 
 ---
-
 ## Problems
 
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 3–15: Interprocess Communication, Race Conditions, Critical Regions, Strict Alternation).

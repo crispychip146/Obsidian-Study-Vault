@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 91
+order: 102
 ---
 
 # Problem — M-M-1 Queue Performance Metrics Calculation
 
-> 📖 **Reading Order:** Step 91 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 102 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Tandem Two-Server Queue Performance Example]] | ► **Next:** [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
-
 ---
-
----
-
 ## Problem
 
 An internet edge router receives incoming network packets according to a Poisson process at an average arrival rate of $\lambda = 800$ packets per second. The router's transmission interface processes packets with exponentially distributed transmission times at an average service rate of $\mu = 1000$ packets per second. The buffer capacity is effectively unlimited.
@@ -24,22 +20,14 @@ An internet edge router receives incoming network packets according to a Poisson
 4. Compute the average total time a packet spends in the router ($W$) and the average time spent waiting in the buffer ($W_Q$).
 5. Calculate the probability that a packet's total residence time in the router exceeds $5$ milliseconds ($0.005$ seconds).
 6. Suppose packet arrival traffic increases by $20\%$ (from $\lambda = 800$ to $\lambda = 960$ packets/sec). Compute the new average packet latency $W_{\text{new}}$ and discuss the non-linear "hockey stick" congestion effect.
-
 ---
-
----
-
 ## Given
 
 - Model: M/M/1
 - Arrival rate: $\lambda = 800$ packets/sec
 - Service rate: $\mu = 1000$ packets/sec
 - Capacity: $\infty$
-
 ---
-
----
-
 ## Required
 
 1. $\rho$ and $P_0$.
@@ -48,22 +36,14 @@ An internet edge router receives incoming network packets according to a Poisson
 4. $W$ and $W_Q$.
 5. $P(T > 0.005 \text{ s})$.
 6. Sensitivity analysis under $20\%$ traffic surge.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[M-M-1 Queue]]
 - [[M-M-1 Performance Formulas]]
 - [[Little's Law]]
 - Exponential residence time distribution
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]
@@ -198,4 +178,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

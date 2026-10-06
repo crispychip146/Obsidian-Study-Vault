@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 74
+order: 85
 ---
 
 # Weather Forecasting Markov Chain Example
 
-> 📖 **Reading Order:** Step 74 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 85 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Gambler's Ruin Formula]] | ► **Next:** [[Higher-Order State Weather Prediction Example]]
-
 ---
-
----
-
 ## Problem
 
 Suppose that the chance of rain tomorrow depends only on whether it is raining today and not on previous days' weather:
@@ -23,11 +19,7 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 1. Formulate the system as a two-state [[Markov Chain]] and write its transition probability matrix $P$.
 2. Given that it is raining today, calculate the probability that it rains four days from now.
 3. Compute the long-run proportion of days that are rainy.
-
 ---
-
----
-
 ## Given
 
 - State $0$: "Rain"
@@ -37,21 +29,13 @@ Suppose that the chance of rain tomorrow depends only on whether it is raining t
 - $P(\text{Rain tomorrow} \mid \text{No Rain today}) = P_{10} = \beta = 0.4$
 - $P(\text{No Rain tomorrow} \mid \text{No Rain today}) = P_{11} = 1 - \beta = 0.6$
 - Initial state: $X_0 = 0$ (raining today)
-
 ---
-
----
-
 ## Required
 
 1. One-step transition probability matrix $P$.
 2. Four-step transition probability $P_{00}^4 = P(X_4 = 0 \mid X_0 = 0)$.
 3. Long-run stationary distribution $\pi = (\pi_0, \pi_1)$, specifically $\pi_0$.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -134,11 +118,7 @@ For any 2-state Markov chain $P = \begin{pmatrix} \alpha & 1-\alpha \\ \beta & 1
 1. Multi-step transition matrix: Use repeated squaring $P^{(2k)} = (P^{(k)})^2$.
 2. Stationary distribution closed-form solution:
    $$\pi_0 = \frac{\beta}{1 - \alpha + \beta}, \qquad \pi_1 = \frac{1 - \alpha}{1 - \alpha + \beta}$$
-
 ---
-
----
-
 ## Result
 
 1. Transition matrix:
@@ -149,30 +129,18 @@ For any 2-state Markov chain $P = \begin{pmatrix} \alpha & 1-\alpha \\ \beta & 1
    $$\pi_0 = \frac{4}{7} \approx 57.14\%$$
 
 Notice how close $P_{00}^4 = 0.5749$ is to the limiting value $\pi_0 \approx 0.5714$, showing how rapidly the Markov chain converges toward its stationary distribution.
-
 ---
-
----
-
 ## Why This Works
 
 - The Chapman-Kolmogorov equations guarantee that multi-step probabilities correspond to powers of the transition matrix. Computing $P^4 = (P^2)^2$ reduces computational complexity from 3 matrix multiplications to 2.
 - Because all entries of $P$ are strictly positive ($P_{ij} > 0$), the chain is irreducible and aperiodic (primitive), guaranteeing geometric convergence of $P^n$ to a rank-1 matrix where every row equals $\pi = (4/7, 3/7)$.
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Squaring Individual Elements:** Calculating $(0.7)^4 = 0.2401$ instead of matrix power $P^4$.
 - **Ignoring Normalization:** Trying to solve $\pi(P - I) = 0$ without using $\pi_0 + \pi_1 = 1$, leading to infinite trivial solutions or $\pi = 0$.
 - **Arithmetic Inversion:** Inverting $\pi_1 = (3/4)\pi_0$ as $\pi_0 = (3/4)\pi_1$.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -185,12 +153,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
 - [[Higher-Order State Weather Prediction Example]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 5, 10, 21–22)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.1, p. 194; Example 4.11, p. 212)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 5, 10, 21–22)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.1, p. 194; Example 4.11, p. 212)

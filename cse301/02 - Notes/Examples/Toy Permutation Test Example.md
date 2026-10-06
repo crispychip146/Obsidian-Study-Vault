@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 65
+order: 76
 ---
 
 # Toy Permutation Test Example
 
-> 📖 **Reading Order:** Step 65 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 76 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]] | ► **Next:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
-
 ---
-
----
-
 ## Problem
 
 Consider a tiny dataset consisting of two samples:
@@ -29,32 +25,20 @@ $$T = \lvert \bar{X} - \bar{Y} \rvert$$
 2. List all $N! = (2 + 1)! = 6$ possible permutations of the pooled data vector.
 3. Compute the value of $T$ for each permutation.
 4. Calculate the exact two-sided $p$-value for the test.
-
 ---
-
----
-
 ## Given
 
 - Pooled data vector: $\mathbf{Z} = (1, 9, 3)$ of length $N = 3$.
 - Group sizes: $m = 2, n = 1$.
 - Test statistic formula: $T = \left\lvert \frac{X_1 + X_2}{2} - Y_1 \right\rvert$.
-
 ---
-
----
-
 ## Required
 
 1. Observed value $t_{\text{obs}}$.
 2. Complete permutation table.
 3. Exact permutation $p$-value:
    $$p = \frac{1}{N!}\sum_{j=1}^{N!} \mathbf{1}_{\{T_j \ge t_{\text{obs}}\}}$$
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -109,21 +93,13 @@ Notice that the observed value $t_{\text{obs}} = 2$ is actually the **smallest p
 $$p = \frac{\# \{j : T_j \ge 2\}}{6} = \frac{6}{6} = 1.0$$
 
 Since $p = 1.0 \gg 0.05$, we fail to reject $H_0$. There is zero evidence that the distributions differ.
-
 ---
-
----
-
 ## Result
 
 - Observed difference: $t_{\text{obs}} = 2$.
 - Permutation values: $\{2, 2, 7, 7, 5, 5\}$.
 - Exact $p$-value: $p = 1.0$.
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -134,11 +110,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 1. **Exactness:** The permutation test is exact; it does not rely on the Central Limit Theorem. With $N = 3$, an asymptotic test (like a $z$-test) would be absurd and completely invalid.
 2. **Minimal Achievable $p$-value:** Notice that even if the observed data had yielded the most extreme statistic possible ($T = 7$), the $p$-value would have been $p = \frac{2}{6} = 0.333$. This demonstrates that with $N = 3$, it is mathematically impossible to reject $H_0$ at the $\alpha = 0.05$ level, regardless of how extreme the data are. A permutation test requires at least $\binom{N}{m} \ge \frac{1}{\alpha} = 20$ permutations (e.g., $N \ge 6$) to ever reach a $p$-value below $0.05$.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -150,11 +122,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Permutation Test Algorithm]]
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

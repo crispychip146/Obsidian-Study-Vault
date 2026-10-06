@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 24
 ---
-
 # Producer-Consumer Semaphore Implementation Example
 
-> 📖 **Reading Order:** Step 24 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 24 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Classic Synchronization Solutions]] | ► **Next:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
----
-
 ## Problem
 
 Consider a concurrent system with:
@@ -30,27 +26,21 @@ Consider a concurrent system with:
 - `out = 0`: Index from which the next consumed item is extracted.
 
 ---
-
----
-
 ## Given
 
 - System state matrices, resource vectors, and process workload parameters as specified in problem setup.
 
 ---
-
 ## Required
 
 - Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
 
 ---
-
 ## Understanding the Problem and Choosing the Method
 
 Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
 
 ---
-
 ## Solution
 
 ### 1. Chronological Step-by-Step Execution Trace
@@ -99,9 +89,6 @@ Below is a detailed time trace demonstrating process synchronization, buffer fil
 - $P_2$ calls `signal(&full)`: `full` increments $2 \to 3$.
 
 ---
-
----
-
 ### 2. Semaphore State Matrix
 
 | Time | Active Process | Action Taken | `mutex` | `empty` | `full` | `empty` Queue | `full` Queue | Buffer State `[0, 1, 2]` |
@@ -115,9 +102,6 @@ Below is a detailed time trace demonstrating process synchronization, buffer fil
 | $t_6$ | $P_2$ | Inserts `'D'` into slot 0 | 1 | 0 | 3 | $\emptyset$ | $\emptyset$ | `['D', 'B', 'C']` |
 
 ---
-
----
-
 ### 3. Concrete POSIX C Implementation
 
 ```c
@@ -190,41 +174,33 @@ int main() {
 ```
 
 ---
-
----
-
 ## Result
 
 The simulation completes successfully, confirming that all process requests and state transitions respect system invariants.
 
 ---
-
 ## Why This Works
 
 Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
 
 ---
-
 ## Common Mistakes
 
 - Overlooking state changes between execution phases.
 - Incorrectly calculating intermediate residual capacities or queue offsets.
 
 ---
-
 ## General Method
 
 Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
 
 ---
-
 ## Related Concepts
 
 - [[Operating System Structures and Functions]]
 - [[Process Concepts and Memory Layout]]
 
 ---
-
 ## Sources
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)

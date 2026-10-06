@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 11
 ---
-
 # Problem — Fork Execution Tree and Process Tracing
 
-> 📖 **Reading Order:** Step 11 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 11 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Process Forking and Zombie Orphan Example]] | ► **Next:** [[CPU Scheduling Principles and Criteria]]
 
 ---
-
----
-
 ## Problem
 
 Analyze the following four POSIX C code snippets and answer the corresponding tracing questions:
@@ -37,7 +33,6 @@ int main() {
 4. Draw the complete process execution tree.
 
 ---
-
 ### Part 2: Loop-Based Forking
 ```c
 #include <stdio.h>
@@ -55,7 +50,6 @@ int main() {
 2. How many times is `"Iteration 0"`, `"Iteration 1"`, and `"Iteration 2"` printed?
 
 ---
-
 ### Part 3: Short-Circuit Boolean Forking
 ```c
 #include <stdio.h>
@@ -74,41 +68,33 @@ int main() {
 3. How many times is `"Done"` printed?
 
 ---
-
----
-
 ## Given
 
 - Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
 
 ---
-
 ## Required
 
 - Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
 
 ---
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Question Type
 
 Code Trace / Process Tree Construction
 
 ---
-
 ## Solution
 
 ### Understanding the Situation
@@ -125,9 +111,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - C logical short-circuit rules (`&&` stops if first operand is false/0; `||` stops if first operand is true/non-zero).
 
 ---
-
----
-
 ### Full Step-by-Step Solution
 
 ### Solution to Part 1: Sequential Fork Calls
@@ -170,7 +153,6 @@ graph TD
 ```
 
 ---
-
 ### Solution to Part 2: Loop-Based Forking
 
 Let us trace iteration by iteration:
@@ -194,7 +176,6 @@ Let us trace iteration by iteration:
   For $N = 3$: $2^4 - 2 = 16 - 2 = 14$.
 
 ---
-
 ### Solution to Part 3: Short-Circuit Boolean Forking
 
 Recall the return value of `fork()`:
@@ -250,18 +231,15 @@ flowchart TD
 - **Times "Done" is Printed:** Exactly **4 times**.
 
 ---
-
 ### Result and Interpretation
 The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
 
 ---
-
 ## Reusable Insight
 
 Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
 
 ---
-
 ## Common Mistakes
 
 1. **Ignoring Short-Circuit:** Assuming that `fork() && fork()` always creates 4 processes. The child of the first fork *never* executes the second fork!
@@ -269,29 +247,23 @@ Always decompose the problem into initial state verification, transition step ev
    - If `printf("Hello")` does not contain a newline `\n` and output is redirected to a file, C standard I/O buffers the text in user space. During `fork()`, the unflushed buffer is cloned into the child, causing `"Hello"` to be printed twice as many times as expected! (Always use `\n` or `fflush(stdout)` in tracing problems).
 
 ---
-
----
-
 ## Exam Pattern
 
 Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
 
 ---
-
 ## Related Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Related Concepts
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
 ## Source
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 22–28)

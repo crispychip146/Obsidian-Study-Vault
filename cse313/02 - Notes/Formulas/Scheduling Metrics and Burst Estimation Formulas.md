@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 15
 ---
-
 # Scheduling Metrics and Burst Estimation Formulas
 
-> 📖 **Reading Order:** Step 15 of 34 | **Module 3:** CPU Scheduling  
+> 📖 **Reading Order:** Step 15 of 68 | **Module 3:** CPU Scheduling  
 > ◄ **Previous:** [[Interactive Scheduling Algorithms]] | ► **Next:** [[Comprehensive CPU Scheduling Simulation Example]]
 
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 How can an operating system quantitatively measure scheduling performance across different algorithms, and how can a scheduler estimate future CPU burst lengths when future bursts cannot be known in advance?
@@ -21,7 +17,6 @@ How can an operating system quantitatively measure scheduling performance across
 Earlier we established that Shortest Job First (SJF) is provably optimal for minimizing average waiting time. However, the fundamental obstacle to running SJF in practice is that the operating system cannot know how long a process will compute before its next I/O call without executing it first.
 
 ---
-
 ## Developing the Formula
 
 To resolve this obstacle, we apply **Exponential Smoothing** to predict the next CPU burst ($\tau_{n+1}$) using the historical average of previous bursts:
@@ -31,7 +26,6 @@ To resolve this obstacle, we apply **Exponential Smoothing** to predict the next
 Expanding this recurrence shows that older bursts contribute with geometrically decaying weights $(1 - \alpha)^j$.
 
 ---
-
 ## Formula
 
 ### Core Scheduling Performance Metrics:
@@ -47,7 +41,6 @@ $$\text{Throughput} = \frac{\text{Total Completed Processes}}{\text{Total Elapse
 $$\tau_{n+1} = \alpha t_n + (1 - \alpha) \tau_n$$
 
 ---
-
 ## Variables
 
 | Symbol | Meaning |
@@ -61,14 +54,12 @@ $$\tau_{n+1} = \alpha t_n + (1 - \alpha) \tau_n$$
 | $\alpha$ | Smoothing factor ($0 \le \alpha \le 1$), typically $\alpha = 0.5$ |
 
 ---
-
 ## Conditions
 
 - Metric calculations require discrete arrival and completion timestamps from a Gantt chart.
 - Burst estimation assumes process burst behaviors exhibit temporal locality (recent past predicts near future).
 
 ---
-
 ## Intuition
 
 ### Choosing the Smoothing Factor $\alpha$
@@ -82,9 +73,6 @@ The value of $\alpha$ controls how rapidly the scheduler adapts to changing proc
 | **$\alpha = 0.5$** | $\tau_{n+1} = 0.5 t_n + 0.5 \tau_n$ | Equal weight given to the latest observed burst and the accumulated historical trend. | **Standard OS choice**; balances stability with agility. |
 
 ---
-
----
-
 ## Derivation
 
 To see why this formula is called *exponential*, expand the recurrence relation backwards:
@@ -106,9 +94,6 @@ Because $(1 - \alpha) < 1$, the coefficient weights $\alpha(1 - \alpha)^j$ decay
 Past history is remembered, but its influence fades away exponentially! $\blacksquare$
 
 ---
-
----
-
 ## Example
 
 ### Worked Numerical Example of Exponential Smoothing
@@ -126,35 +111,28 @@ $$t_0 = 6\text{ ms}, \quad t_1 = 4\text{ ms}, \quad t_2 = 16\text{ ms}$$
 Notice how the prediction smoothly adjusts from $10 \to 8 \to 6$, and then climbs to $11$ when the burst surges to $16$.
 
 ---
-
----
-
 ## Common Mistakes
 
 - Calculating Waiting Time as $T_{\text{completion}} - T_{\text{arrival}}$ (which is Turnaround Time!). Waiting Time is strictly Turnaround Time minus Burst Time.
 - Confusing Response Time (time until first CPU allocation) with Turnaround Time (time until final completion).
 
 ---
-
 ## Related Concepts
 
 - [[Batch Scheduling Algorithms]]
 - [[Interactive Scheduling Algorithms]]
 
 ---
-
 ## Prerequisites
 
 - [[CPU Scheduling Principles and Criteria]]
 
 ---
-
 ## Problems
 
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 13–24)

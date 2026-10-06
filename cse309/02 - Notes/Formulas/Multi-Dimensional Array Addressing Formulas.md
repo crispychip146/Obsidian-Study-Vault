@@ -12,8 +12,6 @@ order: 13
 
 ---
 
----
-
 ## The Question and Earlier Knowledge
 
 How does a compiler map high-dimensional array references (such as `A[i][j]` or `A[i][j][k]`) down into linear physical byte memory addresses, and how can the emitted Three-Address Code compute these offsets using minimum runtime instructions?
@@ -135,8 +133,6 @@ For any $k$-dimensional array $A[n_1][n_2]\dots[n_k]$ with indices $i_1, i_2, \d
 $$\mathbf{\text{Address} = \text{base} + \left( \sum_{j=1}^k i_j \prod_{m=j+1}^k n_m \right) \times w}$$
 
 The compiler evaluates this in a simple linear loop during parsing, multiplying by the next dimension size and adding the next index at each grammatical level!
-
----
 
 ---
 

@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 19
+order: 29
 ---
 
 # Law of Total Probability and Bayes' Rule
 
-> 📖 **Reading Order:** Step 19 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> 📖 **Reading Order:** Step 29 of 103 | **Module 3:** Conditional Probability and Conditioning  
 > ◄ **Previous:** [[Conditional Expectation]] | ► **Next:** [[Adam's Law (Law of Total Expectation)]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Law of Total Probability and Bayes' Rule, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -51,11 +47,7 @@ where:
 - $f(\theta)$ is the **prior distribution**.
 - $f(x \mid \theta) = \mathcal{L}(\theta)$ is the **likelihood**.
 - $f(\theta \mid x)$ is the **posterior distribution**.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -83,11 +75,7 @@ where:
 - **Posterior Probability $P(B_k \mid A)$:** The updated belief in hypothesis $B_k$ after incorporating evidence $A$.
 
 $$\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}$$
-
 ---
-
----
-
 ## Derivation
 
 Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
@@ -113,11 +101,7 @@ $$P(+) = (0.99)(0.001) + (0.05)(0.999) = 0.00099 + 0.04995 = 0.05094$$
 $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 0.0194 \approx 1.94\%$$
 
 **Surprising Insight (Base Rate Fallacy):** Even though the test is $99\%$ accurate on sick patients, because the disease is extremely rare, over $98\%$ of positive test results are false positives!
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Base Rate Fallacy:** Ignoring prior probabilities when evaluating posterior likelihoods, assuming $P(D \mid +) \approx P(+ \mid D)$.
@@ -129,14 +113,12 @@ $$P(D \mid +) = \frac{P(+ \mid D) P(D)}{P(+)} = \frac{0.00099}{0.05094} \approx 
 ## Related Concepts
 
 - [[Conditional Probability and Independence]] — Foundational axioms of conditional probability.
+- [[Simpson's Paradox]] — Confounding and inequality reversal under the Law of Total Probability.
 - [[Bayesian Inference]] — Statistical framework built on Bayes' Rule.
 - [[Monty Hall Problem Example]] — Bayesian solution to the famous game show puzzle.
+- [[Ace of Spades Conditioning Paradox Example]] — Sample space restriction and specific vs. generic conditioning.
 - [[Problem — Patty and Max Gambler's Ruin]] — Boundary conditioning with total probability.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]

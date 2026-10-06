@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 57
+order: 68
 ---
 
 # Hypothesis Testing Framework
 
-> 📖 **Reading Order:** Step 57 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 68 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Problem — Laplace Rule of Succession and Bayesian Updating]] | ► **Next:** [[p-Values and Significance]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Hypothesis Testing Framework, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -40,11 +36,7 @@ A hypothesis test is defined by:
 2. A **rejection region** (or **critical region**) $R \subset \mathbb{R}$, such that:
    $$\text{Reject } H_0 \iff T(\mathbf{X}) \in R$$
    $$\text{Retain (Fail to Reject) } H_0 \iff T(\mathbf{X}) \notin R$$
-
 ---
-
----
-
 ## How It Works
 
 ### The Legal Trial Analogy: Asymmetric Decision Making
@@ -122,11 +114,7 @@ Hypothesis testing and interval estimation are two sides of the same mathematica
 > **Inversion Theorem:**
 > A level $\alpha$ two-sided test rejects $H_0: \theta = \theta_0$ if and only if $\theta_0$ falls outside the corresponding $1 - \alpha$ confidence interval $C_n$:
 > $$\text{Reject } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
-
 ---
-
----
-
 ## Example
 
 ### Two-Sided Test of Coin Fairness
@@ -207,11 +195,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Confidence Intervals and Confidence Sets]]
 - [[Toy Permutation Test Example]]
 - [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Continuous Probability Distributions]]
@@ -229,4 +213,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

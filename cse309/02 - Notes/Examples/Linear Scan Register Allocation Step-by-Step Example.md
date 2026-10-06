@@ -12,8 +12,6 @@ order: 47
 
 ---
 
----
-
 ## Problem
 
 We trace the exact register allocation example presented in the KMS lecture slides (Slides 368–425).
@@ -48,8 +46,6 @@ Variable g: [9, 10]
 ```
 
 Sorted by starting point: `[a, b, c, d, e, f, g]`.
-
----
 
 ---
 
@@ -139,8 +135,6 @@ Now let us trace Linear Scan with only $R = 2$ registers: $\{ R_0, R_1 \}$.
 
 ---
 
----
-
 ## Result
 
 | Variable | Live Interval | Allocation Status | Assigned Physical Register |
@@ -152,8 +146,6 @@ Now let us trace Linear Scan with only $R = 2$ registers: $\{ R_0, R_1 \}$.
 | **$e$** | `[1, 9]` | **Spilled** | Memory Stack Slot |
 | **$f$** | `[2, 9]` | In Register | **$R_0$** |
 | **$g$** | `[9, 10]` | In Register | **$R_0$** |
-
----
 
 ---
 

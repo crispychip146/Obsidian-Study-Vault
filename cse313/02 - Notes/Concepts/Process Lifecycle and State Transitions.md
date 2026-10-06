@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 5
 ---
-
 # Process Lifecycle and State Transitions
 
-> 📖 **Reading Order:** Step 05 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 05 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Process Concepts and Memory Layout]] | ► **Next:** [[Process Control Block and Context Switching]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3b, 2018 Q1a, 2020 Q4a)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, verbatim repeated!)**
 >
@@ -27,9 +25,6 @@ order: 5
 >    - **Livelock:** The process is in the **`RUNNING`** state. It consumes **100% CPU cycles** spinning in an active loop. Its internal state values continuously oscillate and change in response to another process, yet neither makes functional forward progress.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 In any modern computing system, there are typically hundreds or thousands of processes configured, but only a small number of physical CPU cores (e.g. 4 to 16 cores).
@@ -37,7 +32,6 @@ In any modern computing system, there are typically hundreds or thousands of pro
 We want the system to multiplex these cores fairly and efficiently so that all active programs make progress, interactive applications respond instantly to user input, and batch computations utilize spare cycles. The central obstacle is that processes have radically different immediate needs: some are actively computing, some are waiting for slow disk or network I/O, and others are waiting for timer alarms.
 
 ---
-
 ## Developing the Idea
 
 The operating system structures process management around a formal **Finite State Machine (FSM)**: the **Process Lifecycle**.
@@ -48,7 +42,6 @@ By categorizing every process into one of several well-defined states, the OS CP
 - Under memory pressure, the OS extends this model with **Suspended States**, paging out entire processes to secondary storage to reclaim physical RAM frames.
 
 ---
-
 ## Definition
 
 During its existence from initial creation to final termination, a process changes its execution status dynamically. The **process lifecycle** is modeled as a finite state machine governed by the operating system scheduler and hardware events.
@@ -61,9 +54,6 @@ The standard representation is the **Five-State Process Model**:
 5. **Terminated (Exit):** The process has finished executing its code (or was killed), its memory and file descriptors are released, but its exit status remains in the process table until its parent collects it.
 
 ---
-
----
-
 ## How It Works
 
 ### The 5-State Transition Diagram
@@ -101,9 +91,6 @@ stateDiagram-v2
    - The process finishes its `main()` function, explicitly calls `exit()`, or receives a fatal terminating signal (`SIGKILL`, `SIGSEGV`).
 
 ---
-
----
-
 ### The Extended 7-State Model (Suspended States)
 
 When physical RAM is heavily overcommitted (thrashing), the OS must free up memory by swapping entire processes out of physical RAM and onto secondary storage (the swap partition/file). This introduces two **Suspended States**:
@@ -121,9 +108,6 @@ flowchart TD
 2. **Ready Suspended:** The process has been swapped out to disk, but its blocking event has already completed. It is ready to run as soon as sufficient physical memory becomes available to swap it back into RAM.
 
 ---
-
----
-
 ## Example
 
 Tracing a text editor process:
@@ -135,13 +119,11 @@ Tracing a text editor process:
 6. User clicks Save & Exit: Editor writes file, executes `exit()`, and enters **Terminated**.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Strict Invariance of Transitions:** A process cannot jump directly from Blocked to Running; it *must* first enter the Ready state so the scheduler can evaluate priorities fairly.
@@ -149,14 +131,12 @@ See related modules for microarchitectural implementation details.
 - **State Determinism:** Every state transition is triggered either by a hardware interrupt (timer, I/O device) or an explicit software trap/system call.
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 - **Next Step:** What underlying data structure records these states and enables saving/restoring them? (See [[Process Control Block and Context Switching]]).
@@ -167,9 +147,6 @@ See related modules for microarchitectural implementation details.
   - "What event triggers the transition from Running to Ready vs. Running to Blocked?"
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Process Control Block and Context Switching]]
@@ -177,19 +154,16 @@ See related modules for microarchitectural implementation details.
 - [[CPU Multiprogramming Utilization Formula]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 
 ---
-
 ## Problems
 
 - [[Problem — Fork Execution Tree and Process Tracing]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 11–15)

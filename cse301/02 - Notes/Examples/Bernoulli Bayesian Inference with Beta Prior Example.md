@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 54
+order: 65
 ---
 
 # Bernoulli Bayesian Inference with Beta Prior Example
 
-> 📖 **Reading Order:** Step 54 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 65 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Normal-Normal Conjugate Updating Formula]] | ► **Next:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
-
 ---
-
----
-
 ## Problem
 
 A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ successful recoveries and $6$ non-recoveries. Let $p \in (0, 1)$ denote the true recovery probability.
@@ -22,11 +18,7 @@ A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ succe
 2. Compute the Bayes point estimate (posterior mean) and the MAP estimate under this flat prior. Compare both with the Maximum Likelihood Estimator (MLE).
 3. Now suppose an expert clinical researcher insists on an informative prior: based on historical treatments, they specify $p \sim \text{Beta}(4, 4)$ (prior mean $0.5$, effective prior sample size $8$). Derive the new posterior distribution, posterior mean, and MAP estimate.
 4. Calculate the weight placed on the sample data versus the prior in both scenarios.
-
 ---
-
----
-
 ## Given
 
 - Sample size: $n = 20$
@@ -34,21 +26,13 @@ A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ succe
 - Likelihood: $L(p) \propto p^{14}(1 - p)^6$
 - Prior 1: Flat uniform prior $\text{Beta}(1, 1)$
 - Prior 2: Informative prior $\text{Beta}(4, 4)$
-
 ---
-
----
-
 ## Required
 
 1. Posterior distributions for both priors.
 2. Posterior mean, MAP, and MLE comparisons.
 3. Weights on empirical sample vs. prior belief.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -112,11 +96,7 @@ Identify the random variables, state the conditional distributions, select the a
      $$1 - w = \frac{\alpha + \beta}{n + \alpha + \beta} = \frac{8}{28} = \frac{2}{7} \approx 28.57\%$$
    - Verifying the weighted average:
      $$\hat{p}_{\text{Bayes}} = \frac{5}{7}(0.7000) + \frac{2}{7}(0.5000) = 0.5000 + 0.1429 = 0.6429 \quad \checkmark$$
-
 ---
-
----
-
 ## Result
 
 | Metric | Flat Prior $\text{Beta}(1, 1)$ | Informative Prior $\text{Beta}(4, 4)$ | Classical Frequentist MLE |
@@ -126,11 +106,7 @@ Identify the random variables, state the conditional distributions, select the a
 | Mode (MAP) | $\frac{14}{20} = 0.7000$ | $\frac{17}{26} \approx 0.6538$ | $0.7000$ |
 | Data Weight | $90.91\%$ ($w = 20/22$) | $71.43\%$ ($w = 20/28$) | $100\%$ |
 | Prior Weight | $9.09\%$ ($1-w = 2/22$) | $28.57\%$ ($1-w = 8/28$) | $0\%$ |
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -140,11 +116,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
 ## Common Mistakes
 
 Under the flat prior, the MAP estimate equals the MLE, while the posterior mean incorporates mild regularization. When an informative prior centered at $0.5$ is introduced, it exerts a gravitational pull (shrinkage) on the estimate, moving it from $0.70$ down to $0.6429$.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -156,11 +128,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Bayesian Inference]]
 - [[Maximum A Posteriori (MAP) Estimation]]
 - [[Beta-Binomial Conjugate Updating Formula]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 31
 ---
-
 # Banker's Algorithm Multi-Resource Step-by-Step Example
 
-> 📖 **Reading Order:** Step 31 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 31 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Deadlock Detection and Recovery Algorithms]] | ► **Next:** [[Resource Allocation Graph Cycle Detection Example]]
 
 ---
-
----
-
 ## Problem
 
 *(Directly derived from course simulation lecture notes: `Notes on algorithm simulation.pdf`)*
@@ -37,27 +33,21 @@ $$E = (9, 3, 6)$$
 **Question:** Determine whether the current state of this system is **Safe** or **Unsafe**. If safe, find a valid safe sequence.
 
 ---
-
----
-
 ## Given
 
 - System state matrices, resource vectors, and process workload parameters as specified in problem setup.
 
 ---
-
 ## Required
 
 - Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
 
 ---
-
 ## Understanding the Problem and Choosing the Method
 
 Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
 
 ---
-
 ## Solution
 
 ### 2. Step 1: Compute Available Vector ($A$) and Need Matrix ($R$)
@@ -80,9 +70,6 @@ Summary Table of Remaining Needs:
 $$R = \begin{pmatrix} 2 & 2 & 2 \\ 0 & 0 & 1 \\ 1 & 0 & 3 \\ 4 & 2 & 0 \end{pmatrix}$$
 
 ---
-
----
-
 ### 3. Step 2: Safety Simulation Algorithm
 
 We initialize $Work = A = (0, 1, 1)$ and $Finish = [F, F, F, F]$.
@@ -102,7 +89,6 @@ $$Work_{\text{new}} = Work_{\text{old}} + CA(P_2) = (0, 1, 1) + (6, 1, 2) = \mat
 - **Safe Sequence so far:** $\langle P_2 \rangle$.
 
 ---
-
 ### Iteration 2:
 Available pool is now $Work = (6, 2, 3)$. Evaluate remaining processes $\{P_1, P_3, P_4\}$:
 - For $P_1$: Need $(2, 2, 2) \le (6, 2, 3)$? $\implies$ **True** ($2 \le 6, 2 \le 2, 2 \le 3$).
@@ -117,7 +103,6 @@ $$Work_{\text{new}} = Work_{\text{old}} + CA(P_1) = (6, 2, 3) + (1, 0, 0) = \mat
 - **Safe Sequence so far:** $\langle P_2, P_1 \rangle$.
 
 ---
-
 ### Iteration 3:
 Available pool is now $Work = (7, 2, 3)$. Evaluate remaining processes $\{P_3, P_4\}$:
 - For $P_3$: Need $(1, 0, 3) \le (7, 2, 3)$? $\implies$ **True** ($1 \le 7, 0 \le 2, 3 \le 3$).
@@ -130,7 +115,6 @@ $$Work_{\text{new}} = Work_{\text{old}} + CA(P_3) = (7, 2, 3) + (2, 1, 1) = \mat
 - **Safe Sequence so far:** $\langle P_2, P_1, P_3 \rangle$.
 
 ---
-
 ### Iteration 4:
 Available pool is now $Work = (9, 3, 4)$. Only $P_4$ remains:
 - For $P_4$: Need $(4, 2, 0) \le (9, 3, 4)$? $\implies$ **True** ($4 \le 9, 2 \le 3, 0 \le 4$).
@@ -140,9 +124,6 @@ $$Work_{\text{new}} = Work_{\text{old}} + CA(P_4) = (9, 3, 4) + (0, 0, 2) = \mat
 - Set $Finish[P_4] = \text{TRUE}$.
 
 ---
-
----
-
 ## Result
 
 Since $Finish[i] = \text{TRUE}$ for all $i \in \{1, 2, 3, 4\}$, the system is in a **SAFE STATE**.
@@ -153,35 +134,28 @@ $$\mathbf{\langle P_2 \to P_1 \to P_3 \to P_4 \rangle}$$
 *(Alternative valid safe sequences include $\langle P_2, P_3, P_1, P_4 \rangle$ and $\langle P_2, P_4, P_1, P_3 \rangle$.)*
 
 ---
-
----
-
 ## Why This Works
 
 Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
 
 ---
-
 ## Common Mistakes
 
 - Overlooking state changes between execution phases.
 - Incorrectly calculating intermediate residual capacities or queue offsets.
 
 ---
-
 ## General Method
 
 Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
 
 ---
-
 ## Related Concepts
 
 - [[Operating System Structures and Functions]]
 - [[Process Concepts and Memory Layout]]
 
 ---
-
 ## Sources
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)

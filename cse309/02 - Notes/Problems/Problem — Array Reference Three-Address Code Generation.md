@@ -12,8 +12,6 @@ order: 19
 
 ---
 
----
-
 ## Problem
 
 A high-performance computing library defines a 3-dimensional data cube in C syntax as:
@@ -35,8 +33,6 @@ The compiler targets a 32-bit architecture with the following system characteris
    - A **Quadruples Table**
    - A **Triples Table**
 5. **Architectural Analysis:** Formally explain why the first dimension bound ($n_1 = 10$) **never appears** in the address calculation formula.
-
----
 
 ---
 
@@ -221,8 +217,6 @@ Always follow compiler phase invariants: parse bottom-up or top-down according t
 > If an exam question specifies 1-based indexing ($1 \le i \le 10, 1 \le j \le 20, 1 \le k \le 30$) or custom bounds ($l_m \le i_m \le u_m$):
 > - You MUST normalize each index by subtracting its lower bound: $(i - l_1), (j - l_2), (k - l_3)$.
 > - Failing to subtract the lower bound shifts every memory access by an invalid constant base offset, resulting in total loss of marks!
-
----
 
 ---
 

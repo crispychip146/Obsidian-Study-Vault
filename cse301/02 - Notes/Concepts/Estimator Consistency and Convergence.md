@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 37
+order: 48
 ---
 
 # Estimator Consistency and Convergence
 
-> 📖 **Reading Order:** Step 37 of 92 | **Module 6:** Statistical Inference  
+> 📖 **Reading Order:** Step 48 of 103 | **Module 6:** Statistical Inference  
 > ◄ **Previous:** [[Bias-Variance Decomposition]] | ► **Next:** [[Confidence Intervals and Confidence Sets]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Estimator Consistency and Convergence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -28,11 +24,7 @@ Consistency is the ultimate "sanity check" of any statistical estimator:
 - With $1,000,000$ data points, the probability that your estimate differs from the true parameter by any noticeable amount $\epsilon$ approaches zero.
 
 If an estimator is not consistent, collecting more data does not guarantee that you will learn the truth. In modern statistics, **consistency is considered far more important than unbiasedness**. Unbiasedness is merely a finite-sample property that can be easily corrected, whereas inconsistency indicates a fundamentally flawed procedure.
-
 ---
-
----
-
 ## Definition
 
 An estimator is **consistent** if, as the sample size $n$ grows toward infinity, the estimator converges in probability to the true underlying parameter value $\theta$.
@@ -44,11 +36,7 @@ which means that for every tolerance threshold $\epsilon > 0$:
 $$\lim_{n \to \infty} P_\theta\left(\lvert \hat{\theta}_n - \theta \rvert > \epsilon\right) = 0$$
 or equivalently,
 $$\lim_{n \to \infty} P_\theta\left(\lvert \hat{\theta}_n - \theta \rvert \le \epsilon\right) = 1$$
-
 ---
-
----
-
 ## How It Works
 
 ### Modes of Convergence
@@ -155,11 +143,7 @@ $$\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$$
    - $X_n / Y_n \xrightarrow{d} X / c$ (provided $c \ne 0$)
 3. **Weak Law of Large Numbers (WLLN):** For i.i.d. observations with finite mean $\mu$, the sample mean $\bar{X}_n$ is a consistent estimator of $\mu$:
    $$\bar{X}_n \xrightarrow{P} \mu$$
-
 ---
-
----
-
 ## Example
 
 ### Proving Consistency of Sample Mean via MSE Criterion
@@ -222,11 +206,7 @@ For a comparative exercise constructing an unbiased estimator that is inconsiste
    Consistency requires convergence in probability ($\xrightarrow{P}$). Strong consistency requires almost sure convergence ($\xrightarrow{\text{a.s.}}$), which is a strictly stronger condition.
 2. **Assuming $\lim_{n \to \infty} E[\hat{\theta}_n] = \theta$ implies consistency:**
    An estimator can be asymptotically unbiased ($\text{bias} \to 0$) without being consistent if its variance does not go to zero (e.g., $\hat{\theta}_n = X_1 + \frac{1}{n}$).
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Exam Relevance
@@ -235,41 +215,25 @@ Exam questions often test:
 1. Proving that an estimator is consistent using the $\text{MSE} \to 0$ theorem.
 2. Identifying or constructing counterexamples of estimators that are unbiased yet inconsistent, or consistent yet biased.
 3. Applying Markov's inequality to prove that quadratic mean convergence implies convergence in probability.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Point Estimation]]
 - [[Bias-Variance Decomposition]]
 - [[Confidence Intervals and Confidence Sets]]
 - [[Maximum Likelihood Estimation]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Point Estimation]]
 - [[Markov Inequality]]
 - [[Law of Large Numbers]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+- [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]

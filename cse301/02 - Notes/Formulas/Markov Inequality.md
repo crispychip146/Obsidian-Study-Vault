@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 25
+order: 36
 ---
 
 # Markov Inequality
 
-> 📖 **Reading Order:** Step 25 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> 📖 **Reading Order:** Step 36 of 103 | **Module 4:** Probability Bounds and Inequalities  
 > ◄ **Previous:** [[Problem — Compound Random Sum via Adam and Eve's Laws]] | ► **Next:** [[Chebyshev Inequality]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Markov Inequality, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -34,11 +30,7 @@ $$P(X \ge a) \le \frac{\mathbb{E}[X]}{a}$$
 
 Equivalently, setting $a = c \mathbb{E}[X]$ for $c > 0$:
 $$P(X \ge c \mathbb{E}[X]) \le \frac{1}{c}$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -76,11 +68,7 @@ This generalization is the mother of all major concentration inequalities:
 - Choosing $g(x) = (x - \mu)^2$ yields the [[Chebyshev Inequality]].
 - Choosing $g(x) = e^{tx}$ ($t > 0$) yields the [[Chernoff Bound]].
 - Choosing $g(x) = x^k$ ($k > 0$) yields high-order moment bounds.
-
 ---
-
----
-
 ## Derivation
 
 Consider the indicator random variable $I_{X \ge a}$, defined as:
@@ -127,21 +115,13 @@ For a concrete comparison of how this bound compares against second-moment ([[Ch
    - *Counterexample:* Let $X = -100$ with probability $0.5$ and $X = 100$ with probability $0.5$. Then $\mathbb{E}[X] = 0$.
    - Claiming $P(X \ge 50) \le \frac{0}{50} = 0$ is completely false, since $P(X \ge 50) = 0.5$!
 2. **Weak Bounds:** Because it only uses the first moment ($\mathbb{E}[X]$), Markov's inequality is generally loose. When variance or MGF is known, Chebyshev or Chernoff should be preferred.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Chebyshev Inequality]] — Second-moment specialization.
 - [[Chernoff Bound]] — Exponential moment specialization.
 - [[Comparison of Probability Bounds Example]] — Side-by-side numerical comparison.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]

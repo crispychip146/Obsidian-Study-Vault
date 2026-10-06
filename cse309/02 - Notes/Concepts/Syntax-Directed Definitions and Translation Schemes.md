@@ -7,16 +7,8 @@ order: 1
 
 # Syntax-Directed Definitions and Translation Schemes
 
-> 📖 **Reading Order:** Step 1 of 55 | **Module 1:** Syntax-Directed Translation  
-> ◄ **Previous:** [[cse309/00 - Course Hub|Course Hub]] | ► **Next:** [[Synthesized and Inherited Attributes]]
-
----
-
----
-
----
-
----
+> 📖 **Reading Order:** Step 01 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** *Start of Course* | ► **Next:** [[Synthesized and Inherited Attributes]]
 
 ---
 
@@ -50,14 +42,6 @@ So, compiler designers had an ingenious insight:
 We attach properties called **Attributes** to grammar symbols (like attaching sticky notes to each node of the parse tree), and we attach mathematical equations or code snippets called **Semantic Rules / Actions** to the grammar productions. As the tree is parsed, these rules fire, computing values, checking types, and generating code.
 
 This unified framework is called **Syntax-Directed Translation (SDT)**.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -97,33 +81,13 @@ An SDT takes an SDD and embeds explicit executable program fragments (called **S
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Syntax-Directed Definitions and Translation Schemes** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Grammar Attributes: The Data Carriers
 
@@ -145,6 +109,7 @@ How does information move across a tree? There are only two fundamental directio
 2. **From Parent or Siblings Down to Children:** **[[Synthesized and Inherited Attributes|Inherited Attributes]]**.
 
 ---
+
 ### The Annotated (Decorated) Parse Tree
 
 When an SDD is evaluated for a specific input string, we can visualize the result by writing the computed attribute values directly inside each node of the parse tree. This is called an **Annotated Parse Tree** (or Decorated Parse Tree).
@@ -188,6 +153,7 @@ graph TD
 - The final answer $19$ reaches $L.val$ at the very top.
 
 ---
+
 ### Dependency Graphs and the Evaluation Order
 
 Because an SDD does not specify an evaluation order, how does a compiler figure out which attribute to calculate first?
@@ -214,6 +180,7 @@ flowchart LR
 > 2. If the graph has no cycles (is a DAG), by graph theory, there exists at least one node with in-degree 0 (a node that depends on nothing). We evaluate this node, remove it and its outgoing edges from the graph, and repeat. The remaining subgraph is still a DAG. By induction on the number of vertices, this process always terminates, producing a valid linear evaluation sequence. $\blacksquare$
 
 ---
+
 ### The Catastrophic Cycle Problem & Why We Need SDD Classes
 
 What if a programmer writes an SDD like this?
@@ -244,101 +211,6 @@ These classes will be explored deeply in the next two notes.
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -360,12 +232,6 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 ### Common Exam Traps and Pitfalls
 
 > [!WARNING] The 3 Classic Exam Traps
@@ -375,65 +241,29 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ---
 
----
-
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Synthesized and Inherited Attributes]]
+- [[S-Attributed and L-Attributed SDDs]]
 - [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- *Start of Course (Compiler Front End & Context-Free Grammars)*
 
 ---
 
 ## Problems
 
 - [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
 
 ---
 

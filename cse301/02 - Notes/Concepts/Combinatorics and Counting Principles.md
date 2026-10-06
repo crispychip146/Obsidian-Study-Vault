@@ -7,13 +7,9 @@ order: 1
 
 # Combinatorics and Counting Principles
 
-> 📖 **Reading Order:** Step 01 of 92 | **Module 1:** Counting and Discrete Probability  
+> 📖 **Reading Order:** Step 01 of 103 | **Module 1:** Counting and Discrete Probability  
 > ◄ **Previous:** *Start of Course* | ► **Next:** [[Probability Axioms and Naive Probability]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Combinatorics and Counting Principles, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -32,11 +28,7 @@ By formalizing sample spaces, probability measures, state transitions, or likeli
 
 In probability theory, combinatorics forms the operational backbone of the **naive definition of probability**: when all outcomes in a finite sample space $S$ are equally likely, the probability of an event $A$ is simply:
 $$P(A) = \frac{\lvert A \rvert}{\lvert S \rvert} = \frac{\# \text{ favorable outcomes}}{\text{total } \# \text{ possible outcomes}}$$
-
 ---
-
----
-
 ## How It Works
 
 ### Core Counting Rules
@@ -74,11 +66,7 @@ $$\star \star \mid \star \mid \mid \star \star \star \quad (k = 6 \text{ stars},
 Total positions in the line = $k + (n - 1)$.
 The number of valid arrangements is the number of ways to choose the positions of the $k$ stars:
 $$\binom{n + k - 1}{k} = \binom{n + k - 1}{n - 1}$$
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Distributing Server Jobs (Stars & Bars Application)
@@ -120,11 +108,7 @@ This generalizes the binomial coefficient $\binom{n}{k} = \binom{n}{k, n-k}$ and
 2. **Strict compositions ($x_i \ge 1$):** Solutions to $x_1 + \dots + x_n = k$ in positive integers equal $\binom{k - 1}{n - 1}$ (choosing $n - 1$ dividers among $k - 1$ spaces between stars).
 
 For extensions to unions of non-disjoint counting sets, see the [[Inclusion-Exclusion Principle]].
-
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 ### Story Proofs (Combinatorial Proofs)
@@ -145,11 +129,7 @@ $$\binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k}$$
 ### Example 3: Vandermonde's Identity
 $$\binom{m + n}{k} = \sum_{j=0}^k \binom{m}{j} \binom{n}{k - j}$$
 - **Story:** A class consists of $m$ computer science students and $n$ data science students. We choose a delegation of $k$ students. We can select $j$ computer science students ($\binom{m}{j}$ ways) and $k - j$ data science students ($\binom{n}{k-j}$ ways). Summing over all possible CS headcounts $j \in \{0, 1, \dots, k\}$ yields the identity.
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
@@ -160,11 +140,7 @@ $$\binom{m + n}{k} = \sum_{j=0}^k \binom{m}{j} \binom{n}{k - j}$$
    Using $n^k$ when items cannot be reused.
 3. **Assuming equally likely outcomes without checking symmetry:**
    The naive probability formula $\frac{\lvert A \rvert}{\lvert S \rvert}$ requires that every elementary outcome has the exact same probability of occurring.
-
 ---
-
----
-
 ## Exam Relevance
 
 Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and statistical hypothesis testing.
@@ -177,11 +153,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Inclusion-Exclusion Principle]]
 - [[Birthday Problem and Collisions Example]]
 - [[Derangements and Card Matching Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]
@@ -196,6 +168,6 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/Lecture_Notes_Complete.pdf]] (Lectures 1–2: Counting & Story Proofs)
-- [[01 - Sources/Lectures/strategic_practice_and_homework_1.pdf]]
-- [[01 - Sources/Lectures/ITP.pdf]] (Chapter 1: Probability and Counting)
+- [[cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf]] (Lectures 1–2: Counting & Story Proofs)
+- [[cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf]]
+- [[cse301/01 - Sources/Lectures/ITP.pdf]] (Chapter 1: Probability and Counting)

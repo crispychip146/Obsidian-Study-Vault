@@ -7,28 +7,14 @@ order: 16
 
 # Backpatching in Intermediate Code Generation
 
-> 📖 **Reading Order:** Step 16 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 16 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Control Flow Translation and Boolean Expressions]] | ► **Next:** [[Backpatching Control-Flow Code Generation Algorithm]]
-
----
-
----
-
----
-
----
 
 ---
 
 ## Starting Point and the Problem
 
 Compilers require formal semantic translations to bridge the gap between abstract syntax trees and concrete target machine instructions.
-
----
-
----
-
----
 
 ---
 
@@ -51,33 +37,13 @@ flowchart LR
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Backpatching in Intermediate Code Generation** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Three Synthesized Attributes
 
@@ -90,6 +56,7 @@ Unlike the inherited label scheme described in [[Control Flow Translation and Bo
 | `S.nextlist` | A list of instruction indices (quads) | Jump instructions that must transfer control to the statement immediately following statement $S$. |
 
 ---
+
 ### The Three Fundamental List Operations
 
 The compiler maintains linked lists of instruction indices using three primitive operations:
@@ -112,6 +79,7 @@ The compiler maintains linked lists of instruction indices using three primitive
 > If instructions $100, 104, 108$ are all on `truelist`, `quad[108].target` holds $104$, and `quad[104].target` holds $100$. Backpatching simply walked this chain through the instruction memory!
 
 ---
+
 ### Marker Non-Terminals: Capturing Real-Time Instruction Indices
 
 Because code emission happens in real time, the compiler must record the instruction index where a new sub-clause begins *before* the sub-clause is parsed.
@@ -130,6 +98,7 @@ $$N \longrightarrow \epsilon \quad \{ N.nextlist = \text{makelist}(nextquad); \;
 - Emits an unconditional jump over the `else` block with an unfulfilled target, and packages that instruction index into `N.nextlist` so it can be merged with the statement exit list.
 
 ---
+
 ### Architectural Comparison: Multi-Pass vs. One-Pass Backpatching
 
 | Dimension | Multi-Pass (Inherited Labels) | One-Pass Backpatching |
@@ -138,137 +107,6 @@ $$N \longrightarrow \epsilon \quad \{ N.nextlist = \text{makelist}(nextquad); \;
 | **Yacc/Bison Integration** | Complex; needs global state or stack manipulation | **Native fit**; standard semantic actions `\$\$.truelist` |
 | **Memory Requirement** | $O(\text{Program AST Size})$ in RAM | **$O(1)$ tree memory**; streams instructions linearly |
 | **Instruction Output** | Emits symbolic labels (`L1:`, `L2:`) requiring an assembler pass | Emits direct numeric instruction indices (`quads`) |
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-### Formal Proof: Completeness and Soundness of Backpatching
-
-### Theorem:
-*For any well-formed control flow program, the Backpatching algorithm guarantees that:*
-1. *Every conditional and unconditional branch emitted with a blank destination is backpatched to a valid instruction quad before program code generation terminates.*
-2. *Control transfers strictly to the instruction quads dictated by the programming language semantics.*
-
-### Proof:
-1. **Base Case (Relational Expressions):**
-   - For $B \to E_1 \text{ relop } E_2$, two instructions are emitted at indices $q$ and $q+1$:
-     $$q: \text{if } E_1 \text{ relop } E_2 \text{ goto } \underline{\quad} \quad (q \in B.truelist)$$
-     $$q+1: \text{goto } \underline{\quad} \quad (q+1 \in B.falselist)$$
-   - Neither instruction has a target. Both are added to $B$'s lists.
-2. **Inductive Step for Expressions:**
-   - For $B \to B_1 \text{ || } M B_2$:
-     - $B_1.falselist$ is backpatched with $M.quad$ (the starting quad of $B_2$).
-     - The true jumps of $B_1$ and $B_2$ are preserved and merged into $B.truelist$.
-     - Any instruction in $B_1.falselist$ is resolved to the exact start of $B_2$, satisfying short-circuit OR semantics.
-   - For $B \to B_1 \text{ \&\& } M B_2$:
-     - $B_1.truelist$ is backpatched with $M.quad$ (the starting quad of $B_2$).
-     - The false jumps of $B_1$ and $B_2$ are merged into $B.falselist$.
-     - Any instruction in $B_1.truelist$ is resolved to the start of $B_2$, satisfying short-circuit AND semantics.
-3. **Inductive Step for Statements:**
-   - In $S \to \mathbf{if} ( B ) M S_1$:
-     - $B.truelist$ is backpatched to $M.quad$ (the start of $S_1$).
-     - $B.falselist$ and $S_1.nextlist$ are merged into $S.nextlist$.
-   - In sequence $S \to S_1 M S_2$:
-     - $S_1.nextlist$ is backpatched to $M.quad$ (the start of $S_2$).
-     - $S.nextlist = S_2.nextlist$.
-4. **Program Termination:**
-   - At the root program level $P \to S$, $S.nextlist$ is backpatched to the final terminating instruction (or program exit quad $nextquad$).
-   - Since every sublist is either:
-     a) Immediately backpatched via an $M$ marker, or
-     b) Merged into a parent list that is inductively backpatched by an enclosing statement,
-     no instruction remains on an unresolved list.
-5. Therefore, all forward branches are completely and correctly patched. $\blacksquare$
-
----
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -293,74 +131,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Backpatching Control-Flow Code Generation Algorithm]]
+- [[Control Flow Translation and Boolean Expressions]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Control Flow Translation and Boolean Expressions]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Backpatching Boolean Expression Translation]]
 
 ---
 
@@ -389,5 +186,6 @@ Trace what happens as the parser scans left-to-right:
 How can a single-pass compiler emit a branch instruction when it has no idea where that branch will lead?
 
 ---
+
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 186–193).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.7 (Backpatching).

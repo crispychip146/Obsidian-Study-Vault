@@ -12,8 +12,6 @@ order: 42
 
 ---
 
----
-
 ## Problem
 
 Consider the following basic block containing array operations:
@@ -28,8 +26,6 @@ Consider the following basic block containing array operations:
 1. Explain why it is **incorrect** in general to eliminate statement (3) by reusing the value of `x` computed in statement (1).
 2. Construct the DAG representation of this basic block adhering to the compiler rules for array load (`=[]`) and array store (`[]=`) operations.
 3. Under what specific condition can the compiler optimize away statement (3)? Show the resulting simplified DAG under that condition.
-
----
 
 ---
 

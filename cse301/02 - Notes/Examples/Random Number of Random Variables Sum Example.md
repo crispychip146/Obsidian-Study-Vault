@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 23
+order: 34
 ---
 
 # Random Number of Random Variables Sum Example
 
-> 📖 **Reading Order:** Step 23 of 92 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Monty Hall Problem Example]] | ► **Next:** [[Problem — Compound Random Sum via Adam and Eve's Laws]]
-
+> 📖 **Reading Order:** Step 34 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Ace of Spades Conditioning Paradox Example]] | ► **Next:** [[Problem — Compound Random Sum via Adam and Eve's Laws]]
 ---
-
----
-
 ## Problem
 
 In computer systems, network modeling, and e-commerce, cumulative workloads often involve a **random number of random quantities**:
@@ -28,11 +24,7 @@ $$S_N = \sum_{i=1}^N X_i \quad (\text{with } S_0 = 0)$$
 1. Compute the expected cumulative workload $\mathbb{E}[S_N]$.
 2. Compute the variance of the cumulative workload $\operatorname{Var}(S_N)$.
 3. Interpret the relative contributions of arrival randomness vs. service time randomness.
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -112,11 +104,7 @@ $$\operatorname{SD}(S_N) = \sqrt{80,000} \approx 282.84\text{ ms}$$
 - **$\mathbf{VE} = 40,000$ ($50\%$ of total variance):** Arises from the external arrival randomness of $N$ (some minutes see 85 requests, others see 115 requests).
 
 Notice that if the number of requests were fixed at exactly $N = 100$ (deterministic), the total variance would be only $40,000$. The fluctuation in traffic volume $N$ doubles the system variance!
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -148,11 +136,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Eve's Law (Law of Total Variance)]] — General variance formula.
 - [[Continuous Probability Distributions]] — Exponential distribution properties.
 - [[Discrete Probability Distributions]] — Poisson distribution properties.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)

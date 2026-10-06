@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 17
+order: 26
 ---
 
 # Conditional Probability and Independence
 
-> 📖 **Reading Order:** Step 17 of 92 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Problem — Indicator Variables for Distinct Birthday Counts]] | ► **Next:** [[Conditional Expectation]]
-
+> 📖 **Reading Order:** Step 26 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Problem — Expected Number of Local Maxima in Random Permutations]] | ► **Next:** [[Simpson's Paradox]]
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Probability and Independence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -35,11 +31,7 @@ $$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$$
 
 ### Intuition: Shrinking the Sample Space
 Conditioning on $B$ discards all outcomes outside of $B$. The event $B$ becomes the **new sample space (universe)**. The only part of $A$ that can still occur is $A \cap B$, whose original probability must be normalized by dividing by $P(B)$ so that $P(B \mid B) = 1$.
-
 ---
-
----
-
 ## How It Works
 
 ### The Multiplication Rule
@@ -113,11 +105,7 @@ $$P(A \mid B \cap C) = P(A \mid C)$$
 - Conditional independence does **NOT** imply marginal independence.
 - Marginal independence does **NOT** imply conditional independence.
 - *Example:* Two symptoms of a single underlying disease are conditionally independent given the disease status, but strongly dependent overall in the population.
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Diagnostic Testing and the Base Rate Fallacy
@@ -139,6 +127,7 @@ Despite a 95% accurate test, an individual who tests positive only has a 16.1% c
 
 For extended worked conditioning applications, see:
 - [[Monty Hall Problem Example]] — Conditional probability and decision strategy in the classic 3-door puzzle.
+- [[Ace of Spades Conditioning Paradox Example]] — How conditioning on specific vs. generic attributes drastically alters posterior probabilities.
 - [[Random Number of Random Variables Sum Example]] — Conditioning on random variables in compound processes.
 
 ---
@@ -160,7 +149,7 @@ For random variables (or $\sigma$-algebras), conditional independence satisfies 
 3. **Weak Union:** $X \perp (Y, W) \mid Z \implies X \perp Y \mid (Z, W)$
 4. **Contraction:** $(X \perp Y \mid Z) \text{ and } (X \perp W \mid (Y, Z)) \implies X \perp (Y, W) \mid Z$
 
-For inversion of conditioning, see [[Law of Total Probability and Bayes' Rule]]; for expectation conditioning, see [[Conditional Expectation]].
+For inversion of conditioning, see [[Law of Total Probability and Bayes' Rule]]; for expectation conditioning, see [[Conditional Expectation]]; for confounding and aggregated reversals, see [[Simpson's Paradox]].
 
 ---
 
@@ -181,27 +170,22 @@ For inversion of conditioning, see [[Law of Total Probability and Bayes' Rule]];
    - **Mutually exclusive events with non-zero probability can NEVER be independent!**
 2. **Conditioning on Measure-Zero Events:**
    - In continuous spaces, $P(X = x) = 0$, requiring conditioning via density ratios $f_{Y \mid X}(y \mid x) = \frac{f_{X, Y}(x, y)}{f_X(x)}$ or infinitesimal limits.
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
 
 - **Bayes' Rule:** Inverts condition and effect (see [[Law of Total Probability and Bayes' Rule]]).
+- **Paradoxes & Confounding:** [[Simpson's Paradox]] demonstrates how conditioning on strata reverses aggregate conclusions.
 - **Markov Property:** Future is conditionally independent of past given the present: $P(X_{n+1} \mid X_n, \dots, X_0) = P(X_{n+1} \mid X_n)$ (see [[Markov Chain]]).
 - **Machine Learning:** Naive Bayes classifier assumes all features $X_i$ are conditionally independent given class label $Y$.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Probability Axioms and Naive Probability]]
 - [[Law of Total Probability and Bayes' Rule]]
+- [[Simpson's Paradox]]
+- [[Ace of Spades Conditioning Paradox Example]]
 - [[Conditional Expectation]]
 - [[Markov Chain]]
 - [[Bayesian Inference]]

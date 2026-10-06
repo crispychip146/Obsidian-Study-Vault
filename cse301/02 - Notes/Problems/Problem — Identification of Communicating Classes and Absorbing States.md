@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 81
+order: 92
 ---
 
 # Problem — Identification of Communicating Classes and Absorbing States
 
-> 📖 **Reading Order:** Step 81 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 92 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Problem — State Communication and Irreducibility Verification]] | ► **Next:** [[Queueing Systems and Kendall Notation]]
-
 ---
-
----
-
 ## Problem
 
 Consider a discrete-time [[Markov Chain]] with four states $S = \{0, 1, 2, 3\}$ and transition probability matrix:
@@ -30,20 +26,12 @@ $$P = \begin{pmatrix}
 3. Identify any **absorbing states**.
 4. Explain why state $2$ does not communicate with state $0$, even though state $0$ is accessible from state $2$.
 5. Is this Markov chain irreducible?
-
 ---
-
----
-
 ## Given
 
 - State space $S = \{0, 1, 2, 3\}$
 - Transition matrix $P$ as given above.
-
 ---
-
----
-
 ## Required
 
 1. Complete partition of state space into communicating classes $C_1, C_2, \dots$
@@ -51,38 +39,22 @@ $$P = \begin{pmatrix}
 3. Identification of absorbing state(s).
 4. Rigorous explanation of one-way accessibility $2 \to 0$ without communication ($2 \not\leftrightarrow 0$).
 5. Determination of irreducibility.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Classification of States in Markov Chains]]
 - [[Markov Chain]]
 - Absorbing states, recurrence, transience, irreducibility
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]]
-
 ---
-
----
-
 ## Question Type
 
 Conceptual / State Space Decomposition
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -196,11 +168,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 - **Confusing Accessibility with Communication:** Grouping states $0, 1, 2$ into one class simply because state 2 can jump to states 0 and 1.
 - **Overlooking Absorbing State Definition:** Forgetting to check diagonal entries $P_{ii} = 1$ to immediately spot absorbing states.
 - **Calling the Whole Chain Transient or Recurrent:** Markov chains with multiple classes are not uniformly recurrent or transient; classification applies to individual states and communicating classes.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -223,5 +191,5 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 15)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–206)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 15)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–206)

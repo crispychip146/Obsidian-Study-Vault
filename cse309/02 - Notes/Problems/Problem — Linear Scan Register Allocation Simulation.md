@@ -12,8 +12,6 @@ order: 49
 
 ---
 
----
-
 ## Problem
 
 A Just-In-Time compiler computes the following set of live intervals for 6 variables:
@@ -33,8 +31,6 @@ Assume the target processor provides **$R = 2$ physical registers**: $\{ R_0, R_
 1. Sort the intervals by start point and simulate the **Linear Scan Register Allocation** algorithm step-by-step.
 2. Show the contents of the `active` list, the `free_registers` pool, and any register expirations or spill actions at each step.
 3. State the final allocation (register assigned or spilled) for every variable.
-
----
 
 ---
 

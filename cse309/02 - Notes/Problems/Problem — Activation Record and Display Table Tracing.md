@@ -12,8 +12,6 @@ order: 31
 
 ---
 
----
-
 ## Problem
 
 Consider the following recursive, mutually invoking Pascal program featuring nested procedure declarations:
@@ -52,8 +50,6 @@ end.
 3. **Display Array Simulation:**
    - Trace the state of the **Display Array** at each call step up to Point X.
    - Explain how the statement `c := a + b` at Point X is executed in strictly $O(1)$ time using the Display.
-
----
 
 ---
 

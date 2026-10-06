@@ -7,10 +7,8 @@ order: 9
 
 # Problem — Desk Calculator SDD and Annotated Parse Tree
 
-> 📖 **Reading Order:** Step 9 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 09 of 55 | **Module 1:** Syntax-Directed Translation  
 > ◄ **Previous:** [[Infix to Postfix and Prefix SDT Translation Example]] | ► **Next:** [[Intermediate Representations and Three-Address Code]]
-
----
 
 ---
 
@@ -34,8 +32,6 @@ $$\mathbf{3 + 2 \wedge 3 \wedge 2}$$
 3. **Annotated Parse Tree:** Decorate every node of the parse tree with its computed attribute values.
 4. **SDD Classification:** Formally classify this SDD (S-attributed, L-attributed, or neither) with rigorous mathematical justification.
 5. **Attribute Dependency Graph & Evaluation Order:** Draw the dependency graph and provide a valid topological evaluation sequence.
-
----
 
 ---
 
@@ -257,8 +253,6 @@ Always follow compiler phase invariants: parse bottom-up or top-down according t
 
 > [!WARNING] Trap 2: Mixing Precedence in Concrete Parse Trees
 > When constructing the concrete parse tree, if you connect the root $E$ directly to $2 \wedge 3 \wedge 2$ before finishing the addition with $3$, you break the grammar hierarchy. Remember: lower precedence operators ($+$) are higher up in the tree!
-
----
 
 ---
 

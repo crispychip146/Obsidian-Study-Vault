@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 19
 ---
-
 # Peterson's Algorithm and Hardware Mutual Exclusion
 
-> 📖 **Reading Order:** Step 19 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 19 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Race Conditions and Critical-Section Problem]] | ► **Next:** [[Semaphores and Synchronization Primitives]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q1b, 2018 Q1c, 2019 Q2a, 2019 Q2c, 2021 Q4a)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared 4 out of 5 recent exam years)**
 >
@@ -33,9 +31,6 @@ order: 19
 >    - Initialize `lock = 1`. Spin `while (FetchAndSubtract(&lock, 1) <= 0) { FetchAndSubtract(&lock, -1); }`. Release with `FetchAndSubtract(&lock, -1);`.
 
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 In concurrent programming, multiple threads updating shared variables suffer from race conditions. Early software attempts failed: strict alternation (`turn` variable) fails Progress because a thread in its remainder section blocks the other; boolean intent flags (`flag[i] = true`) fail Mutual Exclusion when both threads set their flags before testing.
@@ -43,7 +38,6 @@ In concurrent programming, multiple threads updating shared variables suffer fro
 We want a pure software solution that guarantees mutual exclusion, progress, and bounded waiting for two concurrent processes without requiring special hardware instructions. The central obstacle is ensuring that when both processes attempt to enter the critical section simultaneously, the tie is broken deterministically and symmetrically.
 
 ---
-
 ## Developing the Core Idea
 
 In 1981, **G.L. Peterson** discovered that combining intent flags with a polite yielding mechanism creates a provably correct mutual exclusion algorithm:
@@ -53,7 +47,6 @@ In 1981, **G.L. Peterson** discovered that combining intent flags with a polite 
 - If both processes arrive simultaneously, the memory write that occurs last sets `turn`, allowing the other process to immediately enter the critical section.
 
 ---
-
 ## Inputs
 
 - Shared state: `boolean flag[2] = {false, false};`
@@ -61,13 +54,11 @@ In 1981, **G.L. Peterson** discovered that combining intent flags with a polite 
 - Calling process ID $i \in \{0, 1\}$ and peer ID $j = 1 - i$.
 
 ---
-
 ## Outputs
 
 - Mutually exclusive execution of the Critical Section.
 
 ---
-
 ## How It Works
 
 ### 4. Formal Proof of Correctness
@@ -90,9 +81,6 @@ A process $P_i$ waits at most one critical section execution of $P_j$. When $P_j
 > On modern out-of-order superscalar processors (x86, ARM), compiler optimizations and processor memory controllers can reorder writes (`interested[process] = TRUE` and `turn = process`). If `turn = process` is committed before `interested[process] = TRUE`, mutual exclusion can be broken! Therefore, in modern C/C++, explicit **memory fences/barriers** (`std::atomic_thread_fence`) are mandatory.
 
 ---
-
----
-
 ### 5. Hardware-Enforced Mutual Exclusion
 
 To relieve programmers from software race checks, computer architectures implement hardware-level **atomic read-modify-write** instructions.
@@ -125,9 +113,6 @@ enter_region:
 ```
 
 ---
-
----
-
 ### 6. The Priority Inversion Problem
 
 A major defect of busy-waiting synchronization (spinlocks) is the **Priority Inversion Problem**:
@@ -142,9 +127,6 @@ A major defect of busy-waiting synchronization (spinlocks) is the **Priority Inv
 **Solution:** Priority Inheritance Protocol or blocking synchronization primitives ([[Semaphores and Synchronization Primitives]]).
 
 ---
-
----
-
 ## Pseudocode
 
 ### 1. Algorithmic Overview & Motivation
@@ -158,9 +140,6 @@ By politely yielding `turn` to the opponent before spinning, deadlocks and mutua
 In addition, hardware designers introduced atomic read-modify-write CPU instructions such as **TSL (Test and Set Lock)** and **XCHG (Exchange)** to provide hardware-enforced mutual exclusion without complex software protocols.
 
 ---
-
----
-
 ### 2. Peterson's Algorithm Implementation
 
 ### Global Data Structures:
@@ -192,9 +171,6 @@ void leave_region(int process) {
 ```
 
 ---
-
----
-
 ## Example
 
 ### 3. Step-by-Step Execution Scenarios
@@ -221,9 +197,6 @@ void leave_region(int process) {
 5. On $P_1$'s next check, `interested[0]` is `FALSE`, so $P_1$'s loop terminates and $P_1$ enters.
 
 ---
-
----
-
 ## Complexity
 
 ### Time Complexity
@@ -233,7 +206,6 @@ $O(1)$ operations in entry and exit; busy-waiting cycles while waiting.
 $O(1)$ memory (2 booleans and 1 integer).
 
 ---
-
 ## Properties
 
 - **Mutual Exclusion:** Provably impossible for both processes to occupy CS simultaneously.
@@ -241,46 +213,39 @@ $O(1)$ memory (2 booleans and 1 integer).
 - **Bounded Waiting:** A process waits at most one critical section turn before entering.
 
 ---
-
 ## Limitations
 
 - Limited to 2 processes (generalizable to $N$ via Filter algorithm, but complex).
 - Relies on sequential memory consistency; on modern out-of-order processors, hardware atomic instructions (`TestAndSet`, `CompareAndSwap`) or memory barriers are required.
 
 ---
-
 ## Common Mistakes
 
 - Misunderstanding preemption boundaries during execution.
 - Failing to verify state invariants before granting resource claims.
 
 ---
-
 ## Exam Relevance
 
 Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
 
 ---
-
 ## Related Concepts
 
 - [[Semaphores and Synchronization Primitives]]
 - [[Classic Synchronization Solutions]]
 
 ---
-
 ## Prerequisites
 
 - [[Race Conditions and Critical-Section Problem]]
 
 ---
-
 ## Problems
 
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 16–28: Peterson's Solution, The TSL Instruction, The Priority Inversion Problem).

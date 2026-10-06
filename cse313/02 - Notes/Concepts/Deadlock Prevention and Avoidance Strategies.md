@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 28
 ---
-
 # Deadlock Prevention and Avoidance Strategies
 
-> 📖 **Reading Order:** Step 28 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 28 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Resource Allocation Graphs and Deadlock Modeling]] | ► **Next:** [[Banker's Algorithm]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q1c, 2019 Q3c, 2021 Q1c, 2021 Q3a)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
 >
@@ -29,9 +27,6 @@ order: 28
 >    - **Why it works:** In any dependency chain $P_0 \to P_1 \to \dots \to P_k \to P_0$, the resource indices would have to strictly increase: $F(R_0) < F(R_1) < \dots < F(R_k) < F(R_0)$, which implies $F(R_0) < F(R_0)$, a mathematical contradiction! Thus, cycles are impossible.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 Once deadlock occurs, processes freeze, hardware resources sit idle, and human intervention or process killing is typically required to restore system function.
@@ -39,7 +34,6 @@ Once deadlock occurs, processes freeze, hardware resources sit idle, and human i
 We want the operating system to guarantee that deadlocks never occur in the first place. The central obstacle is balancing safety against system efficiency: overly restrictive policies prevent deadlock by crippling concurrency and wasting hardware capacity.
 
 ---
-
 ## Developing the Idea
 
 Operating system designers developed two distinct proactive strategies:
@@ -51,13 +45,11 @@ Operating system designers developed two distinct proactive strategies:
 2. **Deadlock Avoidance:** A dynamic runtime approach where the OS inspects every request in real time, granting it only if the resulting system state remains **Safe** (a guaranteed safe sequence exists).
 
 ---
-
 ## Definition
 
 
 
 ---
-
 ## How It Works
 
 ### 2. Deadlock Prevention: Attacking the Four Coffman Conditions
@@ -99,9 +91,6 @@ flowchart TD
      This implies $F(R_0) < F(R_0)$, which is a logical contradiction! Therefore, **no cycle can ever form**. $\blacksquare$
 
 ---
-
----
-
 ## Example
 
 Havender's Global Resource Ordering ($F(R)$):
@@ -112,13 +101,11 @@ Let Disk $= 1$, Printer $= 2$, Tape Drive $= 3$.
 Circular wait is mathematically impossible because a cycle would require $i_1 < i_2 < \dots < i_k < i_1$, a logical contradiction.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Safe State Invariant:** A safe state is NOT deadlock; a safe state guarantees that at least one execution sequence exists where all processes can terminate.
@@ -126,20 +113,17 @@ See related modules for microarchitectural implementation details.
 - **Prevention vs. Avoidance Trade-Off:** Prevention restricts programming flexibility and resource utilization statically; Avoidance requires prior knowledge of maximum resource claims at runtime.
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
 
 ---
-
 ## Related Concepts
 
 - [[Banker's Algorithm]]
@@ -147,20 +131,17 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 - [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Deadlock Fundamentals and Coffman Conditions]]
 - [[Resource Allocation Graphs and Deadlock Modeling]]
 
 ---
-
 ## Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 25–27, 32–37: Resource Trajectories, Safe and Unsafe States, Deadlock Prevention Methods).

@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 56
+order: 67
 ---
 
 # Problem — Laplace Rule of Succession and Bayesian Updating
 
-> 📖 **Reading Order:** Step 56 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 67 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]] | ► **Next:** [[Hypothesis Testing Framework]]
-
 ---
-
----
-
 ## Problem
 
 An automated safety verification framework evaluates an autonomous vehicle control module across $n = 5$ independent critical road simulation tests. All $5$ tests pass without incident ($s = 5$ successes, $0$ failures). Let $p \in [0, 1]$ be the unknown true probability of passing a critical test.
@@ -25,21 +21,13 @@ An automated safety verification framework evaluates an autonomous vehicle contr
    Prove that this probability equals the posterior mean of $p$.
 4. State the general formula for **Laplace's Rule of Succession** and explain how it prevents the "zero-probability" trap.
 5. Contrast the behavior of the Bayesian predictive probability with the MLE as $n \to \infty$ with all successes.
-
 ---
-
----
-
 ## Given
 
 - Sample: $n = 5$ independent Bernoulli trials
 - Observed successes: $s = 5$, failures: $n - s = 0$
 - Prior: $p \sim \text{Beta}(1, 1)$
-
 ---
-
----
-
 ## Required
 
 1. $\hat{p}_{\text{MLE}}$ and its predicted failure probability.
@@ -47,39 +35,23 @@ An automated safety verification framework evaluates an autonomous vehicle contr
 3. Rigorous derivation of posterior predictive probability $P(X_{n+1} = 1 \mid \mathbf{X})$.
 4. Laplace's Rule of Succession formula $\frac{s+1}{n+2}$.
 5. Asymptotic comparison.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Bayesian Inference]]
 - [[Maximum Likelihood Estimation]]
 - [[Beta-Binomial Conjugate Updating Formula]]
 - Posterior Predictive Distribution
-
 ---
-
----
-
 ## Prerequisites
 
 - Law of Total Probability for continuous conditioning
 - Properties of the Beta distribution and Gamma function
-
 ---
-
----
-
 ## Question Type
 
 - Theoretical Proof & Safety-Critical Application
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -211,4 +183,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

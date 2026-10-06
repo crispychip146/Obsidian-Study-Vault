@@ -2,18 +2,14 @@
 type: algorithm
 course: cse301
 status: active
-order: 63
+order: 74
 ---
 
 # Benjamini-Hochberg Procedure Algorithm
 
-> 📖 **Reading Order:** Step 63 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 74 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Multiple Testing and False Discovery Rate]] | ► **Next:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
-
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
@@ -22,11 +18,7 @@ It ensures that the expected proportion of false positives among all declared di
 $$\text{FDR} = E\left[\frac{V}{\max(R, 1)}\right] \le \frac{m_0}{m} q \le q$$
 
 It solves the excessive conservatism of the classical [[Multiple Testing and False Discovery Rate|Bonferroni correction]], dramatically increasing statistical power to detect real effects in large-scale data science and bioinformatics experiments.
-
 ---
-
----
-
 ## Developing the Core Idea
 
 Rather than comparing every $p$-value against a fixed, brutally small threshold $\alpha/m$ (as Bonferroni does), the BH procedure compares ordered $p$-values against a **linearly increasing threshold**:
@@ -38,11 +30,7 @@ $$\ell_i = \frac{i}{m} q, \quad i = 1, 2, \dots, m$$
 - The largest $p$-value ($i = m$) is compared against $q$.
 
 By finding the largest index $k$ where the data still fall below the threshold line, the algorithm safely rejects **all** hypotheses up to rank $k$.
-
 ---
-
----
-
 ## Inputs
 
 - Ranked empirical test statistics, p-values, or sample arrays.
@@ -79,11 +67,7 @@ By finding the largest index $k$ where the data still fall below the threshold l
 - [[p-Values and Significance]]
 - [[Hypothesis Testing Framework]]
 - [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
-
 ---
-
----
-
 ## Pseudocode
 
 ### Pseudocode
@@ -116,11 +100,7 @@ def benjamini_hochberg(p_values, q=0.05):
             
     return rejected, k_star + 1
 ```
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: 10 Tests Comparison
@@ -145,20 +125,12 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 - **Benjamini-Hochberg:** The largest index satisfying $P_{(i)} \le \frac{i}{10}(0.05)$ is **$k = 5$** (since $0.01220 \le 0.0250$). 
   Therefore, we reject hypotheses **1, 2, 3, 4, and 5**! Total discoveries = **5**.
 - **Result:** The BH procedure safely uncovered **more than double** the number of legitimate discoveries while rigorously bounding the False Discovery Rate at $\le 5\%$.
-
 ---
-
----
-
 ## Complexity
 
 - **Time Complexity:** $O(m \log m)$ dominated by sorting the $m$ $p$-values. The subsequent linear scan is $O(m)$.
 - **Space Complexity:** $O(m)$ to store sorted indices and threshold comparisons.
-
 ---
-
----
-
 ## Properties
 
 ### Properties and Guarantees
@@ -166,11 +138,7 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 1. **Exact FDR Bound:** Under independence of test statistics (or positive regression dependency PRDS), Benjamini and Hochberg proved that:
    $$\text{FDR} = E\left[\frac{V}{R}\right] = \frac{m_0}{m} q \le q$$
 2. **Monotonicity:** Any hypothesis rejected by Bonferroni is guaranteed to also be rejected by Benjamini-Hochberg ($R_{\text{Bonferroni}} \subseteq R_{\text{BH}}$).
-
 ---
-
----
-
 ## Limitations
 
 - Exact permutation calculation requires evaluating $\binom{N}{n}$ combinations, becoming intractable for large $N$ (requiring Monte Carlo sampling).
@@ -211,4 +179,4 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

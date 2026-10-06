@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 28
+order: 39
 ---
 
 # Cauchy-Schwarz and Jensen Inequalities
 
-> 📖 **Reading Order:** Step 28 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> 📖 **Reading Order:** Step 39 of 103 | **Module 4:** Probability Bounds and Inequalities  
 > ◄ **Previous:** [[Chernoff Bound]] | ► **Next:** [[Comparison of Probability Bounds Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Cauchy-Schwarz and Jensen Inequalities, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -144,11 +140,7 @@ $\blacksquare$
 
 3. **Information Theory (Kullback-Leibler Divergence):**
    Proves that relative entropy $D_{KL}(P \parallel Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)} \ge 0$, establishing that Shannon entropy is maximized by the uniform distribution.
-
 ---
-
----
-
 ## Derivation
 
 ### Proof of Cauchy-Schwarz via Quadratic Discriminant
@@ -210,11 +202,7 @@ For complete bounds comparisons across distributions, see [[Comparison of Probab
 - [[Random Variables and Probability Distributions]] — Variance positivity via Jensen.
 - [[Chernoff Bound]] — Convexity of the log-MGF.
 - [[Comparison of Probability Bounds Example]] — Side-by-side numerical comparison.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]

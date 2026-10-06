@@ -2,18 +2,14 @@
 type: algorithm
 course: cse301
 status: active
-order: 61
+order: 72
 ---
 
 # Permutation Test Algorithm
 
-> 📖 **Reading Order:** Step 61 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 72 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Pearson's Chi-Square Goodness-of-Fit Test]] | ► **Next:** [[Multiple Testing and False Discovery Rate]]
-
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 The **Permutation Test** (also known as a randomization test) is a non-parametric, exact statistical method for testing whether two independent samples originate from the same underlying probability distribution ($H_0: F_X = F_Y$).
@@ -22,11 +18,7 @@ It solves the problem of hypothesis testing when:
 1. Sample sizes are too small for Central Limit Theorem asymptotic approximations to hold.
 2. Parametric assumptions (such as normality or equal variances) are violated or unknown.
 3. An exact, assumption-free $p$-value is required.
-
 ---
-
----
-
 ## Developing the Core Idea
 
 Suppose we have two samples:
@@ -38,11 +30,7 @@ Under the null hypothesis $H_0: F_X = F_Y$, both groups are drawn from the **exa
 Consequently, the group labels ("X" vs "Y") are completely meaningless and arbitrary. Any partition of the $N$ pooled numbers into a group of size $m$ and a group of size $n$ was **equally likely to have occurred**.
 
 By shuffling the pooled data across all $N!$ possible permutations and recomputing the test statistic, we generate the **exact empirical null distribution** of the statistic without making any parametric assumptions.
-
 ---
-
----
-
 ## Inputs
 
 - Ranked empirical test statistics, p-values, or sample arrays.
@@ -80,11 +68,7 @@ When $N$ exceeds $\approx 20$, the number of permutations $N!$ is astronomically
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 - [[Toy Permutation Test Example]]
-
 ---
-
----
-
 ## Pseudocode
 
 ### Pseudocode
@@ -115,11 +99,7 @@ def permutation_test(X, Y, B=10000):
     p_value = (count_extreme + 1) / (B + 1)
     return p_value
 ```
-
 ---
-
----
-
 ## Example
 
 ### Example: Toy Permutation Test
@@ -141,11 +121,7 @@ All $3! = 6$ equally likely permutations of $(1, 9, 3)$:
 | $(3, 9, 1)$ | $(3, 9)$ | $1$ | $6$ | $1$ | $\lvert 6 - 1 \rvert = 5$ | **Yes** |
 
 Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = \frac{6}{6} = 1.0$.
-
 ---
-
----
-
 ## Complexity
 
 - **Exact Test:**
@@ -154,11 +130,7 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 - **Monte Carlo Test:**
   - Time Complexity: $O(B \cdot N)$ — Linear in sample size and number of draws.
   - Space Complexity: $O(N)$.
-
 ---
-
----
-
 ## Properties
 
 - **FDR Control:** Strictly controls false discovery rate or exact non-parametric size under exchangeability.
@@ -176,11 +148,7 @@ Notice that for this toy dataset, all 6 permutations yield $T^* \ge 2$, so $p = 
 ### Limitations
 1. **Exchangeability Assumption:** Observations must be independent and exchangeable under $H_0$. If two groups have different shapes or variances under $H_0$, the permutation test can yield inflated Type I errors.
 2. **Computational Overhead:** Requires simulation loops.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing Family-Wise Error Rate (FWER) with False Discovery Rate (FDR).
@@ -215,4 +183,4 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

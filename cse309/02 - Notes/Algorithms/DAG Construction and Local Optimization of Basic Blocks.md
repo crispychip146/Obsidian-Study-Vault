@@ -7,16 +7,8 @@ order: 36
 
 # DAG Construction and Local Optimization of Basic Blocks
 
-> 📖 **Reading Order:** Step 36 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 36 of 55 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Liveness and Next-Use Analysis within Basic Blocks]] | ► **Next:** [[A Simple Code Generator Algorithm]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -44,14 +36,6 @@ To optimize basic blocks safely, compilers employ **DAG Construction with Dynami
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Core Idea
 
 A basic block DAG consists of:
@@ -72,63 +56,19 @@ A basic block DAG consists of:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Sequence of Three-Address Code instructions forming a basic block.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Directed Acyclic Graph (DAG) with redundant operations eliminated, constant folded, and re-emitted optimized instruction sequence.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### The Array Store "Kill" Rule & Memory Dependencies
 
@@ -178,6 +118,7 @@ graph TD
 7. Hence, semantic correctness is strictly preserved. $\blacksquare$
 
 ---
+
 ### Reassembling an Optimized Basic Block from the DAG
 
 Once all statements of the basic block have been processed into the DAG:
@@ -196,101 +137,9 @@ Once all statements of the basic block have been processed into the DAG:
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
 
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
 The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
 
 ---
 
@@ -310,12 +159,6 @@ $O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ---
 
----
-
----
-
----
-
 ## Properties
 
 - **Termination:** Provably terminates on all well-formed compiler inputs.
@@ -325,92 +168,41 @@ $O(N)$ for auxiliary state tables, stacks, or free lists.
 
 ## Limitations
 
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
+- Confined to basic blocks; does not identify global common subexpressions across loop iterations or distinct CFG blocks.
 
 ---
 
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to update liveness information or next-use pointers.
 - Misinterpreting index bounds during stack or interval scans.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of DAG Construction and Local Optimization of Basic Blocks on given code fragments or graphs.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
+- [[Value-Number Method for DAG Construction]]
 - [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[A Simple Code Generator Algorithm]]
 
 ---
 
 ## Prerequisites
 
+- [[Value-Number Method for DAG Construction]]
 - [[Basic Blocks and Control Flow Graphs]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — DAG Optimization of Basic Block with Array Store]]
 
 ---
 

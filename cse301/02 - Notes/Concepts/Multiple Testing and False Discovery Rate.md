@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 62
+order: 73
 ---
 
 # Multiple Testing and False Discovery Rate
 
-> 📖 **Reading Order:** Step 62 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 73 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Permutation Test Algorithm]] | ► **Next:** [[Benjamini-Hochberg Procedure Algorithm]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Multiple Testing and False Discovery Rate, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -31,11 +27,7 @@ In modern data science, genomics, and A/B testing:
 - If we conduct every test at unadjusted $\alpha = 0.05$:
   $$\text{Expected False Discoveries} = 20,000 \times 0.05 = 1,000 \text{ fake discoveries!}$$
 Researchers would waste millions of dollars chasing 1,000 ghost genes that have zero actual biological effect.
-
 ---
-
----
-
 ## Definition
 
 The **Multiple Testing Problem** arises when a researcher conducts $m > 1$ statistical hypothesis tests simultaneously. If each individual test is evaluated at the nominal significance level $\alpha$ (e.g., $\alpha = 0.05$), the probability of committing at least one false positive (Type I error) across the family of tests escalates rapidly toward certainty.
@@ -51,11 +43,7 @@ The **Multiple Testing Problem** arises when a researcher conducts $m > 1$ stati
 - $m$: Total number of hypothesis tests conducted (known).
 - $R$: Number of rejected null hypotheses (observed).
 - $V$: Number of falsely rejected nulls (unobserved random variable).
-
 ---
-
----
-
 ## How It Works
 
 ### Two Error Metrics: FWER vs. FDR
@@ -135,11 +123,7 @@ Controlling FDR at $q = 0.05$ guarantees that **on average, no more than 5% of y
 | **Type I Error Risk** | Extremely High (runaway false alarms) | Minimal (strictly bounded $\le \alpha$) | Controlled proportion of discoveries |
 | **Statistical Power** | Highest (many false positives) | Lowest (overly strict, misses true hits) | **Optimal balance** between power and precision |
 | **Best Used When** | Exploratory single tests | Confirmatory trials (clinical drug approval) | Big Data, genomics, large A/B test suites |
-
 ---
-
----
-
 ## Example
 
 ### Comparing Bonferroni vs. Benjamini-Hochberg on $m = 5$ Hypotheses
@@ -217,11 +201,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[p-Values and Significance]]
 - [[Benjamini-Hochberg Procedure Algorithm]]
 - [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Hypothesis Testing Framework]]
@@ -238,4 +218,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

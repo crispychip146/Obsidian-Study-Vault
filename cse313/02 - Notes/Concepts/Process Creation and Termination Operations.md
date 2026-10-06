@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 7
 ---
-
 # Process Creation and Termination Operations
 
-> 📖 **Reading Order:** Step 07 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 07 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Process Control Block and Context Switching]] | ► **Next:** [[Threads and Multithreading Models]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1b, 2018 Q2c, 2018 Q4a, 2020 Q4b)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years, verbatim repeated!)**
 >
@@ -30,9 +28,6 @@ order: 7
 >    - Know how to write robust C code utilizing `fork()`, `execvp(args[0], args)`, and `waitpid(pid, &status, 0)` with proper error checking on return values.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 When an operating system boots, it begins with only a single user-space ancestor process (`systemd` or `init`, PID 1). During system operation, users launch applications, web servers spawn worker tasks, and shells run pipeline commands.
@@ -40,7 +35,6 @@ When an operating system boots, it begins with only a single user-space ancestor
 We want a robust, uniform mechanism to dynamically create new processes, configure their execution environments, and cleanly reclaim all associated kernel and hardware resources when they finish. The central obstacle is managing parent-child dependencies and resource cleanup: if a child terminates before its parent, its exit status must be preserved; if a parent dies first, the child must not be left unmanaged.
 
 ---
-
 ## Developing the Idea
 
 UNIX solves process lifecycle operations through a two-step mechanism: **`fork()`** and **`exec()`**.
@@ -52,7 +46,6 @@ Rather than creating a brand-new process from scratch with dozens of configurati
 4. If a parent terminates without waiting for its children, they become **Orphans** and are adopted by PID 1 (`init`/`systemd`), which automatically reaps their exit status.
 
 ---
-
 ## Definition
 
 Operating systems manage processes through distinct, fundamental operations:
@@ -60,9 +53,6 @@ Operating systems manage processes through distinct, fundamental operations:
 - **Process Termination:** The mechanism by which a process ends its execution, releases allocated resources, and reports an exit status code to its parent.
 
 ---
-
----
-
 ## How It Works
 
 ### Process Creation in UNIX/Linux: `fork()` and `exec()`
@@ -112,9 +102,6 @@ Historically, duplicating an entire multi-gigabyte address space during `fork()`
 - **Critical Property:** The **PID remains completely unchanged**! `exec()` transforms the soul of the process while retaining its original identity and open file descriptors.
 
 ---
-
----
-
 ### Process Termination: The 4 Causes
 
 A process terminates due to one of four events:
@@ -129,9 +116,6 @@ A process terminates due to one of four events:
    - Another process with appropriate privileges sends a fatal terminating signal via the `kill()` system call (e.g., `kill -9 <PID>` sending `SIGKILL`).
 
 ---
-
----
-
 ## Example
 
 Shell command execution `ls -l`:
@@ -141,13 +125,11 @@ Shell command execution `ls -l`:
 4. When `ls` finishes, it returns code $0$; kernel notifies parent, reaps child's PCB, and the shell prompts for the next command.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Copy-On-Write (COW) Efficiency:** `fork()` does not physically copy memory pages immediately; it marks pages read-only and shares them. A physical page copy occurs only if either parent or child writes to memory.
@@ -155,7 +137,6 @@ See related modules for microarchitectural implementation details.
 - **Orphan Adoption Invariant:** No process is ever left without a valid parent; the operating system guarantees that PID 1 adopts all orphaned processes and calls `wait()` periodically.
 
 ---
-
 ## Common Mistakes
 
 1. **You Cannot "Kill" a Zombie:**
@@ -165,9 +146,6 @@ See related modules for microarchitectural implementation details.
    - In some operating systems (like VMS), when a parent process terminates, the OS automatically terminates all of its children, grandchildren, and descendants. UNIX does not enforce cascading termination by default—children simply become orphans.
 
 ---
-
----
-
 ## Exam Relevance
 
 When a process terminates, its memory space, open files, and CPU allocations are immediately released back to the OS. However, its entry in the **Process Table** (and its PCB) cannot be deleted yet, because the parent process has a right to read the child's exit status code and CPU statistics using `wait()` or `waitpid()`.
@@ -206,9 +184,6 @@ classDiagram
   `init` continuously runs an infinite loop executing `wait()`, instantly reaping any adopted orphan as soon as it terminates. Thus, orphans never remain zombies permanently.
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Process Forking and Zombie Orphan Example]]
@@ -216,21 +191,18 @@ classDiagram
 - [[Dual-Mode Operation and System Calls]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Problems
 
 - [[Problem — Fork Execution Tree and Process Tracing]]
 - [[Process Forking and Zombie Orphan Example]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 9–10, 22–28)

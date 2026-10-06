@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 42
+order: 53
 ---
 
 # Problem — Unbiased yet Inconsistent Estimator Analysis
 
-> 📖 **Reading Order:** Step 42 of 92 | **Module 6:** Statistical Inference  
+> 📖 **Reading Order:** Step 53 of 103 | **Module 6:** Statistical Inference  
 > ◄ **Previous:** [[Berger-Wolpert Confidence Set Puzzle Example]] | ► **Next:** [[Maximum Likelihood Estimation]]
-
 ---
-
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a population distribution with unknown mean $\mu$ and known finite variance $\sigma^2 > 0$.
@@ -27,22 +23,14 @@ That is, the analyst simply records the first observed value and discards the re
 3. Compute the Mean Squared Error $\text{MSE}(\hat{\mu}_n)$.
 4. Determine whether $\hat{\mu}_n$ is a consistent estimator of $\mu$ as $n \to \infty$. Justify your answer formally using the definition of convergence in probability.
 5. Contrast $\hat{\mu}_n$ with the standard sample mean $\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$.
-
 ---
-
----
-
 ## Given
 
 - $X_1, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$
 - $E[X_i] = \mu$ for all $i$
 - $\text{Var}(X_i) = \sigma^2 > 0$ for all $i$
 - Estimator: $\hat{\mu}_n = X_1$
-
 ---
-
----
-
 ## Required
 
 1. $\text{bias}(\hat{\mu}_n)$ and unbiasedness classification.
@@ -50,38 +38,22 @@ That is, the analyst simply records the first observed value and discards the re
 3. $\text{MSE}(\hat{\mu}_n)$.
 4. Rigorous proof of consistency or inconsistency.
 5. Comparison of large-sample behaviors.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Point Estimation]]
 - [[Estimator Consistency and Convergence]]
 - [[Bias-Variance Decomposition]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Point Estimation]]
 - Basic Definition of Expectation, Variance, and Convergence in Probability
-
 ---
-
----
-
 ## Question Type
 
 - Conceptual & Analytical Derivation
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -189,11 +161,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 - Concluding that an estimator must be consistent simply because it is unbiased.
 - Stating that $X_1$ depends on $n$; $X_1$ is only the first observation and is completely unaffected by whether $n = 1$ or $n = 1,000,000$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -216,4 +184,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+- [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]

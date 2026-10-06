@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 27
+order: 38
 ---
 
 # Chernoff Bound
 
-> 📖 **Reading Order:** Step 27 of 92 | **Module 4:** Probability Bounds and Inequalities  
+> 📖 **Reading Order:** Step 38 of 103 | **Module 4:** Probability Bounds and Inequalities  
 > ◄ **Previous:** [[Chebyshev Inequality]] | ► **Next:** [[Cauchy-Schwarz and Jensen Inequalities]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Chernoff Bound, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -36,11 +32,7 @@ For any real threshold $a$:
 
 - **Lower Tail Bound:**
   $$P(X \le a) \le \inf_{t < 0} e^{-ta} M_X(t)$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -76,11 +68,7 @@ $$P(X \ge a) \le e^{-I(a)}$$
 | **Markov** | $O(1/a)$ | Polynomial (very slow) | Mean $\mathbb{E}[X]$ only |
 | **Chebyshev** | $O(1/a^2)$ | Polynomial | Mean and Variance |
 | **Chernoff** | $O(e^{-c a^2})$ | **Exponential (extremely fast)** | Entire MGF $M_X(t)$ |
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation via Markov's Inequality
@@ -98,11 +86,7 @@ $\blacksquare$
 
 Similarly, for the lower tail ($a \le \mathbb{E}[X]$), multiplying by $t < 0$ reverses the inequality ($X \le a \iff tx \ge ta \iff e^{tX} \ge e^{ta}$), yielding:
 $$P(X \le a) \le \inf_{t < 0} e^{-ta} M_X(t)$$
-
 ---
-
----
-
 ## Example
 
 ### Classic Example: Standard Normal Tail Bound
@@ -120,11 +104,7 @@ $$h(c) = \frac{c^2}{2} - c^2 = -\frac{c^2}{2}$$
 $$P(Z \ge c) \le e^{-c^2 / 2}$$
 By symmetry, the two-sided tail is bounded by:
 $$P(\lvert Z \rvert \ge c) \le 2e^{-c^2 / 2}$$
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Sign of Parameter $t$:** Minimizing over unconstrained $t \in \mathbb{R}$. For upper-tail bounds $P(X \ge a)$, optimization must be restricted to $t > 0$; for lower-tail bounds $P(X \le a)$, optimization must use $t < 0$.
@@ -139,11 +119,7 @@ $$P(\lvert Z \rvert \ge c) \le 2e^{-c^2 / 2}$$
 - [[Chebyshev Inequality]] — Second moment polynomial bound.
 - [[Moment Generating Functions]] — Provides $M_X(t)$.
 - [[Comparison of Probability Bounds Example]] — Concrete numerical benchmark.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]

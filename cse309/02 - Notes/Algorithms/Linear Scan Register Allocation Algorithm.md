@@ -7,16 +7,8 @@ order: 45
 
 # Linear Scan Register Allocation Algorithm
 
-> 📖 **Reading Order:** Step 45 of 55 | **Module 5:** Register Allocation  
+> 📖 **Reading Order:** Step 45 of 55 | **Module 5: Register Allocation**  
 > ◄ **Previous:** [[Register Interference Graphs and Graph Coloring Principles]] | ► **Next:** [[Chaitin's Graph Coloring Register Allocation Algorithm]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -41,14 +33,6 @@ flowchart TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Core Idea
 
 1. `intervals`: List of all variable intervals $[start_i, end_i]$, sorted in ascending order of $start_i$.
@@ -58,153 +42,23 @@ flowchart TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- List of live intervals sorted by start point, and number of available physical registers $R$.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Register assignment mapping each live interval to a physical register or memory spill slot.
 
 ---
 
 ## How It Works
 
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-The algorithm transitions through defined phases.
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
 ---
 
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Algorithmic Implementation
 
@@ -269,14 +123,6 @@ def linear_scan_register_allocation(intervals, R):
 
 ---
 
----
-
----
-
----
-
----
-
 ## Example
 
 Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
@@ -292,14 +138,6 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 
 ---
 
----
-
----
-
----
-
----
-
 ## Properties
 
 - **Termination:** Provably terminates on all well-formed compiler inputs.
@@ -308,12 +146,6 @@ Concrete step-by-step simulations and traces are cataloged in the associated Exa
 ---
 
 ## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
 
 ### Key Mechanics: Why Spill the Latest End Point?
 
@@ -327,84 +159,36 @@ Spilling the variable whose lifetime extends **farthest into the future**:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to update liveness information or next-use pointers.
 - Misinterpreting index bounds during stack or interval scans.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Linear Scan Register Allocation Algorithm on given code fragments or graphs.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Basic Blocks and Control Flow Graphs]]
 - [[Live Ranges and Live Intervals in Register Allocation]]
 - [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Chaitin's Graph Coloring Register Allocation Algorithm]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Live Ranges and Live Intervals in Register Allocation]]
 
 ---
 
 ## Problems
 
 - [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
 
 ---
 

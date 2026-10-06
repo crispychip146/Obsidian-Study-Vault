@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 92
+order: 103
 ---
 
 # Problem — Finite Capacity Queue Loss and Effective Throughput
 
-> 📖 **Reading Order:** Step 92 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 103 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Problem — M-M-1 Queue Performance Metrics Calculation]] | ► **Next:** *End of Course*
-
 ---
-
----
-
 ## Problem
 
 A cloud microservice endpoint handles incoming API requests using a single database worker thread.
@@ -29,22 +25,14 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 4. Calculate the effective request throughput $\lambda_{\text{eff}}$ of the service.
 5. Compute the average number of requests $L$ present in the microservice.
 6. Calculate the average latency $W$ experienced by an accepted request.
-
 ---
-
----
-
 ## Given
 
 - Model: M/M/1/3
 - Capacity: $N = 3$
 - Arrival rate: $\lambda = 6$ req/s
 - Service rate: $\mu = 4$ req/s
-
 ---
-
----
-
 ## Required
 
 1. Stability explanation for $\rho > 1$.
@@ -53,22 +41,14 @@ Any incoming request arriving when the buffer is full ($N = 3$) is immediately d
 4. Effective throughput $\lambda_{\text{eff}} = \lambda(1 - P_3)$.
 5. Average inventory $L = \sum_{n=0}^3 n P_n$.
 6. Average latency $W = L / \lambda_{\text{eff}}$.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Finite Capacity M-M-1-N Queue]]
 - [[PASTA Property and Inspection Paradox]]
 - [[Little's Law]]
 - Queueing capacity constraints
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]
@@ -222,4 +202,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

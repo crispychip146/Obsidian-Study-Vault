@@ -2,28 +2,20 @@
 type: concept
 course: cse301
 status: active
-order: 70
+order: 81
 ---
 
 # Classification of States in Markov Chains
 
-> 📖 **Reading Order:** Step 70 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 81 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Markov Chain]] | ► **Next:** [[Stationary and Limiting Distributions in Markov Chains]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 - **Decomposing Complex Systems:** Real-world Markov chains with thousands of states can be decomposed into smaller, self-contained sub-chains (communicating classes) that can be analyzed independently.
 - **Determining Long-Run Fate:** Knowing whether states are recurrent, transient, or absorbing tells us whether the system settles into an equilibrium, drifts to infinity, or gets trapped in absorbing barriers (as in [[Gambler's Ruin Formula]]).
 - **Prerequisite for Limiting Distributions:** A Markov chain possesses a unique, starting-state-independent limiting distribution if and only if it is irreducible, aperiodic, and positive recurrent (see [[Stationary and Limiting Distributions in Markov Chains]]).
-
 ---
-
----
-
 ## Developing the Idea
 
 Think of the Markov chain as a directed graph where vertices are states and directed edges exist wherever $P_{ij} > 0$:
@@ -33,11 +25,7 @@ Think of the Markov chain as a directed graph where vertices are states and dire
 3. **Irreducibility:** A fully connected transit network. From any station, every other station on the map is reachable, and you can always return home.
 4. **Absorbing State:** A black hole or dead-end cul-de-sac. Once you step into it, there are no outgoing roads.
 5. **Period ($d$):** A rhythmic clock. If a pendulum swings left and right, it can only return to the left side after an even number of ticks ($d = 2$). If a state has period $d=3$, you can only visit it on step $3, 6, 9, 12, \dots$.
-
 ---
-
----
-
 ## Definition
 
 In a [[Markov Chain]], states can be classified according to their reachability, mutual connectivity, recurrence behavior, and temporal periodicity.
@@ -87,11 +75,7 @@ $$f_i = P(\text{process ever returns to state } i \mid X_0 = i) = \sum_{n=1}^\in
 - State $i$ is **transient** if $f_i < 1$. (The process eventually leaves state $i$ never to return).
   $$\text{Transient} \iff \sum_{n=1}^\infty P_{ii}^n < \infty$$
 - **Class Property:** Recurrence and transience are class properties. If $i \leftrightarrow j$, then either both are recurrent or both are transient.
-
 ---
-
----
-
 ## How It Works
 
 ### How It Works
@@ -128,11 +112,7 @@ $$f_i = P(\text{process ever returns to state } i \mid X_0 = i) = \sum_{n=1}^\in
 | **Aperiodic** | $\gcd\{n : P_{ii}^n > 0\} = 1$ | Required for limiting probabilities |
 | **Recurrent** | $P(\text{return}) = 1$ | Visited infinitely many times |
 | **Transient** | $P(\text{return}) < 1$ | Visited only finitely many times |
-
 ---
-
----
-
 ## Example
 
 ### Example 1: Verifying Irreducibility and Aperiodicity (3 States)
@@ -177,11 +157,7 @@ For full step-by-step matrix verification exercises, see [[Weather Forecasting M
    - Accessibility and Communication ($\leftrightarrow$)
    - Periodicity ($d$)
    - Recurrence / Transience ($f_i = 1$ vs $f_i < 1$)
-
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
@@ -197,11 +173,7 @@ For full step-by-step matrix verification exercises, see [[Weather Forecasting M
 - **Confusing Closed Classes with Absorbing States:** An absorbing state is a *single* state with $P_{ii} = 1$. A closed class can have multiple communicating states (e.g., $\{0, 1\}$ with transitions between each other, but no transitions escaping the set).
 - **Calculating Period as Minimum Step Count Instead of GCD:** The period is the greatest common divisor of *all* return path lengths, not the shortest cycle length.
 - **Assuming Reducible Chains Cannot Have Stationary Distributions:** Reducible chains can have stationary distributions, but they are generally not unique and depend on the initial state distribution.
-
 ---
-
----
-
 ## Exam Relevance
 
 In CSE301 examinations:
@@ -210,41 +182,25 @@ In CSE301 examinations:
 - Determining whether a given chain is irreducible.
 - Identifying transient, recurrent, and absorbing states.
 - Calculating the period of states and proving aperiodicity via self-loops ($P_{ii} > 0$).
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Markov Chain]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Gambler's Ruin Formula]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Stochastic Process]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — State Communication and Irreducibility Verification]]
 - [[Problem — Identification of Communicating Classes and Absorbing States]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 11–15, 23–24)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–211)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 11–15, 23–24)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–211)

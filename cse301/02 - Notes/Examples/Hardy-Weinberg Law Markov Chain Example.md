@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 76
+order: 87
 ---
 
 # Hardy-Weinberg Law Markov Chain Example
 
-> 📖 **Reading Order:** Step 76 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 87 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Higher-Order State Weather Prediction Example]] | ► **Next:** [[Problem — Patty and Max Gambler's Ruin]]
-
 ---
-
----
-
 ## Problem
 
 In population genetics, consider a gene with two alleles, $A$ and $a$. An individual's genotype consists of a pair of these genes: $AA$, $aa$, or $Aa$.
@@ -24,11 +20,7 @@ In a large population, suppose the initial fractions of individuals with genotyp
 2. Derive the genotype proportions $p, q, r$ in the next generation.
 3. Prove that the allele frequencies remain constant in all subsequent generations (**Hardy-Weinberg Law**).
 4. Model the genetic lineage of a single individual across generations as a three-state [[Markov Chain]], determine its transition probability matrix $P$, and prove that the stationary distribution is $\pi = (p, q, r)$.
-
 ---
-
----
-
 ## Given
 
 - Genotypes: $\{AA, aa, Aa\}$
@@ -37,22 +29,14 @@ In a large population, suppose the initial fractions of individuals with genotyp
   - An $AA$ parent always transmits an $A$ gene (probability $1$).
   - An $aa$ parent always transmits an $a$ gene (probability $1$).
   - An $Aa$ parent transmits an $A$ gene with probability $1/2$, and an $a$ gene with probability $1/2$.
-
 ---
-
----
-
 ## Required
 
 1. Allele frequencies $P(A)$ and $P(a)$.
 2. Offspring genotype frequencies $p = P(AA)$, $q = P(aa)$, $r = P(Aa)$.
 3. Algebraic invariance proof: $P_{\text{next}}(A) = P_{\text{initial}}(A)$.
 4. Markov transition matrix $P$ for descendant lineage and verification of stationary distribution $\pi P = \pi$.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -189,40 +173,24 @@ We check $\pi P = \pi$ by multiplying $\pi$ with each column of $P$:
   $$(\pi P)_3 = 1 - [(\pi P)_1 + (\pi P)_2] = 1 - [p + q] = r = \pi_3$$
 
 Thus, $\pi P = \pi$, confirming that $\pi = (p, q, r)$ is indeed the stationary distribution of the descendant Markov chain. $\blacksquare$
-
 ---
-
----
-
 ## Result
 
 1. Allele frequencies: $P(A) = p_0 + r_0/2$, $P(a) = q_0 + r_0/2$.
 2. Offspring genotype frequencies: $p = P(A)^2, \; q = P(a)^2, \; r = 2P(A)P(a)$.
 3. Allele frequencies remain invariant across generations ($P_{\text{new}}(A) = P_{\text{old}}(A)$).
 4. Stationary distribution of the lineage Markov chain matches the population frequencies: $\pi = (p, q, r)$.
-
 ---
-
----
-
 ## Why This Works
 
 The stability of the gene pool mirrors the convergence of a Markov chain to its stationary distribution: once the population reaches random-mating equilibrium, the probability distribution of an individual descendant's genotype matches the macroscopic composition of the entire population.
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Forgetting the Factor of 2 in $r$:** Writing $r = P(A)P(a)$ instead of $2P(A)P(a)$. The genotype $Aa$ can be formed in two mutually exclusive ways (mother $A$ / father $a$ OR mother $a$ / father $A$).
 - **Failing to Factor Out $(p + r/2)$ in the Invariance Proof:** Trying to expand everything into polynomials and getting lost in algebra rather than using the identity $p_0 + q_0 + r_0 = 1$.
 - **Assuming One Generation Changes Allele Frequencies:** Assuming that random mating changes allele frequencies. Random mating only redistributes alleles into genotypes; it never alters allele frequencies.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -234,12 +202,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Markov Chain]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
 - [[Stochastic Process]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 25–29)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.14, pp. 215–217)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 25–29)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.14, pp. 215–217)

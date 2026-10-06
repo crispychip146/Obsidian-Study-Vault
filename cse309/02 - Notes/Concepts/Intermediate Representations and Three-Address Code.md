@@ -7,16 +7,8 @@ order: 10
 
 # Intermediate Representations and Three-Address Code
 
-> 📖 **Reading Order:** Step 10 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 10 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]] | ► **Next:** [[Value-Number Method for DAG Construction]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -82,14 +74,6 @@ This is the architectural foundation of the **LLVM Compiler Infrastructure**:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 Why do compilers linearize trees into **Three-Address Code**? Why specifically **THREE** addresses?
@@ -116,33 +100,13 @@ To hold intermediate results between steps, the compiler invents synthetic varia
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Intermediate Representations and Three-Address Code** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The 3 Physical Data Structures for Three-Address Code
 
@@ -213,7 +177,6 @@ flowchart LR
 
 ---
 
----
 ### Technical Details
 
 ### Static Single Assignment (SSA) Form: The Modern Compiler Revolution
@@ -269,96 +232,6 @@ SSA form is the foundational representation inside GCC, LLVM, Java HotSpot, and 
 
 ---
 
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -380,61 +253,22 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Value-Number Method for DAG Construction]]
+- [[Type Expressions and Storage Layout]]
+- [[Control Flow Translation and Boolean Expressions]]
 
 ---
 
@@ -446,7 +280,6 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
 - [[Problem — Array Reference Three-Address Code Generation]]
 
 ---

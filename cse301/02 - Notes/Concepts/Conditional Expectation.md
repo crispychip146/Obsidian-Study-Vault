@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 18
+order: 28
 ---
 
 # Conditional Expectation
 
-> 📖 **Reading Order:** Step 18 of 92 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Conditional Probability and Independence]] | ► **Next:** [[Law of Total Probability and Bayes' Rule]]
-
+> 📖 **Reading Order:** Step 28 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Simpson's Paradox]] | ► **Next:** [[Law of Total Probability and Bayes' Rule]]
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Expectation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -44,11 +40,7 @@ Specifically:
 $$\mathbb{E}[Y \mid X] = g(X)$$
 where $g(x) = \mathbb{E}[Y \mid X = x]$.
 Because $X$ is random, $g(X)$ is random. It has its own distribution, mean, and variance.
-
 ---
-
----
-
 ## How It Works
 
 ### Fundamental Algebraic Properties of $\mathbb{E}[Y \mid X]$
@@ -72,11 +64,7 @@ Because $X$ is random, $g(X)$ is random. It has its own distribution, mean, and 
    If we condition on more information $(X_1, X_2)$ and then condition on less information $X_1$:
    $$\mathbb{E}\left[ \mathbb{E}[Y \mid X_1, X_2] \mid X_1 \right] = \mathbb{E}[Y \mid X_1]$$
    *(The rougher conditioning dominates)*.
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Random Number of Coin Flips
@@ -145,11 +133,7 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 2. **Confusing Conditioned and Target Variables:**
    - $\mathbb{E}[X \mid Y] \ne \mathbb{E}[Y \mid X]$.
    - Linearity applies only to the target variable: $\mathbb{E}[Y \mid X_1 + X_2] \ne \mathbb{E}[Y \mid X_1] + \mathbb{E}[Y \mid X_2]$.
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -157,11 +141,7 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 - **Adam's & Eve's Laws:** Solves compound random variables (see [[Adam's Law (Law of Total Expectation)]] and [[Eve's Law (Law of Total Variance)]]).
 - **Martingales:** A stochastic process $\{M_n\}$ is a martingale if $\mathbb{E}[M_{n+1} \mid M_n, \dots, M_0] = M_n$.
 - **Regression Analysis:** In regression modeling, the true regression function is precisely $r(x) = \mathbb{E}[Y \mid X = x]$.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Conditional Probability and Independence]]

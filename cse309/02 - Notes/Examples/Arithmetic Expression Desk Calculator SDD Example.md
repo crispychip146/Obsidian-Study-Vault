@@ -7,10 +7,8 @@ order: 7
 
 # Arithmetic Expression Desk Calculator SDD Example
 
-> 📖 **Reading Order:** Step 7 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 07 of 55 | **Module 1:** Syntax-Directed Translation  
 > ◄ **Previous:** [[Bottom-Up Evaluation of L-Attributed SDDs]] | ► **Next:** [[Infix to Postfix and Prefix SDT Translation Example]]
-
----
 
 ---
 
@@ -27,8 +25,6 @@ a naive text scanner processing tokens left-to-right immediately stumbles:
 The fundamental issue is that **mathematical expressions possess recursive, hierarchical tree structures, not linear flat structures**. High-precedence operators (`*`, `/`) must execute before low-precedence operators (`+`, `-`), and nested parentheses can defer execution indefinitely.
 
 A **Syntax-Directed Definition (SDD)** solves this by marrying the context-free grammar—which structurally enforces precedence and associativity—with semantic rules that synthesize evaluated numerical results directly from the leaves to the root.
-
----
 
 ---
 
@@ -236,8 +232,6 @@ $$\begin{aligned}
 \end{aligned}$$
 
 Because every edge flows monotonically upward, evaluation is deterministic, robust, and lightning-fast.
-
----
 
 ---
 

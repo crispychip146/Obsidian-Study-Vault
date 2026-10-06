@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 20
 ---
-
 # Semaphores and Synchronization Primitives
 
-> 📖 **Reading Order:** Step 20 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 20 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Peterson's Algorithm and Hardware Mutual Exclusion]] | ► **Next:** [[Monitors and Condition Variables]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2b, 2018 Q2a, 2018 Q3a, 2020 Q2b)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
 >
@@ -27,9 +25,6 @@ order: 20
 >    - Use an array of $M$ turn semaphores `turn[M]`, where `turn[0]=1` and all others are `0`. Producer $i$ waits on `turn[i]` and, upon inserting an item, signals `turn[(i+1)%M]`.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 In concurrent programming, low-level mutual exclusion using spinlocks (busy-waiting loops like `while (test_and_set(&lock));`) forces CPU cores to consume 100% power executing useless spin cycles while waiting for a lock to clear. Furthermore, primitive integer flags suffer from "lost wakeup" race conditions.
@@ -37,7 +32,6 @@ In concurrent programming, low-level mutual exclusion using spinlocks (busy-wait
 We want an expressive, general-purpose synchronization primitive that allows threads to coordinate mutual exclusion and manage shared resource pools without wasting CPU cycles. The central obstacle is that the operations of testing, decrementing, and sleeping must occur completely atomically: if a thread is preempted halfway through checking a counter, synchronization collapses.
 
 ---
-
 ## Developing the Idea
 
 In 1965, **Edsger Dijkstra** introduced the **Semaphore**: an integer variable $S$ that can only be accessed through two standardized, strictly atomic primitives:
@@ -47,13 +41,11 @@ In 1965, **Edsger Dijkstra** introduced the **Semaphore**: an integer variable $
 Unlike spinlocks, a thread calling `wait()` when resources are unavailable voluntarily yields the CPU via `sleep()` / `block()`, enabling the OS to run productive work until `signal()` awakens it.
 
 ---
-
 ## Definition
 
 
 
 ---
-
 ## How It Works
 
 ### 2. Dijkstra's Semaphore Architecture
@@ -66,9 +58,6 @@ A **semaphore** $S$ is a protected integer variable that, apart from initializat
 All modifications to the semaphore integer and its internal waiting queue must execute **atomically** (uninterruptibly).
 
 ---
-
----
-
 ## Example
 
 Managing a pool of 3 printer devices using a Counting Semaphore initialized to $S = 3$:
@@ -79,7 +68,6 @@ Managing a pool of 3 printer devices using a Counting Semaphore initialized to $
 5. Job 1 completes printing and calls `signal(S)` $	o S = 0 \le 0$, Job 4 is unblocked and granted printer access.
 
 ---
-
 ## Technical Details
 
 ### 4. Types of Semaphores
@@ -105,9 +93,6 @@ Managing a pool of 3 printer devices using a Counting Semaphore initialized to $
 - Used to manage finite resource pools (e.g., $N$ open database connections, $N$ buffer slots).
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Wait Queue Invariance:** If semaphore value $S < 0$, then the absolute value $|S|$ represents the exact number of processes currently blocked in the semaphore queue.
@@ -115,7 +100,6 @@ Managing a pool of 3 printer devices using a Counting Semaphore initialized to $
 - **Mutex vs. Counting Distinction:** A binary semaphore ($S \in \{0, 1\}$) provides mutual exclusion; a general counting semaphore ($S \ge 0$) manages counting pools of identical resources.
 
 ---
-
 ## Common Mistakes
 
 Because semaphores are low-level procedural primitives, small developer mistakes result in fatal system deadlocks:
@@ -150,15 +134,11 @@ Because semaphores are low-level procedural primitives, small developer mistakes
    *Consequence:* If Thread 1 acquires `semA` and Thread 2 acquires `semB`, each waits on the other's lock $\implies$ **Permanent Deadlock**!
 
 ---
-
----
-
 ## Exam Relevance
 
 Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
 
 ---
-
 ## Related Concepts
 
 - [[Monitors and Condition Variables]]
@@ -166,20 +146,17 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 - [[Producer-Consumer Semaphore Implementation Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Race Conditions and Critical-Section Problem]]
 - [[Threads and Multithreading Models]]
 
 ---
-
 ## Problems
 
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 29–42: Sleep and Wakeup, The Lost Wakeup Problem, Semaphores, Mutexes in Pthreads).

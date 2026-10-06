@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 27
 ---
-
 # Resource Allocation Graphs and Deadlock Modeling
 
-> 📖 **Reading Order:** Step 27 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 27 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Deadlock Fundamentals and Coffman Conditions]] | ► **Next:** [[Deadlock Prevention and Avoidance Strategies]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2018 Q2b, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
 >
@@ -25,9 +23,6 @@ order: 27
 >    - Trace edges strictly from request ($P \to R$) to assignment ($R \to P$). If you hit a node with no outgoing edges, backtrack. If you hit an active node currently on your recursion stack, a cycle is confirmed!
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 In real-world operating systems with dozens of processes and hundreds of heterogeneous resources (some with multiple identical instances, like 4 tape drives or 8 memory buffers), informal reasoning about deadlocks quickly becomes impossible.
@@ -35,7 +30,6 @@ In real-world operating systems with dozens of processes and hundreds of heterog
 We want a formal mathematical model to precisely represent system allocation state and detect whether deadlock exists. The central obstacle is distinguishing harmless resource contention from true deadlock when resources have multiple instances: a cycle in dependency may or may not mean deadlock.
 
 ---
-
 ## Developing the Idea
 
 Computer scientists solve this by modeling resource allocations as a directed bipartite graph: the **Resource Allocation Graph (RAG)** $G = (V, E)$.
@@ -49,13 +43,11 @@ The edges $E$ represent dependencies:
 - **Assignment Edge ($R_j 	o P_i$):** An instance of resource $R_j$ is allocated to process $P_i$.
 
 ---
-
 ## Definition
 
 
 
 ---
-
 ## How It Works
 
 ### 1. Graph Theoretical Formulation
@@ -83,9 +75,6 @@ graph LR
 ```
 
 ---
-
----
-
 ## Example
 
 Cycle analysis on RAGs:
@@ -93,27 +82,23 @@ Cycle analysis on RAGs:
 - **Multiple-Instance Resources:** If resources have multiple instances, a cycle is **necessary but NOT sufficient**. For example, processes outside the cycle may finish and return resources, breaking the dependency.
 
 ---
-
 ## Technical Details
 
 See related modules for microarchitectural implementation details.
 
 ---
-
 ## Important Properties and Why They Hold
 
 - **Graph Reduction Theorem:** A RAG is deadlocked if and only if it cannot be completely reduced. The **Graph Reduction Algorithm** repeatedly finds unblocked processes, satisfies their requests, and deletes all their edges until no more processes can be reduced.
 - **Bipartite Invariant:** Edges strictly alternate between Process nodes and Resource nodes; an edge can never directly connect two processes or two resources.
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 ### Case A: Single-Instance Cycle $\implies$ Permanent Deadlock
@@ -131,7 +116,6 @@ graph TD
 Cycle: $A \to S \to B \to R \to A$. Neither $A$ nor $B$ can proceed. **Definite Deadlock.**
 
 ---
-
 ### Case B: Multi-Instance Cycle $\implies$ NO Deadlock (False Alarm)
 Consider processes $P_1, P_2, P_3$ and resources $R_1, R_2$ (2 instances each):
 - $R_1$ has 2 instances: held by $P_1$ and $P_2$.
@@ -160,9 +144,6 @@ Notice Process $P_3$! $P_3$ holds an instance of $R_2$, but $P_3$ is **not waiti
 The cycle dissolved completely!
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Deadlock Prevention and Avoidance Strategies]]
@@ -171,19 +152,16 @@ The cycle dissolved completely!
 - [[Resource Allocation Graph Cycle Detection Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 10–13, 16–17: Deadlock Modeling, Resource Allocation Graphs, Cycle Analysis).

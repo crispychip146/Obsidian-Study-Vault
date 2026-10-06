@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 35
+order: 46
 ---
 
 # Point Estimation
 
-> 📖 **Reading Order:** Step 35 of 92 | **Module 6:** Statistical Inference  
+> 📖 **Reading Order:** Step 46 of 103 | **Module 6:** Statistical Inference  
 > ◄ **Previous:** [[Problem — CLT Implications for the Weak Law of Large Numbers]] | ► **Next:** [[Bias-Variance Decomposition]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 In the real world, we rarely or never observe an entire population:
@@ -22,11 +18,7 @@ In the real world, we rarely or never observe an entire population:
 - We cannot observe infinite flips of a coin.
 
 Instead, we collect a finite random sample of size $n$. Point estimation provides a principled mathematical framework for extracting a single optimal guess of the underlying true data-generating parameter from noisy, incomplete observations.
-
 ---
-
----
-
 ## Developing the Idea
 
 Imagine you are an archer shooting arrows at a hidden bullseye ($\theta$):
@@ -39,11 +31,7 @@ Point estimation asks two intuitive questions:
 2. **How tightly clustered are your shots?** Even if you are aimed at the center, do your arrows scatter all over the target (high standard error) or land in a tight cluster (low standard error)?
 
 A great estimator has both **zero bias** (centered on truth) and **low standard error** (tightly clustered).
-
 ---
-
----
-
 ## Definition
 
 **Point estimation** is the process of using sample data to calculate a single best-guess numerical value (a "point") for an unknown population parameter $\theta$, distribution characteristic, or functional quantity.
@@ -57,11 +45,7 @@ A crucial distinction in statistical theory:
 - $\theta$: The true population parameter. It is a **fixed, unknown constant** (under the frequentist paradigm). It does NOT have a probability distribution.
 - $\hat{\theta}_n$: The estimator. Because it is a function of random sample variables $X_1, \dots, X_n$, it is itself a **random variable** with its own probability distribution, known as the **sampling distribution**.
 - $\hat{\theta}$: An estimate (the observed numerical realization when actual sample values $x_1, \dots, x_n$ are plugged into $g$).
-
 ---
-
----
-
 ## How It Works
 
 ### How It Works
@@ -104,11 +88,7 @@ $$\text{MSE}(\hat{\theta}_n) = \text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta
 | Standard Error | $\text{se}(\hat{\theta}_n)$ | $\sqrt{\text{Var}_\theta(\hat{\theta}_n)}$ | Decreases at rate $1/\sqrt{n}$ |
 | Mean Squared Error | $\text{MSE}(\hat{\theta}_n)$ | $\text{bias}^2(\hat{\theta}_n) + \text{Var}_\theta(\hat{\theta}_n)$ | $\to 0$ as $n \to \infty$ |
 | Consistency | $\hat{\theta}_n \xrightarrow{P} \theta$ | $P(\lvert\hat{\theta}_n - \theta\rvert > \epsilon) \to 0$ | Holds for large samples |
-
 ---
-
----
-
 ## Example
 
 ### Bernoulli Parameter Estimation and Standard Error
@@ -157,11 +137,7 @@ $$\operatorname{Var}(\hat{\theta}_n) \ge \frac{1}{n I_1(\theta)}$$
 Unbiasedness alone is insufficient for practical optimality:
 $$\text{MSE}(\hat{\theta}_n) = \text{bias}^2(\hat{\theta}_n) + \operatorname{Var}(\hat{\theta}_n)$$
 An unbiased estimator with huge variance is inferior to a slightly biased shrinkage estimator with substantially reduced variance (e.g. Ridge regression or Bayesian posterior means).
-
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
@@ -179,11 +155,7 @@ An unbiased estimator with huge variance is inferior to a slightly biased shrink
    Standard deviation $\sigma$ measures the spread of individual data points in the population. Standard error $\text{se} = \sigma / \sqrt{n}$ measures the spread of the sample average $\hat{\theta}_n$ across multiple datasets.
 3. **Believing unbiasedness implies consistency:**
    An estimator can be completely unbiased for every $n$ yet fail to converge to the truth (e.g., ignoring all data except the first observation: $\hat{\mu} = X_1$).
-
 ---
-
----
-
 ## Exam Relevance
 
 In exam problems, you will typically be asked to:
@@ -192,11 +164,7 @@ In exam problems, you will typically be asked to:
 3. Construct the plug-in estimated standard error $\widehat{\text{se}}$.
 4. Evaluate Mean Squared Error and discuss the trade-off between bias and variance via [[Bias-Variance Decomposition]].
 5. Contrast point estimation with interval estimation ([[Confidence Intervals and Confidence Sets]]).
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Estimator Consistency and Convergence]]
@@ -204,30 +172,18 @@ In exam problems, you will typically be asked to:
 - [[Confidence Intervals and Confidence Sets]]
 - [[Maximum Likelihood Estimation]]
 - [[Bayesian Inference]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]
 - [[Covariance and Correlation]]
 - [[Law of Large Numbers]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+- [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]

@@ -7,16 +7,8 @@ order: 17
 
 # Backpatching Control-Flow Code Generation Algorithm
 
-> 📖 **Reading Order:** Step 17 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 17 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Backpatching in Intermediate Code Generation]] | ► **Next:** [[Array Reference and Boolean Control-Flow TAC Generation Example]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -60,14 +52,6 @@ class BackpatchEngine:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Core Idea
 
 Why must the grammar include marker non-terminals $M$ and $N$?
@@ -83,63 +67,19 @@ Why must the grammar include marker non-terminals $M$ and $N$?
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Syntax-directed translation attributes (`truelist`, `falselist`, `nextlist`) and TAC instruction quad addresses.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Three-Address Code with completed jump target addresses replacing unresolved marker placeholders.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### SDT Specification: Boolean Expressions
 
@@ -177,6 +117,7 @@ Production                        Semantic Actions
 ```
 
 ---
+
 ### SDT Specification: Control-Flow Statements
 
 Each statement non-terminal $S$ synthesizes:
@@ -209,101 +150,9 @@ Production                                      Semantic Actions
 
 ---
 
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
 
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
 The complete algorithmic procedure is detailed in the sections above.
-
----
-
----
-
----
 
 ---
 
@@ -350,12 +199,6 @@ $O(N)$ auxiliary memory for data structures.
 
 ---
 
----
-
----
-
----
-
 ## Properties
 
 - **Termination:** Provably terminates on all well-formed compiler inputs.
@@ -365,92 +208,41 @@ $O(N)$ auxiliary memory for data structures.
 
 ## Limitations
 
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
+- Requires syntax-directed evaluation with access to synthesized jump lists.
+- Unstructured arbitrary jumps (`goto`) require specialized resolution.
 
 ---
 
 ## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
 
 - Forgetting to update liveness information or next-use pointers.
 - Misinterpreting index bounds during stack or interval scans.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Backpatching Control-Flow Code Generation Algorithm on given code fragments or graphs.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
+- [[Control Flow Translation and Boolean Expressions]]
+- [[Backpatching in Intermediate Code Generation]]
 - [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Backpatching in Intermediate Code Generation]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — Backpatching Boolean Expression Translation]]
 
 ---
 

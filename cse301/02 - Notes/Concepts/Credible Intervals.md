@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 51
+order: 62
 ---
 
 # Credible Intervals
 
-> 📖 **Reading Order:** Step 51 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 62 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Maximum A Posteriori (MAP) Estimation]] | ► **Next:** [[Beta-Binomial Conjugate Updating Formula]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Credible Intervals, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -27,11 +23,7 @@ A credible interval provides the exact answer to the intuitive question that mos
 > *"Given the data I actually observed, what is a range of values that contains the unknown parameter with 95% probability?"*
 
 Because Bayesian statistics treats $\theta$ as a random variable conditional on the observed data $\mathbf{x}$, we can integrate the posterior density $f(\theta \mid \mathbf{x})$ directly between two endpoints $[a, b]$ to calculate the exact probability that $\theta \in [a, b]$.
-
 ---
-
----
-
 ## Definition
 
 In Bayesian statistics, a **$1 - \alpha$ Credible Interval** (also called a **posterior interval**) for an unknown parameter $\theta \in \Theta$ is an interval $C \subset \Theta$ such that the posterior probability that $\theta$ lies within $C$, given the observed sample data $\mathbf{X} = \mathbf{x}$, is equal to $1 - \alpha$:
@@ -41,11 +33,7 @@ $$P(\theta \in C \mid \mathbf{X} = \mathbf{x}) = \int_C f(\theta \mid \mathbf{x}
 For a vector parameter $\boldsymbol{\theta} \in \mathbb{R}^d$, $C$ is referred to as a **credible set** or **posterior region**.
 
 Common choices of significance level $\alpha$ include $\alpha = 0.05$ (a $95\%$ credible interval) and $\alpha = 0.10$ (a $90\%$ credible interval).
-
 ---
-
----
-
 ## How It Works
 
 ### Credible Interval vs. Frequentist Confidence Interval
@@ -85,11 +73,7 @@ where $k$ is the largest constant chosen such that $\int_{C_{\text{HPD}}} f(\the
   1. Every point inside $C_{\text{HPD}}$ has higher posterior density than any point outside it.
   2. It is the **narrowest (shortest) possible interval** with coverage $1 - \alpha$.
   3. If the posterior is multimodal, the HPD set can naturally split into disjoint intervals.
-
 ---
-
----
-
 ## Example
 
 ### Normal-Normal Conjugate Model Credible Interval
@@ -141,44 +125,28 @@ As the sample size $n \to \infty$:
   $$\theta \mid \mathbf{X} \approx N\left(\hat{\theta}_{\text{MLE}}, \frac{1}{I_n(\hat{\theta}_{\text{MLE}})}\right)$$
 - Consequently, for large $n$, the **Bayesian credible interval asymptotically coincides with the Frequentist Wald confidence interval**:
   $$C_{\text{Bayes}} \approx C_{\text{Frequentist}} \approx \hat{\theta}_{\text{MLE}} \pm z_{\alpha/2}\widehat{\text{se}}$$
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
 
 - Setting equal-tail cutoffs on a highly skewed posterior (such as an exponential or heavily skewed Beta) and expecting it to yield the shortest interval (the HPD region is shorter).
 - Believing that credible intervals require large samples (unlike frequentist Wald intervals, Bayesian credible intervals are exact for any sample size $n$, even $n = 1$, provided the prior and likelihood models are correct).
-
 ---
-
----
-
 ## Exam Relevance
 
 In exam problems, expect to:
 1. Contrast the philosophical interpretations of Bayesian credible intervals ($P(\theta \in C \mid x) = 1 - \alpha$) and frequentist confidence intervals ($P_\theta(\theta \in C(X)) = 1 - \alpha$).
 2. Compute equal-tailed credible intervals using Gaussian and Beta quantiles.
 3. State conditions under which equal-tailed and HPD credible intervals coincide (symmetry and unimodality).
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Bayesian Inference]]
 - [[Confidence Intervals and Confidence Sets]]
 - [[Normal-Normal Conjugate Updating Formula]]
 - [[Beta-Binomial Conjugate Updating Formula]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Bayesian Inference]]
@@ -195,5 +163,5 @@ In exam problems, expect to:
 
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
-- [[01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]

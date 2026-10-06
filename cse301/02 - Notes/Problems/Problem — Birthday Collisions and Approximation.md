@@ -7,13 +7,9 @@ order: 6
 
 # Problem — Birthday Collisions and Approximation
 
-> 📖 **Reading Order:** Step 06 of 92 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Derangements and Card Matching Example]] | ► **Next:** [[Random Variables and Probability Distributions]]
-
+> 📖 **Reading Order:** Step 06 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Derangements and Card Matching Example]] | ► **Next:** [[Newton-Pepys Dice Problem Example]]
 ---
-
----
-
 ## Problem
 
 Suppose $k$ distinct keys are inserted uniformly and independently at random into a hash table with $m$ buckets (numbered $1, 2, \dots, m$).
@@ -22,11 +18,7 @@ Suppose $k$ distinct keys are inserted uniformly and independently at random int
 2. **Poisson Approximation / Exponential Bound:** Using the inequality $1 - x \le e^{-x}$, derive a closed-form lower bound on the collision probability.
 3. **Threshold Calculation:** For a 32-bit hash table ($m = 2^{32} \approx 4.29 \times 10^9$), find the approximate number of keys $k$ required before the probability of a collision reaches $50\%$.
 4. **Expected Number of Collisions:** Define an indicator random variable $I_{ij}$ for each pair of keys $\{i, j\}$ ($1 \le i < j \le k$) indicating whether keys $i$ and $j$ collide. Find the exact expected number of colliding pairs $\mathbb{E}[C]$.
-
 ---
-
----
-
 ## Given
 
 - Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
@@ -52,11 +44,7 @@ Suppose $k$ distinct keys are inserted uniformly and independently at random int
 - [[Probability Axioms and Naive Probability]] — Complement rule.
 - [[Birthday Problem and Collisions Example]] — Birthday paradox mechanics.
 - Linearity of expectation via indicator random variables.
-
 ---
-
----
-
 ## Question Type
 
 Probability / Statistical Inference / Markov Chain Analysis
@@ -159,11 +147,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 1. **Confusing number of items with number of pairs:** Forgetting that collisions happen between *pairs*. The relevant quantity is $\binom{k}{2} \approx k^2/2$, not $k$.
 2. **Assuming independence of pairs:** The pairs $I_{12}$ and $I_{23}$ are not independent (if 1 and 2 collide, and 2 and 3 collide, then 1 and 3 must collide!). However, **linearity of expectation does not require independence**, which makes the calculation of $\mathbb{E}[C]$ exact and simple.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.

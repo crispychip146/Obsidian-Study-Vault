@@ -7,16 +7,8 @@ order: 21
 
 # Run-Time Storage Organization and Activation Records
 
-> 📖 **Reading Order:** Step 21 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 21 of 55 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Problem — Backpatching Boolean Expression Translation]] | ► **Next:** [[Calling Sequences and Stack Frame Management]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -25,14 +17,6 @@ order: 21
 When you launch an executable binary in an operating system (e.g., typing `./a.out` in Linux or double-clicking an `.exe` in Windows), the OS kernel does not simply dump bytes into RAM. It constructs a **Virtual Memory Space** (typically 4GB on 32-bit architectures or 256TB on 64-bit architectures) managed by hardware page tables:
 - The CPU hardware does not understand high-level concepts like "recursion", "objects", "local variables", or "lexical scope".
 - The compiler is the architect that organizes this flat virtual address space into distinct memory regions, ensuring that procedures can invoke each other, allocate dynamic structures, and recurse infinitely without corrupting program code or clobbering each other's data.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -61,33 +45,13 @@ This is one of the most brilliant architectural designs in computer history:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Run-Time Storage Organization and Activation Records** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Activation Trees: The Mathematics of Procedure Lifetimes
 
@@ -130,7 +94,6 @@ graph TD
 
 ---
 
----
 ### Technical Details
 
 ### The Anatomy of an Activation Record (Stack Frame)
@@ -165,6 +128,7 @@ An **Activation Record (AR)** (or **Stack Frame**) is a contiguous block of stac
 7. **Temporaries:** Scratch memory used by the code generator when evaluating complex intermediate expressions or register spilling.
 
 ---
+
 ### Frame Pointer ($fp$) vs. Stack Pointer ($sp$) Mechanics
 
 Why do CPUs have both a Stack Pointer register (`$sp` / `esp` / `rsp`) and a Frame Pointer register (`$fp` / `ebp` / `rbp`)?
@@ -179,96 +143,6 @@ Why do CPUs have both a Stack Pointer register (`$sp` / `esp` / `rsp`) and a Fra
 - Local variables and arguments are referenced using fixed, compile-time **constant offsets** from `$fp`:
   $$\text{Address of Parameter } j = fp + \text{offset}_j$$
   $$\text{Address of Local Variable } i = fp - \text{offset}_i$$
-
----
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -293,74 +167,34 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Calling Sequences and Stack Frame Management]]
+- [[Non-Local Variable Access in Static and Dynamic Scopes]]
+- [[Heap Memory Management and Allocation Strategies]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Type Expressions and Storage Layout]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Activation Record and Display Table Tracing]]
 
 ---
 

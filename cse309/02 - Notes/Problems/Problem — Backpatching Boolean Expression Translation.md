@@ -12,8 +12,6 @@ order: 20
 
 ---
 
----
-
 ## Problem
 
 A compiler frontend parses the following conditional statement with mixed boolean operators:
@@ -36,8 +34,6 @@ else
 3. **Parse Tree with Markers:** Draw the concrete syntax tree showing where each marker non-terminal reduces.
 4. **Final Instruction Array:** Provide the complete, finalized intermediate instruction table with zero unresolved targets.
 5. **Path Verification:** Trace the execution path for all $2^3 = 8$ truth assignments of the atomic comparisons to prove semantic correctness.
-
----
 
 ---
 

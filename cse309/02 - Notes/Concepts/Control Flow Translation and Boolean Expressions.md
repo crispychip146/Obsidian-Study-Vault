@@ -7,16 +7,8 @@ order: 15
 
 # Control Flow Translation and Boolean Expressions
 
-> 📖 **Reading Order:** Step 15 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 15 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Translation of Expressions and Array References]] | ► **Next:** [[Backpatching in Intermediate Code Generation]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -47,14 +39,6 @@ Modern optimizing compilers solve both safety and performance problems by transl
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 In C, C++, Java, and Python:
@@ -82,33 +66,13 @@ flowchart TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Control Flow Translation and Boolean Expressions** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Why Inherited Attributes Are Mandatory for Boolean Expressions
 
@@ -126,6 +90,7 @@ Similarly, statement non-terminals $S$ require:
 - `S.next`: The label of the instruction immediately following the execution of statement $S$.
 
 ---
+
 ### Formal SDD for Flow-of-Control Statements
 
 ### Helper Functions:
@@ -195,6 +160,7 @@ S.code  = label(begin)
 - **Intuition:** Every iteration starts at `begin`. $B$ is tested; if true, `S1` executes and unconditionally loops back to `begin`. If false, control exits immediately to `S.next`.
 
 ---
+
 ### Formal SDD for Boolean Expressions
 
 Now let us define how inherited exit labels flow downwards through logical operators:
@@ -234,101 +200,6 @@ B.code   = B1.code
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -350,123 +221,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-### End-to-End Walkthrough: Complex Conditional
-
-Consider translating:
-$$\mathbf{if \; (x < 100 \; || \; x > 200 \; \&\& \; x \neq y) \; x = 0;}$$
-
-Following standard operator precedence, `&&` binds tighter than `||`:
-$$B = B_1 \text{ || } (B_2 \text{ \&\& } B_3)$$
-Let the overall statement have `S.next = L_after`.
-
-1. **Outer `if` Setup:**
-   - `B.true = L_then`
-   - `B.false = L_after`
-2. **Top-Level OR ($B_1 \text{ || } B_{and}$):**
-   - $B_1 = (x < 100)$:
-     - `B1.true = B.true = L_then`
-     - `B1.false = L_test_and`
-   - $B_{and} = (x > 200 \text{ \&\& } x \neq y)$:
-     - `Band.true = B.true = L_then`
-     - `Band.false = B.false = L_after`
-3. **Inner AND ($B_2 \text{ \&\& } B_3$):**
-   - $B_2 = (x > 200)$:
-     - `B2.true = L_test_neq`
-     - `B2.false = Band.false = L_after`
-   - $B_3 = (x \neq y)$:
-     - `B3.true = Band.true = L_then`
-     - `B3.false = Band.false = L_after`
-
-### Emitted Three-Address Code:
-```text
-      if x < 100 goto L_then        // B1: If true, short-circuit entire condition!
-      goto L_test_and
-
-L_test_and:
-      if x > 200 goto L_test_neq    // B2: If true, test B3
-      goto L_after                  // Short-circuit: B2 failed, so AND failed!
-
-L_test_neq:
-      if x != y goto L_then         // B3: If true, condition succeeded!
-      goto L_after                  // B3 failed, entire condition failed!
-
-L_then:
-      x = 0
-
-L_after:
-      // Execution continues...
-```
-
-Notice how the control flow strictly mirrors the mathematical truth table while never executing a single unnecessary check at runtime!
-
----
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
+- [[Backpatching in Intermediate Code Generation]]
 - [[Basic Blocks and Control Flow Graphs]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Intermediate Representations and Three-Address Code]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Backpatching Boolean Expression Translation]]
 
 ---
 

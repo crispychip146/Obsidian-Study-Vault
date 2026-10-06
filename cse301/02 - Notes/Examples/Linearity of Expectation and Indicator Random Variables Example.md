@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 14
+order: 18
 ---
 
 # Linearity of Expectation and Indicator Random Variables Example
 
-> 📖 **Reading Order:** Step 14 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Moment Generating Functions]] | ► **Next:** [[Exponential Distribution Memorylessness Example]]
-
+> 📖 **Reading Order:** Step 18 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Moment Generating Functions]] | ► **Next:** [[Poisson Triplet Birthday Collisions Example]]
 ---
-
----
-
 ## Problem
 
 The **Fundamental Bridge** between probability and expectation is the **indicator random variable**:
@@ -29,11 +25,7 @@ which holds **regardless of whether the variables are independent or dependent**
 We demonstrate the power of this method across two classic problems:
 1. **Hypergeometric Mean:** Drawing $n$ balls without replacement from $w$ white and $b$ black balls.
 2. **Distinct Birthday Count:** Finding the expected number of distinct days represented by the birthdays of $k$ people.
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -107,11 +99,7 @@ Let $D$ be the number of **distinct days** of the year that are someone's birthd
   Using $\left(1 - \frac{1}{n}\right)^n \approx e^{-1} \approx 0.3679$:
   $$\mathbb{E}[D] \approx 365 \left( 1 - \frac{1}{e} \right) \approx 365 \times 0.6321 \approx 230.7 \text{ days}$$
   *(With 365 people, on average only $\approx 231$ distinct days are covered; about 134 days have zero birthdays!)*.
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -128,11 +116,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 - **The Indicator Choice Trick:** If asked for "the number of occupied bins", define indicators for the **bins**, not the balls!
 - **Independence is Irrelevant for Linearity:** $\mathbb{E}[X_1 + \dots + X_n] = \mathbb{E}[X_1] + \dots + \mathbb{E}[X_n]$ is true **always**. Never spend time checking independence when calculating expectations.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -144,11 +128,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Discrete Probability Distributions]] — Hypergeometric and Binomial properties.
 - [[Law of the Unconscious Statistician (LOTUS)]] — Expectation mechanics.
 - [[Problem — Indicator Variables for Distinct Birthday Counts]] — Full variance calculation via indicator covariance.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 8, pages 23–25)

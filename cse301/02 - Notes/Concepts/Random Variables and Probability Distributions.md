@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 7
+order: 8
 ---
 
 # Random Variables and Probability Distributions
 
-> 📖 **Reading Order:** Step 07 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Problem — Birthday Collisions and Approximation]] | ► **Next:** [[Discrete Probability Distributions]]
-
+> 📖 **Reading Order:** Step 08 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Newton-Pepys Dice Problem Example]] | ► **Next:** [[Discrete Probability Distributions]]
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Random Variables and Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -34,11 +30,7 @@ $$X: S \to \mathbb{R}$$
 Despite the name, a random variable is **neither random nor a variable** in the algebraic sense—it is a **deterministic function** whose input is determined by a random experiment.
 
 The **probability distribution** of $X$ describes the allocation of probabilities across the possible values that $X$ can take in $\mathbb{R}$.
-
 ---
-
----
-
 ## How It Works
 
 ### Cumulative Distribution Function (CDF)
@@ -100,11 +92,7 @@ $$\operatorname{SD}(X) = \sqrt{\operatorname{Var}(X)}$$
    $$\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) + 2\operatorname{Cov}(X, Y)$$
    If $X$ and $Y$ are independent (or uncorrelated), $\operatorname{Cov}(X, Y) = 0$, so:
    $$\operatorname{Var}(X + Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)$$
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Expectation and Variance from CDF / PMF
@@ -168,11 +156,7 @@ For distributions of functions of random variables, see [[Law of the Unconscious
    - $\operatorname{Var}(X - Y) = \operatorname{Var}(X) + \operatorname{Var}(Y) - 2\operatorname{Cov}(X, Y)$. For independent RVs, $\operatorname{Var}(X - Y) = \operatorname{Var}(X) + \operatorname{Var}(Y)$ (variances add, never subtract!).
 3. **Non-existent Expectations:**
    - Certain distributions like the Cauchy distribution have no mean because $\int \lvert x \rvert f(x) dx = \infty$.
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Cross-Topic Connections / Exam Relevance
@@ -181,11 +165,7 @@ For distributions of functions of random variables, see [[Law of the Unconscious
 - **Transformations:** Evaluated via [[Law of the Unconscious Statistician (LOTUS)]] and Jacobian changes of variables.
 - **Multivariate:** Extended to pairs and vectors in [[Joint and Marginal Distributions]] and [[Covariance and Correlation]].
 - **Estimation:** Forms the sample data generating process in [[Point Estimation]] and [[Maximum Likelihood Estimation]].
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Probability Axioms and Naive Probability]]

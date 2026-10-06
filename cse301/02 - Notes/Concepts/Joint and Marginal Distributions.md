@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 10
+order: 14
 ---
 
 # Joint and Marginal Distributions
 
-> 📖 **Reading Order:** Step 10 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Continuous Probability Distributions]] | ► **Next:** [[Covariance and Correlation]]
-
+> 📖 **Reading Order:** Step 14 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[St. Petersburg Paradox]] | ► **Next:** [[Covariance and Correlation]]
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Joint and Marginal Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -29,11 +25,7 @@ By formalizing sample spaces, probability measures, state transitions, or likeli
 ## Definition
 
 When studying two or more random variables simultaneously (e.g., $(X, Y)$), their collective behavior is described by a **joint probability distribution**.
-
 ---
-
----
-
 ## How It Works
 
 ### Discrete Joint Distributions
@@ -86,11 +78,7 @@ Random variables $X$ and $Y$ are **independent** ($X \perp Y$) if and only if an
    $X$ and $Y$ are independent if and only if the joint density can be factored into a function of $x$ alone and a function of $y$ alone:
    $$f_{X, Y}(x, y) = g(x) h(y)$$
    **AND** the support of $(X, Y)$ is a **Cartesian product (rectangle)** of the form $S_X \times S_Y$.
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Marginalization and Conditional Densities
@@ -173,16 +161,20 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 
 - **Covariance:** Linear association measured by integrating against the joint density (see [[Covariance and Correlation]]).
 - **Conditioning:** Conditional density $f_{Y \mid X}(y \mid x)$ forms the foundation for [[Conditional Expectation]] and Adam's / Eve's laws.
-- **Transformations:** Joint 2D transformations require the 2D Jacobian determinant.
+- **Transformations & Non-rectangular Supports:** Slicing circular domains (see [[Uniform Distribution on the Unit Disk Example]]) and distance metrics (see [[Expected Absolute Distance of Random Variables Example]]).
+- **Categorical Generalization:** Discrete random vectors with fixed sum constraints (see [[Multinomial Distribution]]).
 
 ---
 
 ## Related Concepts
 
 - [[Random Variables and Probability Distributions]]
+- [[Multinomial Distribution]]
 - [[Covariance and Correlation]]
 - [[Conditional Expectation]]
 - [[Law of the Unconscious Statistician (LOTUS)]]
+- [[Uniform Distribution on the Unit Disk Example]]
+- [[Expected Absolute Distance of Random Variables Example]]
 
 ---
 

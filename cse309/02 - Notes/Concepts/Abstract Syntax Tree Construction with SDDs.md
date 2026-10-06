@@ -7,16 +7,8 @@ order: 4
 
 # Abstract Syntax Tree Construction with SDDs
 
-> 📖 **Reading Order:** Step 4 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 04 of 55 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[S-Attributed and L-Attributed SDDs]] | ► **Next:** [[Eliminating Left Recursion from SDTs]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -73,14 +65,6 @@ An **Abstract Syntax Tree (AST)** strips away all punctuation, parentheses, and 
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 In a compiler's object model, AST nodes are created using object constructors:
@@ -94,33 +78,13 @@ In a compiler's object model, AST nodes are created using object constructors:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Abstract Syntax Tree Construction with SDDs** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### S-Attributed SDD: Bottom-Up AST Construction
 
@@ -152,6 +116,7 @@ When parsing bottom-up (LR parser), constructing an AST is simple. Each non-term
 The root pointer $p_5$ points to the completed, clean AST.
 
 ---
+
 ### The Mind-Bending Challenge: Top-Down L-Attributed AST Construction
 
 Now, prepare for one of the most brilliant conceptual tricks in compiler design.
@@ -172,6 +137,7 @@ $$\text{AST} = a - (b - c) = a - b + c \quad \text{\bf (COMPLETELY WRONG!)}$$
 Subtraction is **left-associative** ($((a - b) - c)$). How on earth can a right-recursive top-down parser construct a left-associative tree?
 
 ---
+
 ### The Solution: The Accumulator Pattern (Inherited Attributes)
 
 The compiler solves this using an **Accumulator Pattern** via inherited attribute $R.inh$:
@@ -217,101 +183,6 @@ Left-associativity is completely preserved despite using a right-recursive gramm
 
 ---
 
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -333,74 +204,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
 - [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Syntax-Directed Definitions and Translation Schemes]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[S-Attributed and L-Attributed SDDs]]
 
 ---
 
 ## Problems
 
 - [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
 
 ---
 

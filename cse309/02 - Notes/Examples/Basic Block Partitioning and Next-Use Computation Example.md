@@ -12,8 +12,6 @@ order: 39
 
 ---
 
----
-
 ## Problem
 
 Given the following sequence of Three-Address Code instructions:
@@ -38,8 +36,6 @@ Given the following sequence of Three-Address Code instructions:
 1. Apply the 3 leader rules to partition this program into Basic Blocks.
 2. Draw the resulting Control Flow Graph (CFG).
 3. Perform backward next-use and liveness analysis on the loop body block (instructions 3 through 12). Assume user variables `prod, i, a, b` are live at block exit, and all `t_i` temporaries are dead at block exit.
-
----
 
 ---
 
@@ -157,8 +153,6 @@ We scan backwards from instruction (12) to instruction (3).
 
 ---
 
----
-
 ## Result
 
 | Inst # | Statement | Attached Variable Status |
@@ -173,8 +167,6 @@ We scan backwards from instruction (12) to instruction (3).
 | **(10)** | `t7 = i + 1` | $t_7$: dead, none; &nbsp; $i$: dead, none |
 | **(11)** | `i = t7` | $i$: live, next-use: (12); &nbsp; $t_7$: live, next-use: (11) |
 | **(12)** | `if i <= 20 goto (3)` | $i$: live, none |
-
----
 
 ---
 

@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 22
 ---
-
 # Message Passing and IPC Models
 
-> 📖 **Reading Order:** Step 22 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 22 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Monitors and Condition Variables]] | ► **Next:** [[Classic Synchronization Solutions]]
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 Shared-memory synchronization primitives (mutexes, semaphores, monitors) assume that all communicating threads share a single, unified physical address space.
@@ -21,7 +17,6 @@ Shared-memory synchronization primitives (mutexes, semaphores, monitors) assume 
 We want a communication mechanism that operates uniformly whether communicating processes run on the same physical CPU, on a microkernel operating system with disjoint address spaces, or across different computers connected via a local network. The central obstacle is that in distributed environments or isolated address spaces, one process cannot dereference pointers or write to memory belonging to another process.
 
 ---
-
 ## Developing the Idea
 
 The operating system provides an alternative IPC architecture: **Message Passing**.
@@ -33,13 +28,11 @@ Instead of sharing memory, processes communicate by explicitly transmitting self
 The operating system kernel handles the data copying, synchronization, queuing, and network serialization transparently. Message passing unifies local inter-process communication (pipes, message queues, sockets) with distributed computing.
 
 ---
-
 ## Definition
 
 
 
 ---
-
 ## How It Works
 
 ### 2. Core Message Passing Primitives
@@ -49,9 +42,6 @@ The interface is centered around two fundamental system calls:
 - **`receive(source, &message)`**
 
 ---
-
----
-
 ### 5. UNIX IPC Mechanisms Overview
 
 Modern POSIX operating systems provide concrete message-passing primitives:
@@ -64,9 +54,6 @@ Modern POSIX operating systems provide concrete message-passing primitives:
 | **Network Sockets (`AF_INET`)** | Across distributed network hosts | Full-duplex byte stream / datagrams | Operates over TCP/IP network protocol stack. |
 
 ---
-
----
-
 ## Example
 
 Producer-Consumer implemented via message passing with mailboxes:
@@ -87,7 +74,6 @@ while (1) {
 ```
 
 ---
-
 ## Technical Details
 
 ### 3. Key Design Dimensions of Message Passing Systems
@@ -103,7 +89,6 @@ Operating systems implement message passing across three fundamental architectur
 | **Indirect (Mailboxes / Ports)** | `send(Mailbox_M, &msg);`<br/>`receive(Mailbox_M, &msg);` | Messages are sent to and received from named storage objects (mailboxes, message queues, or ports). Decouples processes: many senders and receivers can share one mailbox. |
 
 ---
-
 ### 2. Synchronization Disciplines (Blocking vs Non-blocking)
 
 Communication can be either synchronous or asynchronous:
@@ -117,7 +102,6 @@ Communication can be either synchronous or asynchronous:
 > When **both** `send()` and `receive()` are blocking, the synchronization point is called a **Rendezvous**. Sender and receiver meet at the exact moment of message handover.
 
 ---
-
 ### 3. Buffering Capacity (Queue Sizing)
 
 Every message channel has an internal buffer maintained by the operating system:
@@ -133,9 +117,6 @@ Every message channel has an internal buffer maintained by the operating system:
    - The sender never blocks.
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Zero-Sharing Memory Isolation:** Communicating processes do not share any state; memory corruption in one process cannot directly alter memory in the peer process.
@@ -145,20 +126,17 @@ Every message channel has an internal buffer maintained by the operating system:
 - **Buffering Invariant:** Systems with zero-capacity buffers require rendezvous; bounded/unbounded buffers allow producer to run ahead of consumer.
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
 
 ---
-
 ## Related Concepts
 
 - [[Semaphores and Synchronization Primitives]]
@@ -166,20 +144,17 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 - [[Dual-Mode Operation and System Calls]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Operating System Structures and Functions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 53–60: Message Passing, Addressing, Buffering, Pipes and Network Sockets).

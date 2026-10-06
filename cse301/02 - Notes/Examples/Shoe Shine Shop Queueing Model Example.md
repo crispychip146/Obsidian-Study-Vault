@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 89
+order: 100
 ---
 
 # Shoe Shine Shop Queueing Model Example
 
-> 📖 **Reading Order:** Step 89 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 100 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Jackson Networks and Tandem Queues]] | ► **Next:** [[Tandem Two-Server Queue Performance Example]]
-
 ---
-
----
-
 ## Problem
 
 A shoe shine shop has two chairs, each staffed by a dedicated server:
@@ -28,11 +24,7 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 3. Express the steady-state probabilities in terms of $P_{00}$.
 4. Find the proportion of potential customers who actually enter the shop.
 5. Derive the mean time $W$ that an entering customer spends in the shop.
-
 ---
-
----
-
 ## Given
 
 - Server 1 rate: $\mu_1$ (Chair 1)
@@ -40,11 +32,7 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 - Arrival rate: $\lambda$ (Poisson)
 - Capacity: At most 2 customers total in the shop.
 - Blocking rule: When Chair 1 is done and Chair 2 is busy, Chair 1 enters blocked state $b$.
-
 ---
-
----
-
 ## Required
 
 1. Minimal complete state space representation.
@@ -52,11 +40,7 @@ A shoe shine shop has two chairs, each staffed by a dedicated server:
 3. Closed-form stationary probabilities.
 4. Entry proportion and effective throughput $\lambda_a$.
 5. Average residence time $W$ via Little's Law.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -167,21 +151,13 @@ $$W = \frac{L}{\lambda_a} = \frac{P_{10} + P_{01} + 2(P_{11} + P_{b1})}{\lambda(
 ### Key Insight: The Cost of Blocking
 
 Notice that when $\mu_1 \gg \mu_2$ (cleaning is very fast, polishing is slow), Chair 1 spends almost all its time in the blocked state $(b, 1)$. Even though Server 1 is available and sitting idle, incoming customers are turned away at the door because the previous customer has nowhere to move. This illustrates the importance of intermediate buffers in pipeline computing architectures.
-
 ---
-
----
-
 ## Result
 
 - Feasible state space requires tracking blocked states: $S = \{(0,0), (1,0), (0,1), (1,1), (b,1)\}$.
 - Entry proportion: $P_{00} + P_{01}$.
 - Mean residence time: $W = \frac{L}{\lambda(P_{00} + P_{01})}$.
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -207,11 +183,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[PASTA Property and Inspection Paradox]]
 - [[Little's Law]]
 - [[Finite Capacity M-M-1-N Queue]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

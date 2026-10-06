@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 59
+order: 70
 ---
 
 # Wald Test Statistic
 
-> 📖 **Reading Order:** Step 59 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 70 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[p-Values and Significance]] | ► **Next:** [[Pearson's Chi-Square Goodness-of-Fit Test]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Wald Test Statistic, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -58,11 +54,7 @@ $$p = 2 \cdot \Phi(-\lvert w \rvert) = 2 \cdot \big(1 - \Phi(\lvert w \rvert)\bi
 To test $H_0: \mu_1 - \mu_2 = 0$ versus $H_1: \mu_1 - \mu_2 \ne 0$ from two independent samples $X_1, \dots, X_m$ and $Y_1, \dots, Y_n$:
 $$W = \frac{(\bar{X} - \bar{Y}) - 0}{\sqrt{\frac{S_X^2}{m} + \frac{S_Y^2}{n}}}$$
 where $S_X^2$ and $S_Y^2$ are the sample variances.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -73,11 +65,7 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
 | $W$ | Wald test statistic | Standardized score |
 | $z_{\alpha/2}$ | Normal critical threshold | $1.96$ for $\alpha = 0.05$ |
 | $p$ | Two-sided $p$-value | $(0, 1)$ |
-
 ---
-
----
-
 ## Conditions
 
 1. **Asymptotic Normality:** The estimator must satisfy:
@@ -87,11 +75,7 @@ where $S_X^2$ and $S_Y^2$ are the sample variances.
    $$\frac{\widehat{\text{se}}}{\text{se}} \xrightarrow{P} 1$$
    By Slutsky's theorem, dividing by $\widehat{\text{se}}$ preserves standard normal convergence.
 3. **Sufficient Sample Size:** $n$ must be large enough that the finite-sample distribution of $\hat{\theta}_n$ is well approximated by a Gaussian.
-
 ---
-
----
-
 ## Intuition
 
 ### Intuition
@@ -111,11 +95,7 @@ $$\lvert W \rvert \le z_{\alpha/2} \iff -z_{\alpha/2} \le \frac{\hat{\theta}_n -
 Therefore:
 $$\text{The size } \alpha \text{ Wald test rejects } H_0: \theta = \theta_0 \iff \theta_0 \notin C_n$$
 where $C_n = \hat{\theta}_n \pm z_{\alpha/2}\widehat{\text{se}}$ is the standard $1 - \alpha$ confidence interval!
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation of Asymptotic Size $\alpha$
@@ -135,11 +115,7 @@ $$\lim_{n \to \infty} P_{\theta_0}(W > z_{\alpha/2}) = 1 - \Phi(z_{\alpha/2}) = 
 
 Summing the two tails:
 $$\lim_{n \to \infty} P_{\theta_0}(\lvert W \rvert > z_{\alpha/2}) = \frac{\alpha}{2} + \frac{\alpha}{2} = \alpha \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example: Comparing Prediction Algorithms (Unpaired)
@@ -159,11 +135,7 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 5. **$p$-value:**
    $$p = 2\Phi(-1.78) = 2(0.0375) = 0.075 \quad (7.5\%)$$
    There is weak/marginal evidence, but not sufficient proof at the $\alpha = 0.05$ standard to declare one algorithm superior.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
@@ -177,11 +149,7 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 - [[p-Values and Significance]]
 - [[Normal-Based Large-Sample Confidence Interval]]
 - [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Hypothesis Testing Framework]]
@@ -199,4 +167,4 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

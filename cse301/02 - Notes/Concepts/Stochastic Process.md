@@ -2,28 +2,20 @@
 type: concept
 course: cse301
 status: active
-order: 68
+order: 79
 ---
 
 # Stochastic Process
 
-> 📖 **Reading Order:** Step 68 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 79 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]] | ► **Next:** [[Markov Chain]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 - **Overcoming Static Probability:** Classical probability models static outcomes. Real-world systems require modeling temporal dependencies, long-term trends, and sequential transitions.
 - **Handling History and Memory:** Unlike independent and identically distributed (i.i.d.) random variables—where the past has no bearing on the future—a stochastic process formalizes different degrees of historical dependence.
 - **Unified Framework:** It provides the mathematical foundation for [[Markov Chain]], Poisson processes, Brownian motion, queuing models, and time series analysis.
-
 ---
-
----
-
 ## Developing the Idea
 
 In elementary probability, a random variable gives a single probabilistic snapshot: for example, the roll of a die or the height of an individual.
@@ -34,11 +26,7 @@ However, many physical, biological, computational, and financial systems evolve 
 - The weather (sunny, rainy) observed each morning.
 
 A stochastic process is simply a sequence of random variables that models how a system changes over time under uncertainty. It is a "random variable with a clock."
-
 ---
-
----
-
 ## Definition
 
 A **stochastic process** is an indexed collection of random variables:
@@ -50,11 +38,7 @@ defined on a common probability space $(\Omega, \mathcal{F}, P)$, where $T$ is t
 - If the index set $T = \{0, 1, 2, \dots\}$, the process is a **discrete-time stochastic process**, commonly denoted $\{X_n, n \ge 0\}$.
 - If $T = [0, \infty)$, the process is a **continuous-time stochastic process**, denoted $\{X(t), t \ge 0\}$.
 - If the state space $S$ is countable (finite or countably infinite), such as $\{0, 1, 2, \dots\}$, it is a **discrete-state process**.
-
 ---
-
----
-
 ## How It Works
 
 ### How It Works
@@ -76,11 +60,7 @@ defined on a common probability space $(\Omega, \mathcal{F}, P)$, where $T$ is t
 - **Time Homogeneity:** A discrete-time process is time-homogeneous (stationary transition probabilities) if the conditional probability of moving from state $i$ to state $j$ does not depend on the absolute time index $n$:
   $$P(X_{n+1} = j \mid X_n = i) = P(X_1 = j \mid X_0 = i)$$
 - **Stationarity:** A process is strictly stationary if the joint distribution of $(X_{t_1+h}, \dots, X_{t_k+h})$ is identical to that of $(X_{t_1}, \dots, X_{t_k})$ for all shifts $h$.
-
 ---
-
----
-
 ## Example
 
 ### One-Dimensional Simple Random Walk
@@ -121,11 +101,7 @@ For concrete applications and multi-state modeling, see [[Weather Forecasting Ma
    - **Independent Process:** $P(X_{n+1} = j \mid \mathcal{F}_n) = P(X_{n+1} = j)$.
    - **Markov Process:** $P(X_{n+1} = j \mid \mathcal{F}_n) = P(X_{n+1} = j \mid X_n)$.
    - **Higher-Order Process:** Future depends on the last $k$ states $\sigma(X_n, \dots, X_{n-k+1})$ (can be converted to a first-order Markov chain by state vector augmentation).
-
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
@@ -140,50 +116,30 @@ For concrete applications and multi-state modeling, see [[Weather Forecasting Ma
 - **Confusing State Space with Time Parameter:** Mixing up the possible values $X_t \in S$ with the indices $t \in T$. For example, a process can have continuous time ($T = [0, \infty)$) but a discrete state space ($S = \{0, 1, 2, \dots\}$), as in a Poisson process.
 - **Assuming All Processes Are Independent:** Treating $X_{n+1}$ as independent of $X_n$. In almost all stochastic models, temporal correlation is the primary object of study.
 - **Overlooking Sample Paths:** Confusing the marginal distribution of $X_t$ at a single time $t$ with the joint distribution across multiple time steps.
-
 ---
-
----
-
 ## Exam Relevance
 
 In CSE301 examinations:
 - Questions frequently ask students to classify a process by its time set (discrete vs continuous) and state space (discrete vs continuous).
 - Students must identify whether a given physical or probabilistic system satisfies the Markov property or requires state augmentation to become Markovian.
 - Serves as the formal gateway to [[Markov Chain]], queuing models, and Poisson processes.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions|Random Variable]]
 - [[Conditional Probability and Independence|Conditional Probability]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Rain Prediction Two Days Ahead]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 2–3)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.1, pp. 193–194)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 2–3)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.1, pp. 193–194)

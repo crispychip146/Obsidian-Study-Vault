@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 14
 ---
-
 # Interactive Scheduling Algorithms
 
-> 📖 **Reading Order:** Step 14 of 34 | **Module 3:** CPU Scheduling  
+> 📖 **Reading Order:** Step 14 of 68 | **Module 3:** CPU Scheduling  
 > ◄ **Previous:** [[Batch Scheduling Algorithms]] | ► **Next:** [[Scheduling Metrics and Burst Estimation Formulas]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4b, 2018 Q3b, 2018 Q4b, 2018 Q4c, 2019 Q1a, 2020 Q1a, 2020 Q4c, 2021 Q2a)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -31,9 +29,6 @@ order: 14
 >    - CPU-bound jobs consume full quanta and get demoted ($Q_0 \to Q_1 \to Q_2$). Interactive jobs yield early and stay at $Q_0$. The Priority Boost period ($S=500\text{ ms}$) flushes all jobs back to $Q_0$ to prevent starvation and allow compute-bound jobs whose behavior turns interactive to reclaim low response latency.
 
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 In interactive desktop, mobile, and server environments, users interact with multiple GUI windows and terminals simultaneously. Batch algorithms (FCFS, SJF) minimize average turnaround time, but produce unacceptable response times (often seconds or minutes), making interactive systems feel completely frozen.
@@ -41,7 +36,6 @@ In interactive desktop, mobile, and server environments, users interact with mul
 We want scheduling algorithms that guarantee fast, bounded response times (under 50–100 ms) and fair CPU sharing. The central obstacle is that long-running computations will starve interactive tasks unless the operating system forcefully preempts the running process.
 
 ---
-
 ## Developing the Core Idea
 
 The foundational mechanism for interactive scheduling is **Time Slicing via Hardware Timer Interrupts**:
@@ -51,7 +45,6 @@ The foundational mechanism for interactive scheduling is **Time Slicing via Hard
 - **Lottery Scheduling:** Probabilistic proportional-share scheduling using randomized tickets.
 
 ---
-
 ## Inputs
 
 - Ready Queue of runnable processes.
@@ -59,14 +52,12 @@ The foundational mechanism for interactive scheduling is **Time Slicing via Hard
 - Priority values and feedback queue thresholds.
 
 ---
-
 ## Outputs
 
 - Scheduled process ID dispatched to the CPU.
 - Maximum response time bound $R \le (n - 1)q$ for $n$ processes.
 
 ---
-
 ## How It Works
 
 ### Overview
@@ -80,9 +71,6 @@ The dominant interactive algorithms are:
 4. **Lottery Scheduling (Proportional Share)**
 
 ---
-
----
-
 ### 1. Round Robin (RR) Scheduling
 
 ### Algorithmic Logic
@@ -122,9 +110,6 @@ CPU wastes time swapping registers       Degrades into FCFS (Convoy Effect)
   Set the time quantum $q$ such that **$80\%$ of all CPU bursts are shorter than $q$**, while keeping context switch overhead below $1\%$ of the quantum. (Modern desktop kernels set $q \approx 10\text{–}50\text{ ms}$ with context switch overhead $\approx 1\text{–}5\text{ }\mu\text{s}$).
 
 ---
-
----
-
 ### 2. Priority Scheduling (Static & Dynamic)
 
 ### Algorithmic Logic
@@ -148,9 +133,6 @@ Consider three processes: High ($H$), Medium ($M$), Low ($L$):
   Whenever a high-priority process $H$ blocks on a resource held by low-priority process $L$, process $L$ temporarily **inherits the high priority of $H$** until it releases the lock, preventing medium processes from preempting it.
 
 ---
-
----
-
 ### 3. Multilevel Feedback Queue (MLFQ)
 
 Created by Fernando Corbató (Turing Award winner), the **Multilevel Feedback Queue (MLFQ)** is the gold-standard scheduling framework adopted by modern general-purpose operating systems (Linux CFS, Windows NT, macOS).
@@ -177,9 +159,6 @@ flowchart TD
 5. **Rule 5 (Priority Boost):** After some time period $S$, move **all jobs in the system to Queue 0**. (This guarantees CPU-bound jobs will not starve, and handles processes that transition from compute-bound to interactive).
 
 ---
-
----
-
 ### 4. Lottery Scheduling (Proportional Share)
 
 - **Mechanism:** The OS allocates each process a set of discrete **lottery tickets**. Whenever a scheduling decision is made, the OS generates a pseudo-random number between $1$ and $T_{\text{total}}$. Whichever process holds the winning ticket gets the CPU!
@@ -187,9 +166,6 @@ flowchart TD
 - **Ticket Transfers:** A client can temporarily transfer its lottery tickets to a server process while waiting for an RPC, preventing server bottlenecks.
 
 ---
-
----
-
 ### Comparative Reference Table
 
 | Algorithm | Primary Strengths | Primary Weaknesses | Best Suited For |
@@ -200,9 +176,6 @@ flowchart TD
 | **Lottery Scheduling** | Mathematically simple proportional sharing, flexible ticket delegation | Non-deterministic in short time horizons | Virtual machine hypervisors, cloud multi-tenancy |
 
 ---
-
----
-
 ## Pseudocode
 
 ```c
@@ -210,13 +183,11 @@ flowchart TD
 ```
 
 ---
-
 ## Example
 
 Three processes $P_1(24\text{ ms}), P_2(3\text{ ms}), P_3(3\text{ ms})$ with quantum $q = 4\text{ ms}$. $P_1$ runs for 4 ms, then $P_2$ finishes in 3 ms, $P_3$ finishes in 3 ms, and $P_1$ finishes its remaining 20 ms in 5 slices.
 
 ---
-
 ## Complexity
 
 ### Time Complexity
@@ -226,27 +197,23 @@ $O(1)$ dispatch time using FIFO round-robin pointer rotation or multilevel array
 $O(n)$ space for priority queue headers and ready lists.
 
 ---
-
 ## Properties
 
 - **Bounded Response Guarantee:** Under Round Robin with quantum $q$ and $n$ processes, no process waits longer than $(n - 1)q$ time units for its next turn.
 - **Quantum Sensitivity:** If $q \to \infty$, RR degenerates into FCFS; if $q \to 0$, context switch overhead dominates and system throughput drops toward zero.
 
 ---
-
 ## Limitations
 
 - Priority inversion can occur when a high-priority process waits for a resource held by a low-priority process (resolved by Priority Inheritance).
 
 ---
-
 ## Common Mistakes
 
 - Misunderstanding preemption boundaries during execution.
 - Failing to verify state invariants before granting resource claims.
 
 ---
-
 ## Exam Relevance
 
 - **Next Step:** Mathematical formulas for calculating waiting times and predicting future burst times using exponential smoothing (see [[Scheduling Metrics and Burst Estimation Formulas]]).
@@ -257,29 +224,23 @@ $O(n)$ space for priority queue headers and ready lists.
   - "State the 5 rules of the Multilevel Feedback Queue."
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Scheduling Metrics and Burst Estimation Formulas]]
 - [[Comprehensive CPU Scheduling Simulation Example]]
 
 ---
-
 ## Prerequisites
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Batch Scheduling Algorithms]]
 
 ---
-
 ## Problems
 
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 25–48)

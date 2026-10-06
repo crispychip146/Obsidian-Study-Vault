@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 48
+order: 59
 ---
 
 # Problem — Sample Variance Bias and Bessel's Correction Derivation
 
-> 📖 **Reading Order:** Step 48 of 92 | **Module 7:** Parametric Inference  
+> 📖 **Reading Order:** Step 59 of 103 | **Module 7:** Parametric Inference  
 > ◄ **Previous:** [[Discrete and Continuous Parameter MLE Reference Examples]] | ► **Next:** [[Bayesian Inference]]
-
 ---
-
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) random sample from any probability distribution with finite population mean $\mu = E[X_i]$ and finite population variance $\sigma^2 = \text{Var}(X_i) > 0$.
@@ -27,61 +23,37 @@ where $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$.
 2. Determine the exact bias of $\hat{\sigma}^2_n$.
 3. Show how Bessel's correction produces an unbiased estimator $S^2$.
 4. Explain the intuitive geometric reason why the uncorrected estimator is biased downward.
-
 ---
-
----
-
 ## Given
 
 - $X_1, \dots, X_n \overset{\text{iid}}{\sim} (\mu, \sigma^2)$
 - $E[X_i] = \mu$, $\text{Var}(X_i) = \sigma^2$
 - $E[\bar{X}] = \mu$, $\text{Var}(\bar{X}) = \frac{\sigma^2}{n}$
 - $\hat{\sigma}^2_n = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$
-
 ---
-
----
-
 ## Required
 
 1. Complete algebraic proof of $E[\hat{\sigma}^2_n] = \frac{n-1}{n}\sigma^2$.
 2. Analytical expression for $\text{bias}(\hat{\sigma}^2_n)$.
 3. Proof that $E[S^2] = \sigma^2$ for $S^2 = \frac{1}{n-1}\sum (X_i - \bar{X})^2$.
 4. Conceptual degrees-of-freedom explanation.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Point Estimation]]
 - [[Maximum Likelihood Estimation]]
 - [[Bias-Variance Decomposition]]
 - Properties of Expectation and Variance
-
 ---
-
----
-
 ## Prerequisites
 
 - Linearity of expectation
 - Variance identity: $\text{Var}(Y) = E[Y^2] - (E[Y])^2 \implies E[(Y - E[Y])^2] = \text{Var}(Y)$
-
 ---
-
----
-
 ## Question Type
 
 - Mathematical Proof & Analytical Derivation
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -191,11 +163,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 - Forgetting that $\sum (X_i - \mu) = n(\bar{X} - \mu)$, which simplifies the cross-product term.
 - Believing this proof requires a Normal distribution assumption. This proof is **completely non-parametric**; it holds for any distribution with finite variance $\sigma^2$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -218,4 +186,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]

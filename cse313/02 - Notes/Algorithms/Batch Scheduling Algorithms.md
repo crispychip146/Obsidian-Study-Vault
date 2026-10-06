@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 13
 ---
-
 # Batch Scheduling Algorithms
 
-> 📖 **Reading Order:** Step 13 of 34 | **Module 3:** CPU Scheduling  
+> 📖 **Reading Order:** Step 13 of 68 | **Module 3:** CPU Scheduling  
 > ◄ **Previous:** [[CPU Scheduling Principles and Criteria]] | ► **Next:** [[Interactive Scheduling Algorithms]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2017 Q4b, 2017 Q4c, 2019 Q1a, 2019 Q1b, 2020 Q2a, 2021 Q2b, 2021 Q2c, 2021 Q2d)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -31,9 +29,6 @@ order: 13
 >    - Maximize Throughput (jobs/hr), Maximize CPU Utilization (keep CPU near 100%), Minimize Turnaround Time.
 
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 In batch processing environments (scientific clusters, payroll processing, video rendering), queues of non-interactive jobs await execution on the CPU. Earlier uniprogrammed systems executed jobs strictly in manual order, leaving the CPU idle during tape/disk transfers.
@@ -41,7 +36,6 @@ In batch processing environments (scientific clusters, payroll processing, video
 We want an algorithmic scheduling policy that minimizes average waiting time and turnaround time across all jobs. The central obstacle is the **Convoy Effect**: under simple First-Come First-Served scheduling, a single massive CPU-bound job can block dozens of tiny I/O-bound jobs behind it, sending average waiting time soaring.
 
 ---
-
 ## Developing the Core Idea
 
 To minimize average waiting time, we must schedule jobs according to their required burst lengths:
@@ -50,7 +44,6 @@ To minimize average waiting time, we must schedule jobs according to their requi
 - **SRTF (Shortest Remaining Time First):** Preemptive version of SJF; if a newly arriving job has a shorter remaining burst than the running job, the CPU is immediately preempted.
 
 ---
-
 ## Inputs
 
 - Process ID list: $\{P_1, P_2, \dots, P_n\}$
@@ -58,7 +51,6 @@ To minimize average waiting time, we must schedule jobs according to their requi
 - Burst Times: $BT = [bt_1, bt_2, \dots, bt_n]$
 
 ---
-
 ## Outputs
 
 - Gantt Chart (chronological timeline of CPU allocations).
@@ -66,7 +58,6 @@ To minimize average waiting time, we must schedule jobs according to their requi
 - Average Turnaround Time and Average Waiting Time.
 
 ---
-
 ## How It Works
 
 ### Overview
@@ -79,9 +70,6 @@ Three foundational algorithms govern batch scheduling:
 3. **Shortest Remaining Time First (SRTF)**
 
 ---
-
----
-
 ### 1. First-Come, First-Served (FCFS)
 
 ### Algorithmic Logic
@@ -106,9 +94,6 @@ The fatal weakness of FCFS is the **Convoy Effect**:
 - Average waiting time skyrockets. The short processes are "dragged like a convoy" behind the slow truck.
 
 ---
-
----
-
 ### 2. Shortest Job First (SJF)
 
 ### Algorithmic Logic
@@ -152,9 +137,6 @@ Hence, executing the shortest jobs first minimizes average waiting time! $\black
 2. **Starvation (Indefinite Blocking):** If a continuous stream of short processes enters the Ready Queue, a long process will sit waiting at the back of the queue and may **never execute**!
 
 ---
-
----
-
 ### 3. Shortest Remaining Time First (SRTF)
 
 ### Algorithmic Logic
@@ -181,9 +163,6 @@ event On_Process_Termination_Or_Block(process):
 ```
 
 ---
-
----
-
 ### Comparative Performance Summary
 
 | Feature | FCFS | Non-Preemptive SJF | Preemptive SRTF |
@@ -195,9 +174,6 @@ event On_Process_Termination_Or_Block(process):
 | **Implementation Complexity** | Trivial | Difficult (burst prediction) | Difficult (tracks remaining times) |
 
 ---
-
----
-
 ## Pseudocode
 
 ```c
@@ -205,13 +181,11 @@ event On_Process_Termination_Or_Block(process):
 ```
 
 ---
-
 ## Example
 
 Four processes $P_1(BT=8), P_2(BT=4), P_3(BT=9), P_4(BT=5)$ arriving at $t=0$. Under FCFS, average wait is $10.25$ ms; under SJF (order $P_2, P_4, P_1, P_3$), average wait drops to $7.0$ ms!
 
 ---
-
 ## Complexity
 
 ### Time Complexity
@@ -221,20 +195,17 @@ $O(n \log n)$ to maintain priority queues of ready jobs.
 $O(n)$ space for ready queue descriptors and timeline structures.
 
 ---
-
 ## Properties
 
 - **Optimality of SJF:** Shortest Job First is provably optimal for minimizing average waiting time among non-preemptive scheduling algorithms.
 - **Fairness Deficiency:** Both SJF and SRTF can cause indefinite starvation for long CPU bursts if short jobs arrive continuously.
 
 ---
-
 ## Limitations
 
 - SJF and SRTF require knowing future CPU burst lengths in advance, which cannot be known with certainty on general-purpose OSes (requiring exponential smoothing estimation).
 
 ---
-
 ## Common Mistakes
 
 1. **Equal Remaining Time During Preemption:**
@@ -243,9 +214,6 @@ $O(n)$ space for ready queue descriptors and timeline structures.
    - If processes arrive with infinitesimally smaller remaining times, the CPU can spend more time context switching than actually executing code.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** Interactive systems require time-sliced sharing where processes cannot monopolize the CPU (see [[Interactive Scheduling Algorithms]]).
@@ -253,9 +221,6 @@ $O(n)$ space for ready queue descriptors and timeline structures.
 - **Exam Testing:** Core exam material. Students are routinely required to draw Gantt charts and compute average turnaround and waiting times under FCFS, SJF, and SRTF.
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Interactive Scheduling Algorithms]]
@@ -263,19 +228,16 @@ $O(n)$ space for ready queue descriptors and timeline structures.
 - [[Comprehensive CPU Scheduling Simulation Example]]
 
 ---
-
 ## Prerequisites
 
 - [[CPU Scheduling Principles and Criteria]]
 
 ---
-
 ## Problems
 
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 13–24)

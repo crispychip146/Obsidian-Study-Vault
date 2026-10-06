@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 85
+order: 96
 ---
 
 # M-M-1 Queue
 
-> 📖 **Reading Order:** Step 85 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 96 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[PASTA Property and Inspection Paradox]] | ► **Next:** [[M-M-1 Performance Formulas]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to M-M-1 Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -36,11 +32,7 @@ An **M/M/1 Queue** is the foundational stochastic model of a single-server queue
 - **FIFO Discipline:** Customers are served strictly First-In, First-Out.
 
 Let $X(t)$ denote the number of customers in the system at time $t$. The stochastic process $\{X(t), t \ge 0\}$ is a **Continuous-Time Markov Chain (CTMC)**, specifically a **Birth-Death Process** with state space $\{0, 1, 2, \dots\}$.
-
 ---
-
----
-
 ## How It Works
 
 ### State Transition Diagram (Birth-Death Process)
@@ -154,11 +146,7 @@ A critical engineering insight from the formula $W = \frac{1}{\mu(1 - \rho)}$:
 - At $\rho = 0.95$ (95% CPU utilization): $W = \frac{20}{\mu}$ (delay is $20 \times$ service time).
 
 As utilization approaches $100\%$, waiting time does **not** increase linearly; it **hyperbolically explodes**. This is why web servers and telecommunications networks are engineered to operate at target utilizations of $60\% - 75\%$.
-
 ---
-
----
-
 ## Example
 
 ### Numerical Server Performance Calculation ($\lambda = 3, \mu = 5$)
@@ -236,11 +224,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Finite Capacity M-M-1-N Queue]]
 - [[M-M-1 Performance Formulas]]
 - [[Shoe Shine Shop Queueing Model Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Queueing Systems and Kendall Notation]]
@@ -257,4 +241,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

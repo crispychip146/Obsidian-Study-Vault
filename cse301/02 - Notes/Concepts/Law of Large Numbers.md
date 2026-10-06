@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 31
+order: 42
 ---
 
 # Law of Large Numbers
 
-> 📖 **Reading Order:** Step 31 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> 📖 **Reading Order:** Step 42 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
 > ◄ **Previous:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]] | ► **Next:** [[Central Limit Theorem]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Law of Large Numbers, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -36,11 +32,7 @@ $$\bar{X}_n = \frac{1}{n}\sum_{i=1}^n X_i$$
 There are two fundamental versions of the Law of Large Numbers, distinguished by the mode of mathematical convergence:
 1. **The Weak Law of Large Numbers (WLLN)** — Convergence in Probability.
 2. **The Strong Law of Large Numbers (SLLN)** — Almost Sure Convergence.
-
 ---
-
----
-
 ## How It Works
 
 ### WLLN vs. SLLN: What Is the Difference?
@@ -68,11 +60,7 @@ A frequent psychological error is the **Gambler's Fallacy**: believing that afte
 1. **Empirical Risk Minimization (ERM):** Justifies replacing unknown population risk $\mathbb{E}[L(f(X), Y)]$ with training error $\frac{1}{n}\sum_{i=1}^n L(f(x_i), y_i)$.
 2. **Monte Carlo Integration:** Approximates intractable multidimensional integrals $I = \int g(x) dx$ by sampling $X_i \sim \operatorname{Unif}$ and taking $\frac{1}{n}\sum g(X_i) \to I$.
 3. **Consistency of Estimators:** An estimator $\hat{\theta}_n$ is consistent if $\hat{\theta}_n \xrightarrow{P} \theta$ (see [[Estimator Consistency and Convergence]]).
-
 ---
-
----
-
 ## Example
 
 ### Empirical Convergence of Bernoulli Coin Flips
@@ -148,11 +136,7 @@ $$P\left( \lim_{n \to \infty} \bar{X}_n = \mu \right) = 1$$
 
 In formal terminology, $\bar{X}_n$ **converges almost surely (a.s.)** to $\mu$:
 $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Believing in Compensation (Gambler's Fallacy):** Believing that the sample mean converges because future flips compensate for past imbalances. The LLN works through dilution (growing denominator $n$), not compensation.
@@ -167,11 +151,7 @@ $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
 
 - **Central Limit Theorem:** While LLN tells us **where** $\bar{X}_n$ converges (to $\mu$), the [[Central Limit Theorem]] describes **how** it fluctuates around $\mu$ at rate $1/\sqrt{n}$.
 - **Markov Chains:** The Ergodic Theorem for Markov chains is the Markovian generalization of the SLLN: $\frac{1}{n}\sum_{t=1}^n f(X_t) \xrightarrow{\text{a.s.}} \sum_i \pi_i f(i)$ (see [[Stationary and Limiting Distributions in Markov Chains]]).
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Central Limit Theorem]] — Asymptotic distribution of deviations.

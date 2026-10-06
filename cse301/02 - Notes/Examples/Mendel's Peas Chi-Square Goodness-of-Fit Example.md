@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 64
+order: 75
 ---
 
 # Mendel's Peas Chi-Square Goodness-of-Fit Example
 
-> 📖 **Reading Order:** Step 64 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 75 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Benjamini-Hochberg Procedure Algorithm]] | ► **Next:** [[Toy Permutation Test Example]]
-
 ---
-
----
-
 ## Problem
 
 In his historic 1865 genetics experiments on dihybrid inheritance, Gregor Mendel crossed pea plants and predicted four progeny phenotypes based on his Law of Independent Assortment:
@@ -29,11 +25,7 @@ In an experimental trial with $n = 556$ seeds, Mendel observed the following cou
 - Wrinkled Green ($X_4$): $32$
 
 Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significance level to evaluate whether Mendel's empirical data support his genetic ratio theory.
-
 ---
-
----
-
 ## Given
 
 - Categories: $k = 4$
@@ -41,22 +33,14 @@ Conduct Pearson's $\chi^2$ goodness-of-fit test at the $\alpha = 0.05$ significa
 - Null Hypothesis:
   $$H_0: \mathbf{p} = \left(\frac{9}{16}, \frac{3}{16}, \frac{3}{16}, \frac{1}{16}\right) = (0.5625, 0.1875, 0.1875, 0.0625)$$
 - Significance level: $\alpha = 0.05$
-
 ---
-
----
-
 ## Required
 
 1. Expected count $E_j$ for each of the four categories under $H_0$.
 2. Degrees of freedom for the test.
 3. Pearson $\chi^2$ test statistic $V$.
 4. Critical value $\chi^2_{df, 0.05}$, test decision, and scientific conclusion.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -127,11 +111,7 @@ $$V = 0.0162 + 0.1013 + 0.1349 + 0.2176 = 0.4700$$
 ### Historical Note: Fisher's "Too Good to Be True" Critique
 
 In 1936, the great statistician Ronald Fisher analyzed all of Mendel's published pea experiments. Fisher noted that across all experiments, the combined $\chi^2$ values were extraordinarily small ($p \approx 0.99993$). In statistical theory, an exact $H_0$ generates $V$ uniformly distributed in tail areas. A $p$-value of $0.9999$ occurs purely by chance only once in $10,000$ times, leading Fisher to suggest that an overzealous assistant may have slightly "tidied up" the counts to match Mendel's ratios more closely than natural sampling noise would produce!
-
 ---
-
----
-
 ## Result
 
 - Pearson statistic: $V = 0.470$
@@ -139,11 +119,7 @@ In 1936, the great statistician Ronald Fisher analyzed all of Mendel's published
 - Critical value: $\chi^2_{3, 0.05} = 7.815$
 - $p$-value: $0.925$
 - Decision: Retain $H_0$. Strong empirical confirmation of Mendel's Law of Independent Assortment.
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -168,11 +144,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Pearson's Chi-Square Goodness-of-Fit Test]]
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 9
 ---
-
 # CPU Multiprogramming Utilization Formula
 
-> 📖 **Reading Order:** Step 09 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 09 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Threads and Multithreading Models]] | ► **Next:** [[Process Forking and Zombie Orphan Example]]
 
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 How much CPU computing capacity is actively utilized when $n$ independent processes are loaded concurrently into main memory, and what fraction of CPU time is wasted idling during I/O waits?
@@ -21,7 +17,6 @@ How much CPU computing capacity is actively utilized when $n$ independent proces
 We already know that processes alternate between CPU bursts and I/O bursts. When only a single process is resident in memory ($n=1$), any time it blocks on slow disk or network I/O, the expensive CPU has nothing to do and sits completely idle. The obstacle to calculating multi-process CPU utilization directly is modeling the complex concurrent scheduling interactions among multiple processes without running an intractable minute-by-minute simulation.
 
 ---
-
 ## Developing the Formula
 
 We model the system using probabilistic analysis:
@@ -32,7 +27,6 @@ We model the system using probabilistic analysis:
 5. Therefore, by the complement rule of probability, at least one process is ready to execute with probability $1 - p^n$.
 
 ---
-
 ## Formula
 
 $$\text{CPU Utilization} = 1 - p^n$$
@@ -40,7 +34,6 @@ $$\text{CPU Utilization} = 1 - p^n$$
 $$\text{CPU Idle Probability} = p^n$$
 
 ---
-
 ## Variables
 
 | Symbol | Meaning | Domain |
@@ -51,7 +44,6 @@ $$\text{CPU Idle Probability} = p^n$$
 | $1 - p^n$ | CPU Utilization (probability that CPU is actively computing) | $0 \le 1 - p^n \le 1$ |
 
 ---
-
 ## Conditions
 
 - Process I/O requests are statistically independent.
@@ -59,7 +51,6 @@ $$\text{CPU Idle Probability} = p^n$$
 - Context switching overhead is negligible relative to burst lengths.
 
 ---
-
 ## Intuition
 
 ### Model Limitations & Assumptions
@@ -69,9 +60,6 @@ While invaluable for conceptual modeling, the formula makes simplifying assumpti
 2. **Ignores Context Switching Overhead:** Context switches consume non-zero CPU time. If $n$ becomes excessively large, physical memory is exhausted, triggering paging/thrashing where the CPU spends $99\%$ of its time swapping pages to disk.
 
 ---
-
----
-
 ## Derivation
 
 1. Consider a single process running in isolation ($n = 1$). By definition, it spends fraction $p$ of its time blocked on I/O. Therefore:
@@ -87,9 +75,6 @@ While invaluable for conceptual modeling, the formula makes simplifying assumpti
 $\blacksquare$
 
 ---
-
----
-
 ## Example
 
 ### Numerical Analysis: The Power of Multiprogramming
@@ -117,9 +102,6 @@ xychart-beta
 ```
 
 ---
-
----
-
 ### Practical Hardware Design Implication: Sizing RAM
 
 This formula guides physical memory capacity planning in operating systems:
@@ -132,36 +114,29 @@ This formula guides physical memory capacity planning in operating systems:
 - **Law of Diminishing Returns:** Upgrading beyond $15$ processes produces negligible CPU gains ($< 2\%$), while consuming expensive memory and increasing scheduling overhead.
 
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing $p$ (I/O wait fraction) with CPU burst fraction ($1 - p$).
 - Assuming $n$ can be increased indefinitely to achieve 100% utilization: once memory is exhausted, paging overhead triggers **Thrashing**, crashing CPU utilization to near zero.
 
 ---
-
 ## Related Concepts
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Process Forking and Zombie Orphan Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Problems
 
 - [[Comprehensive CPU Scheduling Simulation Example]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 16–21)

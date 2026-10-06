@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 45
+order: 56
 ---
 
 # Normal Distribution Parameter MLE Derivation Example
 
-> 📖 **Reading Order:** Step 45 of 92 | **Module 7:** Parametric Inference  
+> 📖 **Reading Order:** Step 56 of 103 | **Module 7:** Parametric Inference  
 > ◄ **Previous:** [[Likelihood and Score Equations]] | ► **Next:** [[Uniform Distribution Non-Regular MLE Example]]
-
 ---
-
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a sample of size $n$ from a normal distribution with unknown mean $\mu \in (-\infty, \infty)$ and unknown variance $\sigma^2 > 0$.
@@ -21,32 +17,20 @@ Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a samp
 1. Derive the joint Maximum Likelihood Estimators $\hat{\mu}_{\text{MLE}}$ and $\hat{\sigma}^2_{\text{MLE}}$.
 2. Prove whether $\hat{\mu}_{\text{MLE}}$ is unbiased.
 3. Prove whether $\hat{\sigma}^2_{\text{MLE}}$ is unbiased, and if biased, determine the exact bias and explain Bessel's correction.
-
 ---
-
----
-
 ## Given
 
 - PDF of single observation:
   $$f(x; \mu, \sigma^2) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x - \mu)^2}{2\sigma^2}\right)$$
 - Sample mean: $\bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$
 - Population moments: $E[X_i] = \mu$, $\text{Var}(X_i) = \sigma^2$.
-
 ---
-
----
-
 ## Required
 
 1. Closed-form expressions for $\hat{\mu}$ and $\hat{\sigma}^2$.
 2. Expectation $E[\hat{\mu}]$ and bias.
 3. Expectation $E[\hat{\sigma}^2]$, bias, and unbiased alternative $S^2$.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -117,38 +101,22 @@ Since the bias is strictly negative ($-\sigma^2/n < 0$), the MLE systematically 
 To construct an unbiased estimator, multiply by the factor $\frac{n}{n-1}$ (known as **Bessel's correction**):
 $$S^2 = \frac{n}{n-1} \hat{\sigma}^2_{\text{MLE}} = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2$$
 $$E[S^2] = \frac{n}{n-1} E[\hat{\sigma}^2_{\text{MLE}}] = \frac{n}{n-1}\left(\frac{n-1}{n}\sigma^2\right) = \sigma^2 \quad (\text{unbiased})$$
-
 ---
-
----
-
 ## Result
 
 - $\hat{\mu}_{\text{MLE}} = \bar{X} = \frac{1}{n}\sum_{i=1}^n X_i$ (Unbiased)
 - $\hat{\sigma}^2_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n (X_i - \bar{X})^2$ (Biased with $\text{bias} = -\sigma^2/n$)
 - Unbiased sample variance: $S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar{X})^2$
-
 ---
-
----
-
 ## Why This Works
 
 The score equations find the coordinates $(\mu, \sigma^2)$ at which the Gaussian surface matches the empirical moments of the data. The variance MLE is biased because measuring distances from the sample mean $\bar{X}$ instead of the true population mean $\mu$ absorbs one degree of freedom, systematically reducing the sum of squared deviations.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Setting the denominator of the MLE of $\sigma^2$ to $n - 1$. The MLE is mathematically derived as having denominator $n$.
 - Differentiating with respect to $\sigma$ instead of $\sigma^2$ and getting bogged down in messy square roots (by the invariance property of MLE, estimating $\sigma^2$ directly yields the exact same answer as estimating $\sigma$).
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -160,12 +128,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Maximum Likelihood Estimation]]
 - [[Likelihood and Score Equations]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
-- [[01 - Sources/Lectures/MLE.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/MLE.pdf]]

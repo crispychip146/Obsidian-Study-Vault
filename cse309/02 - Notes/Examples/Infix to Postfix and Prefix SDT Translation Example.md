@@ -7,10 +7,8 @@ order: 8
 
 # Infix to Postfix and Prefix SDT Translation Example
 
-> 📖 **Reading Order:** Step 8 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 08 of 55 | **Module 1:** Syntax-Directed Translation  
 > ◄ **Previous:** [[Arithmetic Expression Desk Calculator SDD Example]] | ► **Next:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-
----
 
 ---
 
@@ -226,8 +224,6 @@ The outer `"+"` is correctly prepended to the entire accumulated left substring.
 | :--- | :--- | :--- |
 | **Postfix (RPN)** | At the end of productions (Postfix SDT) | **Trivially feasible** with $O(1)$ memory; matches LR shift-reduce order directly. |
 | **Prefix** | At the beginning/middle of productions | **Impossible without buffering**; requires synthesizing string buffers or traversing an explicit AST. |
-
----
 
 ---
 

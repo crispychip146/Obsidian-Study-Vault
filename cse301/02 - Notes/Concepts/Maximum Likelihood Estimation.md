@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 43
+order: 54
 ---
 
 # Maximum Likelihood Estimation
 
-> 📖 **Reading Order:** Step 43 of 92 | **Module 7:** Parametric Inference  
+> 📖 **Reading Order:** Step 54 of 103 | **Module 7:** Parametric Inference  
 > ◄ **Previous:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]] | ► **Next:** [[Likelihood and Score Equations]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum Likelihood Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -36,11 +32,7 @@ $$P(\theta \mid \text{data}) = \frac{P(\text{data} \mid \theta) P(\theta)}{P(\te
 If we assume a priori that all parameter values $\theta$ are equally likely (a flat, non-informative uniform prior $P(\theta) = c$), then:
 $$P(\theta \mid \text{data}) \propto P(\text{data} \mid \theta) = L_n(\theta)$$
 Thus, **the MLE is exactly the parameter value that maximizes the posterior probability under a uniform prior!**
-
 ---
-
----
-
 ## Definition
 
 **Maximum Likelihood Estimation (MLE)** is a method of estimating the unknown parameters $\theta \in \Theta$ of a statistical model by finding the parameter values that maximize the **likelihood function**—the probability (or probability density) of having observed the collected data under that parameter.
@@ -55,11 +47,7 @@ $$\hat{\theta}_n = \arg\max_{\theta \in \Theta} L_n(\theta)$$
 Because the natural logarithm is a strictly monotonically increasing function, maximizing $L_n(\theta)$ is mathematically equivalent to maximizing the **log-likelihood function** $\ell_n(\theta)$:
 $$\ell_n(\theta) = \log L_n(\theta) = \sum_{i=1}^n \log f(X_i; \theta)$$
 $$\hat{\theta}_n = \arg\max_{\theta \in \Theta} \ell_n(\theta)$$
-
 ---
-
----
-
 ## How It Works
 
 ### Why Use the Log-Likelihood?
@@ -127,11 +115,7 @@ Maximum likelihood optimizes for making the observed data likely; it makes zero 
   As derived in [[Problem — Sample Variance Bias and Bessel's Correction Derivation]], its expectation is:
   $$E[\hat{\sigma}^2_{\text{MLE}}] = \frac{n-1}{n}\sigma^2 = \sigma^2 - \frac{\sigma^2}{n} \ne \sigma^2$$
   The MLE systematically underestimates the variance! However, because the bias $-\sigma^2/n \to 0$ as $n \to \infty$, the MLE is **asymptotically unbiased**.
-
 ---
-
----
-
 ## Example
 
 ### Maximum Likelihood Estimator for Exponential Lifetimes
@@ -208,11 +192,7 @@ For complete worked derivations across parametric families, including boundary c
    Omitting indicator functions like $\mathbf{1}_{\{X_{(n)} \le \theta\}}$ when writing down likelihoods for bounded distributions.
 3. **Assuming the denominator for sample variance MLE is $n - 1$:**
    The MLE has denominator $n$. The estimator with denominator $n - 1$ ($S^2$) is Bessel's unbiased correction, but it is **not** the MLE.
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Exam Relevance
@@ -231,11 +211,7 @@ MLE is one of the most heavily tested topics in computing and data science exami
 - [[Uniform Distribution Non-Regular MLE Example]]
 - [[Discrete and Continuous Parameter MLE Reference Examples]]
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Likelihood and Score Equations]]
@@ -243,22 +219,14 @@ MLE is one of the most heavily tested topics in computing and data science exami
 - [[Estimator Consistency and Convergence]]
 - [[Maximum A Posteriori (MAP) Estimation]]
 - [[Bayesian Inference]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Point Estimation]]
 - [[Continuous Probability Distributions]]
 - [[Joint and Marginal Distributions]]
 - [[Likelihood and Score Equations]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
@@ -267,5 +235,5 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
-- [[01 - Sources/Lectures/MLE.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/MLE.pdf]]

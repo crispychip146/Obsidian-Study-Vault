@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 21
 ---
-
 # Monitors and Condition Variables
 
-> 📖 **Reading Order:** Step 21 of 34 | **Module 4:** Inter-Process Communication & Synchronization  
+> 📖 **Reading Order:** Step 21 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
 > ◄ **Previous:** [[Semaphores and Synchronization Primitives]] | ► **Next:** [[Message Passing and IPC Models]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q3c)**
 > **Frequency:** ⭐⭐⭐ **Critical Conceptual Trap in Concurrency Design**
 >
@@ -29,9 +27,6 @@ order: 21
 >      8. **The Rule:** Always wrap condition waits in a loop: `while (condition) cond_wait(&var);`.
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 While semaphores provide powerful synchronization, they are low-level primitives: every programmer must remember to place `wait()` before every critical section and `signal()` after every critical section in the exact right order.
@@ -39,7 +34,6 @@ While semaphores provide powerful synchronization, they are low-level primitives
 We want a high-level, language-enforced abstraction where synchronization errors are impossible or caught at compile time. The central obstacle is programmer fallibility: omitting a single `signal()` causes permanent deadlock; calling `wait()` twice freezes the program; swapping the order of two semaphore calls violates mutual exclusion.
 
 ---
-
 ## Developing the Idea
 
 To eliminate manual synchronization errors, C.A.R. Hoare and Per Brinch Hansen invented the **Monitor**: an object-oriented synchronization construct built directly into programming languages (such as Java, C#, or Ada).
@@ -49,13 +43,11 @@ A monitor encapsulates shared variables and procedures within a protected bounda
 - **Condition Variables:** When a thread inside the monitor needs to wait for a specific condition (e.g. `buffer_not_empty`), it calls `cond.wait()`, atomically releasing the monitor lock and sleeping. When another thread satisfies the condition, it calls `cond.signal()`, waking the waiting thread.
 
 ---
-
 ## Definition
 
 
 
 ---
-
 ## How It Works
 
 ### 2. Monitor Architecture & Syntax
@@ -86,9 +78,6 @@ monitor ProducerConsumerMonitor {
 ```
 
 ---
-
----
-
 ### 3. Condition Variables
 
 Monitors alone cannot handle situations where a process enters a monitor procedure, finds that a condition is not met (e.g., buffer is full), and must wait. If it simply halted, it would hold the monitor lock, blocking all other processes from entering to change the condition!
@@ -104,9 +93,6 @@ A condition variable is a synchronization object (not an integer counter) with t
    - **Crucial Distinction from Semaphores:** If no process is currently waiting on `condition_var`, the signal is **silently lost and discarded**. Condition variables have **no memory** and do not accumulate counts.
 
 ---
-
----
-
 ## Example
 
 Java Monitor syntax for a thread-safe bank account:
@@ -129,7 +115,6 @@ public class BankAccount {
 ```
 
 ---
-
 ## Technical Details
 
 ### 4. Signaling Disciplines: Hoare vs Mesa Semantics
@@ -156,9 +141,6 @@ When process $P$ executes `signal(c)` inside a monitor, waking up sleeping proce
   ```
 
 ---
-
----
-
 ### 6. Comprehensive Comparison: Semaphores vs Monitors
 
 | Feature | Semaphore | Monitor |
@@ -171,9 +153,6 @@ When process $P$ executes `signal(c)` inside a monitor, waking up sleeping proce
 | **Supported Systems** | C, OS kernels, POSIX systems | Java (`synchronized`), C#, Concurrent Pascal |
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Mesa vs. Hoare Signaling Semantics:**
@@ -182,20 +161,17 @@ When process $P$ executes `signal(c)` inside a monitor, waking up sleeping proce
 - **Compile-Time Safety:** Programmers cannot accidentally bypass mutual exclusion when accessing monitor variables, drastically reducing synchronization bugs.
 
 ---
-
 ## Common Mistakes
 
 - Assuming user mode code can execute privileged instructions directly without a system call trap.
 - Overlooking race conditions in shared variables without explicit synchronization.
 
 ---
-
 ## Exam Relevance
 
 Frequently examined through conceptual comparison questions, trace diagrams, and architectural trade-off evaluations.
 
 ---
-
 ## Related Concepts
 
 - [[Classic Synchronization Solutions]]
@@ -203,20 +179,17 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 - [[Producer-Consumer Semaphore Implementation Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Semaphores and Synchronization Primitives]]
 - [[Race Conditions and Critical-Section Problem]]
 
 ---
-
 ## Problems
 
 - [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
 
 ---
-
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 43–52: Monitors, Condition Variables, Hoare vs Mesa Semantics).

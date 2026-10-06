@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 52
+order: 63
 ---
 
 # Beta-Binomial Conjugate Updating Formula
 
-> 📖 **Reading Order:** Step 52 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 63 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Credible Intervals]] | ► **Next:** [[Normal-Normal Conjugate Updating Formula]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Beta-Binomial Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -52,11 +48,7 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
    $$w = \frac{n}{n + \alpha + \beta}, \quad 1 - w = \frac{\alpha + \beta}{n + \alpha + \beta}, \quad p_0 = \frac{\alpha}{\alpha + \beta} = E_{\text{prior}}[p], \quad \bar{X} = \frac{s}{n}$$
 3. **MAP Estimator (Posterior Mode for $\alpha_{\text{post}}, \beta_{\text{post}} > 1$):**
    $$\hat{p}_{\text{MAP}} = \frac{\alpha + s - 1}{\alpha + \beta + n - 2}$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning | Interpretation |
@@ -67,21 +59,13 @@ $$\alpha_{\text{post}} = \alpha + s, \quad \beta_{\text{post}} = \beta + n - s$$
 | $s$ | Number of observed successes | Sample evidence |
 | $p_0$ | Prior expectation $\frac{\alpha}{\alpha + \beta}$ | Anchor point of prior belief |
 | $w$ | Weight on sample data $\frac{n}{n + \alpha + \beta}$ | Relative strength of data vs. prior |
-
 ---
-
----
-
 ## Conditions
 
 1. The data generating process must be conditionally independent $\text{Bernoulli}(p)$ or $\text{Binomial}(n, p)$ given $p$.
 2. The hyperparameters must satisfy $\alpha > 0$ and $\beta > 0$.
 3. When $\alpha = \beta = 1$, the prior is the standard continuous $\text{Uniform}(0, 1)$ distribution.
-
 ---
-
----
-
 ## Intuition
 
 ### Intuition: Pseudocounts and Shrinkage
@@ -92,11 +76,7 @@ The Beta hyperparameters $\alpha$ and $\beta$ act as **fictitious prior observat
 - **Shrinkage toward the prior:**
   - When sample size $n$ is small ($n \ll \alpha + \beta$), $w \approx 0$, and the estimate shrinks heavily toward the prior belief $p_0$.
   - When sample size $n$ is very large ($n \gg \alpha + \beta$), $w \to 1$, and the posterior mean converges to the sample mean $\bar{X} = s/n$, washing out the prior.
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation
@@ -121,11 +101,7 @@ $$E[p \mid \mathbf{X}] = \frac{\alpha + s}{\alpha + \beta + n} = \frac{s}{\alpha
 Multiply and divide the first term by $n$, and the second term by $(\alpha + \beta)$:
 $$= \left(\frac{n}{\alpha + \beta + n}\right)\left(\frac{s}{n}\right) + \left(\frac{\alpha + \beta}{\alpha + \beta + n}\right)\left(\frac{\alpha}{\alpha + \beta}\right)$$
 $$= w \bar{X} + (1 - w) p_0 \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example: Laplace's Rule of Succession
@@ -140,33 +116,21 @@ What is the posterior probability that the event will happen again on the next t
    $$\hat{p}_{\text{Bayes}} = \frac{n + 1}{(n + 1) + 1} = \frac{n + 1}{n + 2}$$
 
 This is the historic **Laplace's Rule of Succession** (e.g., if the sun has risen $n$ days in a row, the probability it rises tomorrow is $\frac{n+1}{n+2}$, avoiding the absurd MLE claim of $100\%$ certainty when $n = 1$).
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
 
 - Setting $\alpha = 0, \beta = 0$ as a prior. The prior must have $\alpha > 0, \beta > 0$ to be proper. The Haldane prior $\text{Beta}(0, 0)$ is improper.
 - Forgetting to subtract $s$ from $n$ when calculating the second parameter: the second parameter is $\beta + (n - s)$, not $\beta + n$.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Bayesian Inference]]
 - [[Maximum A Posteriori (MAP) Estimation]]
 - [[Normal-Normal Conjugate Updating Formula]]
 - [[Bernoulli Bayesian Inference with Beta Prior Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Bayesian Inference]]
@@ -183,4 +147,4 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

@@ -12,8 +12,6 @@ order: 18
 
 ---
 
----
-
 ## Problem
 
 Consider the classic searching and filtering loop found in systems programming:
@@ -29,8 +27,6 @@ Look at the array boundary: `a` is allocated with 10 elements (indices $0$ to $9
 - If `i` reaches $10$, the condition `i < 10` evaluates to **false**.
 - If the compiler did **not** short-circuit and eagerly evaluated `a[i] > max`, the CPU would attempt to read `a[10]`. That is a **buffer over-read**! It might read garbage memory, or if `a` is at the end of a memory page, trigger a fatal hardware Segmentation Fault (`SIGSEGV`).
 - Because short-circuiting mandates that the second operand of `&&` must never execute if the first operand is false, the compiler's generated Three-Address Code **must** jump past the memory load whenever `i < 10` fails!
-
----
 
 ---
 
@@ -223,8 +219,6 @@ To overcome the reordering defect of Triples, compilers use **Indirect Triples**
 - An auxiliary **Pointer Array** lists the order of execution:
   $$\text{Execution Order: } [p_0, p_1, p_2, \dots]$$
 - If the compiler wants to reorder instructions, it simply swaps pointers in the execution array! No triple arguments need to be updated.
-
----
 
 ---
 

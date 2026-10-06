@@ -16,12 +16,11 @@ This intelligence map analyzes recurring patterns, high-frequency question types
 Across all five exam years analyzed (2017, 2018, 2019, 2020, 2021), the first four questions consistently draw from the first five core modules:
 
 ```mermaid
-pie title Question Distribution Across Exams (Q1 - Q4)
-    "CPU Scheduling & Workloads" : 26
-    "Deadlock Avoidance (Banker's) & Detection" : 24
-    "Concurrency, Peterson's & Dining Philosophers" : 24
-    "Processes, Fork Trees & Threads" : 16
-    "Kernel Architecture, Booting & Syscalls" : 10
+xychart-beta
+    title "Question Distribution Across Exams (Q1 - Q4) [%]"
+    x-axis ["CPU Scheduling", "Deadlock & Banker's", "Concurrency", "Processes & Threads", "Kernel & Syscalls"]
+    y-axis "Percentage (%)" 0 --> 30
+    bar [26, 24, 24, 16, 10]
 ```
 
 ---

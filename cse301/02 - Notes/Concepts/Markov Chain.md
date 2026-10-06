@@ -2,28 +2,20 @@
 type: concept
 course: cse301
 status: active
-order: 69
+order: 80
 ---
 
 # Markov Chain
 
-> 📖 **Reading Order:** Step 69 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 80 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Stochastic Process]] | ► **Next:** [[Classification of States in Markov Chains]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 1. **Tractable Modeling of Sequential Dependency:** Modeling systems where full memory creates an exponential state explosion ($|S|^n$). The Markov property collapses this history into the current state alone.
 2. **Foundation for Algorithmic Analysis:** Markov chains provide the bedrock for PageRank, Markov Chain Monte Carlo (MCMC), randomized algorithms, queuing systems, speech recognition (HMMs), and reinforcement learning (MDPs).
 3. **Analytical Solvability:** By reducing temporal dynamics to linear algebraic operations on the transition matrix $P$, long-run equilibria and multi-step behaviors can be computed using matrix powers and eigenvectors.
-
 ---
-
----
-
 ## Developing the Idea
 
 When modeling a system that evolves over time, two extremes exist:
@@ -35,11 +27,7 @@ If you know where the system is *right now* ($X_n = i$), the exact historical tr
 
 In plain terms:
 > *"The future depends on the past only through the present."*
-
 ---
-
----
-
 ## Definition
 
 A **discrete-time Markov chain** is a discrete-time [[Stochastic Process]] $\{X_n, n = 0, 1, 2, \dots\}$ taking values in a finite or countable state space $S \subseteq \{0, 1, 2, \dots\}$ such that for all time steps $n \ge 0$ and all states $i_0, i_1, \dots, i_{n-1}, i, j \in S$:
@@ -63,11 +51,7 @@ P_{10} & P_{11} & P_{12} & \cdots \\
 P_{i0} & P_{i1} & P_{i2} & \cdots \\
 \vdots & \vdots & \vdots & \ddots
 \end{pmatrix}$$
-
 ---
-
----
-
 ## How It Works
 
 ### How It Works
@@ -90,11 +74,7 @@ P_{i0} & P_{i1} & P_{i2} & \cdots \\
 - **Markov Property Holds for Multi-Step Horizons:**
   $$P(X_{n+m} = j \mid X_n = i, X_{n-1} = i_{n-1}, \dots, X_0 = i_0) = P(X_{n+m} = j \mid X_n = i) = P_{ij}^m$$
 - **Closure under Matrix Multiplication:** Multi-step transitions are given directly by powers of $P$ via [[Chapman-Kolmogorov Equations]].
-
 ---
-
----
-
 ## Example
 
 ### 1. Two-State Weather Model
@@ -143,11 +123,7 @@ $$P(X_{n+1} = j \mid X_n, X_{n-1}, \dots, X_{n-k+1})$$
 it can always be reformulated as a standard first-order Markov chain by expanding the state space into $k$-tuples:
 $$Y_n = (X_n, X_{n-1}, \dots, X_{n-k+1})$$
 See [[Higher-Order State Weather Prediction Example]] for a concrete application.
-
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
@@ -163,11 +139,7 @@ See [[Higher-Order State Weather Prediction Example]] for a concrete application
 - **Assuming Symmetry ($P_{ij} = P_{ji}$):** Transition probabilities are directed. The probability of transitioning from rain to sun is rarely equal to the probability of transitioning from sun to rain.
 - **Prematurely Declaring a Non-Markov Process Impossible:** Forgetting that non-Markovian processes with finite historical dependence can be converted into Markov chains via state augmentation.
 - **Misapplying the Markov Property:** Forgetting that conditioning on the *present* state is required to separate past and future. Unconditioned, $X_{n+1}$ and $X_{n-1}$ are usually dependent.
-
 ---
-
----
-
 ## Exam Relevance
 
 In CSE301 examinations:
@@ -175,11 +147,7 @@ In CSE301 examinations:
 2. **Validating Stochastic Matrices:** Verifying non-negativity and row-sum normalization.
 3. **Joint Path Probability Calculations:** Computing $P(X_0 = i_0, X_1 = i_1, \dots, X_n = i_n)$ by multiplying transition entries via [[Chapman-Kolmogorov Equations]].
 4. **Higher-Order State Expansion:** Converting 2-day or multi-day weather dependencies into a valid first-order transition matrix (see [[Higher-Order State Weather Prediction Example]]).
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Stochastic Process]]
@@ -187,32 +155,20 @@ In CSE301 examinations:
 - [[Stationary and Limiting Distributions in Markov Chains]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Gambler's Ruin Formula]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Stochastic Process]]
 - [[Conditional Probability and Independence|Conditional Probability]]
 - [[Random Variables and Probability Distributions|Random Variable]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Four-Day Weather Forecast]]
 - [[Problem — Rain Prediction Two Days Ahead]]
 - [[Problem — State Communication and Irreducibility Verification]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 2–7)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.1, pp. 193–197)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 2–7)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.1, pp. 193–197)

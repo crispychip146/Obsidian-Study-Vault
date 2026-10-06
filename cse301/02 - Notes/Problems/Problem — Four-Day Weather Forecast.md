@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 78
+order: 89
 ---
 
 # Problem — Four-Day Weather Forecast
 
-> 📖 **Reading Order:** Step 78 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 89 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Problem — Patty and Max Gambler's Ruin]] | ► **Next:** [[Problem — Rain Prediction Two Days Ahead]]
-
 ---
-
----
-
 ## Problem
 
 Consider a two-state [[Markov Chain]] modeling weather, with states $0$ (Rain) and $1$ (No Rain). The one-step transition probability matrix is:
@@ -26,59 +22,35 @@ $$P = \begin{pmatrix}
 1. If it is raining today ($X_0 = 0$), what is the probability that it rains two days from now?
 2. What is the probability that it rains four days from now?
 3. Calculate the limiting probability of rain $\pi_0 = \lim_{n \to \infty} P_{00}^n$, and explain why $P_{00}^4$ is already extremely close to this value.
-
 ---
-
----
-
 ## Given
 
 - State space $S = \{0, 1\}$ ($0 = \text{Rain}$, $1 = \text{No Rain}$)
 - Transition probability matrix:
   $$P = \begin{pmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{pmatrix}$$
 - Starting state: $X_0 = 0$
-
 ---
-
----
-
 ## Required
 
 1. Two-step probability: $P_{00}^{(2)}$
 2. Four-step probability: $P_{00}^{(4)}$
 3. Limiting probability $\pi_0$ and analysis of rate of convergence.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
-
 ---
-
----
-
 ## Question Type
 
 Numerical / Multi-step Matrix Power
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -182,11 +154,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 - **Incorrect Element Multiplication:** Computing $(P_{00})^4 = (0.7)^4 = 0.2401$ instead of matrix exponentiation.
 - **Transposed Dot Product:** Multiplying column 0 by row 0 instead of row 0 by column 0.
 - **Arithmetic Inaccuracy in Intermediate Steps:** Rounding intermediate decimals excessively (e.g., rounding $0.61$ to $0.6$), which compounds into large errors in $P^4$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -209,5 +177,5 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 10)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.11, p. 212)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 10)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.11, p. 212)

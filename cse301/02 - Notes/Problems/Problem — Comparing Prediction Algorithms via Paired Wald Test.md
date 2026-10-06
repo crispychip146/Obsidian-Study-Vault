@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 66
+order: 77
 ---
 
 # Problem — Comparing Prediction Algorithms via Paired Wald Test
 
-> 📖 **Reading Order:** Step 66 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 77 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Toy Permutation Test Example]] | ► **Next:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
-
 ---
-
----
-
 ## Problem
 
 A machine learning team compares two image classification models, Algorithm 1 and Algorithm 2.
@@ -36,11 +32,7 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 3. Define the paired difference variable $D_i = X_i - Y_i$. Calculate the sample mean difference $\bar{D}$ and the sample variance $S_D^2$.
 4. Compute the paired Wald test statistic $W$ and its two-sided $p$-value.
 5. State your decision at significance level $\alpha = 0.05$ and interpret the scientific conclusion.
-
 ---
-
----
-
 ## Given
 
 - Sample size: $n = 500$ paired observations
@@ -52,11 +44,7 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 - Error counts:
   - Algorithm 1 errors: $\sum X_i = 15 + 35 = 50 \implies \hat{p}_1 = \frac{50}{500} = 0.10$
   - Algorithm 2 errors: $\sum Y_i = 40 + 35 = 75 \implies \hat{p}_2 = \frac{75}{500} = 0.15$
-
 ---
-
----
-
 ## Required
 
 1. Explanation of why unpaired test fails.
@@ -64,22 +52,14 @@ The test results are summarized in the following $2 \times 2$ contingency table:
 3. $\bar{D}$, $S_D^2$, and $\widehat{\text{se}}(\bar{D})$.
 4. Paired Wald statistic $W$ and $p$-value.
 5. Final statistical verdict at $\alpha = 0.05$.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Wald Test Statistic]]
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 - Paired vs. Unpaired experimental designs
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]
@@ -211,4 +191,4 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

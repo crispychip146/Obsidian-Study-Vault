@@ -8,9 +8,7 @@ order: 55
 # Problem — Quicksort Loop Induction Variable Strength Reduction
 
 > 📖 **Reading Order:** Step 55 of 55 | **Module 6:** Machine-Independent Optimization  
-> ◄ **Previous:** [[Quicksort Partition Loop Complete Optimization Example]] | ► **Next:** [[cse309/00 - Course Hub|Course Hub]]
-
----
+> ◄ **Previous:** [[Quicksort Partition Loop Complete Optimization Example]] | ► **Next:** *End of Course*
 
 ---
 
@@ -34,8 +32,6 @@ Assume $i$ is initialized before the loop to $0$ ($i = 0$), and array elements a
 2. Apply **Strength Reduction** to replace the multiplication $8 * i$ with an addition. Show the code to be inserted into the loop pre-header and the updated loop body.
 3. Apply **Induction Variable Elimination** to eliminate the basic induction variable $i$ from the loop entirely, transforming the termination condition.
 4. Compare the instruction count and hardware cycle savings per iteration before and after optimization.
-
----
 
 ---
 

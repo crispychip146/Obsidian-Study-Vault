@@ -88,9 +88,9 @@ flowchart TD
 
 ### Pathway 0: Foundations of Probability, Conditioning, and Limit Theorems
 1. `[[Combinatorics and Counting Principles]]` + `[[Probability Axioms and Naive Probability]]` $\to$ `[[Inclusion-Exclusion Principle]]` (Naive probability, sample spaces, and union bounds).
-2. `[[Random Variables and Probability Distributions]]` $\to$ `[[Discrete Probability Distributions]]` & `[[Continuous Probability Distributions]]` (Distribution stories, PMF/PDF, moments).
+2. `[[Random Variables and Probability Distributions]]` $\to$ `[[Discrete Probability Distributions]]`, `[[Multinomial Distribution]]`, `[[Continuous Probability Distributions]]`, `[[Cauchy and Student-t Distributions]]`, and `[[St. Petersburg Paradox]]` (Distribution stories, PMF/PDF, moments, heavy tails, utility).
 3. `[[Joint and Marginal Distributions]]` $\to$ `[[Covariance and Correlation]]` (Multivariate interactions, independence vs uncorrelatedness).
-4. `[[Conditional Probability and Independence]]` $\to$ `[[Law of Total Probability and Bayes' Rule]]` (Conditioning and belief revision).
+4. `[[Conditional Probability and Independence]]` $\to$ `[[Law of Total Probability and Bayes' Rule]]` & `[[Simpson's Paradox]]` (Conditioning, belief revision, and confounding reversal).
 5. `[[Conditional Expectation]]` $\to$ `[[Adam's Law (Law of Total Expectation)]]` & `[[Eve's Law (Law of Total Variance)]]` (Tower property, compound sums, ANOVA decomposition).
 6. `[[Markov Inequality]]` $\to$ `[[Chebyshev Inequality]]` $\to$ `[[Chernoff Bound]]` (Moment-based concentration inequalities).
 7. `[[Moment Generating Functions]]` $\to$ `[[Central Limit Theorem]]` & `[[Law of Large Numbers]]` (Asymptotic convergence in distribution and probability).
@@ -120,7 +120,7 @@ flowchart TD
 1. Decision Theory $\to$ `[[Hypothesis Testing Framework]]` (Null/alternative, Type I/II errors, power function, size).
 2. `[[Hypothesis Testing Framework]]` $\to$ `[[p-Values and Significance]]` (Sliding critical threshold, null distribution $P \sim \text{Uniform}(0, 1)$).
 3. `[[Maximum Likelihood Estimation]]` + `[[p-Values and Significance]]` $\to$ `[[Wald Test Statistic]]` (Asymptotic standard normal test).
-4. `[[Discrete Probability Distributions|Multinomial Distribution]]` $\to$ `[[Pearson's Chi-Square Goodness-of-Fit Test]]` (Degrees of freedom $k - 1$, Mendel's peas).
+4. `[[Multinomial Distribution]]` $\to$ `[[Pearson's Chi-Square Goodness-of-Fit Test]]` (Degrees of freedom $k - 1$, Mendel's peas).
 5. Non-parametric Exchangeability $\to$ `[[Permutation Test Algorithm]]` (Exact permutation distribution and Monte Carlo test).
 6. Multiplicity Dilemma $\to$ `[[Multiple Testing and False Discovery Rate]]` (FWER inflation vs. False Discovery Rate).
 7. `[[Multiple Testing and False Discovery Rate]]` $\to$ `[[Benjamini-Hochberg Procedure Algorithm]]` (Adaptive linear rank thresholding).

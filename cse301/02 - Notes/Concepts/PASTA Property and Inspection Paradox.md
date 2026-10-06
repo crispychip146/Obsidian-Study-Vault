@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 84
+order: 95
 ---
 
 # PASTA Property and Inspection Paradox
 
-> 📖 **Reading Order:** Step 84 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 95 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Little's Law]] | ► **Next:** [[M-M-1 Queue]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to PASTA Property and Inspection Paradox, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -39,11 +35,7 @@ In queueing systems, the state of the system can look vastly different depending
 3. **Departure-Seen Probability ($d_n$):**
    The long-run proportion of departing customers who leave behind exactly $n$ customers in the system upon their departure:
    $$d_n = \lim_{t \to \infty} \frac{\text{number of departures in } [0, t] \text{ that leave } n \text{ customers}}{\text{total departures in } [0, t]}$$
-
 ---
-
----
-
 ## How It Works
 
 ### Proposition 1: Arrivals and Departures See the Same Rates ($a_n = d_n$)
@@ -92,11 +84,7 @@ PASTA provides the magical bridge that allows queueing theorists to solve comple
 - But system managers care about the **customer experience $a_n$** (e.g., what percentage of callers find the phone line busy and get dropped?).
 - PASTA guarantees that under Poisson arrivals, customer experience matches continuous time averages:
   $$P(\text{customer is blocked}) = a_N = P_N$$
-
 ---
-
----
-
 ## Example
 
 ### Counterexample: Regular Deterministic Arrivals ($D/D/1$) Demonstrating Failure of PASTA
@@ -174,11 +162,7 @@ In CSE301 examinations:
 - [[Finite Capacity M-M-1-N Queue]]
 - [[Little's Law]]
 - [[Shoe Shine Shop Queueing Model Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Discrete Probability Distributions]]
@@ -195,4 +179,4 @@ In CSE301 examinations:
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

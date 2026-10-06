@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 16
 ---
-
 # Comprehensive CPU Scheduling Simulation Example
 
-> 📖 **Reading Order:** Step 16 of 34 | **Module 3:** CPU Scheduling  
+> 📖 **Reading Order:** Step 16 of 68 | **Module 3:** CPU Scheduling  
 > ◄ **Previous:** [[Scheduling Metrics and Burst Estimation Formulas]] | ► **Next:** [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
----
-
 ## Problem
 
 Consider a workload of 4 processes arriving at different times with varying CPU burst durations:
@@ -33,27 +29,21 @@ Simulate execution, construct ASCII Gantt charts, and compute individual and ave
 4. **Round Robin (RR with Time Quantum $q = 4\text{ ms}$)**
 
 ---
-
----
-
 ## Given
 
 - System state matrices, resource vectors, and process workload parameters as specified in problem setup.
 
 ---
-
 ## Required
 
 - Determine step-by-step state transitions, verify system invariants, and calculate resulting performance metrics.
 
 ---
-
 ## Understanding the Problem and Choosing the Method
 
 Analyze initial conditions, verify prerequisite invariants, track state changes iteratively, and check final consistency against theoretical rules.
 
 ---
-
 ## Solution
 
 ### 1. First-Come, First-Served (FCFS)
@@ -80,9 +70,6 @@ $$\text{Average Turnaround Time} = \frac{8 + 11 + 19 + 23}{4} = \frac{61}{4} = \
 $$\text{Average Waiting Time} = \frac{0 + 7 + 10 + 18}{4} = \frac{35}{4} = \mathbf{8.75\text{ ms}}$$
 
 ---
-
----
-
 ### 2. Shortest Job First (SJF — Non-Preemptive)
 
 ### Execution Trace & Gantt Chart:
@@ -109,9 +96,6 @@ $$\text{Average Turnaround Time} = \frac{8 + 11 + 24 + 14}{4} = \frac{57}{4} = \
 $$\text{Average Waiting Time} = \frac{0 + 7 + 15 + 9}{4} = \frac{31}{4} = \mathbf{7.75\text{ ms}}$$
 
 ---
-
----
-
 ### 3. Shortest Remaining Time First (SRTF — Preemptive)
 
 ### Execution Trace & Gantt Chart:
@@ -153,9 +137,6 @@ $$\text{Average Turnaround Time} = \frac{17 + 4 + 24 + 7}{4} = \frac{52}{4} = \m
 $$\text{Average Waiting Time} = \frac{9 + 0 + 15 + 2}{4} = \frac{26}{4} = \mathbf{6.50\text{ ms}}$$
 
 ---
-
----
-
 ### 4. Round Robin (RR with Quantum $q = 4\text{ ms}$)
 
 ### Execution Trace & Gantt Chart:
@@ -193,9 +174,6 @@ $$\text{Average Waiting Time} = \frac{12 + 3 + 15 + 17}{4} = \frac{47}{4} = \mat
 $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathbf{4.50\text{ ms}}$$
 
 ---
-
----
-
 ## Result
 
 | Metric | FCFS | SJF (Non-Preemptive) | SRTF (Preemptive) | Round Robin ($q=4$) |
@@ -210,28 +188,22 @@ $$\text{Average Response Time} = \frac{0 + 3 + 6 + 9}{4} = \frac{18}{4} = \mathb
 - **Round Robin** has a higher turnaround time ($18.25\text{ ms}$) because long jobs are interleaved and prolonged, but it guarantees that **every process gets its first response quickly** (average response time drops to $4.50\text{ ms}$), providing the smooth responsiveness human users require!
 
 ---
-
----
-
 ## Why This Works
 
 Each state transformation follows the operational semantics of kernel execution, ensuring mutual exclusion, safe scheduling, or deadlock freedom.
 
 ---
-
 ## Common Mistakes
 
 - Overlooking state changes between execution phases.
 - Incorrectly calculating intermediate residual capacities or queue offsets.
 
 ---
-
 ## General Method
 
 Extract the generic algorithmic pattern: initialize tracking vectors, simulate execution step by step, verify invariant conditions, and calculate final summary metrics.
 
 ---
-
 ## Related Concepts
 
 - [[Batch Scheduling Algorithms]] — Formal specifications of FCFS, SJF, and SRTF.
@@ -239,9 +211,6 @@ Extract the generic algorithmic pattern: initialize tracking vectors, simulate e
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]] — Practice exam problem.
 
 ---
-
----
-
 ## Sources
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)

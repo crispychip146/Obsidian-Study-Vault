@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 83
+order: 94
 ---
 
 # Little's Law
 
-> 📖 **Reading Order:** Step 83 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 94 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Queueing Systems and Kendall Notation]] | ► **Next:** [[PASTA Property and Inspection Paradox]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Little's Law, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -47,11 +43,7 @@ where:
    where $E[S] = 1/\mu$ is the mean service time.
 3. **Decomposition:**
    $$W = W_Q + \frac{1}{\mu} \iff L = L_Q + \frac{\lambda_a}{\mu}$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning | Dimensions |
@@ -63,11 +55,7 @@ where:
 | $W_Q$ | Expected waiting time in queue | Time |
 | $\mu$ | Server processing rate | Customers / Time |
 | $\rho$ | Server utilization | Dimensionless $\in [0, 1)$ |
-
 ---
-
----
-
 ## Conditions
 
 - Random variables must possess finite first and second moments (well-defined expectations).
@@ -90,11 +78,7 @@ The only requirements are:
 1. The system must reach a stationary stochastic steady state.
 2. Customers must eventually depart (no customers trapped forever).
 3. The limits defining long-run averages must exist.
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation via the Fundamental Cost Identity
@@ -144,11 +128,7 @@ Choose the cost rule: **"Every customer pays \$1 per unit of time while in servi
 - $r(t) = 1$ if the server is busy, and $0$ if idle $\implies R = P(\text{server is busy}) = \rho$
 - Substituting into $R = \lambda_a G$:
   $$\rho = \lambda_a \left(\frac{1}{\mu}\right) = \mathbf{\frac{\lambda_a}{\mu}} \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example: Fast-Food Drive-Through
@@ -159,33 +139,21 @@ On average, a car spends $W = 3$ minutes from entering the driveway until leavin
 By Little's Law:
 $$L = \lambda W = 2 \text{ cars/min} \times 3 \text{ min} = 6 \text{ cars}$$
 At any random instant, an overhead drone will count an average of **6 cars** in the drive-through lane.
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
 
 - **Unit mismatch:** Mixing hours and minutes (e.g., $\lambda$ in customers/hour and $W$ in minutes). Always convert to identical time units!
 - **Gross vs. Effective Arrivals:** Using gross arrival rate $\lambda$ instead of effective arrival rate $\lambda_a = \lambda(1 - P_{\text{blocked}})$ in finite capacity loss systems.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Queueing Systems and Kendall Notation]]
 - [[M-M-1 Queue]]
 - [[Finite Capacity M-M-1-N Queue]]
 - [[M-M-1 Performance Formulas]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Queueing Systems and Kendall Notation]]
@@ -202,4 +170,4 @@ At any random instant, an overhead drone will count an average of **6 cars** in 
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

@@ -12,8 +12,6 @@ order: 41
 
 ---
 
----
-
 ## Problem
 
 Given the following intermediate code fragment:
@@ -37,8 +35,6 @@ Given the following intermediate code fragment:
 1. Identify all Leaders in this program using the 3 formal rules, stating which rule applies to each leader.
 2. Partition the code into Basic Blocks and construct the Control Flow Graph (CFG).
 3. Compute the backward liveness and next-use information for each statement in the block containing statements `(5), (6), (7)`. Assume variables `p, q, w, x, y` are live at exit of this block.
-
----
 
 ---
 

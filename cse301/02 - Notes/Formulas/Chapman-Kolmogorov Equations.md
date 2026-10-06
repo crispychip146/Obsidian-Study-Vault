@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 72
+order: 83
 ---
 
 # Chapman-Kolmogorov Equations
 
-> 📖 **Reading Order:** Step 72 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 83 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Stationary and Limiting Distributions in Markov Chains]] | ► **Next:** [[Gambler's Ruin Formula]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Chapman-Kolmogorov Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -45,11 +41,7 @@ where $\cdot$ denotes standard matrix multiplication.
 By mathematical induction, this implies:
 
 $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -60,11 +52,7 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 | $k$ | Intermediate state at step $n$ (summed over the entire state space $S$) |
 | $P^{(n)}$ | $n$-step transition probability matrix |
 | $P$ | One-step transition probability matrix $P = P^{(1)}$ |
-
 ---
-
----
-
 ## Conditions
 
 1. **Discrete-Time Markov Process:** The underlying process $\{X_n, n \ge 0\}$ must satisfy the Markov property:
@@ -72,11 +60,7 @@ $$P^{(n)} = P^n = \underbrace{P \cdot P \cdots P}_{n \text{ times}}$$
 2. **Time Homogeneity:** The transition probabilities $P_{ij}$ are stationary (do not depend on the absolute time index $k$):
    $$P(X_{n+k} = j \mid X_k = i) = P(X_n = j \mid X_0 = i)$$
 3. **Valid State Space:** The intermediate states $k$ must form a partition of the state space $S$.
-
 ---
-
----
-
 ## Intuition
 
 ### Intuition
@@ -90,11 +74,7 @@ Therefore, the total probability of ending at $j$ is obtained by:
 2. Summing these disjoint path probabilities over all conceivable waypoints $k$.
 
 In matrix terms, computing transition probabilities over multiple time steps is identical to standard matrix multiplication.
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation
@@ -122,11 +102,7 @@ $$P(X_n = k \mid X_0 = i) = P_{ik}^n$$
 ### Step 5: Substitution
 Substituting these two factors back into the summation yields:
 $$P_{ij}^{n+m} = \sum_{k=0}^\infty P_{ik}^n P_{kj}^m \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example
@@ -151,11 +127,7 @@ $$P_{11}^4 = (0.52)(0.39) + (0.48)(0.48) = 0.2028 + 0.2304 = 0.4332$$
 $$P^{(4)} = \begin{pmatrix} 0.5749 & 0.4251 \\ 0.5668 & 0.4332 \end{pmatrix}$$
 
 Thus, $P_{00}^4 = 0.5749$.
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
@@ -164,41 +136,25 @@ Thus, $P_{00}^4 = 0.5749$.
 - **Summing over Wrong Index:** Summing over destination states $j$ instead of intermediate waypoints $k$.
 - **Transposing Matrix Multiplication Order:** In general, $A B \neq B A$. While $P^n P^m = P^m P^n = P^{n+m}$ holds for powers of the same matrix, when multiplying initial probability row vectors $\alpha$, one must compute $\alpha P^n$ (row times matrix), not $P^n \alpha$.
 - **Dropping the Conditioning Prematurely:** Forgetting to justify the removal of $X_0 = i$ in the third line of the derivation via the Markov property.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]]
 - [[Stationary and Limiting Distributions in Markov Chains]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Conditional Probability and Independence|Conditional Probability]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Four-Day Weather Forecast]]
 - [[Problem — Rain Prediction Two Days Ahead]]
 - [[Problem — State Communication and Irreducibility Verification]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 7–10)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.2, pp. 197–202)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 7–10)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.2, pp. 197–202)

@@ -19,6 +19,7 @@ This map organizes the topics covered in CSE301 (Mathematics for Computing and D
 - **Worked Examples:**
   - [[Birthday Problem and Collisions Example]] (23-person 50% threshold, Taylor series approximation, hash collisions)
   - [[Derangements and Card Matching Example]] (Montmort matching, $1/e$ asymptotic derangement limit)
+  - [[Newton-Pepys Dice Problem Example]] (Pepys-Newton 1693 fair dice comparison, Binomial skewness)
 - **Practice Problem:** [[Problem — Birthday Collisions and Approximation]] (Q-CSE301-013)
 
 ---
@@ -32,10 +33,16 @@ This map organizes the topics covered in CSE301 (Mathematics for Computing and D
   - Expectation, linearity, variance, and standard deviation
 - **Core Concept:** [[Discrete Probability Distributions]]
   - Distribution stories, PMFs, means, variances: $\operatorname{Bern}, \operatorname{Bin}, \operatorname{HGeom}, \operatorname{Geom}, \operatorname{FS}, \operatorname{NBin}, \operatorname{Pois}$
+- **Core Concept:** [[Multinomial Distribution]]
+  - Joint PMF for $k \ge 3$ categories, lumping property to marginal Binomials, negative covariance $\operatorname{Cov}(X_i, X_j) = -n p_i p_j$
 - **Core Concept:** [[Continuous Probability Distributions]]
   - Continuous families: $\operatorname{Unif}, \mathcal{N}, \operatorname{Exp}, \operatorname{Gamma}, \operatorname{Beta}$
   - Universality of the Uniform (Probability Integral Transform)
   - Empirical 68-95-99.7 rule for Gaussians
+- **Core Concept:** [[Cauchy and Student-t Distributions]]
+  - Ratio of standard normals, undefined moments, failure of LLN/CLT, Student's $t$ degrees of freedom
+- **Core Concept:** [[St. Petersburg Paradox]]
+  - Infinite expected payoff, finite bankroll resolution, and logarithmic utility of wealth
 - **Core Concept:** [[Joint and Marginal Distributions]]
   - Joint PMF/PDF, marginalization, conditional distributions, independence criteria
   - The support dependency trap
@@ -47,8 +54,14 @@ This map organizes the topics covered in CSE301 (Mathematics for Computing and D
   - [[Moment Generating Functions]]
 - **Worked Examples:**
   - [[Linearity of Expectation and Indicator Random Variables Example]]
+  - [[Poisson Triplet Birthday Collisions Example]] (3-way birthday collisions via Poisson paradigm)
   - [[Exponential Distribution Memorylessness Example]]
-- **Practice Problem:** [[Problem — Indicator Variables for Distinct Birthday Counts]] (Q-CSE301-014)
+  - [[Gaussian Normalizing Constant Polar Derivation Example]] (2D polar Jacobian evaluation of $\sqrt{2\pi}$)
+  - [[Uniform Distribution on the Unit Disk Example]] (Semicircular marginals, conditional uniformity, uncorrelated yet dependent)
+  - [[Expected Absolute Distance of Random Variables Example]] (2D LOTUS and min/max order statistics for $E|X-Y|$ and $E|Z_1-Z_2|$)
+- **Practice Problems:**
+  - [[Problem — Indicator Variables for Distinct Birthday Counts]] (Q-CSE301-014)
+  - [[Problem — Expected Number of Local Maxima in Random Permutations]] (Q-CSE301-018)
 
 ---
 
@@ -57,6 +70,8 @@ This map organizes the topics covered in CSE301 (Mathematics for Computing and D
 ### 3.1 Conditioning & Laws of Total Probability / Expectation
 - **Core Concept:** [[Conditional Probability and Independence]]
   - Definition $P(A \mid B)$, chain rule, pairwise vs mutual independence, conditional independence
+- **Core Concept:** [[Simpson's Paradox]]
+  - Confounding variables, Dr. Hibbert vs. Dr. Nick case study, reversal of inequalities under aggregation
 - **Core Concept:** [[Conditional Expectation]]
   - Number $\mathbb{E}[Y \mid X = x]$ vs random variable $\mathbb{E}[Y \mid X]$
   - Best MSE predictor (orthogonal projection theorem), pulling out known factors
@@ -66,6 +81,7 @@ This map organizes the topics covered in CSE301 (Mathematics for Computing and D
   - [[Eve's Law (Law of Total Variance)]] (EVVE within/between-group variance decomposition)
 - **Worked Examples:**
   - [[Monty Hall Problem Example]]
+  - [[Ace of Spades Conditioning Paradox Example]] (Specific vs. generic card conditioning)
   - [[Random Number of Random Variables Sum Example]]
 - **Practice Problem:** [[Problem — Compound Random Sum via Adam and Eve's Laws]] (Q-CSE301-015)
 

@@ -7,16 +7,8 @@ order: 24
 
 # Heap Memory Management and Allocation Strategies
 
-> 📖 **Reading Order:** Step 24 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 24 of 55 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Non-Local Variable Access in Static and Dynamic Scopes]] | ► **Next:** [[Garbage Collection Fundamentals and Reference Counting]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -37,14 +29,6 @@ How can a server with 8 gigabytes of free RAM fail to allocate 500 kilobytes?
 Because of **External Fragmentation**: the 8GB of free memory is pulverized into millions of tiny, non-contiguous fragments, and not a single contiguous block of 500KB exists!
 
 The **Heap Memory Manager** is the low-level systems software layer (e.g., `glibc ptmalloc`, Google `tcmalloc`, FreeBSD/Facebook `jemalloc`) designed to conquer fragmentation while keeping allocation times in single-digit nanoseconds.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -70,33 +54,13 @@ The **Heap Memory Manager** is the low-level systems software layer (e.g., `glib
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Heap Memory Management and Allocation Strategies** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### Dynamic Heap Placement Strategies
 
@@ -109,6 +73,7 @@ When satisfying an allocation request of $K$ bytes from a collection of free blo
 | **Next-Fit** | Like First-Fit, but begins searching from the location of the **most recent allocation** (circular scan). | $O(N)$ worst-case | Avoids cluttering the front of the heap by distributing allocations evenly. Empirically, simulations show it suffers from worse fragmentation than standard First-Fit. |
 
 ---
+
 ### Modern Allocators: Segregated Free Lists (Bin-Based Heaps)
 
 To eliminate the unacceptable $O(N)$ pointer-chasing latency of linear free lists, production memory managers organize free memory into **Segregated Free Lists (Bins)**:
@@ -131,7 +96,6 @@ flowchart LR
 
 ---
 
----
 ### Technical Details
 
 ### Free Space Coalescing: Donald Knuth's Boundary Tag Method
@@ -172,7 +136,6 @@ Physical Layout of Two Adjacent Blocks:
 
 ---
 
----
 ### Important Properties and Why They Hold
 
 ### The $O(1)$ Coalescing Algorithm & Correctness Invariant
@@ -229,90 +192,6 @@ $$\forall i, \; \neg (\text{is\_free}(\text{block}_i) \land \text{is\_free}(\tex
 
 ---
 
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
 ## Example
 
 Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
@@ -334,74 +213,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Garbage Collection Fundamentals and Reference Counting]]
+- [[Trace-Based Garbage Collection Algorithms]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Run-Time Storage Organization and Activation Records]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Activation Record and Display Table Tracing]]
 
 ---
 

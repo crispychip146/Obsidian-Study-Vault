@@ -7,13 +7,9 @@ order: 5
 
 # Derangements and Card Matching Example
 
-> 📖 **Reading Order:** Step 05 of 92 | **Module 1:** Counting and Discrete Probability  
+> 📖 **Reading Order:** Step 05 of 103 | **Module 1:** Counting and Discrete Probability  
 > ◄ **Previous:** [[Birthday Problem and Collisions Example]] | ► **Next:** [[Problem — Birthday Collisions and Approximation]]
-
 ---
-
----
-
 ## Problem
 
 Consider the classic **de Montmort Matching Problem** (also known as the Hat Check Problem or Secret Santa Problem):
@@ -26,11 +22,7 @@ A deck of $n$ distinct cards numbered $1, 2, \dots, n$ is thoroughly shuffled an
 2. What is the probability of a complete derangement (no matches)?
 3. What is the expected number of matches?
 4. What happens as the number of cards $n \to \infty$?
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -130,11 +122,7 @@ Let's test small values of $n$:
   - $(2,3,1), (3,1,2)$ [0 matches]
   Matches = $4/6 = 2/3 \approx 0.6667$.
   Formula: $1 - 1/2 + 1/6 = 4/6 = 2/3$. Correct.
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -151,11 +139,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 - **Symmetry Trick:** Notice how $P(A_i \cap \dots \cap A_{i_k})$ only depends on the size $k$, not which specific indices are chosen. This allows pulling the probability outside the summation: $\sum_{1 \le i_1 < \dots < i_k \le n} \dots = \binom{n}{k} P(A_1 \cap \dots \cap A_k)$.
 - **Convergence Speed:** Because $k!$ grows astronomically fast, $P(\text{derangement})$ converges to $1/e$ within 4 decimal places already at $n = 7$.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -167,11 +151,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Inclusion-Exclusion Principle]] — Theoretical formula and indicator variable proof.
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Method of indicator variables.
 - [[Probability Axioms and Naive Probability]] — Naive counting and sample spaces.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 3, pages 7–9)

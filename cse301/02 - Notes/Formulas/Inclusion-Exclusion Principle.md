@@ -7,13 +7,9 @@ order: 3
 
 # Inclusion-Exclusion Principle
 
-> 📖 **Reading Order:** Step 03 of 92 | **Module 1:** Counting and Discrete Probability  
+> 📖 **Reading Order:** Step 03 of 103 | **Module 1:** Counting and Discrete Probability  
 > ◄ **Previous:** [[Probability Axioms and Naive Probability]] | ► **Next:** [[Birthday Problem and Collisions Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Inclusion-Exclusion Principle, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -39,11 +35,7 @@ where $S_k$ is the sum of the probabilities of all distinct $k$-way intersection
 $$S_k = \sum_{1 \le i_1 < i_2 < \dots < i_k \le n} P(A_{i_1} \cap A_{i_2} \cap \dots \cap A_{i_k})$$
 
 There are $\binom{n}{k}$ terms in each sum $S_k$, yielding a total of $2^n - 1$ terms.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -52,11 +44,7 @@ There are $\binom{n}{k}$ terms in each sum $S_k$, yielding a total of $2^n - 1$ 
 | $\bigcup_{i=1}^n A_i$ | Event that *at least one* of $A_1, \dots, A_n$ occurs |
 | $S_k$ | Sum of probabilities of all distinct $k$-way intersections $\sum_{i_1 < \dots < i_k} P(A_{i_1} \cap \dots \cap A_{i_k})$ |
 | $I_{A_i}$ | Indicator random variable for event $A_i$ ($1$ if occurred, $0$ otherwise) |
-
 ---
-
----
-
 ## Conditions
 
 - Random variables must possess finite first and second moments (well-defined expectations).
@@ -77,11 +65,7 @@ When $n$ is large, computing all $2^n - 1$ terms is intractable. The partial sum
   $$P\left( \bigcup_{i=1}^n A_i \right) \le S_1 - S_2 + S_3$$
 
 In general, stopping after an **odd** number of sums gives an **upper bound**, while stopping after an **even** number of sums gives a **lower bound**.
-
 ---
-
----
-
 ## Derivation
 
 ### Proof via Indicator Random Variables
@@ -124,11 +108,7 @@ $$P(\text{no matches / derangement}) \to e^{-1} \approx 0.3679$$
 Remarkably, for $n \ge 7$, this probability is essentially constant!
 
 For the complete standalone worked analysis and variations, see [[Derangements and Card Matching Example]].
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
@@ -141,11 +121,7 @@ For the complete standalone worked analysis and variations, see [[Derangements a
 - [[Probability Axioms and Naive Probability]] — Axiomatic basis.
 - [[Derangements and Card Matching Example]] — Full step-by-step example.
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Exploitation of indicator algebra.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Probability Axioms and Naive Probability]]

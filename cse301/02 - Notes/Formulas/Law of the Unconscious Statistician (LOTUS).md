@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 12
+order: 16
 ---
 
 # Law of the Unconscious Statistician (LOTUS)
 
-> 📖 **Reading Order:** Step 12 of 92 | **Module 2:** Random Variables and Distributions  
+> 📖 **Reading Order:** Step 16 of 103 | **Module 2:** Random Variables and Distributions  
 > ◄ **Previous:** [[Covariance and Correlation]] | ► **Next:** [[Moment Generating Functions]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Law of the Unconscious Statistician (LOTUS), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -37,11 +33,7 @@ Let $X$ be a random variable, and let $g: \mathbb{R} \to \mathbb{R}$ be a measur
   $$\mathbb{E}[g(X)] = \int_{-\infty}^\infty g(x) \, f_X(x) \, dx$$
 
 *(Subject to absolute convergence: $\mathbb{E}[\lvert g(X) \rvert] < \infty$)*.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -81,11 +73,7 @@ Setting $g(X, Y) = aX + bY$:
 $$\mathbb{E}[aX + bY] = \iint (ax + by) f_{X,Y}(x, y) dx dy = a \int x \left( \int f_{X,Y}(x, y) dy \right) dx + b \int y \left( \int f_{X,Y}(x, y) dx \right) dy$$
 $$= a \int x f_X(x) dx + b \int y f_Y(y) dy = a\mathbb{E}[X] + b\mathbb{E}[Y]$$
 This proves that **linearity of expectation holds for ANY random variables**, whether independent or dependent!
-
 ---
-
----
-
 ## Derivation
 
 ### Proof Sketch (Discrete Case)
@@ -102,11 +90,7 @@ $$\mathbb{E}[Y] = \sum_{y \in \mathcal{Y}} y \left( \sum_{x: g(x) = y} p_X(x) \r
 Since $g(x) = y$ inside the inner summation, we replace $y$ with $g(x)$:
 $$\mathbb{E}[Y] = \sum_{y \in \mathcal{Y}} \sum_{x: g(x) = y} g(x) \, p_X(x) = \sum_{x} g(x) \, p_X(x)$$
 $\blacksquare$
-
 ---
-
----
-
 ## Example
 
 ### Application Examples
@@ -122,11 +106,7 @@ $$M_X(t) = \int_{-\infty}^\infty e^{tx} f_X(x) \, dx$$
 
 For detailed indicator and expectation applications, see:
 - [[Linearity of Expectation and Indicator Random Variables Example]] — Applying LOTUS to indicator polynomials.
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Pitfalls
@@ -135,21 +115,13 @@ For detailed indicator and expectation applications, see:
   $$\mathbb{E}[g(X)] \ne g(\mathbb{E}[X])$$
   For example, $\mathbb{E}[X^2] \ne (\mathbb{E}[X])^2$ (their difference is $\operatorname{Var}(X) \ge 0$).
   By Jensen's Inequality, if $g$ is convex, $\mathbb{E}[g(X)] \ge g(\mathbb{E}[X])$.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Random Variables and Probability Distributions]] — Foundational expectation definitions.
 - [[Joint and Marginal Distributions]] — Joint integration and 2D LOTUS.
 - [[Moment Generating Functions]] — Applied to $g(x) = e^{tx}$.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]

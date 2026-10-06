@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 32
+order: 43
 ---
 
 # Central Limit Theorem
 
-> 📖 **Reading Order:** Step 32 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> 📖 **Reading Order:** Step 43 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
 > ◄ **Previous:** [[Law of Large Numbers]] | ► **Next:** [[Normal Approximation to Binomial and Poisson Example]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Central Limit Theorem, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -29,11 +25,7 @@ By formalizing sample spaces, probability measures, state transitions, or likeli
 ## Definition
 
 The **Central Limit Theorem (CLT)** is one of the most remarkable and foundational theorems in all of mathematics. It states that the standardized sum (or sample average) of a large number of independent, identically distributed (i.i.d.) random variables approaches a **Standard Normal distribution**, regardless of the shape of the underlying population distribution (provided the population has finite variance).
-
 ---
-
----
-
 ## How It Works
 
 ### Formal Statement (Lindeberg-Lévy CLT)
@@ -66,11 +58,7 @@ When approximating a discrete integer-valued random variable $X$ (like Binomial 
   - $P(X \ge k) \approx P\left( Y_{\text{norm}} \ge k - 0.5 \right)$
   - $P(X = k) \approx P\left( k - 0.5 \le Y_{\text{norm}} \le k + 0.5 \right)$
   - $P(a \le X \le b) \approx P\left( a - 0.5 \le Y_{\text{norm}} \le b + 0.5 \right)$
-
 ---
-
----
-
 ## Example
 
 ### Quality Control Inspection via Continuity-Corrected CLT
@@ -150,11 +138,7 @@ $\blacksquare$
 | **Scaling Factor** | $\bar{X}_n - \mu$ (no scaling) | $\sqrt{n}(\bar{X}_n - \mu)$ (magnified by $\sqrt{n}$) |
 | **Limiting Behavior** | Collapses to a deterministic constant $\mu$ (a Dirac delta spike) | Spreads out into a universal Gaussian bell curve $\mathcal{N}(0, \sigma^2)$ |
 | **Convergence Type** | Convergence in probability ($\xrightarrow{P}$) or almost surely ($\xrightarrow{\text{a.s.}}$) | Convergence in distribution ($\xrightarrow{d}$) |
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Assuming Data Distribution Becomes Normal:** Confusing the distribution of the sample mean $\bar{X}_n$ with the distribution of the individual observations $X_i$. A histogram of 1,000,000 exponential observations remains exponential; only their sample average is Gaussian.
@@ -170,11 +154,7 @@ $\blacksquare$
 - **Confidence Intervals:** Derives the standard $95\%$ confidence interval formula $\bar{X}_n \pm 1.96 \frac{\sigma}{\sqrt{n}}$ (see [[Normal-Based Large-Sample Confidence Interval]]).
 - **Hypothesis Testing:** Underpins the asymptotic normality of the [[Wald Test Statistic]].
 - **Queueing Theory:** Heavy-traffic limits of queue lengths converge to reflected Brownian motions via functional CLTs.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Law of Large Numbers]] — Zero-order limit convergence of $\bar{X}_n \to \mu$.

@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 73
+order: 84
 ---
 
 # Gambler's Ruin Formula
 
-> 📖 **Reading Order:** Step 73 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 84 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Chapman-Kolmogorov Equations]] | ► **Next:** [[Weather Forecasting Markov Chain Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Gambler's Ruin Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -52,11 +48,7 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 1 - \left(\dfrac{q}{p}\right)^i, & \text{if } p > \dfrac{1}{2} \\[10pt]
 0, & \text{if } p \le \dfrac{1}{2}
 \end{cases}$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -68,11 +60,7 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 | $q/p$ | Ratio of loss to win probability (odds ratio) |
 | $P_i$ | Probability of reaching $N$ before $0$, given initial fortune $i$ |
 | $Q_i$ | Probability of ruin (hitting $0$ before $N$), given initial fortune $i$ |
-
 ---
-
----
-
 ## Conditions
 
 1. **Absorbing Boundaries:** States $0$ and $N$ are absorbing: $P_{00} = 1$ and $P_{NN} = 1$. Once reached, the game halts immediately.
@@ -80,11 +68,7 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
    $$P_{i, i+1} = p, \quad P_{i, i-1} = q = 1 - p$$
 3. **Step Size Exactly One:** Each play increments or decrements the fortune by exactly $1$ unit (no multi-unit bets or ties).
 4. **Independent and Identically Distributed (i.i.d.) Trials:** The outcome of each play is independent of all past plays.
-
 ---
-
----
-
 ## Intuition
 
 ### Intuition
@@ -94,11 +78,7 @@ $$\lim_{N \to \infty} P_i = \begin{cases}
 - **The Tragedy of Fair Gambling Against the House ($N \to \infty$):** If an individual plays a fair game ($p = 0.5$) against a casino with effectively infinite wealth ($N \to \infty$), the probability of avoiding ruin is:
   $$\lim_{N \to \infty} \frac{i}{N} = 0$$
   **Ruin is certain with probability 1**, even in an unbiased game! Only an strictly favorable game ($p > 1/2$) provides a non-zero probability of surviving forever.
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation
@@ -158,11 +138,7 @@ Substituting $P_1$ back into the formula for $P_i$:
   $$P_i = \left( \frac{1 - (q/p)}{1 - (q/p)^N} \right) \left( \frac{1 - (q/p)^i}{1 - (q/p)} \right) = \frac{1 - (q/p)^i}{1 - (q/p)^N}$$
 - For $p = 1/2$:
   $$P_i = i \left(\frac{1}{N}\right) = \frac{i}{N} \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example
@@ -181,11 +157,7 @@ Calculate the probability that Patty wins all of Max's pennies:
    $$P_5 = \frac{1 - (2/3)^5}{1 - (2/3)^{15}} = \frac{1 - 0.131687}{1 - 0.002284} = \frac{0.868313}{0.997716} \approx 0.8703 \quad (87.03\%)$$
 
 Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ edge elevates her winning probability to over $87\%$.
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
@@ -194,39 +166,23 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 - **Inverting the Ratio $q/p$:** Using $p/q$ instead of $q/p$. Remember: $q$ (loss probability) is in the numerator!
 - **Using Non-Fair Formula when $p = 0.5$:** Substituting $p = 0.5$ into $\frac{1 - (q/p)^i}{1 - (q/p)^N}$ produces $0/0$. When $p = 0.5$, use L'Hôpital's rule or directly apply $P_i = i/N$.
 - **Misinterpreting $N \to \infty$ for Fair Games:** Believing that in a fair game ($p = 0.5$), you have a $50\%$ chance of never going bankrupt against an infinite bankroll. The true probability is exactly $0$.
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]]
 - [[Stochastic Process]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Conditional Probability and Independence|Conditional Probability]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Patty and Max Gambler's Ruin]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 30–36)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.5.1, pp. 230–234)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 30–36)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.5.1, pp. 230–234)

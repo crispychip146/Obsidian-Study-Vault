@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 15
+order: 23
 ---
 
 # Exponential Distribution Memorylessness Example
 
-> 📖 **Reading Order:** Step 15 of 92 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Linearity of Expectation and Indicator Random Variables Example]] | ► **Next:** [[Problem — Indicator Variables for Distinct Birthday Counts]]
-
+> 📖 **Reading Order:** Step 23 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Expected Absolute Distance of Random Variables Example]] | ► **Next:** [[Problem — Indicator Variables for Distinct Birthday Counts]]
 ---
-
----
-
 ## Problem
 
 Let $T \sim \operatorname{Exp}(\lambda)$ represent the lifetime of an electronic component (or service time at a server), with rate parameter $\lambda > 0$.
@@ -25,11 +21,7 @@ A continuous random variable $T$ is **memoryless** if:
 $$P(T > s + t \mid T > s) = P(T > t) \quad \text{for all } s, t \ge 0$$
 
 In human terms: If you have already waited $s$ minutes for a service to complete, the probability that you must wait at least an *additional* $t$ minutes is exactly the same as if you had just arrived! The system retains **zero memory** of the elapsed time $s$.
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -106,11 +98,7 @@ Alice, Bob, and Charlie walk into a post office with two clerks.
 Therefore:
 $$P(\text{Charlie is last}) = \frac{1}{2}$$
 Despite arriving after Alice and Bob, Charlie is the last to leave with probability **exactly $50\%$**!
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -141,11 +129,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Continuous Probability Distributions]] — Exponential, Gamma, and Normal distributions.
 - [[M-M-1 Queue]] — Memoryless property guarantees Markovian state transitions.
 - [[PASTA Property and Inspection Paradox]] — How memorylessness affects arrival averages.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 12, pages 36–39)

@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 58
+order: 69
 ---
 
 # p-Values and Significance
 
-> 📖 **Reading Order:** Step 58 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 69 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Hypothesis Testing Framework]] | ► **Next:** [[Wald Test Statistic]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to p-Values and Significance, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -36,11 +32,7 @@ Imagine the critical rejection cutoff $c_\alpha$ as a sliding high-jump bar:
   • If p ≤ α  ===> Reject H₀  (observed data are sufficiently rare under H₀)
   • If p > α  ===> Retain H₀  (observed data are plausibly consistent with H₀)
 ```
-
 ---
-
----
-
 ## Definition
 
 The **$p$-value** is the probability, computed assuming the null hypothesis $H_0$ is true, of observing a test statistic at least as extreme as (or more extreme than) the value actually observed in the sample data.
@@ -52,11 +44,7 @@ $$p = \sup_{\theta \in \Theta_0} P_\theta\left(T(\mathbf{X}) \ge t_{\text{obs}}\
 ### Alternative Operational Definition
 The $p$-value is the **smallest significance level $\alpha$** at which a hypothesis test would reject the null hypothesis $H_0$:
 $$p = \inf\big\{\alpha \in (0, 1) : T(\mathbf{x}) \in R_\alpha\big\}$$
-
 ---
-
----
-
 ## How It Works
 
 ### Standard Interpretation Scale
@@ -122,11 +110,7 @@ $$P_{H_0}(F(T) \ge 1 - u) = 1 - (1 - u) = u$$
 Since $P(P \le u) = u$, $P \sim \text{Uniform}(0, 1) \quad \blacksquare$.
 
 This beautiful result explains why setting a threshold $\alpha = 0.05$ guarantees that the Type I error rate is exactly $5\%$: under $H_0$, $P(P \le 0.05) = 0.05$.
-
 ---
-
----
-
 ## Example
 
 ### One-Sided vs. Two-Sided $p$-Value Calculation
@@ -192,11 +176,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Multiple Testing and False Discovery Rate]]
 - [[Permutation Test Algorithm]]
 - [[Toy Permutation Test Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Hypothesis Testing Framework]]
@@ -213,4 +193,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

@@ -7,16 +7,8 @@ order: 26
 
 # Trace-Based Garbage Collection Algorithms
 
-> 📖 **Reading Order:** Step 26 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 26 of 55 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Garbage Collection Fundamentals and Reference Counting]] | ► **Next:** [[Mark-and-Sweep Garbage Collection Algorithm]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -29,14 +21,6 @@ A trace-based collector traverses the graph of heap references starting from the
 ### Core Advantages:
 1. **Completely Solves the Cyclic Reference Problem:** Any cyclic island disconnected from the root set is simply never visited and therefore reclaimed automatically!
 2. **Zero Overhead on Pointer Assignments:** Mutators perform regular pointer assignments without incrementing or decrementing reference counts.
-
----
-
----
-
----
-
----
 
 ---
 
@@ -66,196 +50,13 @@ When the work queue is empty (i.e., **no objects remain in the Unscanned state**
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Trace-Based Garbage Collection Algorithms** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
-
-### Architectural Comparison Table
-
-| Metric | Mark-and-Sweep | Mark-and-Compact | Copying Collector |
-| :--- | :--- | :--- | :--- |
-| **Object Movement** | Objects **never move** | Objects **move** (relocating) | Objects **move** (relocating) |
-| **Heap Fragmentation** | Severe external fragmentation | **Zero** fragmentation | **Zero** fragmentation |
-| **Time Complexity** | $O(\text{Heap Size})$ | $O(\text{Heap Size})$ | **$O(\text{Live Objects})$** |
-| **Allocation Cost** | Free list search ($O(1)$ to $O(N)$) | Bump pointer ($O(1)$) | Bump pointer ($O(1)$) |
-| **Usable Heap Space** | $100\%$ | $100\%$ | **$50\%$** (2 Semispaces) |
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-
-## Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-
-## Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-
-## Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Confusing syntactic validity with semantic correctness.
-- Overlooking variable scoping or memory aliasing side effects.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### The Three Major Families of Trace-Based Collectors
 
@@ -296,37 +97,67 @@ graph TD
 
 ---
 
+### Architectural Comparison Table
+
+| Metric | Mark-and-Sweep | Mark-and-Compact | Copying Collector |
+| :--- | :--- | :--- | :--- |
+| **Object Movement** | Objects **never move** | Objects **move** (relocating) | Objects **move** (relocating) |
+| **Heap Fragmentation** | Severe external fragmentation | **Zero** fragmentation | **Zero** fragmentation |
+| **Time Complexity** | $O(\text{Heap Size})$ | $O(\text{Heap Size})$ | **$O(\text{Live Objects})$** |
+| **Allocation Cost** | Free list search ($O(1)$ to $O(N)$) | Bump pointer ($O(1)$) | Bump pointer ($O(1)$) |
+| **Usable Heap Space** | $100\%$ | $100\%$ | **$50\%$** (2 Semispaces) |
+
 ---
-### Exam Relevance
+
+## Example
+
+Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
+
+---
+
+## Technical Details
+
+Target architecture and ABI specifications govern low-level alignment and register assignments.
+
+---
+
+## Important Properties and Why They Hold
+
+- **Semantic Soundness:** Preserves program execution equivalence.
+- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
+
+---
+
+## Common Mistakes
+
+- Confusing syntactic validity with semantic correctness.
+- Overlooking variable scoping or memory aliasing side effects.
+
+---
+
+## Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Mark-and-Sweep Garbage Collection Algorithm]]
+- [[Copying Garbage Collection Algorithm]]
+- [[Garbage Collection Fundamentals and Reference Counting]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Garbage Collection Fundamentals and Reference Counting]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Activation Record and Display Table Tracing]]
 
 ---
 

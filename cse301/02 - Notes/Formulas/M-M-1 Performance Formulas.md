@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 86
+order: 97
 ---
 
 # M-M-1 Performance Formulas
 
-> 📖 **Reading Order:** Step 86 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 97 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[M-M-1 Queue]] | ► **Next:** [[Finite Capacity M-M-1-N Queue]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs M-M-1 Performance Formulas, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -40,11 +36,7 @@ For an M/M/1 queue with Poisson arrival rate $\lambda$, exponential service rate
 | **Average Number of Customers in Queue** | $L_Q$ | $\frac{\lambda^2}{\mu(\mu - \lambda)}$ | $\frac{\rho^2}{1 - \rho}$ |
 | **Average Time Spent in System** | $W$ | $\frac{1}{\mu - \lambda}$ | $\frac{1}{\mu(1 - \rho)}$ |
 | **Average Time Spent Waiting in Queue** | $W_Q$ | $\frac{\lambda}{\mu(\mu - \lambda)}$ | $\frac{\rho}{\mu(1 - \rho)}$ |
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -91,11 +83,7 @@ L_Q &= \lambda W_Q \quad (\text{Little's Law}) \\
 L_Q &= \rho L \\
 W_Q &= \rho W
 \end{aligned}$$
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation of $P(N \ge k)$
@@ -106,11 +94,7 @@ Factor out $\rho^k$:
 $$= (1 - \rho)\rho^k \sum_{m=0}^\infty \rho^m$$
 Since $\sum_{m=0}^\infty \rho^m = \frac{1}{1 - \rho}$:
 $$P(N \ge k) = (1 - \rho)\rho^k \left(\frac{1}{1 - \rho}\right) = \mathbf{\rho^k} \quad \blacksquare$$
-
 ---
-
----
-
 ## Example
 
 ### Example: Quick Parameter Calculation
@@ -123,11 +107,7 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 5. **Average wait in buffer:** $W_Q = \frac{0.80}{50(1 - 0.80)} = \frac{0.80}{10} = 0.08 \text{ sec} = 80 \text{ ms}$.
 6. **Average in buffer:** $L_Q = 40 \times 0.08 = 3.2$ requests.
 7. **Probability of queue backlog $> 3$ requests:** $P(N \ge 4) = (0.80)^4 = 0.4096 \approx 41\%$.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
@@ -141,11 +121,7 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 - [[Little's Law]]
 - [[Queueing Systems and Kendall Notation]]
 - [[Problem — M-M-1 Queue Performance Metrics Calculation]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[M-M-1 Queue]]
@@ -162,4 +138,4 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

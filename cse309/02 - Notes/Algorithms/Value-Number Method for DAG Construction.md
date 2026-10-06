@@ -7,16 +7,8 @@ order: 11
 
 # Value-Number Method for DAG Construction
 
-> 📖 **Reading Order:** Step 11 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 11 of 55 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Intermediate Representations and Three-Address Code]] | ► **Next:** [[Type Expressions and Storage Layout]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -78,14 +70,6 @@ graph TD
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Core Idea
 
 The algorithm represents the DAG as a compact **Node Array** (indexed by integers called **Value Numbers**) paired with a **Hash Table** for instantaneous $O(1)$ duplicate detection:
@@ -107,63 +91,19 @@ $$\text{Signature} \longrightarrow \text{Value Number (Array Index)}$$
 
 ---
 
----
-
----
-
----
-
----
-
 ## Inputs
 
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
+- Sequence of Three-Address Code statements within a basic block, and initial symbol table mapping variable names to node indices.
 
 ---
 
 ## Outputs
 
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
+- Array of unique DAG node records (value numbers) and updated variable-to-node mapping.
 
 ---
 
 ## How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
-
-### Inputs
-
-- Intermediate representation (Three-Address Code instructions, parse tree nodes, live intervals, or interference graph).
-
----
-### Outputs
-
-- Partitioned blocks, DAG nodes, allocated physical registers, or evacuated memory blocks.
-
----
-### How It Works
 
 ### Advanced Compiler Extensions: Commutative Value Numbering
 
@@ -180,7 +120,6 @@ Because $\min(1, 2) = 1$ and $\max(1, 2) = 2$, both $a + b$ and $b + a$ generate
 
 ---
 
----
 ### Properties
 
 ### Formal Proof of Correctness (Common Subexpression Detection)
@@ -225,87 +164,7 @@ Let height $h(e)$ be the height of expression $e$'s parse tree.
 
 ---
 
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-### Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-### Related Concepts
-
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-### Prerequisites
-
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Problems
-
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
----
-
 ## Pseudocode
-
-### Pseudocode
-
-### Pseudocode
-
-### Pseudocode
 
 ### The Value-Number Construction Algorithm
 
@@ -351,100 +210,7 @@ class ValueNumberDAGBuilder:
 
 ---
 
----
-
----
-
----
-
----
-
 ## Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-
-## Complexity
-
-- **Time Complexity:**
-  - Hash lookup per token/node: $O(1)$ expected time.
-  - For an expression with $N$ tokens: **$O(N)$ total time**.
-- **Space Complexity:**
-  - Hash table entries: $O(U)$ where $U \le N$ is the number of **unique** subexpressions.
-  - Node array: $O(U)$ records.
-
----
-
----
-
----
-
----
-
----
-
-## Properties
-
-- **Termination:** Provably terminates on all well-formed compiler inputs.
-- **Correctness:** Preserves the underlying language semantics and program data dependencies.
-
----
-
-## Limitations
-
-### Limitations
-
-### Limitations
-
-### Limitations
-
-- Conservative heuristics may yield suboptimal allocations or require register spilling when demand exceeds hardware resources.
-
----
-
----
-
----
-
----
-
-## Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
-- Forgetting to update liveness information or next-use pointers.
-- Misinterpreting index bounds during stack or interval scans.
-
----
-
----
-
----
-
----
-
-## Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Concrete step-by-step simulations and traces are cataloged in the associated Example and Problem notes.
-
----
-### Exam Relevance
-
-### Example
 
 ### Concrete Execution Trace: Step-by-Step
 
@@ -483,37 +249,60 @@ Index | Type     | Op/Val | Left | Right | Mathematical Meaning
 
 ---
 
+## Complexity
+
+- **Time Complexity:**
+  - Hash lookup per token/node: $O(1)$ expected time.
+  - For an expression with $N$ tokens: **$O(N)$ total time**.
+- **Space Complexity:**
+  - Hash table entries: $O(U)$ where $U \le N$ is the number of **unique** subexpressions.
+  - Node array: $O(U)$ records.
+
 ---
-### Exam Relevance
+
+## Properties
+
+- **Termination:** Provably terminates on all well-formed compiler inputs.
+- **Correctness:** Preserves the underlying language semantics and program data dependencies.
+
+---
+
+## Limitations
+
+- Local to a single basic block; does not track value equivalence across control flow branches or procedure boundaries.
+
+---
+
+## Common Mistakes
+
+- Forgetting to update liveness information or next-use pointers.
+- Misinterpreting index bounds during stack or interval scans.
+
+---
+
+## Exam Relevance
 
 Frequently tested on final examinations via hand-simulation of Value-Number Method for DAG Construction on given code fragments or graphs.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Basic Blocks and Control Flow Graphs]]
-- [[Live Ranges and Live Intervals in Register Allocation]]
-- [[Register Interference Graphs and Graph Coloring Principles]]
+- [[Intermediate Representations and Three-Address Code]]
+- [[DAG Construction and Local Optimization of Basic Blocks]]
+- [[Global Common Subexpression Elimination and Copy Propagation]]
 
 ---
 
 ## Prerequisites
 
-- [[Basic Blocks and Control Flow Graphs]]
+- [[Intermediate Representations and Three-Address Code]]
 
 ---
 
 ## Problems
 
-- [[Problem — Linear Scan Register Allocation Simulation]]
-- [[Problem — Chaitin Graph Coloring Register Allocation]]
+- [[Problem — DAG Optimization of Basic Block with Array Store]]
 
 ---
 

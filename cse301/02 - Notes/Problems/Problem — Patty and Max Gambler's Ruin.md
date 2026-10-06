@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 77
+order: 88
 ---
 
 # Problem — Patty and Max Gambler's Ruin
 
-> 📖 **Reading Order:** Step 77 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 88 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Hardy-Weinberg Law Markov Chain Example]] | ► **Next:** [[Problem — Four-Day Weather Forecast]]
-
 ---
-
----
-
 ## Problem
 
 Patty and Max flip pennies in successive independent rounds. On each flip, Patty wins with probability $p = 0.6$ and loses with probability $q = 1 - p = 0.4$. 
@@ -23,11 +19,7 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 1. What is the probability that Patty wipes Max out (wins all 15 pennies)?
 2. What is the probability that Patty is ruined?
 3. Compare Patty's initial fraction of the total wealth with her winning probability, and interpret the result.
-
 ---
-
----
-
 ## Given
 
 - Initial fortune of Patty: $i = 5$
@@ -36,48 +28,28 @@ Patty starts with $5$ pennies, and Max starts with $10$ pennies. The game contin
 - Probability of winning $1$ penny on each flip: $p = 0.6$
 - Probability of losing $1$ penny on each flip: $q = 0.4$
 - Stopping states: $0$ (Patty ruined) and $N = 15$ (Max ruined)
-
 ---
-
----
-
 ## Required
 
 1. Win probability $P_5 = P(\text{fortune reaches } 15 \mid X_0 = 5)$.
 2. Ruin probability $Q_5 = 1 - P_5$.
 3. Comparison between initial stake proportion $i/N$ and win probability $P_5$.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]] (Absorbing states, transient states)
 - [[Gambler's Ruin Formula]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Gambler's Ruin Formula]]
-
 ---
-
----
-
 ## Question Type
 
 Numerical / Applied Probability
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -174,11 +146,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 - **Incorrect Boundary Value ($N$):** Setting $N = 10$ (Max's pennies) instead of the total pennies in play $N = 5 + 10 = 15$.
 - **Inverted Odds Ratio:** Calculating $p/q = 1.5$ instead of $q/p = 2/3$. Remember that $q$ (loss probability) is in the numerator.
 - **Using the Fair Game Formula:** Applying $P_i = i/N = 5/15 = 0.3333$, ignoring the fact that $p = 0.6 \neq 0.5$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -201,5 +169,5 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 36)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.22, pp. 233–234)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 36)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.22, pp. 233–234)

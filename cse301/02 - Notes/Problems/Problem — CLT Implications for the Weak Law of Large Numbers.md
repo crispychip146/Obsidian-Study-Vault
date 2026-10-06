@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 34
+order: 45
 ---
 
 # Problem — CLT Implications for the Weak Law of Large Numbers
 
-> 📖 **Reading Order:** Step 34 of 92 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> 📖 **Reading Order:** Step 45 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
 > ◄ **Previous:** [[Normal Approximation to Binomial and Poisson Example]] | ► **Next:** [[Point Estimation]]
-
 ---
-
----
-
 ## Problem
 
 A polling agency wants to estimate the true proportion $p$ of users who prefer a new user interface over the old one. They survey $n$ independent users, modeling their responses as $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \operatorname{Bern}(p)$.
@@ -28,11 +24,7 @@ $$P\left( \lvert \hat{p}_n - p \rvert \le 0.03 \right) \ge 0.95 \iff P\left( \lv
 4. **Comparison & Theoretical Connection:**
    - Compare the sample sizes $n_{\text{Cheb}}$ and $n_{\text{CLT}}$ and discuss the practical cost implications for engineering telemetry.
    - Prove mathematically that the Central Limit Theorem implies the Weak Law of Large Numbers.
-
 ---
-
----
-
 ## Given
 
 - Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
@@ -58,11 +50,7 @@ $$P\left( \lvert \hat{p}_n - p \rvert \le 0.03 \right) \ge 0.95 \iff P\left( \lv
 - [[Central Limit Theorem]] — Normal approximation of sample mean.
 - [[Law of Large Numbers]] — Convergence in probability definition.
 - [[Normal-Based Large-Sample Confidence Interval]] — Margin of error formulation.
-
 ---
-
----
-
 ## Question Type
 
 Probability / Statistical Inference / Markov Chain Analysis
@@ -164,11 +152,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 1. **Forgetting $\sqrt{n}$ in the denominator:** The standard error of the sample mean is $\frac{\sigma}{\sqrt{n}}$, not $\frac{\sigma}{n}$.
 2. **Confusing 1-sided and 2-sided tail critical values:** For $95\%$ two-sided coverage, each tail receives $2.5\%$, which corresponds to $z_{0.025} = 1.96$, not $z_{0.05} = 1.645$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.

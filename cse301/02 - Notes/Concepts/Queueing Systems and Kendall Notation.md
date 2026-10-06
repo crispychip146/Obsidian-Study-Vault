@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 82
+order: 93
 ---
 
 # Queueing Systems and Kendall Notation
 
-> 📖 **Reading Order:** Step 82 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 93 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Problem — Identification of Communicating Classes and Absorbing States]] | ► **Next:** [[Little's Law]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Queueing Systems and Kendall Notation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -48,11 +44,7 @@ where:
 4. **$K$ (System Capacity):** Maximum number of customers allowed in the system (queue + servers). Default is $\infty$ if omitted.
 5. **$N$ (Population Size):** Size of the customer source population. Default is $\infty$ if omitted.
 6. **$D$ (Queue Discipline):** Order of service. Default is FIFO (First-In, First-Out).
-
 ---
-
----
-
 ## How It Works
 
 ### Fundamental Performance Metrics
@@ -109,11 +101,7 @@ Queueing phenomena govern virtually every shared computing resource:
 - **Computer Networks:** Router packet buffer sizing to prevent packet drop (bufferbloat vs. packet loss).
 - **Operating Systems:** Process scheduling queues, I/O disk request dispatchers.
 - **Database Systems:** Connection pooling, query concurrency limits, lock contention.
-
 ---
-
----
-
 ## Example
 
 ### Kendall Classification and Little's Law Application
@@ -193,11 +181,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Jackson Networks and Tandem Queues]]
 - [[Shoe Shine Shop Queueing Model Example]]
 - [[Tandem Two-Server Queue Performance Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Continuous Probability Distributions]]
@@ -214,4 +198,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

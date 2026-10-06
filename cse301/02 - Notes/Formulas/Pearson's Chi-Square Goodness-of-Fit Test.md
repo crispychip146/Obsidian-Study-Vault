@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 60
+order: 71
 ---
 
 # Pearson's Chi-Square Goodness-of-Fit Test
 
-> 📖 **Reading Order:** Step 60 of 92 | **Module 9:** Hypothesis Testing  
+> 📖 **Reading Order:** Step 71 of 103 | **Module 9:** Hypothesis Testing  
 > ◄ **Previous:** [[Wald Test Statistic]] | ► **Next:** [[Permutation Test Algorithm]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Pearson's Chi-Square Goodness-of-Fit Test, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -51,11 +47,7 @@ The statistic converges in distribution to a **Chi-Square distribution with $k -
 For a significance level $\alpha$:
 $$\text{Reject } H_0 \iff V > \chi^2_{k - 1, \alpha}$$
 where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi^2$ distribution with $k - 1$ degrees of freedom.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning | Role |
@@ -67,11 +59,7 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
 | $E_j = n p_{0j}$ | Expected frequency count in bin $j$ | Theoretical baseline |
 | $V$ | Pearson test statistic | Aggregate standardized discrepancy |
 | $df = k - 1$ | Degrees of freedom | Accounts for constraint $\sum O_j = n$ |
-
 ---
-
----
-
 ## Conditions
 
 1. **Independent Observations:** The $n$ trials must be independent.
@@ -80,11 +68,7 @@ where $\chi^2_{k - 1, \alpha}$ is the upper $\alpha$ critical value of the $\chi
    - All expected cell counts must satisfy $E_j \ge 1$.
    - At least $80\%$ of expected cell counts must satisfy $E_j \ge 5$.
    If expected cell counts are too small, adjacent categories should be collapsed, or an exact multinomial test used.
-
 ---
-
----
-
 ## Intuition
 
 ### Intuition
@@ -111,11 +95,7 @@ Recall the definition of the $\chi^2_m$ distribution:
 Because $V$ is asymptotically the sum of $k - 1$ independent standard normal squares, under $H_0$ the expected value of $V$ is:
 $$E[V] \approx k - 1$$
 If $V \approx k - 1$, the observed data match theoretical expectations. If $V \gg k - 1$, the discrepancy is far too large to explain by chance alone.
-
 ---
-
----
-
 ## Derivation
 
 Derived by applying definition of expectation, interchanging summation/integrals via Fubini's theorem, and collecting terms.
@@ -137,11 +117,7 @@ $$V = \frac{4 + 4 + 1 + 1 + 9 + 9}{10} = \frac{28}{10} = 2.8$$
 
 For $df = 5$ at $\alpha = 0.05$, the critical value is $\chi^2_{5, 0.05} = 11.07$.
 Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with fairness.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
@@ -154,11 +130,7 @@ Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with
 - [[Hypothesis Testing Framework]]
 - [[p-Values and Significance]]
 - [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Hypothesis Testing Framework]]
@@ -176,4 +148,4 @@ Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]

@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 11
+order: 15
 ---
 
 # Covariance and Correlation
 
-> 📖 **Reading Order:** Step 11 of 92 | **Module 2:** Random Variables and Distributions  
+> 📖 **Reading Order:** Step 15 of 103 | **Module 2:** Random Variables and Distributions  
 > ◄ **Previous:** [[Joint and Marginal Distributions]] | ► **Next:** [[Law of the Unconscious Statistician (LOTUS)]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Covariance and Correlation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -36,11 +32,7 @@ $$\operatorname{Cov}(X, Y) = \mathbb{E}[XY] - \mathbb{E}[X]\mathbb{E}[Y]$$
 
 **Correlation** (Pearson's correlation coefficient) is the dimensionless, standardized measure of linear relationship:
 $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\operatorname{SD}(X)\operatorname{SD}(Y)} = \frac{\operatorname{Cov}(X, Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}}$$
-
 ---
-
----
-
 ## How It Works
 
 ### Fundamental Properties of Covariance
@@ -79,11 +71,7 @@ $$\rho(X, Y) = \operatorname{Corr}(X, Y) = \frac{\operatorname{Cov}(X, Y)}{\oper
 
 3. **Invariance to Positive Affine Scaling:**
    If $a, c > 0$: $\rho(aX + b, cY + d) = \rho(X, Y)$.
-
 ---
-
----
-
 ## Example
 
 ### Worked Example: Zero Covariance Does NOT Imply Independence

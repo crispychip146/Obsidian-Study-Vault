@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 3
 ---
-
 # Computer Booting and Hardware Abstractions
 
-> 📖 **Reading Order:** Step 03 of 34 | **Module 1:** OS Architecture & Kernel Fundamentals  
+> 📖 **Reading Order:** Step 03 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
 > ◄ **Previous:** [[Dual-Mode Operation and System Calls]] | ► **Next:** [[Process Concepts and Memory Layout]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1a, 2021 Q3d)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Repeated Verbatim in 2017 and 2021!)**
 >
@@ -28,9 +26,6 @@ order: 3
 >      7. **Kernel Initialization & PID 1 Launch:** Kernel initializes memory paging, device drivers, and CPU scheduler, mounts real root (`/`), and spawns the first user-space process (`systemd` or `init`, PID 1).
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 When a computer's power switch is flipped, main memory (RAM) is completely volatile and holds random, uninitialized bits. The CPU registers hold undefined values, and no operating system is present in memory.
@@ -38,7 +33,6 @@ When a computer's power switch is flipped, main memory (RAM) is completely volat
 We want the machine to transition reliably from cold, unpowered silicon into a protected, multitasking environment running the OS kernel with memory management, scheduling, and device drivers fully active. The central obstacle is a bootstrap chicken-and-egg dilemma: the CPU can only execute instructions that reside in memory, but the software responsible for loading programs from storage (the OS) is itself sitting unread on disk.
 
 ---
-
 ## Developing the Idea
 
 The solution is **bootstrapping** (pulling oneself up by one's own bootstraps) through a disciplined, multi-stage chain of increasingly sophisticated software layers.
@@ -50,7 +44,6 @@ Each stage has just enough capability to initialize the minimum hardware needed 
 4. Stage 2 loads the compressed OS kernel image into RAM and transfers control.
 
 ---
-
 ## Definition
 
 **Booting** (short for *bootstrapping*) is the initial sequential process that starts an operating system when a computer is powered on or restarted.
@@ -58,9 +51,6 @@ Each stage has just enough capability to initialize the minimum hardware needed 
 Because main memory (RAM) is volatile, it contains random, meaningless data at power-on. The CPU cannot immediately run an operating system from RAM. Instead, hardware and firmware must work in a multi-stage chain—each link loading a slightly more complex piece of software—culminating in an initialized OS kernel running in privileged mode.
 
 ---
-
----
-
 ## How It Works
 
 ### The Step-by-Step Boot Sequence
@@ -111,9 +101,6 @@ Once kernel initialization is complete, the kernel mounts the root file system a
 - PID 1 reads system configuration files to spawn background service daemons (networking, cron, logging) and finally launches graphical login managers or terminal shells (`getty`/`login`).
 
 ---
-
----
-
 ### Essential Hardware Abstractions
 
 To understand process execution and scheduling, an operating system relies on four fundamental hardware abstractions:
@@ -154,9 +141,6 @@ The OS abstracts this entire hierarchy into a clean, uniform **Virtual Address S
 An array of function pointers stored in kernel memory. When interrupt line $k$ triggers, the hardware pauses the current instruction, looks up index $k$ in the IDT, and vectors execution immediately to that address in kernel mode.
 
 ---
-
----
-
 ## Example
 
 Step-by-step trace of booting an x86-64 machine:
@@ -168,7 +152,6 @@ Step-by-step trace of booting an x86-64 machine:
 6. Kernel initializes page tables, mounts `/`, and executes `/sbin/init` (PID 1).
 
 ---
-
 ## Technical Details
 
 ### Essential Hardware Abstractions
@@ -211,9 +194,6 @@ The OS abstracts this entire hierarchy into a clean, uniform **Virtual Address S
 An array of function pointers stored in kernel memory. When interrupt line $k$ triggers, the hardware pauses the current instruction, looks up index $k$ in the IDT, and vectors execution immediately to that address in kernel mode.
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Chain-of-Trust Invariant:** Each stage verifies the presence or integrity of the succeeding stage before transferring execution control.
@@ -221,7 +201,6 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
 - **Hardware Abstraction Decoupling:** Firmware abstracts low-level motherboard differences so bootloaders and kernels can query system topology via standardized tables (ACPI, SMBIOS).
 
 ---
-
 ## Common Mistakes
 
 1. **Missing Boot Signature:** If sector 0 does not terminate with `0x55AA`, the BIOS refuses to boot and reports: *"No bootable device found"*.
@@ -231,9 +210,6 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
    - Warm Boot (Restart): Memory and CPU reset without cycling physical power; skips several low-level hardware test phases.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** Once the OS is booted and PID 1 is running, how does the OS represent, structure, and isolate individual running programs? (See [[Process Concepts and Memory Layout]]).
@@ -244,9 +220,6 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
   - "Why is the bootloader split into multiple stages?"
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Operating System Structures and Functions]]
@@ -254,19 +227,16 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
 - [[Process Concepts and Memory Layout]]
 
 ---
-
 ## Prerequisites
 
 - [[Operating System Structures and Functions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Fork Execution Tree and Process Tracing]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 7–10, 29–36)

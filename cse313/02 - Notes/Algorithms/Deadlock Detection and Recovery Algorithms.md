@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 30
 ---
-
 # Deadlock Detection and Recovery Algorithms
 
-> 📖 **Reading Order:** Step 30 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 30 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Banker's Algorithm]] | ► **Next:** [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 3 exam years, repeated!)**
 >
@@ -27,9 +25,6 @@ order: 30
 >    - **The Proof & Example:** Suppose processes $P_1$ and $P_2$ form a circular deadlock over single-instance resources $R_1$ and $R_2$ ($P_1 \to R_2 \to P_2 \to R_1 \to P_1$). If a third process $P_3$ now requests resource $R_1$, $P_3$ will block indefinitely waiting for $R_1$. Since $P_1$ will never release $R_1$, $P_3$ is permanently deadlocked, despite having no directed path leading back to $P_3$.
 
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 Deadlock prevention severely restricts resource requests; deadlock avoidance requires knowing future maximum claims. Most modern general-purpose operating systems (Linux, macOS, Windows) choose the Ostrich algorithm (ignore the problem) or periodically run deadlock detection algorithms.
@@ -37,7 +32,6 @@ Deadlock prevention severely restricts resource requests; deadlock avoidance req
 We want an algorithmic mechanism to detect whether the current system state contains deadlocks, identify the deadlocked processes, and restore the system to an operational state. The central obstacle is minimizing detection runtime and deciding which process to terminate or preempt with minimum rollback cost.
 
 ---
-
 ## Developing the Core Idea
 
 Deadlock detection models current dependencies and searches for unresolvable cycles:
@@ -46,21 +40,18 @@ Deadlock detection models current dependencies and searches for unresolvable cyc
 - **Recovery:** Terminate processes (all deadlocked vs one at a time) or preempt resources via checkpointing and rollback.
 
 ---
-
 ## Inputs
 
 - For Single-Instance: Wait-For Graph $G = (V, E)$.
 - For Multiple-Instance: $A$ (Available vector), $CA$ (Allocation matrix), $Q$ (Request matrix).
 
 ---
-
 ## Outputs
 
 - Set of deadlocked processes: $D = \{P_{d1}, P_{d2}, \dots\}$ (or empty set if deadlock-free).
 - Recovery action plan (target process to abort or rollback).
 
 ---
-
 ## How It Works
 
 ### 4. Invocation Timing Strategies
@@ -74,9 +65,6 @@ Running the detection algorithm is computationally expensive. Operating systems 
 | **Utilization-Based** | Invoked when overall CPU utilization drops below a threshold (e.g., $< 20\%$). | Deadlocks inherently cause processes to sleep, idling the CPU; detects freezes when they actually hurt. | Indirect indicator; low utilization could just mean a quiet workload. |
 
 ---
-
----
-
 ### 5. Recovery from Deadlock
 
 Once a deadlock is detected, the OS must break the circular wait using one of three recovery mechanisms:
@@ -99,9 +87,6 @@ Once a deadlock is detected, the OS must break the circular wait using one of th
     4. Interactive vs Batch (kill batch jobs before disrupting interactive users).
 
 ---
-
----
-
 ## Pseudocode
 
 ### 1. Algorithmic Overview & Motivation
@@ -111,15 +96,11 @@ In systems where neither static prevention nor dynamic avoidance is enforced, th
 2. **Recover** from the deadlock by breaking the circular wait.
 
 ---
-
----
-
 ## Example
 
 Matrix detection: Available $A = [0, 0, 0]$. If $P_1$ requests $[0, 0, 0]$, it finishes and releases $[0, 1, 0]$. This unlocks $P_2$, which finishes. If no process can be unlocked, remaining unmarked processes are deadlocked.
 
 ---
-
 ## Complexity
 
 ### Time Complexity
@@ -129,54 +110,46 @@ $O(N^2)$ or $O(V + E)$ for DFS cycle detection in WFG; $O(m \times n^2)$ for mul
 $O(V + E)$ or $O(m \times n)$ memory.
 
 ---
-
 ## Properties
 
 - **Detection Completeness:** Accurately identifies all deadlocked processes at the instant the detection algorithm executes.
 - **Victim Selection Cost:** Recovery must balance process priority, computation time already spent, resources held, and number of rollbacks.
 
 ---
-
 ## Limitations
 
 - Checkpointing and rollbacks incur significant disk I/O overhead.
 - Terminating processes can corrupt shared databases or leave temporary files inconsistent.
 
 ---
-
 ## Common Mistakes
 
 - Misunderstanding preemption boundaries during execution.
 - Failing to verify state invariants before granting resource claims.
 
 ---
-
 ## Exam Relevance
 
 Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
 
 ---
-
 ## Related Concepts
 
 - [[Banker's Algorithm]]
 - [[Resource Allocation Graph Cycle Detection Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Deadlock Fundamentals and Coffman Conditions]]
 - [[Resource Allocation Graphs and Deadlock Modeling]]
 
 ---
-
 ## Problems
 
 - [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
 
 ---
-
 ## Sources
 
 When each resource class has only one instance, the Resource Allocation Graph can be analyzed using a Depth-First Search (DFS) cycle-detection algorithm with backtracking.
@@ -198,7 +171,6 @@ For each node $N$ in the graph:
      - Else (Dead-End Encountered): **Backtrack** to the previous node in $L$, remove $CN$ from $L$, set $CN$ to the predecessor node, and go to Step 4.
 
 ---
-
 When resource types have multiple instances, cycles in the graph do not guarantee a deadlock. We must evaluate whether currently pending requests can be fulfilled using an algorithm closely related to the Banker's safety check.
 
 ### Data Structures:
@@ -230,7 +202,6 @@ Conclusion:
 ```
 
 ---
-
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 16–24: Deadlock Detection with One and Multiple Resources, Recovery Methods) and `Notes on algorithm simulation.pdf`.
 - **Previous Topic:** [[Banker's Algorithm]] (Step 29).
 - **Next Topic:** [[Banker's Algorithm Multi-Resource Step-by-Step Example]] (Step 31).

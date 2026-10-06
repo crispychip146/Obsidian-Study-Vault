@@ -7,13 +7,9 @@ order: 4
 
 # Birthday Problem and Collisions Example
 
-> 📖 **Reading Order:** Step 04 of 92 | **Module 1:** Counting and Discrete Probability  
+> 📖 **Reading Order:** Step 04 of 103 | **Module 1:** Counting and Discrete Probability  
 > ◄ **Previous:** [[Inclusion-Exclusion Principle]] | ► **Next:** [[Derangements and Card Matching Example]]
-
 ---
-
----
-
 ## Problem
 
 Consider a group of $k$ individuals gathered in a room. Assuming:
@@ -25,11 +21,7 @@ Consider a group of $k$ individuals gathered in a room. Assuming:
 1. Find the probability $P(\text{match})$ that at least two individuals share a birthday.
 2. Determine the minimum group size $k$ such that $P(\text{match}) \ge 0.5$.
 3. Derive the general Taylor series approximation for hash table collisions.
-
 ---
-
----
-
 ## Given
 
 - Prior parameters, sample observations, state transition matrix, or probability distributions as specified.
@@ -117,11 +109,7 @@ In computer science, this is the foundation of **hash table collision analysis**
 - To find a collision with probability $\ge 50\%$, an attacker only needs approximately:
   $$k \approx \sqrt{2 \ln 2 \cdot 2^b} \approx 1.177 \times 2^{b/2}$$
 - Therefore, an 80-bit cryptographic hash provides only $\approx 2^{40}$ security against collision attacks!
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -138,11 +126,7 @@ The solution holds because every step follows directly from Bayes' rule, the law
 
 - **Intuition behind the small $k$:** People intuitively compare themselves to others ($22$ comparisons). But the number of distinct *pairs* in the room is $\binom{23}{2} = \frac{23 \times 22}{2} = 253$ pairs! With 253 opportunities for a match, exceeding 50% is natural.
 - **Exam Rule:** If an exam question asks for "at least one...", immediately think of computing $1 - P(\text{none})$.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -154,11 +138,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Combinatorics and Counting Principles]] — Multiplication rule and permutations.
 - [[Probability Axioms and Naive Probability]] — Complement rule and naive probability definition.
 - [[Problem — Birthday Collisions and Approximation]] — Full problem and proof exercises.
-
 ---
-
----
-
 ## Sources
 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 2, pages 4–6)

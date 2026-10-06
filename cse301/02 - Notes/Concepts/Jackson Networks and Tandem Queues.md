@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 88
+order: 99
 ---
 
 # Jackson Networks and Tandem Queues
 
-> 📖 **Reading Order:** Step 88 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 99 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Finite Capacity M-M-1-N Queue]] | ► **Next:** [[Shoe Shine Shop Queueing Model Example]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Jackson Networks and Tandem Queues, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -36,11 +32,7 @@ A network of queues is called a **Jackson Network** if:
 3. Upon completing service at station $i$, a customer transitions to station $j$ with routing probability $P_{ij}$, or exits the entire network with probability:
    $$P_{i, \text{exit}} = 1 - \sum_{j=1}^k P_{ij}$$
 4. All service times and routing transitions are mutually independent.
-
 ---
-
----
-
 ## How It Works
 
 ### Tandem (Sequential) Queues
@@ -117,11 +109,7 @@ By [[Little's Law]] applied to the entire network:
 $$W = \frac{L}{\gamma}$$
 where $\gamma = \sum_{j=1}^k r_j$ is the **total external arrival rate** into the network:
 $$W = \frac{\sum_{j=1}^k L_j}{\sum_{j=1}^k r_j}$$
-
 ---
-
----
-
 ## Example
 
 ### Two-Station Tandem Feed-Forward Queue
@@ -190,22 +178,14 @@ For full multi-server tandem queue derivations, see [[Tandem Two-Server Queue Pe
 ### The Profound Paradox of Jackson's Theorem
 In a network with feedback (e.g., node 2 sending customers back to node 1), the actual internal arrival processes are **not Poisson** because packets traveling in feedback loops create correlated, bursty arrival clusters.
 Yet, Jackson's theorem proves that the joint equilibrium distribution behaves **identically to a set of independent M/M/1 queues!**
-
 ---
-
----
-
 ## Common Mistakes
 
 ### Common Mistakes
 
 - Using the gross internal rate $\lambda_j$ instead of total external rate $\sum r_i$ in the denominator of network Little's Law $W = L / \gamma$.
 - Forgetting that $\rho_j = \lambda_j / \mu_j$ uses the total traffic $\lambda_j$ solved from the traffic equations, not merely the external arrival rate $r_j$.
-
 ---
-
----
-
 ## Exam Relevance
 
 Tested regularly in CSE 301 midterms and finals through derivations, numerical probability calculations, and performance metrics via [[Little's Law]] and [[Tandem Two-Server Queue Performance Example]].
@@ -219,11 +199,7 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[Queueing Systems and Kendall Notation]]
 - [[Tandem Two-Server Queue Performance Example]]
 - [[Shoe Shine Shop Queueing Model Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[M-M-1 Queue]]
@@ -241,4 +217,4 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

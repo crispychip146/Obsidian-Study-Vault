@@ -4,14 +4,12 @@ course: cse313
 status: active
 order: 29
 ---
-
 # Banker's Algorithm
 
-> 📖 **Reading Order:** Step 29 of 34 | **Module 5:** Deadlocks  
+> 📖 **Reading Order:** Step 29 of 68 | **Module 5:** Deadlocks  
 > ◄ **Previous:** [[Deadlock Prevention and Avoidance Strategies]] | ► **Next:** [[Deadlock Detection and Recovery Algorithms]]
 
 ---
-
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3a, 2019 Q3a, 2020 Q3b, 2021 Q1a, 2021 Q3a)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -29,9 +27,6 @@ order: 29
 >    - *Avoidance Rule:* The Banker's Algorithm ensures the system *never enters an unsafe state* by speculatively testing each request before granting it.
 
 ---
-
----
-
 ## The Problem and Earlier Tools
 
 In multiprogrammed systems, processes request multiple resource types dynamically. Earlier techniques—such as static deadlock prevention—force processes to request all resources upfront or impose strict linear acquisition ordering, leading to severe resource underutilization.
@@ -39,7 +34,6 @@ In multiprogrammed systems, processes request multiple resource types dynamicall
 We want an algorithm that dynamically evaluates resource requests in real time and decides whether granting a request is safe. The central obstacle is worst-case concurrency: granting a request that leaves resources available right now might still lead to deadlock later if all processes suddenly claim their maximum declared demands simultaneously.
 
 ---
-
 ## Developing the Core Idea
 
 Dijkstra's key insight is the **Town Banker Analogy**: A banker with a fixed pool of cash never allocates money such that the remaining vault cash cannot satisfy the maximum remaining credit line of at least one client.
@@ -47,7 +41,6 @@ Dijkstra's key insight is the **Town Banker Analogy**: A banker with a fixed poo
 By maintaining this **Safe State Invariant**, the operating system guarantees that at least one process can finish, return all its held resources to the available pool, and thereby allow the remaining processes to finish sequentially without deadlock.
 
 ---
-
 ## Inputs
 
 - $E = [e_1, e_2, \dots, e_m]$: Total existing resource vector.
@@ -56,14 +49,12 @@ By maintaining this **Safe State Invariant**, the operating system guarantees th
 - $Request_i = [r_1, r_2, \dots, r_m]$: Dynamic request vector from process $P_i$.
 
 ---
-
 ## Outputs
 
 - Boolean decision: **Grant** request immediately, or **Suspend** $P_i$ until resources become available.
 - Safe execution sequence: $[P_{s1}, P_{s2}, \dots, P_{sn}]$ proving system safety.
 
 ---
-
 ## How It Works
 
 ### 2. Mathematical Formalization & Data Structures
@@ -83,9 +74,6 @@ For vectors $X, Y \in \mathbb{R}^m$, we define:
 $$X \le Y \iff X_j \le Y_j \quad \forall j \in \{1, 2, \dots, m\}$$
 
 ---
-
----
-
 ## Pseudocode
 
 ### 1. Algorithmic Overview & Motivation
@@ -100,9 +88,6 @@ A small-town banker has a fixed total pool of cash. Several business clients req
 - **Banker's Invariant:** The banker will **never** approve a loan request if granting it would leave the vault with less cash than the maximum remaining need of at least one client. As long as one client can finish, their repaid funds can be used to satisfy the next, avoiding bankruptcy (deadlock).
 
 ---
-
----
-
 ### 3. The Safety Algorithm
 
 This algorithm determines whether the current system state is safe:
@@ -131,9 +116,6 @@ Algorithm Safety_Check:
 ```
 
 ---
-
----
-
 ### 5. Algorithmic Complexity & Limitations
 
 - **Time Complexity:** The safety check requires $O(m \times n^2)$ operations in the worst case (searching through $n$ rows up to $n$ times, each taking $m$ comparisons).
@@ -143,15 +125,11 @@ Algorithm Safety_Check:
   3. *Overhead:* Running an $O(m \cdot n^2)$ safety simulation on **every single system resource call** would cripple OS performance.
 
 ---
-
----
-
 ## Example
 
 Suppose $Available = [3, 3, 2]$, and 5 processes have need vectors. The safety algorithm simulates running each process that satisfies $Need_i \le Work$, collecting its allocated resources back into $Work$, until all processes finish.
 
 ---
-
 ## Complexity
 
 ### Time Complexity
@@ -161,7 +139,6 @@ $O(m 	imes n^2)$ where $n$ is the number of processes and $m$ is the number of r
 $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
 
 ---
-
 ## Properties
 
 - **Deadlock-Free Guarantee:** The algorithm strictly guarantees that the system will never enter a deadlocked state.
@@ -169,7 +146,6 @@ $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
 - **Termination:** The safety algorithm terminates in at most $n$ iterations.
 
 ---
-
 ## Limitations
 
 - Requires processes to state their maximum resource needs in advance ($MaxReq$), which is difficult or impossible for general-purpose applications.
@@ -177,20 +153,17 @@ $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.
 - Assumes processes terminate in finite time and release all allocated resources.
 
 ---
-
 ## Common Mistakes
 
 - Misunderstanding preemption boundaries during execution.
 - Failing to verify state invariants before granting resource claims.
 
 ---
-
 ## Exam Relevance
 
 Regularly examined through Gantt chart simulations, state trace matrices, and deadlock sequence proofs.
 
 ---
-
 ## Related Concepts
 
 - [[Deadlock Prevention and Avoidance Strategies]]
@@ -198,20 +171,17 @@ Regularly examined through Gantt chart simulations, state trace matrices, and de
 - [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
 
 ---
-
 ## Prerequisites
 
 - [[Deadlock Fundamentals and Coffman Conditions]]
 - [[Resource Allocation Graphs and Deadlock Modeling]]
 
 ---
-
 ## Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 
 ---
-
 ## Sources
 
 When a running process $P_i$ issues a new resource request vector $Request_i$:
@@ -248,7 +218,6 @@ flowchart TD
    - **If Unsafe:** The OS undoes the tentative modifications (restores old $A, CA_i, R_i$) and forces $P_i$ to wait.
 
 ---
-
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 28–31: Banker's Algorithm for Single and Multiple Resources) and `Notes on algorithm simulation.pdf`.
 - **Previous Topic:** [[Deadlock Prevention and Avoidance Strategies]] (Step 28).
 - **Next Topic:** [[Deadlock Detection and Recovery Algorithms]] (Step 30).

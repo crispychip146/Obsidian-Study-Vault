@@ -2,28 +2,20 @@
 type: concept
 course: cse301
 status: active
-order: 71
+order: 82
 ---
 
 # Stationary and Limiting Distributions in Markov Chains
 
-> 📖 **Reading Order:** Step 71 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 82 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Classification of States in Markov Chains]] | ► **Next:** [[Chapman-Kolmogorov Equations]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 - **Predicting Steady-State Performance:** In queuing models, web browsing (PageRank), and computer systems, we need to know the steady-state load, average buffer occupancy, or server utilization without simulating infinitely many individual transitions.
 - **Handling Asymptotic Behavior:** Powers of transition matrices $P^n$ become computationally prohibitive for large $n$. Finding $\pi$ reduces the limit of matrix powers to solving a system of linear equations.
 - **MCMC Sampling:** Algorithms like Metropolis-Hastings construct a Markov chain whose unique stationary distribution matches a desired complex target distribution.
-
 ---
-
----
-
 ## Developing the Idea
 
 1. **Forgetting the Past:** Over long time horizons, the chain "forgets" where it started. Whether it began in state 0 or state 5, the probability of finding it in state $j$ after millions of steps approaches $\pi_j$.
@@ -33,11 +25,7 @@ order: 71
 4. **Mean Return Time:** If you are currently in state $j$, the expected number of steps until the chain returns to state $j$, denoted $\mu_{jj}$, is inversely proportional to its stationary probability:
    $$\pi_j = \frac{1}{\mu_{jj}}$$
    (Rare states have tiny $\pi_j$ and huge return times; frequently visited states have large $\pi_j$ and short return times).
-
 ---
-
----
-
 ## Definition
 
 ### 1. Limiting Distribution
@@ -61,11 +49,7 @@ In matrix notation, treating $\pi$ as a row vector:
 $$\pi P = \pi, \quad \pi \mathbf{1} = 1$$
 
 where $\mathbf{1}$ is a column vector of ones.
-
 ---
-
----
-
 ## How It Works
 
 ### The Global Balance Equations
@@ -124,11 +108,7 @@ To find the stationary / limiting distribution for an $m$-state chain:
    $$\sum_{j=0}^{m-1} \pi_j = 1$$
 5. **Solve the Resulting Non-Homogeneous Linear System:**
    Use substitution or Gaussian elimination to find $\pi_0, \pi_1, \dots, \pi_{m-1}$.
-
 ---
-
----
-
 ## Example
 
 ### Two-State Stationary Balance Equations
@@ -198,11 +178,7 @@ For multi-state systems, asymptotic convergence proofs, and genetic stationarity
 - **Not Dropping a Redundant Balance Equation:** Attempting to solve all $m$ balance equations plus the normalization equation simultaneously with standard inversion without recognizing linear dependence.
 - **Treating Periodic Chains as having Limiting Probabilities:** Stating that $\lim_{n \to \infty} P_{ij}^n = \pi_j$ when the chain has period $d \ge 2$. (Long-run average time proportions still equal $\pi_j$, but point-wise limit $\lim P_{ij}^n$ does not exist).
 - **Writing $\pi$ as a Column Vector in $P \pi = \pi$:** In Markov chains, $\pi$ is a **row vector** on the left: $\pi P = \pi$. Writing $P \pi = \pi$ solves for right eigenvectors (which is simply the all-ones vector $\mathbf{1}$, since $P \mathbf{1} = \mathbf{1}$).
-
 ---
-
----
-
 ## Exam Relevance
 
 In CSE301 examinations:
@@ -211,11 +187,7 @@ In CSE301 examinations:
 - Explaining the necessary conditions (irreducible + aperiodic) for the existence of limiting distributions.
 - Interpreting $\pi_j$ as long-run time proportion and calculating mean return time $\mu_{jj} = 1/\pi_j$.
 - Verifying whether a proposed distribution is stationary (as in the [[Hardy-Weinberg Law Markov Chain Example]]).
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Markov Chain]]
@@ -223,29 +195,17 @@ In CSE301 examinations:
 - [[Chapman-Kolmogorov Equations]]
 - [[Weather Forecasting Markov Chain Example]]
 - [[Hardy-Weinberg Law Markov Chain Example]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Classification of States in Markov Chains]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Four-Day Weather Forecast]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 19–24, 28–29)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.4, pp. 211–224)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 19–24, 28–29)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.4, pp. 211–224)

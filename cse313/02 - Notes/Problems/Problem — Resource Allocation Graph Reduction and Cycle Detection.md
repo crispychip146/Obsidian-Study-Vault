@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 34
 ---
-
 # Problem — Resource Allocation Graph Reduction and Cycle Detection
 
-> 📖 **Reading Order:** Step 34 of 34 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Problem — Banker's Algorithm Safe State and Request Granting]] | ► **Next:** [[00 - Course Hub|Course Hub]] *(End of Module 1–5 Series)*
+> 📖 **Reading Order:** Step 34 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Problem — Banker's Algorithm Safe State and Request Granting]] | ► **Next:** [[Address Space Abstraction and Hardware Relocation]]
 
 ---
-
----
-
 ## Problem
 
 This problem evaluates deadlock detection using two standard techniques: Depth-First Search (DFS) cycle tracing for single-instance graphs, and graph reduction for multi-instance graphs.
@@ -35,7 +31,6 @@ Consider a single-instance system with 4 processes ($P_1, P_2, P_3, P_4$) and 4 
 Identify whether a deadlock exists and name the deadlocked cycle.
 
 ---
-
 ### Part 2: Multi-Instance Graph Reduction
 Consider a system with 3 processes ($P_1, P_2, P_3$) and 3 resource types ($R_1, R_2, R_3$):
 - Resource $R_1$ has **2 instances**.
@@ -67,41 +62,33 @@ flowchart TD
 4. Conclude whether the system is deadlocked.
 
 ---
-
----
-
 ## Given
 
 - Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
 
 ---
-
 ## Required
 
 - Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
 
 ---
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Question Type
 
 Graph Theory / Cycle Detection & Reduction
 
 ---
-
 ## Solution
 
 ### Understanding the Situation
@@ -162,7 +149,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
   **Conclusion:** Cycle detected: $R_2 \to P_3 \to R_3 \to P_1 \to R_1 \to P_2 \to R_2$. Process $P_4$ is blocked waiting for deadlocked resource $R_2$.
 
 ---
-
 ### Part 2: Multi-Instance Graph Reduction
 
 #### 1. Vector Formulation:
@@ -211,45 +197,38 @@ Even though a directed cycle existed ($P_1 \to R_3 \to P_3 \to R_1 \to P_1$), **
 This vividly demonstrates Theorem 2: in multi-instance resource systems, **a cycle is a necessary condition, but NOT a sufficient condition for deadlock**.
 
 ---
-
 ### Result and Interpretation
 The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
 
 ---
-
 ## Reusable Insight
 
 Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
 
 ---
-
 ## Common Mistakes
 
 - Misinterpreting the initial state vector or indexing offsets.
 - Confusing necessary conditions with sufficient conditions during analysis.
 
 ---
-
 ## Exam Pattern
 
 Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
 
 ---
-
 ## Related Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Related Concepts
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
 ## Source
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 16–23: Graph Reduction, Cycle Analysis) and `Notes on algorithm simulation.pdf` (Pages 5–7).

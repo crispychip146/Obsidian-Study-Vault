@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 90
+order: 101
 ---
 
 # Tandem Two-Server Queue Performance Example
 
-> 📖 **Reading Order:** Step 90 of 92 | **Module 11:** Queuing Theory  
+> 📖 **Reading Order:** Step 101 of 103 | **Module 11:** Queuing Theory  
 > ◄ **Previous:** [[Shoe Shine Shop Queueing Model Example]] | ► **Next:** [[Problem — M-M-1 Queue Performance Metrics Calculation]]
-
 ---
-
----
-
 ## Problem
 
 An e-commerce order processing pipeline consists of two sequential processing stages in series:
@@ -27,22 +23,14 @@ An e-commerce order processing pipeline consists of two sequential processing st
 3. Compute the average number of orders in Stage 1 ($L_1$), Stage 2 ($L_2$), and in the entire pipeline ($L$).
 4. Compute the average time an order spends in Stage 1 ($W_1$), Stage 2 ($W_2$), and the total end-to-end pipeline latency ($W$).
 5. Verify that Little's Law holds for the entire network.
-
 ---
-
----
-
 ## Given
 
 - Pipeline structure: Tandem queue ($Q_1 \to Q_2$)
 - External arrival rate: $\lambda = 8$ orders/min
 - Server 1 processing rate: $\mu_1 = 12$ orders/min
 - Server 2 processing rate: $\mu_2 = 10$ orders/min
-
 ---
-
----
-
 ## Required
 
 1. $\rho_1, \rho_2$ and stability assessment.
@@ -50,11 +38,7 @@ An e-commerce order processing pipeline consists of two sequential processing st
 3. Pipeline inventory metrics: $L_1, L_2, L$.
 4. Pipeline latency metrics: $W_1, W_2, W$.
 5. Network Little's Law verification ($L = \lambda W$).
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -130,11 +114,7 @@ We verify whether $L = \lambda W$ across the entire pipeline:
 $$\lambda \times W = 8 \text{ orders/min} \times 0.75 \text{ min} = 6.0 \text{ orders}$$
 This matches our derived inventory $L = 6$ exactly:
 $$\mathbf{L = \lambda W \quad \checkmark}$$
-
 ---
-
----
-
 ## Result
 
 | Metric | Stage 1 (Validation) | Stage 2 (Payment) | Total Pipeline |
@@ -146,11 +126,7 @@ $$\mathbf{L = \lambda W \quad \checkmark}$$
 | Average Total ($L$) | $2.00$ orders | $4.00$ orders | **$6.00$ orders** |
 | Wait in Queue ($W_Q$) | $0.167$ min ($10$ s) | $0.400$ min ($24$ s) | $0.567$ min ($34$ s) |
 | Total Residence ($W$) | $0.250$ min ($15$ s) | $0.500$ min ($30$ s) | **$0.750$ min ($45$ s)** |
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -176,11 +152,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[M-M-1 Queue]]
 - [[M-M-1 Performance Formulas]]
 - [[Little's Law]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]

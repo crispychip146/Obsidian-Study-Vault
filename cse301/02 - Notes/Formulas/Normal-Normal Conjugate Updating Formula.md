@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 53
+order: 64
 ---
 
 # Normal-Normal Conjugate Updating Formula
 
-> 📖 **Reading Order:** Step 53 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 64 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Beta-Binomial Conjugate Updating Formula]] | ► **Next:** [[Bernoulli Bayesian Inference with Beta Prior Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Normal-Normal Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -51,11 +47,7 @@ $$\bar{\theta} = \frac{\frac{n}{\sigma^2}\bar{X} + \frac{1}{b^2}a}{\frac{n}{\sig
 ### 3. Bayesian $1 - \alpha$ Credible Interval
 $$C = \left(\bar{\theta} - z_{\alpha/2} \tau, \quad \bar{\theta} + z_{\alpha/2} \tau\right)$$
 where $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning | Role |
@@ -70,11 +62,7 @@ where $z_{\alpha/2} = \Phi^{-1}(1 - \alpha/2)$.
 | $n/\sigma^2$ | Data precision | Information content of sample |
 | $1/\tau^2$ | Posterior precision | Total information content |
 | $\bar{\theta}$ | Posterior mean | Updated point estimate |
-
 ---
-
----
-
 ## Conditions
 
 - Random variables must possess finite first and second moments (well-defined expectations).
@@ -101,11 +89,7 @@ $$\bar{\theta} = \frac{\text{Data Precision} \times \bar{X} + \text{Prior Precis
   The prior is impregnable. $\bar{\theta} \to a$ and data are ignored.
 - **Large Sample ($n \to \infty$):**
   The data precision $n/\sigma^2$ dwarfs the prior precision $1/b^2$, washing out any reasonable prior.
-
 ---
-
----
-
 ## Derivation
 
 ### Derivation
@@ -134,11 +118,7 @@ Exponentiating back:
 $$f(\theta \mid \mathbf{x}) \propto \exp\left(-\frac{1}{2\tau^2}(\theta - \bar{\theta})^2\right)$$
 
 This is recognized immediately as a Gaussian density $N(\bar{\theta}, \tau^2) \quad \blacksquare$.
-
 ---
-
----
-
 ## Example
 
 ### Example
@@ -159,11 +139,7 @@ Suppose an instrument measures a physical constant $\theta$. Instrument precisio
    $$C = 103.89 \pm 1.96 \times 0.4932 = 103.89 \pm 0.967 \implies [102.92, 104.86]$$
 
 Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior prevented it from going all the way to $104$.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
@@ -176,11 +152,7 @@ Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior
 - [[Bayesian Inference]]
 - [[Credible Intervals]]
 - [[Beta-Binomial Conjugate Updating Formula]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Bayesian Inference]]
@@ -197,4 +169,4 @@ Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior
 
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

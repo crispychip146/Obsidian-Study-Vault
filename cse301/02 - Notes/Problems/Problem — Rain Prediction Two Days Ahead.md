@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 79
+order: 90
 ---
 
 # Problem — Rain Prediction Two Days Ahead
 
-> 📖 **Reading Order:** Step 79 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 90 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Problem — Four-Day Weather Forecast]] | ► **Next:** [[Problem — State Communication and Irreducibility Verification]]
-
 ---
-
----
-
 ## Problem
 
 Suppose whether it rains on any given day depends on the weather conditions of the previous two days:
@@ -37,58 +33,34 @@ $$P = \begin{pmatrix}
 \end{pmatrix}$$
 
 **Question:** Given that it rained both yesterday and today (so the system starts in State 0), what is the probability that it rains the day after tomorrow?
-
 ---
-
----
-
 ## Given
 
 - Initial state: $X_0 = 0$ (State 0: rained yesterday and today)
 - Transition probability matrix $P$ as given above.
 - Target event: It rains on day 2 (the day after tomorrow).
-
 ---
-
----
-
 ## Required
 
 1. Compute row 0 of the two-step transition matrix $P^{(2)}$.
 2. Identify all states at time step $n = 2$ in which it rains on that day.
 3. Compute the conditional probability of the target event.
-
 ---
-
----
-
 ## Concepts Tested
 
 - [[Markov Chain]] (Higher-Order State Representation)
 - [[Chapman-Kolmogorov Equations]]
 - Law of Total Probability
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
-
 ---
-
----
-
 ## Question Type
 
 Numerical / Matrix Multiplication
-
 ---
-
----
-
 ## Solution
 
 ### Understanding the Situation
@@ -175,11 +147,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 - **Computing Entire $4 \times 4$ Matrix Unnecessarily:** In an exam with strict time limits, calculating all 16 entries of $P^2$ wastes valuable time. Only **Row 0** is needed since $X_0 = 0$.
 - **Omitting State 1:** Mistakenly concluding the answer is just $P_{00}^{(2)} = 0.49$ by equating "rain" solely with State 0. State 1 also represents rain on that day!
 - **Index Alignment Slip:** Mixing up the 0-indexed states when taking column dot products.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.
@@ -202,5 +170,5 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 ## Source
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 16–18)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.12, pp. 212–213)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 16–18)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.12, pp. 212–213)

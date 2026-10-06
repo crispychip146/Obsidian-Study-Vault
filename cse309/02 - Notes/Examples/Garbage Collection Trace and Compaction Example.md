@@ -12,8 +12,6 @@ order: 30
 
 ---
 
----
-
 ## Problem
 
 Consider a program executing with a heap of 100 memory units. The heap currently contains 6 allocated objects:
@@ -33,8 +31,6 @@ Heap space `[80 .. 99]` is currently unallocated.
 1. Simulate the **Mark-and-Sweep** algorithm and illustrate the resulting free list.
 2. Simulate the **Mark-and-Compact** algorithm and calculate the `NewLocation` for all live objects.
 3. Simulate **Cheney's Copying Collector** assuming a 2-semispace configuration.
-
----
 
 ---
 
@@ -136,8 +132,6 @@ Let total memory 100 be split into two 50-unit semispaces:
    - No pointers $\implies$ `scan` advances to `95`.
 6. `scan == free == 95`: Collection terminates!
 7. To-space has contiguous live objects in `[50 .. 94]`, with 5 units remaining before next swap.
-
----
 
 ---
 

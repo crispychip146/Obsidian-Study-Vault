@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 55
+order: 66
 ---
 
 # Two Binomial Distributions Comparison via Bayesian Simulation Example
 
-> 📖 **Reading Order:** Step 55 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 66 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Bernoulli Bayesian Inference with Beta Prior Example]] | ► **Next:** [[Problem — Laplace Rule of Succession and Bayesian Updating]]
-
 ---
-
----
-
 ## Problem
 
 A clinical trial evaluates an experimental drug against a standard control treatment:
@@ -27,31 +23,19 @@ $$\tau = g(p_1, p_2) = p_2 - p_1$$
 1. Formulate the joint posterior distribution $f(p_1, p_2 \mid X_1, X_2)$ assuming independent non-informative flat priors $f(p_1) = 1$ and $f(p_2) = 1$.
 2. Explain why analytical calculation of the posterior density of $\tau = p_2 - p_1$ is complicated, and design a Monte Carlo simulation algorithm to evaluate the posterior distribution of $\tau$.
 3. Detail how to compute the posterior mean $E[\tau \mid \text{data}]$, the $95\%$ credible interval for $\tau$, and the posterior probability that the treatment is superior: $P(p_2 > p_1 \mid \text{data})$.
-
 ---
-
----
-
 ## Given
 
 - Control data: $n_1 = 50, X_1 = 30 \implies X_1 \sim \text{Binomial}(n_1, p_1)$
 - Treatment data: $n_2 = 50, X_2 = 40 \implies X_2 \sim \text{Binomial}(n_2, p_2)$
 - Independent priors: $f(p_1, p_2) = f(p_1)f(p_2) = 1 \cdot 1 = 1$ on $[0, 1] \times [0, 1]$
-
 ---
-
----
-
 ## Required
 
 1. Closed-form marginal posterior distributions for $p_1$ and $p_2$.
 2. Simulation algorithm for the difference parameter $\tau = p_2 - p_1$.
 3. Method for extracting credible intervals and superiority probability $P(\tau > 0 \mid \text{data})$.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -135,30 +119,18 @@ We can verify the simulation analytically:
 5. **Posterior Probability that Treatment is Superior:**
    Because both Beta distributions are unimodal and moderately sized ($n = 50$), the difference $\tau$ is extremely well approximated by a Gaussian distribution $N(0.1923, 0.0877^2)$:
    $$P(\tau > 0 \mid \text{data}) \approx P\left(Z > \frac{0 - 0.1923}{0.0877}\right) = P(Z > -2.19) = \Phi(2.19) \approx 0.9857 \quad (98.57\%)$$
-
 ---
-
----
-
 ## Result
 
 - Marginal posteriors: $p_1 \sim \text{Beta}(31, 21)$ and $p_2 \sim \text{Beta}(41, 11)$.
 - Posterior mean of treatment benefit: $\hat{\tau}_{\text{Bayes}} \approx +19.23\%$.
 - $95\%$ Credible Interval: $0.1923 \pm 1.96(0.0877) \implies [0.0204, 0.3642]$ (strictly positive).
 - Probability that treatment outperforms control: **$98.57\%$**.
-
 ---
-
----
-
 ## Why This Works
 
 In frequentist statistics, evaluating a non-linear or multi-parameter hypothesis $p_2 - p_1$ requires asymptotic two-sample $Z$-tests or complex asymptotic delta methods. In Bayesian statistics, having the full joint posterior distribution allows any function $\tau = g(p_1, p_2)$ to be evaluated directly and exactly by forward Monte Carlo sampling.
-
 ---
-
----
-
 ## Common Mistakes
 
 - Forgetting normalization constants when evaluating continuous posterior densities.
@@ -177,11 +149,7 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Bayesian Inference]]
 - [[Credible Intervals]]
 - [[Beta-Binomial Conjugate Updating Formula]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

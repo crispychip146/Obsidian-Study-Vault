@@ -12,8 +12,6 @@ order: 50
 
 ---
 
----
-
 ## Problem
 
 Consider the following Register Interference Graph (RIG) for 5 variables $\{ u, v, w, x, y \}$ in a compiler back-end:
@@ -35,8 +33,6 @@ The target machine architecture has **$K = 3$ hardware registers**: $\{ R_1, R_2
    - Show the state of the coloring stack after the Simplify phase.
    - Show the color assignment during the Select phase.
 3. If an actual spill occurs, explain the exact code modifications (loads and stores) the compiler must insert into the intermediate representation.
-
----
 
 ---
 

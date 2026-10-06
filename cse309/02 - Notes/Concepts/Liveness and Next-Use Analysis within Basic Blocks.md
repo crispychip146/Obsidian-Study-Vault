@@ -7,16 +7,8 @@ order: 35
 
 # Liveness and Next-Use Analysis within Basic Blocks
 
-> 📖 **Reading Order:** Step 35 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 35 of 55 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Basic Block Partitioning Algorithm]] | ► **Next:** [[DAG Construction and Local Optimization of Basic Blocks]]
-
----
-
----
-
----
-
----
 
 ---
 
@@ -42,14 +34,6 @@ To make optimal local register allocation choices, the code generator must compu
 
 ---
 
----
-
----
-
----
-
----
-
 ## Developing the Idea
 
 Let $i$ be an intermediate instruction of the form:
@@ -62,33 +46,13 @@ $$i: \quad x = y + z$$
 
 ---
 
----
-
----
-
----
-
----
-
 ## Definition
 
 **Liveness and Next-Use Analysis within Basic Blocks** is a formal compiler mechanism that structures syntax-directed translation, intermediate representations, runtime environments, or code generation.
 
 ---
 
----
-
----
-
----
-
 ## How It Works
-
-### How It Works
-
-### How It Works
-
-### How It Works
 
 ### The Backward Scan: Traveling Against the Arrow of Time
 
@@ -109,6 +73,7 @@ flowchart BT
 ```
 
 ---
+
 ### The Backward Scanning Algorithm
 
 ### Step 1: Initialization at Block Exit
@@ -134,6 +99,7 @@ For each instruction $i: x = y + z$, scanning from the last instruction of $B$ b
    - *Rationale:* Statement $i$ reads the values of $y$ and $z$. Therefore, looking backward from statement $i$, both variables must be alive, and their next use is precisely statement $i$!
 
 ---
+
 ### The Final Annotated Instruction Stream
 
 | Line # | Instruction | Attached Liveness & Next-Use Metadata |
@@ -144,119 +110,6 @@ For each instruction $i: x = y + z$, scanning from the last instruction of $B$ b
 
 > [!NOTE] Compiler Decision from Metadata
 > Look at Line (2): $t_1$ is marked as having its next use at Line (2). Once Line (2) finishes executing, $t_1$'s physical register can be **immediately freed or reused** without storing $t_1$ to RAM, because $t_1$ is never read again!
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-### Formal Proof: Invariant Correctness of Backward Scan
-
-### Theorem:
-*At the instant the backward scan reaches statement $i$, the symbol table correctly reflects the liveness and next-use of every variable at the program point immediately preceding statement $i$.*
-
-### Proof by Mathematical Induction:
-Let the basic block contain $N$ instructions: $\langle I_1, I_2, \dots, I_N \rangle$. We induct on the number of backward steps $k = N - i + 1$.
-
-1. **Base Case ($k = 0$, Block Exit):**
-   - By definition of basic block boundaries, user variables are preserved across blocks, and local temporaries are dead. The initial table state matches the boundary definition.
-2. **Inductive Hypothesis:**
-   - Assume that after scanning backwards from $I_N$ up to $I_{m+1}$, the symbol table accurately reflects the liveness and next-use immediately preceding instruction $I_{m+1}$.
-3. **Inductive Step (Processing $I_m: x = y \oplus z$):**
-   - The state immediately following $I_m$ is identical to the state immediately preceding $I_{m+1}$ (straight-line sequential execution).
-   - Instruction $I_m$ writes to $x$. Any variable read occurring before $I_m$ cannot read the value produced by $I_m$. If $x$ was used in $I_m$, that was a use; but $x$ is defined on the LHS, so any value of $x$ prior to $I_m$ is killed. Thus, setting $x = (\text{Dead}, \text{None})$ correctly reflects the state before $I_m$.
-   - Instruction $I_m$ reads $y$ and $z$. Therefore, in any code preceding $I_m$, $y$ and $z$ must be preserved in registers/memory to reach $I_m$. The next instruction reading them is $I_m$. Setting $y = (\text{Live}, m)$ and $z = (\text{Live}, m)$ accurately updates their state.
-   - For all other variables $w \notin \{x, y, z\}$, $I_m$ neither defines nor uses $w$. Their liveness and next-use values pass through unchanged, which is correct.
-4. By induction, when the scan reaches instruction 1, the attached metadata at every statement is mathematically exact. $\blacksquare$
-
----
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
----
-### Technical Details
-
-Target architecture and ABI specifications govern low-level alignment and register assignments.
-
----
-### Important Properties and Why They Hold
-
-- **Semantic Soundness:** Preserves program execution equivalence.
-- **Algorithmic Efficiency:** Operates in low polynomial or linear time over the program structure.
-
----
-### Related Concepts
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
-
----
-### Prerequisites
-
-- [[Syntax-Directed Definitions and Translation Schemes]]
-
----
-### Problems
-
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
-
----
 
 ---
 
@@ -281,124 +134,33 @@ Target architecture and ABI specifications govern low-level alignment and regist
 
 ## Common Mistakes
 
-### Common Mistakes
-
-### Common Mistakes
-
-### Common Mistakes
-
 - Confusing syntactic validity with semantic correctness.
 - Overlooking variable scoping or memory aliasing side effects.
 
 ---
 
----
-
----
-
----
-
 ## Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-Detailed walkthroughs and traces are provided in the corresponding example and problem notes.
-
----
-### Exam Relevance
-
-### Example
-
-### Comprehensive Trace: 3-Instruction Block
-
-Consider the basic block:
-```text
-(1)  t1 = a * b
-(2)  t2 = t1 + c
-(3)  d = t2 * a
-```
-Assume user variables $a, b, c, d$ are live at block exit, and temporaries $t_1, t_2$ are dead.
-
-### Step-by-Step Backward Scan Walkthrough:
-
-```
-Initial State (at exit after line 3):
-Symbol Table: { a: (L, -),  b: (L, -),  c: (L, -),  d: (L, -),  t1: (D, -),  t2: (D, -) }
-```
-
-#### 1. Processing Line (3): `d = t2 * a`
-- **Attach Info:**
-  - $d$: Live, Next-Use: None
-  - $t_2$: Dead, Next-Use: None
-  - $a$: Live, Next-Use: None
-- **Update Table:**
-  - $d$ defined $\implies d$: **(Dead, None)**
-  - $t_2$ used $\implies t_2$: **(Live, 3)**
-  - $a$ used $\implies a$: **(Live, 3)**
-- **Table State:** `{ a: (L, 3), b: (L, -), c: (L, -), d: (D, -), t1: (D, -), t2: (L, 3) }`
-
-#### 2. Processing Line (2): `t2 = t1 + c`
-- **Attach Info:**
-  - $t_2$: Live, Next-Use: (3)
-  - $t_1$: Dead, Next-Use: None
-  - $c$: Live, Next-Use: None
-- **Update Table:**
-  - $t_2$ defined $\implies t_2$: **(Dead, None)**
-  - $t_1$ used $\implies t_1$: **(Live, 2)**
-  - $c$ used $\implies c$: **(Live, 2)**
-- **Table State:** `{ a: (L, 3), b: (L, -), c: (L, 2), d: (D, -), t1: (L, 2), t2: (D, -) }`
-
-#### 3. Processing Line (1): `t1 = a * b`
-- **Attach Info:**
-  - $t_1$: Live, Next-Use: (2)
-  - $a$: Live, Next-Use: (3)
-  - $b$: Live, Next-Use: None
-- **Update Table:**
-  - $t_1$ defined $\implies t_1$: **(Dead, None)**
-  - $a$ used $\implies a$: **(Live, 1)**
-  - $b$ used $\implies b$: **(Live, 1)**
-- **Final Table at Entry:** `{ a: (L, 1), b: (L, 1), c: (L, 2), d: (D, -), t1: (D, -), t2: (D, -) }`
-
----
-
----
-### Exam Relevance
 
 Tested regularly in compiler examinations via syntax-directed translation proofs, activation record diagrams, and control flow optimization problems.
 
 ---
 
----
-
----
-
----
-
 ## Related Concepts
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
-- [[Intermediate Representations and Three-Address Code]]
-- [[Basic Blocks and Control Flow Graphs]]
+- [[A Simple Code Generator Algorithm]]
+- [[Live Ranges and Live Intervals in Register Allocation]]
 
 ---
 
 ## Prerequisites
 
-- [[Syntax-Directed Definitions and Translation Schemes]]
+- [[Basic Blocks and Control Flow Graphs]]
 
 ---
 
 ## Problems
 
-- [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-- [[Problem — Array Reference Three-Address Code Generation]]
+- [[Problem — Basic Block Partitioning and Next-Use Table]]
 
 ---
 

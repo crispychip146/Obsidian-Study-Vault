@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 20
+order: 30
 ---
 
 # Adam's Law (Law of Total Expectation)
 
-> 📖 **Reading Order:** Step 20 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> 📖 **Reading Order:** Step 30 of 103 | **Module 3:** Conditional Probability and Conditioning  
 > ◄ **Previous:** [[Law of Total Probability and Bayes' Rule]] | ► **Next:** [[Eve's Law (Law of Total Variance)]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Adam's Law (Law of Total Expectation), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -31,11 +27,7 @@ By decomposing joint distributions into conditional components, expanding algebr
 The **Law of Total Expectation**, often referred to as **Adam's Law** (or the **Tower Property**), states that for any two random variables $X$ and $Y$ defined on the same probability space (provided $\mathbb{E}[\lvert Y \rvert] < \infty$):
 
 $$\mathbb{E}[Y] = \mathbb{E}\left[ \mathbb{E}[Y \mid X] \right]$$
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -62,11 +54,7 @@ Adam's Law provides a universal divide-and-conquer strategy for difficult expect
 2. Compute the conditional expectation $g(x) = \mathbb{E}[Y \mid X = x]$ treating $x$ as fixed and known.
 3. Replace $x$ with the random variable $X$ to form the random variable $g(X) = \mathbb{E}[Y \mid X]$.
 4. Take the unconditional expectation $\mathbb{E}[g(X)]$ across the distribution of $X$.
-
 ---
-
----
-
 ## Derivation
 
 ### Detailed Mathematical Proof
@@ -88,11 +76,7 @@ $$\mathbb{E}[g(X)] = \int_{-\infty}^\infty g(x) f_X(x) \, dx = \int_{-\infty}^\i
 $$= \int_{-\infty}^\infty \int_{-\infty}^\infty y f_{X,Y}(x, y) \, dy \, dx = \int_{-\infty}^\infty y \left( \int_{-\infty}^\infty f_{X,Y}(x, y) \, dx \right) dy$$
 $$= \int_{-\infty}^\infty y f_Y(y) \, dy = \mathbb{E}[Y]$$
 $\blacksquare$
-
 ---
-
----
-
 ## Example
 
 ### Application Example: Expected Sum of a Random Number of Terms
@@ -115,11 +99,7 @@ $$\mathbb{E}[S_N] = \mathbb{E}\left[ \mathbb{E}[S_N \mid N] \right] = \mathbb{E}
 
 **Result (Wald's Identity for Expectation):**
 $$\mathbb{E}\left[ \sum_{i=1}^N X_i \right] = \mathbb{E}[N] \mathbb{E}[X]$$
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Treating $\mathbb{E}[X \mid Y]$ as a Number:** $\mathbb{E}[X \mid Y]$ is a random variable (a function of $Y$), not a constant number. Only after taking the outer expectation $\mathbb{E}[\mathbb{E}[X \mid Y]]$ does it become the deterministic scalar $\mathbb{E}[X]$.
@@ -132,11 +112,7 @@ $$\mathbb{E}\left[ \sum_{i=1}^N X_i \right] = \mathbb{E}[N] \mathbb{E}[X]$$
 - [[Conditional Expectation]] — The theoretical projection framework.
 - [[Eve's Law (Law of Total Variance)]] — Variance companion to Adam's Law.
 - [[Random Number of Random Variables Sum Example]] — Full compound process example.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]

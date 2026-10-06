@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 17
 ---
-
 # Problem — CPU Scheduling Algorithm Simulation and Gantt Chart
 
-> 📖 **Reading Order:** Step 17 of 34 | **Module 3:** CPU Scheduling  
+> 📖 **Reading Order:** Step 17 of 68 | **Module 3:** CPU Scheduling  
 > ◄ **Previous:** [[Comprehensive CPU Scheduling Simulation Example]] | ► **Next:** [[Race Conditions and Critical-Section Problem]]
 
 ---
-
----
-
 ## Problem
 
 A multiprogrammed operating system has a single CPU core and five processes arriving in the ready queue. The arrival times, CPU burst times, and process priorities are listed below:
@@ -42,41 +38,33 @@ A multiprogrammed operating system has a single CPU core and five processes arri
 4. Explain how changing the Round Robin time quantum from $q = 3\text{ ms}$ to $q = 1\text{ ms}$ affects system throughput, turnaround time, and context-switch overhead.
 
 ---
-
----
-
 ## Given
 
 - Concrete initial system state, process parameters, resource capacities, or code snippets as defined in the problem statement.
 
 ---
-
 ## Required
 
 - Complete step-by-step analytical derivation, state diagram/Gantt chart construction, and final quantitative/qualitative answer.
 
 ---
-
 ## Concepts Tested
 
 - [[Operating System Structures and Functions]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Control Block and Context Switching]]
 
 ---
-
 ## Question Type
 
 Scheduling Simulation / Gantt Chart Analysis
 
 ---
-
 ## Solution
 
 ### Understanding the Situation
@@ -118,7 +106,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - **Average Response Time ($\bar{T}_{\text{resp}}$):** $\frac{0 + 9 + 12 + 16 + 17}{5} = \mathbf{10.80\text{ ms}}$
 
 ---
-
 ### Part 2: Non-Preemptive Shortest Job First (SJF)
 
 #### Execution Trace:
@@ -153,7 +140,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - **Average Waiting Time ($\bar{T}_{\text{wait}}$):** $\frac{0 + 12 + 15 + 8 + 6}{5} = \frac{41}{5} = \mathbf{8.20\text{ ms}}$
 
 ---
-
 ### Part 3: Shortest Remaining Time First (SRTF)
 
 #### Execution Trace:
@@ -196,7 +182,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - **Average Response Time ($\bar{T}_{\text{resp}}$):** $\frac{0 + 0 + 6 + 3 + 1}{5} = \frac{10}{5} = \mathbf{2.00\text{ ms}}$
 
 ---
-
 ### Part 4: Preemptive Priority Scheduling (Lower Number = Higher Priority)
 
 #### Execution Trace:
@@ -237,7 +222,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - **Average Waiting Time ($\bar{T}_{\text{wait}}$):** $\frac{6 + 0 + 14 + 2 + 17}{5} = \frac{39}{5} = \mathbf{7.80\text{ ms}}$
 
 ---
-
 ### Part 5: Round Robin (RR, $q = 3\text{ ms}$)
 
 #### Step-by-Step Queue Tracing:
@@ -289,7 +273,6 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
 - **Average Response Time ($\bar{T}_{\text{resp}}$):** $\frac{0 + 2 + 4 + 6 + 10}{5} = \frac{22}{5} = \mathbf{4.40\text{ ms}}$
 
 ---
-
 ### Part 6: Algorithm Comparison Summary
 
 | Algorithm | $\bar{T}_{\text{turn}}$ (ms) | $\bar{T}_{\text{wait}}$ (ms) | $\bar{T}_{\text{resp}}$ (ms) | Preemptive? | Starvation Possible? |
@@ -308,45 +291,38 @@ Recall the foundational theorem or algorithm (e.g. Banker's safety check, Coffma
    - *Disadvantage:* Context switch overhead escalates dramatically. If each context switch takes $s = 0.1\text{ ms}$, 22 switches waste $2.2\text{ ms}$ of pure CPU time, reducing overall CPU efficiency ($\frac{\text{CPU Burst}}{\text{CPU Burst} + \text{Overhead}}$). Turnaround time degrades when quantum becomes too small relative to context switch cost.
 
 ---
-
 ### Result and Interpretation
 The final answers and verified metrics are synthesized directly above. Each computed value satisfies the physical constraints of the operating system model.
 
 ---
-
 ## Reusable Insight
 
 Always decompose the problem into initial state verification, transition step evaluation, and post-condition invariant checking. In exam scenarios, clearly display the intermediate matrices or Gantt timelines before writing the final numerical or Boolean conclusion.
 
 ---
-
 ## Common Mistakes
 
 - Misinterpreting the initial state vector or indexing offsets.
 - Confusing necessary conditions with sufficient conditions during analysis.
 
 ---
-
 ## Exam Pattern
 
 Appears frequently in university midterm and final examinations as a multi-part analytical question testing both mechanics and theoretical justification.
 
 ---
-
 ## Related Problems
 
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 - [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
 
 ---
-
 ## Related Concepts
 
 - [[CPU Scheduling Principles and Criteria]]
 - [[Deadlock Fundamentals and Coffman Conditions]]
 
 ---
-
 ## Source
 
 - **Source Material:** `3. Scheduling-week-3-RRR.pdf` (Slides 12–50: Criteria, FCFS, SJF, SRTF, Priority, Round Robin).

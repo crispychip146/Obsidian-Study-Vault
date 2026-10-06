@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 75
+order: 86
 ---
 
 # Higher-Order State Weather Prediction Example
 
-> 📖 **Reading Order:** Step 75 of 92 | **Module 10:** Stochastic Processes  
+> 📖 **Reading Order:** Step 86 of 103 | **Module 10:** Stochastic Processes  
 > ◄ **Previous:** [[Weather Forecasting Markov Chain Example]] | ► **Next:** [[Hardy-Weinberg Law Markov Chain Example]]
-
 ---
-
----
-
 ## Problem
 
 Suppose whether it rains today depends on the weather conditions of the **past two days**:
@@ -23,11 +19,7 @@ Suppose whether it rains today depends on the weather conditions of the **past t
 - If it did not rain either day, it will rain tomorrow with probability $0.2$.
 
 Given that it rained both yesterday and today, what is the probability that it rains the day after tomorrow?
-
 ---
-
----
-
 ## Given
 
 Because the probability of tomorrow's weather depends on two preceding days, the process $\{X_n\}$ where $X_n \in \{\text{Rain}, \text{No Rain}\}$ is a second-order Markov process (not a first-order Markov chain in its native state space).
@@ -42,21 +34,13 @@ To transform this into a standard first-order [[Markov Chain]], we augment the s
 | **3** | Did not rain today, did not rain yesterday | $(NR, NR)$ |
 
 Initial condition: We start in **State 0** ($X_0 = 0$, meaning it rained both yesterday and today).
-
 ---
-
----
-
 ## Required
 
 1. Formulate the $4 \times 4$ one-step transition probability matrix $P$.
 2. Compute the two-step transition probabilities from State 0: $P_{0j}^{(2)}$ for $j \in \{0, 1, 2, 3\}$.
 3. Calculate the probability that it rains the day after tomorrow (at time step $n = 2$).
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -157,41 +141,25 @@ $$P(\text{Rain}) = 0.49 + 0.12 = 0.61$$
 1. **State Expansion:** For memory of depth $k$ over alphabet $\mathcal{A}$, define states as $k$-tuples $\mathbf{s} \in \mathcal{A}^k$.
 2. **Transition Matrix Structure:** $P_{(a_1, \dots, a_k), (b_1, \dots, b_k)} = 0$ unless $b_2 = a_1, b_3 = a_2, \dots, b_k = a_{k-1}$.
 3. **Multi-Step Forecasting:** Multiply $P^n$ and sum over all terminal states matching the event of interest.
-
 ---
-
----
-
 ## Result
 
 - Two-step transition probabilities from State 0:
   $$\begin{pmatrix} P_{00}^{(2)} & P_{01}^{(2)} & P_{02}^{(2)} & P_{03}^{(2)} \end{pmatrix} = \begin{pmatrix} 0.49 & 0.12 & 0.21 & 0.18 \end{pmatrix}$$
 - Probability that it rains the day after tomorrow:
   $$0.61 \quad (61\%)$$
-
 ---
-
----
-
 ## Why This Works
 
 - Systems whose dynamics depend on a finite window of past history of length $k$ can always be modeled as a first-order Markov chain by defining the state as a $k$-tuple of consecutive values.
 - In this expanded state space, each transition automatically preserves continuity (the second element of the past tuple becomes the first element of the next tuple), ensuring the Markov property holds strictly.
-
 ---
-
----
-
 ## Common Mistakes
 
 - **Forgetting Impossible Transitions:** Placing non-zero probabilities on transitions like $(R, R) \to (R, NR)$. If today is $R$, tomorrow's "yesterday" must be $R$; it cannot magically become $NR$.
 - **Adding the Wrong Entries:** Only reporting $P_{00}^{(2)} = 0.49$ and forgetting that State 1 $(R, NR)$ also represents rain on that day.
 - **Inverting the State Tuple Ordering:** Mixing up $(R, NR)$ with $(NR, R)$, which leads to transposed column associations.
-
 ---
-
----
-
 ## General Method
 
 Extract the reusable problem-solving pattern: define random variables, write down the joint distribution, condition on observed data, and normalize the resulting distribution.
@@ -203,12 +171,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Markov Chain]]
 - [[Chapman-Kolmogorov Equations]]
 - [[Weather Forecasting Markov Chain Example]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 16–18)
-- [[01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.4, pp. 195–196; Example 4.12, pp. 212–213)
+- [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 16–18)
+- [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.4, pp. 195–196; Example 4.12, pp. 212–213)

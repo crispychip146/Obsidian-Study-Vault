@@ -2,18 +2,14 @@
 type: problem
 course: cse301
 status: active
-order: 24
+order: 35
 ---
 
 # Problem — Compound Random Sum via Adam and Eve's Laws
 
-> 📖 **Reading Order:** Step 24 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> 📖 **Reading Order:** Step 35 of 103 | **Module 3:** Conditional Probability and Conditioning  
 > ◄ **Previous:** [[Random Number of Random Variables Sum Example]] | ► **Next:** [[Markov Inequality]]
-
 ---
-
----
-
 ## Problem
 
 A distributed database cluster receives a random number $N$ of write transactions per second, where $N \sim \operatorname{Bin}(m, p)$ with $m = 200$ client threads and transmission probability $p = 0.4$.
@@ -25,11 +21,7 @@ Assume $N$ and the sequence $\{X_i\}$ are mutually independent. Let $S_N = \sum_
 2. **Variance Decomposition:** Use [[Eve's Law (Law of Total Variance)]] to determine the exact variance $\operatorname{Var}(S_N)$ and the standard deviation $\operatorname{SD}(S_N)$.
 3. **Relative Variance Attribution:** What percentage of $\operatorname{Var}(S_N)$ is attributable to client transaction randomness vs. individual payload size randomness?
 4. **Compound Moment Generating Function:** Derive an analytical expression for the MGF $M_{S_N}(t)$ in terms of the MGFs $M_N(t)$ and $M_X(t)$.
-
 ---
-
----
-
 ## Given
 
 - Given parameters, random variable definitions, and observation vectors as specified in the problem statement.
@@ -55,11 +47,7 @@ Assume $N$ and the sequence $\{X_i\}$ are mutually independent. Let $S_N = \sum_
 - [[Continuous Probability Distributions]] — Gamma distribution properties.
 - [[Adam's Law (Law of Total Expectation)]] & [[Eve's Law (Law of Total Variance)]]
 - [[Moment Generating Functions]] — MGF conditioning.
-
 ---
-
----
-
 ## Question Type
 
 Probability / Statistical Inference / Markov Chain Analysis
@@ -167,11 +155,7 @@ Always decompose complex event probabilities by conditioning on a partition of t
 
 1. **Forgetting the Squared Mean in VE:** Writing $\operatorname{Var}(N \mathbb{E}[X]) = \mathbb{E}[X]\operatorname{Var}(N)$ instead of $(\mathbb{E}[X])^2 \operatorname{Var}(N)$. Constants pull out squared from variance!
 2. **Confusing MGF composition:** The compound MGF is $M_N(\ln M_X(t))$, which equals the Probability Generating Function (PGF) of $N$ evaluated at $M_X(t)$: $G_N(M_X(t))$.
-
 ---
-
----
-
 ## Exam Pattern
 
 Standard BUET CSE 301 final exam question testing probability bounds, Markov chain stationarity, or statistical parameter estimation.

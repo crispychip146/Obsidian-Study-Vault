@@ -2,18 +2,14 @@
 type: formula
 course: cse301
 status: active
-order: 21
+order: 31
 ---
 
 # Eve's Law (Law of Total Variance)
 
-> 📖 **Reading Order:** Step 21 of 92 | **Module 3:** Conditional Probability and Conditioning  
+> 📖 **Reading Order:** Step 31 of 103 | **Module 3:** Conditional Probability and Conditioning  
 > ◄ **Previous:** [[Adam's Law (Law of Total Expectation)]] | ► **Next:** [[Monty Hall Problem Example]]
-
 ---
-
----
-
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Eve's Law (Law of Total Variance), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -36,11 +32,7 @@ $$\operatorname{Var}(Y) = \mathbb{E}\left[ \operatorname{Var}(Y \mid X) \right] 
 $$\mathbf{E}\mathbf{V} + \mathbf{V}\mathbf{E} \quad \text{("EVVE")}$$
 - $\mathbf{E}[\mathbf{V}]$: Expected value of conditional Variance.
 - $\mathbf{V}[\mathbf{E}]$: Variance of conditional Expectation.
-
 ---
-
----
-
 ## Variables
 
 | Symbol | Meaning |
@@ -72,11 +64,7 @@ Eve's Law is the probabilistic foundation of the **Analysis of Variance (ANOVA)*
 Because $\operatorname{Var}(\mathbb{E}[Y \mid X]) \ge 0$:
 $$\operatorname{Var}(Y) \ge \mathbb{E}[\operatorname{Var}(Y \mid X)]$$
 Conditioning **reduces variance on average**. Information never increases uncertainty on average!
-
 ---
-
----
-
 ## Derivation
 
 ### Rigorous Derivation
@@ -102,11 +90,7 @@ $$\operatorname{Var}(Y) = \mathbb{E}\left[ \operatorname{Var}(Y \mid X) \right] 
 Recognizing the bracketed term as the definition of the variance of the random variable $\mathbb{E}[Y \mid X]$:
 $$\operatorname{Var}(Y) = \mathbb{E}\left[ \operatorname{Var}(Y \mid X) \right] + \operatorname{Var}\left( \mathbb{E}[Y \mid X] \right)$$
 $\blacksquare$
-
 ---
-
----
-
 ## Example
 
 ### Application: Variance of a Compound Random Sum
@@ -125,11 +109,7 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 
 4. **Summing via Eve's Law (Wald's Variance Identity):**
    $$\operatorname{Var}(S_N) = \mathbb{E}[N]\operatorname{Var}(X) + (\mathbb{E}[X])^2 \operatorname{Var}(N)$$
-
 ---
-
----
-
 ## Common Mistakes
 
 - Confusing conditional variance with the variance of conditional expectation (Eve's Law components).
@@ -142,11 +122,7 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 - [[Adam's Law (Law of Total Expectation)]] — Expectation counterpart.
 - [[Random Number of Random Variables Sum Example]] — Practical compound sum calculations.
 - [[Problem — Compound Random Sum via Adam and Eve's Laws]] — Full problem exercise.
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Random Variables and Probability Distributions]]

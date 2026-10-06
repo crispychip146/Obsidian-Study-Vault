@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 47
+order: 58
 ---
 
 # Discrete and Continuous Parameter MLE Reference Examples
 
-> 📖 **Reading Order:** Step 47 of 92 | **Module 7:** Parametric Inference  
+> 📖 **Reading Order:** Step 58 of 103 | **Module 7:** Parametric Inference  
 > ◄ **Previous:** [[Uniform Distribution Non-Regular MLE Example]] | ► **Next:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
-
 ---
-
----
-
 ## Problem
 
 Solve the probability and statistical problem: Discrete and Continuous Parameter MLE Reference Examples.
@@ -169,11 +165,7 @@ Throughout this note, let $X_1, X_2, \dots, X_n$ be an i.i.d. sample, with sampl
 | $\text{Exponential}(\lambda)$ | $\lambda$ (rate) | $\hat{\lambda} = \frac{1}{\bar{X}}$ | Regular |
 | $\text{Uniform}(0, \theta)$ | $\theta$ | $\hat{\theta} = X_{(n)} = \max_i X_i$ | Non-regular |
 | $\text{Uniform}(a, b)$ | $a, b$ | $\hat{a} = X_{(1)}, \quad \hat{b} = X_{(n)}$ | Non-regular |
-
 ---
-
----
-
 ## Result
 
 The mathematical derivation confirms the target probability or estimator value.
@@ -205,12 +197,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Likelihood and Score Equations]]
 - [[Normal Distribution Parameter MLE Derivation Example]]
 - [[Uniform Distribution Non-Regular MLE Example]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/MLE.pdf]]
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/MLE.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]

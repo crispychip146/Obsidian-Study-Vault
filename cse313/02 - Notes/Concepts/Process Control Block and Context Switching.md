@@ -4,16 +4,12 @@ course: cse313
 status: active
 order: 6
 ---
-
 # Process Control Block and Context Switching
 
-> 📖 **Reading Order:** Step 06 of 34 | **Module 2:** Processes & Threads  
+> 📖 **Reading Order:** Step 06 of 68 | **Module 2:** Processes & Threads  
 > ◄ **Previous:** [[Process Lifecycle and State Transitions]] | ► **Next:** [[Process Creation and Termination Operations]]
 
 ---
-
----
-
 ## Starting Point and the Problem
 
 To create the illusion of simultaneous execution (multitasking) on a uniprocessor or multi-core machine, the CPU scheduler must frequently suspend a running process and assign the CPU core to another process.
@@ -21,7 +17,6 @@ To create the illusion of simultaneous execution (multitasking) on a uniprocesso
 We want the suspended process to resume execution later at the exact instruction where it was stopped, with all register values, arithmetic flags, and memory state completely intact. The central obstacle is that the CPU hardware has only one set of architectural registers (Program Counter, Stack Pointer, General Purpose Registers, PSW): loading Process $B$'s values overwrites Process $A$'s values entirely.
 
 ---
-
 ## Developing the Idea
 
 To prevent state destruction, the operating system maintains a dedicated kernel data structure for every active process: the **Process Control Block (PCB)**.
@@ -34,7 +29,6 @@ The PCB acts as the operating system's comprehensive bookmark and dossier for th
 This fundamental operation is called a **Context Switch**.
 
 ---
-
 ## Definition
 
 To manage multiple concurrent processes and enable time-sharing on a single CPU, the operating system requires a dedicated data structure to represent each process.
@@ -42,9 +36,6 @@ To manage multiple concurrent processes and enable time-sharing on a single CPU,
 - **Context Switch:** The hardware and software procedure of stopping the currently executing process, saving its execution state into its PCB, selecting another process, and loading the saved state from that process's PCB into the CPU registers to resume execution seamlessly.
 
 ---
-
----
-
 ## How It Works
 
 ### The Context Switching Mechanism
@@ -83,9 +74,6 @@ sequenceDiagram
    The CPU mode bit is set to $1$, jumping to the restored Program Counter to resume $P_1$.
 
 ---
-
----
-
 ## Example
 
 Context switch sequence between $P_1$ and $P_2$:
@@ -98,7 +86,6 @@ Context switch sequence between $P_1$ and $P_2$:
 7. OS executes return-from-interrupt (`iret`), switching to User Mode and resuming $P_2$.
 
 ---
-
 ## Technical Details
 
 ### Context Switch Overhead: The Cost of Time-Sharing
@@ -117,9 +104,6 @@ Context switch costs fall into two categories:
 - **CPU Cache Pollution:** The L1, L2, and L3 caches contain cache lines belonging to the old process $P_0$. When $P_1$ begins executing, almost every memory access results in a cache miss until $P_1$ warms up the cache.
 
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **State Transparency:** Context switching is completely transparent to the user application; no process can detect that it was suspended other than by querying physical wall-clock time.
@@ -127,7 +111,6 @@ Context switch costs fall into two categories:
 - **Indirect Cache Penalties:** Switching address spaces forces Translation Lookaside Buffer (TLB) flushes and causes CPU L1/L2 cache misses as the new process warms up the cache lines.
 
 ---
-
 ## Common Mistakes
 
 1. **Context Switch vs. Mode Switch:**
@@ -138,9 +121,6 @@ Context switch costs fall into two categories:
    - If $q$ is too large (e.g., $500\text{ ms}$), the system loses interactive responsiveness and degrades to batch FCFS.
 
 ---
-
----
-
 ## Exam Relevance
 
 - **Next Step:** How are new processes generated, and how does the OS clone PCBs during execution? (See [[Process Creation and Termination Operations]]).
@@ -151,9 +131,6 @@ Context switch costs fall into two categories:
   - Explain why frequent context switching degrades memory and CPU performance.
 
 ---
-
----
-
 ## Related Concepts
 
 - [[Dual-Mode Operation and System Calls]]
@@ -161,20 +138,17 @@ Context switch costs fall into two categories:
 - [[Threads and Multithreading Models]]
 
 ---
-
 ## Prerequisites
 
 - [[Process Concepts and Memory Layout]]
 - [[Process Lifecycle and State Transitions]]
 
 ---
-
 ## Problems
 
 - [[Problem — Fork Execution Tree and Process Tracing]]
 
 ---
-
 ## Sources
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 8–10, 16–21)

@@ -2,18 +2,14 @@
 type: example
 course: cse301
 status: active
-order: 46
+order: 57
 ---
 
 # Uniform Distribution Non-Regular MLE Example
 
-> 📖 **Reading Order:** Step 46 of 92 | **Module 7:** Parametric Inference  
+> 📖 **Reading Order:** Step 57 of 103 | **Module 7:** Parametric Inference  
 > ◄ **Previous:** [[Normal Distribution Parameter MLE Derivation Example]] | ► **Next:** [[Discrete and Continuous Parameter MLE Reference Examples]]
-
 ---
-
----
-
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a continuous uniform distribution on the interval $[0, \theta]$:
@@ -24,22 +20,14 @@ $$X_i \overset{\text{iid}}{\sim} \text{Uniform}(0, \theta), \quad \theta > 0$$
 3. Derive the Maximum Likelihood Estimator $\hat{\theta}_{\text{MLE}}$.
 4. Calculate the expectation $E[\hat{\theta}_{\text{MLE}}]$ and determine whether it is biased.
 5. Construct an unbiased estimator based on the MLE.
-
 ---
-
----
-
 ## Given
 
 - Probability density function:
   $$f(x; \theta) = \frac{1}{\theta} \mathbf{1}_{\{0 \le x \le \theta\}} = \begin{cases} \frac{1}{\theta} & \text{if } 0 \le x \le \theta \\ 0 & \text{otherwise} \end{cases}$$
 - Sample order statistics:
   $$X_{(1)} = \min_{1 \le i \le n} X_i, \quad X_{(n)} = \max_{1 \le i \le n} X_i$$
-
 ---
-
----
-
 ## Required
 
 1. Explanation of calculus failure.
@@ -47,11 +35,7 @@ $$X_i \overset{\text{iid}}{\sim} \text{Uniform}(0, \theta), \quad \theta > 0$$
 3. Value of $\hat{\theta}_{\text{MLE}}$.
 4. Bias calculation.
 5. Unbiased adjustment.
-
 ---
-
----
-
 ## Understanding the Problem and Choosing the Method
 
 Identify the random variables, state the conditional distributions, select the appropriate probabilistic law or updating formula, and execute the algebraic substitutions step by step.
@@ -136,21 +120,13 @@ When parameters define the support boundary:
 2. Convert the conditions on all $X_i$ into conditions on order statistics (e.g., $X_{(1)} \ge a$ and $X_{(n)} \le b$).
 3. Sketch or analyze the monotonicity of the function within the allowable region.
 4. The maximum will lie on the **boundary** of the allowable parameter region.
-
 ---
-
----
-
 ## Result
 
 - $\hat{\theta}_{\text{MLE}} = X_{(n)} = \max_{1 \le i \le n} X_i$
 - $E[\hat{\theta}_{\text{MLE}}] = \frac{n}{n+1}\theta \implies \text{bias} = -\frac{\theta}{n+1}$ (asymptotically unbiased as $n \to \infty$)
 - Unbiased estimator: $\frac{n+1}{n} \max(X_i)$
-
 ---
-
----
-
 ## Why This Works
 
 The solution holds because every step follows directly from Bayes' rule, the law of total probability, or properties of expectation and variance.
@@ -175,12 +151,8 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - [[Maximum Likelihood Estimation]]
 - [[Point Estimation]]
 - [[Discrete and Continuous Parameter MLE Reference Examples]]
-
 ---
-
----
-
 ## Sources
 
-- [[01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
-- [[01 - Sources/Lectures/MLE.pdf]]
+- [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+- [[cse301/01 - Sources/Lectures/MLE.pdf]]

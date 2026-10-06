@@ -2,18 +2,14 @@
 type: concept
 course: cse301
 status: active
-order: 49
+order: 60
 ---
 
 # Bayesian Inference
 
-> 📖 **Reading Order:** Step 49 of 92 | **Module 8:** Bayesian Inference  
+> 📖 **Reading Order:** Step 60 of 103 | **Module 8:** Bayesian Inference  
 > ◄ **Previous:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]] | ► **Next:** [[Maximum A Posteriori (MAP) Estimation]]
-
 ---
-
----
-
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Bayesian Inference, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -37,11 +33,7 @@ Probability and statistical inference model uncertainty in physical and computer
 1. **Before the study:** You believe a coin is probably fair ($\theta \approx 0.5$), but you leave room for some bias (Prior).
 2. **Experiment:** You flip the coin 100 times and observe 80 heads (Likelihood strongly favors $\theta = 0.8$).
 3. **After the study:** Your updated belief (Posterior) is a compromise: you no longer believe the coin is perfectly fair, but because of your prior skepticism, you don't immediately believe it has an $80\%$ bias either. Your posterior centers around $\approx 0.72$.
-
 ---
-
----
-
 ## Definition
 
 **Bayesian Inference** is an approach to statistical inference in which probabilities are interpreted as degrees of belief or measures of uncertainty about unknown states of nature, rather than as objective limiting relative frequencies.
@@ -58,11 +50,7 @@ where:
 - $L_n(\theta) = f(\mathbf{x} \mid \theta)$: The **likelihood function** (the probability of the data given parameter $\theta$).
 - $m(\mathbf{x}) = \int_\Theta f(\mathbf{x} \mid \theta) f(\theta) d\theta$: The **marginal likelihood** or **evidence** (a normalizing constant independent of $\theta$).
 - $f(\theta \mid \mathbf{x})$: The **posterior probability density** (our updated belief after observing the data).
-
 ---
-
----
-
 ## How It Works
 
 ### When NOT to Use Bayesian Inference
@@ -73,11 +61,7 @@ where:
    Outside of simple conjugate models, normalizing constants $\int L_n(\theta) f(\theta) d\theta$ in high dimensions require computationally intensive Markov Chain Monte Carlo (MCMC) simulations.
 3. **Legal or Regulatory Contexts:**
    In clinical drug approvals or legal court proceedings, regulators frequently mandate objective frequentist guarantees that are completely immune to subjective investigator biases.
-
 ---
-
----
-
 ## Example
 
 ### Beta-Binomial Conjugate Updating for Click-Through Rates
@@ -166,11 +150,7 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
    An objective prior invariant under parameter transformation, defined using the [[Likelihood and Score Equations|Fisher Information]]:
    $$f(\theta) \propto \sqrt{I_1(\theta)}$$
    For a $\text{Bernoulli}(p)$ model, Jeffreys' prior is $f(p) \propto \frac{1}{\sqrt{p(1-p)}} \iff \text{Beta}\left(\frac{1}{2}, \frac{1}{2}\right)$.
-
 ---
-
----
-
 ## Important Properties and Why They Hold
 
 - **Mathematical Rigor:** Satisfies Kolmogorov's probability axioms or standard asymptotic regularity conditions.
@@ -188,11 +168,7 @@ Conjugate priors allow exact closed-form algebraic Bayesian updating without hav
    The posterior mean is the center of mass $\int \theta f(\theta \mid x) d\theta$, while MAP is the peak/mode $\arg\max f(\theta \mid x)$. They only coincide for symmetric unimodal posteriors (such as Gaussians).
 3. **Integrating over data instead of parameters:**
    The normalizing constant integrates out the parameter $\theta$: $m(x) = \int f(x \mid \theta) f(\theta) d\theta$. The data $x$ are fixed constants during this integration.
-
 ---
-
----
-
 ## Exam Relevance
 
 ### Exam Relevance
@@ -210,11 +186,7 @@ In examinations, expect to:
 - [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
 - [[Problem — Laplace Rule of Succession and Bayesian Updating]]
 - [[Berger-Wolpert Confidence Set Puzzle Example]]
-
 ---
-
----
-
 ## Related Concepts
 
 - [[Maximum A Posteriori (MAP) Estimation]]
@@ -222,22 +194,14 @@ In examinations, expect to:
 - [[Beta-Binomial Conjugate Updating Formula]]
 - [[Normal-Normal Conjugate Updating Formula]]
 - [[Maximum Likelihood Estimation]]
-
 ---
-
----
-
 ## Prerequisites
 
 - [[Point Estimation]]
 - [[Law of Total Probability and Bayes' Rule]]
 - [[Continuous Probability Distributions]]
 - [[Random Variables and Probability Distributions]]
-
 ---
-
----
-
 ## Problems
 
 - [[Problem — Laplace Rule of Succession and Bayesian Updating]]
@@ -246,4 +210,4 @@ In examinations, expect to:
 
 ## Sources
 
-- [[01 - Sources/Lectures/Bayesian_Inference.pdf]]
+- [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]

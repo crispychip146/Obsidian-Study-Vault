@@ -194,6 +194,13 @@ Common examination topics include:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap1-IntroAI.ppt|Chap1-IntroAI.ppt]], [[cse317/01 - Sources/Lectures/MMi/AIHistory.ppt|AIHistory.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 1: Introduction (Sections 1.1–1.5)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** *Start of Course* | ► **Next:** [[Intelligent Agents and Rationality]]

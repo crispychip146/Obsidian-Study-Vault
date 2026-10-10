@@ -119,6 +119,13 @@ Notice that with MRV and Degree heuristics, the search progressed directly to th
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 5–8, 22–30)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Sections 6.1–6.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Min-Conflicts Algorithm for CSPs]] | ► **Next:** [[Problem — Search Strategy Completeness and Complexity Analysis]]

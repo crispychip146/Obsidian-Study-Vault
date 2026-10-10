@@ -151,6 +151,13 @@ Zero search or backtracking was required!
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]] | ► **Next:** *End of Course*

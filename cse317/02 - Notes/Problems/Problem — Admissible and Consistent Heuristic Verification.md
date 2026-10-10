@@ -164,6 +164,13 @@ In this counterexample, $f(A) = g(A) + h(A) = 0 + 2 = 2$, but for successor $B$,
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]], [[cse317/01 - Sources/Lectures/MMi/A-starSearch.ppt|A-starSearch.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Problem — Search Strategy Completeness and Complexity Analysis]] | ► **Next:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]]

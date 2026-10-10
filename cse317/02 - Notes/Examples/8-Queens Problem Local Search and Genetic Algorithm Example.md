@@ -110,6 +110,13 @@ This mutated child is evaluated for fitness and added to the next generation.
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] (Slides 12–18, 38–42), [[cse317/01 - Sources/Lectures/MMi/Genetic Algorithm.ppt|Genetic Algorithm.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 4: Beyond Classical Search (Section 4.1)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Genetic Algorithm]] | ► **Next:** [[Adversarial Search and Two-Player Games]]

@@ -122,6 +122,13 @@ If the temperature schedule $T(t)$ cools sufficiently slowly (specifically, at a
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] (Slides 23–30)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 4: Beyond Classical Search (Section 4.1.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Hill-Climbing Search Algorithm]] | ► **Next:** [[Local Beam Search Algorithm]]

@@ -149,6 +149,13 @@ The ratio $1.332$ perfectly matches the theoretical formula $\frac{b}{b-1} = \fr
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]], [[cse317/01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Australia Map Coloring CSP Example]] | ► **Next:** [[Problem — Admissible and Consistent Heuristic Verification]]

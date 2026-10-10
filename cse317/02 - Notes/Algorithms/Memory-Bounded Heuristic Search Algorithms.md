@@ -109,6 +109,13 @@ While IDA* and RBFS use too little memory ($O(bd)$) and waste time regenerating 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]] (Slides 36–42)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.5.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Optimality of A-Star Search]] | ► **Next:** [[Romania Travel Routing A-Star Search Example]]

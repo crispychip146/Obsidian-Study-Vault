@@ -98,6 +98,13 @@ The 8-puzzle consists of a $3 \times 3$ board with 8 numbered sliding tiles and 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]] (Slides 8–14)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Bidirectional Search Algorithm]] | ► **Next:** [[Heuristic Functions and Properties]]

@@ -121,6 +121,13 @@ For binary CSPs, the problem can be visualized as a **Constraint Graph**:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 1–10)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Section 6.1)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Minimax and Alpha-Beta Game Tree Pruning Example]] | ► **Next:** [[Constraint Propagation and Arc Consistency]]

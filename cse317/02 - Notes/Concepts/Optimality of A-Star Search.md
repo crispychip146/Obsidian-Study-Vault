@@ -115,6 +115,13 @@ A* search can be visualized as expanding concentric **$f$-contours**:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]] (Slides 25–35), [[cse317/01 - Sources/Lectures/MMi/A-starSearch.ppt|A-starSearch.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.5.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[A-Star Search Algorithm]] | ► **Next:** [[Memory-Bounded Heuristic Search Algorithms]]

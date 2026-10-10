@@ -173,6 +173,13 @@ The final root value with Alpha-Beta pruning is $\mathbf{8}$ (move to C), which 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 5: Adversarial Search
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Problem — Admissible and Consistent Heuristic Verification]] | ► **Next:** [[Problem — CSP Arc Consistency and Backtracking Trace]]

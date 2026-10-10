@@ -137,6 +137,13 @@ Notice that A* discovered the route through Pitesti ($418$), while Greedy Best-F
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]] (Slides 15–28), [[cse317/01 - Sources/Lectures/MMi/A-starSearch.ppt|A-starSearch.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Sections 3.4–3.5)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Memory-Bounded Heuristic Search Algorithms]] | ► **Next:** [[Local Search and Optimization Landscape]]

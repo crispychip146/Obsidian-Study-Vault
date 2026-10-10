@@ -89,6 +89,13 @@ Standard local beam search can suffer from a lack of diversity: if one peak is s
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] (Slides 31–35)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 4: Beyond Classical Search (Section 4.1.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Simulated Annealing Algorithm]] | ► **Next:** [[Genetic Algorithm]]

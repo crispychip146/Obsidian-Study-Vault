@@ -162,6 +162,13 @@ function GRAPH-SEARCH(problem):
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]] (Slides 1–15)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Sections 3.1–3.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Agentic AI and Autonomous Systems]] | ► **Next:** [[Uninformed Search Strategies]]

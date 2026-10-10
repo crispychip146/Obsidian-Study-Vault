@@ -143,6 +143,13 @@ It is structured into four distinct functional components:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/learning_agents_elaborate_presentation.pptx|learning_agents_elaborate_presentation.pptx]] (Slides 1–15), [[cse317/01 - Sources/Lectures/MMi/Chap2-IntAgent.pptx|Chap2-IntAgent.pptx]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 2: Intelligent Agents (Section 2.4.5)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Agent Architectures]] | ► **Next:** [[Agentic AI and Autonomous Systems]]

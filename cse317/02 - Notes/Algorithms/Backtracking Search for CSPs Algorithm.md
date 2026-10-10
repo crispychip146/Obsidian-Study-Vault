@@ -103,6 +103,13 @@ def BACKTRACK(assignment, csp):
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 21–25)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Section 6.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[AC-3 Algorithm]] | ► **Next:** [[CSP Search Heuristics and Inference]]

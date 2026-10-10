@@ -130,6 +130,13 @@ An environment is formally characterized along seven principal dimensions:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap2-IntAgent.pptx|Chap2-IntAgent.pptx]] (Slides 19–24)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 2: Intelligent Agents (Section 2.3.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[PEAS Framework]] | ► **Next:** [[Agent Architectures]]

@@ -142,6 +142,13 @@ With optimal move ordering, Alpha-Beta pruning reduces the effective branching f
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]] (Slides 25–38)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 5: Adversarial Search (Section 5.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Minimax Algorithm]] | ► **Next:** [[Evaluation Functions and Cutting Off Search]]

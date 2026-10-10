@@ -137,6 +137,13 @@ If the opponent makes a mistake, Minimax will achieve a payoff *greater than or 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]] (Slides 13–24)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 5: Adversarial Search (Section 5.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Adversarial Search and Two-Player Games]] | ► **Next:** [[Alpha-Beta Pruning Algorithm]]

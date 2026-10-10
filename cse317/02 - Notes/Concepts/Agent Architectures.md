@@ -226,6 +226,13 @@ Goals alone provide only a binary distinction between success and failure (goal 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap2-IntAgent.pptx|Chap2-IntAgent.pptx]] (Slides 25–32)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 2: Intelligent Agents (Section 2.4)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Environment Characterization in AI]] | ► **Next:** [[Learning Agents]]

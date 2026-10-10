@@ -153,6 +153,13 @@ UCS introduces two non-negotiable design requirements:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]], [[cse317/01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]] (Slides 11–14)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.4.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Breadth-First Search Algorithm]] | ► **Next:** [[Depth-First Search and Depth-Limited Search Algorithm]]

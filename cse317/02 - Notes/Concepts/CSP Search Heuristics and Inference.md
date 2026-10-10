@@ -89,6 +89,13 @@ Rather than running inference only at the beginning, we interleave inference at 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 26–34)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Sections 6.3.1–6.3.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Backtracking Search for CSPs Algorithm]] | ► **Next:** [[Min-Conflicts Algorithm for CSPs]]

@@ -138,6 +138,13 @@ def A_STAR_SEARCH(problem, h):
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]] (Slides 19–30), [[cse317/01 - Sources/Lectures/MMi/A-starSearch.ppt|A-starSearch.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.5.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Greedy Best-First Search Algorithm]] | ► **Next:** [[Optimality of A-Star Search]]

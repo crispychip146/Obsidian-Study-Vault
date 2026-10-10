@@ -98,6 +98,13 @@ Enforcing arc consistency across an entire network requires checking **both dire
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 11–18)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Section 6.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Constraint Satisfaction Problems]] | ► **Next:** [[AC-3 Algorithm]]

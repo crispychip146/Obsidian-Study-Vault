@@ -114,6 +114,13 @@ Memory, not time, is the true bottleneck of breadth-first search. While an algor
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]], [[cse317/01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]] (Slides 1–5)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.4)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Problem-Solving Agents and State Space Formulation]] | ► **Next:** [[Breadth-First Search Algorithm]]

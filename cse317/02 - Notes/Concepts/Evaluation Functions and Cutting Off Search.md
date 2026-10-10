@@ -84,6 +84,13 @@ Evaluating a state in the middle of a violent exchange (e.g., right after our qu
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]] (Slides 39–48)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 5: Adversarial Search (Section 5.4)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Alpha-Beta Pruning Algorithm]] | ► **Next:** [[Minimax and Alpha-Beta Game Tree Pruning Example]]

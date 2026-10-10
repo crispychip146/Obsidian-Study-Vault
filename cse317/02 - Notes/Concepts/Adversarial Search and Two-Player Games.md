@@ -92,6 +92,13 @@ The state space forms a **Game Tree**:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]] (Slides 1–12)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 5: Adversarial Search (Sections 5.1–5.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[8-Queens Problem Local Search and Genetic Algorithm Example]] | ► **Next:** [[Minimax Algorithm]]

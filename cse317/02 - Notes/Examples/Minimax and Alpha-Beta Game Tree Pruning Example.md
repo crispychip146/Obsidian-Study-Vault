@@ -113,6 +113,13 @@ $$\text{Value}(A) = \max(\text{Value}(B), \text{Value}(C)) = \max(2, 4) = \mathb
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]] (Slides 28–36)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 5: Adversarial Search (Section 5.3)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Evaluation Functions and Cutting Off Search]] | ► **Next:** [[Constraint Satisfaction Problems]]

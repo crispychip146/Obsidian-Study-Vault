@@ -148,6 +148,12 @@ In complex production workflows, a single monolithic agent is often replaced by 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Agentic_AI_Complete_Presentation.pptx|Agentic_AI_Complete_Presentation.pptx]] (Slides 1–14)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Learning Agents]] | ► **Next:** [[Problem-Solving Agents and State Space Formulation]]

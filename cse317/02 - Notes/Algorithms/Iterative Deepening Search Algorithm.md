@@ -131,6 +131,13 @@ Iterative Deepening Search is universally preferred over BFS for large, uninform
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]], [[cse317/01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]] (Slides 21–25)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Section 3.4.5)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Depth-First Search and Depth-Limited Search Algorithm]] | ► **Next:** [[Bidirectional Search Algorithm]]

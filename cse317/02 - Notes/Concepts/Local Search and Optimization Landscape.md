@@ -97,6 +97,13 @@ Unlike incremental formulations where a state starts empty and pieces are added 
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] (Slides 1–10)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 4: Beyond Classical Search (Section 4.1)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Romania Travel Routing A-Star Search Example]] | ► **Next:** [[Hill-Climbing Search Algorithm]]

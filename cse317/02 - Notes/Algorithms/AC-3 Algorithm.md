@@ -133,6 +133,13 @@ Let $c$ be the number of binary constraints (edges in constraint graph), and $d$
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 15–20)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Section 6.2.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Constraint Propagation and Arc Consistency]] | ► **Next:** [[Backtracking Search for CSPs Algorithm]]

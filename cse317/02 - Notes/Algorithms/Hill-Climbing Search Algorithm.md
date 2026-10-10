@@ -118,6 +118,13 @@ The expected number of restarts required to find the global optimum is $\frac{1}
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] (Slides 11–22)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 4: Beyond Classical Search (Section 4.1.1)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Local Search and Optimization Landscape]] | ► **Next:** [[Simulated Annealing Algorithm]]

@@ -153,6 +153,13 @@ If $m \gg d$ (e.g., a shallow goal at $d=3$, but the graph has branches of depth
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]], [[cse317/01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]] (Slides 15–20)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 3: Solving Problems by Searching (Sections 3.4.3–3.4.4)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Uniform-Cost Search Algorithm]] | ► **Next:** [[Iterative Deepening Search Algorithm]]

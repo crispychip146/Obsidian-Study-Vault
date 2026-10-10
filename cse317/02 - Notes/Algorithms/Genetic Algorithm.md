@@ -131,6 +131,13 @@ John Holland formalized this through the **Schema Theorem**:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] (Slides 36–45), [[cse317/01 - Sources/Lectures/MMi/Genetic Algorithm.ppt|Genetic Algorithm.ppt]]
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 4: Beyond Classical Search (Section 4.1.4)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Local Beam Search Algorithm]] | ► **Next:** [[8-Queens Problem Local Search and Genetic Algorithm Example]]

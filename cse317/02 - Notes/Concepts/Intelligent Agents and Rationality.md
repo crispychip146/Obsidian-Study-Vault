@@ -164,6 +164,13 @@ Frequently examined concepts include:
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/Chap2-IntAgent.pptx|Chap2-IntAgent.pptx]] (Slides 1–12)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 2: Intelligent Agents (Sections 2.1–2.2)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[Definition and Foundations of Artificial Intelligence]] | ► **Next:** [[PEAS Framework]]

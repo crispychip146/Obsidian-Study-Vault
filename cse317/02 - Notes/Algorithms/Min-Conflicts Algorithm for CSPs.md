@@ -111,6 +111,13 @@ The Min-Conflicts heuristic exhibits extraordinary performance on dense, uniform
 
 ---
 
+## Sources
+
+- **Lectures:** [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]] (Slides 35–40)
+- **Textbook:** [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition)]], Chapter 6: Constraint Satisfaction Problems (Section 6.4)
+
+---
+
 ## Navigation
 
 ◄ **Previous:** [[CSP Search Heuristics and Inference]] | ► **Next:** [[Australia Map Coloring CSP Example]]

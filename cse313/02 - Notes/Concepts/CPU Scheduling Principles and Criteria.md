@@ -86,10 +86,10 @@ flowchart LR
 ## Example
 
 Scheduling decisions at 4 critical points:
-1. Process switches from Running to Waiting state (e.g. `read()` system call) $	o$ Non-preemptive scheduling.
-2. Process switches from Running to Ready state (e.g. timer interrupt ticks) $	o$ Preemptive scheduling.
-3. Process switches from Waiting to Ready state (e.g. I/O completion interrupt) $	o$ Preemptive scheduling choice.
-4. Process terminates $	o$ Non-preemptive scheduling.
+1. Process switches from Running to Waiting state (e.g. `read()` system call) $\to$ Non-preemptive scheduling.
+2. Process switches from Running to Ready state (e.g. timer interrupt ticks) $\to$ Preemptive scheduling.
+3. Process switches from Waiting to Ready state (e.g. I/O completion interrupt) $\to$ Preemptive scheduling choice.
+4. Process terminates $\to$ Non-preemptive scheduling.
 
 ---
 ## Technical Details
@@ -100,7 +100,7 @@ See related modules for microarchitectural implementation details.
 ## Important Properties and Why They Hold
 
 - **Preemption vs. Overhead Invariant:** Preemption guarantees bounded response times for interactive applications, but increases total CPU overhead due to frequent context switches and cache thrashing.
-- **Turnaround vs. Waiting Equivalence:** Turnaround Time ($T_{TAT} = T_{	ext{completion}} - T_{	ext{arrival}}$) is always strictly equal to Waiting Time plus Burst Time: $T_{TAT} = T_{wait} + T_{burst}$.
+- **Turnaround vs. Waiting Equivalence:** Turnaround Time ($T_{TAT} = T_{\text{completion}} - T_{\text{arrival}}$) is always strictly equal to Waiting Time plus Burst Time: $T_{TAT} = T_{wait} + T_{burst}$.
 - **Workload Trade-Off Invariant:** No single scheduling algorithm can simultaneously optimize all criteria (Throughput, Turnaround, Waiting Time, Response Time, and CPU Utilization).
 
 ---

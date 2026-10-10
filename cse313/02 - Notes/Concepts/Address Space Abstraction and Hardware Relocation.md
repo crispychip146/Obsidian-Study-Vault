@@ -52,6 +52,82 @@ The canonical process address space consists of three distinct logical segments:
 
 Between the heap and the stack lies a vast unused void. If the address space is 4 GB, a typical program might only use 1 MB for code, 2 MB for heap, and 128 KB for stack—leaving over 3.99 GB of the address space completely empty.
 
+### Real Kernel Representation: The Process Structure in Pintos
+In educational and real-world kernels (such as Stanford's **Pintos OS**, highlighted in lecture slides), the kernel tracks each process and thread through a dedicated structure defined in `pintos/src/threads/thread.h`:
+
+```c
+struct thread {
+    tid_t tid;                       /* Thread identifier */
+    enum thread_status status;       /* THREAD_RUNNING, READY, BLOCKED, DYING */
+    char name[16];                   /* Process / thread name for debugging */
+    uint8_t *stack;                  /* Saved kernel stack pointer */
+    int priority;                    /* Thread scheduling priority */
+    struct list_elem allelem;        /* List element for all threads list */
+    struct list_elem elem;           /* List element for ready / sleep queue */
+
+#ifdef USERPROG
+    uint32_t *pagedir;               /* Page directory (hardware address space) */
+#endif
+
+    unsigned magic;                  /* Stack overflow canary (0xcd6ab3fe) */
+};
+```
+
+### User Stack vs. Kernel Stack Boundary (`PHYS_BASE`)
+In 32-bit x86 systems (including Pintos and traditional 32-bit Linux), the 4 GB virtual address space is split into user space and kernel space at a hard architectural boundary:
+- **`PHYS_BASE = 0xC0000000` (3 GB):**
+  - **User Space (`0x00000000` to `0xBFFFFFFF`, 3 GB):** Contains user instructions (Text), Data, BSS, dynamically allocated Heap, and the User Stack growing downward from `PHYS_BASE`. User code executes in unprivileged Mode (Ring 3) and cannot read or write above `PHYS_BASE`.
+  - **Kernel Space (`0xC0000000` to `0xFFFFFFFF`, 1 GB):** Maps physical memory, kernel data structures, and the per-process Kernel Stack used during system calls and interrupt handling. Accessible only in privileged Kernel Mode (Ring 0).
+
+```
+32-bit Virtual Address Space Split:
+0xFFFFFFFF +-----------------------------------+
+           |        Kernel Space (1 GB)        | (Kernel text, data, kernel stack)
+0xC0000000 +===================================+ <--- PHYS_BASE (3 GB Boundary)
+           |         User Stack (grows v)      |
+           |                 |                 |
+           |                 v                 |
+           |                                   |
+           |                 ^                 |
+           |                 |                 |
+           |          Heap (grows ^)           |
+           +-----------------------------------+
+           |    Uninitialized Data (.bss)      |
+           +-----------------------------------+
+           |     Initialized Data (.data)      |
+           +-----------------------------------+
+           |            Code (.text)           |
+0x00000000 +-----------------------------------+
+```
+
+### Concrete Address Space Inspection in C
+As demonstrated in course lecture experiments, running a simple C program allows observing these address space segments directly:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int InitializedGlobal[1024] = {1};     // Placed in Initialized Data (.data)
+int UninitializedGlobal[1024];         // Placed in BSS (.bss)
+
+int main(int argc, char *argv[]) {
+    int local_stack_var = 10;          // Placed on User Stack
+    void *heap_ptr = malloc(1024);     // Placed on Heap
+
+    printf("Code (main)      : %p\n", (void *)main);
+    printf("Initialized Data : %p\n", (void *)InitializedGlobal);
+    printf("BSS (Uninit Data): %p\n", (void *)UninitializedGlobal);
+    printf("Heap Allocation  : %p\n", heap_ptr);
+    printf("Stack Local Var  : %p\n", (void *)&local_stack_var);
+    return 0;
+}
+```
+Typical execution prints:
+- `Code`: `0x0040057d` (low virtual addresses)
+- `Data / BSS`: `0x00e01020` - `0x00e01030` (just above code)
+- `Heap`: `0x00cf2010` - `0x00e02000` (growing upward)
+- `Stack`: `0x7ffde0...` / `0xeee00a88` (very high addresses, just beneath kernel boundary)
+
 ### The Three Goals of Virtual Memory
 To make this abstraction viable, the virtual memory system must satisfy three fundamental design goals:
 1. **Transparency:** The virtualization must be completely invisible to the running program. Compilers and programs behave as though they possess private physical memory.
@@ -73,12 +149,12 @@ flowchart LR
 ```
 
 ### The Translation Equations
-When the CPU executes an instruction referencing virtual address $	ext{VA}$:
+When the CPU executes an instruction referencing virtual address $\text{VA}$:
 1. **Bounds Check:** The hardware MMU verifies that the virtual address is within the legal allocation size:
-   $$0 \le 	ext{Virtual Address} < 	ext{Bounds}$$
-   If $	ext{VA} \ge 	ext{Bounds}$ or $	ext{VA} < 0$, the MMU halts execution and triggers a **Hardware Exception (Segmentation Fault / Trap to Kernel)**.
+   $$0 \le \text{Virtual Address} < \text{Bounds}$$
+   If $\text{VA} \ge \text{Bounds}$ or $\text{VA} < 0$, the MMU halts execution and triggers a **Hardware Exception (Segmentation Fault / Trap to Kernel)**.
 2. **Base Relocation:** If valid, the MMU computes the physical memory address:
-   $$	ext{Physical Address} = 	ext{Virtual Address} + 	ext{Base}$$
+   $$\text{Physical Address} = \text{Virtual Address} + \text{Base}$$
 
 ### Operating System Responsibilities
 Dynamic relocation requires direct cooperation between the hardware MMU and the OS kernel:
@@ -91,12 +167,12 @@ Dynamic relocation requires direct cooperation between the hardware MMU and the 
 ## Example
 
 Consider a system with 64 KB of physical memory. A process with a 16 KB virtual address space is loaded into physical RAM starting at physical address $32768$ (32 KB):
-- $	ext{Base} = 32768$ (`0x8000`)
-- $	ext{Bounds} = 16384$ (`0x4000`, 16 KB)
+- $\text{Base} = 32768$ (`0x8000`)
+- $\text{Bounds} = 16384$ (`0x4000`, 16 KB)
 
 Suppose the process executes the following memory accesses:
 
-| Virtual Address | Bounds Check ($	ext{VA} < 16384$) | Translation Equation | Physical Address | Result |
+| Virtual Address | Bounds Check ($\text{VA} < 16384$) | Translation Equation | Physical Address | Result |
 |---|---|---|---|---|
 | `0` (Code entry) | $0 < 16384$ (Pass) | $32768 + 0$ | $32768$ (`0x8000`) | Valid fetch |
 | `1024` (Load var) | $1024 < 16384$ (Pass) | $32768 + 1024$ | $33792$ (`0x8400`) | Valid load |
@@ -123,7 +199,7 @@ Suppose the process executes the following memory accesses:
 ## Common Mistakes
 
 - **Confusing Virtual and Physical Addresses:** Beginners often assume pointer values printed in user code (e.g., `printf("%p", ptr)`) represent motherboard RAM addresses. Pointers are *always* virtual addresses that are translated by the MMU on the fly.
-- **Assuming Bounds is an Address:** In some CPU architectures, Bounds is defined as the maximum *virtual address* (size), while in others it is defined as the *physical limit address* ($	ext{Base} + 	ext{Size}$). The standard OSTEP/Dragon model treats Bounds as the **size limit** of the virtual address space.
+- **Assuming Bounds is an Address:** In some CPU architectures, Bounds is defined as the maximum *virtual address* (size), while in others it is defined as the *physical limit address* ($\text{Base} + \text{Size}$). The standard OSTEP/Dragon model treats Bounds as the **size limit** of the virtual address space.
 
 ---
 

@@ -74,18 +74,18 @@ For example, in a 14-bit virtual address space with three segments:
 
 ### Segment Translation Equations (Positive Growth: Code and Heap)
 For segments that grow in the positive direction (Code and Heap):
-1. Check: $	ext{Offset} < 	ext{Bounds}[	ext{SegID}]$ (if false, trigger Segmentation Fault).
+1. Check: $\text{Offset} < \text{Bounds}[\text{SegID}]$ (if false, trigger Segmentation Fault).
 2. Physical Address:
-   $$	ext{Physical Address} = 	ext{Base}[	ext{SegID}] + 	ext{Offset}$$
+   $$\text{Physical Address} = \text{Base}[\text{SegID}] + \text{Offset}$$
 
 ### Negative Growth: The Stack Segment
-The Stack grows **downward** (toward lower addresses), but physical memory addresses grow upward. To support this, hardware adds a **Growth Direction Bit** ($0 = 	ext{Positive}, 1 = 	ext{Negative}$):
+The Stack grows **downward** (toward lower addresses), but physical memory addresses grow upward. To support this, hardware adds a **Growth Direction Bit** ($0 = \text{Positive}, 1 = \text{Negative}$):
 1. In a 4 KB segment, if the stack contains 2 KB of data, the valid virtual addresses are at the top of the segment ($2048$ to $4095$).
 2. The negative offset is computed by subtracting the maximum segment size:
-   $$	ext{Negative Offset} = 	ext{Offset} - 	ext{Max Segment Size}$$
-3. Check: $|	ext{Negative Offset}| \le 	ext{Bounds}[	ext{Stack}]$ (otherwise trigger Fault).
+   $$\text{Negative Offset} = \text{Offset} - \text{Max Segment Size}$$
+3. Check: $|\text{Negative Offset}| \le \text{Bounds}[\text{Stack}]$ (otherwise trigger Fault).
 4. Physical Address:
-   $$	ext{Physical Address} = 	ext{Base}[	ext{Stack}] + 	ext{Negative Offset}$$
+   $$\text{Physical Address} = \text{Base}[\text{Stack}] + \text{Negative Offset}$$
 
 ---
 
@@ -121,7 +121,7 @@ This fundamental flaw led modern operating systems to abandon pure segmentation 
 
 ## Example: Step-by-Step Translation
 
-Assume the following Segment Table for a process with 14-bit virtual addresses ($4\,	ext{KB}$ max segment size):
+Assume the following Segment Table for a process with 14-bit virtual addresses ($4\,\text{KB}$ max segment size):
 
 | Segment | Base | Bounds | Growth Direction | Permissions |
 |---|---|---|---|---|
@@ -130,17 +130,17 @@ Assume the following Segment Table for a process with 14-bit virtual addresses (
 | **10 (Stack)** | `28672` (`0x7000`) | `2048` (`2 KB`) | Negative ($1$) | Read-Write |
 
 Translate Virtual Address `0x0064` (Code):
-- Binary: `00 0000 0110 0100` $\implies 	ext{SegID} = 00$, $	ext{Offset} = 100$.
+- Binary: `00 0000 0110 0100` $\implies \text{SegID} = 00$, $\text{Offset} = 100$.
 - Bounds Check: $100 < 2048$ (Valid).
 - Physical Address: $32768 + 100 = \mathbf{32868}$.
 
 Translate Virtual Address `0x1080` (Heap):
-- Binary: `01 0000 1000 0000` $\implies 	ext{SegID} = 01$, $	ext{Offset} = 128$.
+- Binary: `01 0000 1000 0000` $\implies \text{SegID} = 01$, $\text{Offset} = 128$.
 - Bounds Check: $128 < 3072$ (Valid).
 - Physical Address: $34816 + 128 = \mathbf{34944}$.
 
 Translate Virtual Address `0x2C00` (Stack):
-- Binary: `10 1100 0000 0000` $\implies 	ext{SegID} = 10$, $	ext{Offset} = 3072$.
+- Binary: `10 1100 0000 0000` $\implies \text{SegID} = 10$, $\text{Offset} = 3072$.
 - Negative Offset: $3072 - 4096 = -1024$.
 - Bounds Check: $|-1024| = 1024 \le 2048$ (Valid).
 - Physical Address: $28672 + (-1024) = \mathbf{27648}$.

@@ -50,8 +50,8 @@ Draw the memory layout tree, state the physical address ranges assigned to each 
 
 ## Understanding the Problem and Choosing the Method
 
-- **Part A:** Extract the 2 MSBs for the segment selector. For positive growth segments (Code, Heap, Shared), verify $	ext{Offset} < 	ext{Bounds}$ and compute $	ext{Base} + 	ext{Offset}$. For negative growth (Stack), compute $	ext{Negative Offset} = 	ext{Offset} - 16384$, verify $|	ext{Negative Offset}| \le 	ext{Bounds}$, and compute $	ext{Base} + 	ext{Negative Offset}$.
-- **Part B:** In Binary Buddy allocation, every request of size $S$ is rounded up to $2^{\lceil \log_2 S ceil}$. Memory blocks are recursively split into halves until the matching size is reached. On deallocation, check the XOR buddy address $A \oplus 2^k$ to determine if recursive coalescing can proceed.
+- **Part A:** Extract the 2 MSBs for the segment selector. For positive growth segments (Code, Heap, Shared), verify $\text{Offset} < \text{Bounds}$ and compute $\text{Base} + \text{Offset}$. For negative growth (Stack), compute $\text{Negative Offset} = \text{Offset} - 16384$, verify $|\text{Negative Offset}| \le \text{Bounds}$, and compute $\text{Base} + \text{Negative Offset}$.
+- **Part B:** In Binary Buddy allocation, every request of size $S$ is rounded up to $2^{\lceil \log_2 S \rceil}$. Memory blocks are recursively split into halves until the matching size is reached. On deallocation, check the XOR buddy address $A \oplus 2^k$ to determine if recursive coalescing can proceed.
 
 ---
 
@@ -64,21 +64,21 @@ Draw the memory layout tree, state the physical address ranges assigned to each 
 - Segment ID: `00` (Code).
 - Offset: `00 1000 0000 0000` $= 2048$ bytes.
 - Bounds Check: $2048 < 4096 \implies$ **Valid**.
-- Physical Address: $65536 + 2048 = \mathbf{67584} \quad (	ext{0x10800})$.
+- Physical Address: $65536 + 2048 = \mathbf{67584} \quad (\text{0x10800})$.
 
 #### 2. Address `0x4200`
 - 16-bit binary: `0100 0010 0000 0000`
 - Segment ID: `01` (Heap).
 - Offset: `00 0010 0000 0000` $= 512$ bytes.
 - Bounds Check: $512 < 8192 \implies$ **Valid**.
-- Physical Address: $98304 + 512 = \mathbf{98816} \quad (	ext{0x18200})$.
+- Physical Address: $98304 + 512 = \mathbf{98816} \quad (\text{0x18200})$.
 
 #### 3. Address `0x9000`
 - 16-bit binary: `1001 0000 0000 0000`
 - Segment ID: `10` (Stack).
 - Offset: `01 0000 0000 0000` $= 4096$ bytes.
 - Negative Growth Calculation:
-  $$	ext{Negative Offset} = 4096 - 16384 = -12288$$
+  $$\text{Negative Offset} = 4096 - 16384 = -12288$$
 - Bounds Check:
   - Limit is 4 KB ($4096$).
   - $|-12288| = 12288 \le 4096$ is **FALSE**.
@@ -89,11 +89,11 @@ Draw the memory layout tree, state the physical address ranges assigned to each 
 - Segment ID: `10` (Stack).
 - Offset: `11 1111 0000 0000` $= 16128$ bytes.
 - Negative Growth Calculation:
-  $$	ext{Negative Offset} = 16128 - 16384 = -256$$
+  $$\text{Negative Offset} = 16128 - 16384 = -256$$
 - Bounds Check:
   - $|-256| = 256 \le 4096 \implies$ **Valid**.
 - Physical Address:
-  $$	ext{PA} = 131072 + (-256) = \mathbf{130816} \quad (	ext{0x1FE00}).$$
+  $$\text{PA} = 131072 + (-256) = \mathbf{130816} \quad (\text{0x1FE00}).$$
 
 ---
 
@@ -102,39 +102,39 @@ Draw the memory layout tree, state the physical address ranges assigned to each 
 Initial Pool: 128 KB `[0x00000 - 0x1FFFF]`.
 
 #### Step 1: $A$ requests 18 KB
-- Round up: nearest power of two $\ge 18\,	ext{KB}$ is **32 KB**.
-- Split 128 KB $	o$ two 64 KB blocks: `[0x00000 - 0x0FFFF]` and `[0x10000 - 0x1FFFF]`.
-- Split 64 KB `[0x00000]` $	o$ two 32 KB blocks: `[0x00000 - 0x07FFF]` and `[0x08000 - 0x0FFFF]`.
+- Round up: nearest power of two $\ge 18\,\text{KB}$ is **32 KB**.
+- Split 128 KB $\to$ two 64 KB blocks: `[0x00000 - 0x0FFFF]` and `[0x10000 - 0x1FFFF]`.
+- Split 64 KB `[0x00000]` $\to$ two 32 KB blocks: `[0x00000 - 0x07FFF]` and `[0x08000 - 0x0FFFF]`.
 - **Allocate `[0x00000 - 0x07FFF]` (32 KB) to $A$.**
 
 #### Step 2: $B$ requests 28 KB
-- Round up: nearest power of two $\ge 28\,	ext{KB}$ is **32 KB**.
+- Round up: nearest power of two $\ge 28\,\text{KB}$ is **32 KB**.
 - Free 32 KB block available at `[0x08000 - 0x0FFFF]`.
 - **Allocate `[0x08000 - 0x0FFFF]` (32 KB) to $B$.**
 
 #### Step 3: $C$ requests 9 KB
-- Round up: nearest power of two $\ge 9\,	ext{KB}$ is **16 KB**.
+- Round up: nearest power of two $\ge 9\,\text{KB}$ is **16 KB**.
 - Free list has one 64 KB block `[0x10000 - 0x1FFFF]`.
-- Split 64 KB `[0x10000]` $	o$ two 32 KB blocks: `[0x10000 - 0x17FFF]` and `[0x18000 - 0x1FFFF]`.
-- Split 32 KB `[0x10000]` $	o$ two 16 KB blocks: `[0x10000 - 0x13FFF]` and `[0x14000 - 0x17FFF]`.
+- Split 64 KB `[0x10000]` $\to$ two 32 KB blocks: `[0x10000 - 0x17FFF]` and `[0x18000 - 0x1FFFF]`.
+- Split 32 KB `[0x10000]` $\to$ two 16 KB blocks: `[0x10000 - 0x13FFF]` and `[0x14000 - 0x17FFF]`.
 - **Allocate `[0x10000 - 0x13FFF]` (16 KB) to $C$.**
 
 #### Step 4: $A$ frees its memory (`[0x00000 - 0x07FFF]`, 32 KB)
-- Buddy address $= 	ext{0x00000} \oplus 	ext{0x08000} = 	ext{0x08000}$.
+- Buddy address $= \text{0x00000} \oplus \text{0x08000} = \text{0x08000}$.
 - Block `0x08000` is currently allocated to $B$. **No coalescing possible.**
 - Add `[0x00000 - 0x07FFF]` to 32 KB free list.
 
 #### Step 5: $D$ requests 12 KB
-- Round up: nearest power of two $\ge 12\,	ext{KB}$ is **16 KB**.
+- Round up: nearest power of two $\ge 12\,\text{KB}$ is **16 KB**.
 - Free 16 KB block available at `[0x14000 - 0x17FFF]`.
 - **Allocate `[0x14000 - 0x17FFF]` (16 KB) to $D$.**
 
 #### Step 6: $B$ frees its memory (`[0x08000 - 0x0FFFF]`, 32 KB)
-- $B$ address $= 	ext{0x08000}$. Buddy address $= 	ext{0x08000} \oplus 	ext{0x08000} = \mathbf{	ext{0x00000}}$.
+- $B$ address $= \text{0x08000}$. Buddy address $= \text{0x08000} \oplus \text{0x08000} = \mathbf{\text{0x00000}}$.
 - Is buddy `0x00000` free? **Yes!** ($A$ freed it in Step 4).
 - **Coalesce:** `[0x00000 - 0x07FFF]` and `[0x08000 - 0x0FFFF]` merge into a single **64 KB block**: `[0x00000 - 0x0FFFF]`.
 - Buddy check for the new 64 KB block:
-  - Buddy of `0x00000` (64 KB) $= 	ext{0x00000} \oplus 	ext{0x10000} = \mathbf{	ext{0x10000}}$.
+  - Buddy of `0x00000` (64 KB) $= \text{0x00000} \oplus \text{0x10000} = \mathbf{\text{0x10000}}$.
   - Is `0x10000` completely free? **No**, $C$ and $D$ are currently using chunks of it!
   - Further coalescing stops.
 
@@ -145,7 +145,7 @@ Initial Pool: 128 KB `[0x00000 - 0x1FFFF]`.
 - Free Lists:
   - 32 KB Free List: `[0x18000 - 0x1FFFF]` (32 KB)
   - 64 KB Free List: `[0x00000 - 0x0FFFF]` (64 KB)
-  - Total Free Memory: $32 + 64 = 96\,	ext{KB}$.
+  - Total Free Memory: $32 + 64 = 96\,\text{KB}$.
 
 ---
 

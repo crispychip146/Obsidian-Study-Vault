@@ -89,8 +89,8 @@ In 1971, Edward G. Coffman Jr. proved that a resource deadlock can occur **if an
 Two processes $P_1$ and $P_2$, and two resources: Tape Drive $R_1$ and Printer $R_2$:
 1. $P_1$ requests and acquires $R_1$.
 2. $P_2$ requests and acquires $R_2$.
-3. $P_1$ requests $R_2$ $	o$ Blocked! (Held by $P_2$).
-4. $P_2$ requests $R_1$ $	o$ Blocked! (Held by $P_1$).
+3. $P_1$ requests $R_2$ $\to$ Blocked! (Held by $P_2$).
+4. $P_2$ requests $R_1$ $\to$ Blocked! (Held by $P_1$).
 Both processes are permanently blocked. Neither will ever call `release()`.
 
 ---

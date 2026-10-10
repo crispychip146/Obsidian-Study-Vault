@@ -44,8 +44,8 @@ By maintaining this **Safe State Invariant**, the operating system guarantees th
 ## Inputs
 
 - $E = [e_1, e_2, \dots, e_m]$: Total existing resource vector.
-- $CA = [n 	imes m]$: Current Allocation matrix ($CA[i][j]$ = instances of $R_j$ held by $P_i$).
-- $MaxReq = [n 	imes m]$: Maximum Requirement matrix.
+- $CA = [n \times m]$: Current Allocation matrix ($CA[i][j]$ = instances of $R_j$ held by $P_i$).
+- $MaxReq = [n \times m]$: Maximum Requirement matrix.
 - $Request_i = [r_1, r_2, \dots, r_m]$: Dynamic request vector from process $P_i$.
 
 ---
@@ -133,7 +133,7 @@ Suppose $Available = [3, 3, 2]$, and 5 processes have need vectors. The safety a
 ## Complexity
 
 ### Time Complexity
-$O(m 	imes n^2)$ where $n$ is the number of processes and $m$ is the number of resource types.
+$O(m \times n^2)$ where $n$ is the number of processes and $m$ is the number of resource types.
 
 ### Space Complexity
 $O(m + n)$ auxiliary space for $Work$ and $Finish$ vectors.

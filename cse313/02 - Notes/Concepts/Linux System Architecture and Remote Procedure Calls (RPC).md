@@ -12,18 +12,53 @@ order: 67
 
 ---
 
-## Starting Point and the Problem
+## Linux System Architecture Layers
 
-Operating systems provide rich Inter-Process Communication (IPC) primitives—pipes, message queues, and shared memory—allowing processes on a single physical machine to exchange data.
+As presented in Tanenbaum's Modern Operating Systems (slides 428–435), the modern Linux operating system is structured into five hierarchical layers:
 
-However, modern computing is distributed across networks of independent physical machines. A developer building a client-server application across physical boundaries faces major obstacles:
-1. **Network Complexity:** Managing raw socket connections (`connect`, `send`, `recv`), connection drops, and byte streaming is tedious and error-prone.
-2. **Data Representation (Endianness):** Machine $A$ may be Little-Endian (x86), while Machine $B$ is Big-Endian (SPARC/ARM). Sending raw binary structs over the wire results in corrupted data.
-3. **Programming Paradigm Mismatch:** Programmers think in terms of **procedure calls** (`result = calculate(x, y)`), not low-level packet streaming.
+```
+Linux System Hierarchy:
++-----------------------------------------------------------------------+
+| 1. User Applications & Utilities: bash, gcc, grep, cp, ssh, web apps   |
++-----------------------------------------------------------------------+
+| 2. Standard System Libraries: POSIX C Library (glibc)                 |
++-----------------------------------------------------------------------+
+| 3. System Call Interface: sysenter / syscall / int 0x80 trap handler  |
++-----------------------------------------------------------------------+
+| 4. Linux Kernel Core Subsystems:                                      |
+|    - Process Management (scheduler, signals, clone, task_struct)     |
+|    - Memory Management (paging, TLB flushes, slab allocator)         |
+|    - Virtual File System (VFS abstraction over ext4, NFS, FAT)       |
+|    - I/O Subsystem (block/char drivers, elevator queue, buffer cache) |
+|    - Networking Subsystem (BSD socket API, TCP/IP stack)             |
++-----------------------------------------------------------------------+
+| 5. Hardware Platform: CPU cores, MMU, RAM, storage controllers, NICs  |
++-----------------------------------------------------------------------+
+```
 
-To bridge this, Birrell and Nelson (1984) invented **Remote Procedure Calls (RPC)**.
+### Process Creation in Linux: `clone()` and Flag Masking
+Unlike traditional UNIX that distinguished rigidly between processes and threads, Linux unifies both abstractions under the same kernel descriptor: `struct task_struct`.
+
+The fundamental process creation system call is **`clone()`**:
+```c
+int clone(int (*fn)(void *), void *child_stack, int flags, void *arg);
+```
+The `flags` bitmask allows fine-grained specification of what the child shares with the parent:
+
+| Clone Flag | Resource Controlled | Behavior when Set ($=1$) |
+|---|---|---|
+| **`CLONE_VM`** | Virtual Memory | Child shares parent's page tables and address space (Creates a Thread!). |
+| **`CLONE_FS`** | File System Root / CWD | Child shares root directory, working directory, and umask. |
+| **`CLONE_FILES`** | Open File Descriptors | Child shares the same file descriptor table (closing a fd affects both). |
+| **`CLONE_SIGHAND`**| Signal Handlers | Child shares signal action handlers. |
+| **`CLONE_THREAD`** | Thread Group ID | Child is placed in the same thread group (shares TGID / PID). |
+
+- **Traditional `fork()`:** Implemented internally as `clone()` with all sharing flags set to **zero** (`flags = SIGCHLD`). The child receives a separate Copy-on-Write (COW) address space.
+- **POSIX `pthread_create()`:** Implemented internally as `clone()` with `CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND | CLONE_THREAD` asserted, creating a lightweight thread sharing the parent's memory space.
 
 ---
+
+## Inter-System Communication: The Need for Distributed Primitives
 
 ## Developing the Idea: The Remote Procedure Call (RPC)
 
@@ -105,6 +140,16 @@ Running `rpcgen math.x` automatically compiles this specification into:
 An operation is **Idempotent** if executing it multiple times produces the exact same outcome as executing it once (e.g., `Read Block 5`, `Set Temperature to 22`).
 - Idempotent operations can safely use lightweight UDP with simple retry timeouts.
 - Non-idempotent operations (e.g., `Append $500 to account balance`) require TCP or strict transaction IDs to prevent double execution upon network packet retransmission!
+
+### The "Implicit ACK" Strategy in RPC over UDP (Slide 445)
+Why do systems frequently choose UDP over TCP for remote procedure calls despite UDP being unreliable?
+- Under TCP, a client sending a request receives a TCP ACK, waits for the server computation, receives the response, and sends another TCP ACK—requiring multiple round-trips and connection setup handshakes.
+- **The Implicit ACK Optimization:** In RPC over UDP:
+  1. The client transmits the RPC request packet and starts a retransmission timer.
+  2. The server processes the request and sends the **Function Return Value** back to the client.
+  3. **The function return value packet ITSELF acts as the implicit acknowledgement (ACK) for the request!**
+  4. If the client receives the return value before its timer expires, it knows the request arrived and executed successfully with zero separate ACK packets sent across the wire.
+  5. If the timer expires without a reply, the client assumes packet loss and simply retransmits the request.
 
 ---
 

@@ -93,6 +93,28 @@ TLB Entry Format with ASID:
 +---------+---------+------+-------+-------+
 ```
 
+### Real Hardware Example: The MIPS R4000 64-Bit TLB Entry
+As highlighted in course lectures, the MIPS R4000 processor implements a full 64-bit software-managed TLB entry structure:
+
+```
+MIPS R4000 TLB Entry Anatomy (64 Bits Total):
+0       18 19    23 24 25  31 32              55 56 57 58 59 60 61 62 63
++---------+--------+--+------+------------------+--+--+--+--+--+--+--+--+
+| 19b VPN | (Rsvd) |G | 8b   |     24b PFN      |C |C |C |D |V |  (Rsvd) |
+|         |        |  | ASID |                  |  |  |  |  |  |        |
++---------+--------+--+------+------------------+--+--+--+--+--+--+--+--+
+```
+
+| Field Name | Bit Width | Purpose & Architectural Behavior |
+|---|---|---|
+| **VPN** | 19 bits | Virtual Page Number to match against the upper address bits. |
+| **PFN** | 24 bits | Physical Frame Number; supports systems with up to $2^{24}$ frames ($64\,\text{GB}$ of physical RAM!). |
+| **Global Bit ($G$)** | 1 bit | When set ($G=1$), indicates globally shared memory (e.g., kernel space, glibc); bypasses the ASID check. |
+| **ASID** | 8 bits | Address Space Identifier ($2^8 = 256$ active processes) distinguishing processes without requiring TLB flushes on context switches. |
+| **Coherence Bits ($C$)** | 3 bits | Determines hardware cacheability policy (e.g., Uncached, Cacheable Non-coherent, Cacheable Coherent). |
+| **Dirty Bit ($D$)** | 1 bit | Indicates if the page has been written to (serves as a hardware write-permission bit). |
+| **Valid Bit ($V$)** | 1 bit | Asserts whether a valid translation is loaded in this TLB slot ($1 = \text{Valid}, 0 = \text{Invalid}$). |
+
 ---
 
 ## Example: Tracing TLB Hits on an Array Access

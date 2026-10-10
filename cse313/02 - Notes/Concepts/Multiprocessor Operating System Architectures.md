@@ -39,17 +39,54 @@ flowchart TD
 ```
 
 ### 1. UMA (Uniform Memory Access / Symmetric Multiprocessing - SMP)
-- All physical CPUs connect to a central memory controller across a shared system bus, crossbar switch, or multistage Omega network.
-- **Key Characteristic:** Access latency to any physical memory address is identical regardless of which CPU core issues the access.
-- **Scalability Limit:** Buses saturate when scaled beyond 8 to 16 cores.
+All physical CPUs connect to a centralized memory pool where physical access latency is identical across all cores. Modern architectures implement three UMA interconnect models:
+
+1. **Bus-Based Multiprocessors:** All CPUs and memory connect to a single shared bus. Saturated easily beyond 8 to 16 cores due to electrical bus contention.
+2. **Crossbar Switches:** An $N \times M$ matrix grid connecting $N$ CPUs directly to $M$ memory banks using electronic crosspoint switches.
+   - *Advantage:* Non-blocking; any CPU can access any distinct memory bank simultaneously without contention.
+   - *Cost:* Hardware complexity scales quadratically as $O(N \times M)$ crosspoints, making large matrices prohibitively expensive.
+3. **Multistage Switching Networks (Omega Network):** Connects $N$ CPUs to $N$ memory modules using $2 \times 2$ crossbar switching elements arranged in stages.
+   - Each $2 \times 2$ switch can route inputs straight through or crossed.
+   - Total stages required: $\mathbf{\log_2 N}$ stages, each containing $N/2$ switches (total switches: $\frac{N}{2}\log_2 N$).
+   - Balances cost and concurrency, scaling to dozens of processors.
+
+```
+2x2 Switch States:             Omega Multistage Network (8 CPUs to 8 Memories):
+  +---+                         Stage 0      Stage 1      Stage 2
+A-|---|-> A (Straight)          [ 2x2 ] ---> [ 2x2 ] ---> [ 2x2 ] ---> Mem 0..1
+B-|---|-> B                     [ 2x2 ] ---> [ 2x2 ] ---> [ 2x2 ] ---> Mem 2..3
+  +---+                         [ 2x2 ] ---> [ 2x2 ] ---> [ 2x2 ] ---> Mem 4..5
+  +---+                         [ 2x2 ] ---> [ 2x2 ] ---> [ 2x2 ] ---> Mem 6..7
+A- \ / -> B (Cross)             (Total Stages = log2(8) = 3; Switches per stage = 4)
+B- / \ -> A
+  +---+
+```
 
 ### 2. NUMA (Non-Uniform Memory Access)
-- The system is partitioned into multiple **Nodes**. Each node contains one or more CPU cores and dedicated **Local Physical RAM**.
-- Nodes communicate across high-speed point-to-point interconnects.
+When scaling to hundreds of cores, bus and crossbar saturation forces systems into a distributed memory model with a single unified address space:
+- The system is partitioned into independent **Nodes**. Each node contains CPU cores, caches, and a dedicated **Local Memory Controller**.
 - **Access Latency Disparity:**
-  - Accessing **Local Memory** on the same node takes $\sim 60\,\text{ns}$.
-  - Accessing **Remote Memory** on a different node across the interconnect takes $\sim 150 - 300\,\text{ns}$ (a $3\times$ latency penalty!).
-- **OS Responsibility:** The NUMA-aware OS scheduler must place processes and their memory pages on the **same physical node** to maximize local memory hits.
+  - Local node memory: $\sim 60\,\text{ns}$.
+  - Remote memory across the interconnect: $\sim 150 - 300\,\text{ns}$ ($3\times$ latency penalty).
+
+#### Directory-Based CC-NUMA (Cache-Coherent NUMA)
+Because broadcasting bus invalidations across hundreds of nodes would overwhelm the network, large systems (such as the 256-node model in course slides) use **Directory-Based Coherence**:
+- Every physical memory bank maintains an internal **Directory**:
+  - **Presence Bitvector:** A 256-bit mask indicating exactly which nodes currently hold a cached copy of that memory line.
+  - **State Bits:** Clean (unmodified, cached in 1+ nodes), Shared, or Dirty/Modified (held exclusively by 1 node).
+- Invalidation messages are transmitted **point-to-point only to nodes with their bit set in the directory**, avoiding global network broadcasts!
+
+#### Division of a 32-Bit NUMA Memory Address (256 Nodes)
+```
+32-Bit NUMA Physical Address Layout:
+31              24 23                                            0
++-----------------+----------------------------------------------+
+|   Node Number   |          Memory Offset Within Node           |
+|     (8 Bits)    |                  (24 Bits)                   |
++-----------------+----------------------------------------------+
+```
+- **High 8 Bits:** Identifies the "Home Node" ($2^8 = 256$ nodes) that physically owns the RAM chip.
+- **Low 24 Bits:** Addresses up to $2^{24} = 16\,\text{MB}$ of local RAM within that node module.
 
 ---
 
@@ -94,6 +131,40 @@ Operating systems manage multiple CPUs using three historical models:
   - *Big Kernel Lock (BKL):* Early Linux used a single global lock around the entire kernel. Only one CPU could execute kernel code at a time, severely limiting multicore scaling.
   - *Fine-Grained Locking:* Modern kernels use thousands of independent locks guarding individual data structures (per-CPU runqueues, per-inode locks).
   - *Read-Copy-Update (RCU):* Modern lockless synchronization mechanism allowing concurrent readers to access data with zero lock overhead while writers produce new versions.
+
+---
+
+## Multiprocessor Synchronization: TSL, Bus Locking, and Cache Thrashing
+
+Synchronization on a multiprocessor is fundamentally different from a uniprocessor because disabling interrupts on one CPU does *not* stop other CPUs from executing!
+
+### 1. The TSL Instruction and Bus Locking
+- The CPU provides an atomic hardware instruction: **`TSL RX, LOCK`** (Test and Set Lock).
+- **The Hardware Trap:** In a shared-bus multiprocessor, simply reading and writing memory in two steps can fail because another CPU can interleave an access between the read and write cycles.
+- **Physical Bus Lock Signal:** When executing `TSL`, the executing CPU asserts the physical hardware **`LOCK#` signal pin** on the bus:
+  - This electrically disconnects all other CPU cores from the memory bus for the entire read-modify-write duration.
+  - No other processor can access memory until the instruction completes, guaranteeing hardware atomicity.
+
+### 2. Spinlocks and Cache Line Thrashing
+When multiple CPUs spin on a shared lock:
+```c
+while (TSL(&lock) != 0)
+    ; // Spin-wait
+```
+- Every execution of `TSL` performs a write to the lock variable.
+- Under the MESI protocol, each write issues an invalidation broadcast across the system bus, evicting the lock from all other CPUs' L1 caches!
+- As 8 or 16 cores spin, the cache line bounces constantly between cores—a severe bottleneck known as **Cache Thrashing**.
+
+```mermaid
+flowchart TD
+    Spin["Multiple Cores Spinning on Single Global Lock"] --> Inv["Continuous Bus Invalidation Broadcasts"]
+    Inv --> Thrash["Cache Thrashing (Interconnect Saturation)"]
+    Thrash --> Sol1["Solution 1: Test-and-Test-and-Set (Spin on local cached read)"]
+    Thrash --> Sol2["Solution 2: Multiple Fine-Grained Locks (Avoid shared point)"]
+```
+
+- **Solution 1: Test-and-Test-and-Set (TTAS):** The CPU spins reading the lock in its local cache (in state $S$) without asserting bus writes; only when the lock is freed does it execute `TSL`.
+- **Solution 2: Multiple Locks (Tanenbaum MOS):** Dividing large kernel structures into multiple independent locks (e.g., per-table or per-record locks) distributes lock contention across distinct cache lines, eliminating interconnect traffic storms.
 
 ---
 

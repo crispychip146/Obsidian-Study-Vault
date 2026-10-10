@@ -61,11 +61,11 @@ All modifications to the semaphore integer and its internal waiting queue must e
 ## Example
 
 Managing a pool of 3 printer devices using a Counting Semaphore initialized to $S = 3$:
-1. Job 1 calls `wait(S)` $	o S = 2$, enters printer.
-2. Job 2 calls `wait(S)` $	o S = 1$, enters printer.
-3. Job 3 calls `wait(S)` $	o S = 0$, enters printer.
-4. Job 4 calls `wait(S)` $	o S = -1 < 0$, Job 4 blocks and enters the semaphore wait queue.
-5. Job 1 completes printing and calls `signal(S)` $	o S = 0 \le 0$, Job 4 is unblocked and granted printer access.
+1. Job 1 calls `wait(S)` $\to S = 2$, enters printer.
+2. Job 2 calls `wait(S)` $\to S = 1$, enters printer.
+3. Job 3 calls `wait(S)` $\to S = 0$, enters printer.
+4. Job 4 calls `wait(S)` $\to S = -1 < 0$, Job 4 blocks and enters the semaphore wait queue.
+5. Job 1 completes printing and calls `signal(S)` $\to S = 0 \le 0$, Job 4 is unblocked and granted printer access.
 
 ---
 ## Technical Details

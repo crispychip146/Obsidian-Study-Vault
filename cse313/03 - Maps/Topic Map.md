@@ -89,7 +89,7 @@ This map organizes all topics covered in CSE313 (Operating Systems), linking syl
 
 ### 6.1 Address Spaces, Segmentation & Free-Space Management
 - **Core Concepts:**
-  - [[Address Space Abstraction and Hardware Relocation]] (The address space illusion, transparency, efficiency, protection, MMU Base-and-Bounds dynamic relocation)
+  - [[Address Space Abstraction and Hardware Relocation]] (The address space illusion, Pintos `struct thread`, `PHYS_BASE` 3 GB user/kernel split, C address space trace, MMU Base-and-Bounds dynamic relocation)
   - [[Memory API and Allocation Safety]] (POSIX `malloc`, `free`, `calloc`, `realloc`, underlying `brk`/`sbrk`/`mmap`, and 7 deadly memory bugs)
   - [[Segmentation and External Fragmentation]] (Generalized base-and-bounds, segment registers, negative growth stack, and external fragmentation)
 - **Algorithms:**
@@ -106,14 +106,14 @@ This map organizes all topics covered in CSE313 (Operating Systems), linking syl
 
 ### 7.1 Paging, TLB Caching, Multi-Level Tables & Swapping
 - **Core Concepts:**
-  - [[Paging Architecture and Linear Page Tables]] (Fixed-size pages and frames, VPN and Offset decomposition, PTE bits, space/time overheads)
-  - [[Translation Lookaside Buffers and Hardware Caching]] (MMU TLB hardware cache, TLB hit/miss flow, CISC hardware vs RISC software TLBs, ASID tagging)
+  - [[Paging Architecture and Linear Page Tables]] (Fixed-size pages and frames, VPN and Offset decomposition, x86 PTE bits, space/time overheads)
+  - [[Translation Lookaside Buffers and Hardware Caching]] (MMU TLB hardware cache, TLB hit/miss flow, CISC hardware vs RISC software TLBs, ASID tagging, MIPS R4000 64-bit TLB entry format)
   - [[Multi-Level Page Tables and Advanced Address Translation]] (Sparse address space scaling, Page Directory and PDEs, two-level walk, Inverted Page Tables)
   - [[Swapping Mechanisms and Page Fault Handling]] (Secondary swap space, PTE Present bit $= 0$, page fault handling sequence, instruction restart, memory watermarks)
 - **Algorithms:**
   - [[Page Replacement Policies and the Clock Algorithm]] (Optimal Belady's MIN, FIFO and Belady's Anomaly proof, LRU, Clock second-chance circular buffer, Thrashing)
 - **Mathematical Formula:**
-  - [[Virtual Memory Performance and Address Translation Formulas]] (Average Memory Access Time $	ext{AMAT}$, Effective Access Time $	ext{EAT}$ with TLB, page table sizing formulas)
+  - [[Virtual Memory Performance and Address Translation Formulas]] (Average Memory Access Time $\text{AMAT}$, Effective Access Time $\text{EAT}$ with TLB, page table sizing formulas)
 - **Worked Examples:**
   - [[Two-Level Page Table Translation and Clock Replacement Example]] (32-bit hex virtual address walk through Page Directory and Page Table, 4-frame Clock simulation)
 - **Practice Problems:**
@@ -125,7 +125,7 @@ This map organizes all topics covered in CSE313 (Operating Systems), linking syl
 
 ### 8.1 Devices, Hard Disk Scheduling & RAID Redundancy
 - **Core Concepts:**
-  - [[IO System Architecture and Direct Memory Access]] (System bus hierarchy, canonical device interface, Polling vs Interrupts vs DMA engine, device drivers)
+  - [[IO System Architecture and Direct Memory Access]] (System bus hierarchy, canonical device interface, Polling vs Interrupts vs DMA engine, IDE interface registers, Port I/O vs MMIO, xv6 IDE driver implementation)
   - [[Hard Disk Drive Architecture and Mechanical Latency]] (Platters, tracks, sectors, cylinders, spindle, latency components: Seek, Rotation, Transfer, random vs sequential disparity)
   - [[RAID Architectures and Redundancy Models]] (Multi-disk virtualization, RAID 0, RAID 1, RAID 4 dedicated parity, RAID 5 rotated parity, small-write parity bottleneck)
 - **Algorithms:**
@@ -146,7 +146,7 @@ This map organizes all topics covered in CSE313 (Operating Systems), linking syl
   - [[File and Directory Abstractions and POSIX File API]] (Files as byte arrays, inodes, directories, POSIX API: `open`, `read`, `write`, `lseek`, `fsync`, Hard vs Symbolic links)
   - [[File System Implementation and VSFS On-Disk Structures]] (VSFS on-disk layout, multi-level indexing: 12 direct, single, double, triple indirect, directory traversal, page cache)
   - [[Locality and the Berkeley Fast File System (FFS)]] (Flaws of original UNIX FS, Cylinder Groups, FFS directory and file placement policies, Large-File Exception, fragments)
-  - [[Crash Consistency, FSCK, and Write-Ahead Journaling]] (Crash consistency problem, FSCK flaws, Data Journaling protocol, Metadata Ordered Journaling, flush barriers)
+  - [[Crash Consistency, FSCK, and Write-Ahead Journaling]] (Crash consistency problem, FSCK flaws, Data Journaling protocol, Metadata Ordered Journaling, finite circular log, Block Reuse dilemma and Revoke Records)
   - [[Log-Structured File Systems (LFS) and Segment Cleaning]] (RAM absorbing reads, sequential segment bursts, Wandering Inode problem, Inode Map `imap`, Checkpoint Region `CR`, segment cleaning)
 - **Worked Examples:**
   - [[VSFS Inode Block Indexing and Journaling Crash Recovery Example]] (Multi-level inode byte offset lookup trace and Ordered Journaling crash replay)
@@ -161,7 +161,7 @@ This map organizes all topics covered in CSE313 (Operating Systems), linking syl
 ### 10.1 Kernel Memory, Multiprocessor Architecture & RPC
 - **Core Concepts:**
   - [[Kernel Memory Allocation Architecture and the Slab Allocator]] (Kernel allocation constraints, interrupt context, McKusick-Karels, Jeff Bonwick's Slab Allocator: caches, slabs, slab coloring)
-  - [[Multiprocessor Operating System Architectures]] (UMA vs NUMA latency disparity, MESI cache coherence protocol, Master-Slave vs SMP, fine-grained locking, CPU affinity)
-  - [[Linux System Architecture and Remote Procedure Calls (RPC)]] (Linux kernel structure, distributed IPC, RPC architecture: Client/Server stubs, parameter marshalling, `rpcgen`, UDP vs TCP)
+  - [[Multiprocessor Operating System Architectures]] (UMA with Crossbar and Omega multistage networks, Directory-Based CC-NUMA address splitting, MESI protocol, TSL atomic bus-locking, cache thrashing, SMP, CPU affinity)
+  - [[Linux System Architecture and Remote Procedure Calls (RPC)]] (Linux system layers, kernel subsystems, `clone()` flags, distributed IPC, RPC architecture, parameter marshalling, `rpcgen`, UDP implicit ACK)
 - **Practice Problems:**
   - [[Problem — Multiprocessor Memory Latency and Kernel Memory Allocation]] (`Q-CSE313-010`: NUMA vs naive scheduler access latency, and Slab Allocator object packing and internal fragmentation analysis)

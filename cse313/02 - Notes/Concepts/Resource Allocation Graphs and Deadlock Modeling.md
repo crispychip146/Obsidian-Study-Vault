@@ -39,8 +39,8 @@ The vertices $V$ are partitioned into:
 - Resource nodes $R = \{R_1, R_2, \dots, R_m\}$ (represented as squares containing dots for each instance).
 
 The edges $E$ represent dependencies:
-- **Request Edge ($P_i 	o R_j$):** Process $P_i$ is waiting for an instance of resource $R_j$.
-- **Assignment Edge ($R_j 	o P_i$):** An instance of resource $R_j$ is allocated to process $P_i$.
+- **Request Edge ($P_i \to R_j$):** Process $P_i$ is waiting for an instance of resource $R_j$.
+- **Assignment Edge ($R_j \to P_i$):** An instance of resource $R_j$ is allocated to process $P_i$.
 
 ---
 ## Definition

@@ -35,10 +35,10 @@ typedef struct {
 When user code executes `free(ptr)`, the allocator inspects `((header_t *)ptr - 1)` to determine the exact number of bytes being returned to the free list.
 
 ### 2. Splitting
-When an allocation request of size $S$ is received and the allocator finds a free block of size $B > S + 	ext{sizeof(header\_t)}$:
+When an allocation request of size $S$ is received and the allocator finds a free block of size $B > S + \text{sizeof(header\_t)}$:
 - The allocator splits the block into two chunks.
-- Chunk 1 ($S + 	ext{sizeof(header\_t)}$ bytes) is allocated and returned to the caller.
-- Chunk 2 (the remaining $B - (S + 	ext{sizeof(header\_t)})$ bytes) remains on the free list.
+- Chunk 1 ($S + \text{sizeof(header\_t)}$ bytes) is allocated and returned to the caller.
+- Chunk 2 (the remaining $B - (S + \text{sizeof(header\_t)})$ bytes) remains on the free list.
 
 ### 3. Coalescing
 When a block is freed, simply adding it back to the free list creates adjacent, fragmented blocks. If block $A$ of size 10 KB and block $B$ of size 10 KB sit next to each other in physical RAM, an incoming request for 15 KB would fail if they remain separate.
@@ -63,7 +63,7 @@ flowchart TD
 When multiple free blocks are large enough to satisfy an allocation request, which one should the allocator pick? Four classic policies represent different trade-offs:
 
 ### 1. Best-Fit
-- **Strategy:** Scans the entire free list to find the block that is $\ge 	ext{size}$ with the **smallest remaining leftover**.
+- **Strategy:** Scans the entire free list to find the block that is $\ge \text{size}$ with the **smallest remaining leftover**.
 - **Pros:** Keeps large free blocks intact for future large requests.
 - **Cons:** Requires an exhaustive $O(N)$ scan of the entire free list; tends to leave behind tiny, useless free slivers ("dust") that increase external fragmentation.
 
@@ -73,7 +73,7 @@ When multiple free blocks are large enough to satisfy an allocation request, whi
 - **Cons:** Still requires an exhaustive $O(N)$ scan; rapidly shreds large contiguous free blocks into medium-sized blocks, preventing large allocations later.
 
 ### 3. First-Fit
-- **Strategy:** Traverses the free list from the beginning and selects the **very first block** that is $\ge 	ext{size}$.
+- **Strategy:** Traverses the free list from the beginning and selects the **very first block** that is $\ge \text{size}$.
 - **Pros:** Fast ($O(1)$ to $O(K)$); does not need to scan the entire list.
 - **Cons:** Concentrates small, fragmented free slivers at the beginning of the free list, slowing down subsequent searches.
 

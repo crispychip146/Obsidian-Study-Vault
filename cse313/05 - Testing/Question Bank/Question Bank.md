@@ -82,7 +82,7 @@ This file catalogs all practice, exam, tutorial, and lecture problems for **CSE3
 ### Q-CSE313-008: Disk Arm Scheduling and RAID Performance Analysis
 - **Problem Summary:** Simulates SSTF (7,586 cyl), SCAN (7,492 cyl), and C-LOOK (9,137 cyl, 18.27 ms seek) across a 10-request queue on a 5,000-cylinder drive. Evaluates a 5-disk RAID 5 array under an 80/20 mixed read/write workload, proving the array sustains 781 workload IOPS due to the 4-I/O small-write penalty.
 - **Concepts Tested:** [[Disk Arm Scheduling Algorithms]], [[RAID Architectures and Redundancy Models]], [[Disk Latency and RAID Performance Evaluation Formulas]]
-- **Key Insight:** In RAID 5, random writes cost 2 reads + 2 writes. Average workload request cost is $	ext{Read\%} + 4 	imes 	ext{Write\%} = 1.60	ext{ disk ops}$. Failed disk block reconstruction requires XORing all surviving disks.
+- **Key Insight:** In RAID 5, random writes cost 2 reads + 2 writes. Average workload request cost is $\text{Read\%} + 4 \times \text{Write\%} = 1.60\text{ disk ops}$. Failed disk block reconstruction requires XORing all surviving disks.
 - **Detailed Note:** [[Problem — Disk Arm Scheduling and RAID Performance Analysis]]
 
 ---
@@ -96,7 +96,7 @@ This file catalogs all practice, exam, tutorial, and lecture problems for **CSE3
 ---
 
 ### Q-CSE313-010: Multiprocessor Memory Latency and Kernel Memory Allocation
-- **Problem Summary:** Compares effective memory access time on a 4-node NUMA server: naive scheduler achieves $17.0\,	ext{ns}$ AMAT, whereas NUMA-aware scheduler achieves $8.6\,	ext{ns}$ AMAT ($1.98	imes$ speedup). Analyzes Slab Allocator packing for 840-byte `task_struct` objects against power-of-two allocators, explaining zero external fragmentation and `GFP_ATOMIC` interrupt safety.
+- **Problem Summary:** Compares effective memory access time on a 4-node NUMA server: naive scheduler achieves $17.0\,\text{ns}$ AMAT, whereas NUMA-aware scheduler achieves $8.6\,\text{ns}$ AMAT ($1.98\times$ speedup). Analyzes Slab Allocator packing for 840-byte `task_struct` objects against power-of-two allocators, explaining zero external fragmentation and `GFP_ATOMIC` interrupt safety.
 - **Concepts Tested:** [[Kernel Memory Allocation Architecture and the Slab Allocator]], [[Multiprocessor Operating System Architectures]], [[Linux System Architecture and Remote Procedure Calls (RPC)]]
 - **Key Insight:** Binding processes to local NUMA nodes cuts memory latency in half. Pre-allocating object pools eliminates external fragmentation and guarantees deterministic non-blocking allocation in interrupt handlers.
 - **Detailed Note:** [[Problem — Multiprocessor Memory Latency and Kernel Memory Allocation]]

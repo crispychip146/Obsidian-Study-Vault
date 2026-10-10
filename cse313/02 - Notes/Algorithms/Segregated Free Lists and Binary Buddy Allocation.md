@@ -72,7 +72,7 @@ flowchart TD
 
 #### 1. Allocation (Splitting):
 To allocate a block of size $S$:
-1. Compute the target power of two: $k = \lceil \log_2(S + 	ext{header}) ceil$.
+1. Compute the target power of two: $k = \lceil \log_2(S + \text{header}) \rceil$.
 2. Check the free list for size $2^k$:
    - If a free block exists, remove and return it.
    - If not, search higher free lists ($k+1, k+2, \dots$) for the smallest available block of size $2^m$ ($m > k$).
@@ -82,9 +82,9 @@ To allocate a block of size $S$:
 #### 2. Deallocation (Binary Coalescing):
 When freeing a block of size $2^k$ at memory address $A$:
 1. Compute the physical address of its **Buddy** using a single bitwise XOR operation:
-   $$\mathbf{	ext{Buddy Address} = A \oplus 2^k}$$
+   $$\mathbf{\text{Buddy Address} = A \oplus 2^k}$$
 2. Check if the buddy is currently free and has the same size $2^k$:
-   - If **Yes**: Remove the buddy from the $2^k$ free list, merge them into a single block of size $2^{k+1}$ starting at $\min(A, 	ext{Buddy Address})$, and recursively attempt to coalesce with the next higher buddy!
+   - If **Yes**: Remove the buddy from the $2^k$ free list, merge them into a single block of size $2^{k+1}$ starting at $\min(A, \text{Buddy Address})$, and recursively attempt to coalesce with the next higher buddy!
    - If **No**: Insert block $A$ into the $2^k$ free list.
 
 ---
@@ -93,14 +93,14 @@ When freeing a block of size $2^k$ at memory address $A$:
 
 Consider a 64 KB memory pool spanning addresses `0x0000` to `0xFFFF`:
 1. **Request 7 KB:**
-   - Rounded up to power of two: $8\,	ext{KB}$ ($2^{13} = 8192 = 	ext{0x2000}$).
-   - 64 KB split $	o$ two 32 KB blocks: `[0x0000, 0x8000]`.
-   - 32 KB (`0x0000`) split $	o$ two 16 KB blocks: `[0x0000, 0x4000]`.
-   - 16 KB (`0x0000`) split $	o$ two 8 KB blocks: `[0x0000, 0x2000]`.
+   - Rounded up to power of two: $8\,\text{KB}$ ($2^{13} = 8192 = \text{0x2000}$).
+   - 64 KB split $\to$ two 32 KB blocks: `[0x0000, 0x8000]`.
+   - 32 KB (`0x0000`) split $\to$ two 16 KB blocks: `[0x0000, 0x4000]`.
+   - 16 KB (`0x0000`) split $\to$ two 8 KB blocks: `[0x0000, 0x2000]`.
    - Block `0x0000` (8 KB) is allocated.
 2. **Finding the Buddy:**
-   - Address $A = 	ext{0x0000}$, Size $= 	ext{0x2000}$.
-   - $	ext{Buddy} = 	ext{0x0000} \oplus 	ext{0x2000} = \mathbf{	ext{0x2000}}$.
+   - Address $A = \text{0x0000}$, Size $= \text{0x2000}$.
+   - $\text{Buddy} = \text{0x0000} \oplus \text{0x2000} = \mathbf{\text{0x2000}}$.
    - Block `0x2000` is its exact matching buddy!
 3. **When `0x0000` is freed:**
    - Allocator checks if `0x2000` is free. If yes, they immediately merge back into `0x0000` (16 KB)!
@@ -110,10 +110,10 @@ Consider a 64 KB memory pool spanning addresses `0x0000` to `0xFFFF`:
 ## Complexity
 
 - **Time Complexity:**
-  - *Allocation:* $O(\log_2(	ext{Pool Size}))$, bounded by the maximum tree height (typically $\le 20$ operations).
-  - *Deallocation / Coalescing:* $O(\log_2(	ext{Pool Size}))$, requiring only fast bitwise XOR checks and pointer updates.
+  - *Allocation:* $O(\log_2(\text{Pool Size}))$, bounded by the maximum tree height (typically $\le 20$ operations).
+  - *Deallocation / Coalescing:* $O(\log_2(\text{Pool Size}))$, requiring only fast bitwise XOR checks and pointer updates.
 - **Space Complexity:**
-  - $O(\log_2(	ext{Pool Size}))$ free list head pointers.
+  - $O(\log_2(\text{Pool Size}))$ free list head pointers.
 
 ---
 

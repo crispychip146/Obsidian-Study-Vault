@@ -41,7 +41,7 @@ Operating system designers developed two distinct proactive strategies:
    - Attack Mutual Exclusion: Spooling.
    - Attack Hold and Wait: Require processes to request all resources upfront.
    - Attack No Preemption: Forcibly seize resources if a process cannot get what it needs.
-   - Attack Circular Wait: Establish a global total ordering $F: R 	o \mathbb{N}$ and require processes to request resources in strictly increasing order.
+   - Attack Circular Wait: Establish a global total ordering $F: R \to \mathbb{N}$ and require processes to request resources in strictly increasing order.
 2. **Deadlock Avoidance:** A dynamic runtime approach where the OS inspects every request in real time, granting it only if the resulting system state remains **Safe** (a guaranteed safe sequence exists).
 
 ---

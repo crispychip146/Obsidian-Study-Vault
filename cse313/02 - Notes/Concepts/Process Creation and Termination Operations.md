@@ -120,8 +120,8 @@ A process terminates due to one of four events:
 
 Shell command execution `ls -l`:
 1. The shell process calls `fork()`.
-2. In child ($PID_{	ext{ret}} = 0$): child calls `execvp("ls", args)`, replacing its shell image with the `/bin/ls` binary.
-3. In parent ($PID_{	ext{ret}} > 0$): shell calls `waitpid(child_pid, &status, 0)`, blocking until `ls` finishes.
+2. In child ($PID_{\text{ret}} = 0$): child calls `execvp("ls", args)`, replacing its shell image with the `/bin/ls` binary.
+3. In parent ($PID_{\text{ret}} > 0$): shell calls `waitpid(child_pid, &status, 0)`, blocking until `ls` finishes.
 4. When `ls` finishes, it returns code $0$; kernel notifies parent, reaps child's PCB, and the shell prompts for the next command.
 
 ---

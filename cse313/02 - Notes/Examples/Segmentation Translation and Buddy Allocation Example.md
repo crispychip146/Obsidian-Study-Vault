@@ -38,53 +38,53 @@ Translate the following Virtual Addresses into Physical Addresses, or determine 
 
 ### Translation 1: Virtual Address `0x0210`
 1. Convert to 14-bit binary:
-   $$	ext{0x0210} = \mathbf{00}\;0010\;0001\;0000_2$$
+   $$\text{0x0210} = \mathbf{00}\;0010\;0001\;0000_2$$
 2. Identify fields:
-   - $	ext{Segment ID} = \mathbf{00}$ (Code Segment)
-   - $	ext{Offset} = 0010\;0001\;0000_2 = 528$ (`0x210`)
+   - $\text{Segment ID} = \mathbf{00}$ (Code Segment)
+   - $\text{Offset} = 0010\;0001\;0000_2 = 528$ (`0x210`)
 3. Bounds Check:
-   - Growth is positive. Is $	ext{Offset} < 	ext{Bounds}$?
+   - Growth is positive. Is $\text{Offset} < \text{Bounds}$?
    - $528 < 2048 \implies$ **Valid access**.
 4. Compute Physical Address:
-   $$	ext{PA} = 	ext{Base} + 	ext{Offset} = 32768 + 528 = \mathbf{33296} \quad (	ext{0x8210})$$
+   $$\text{PA} = \text{Base} + \text{Offset} = 32768 + 528 = \mathbf{33296} \quad (\text{0x8210})$$
 
 ### Translation 2: Virtual Address `0x1900`
 1. Convert to 14-bit binary:
-   $$	ext{0x1900} = \mathbf{01}\;1001\;0000\;0000_2$$
+   $$\text{0x1900} = \mathbf{01}\;1001\;0000\;0000_2$$
 2. Identify fields:
-   - $	ext{Segment ID} = \mathbf{01}$ (Heap Segment)
-   - $	ext{Offset} = 1001\;0000\;0000_2 = 2304$ (`0x900`)
+   - $\text{Segment ID} = \mathbf{01}$ (Heap Segment)
+   - $\text{Offset} = 1001\;0000\;0000_2 = 2304$ (`0x900`)
 3. Bounds Check:
-   - Is $	ext{Offset} < 	ext{Bounds}$?
+   - Is $\text{Offset} < \text{Bounds}$?
    - $2304 < 3072 \implies$ **Valid access**.
 4. Compute Physical Address:
-   $$	ext{PA} = 	ext{Base} + 	ext{Offset} = 36864 + 2304 = \mathbf{39168} \quad (	ext{0x9900})$$
+   $$\text{PA} = \text{Base} + \text{Offset} = 36864 + 2304 = \mathbf{39168} \quad (\text{0x9900})$$
 
 ### Translation 3: Virtual Address `0x1D00`
 1. Convert to 14-bit binary:
-   $$	ext{0x1D00} = \mathbf{01}\;1101\;0000\;0000_2$$
+   $$\text{0x1D00} = \mathbf{01}\;1101\;0000\;0000_2$$
 2. Identify fields:
-   - $	ext{Segment ID} = \mathbf{01}$ (Heap Segment)
-   - $	ext{Offset} = 1101\;0000\;0000_2 = 3328$
+   - $\text{Segment ID} = \mathbf{01}$ (Heap Segment)
+   - $\text{Offset} = 1101\;0000\;0000_2 = 3328$
 3. Bounds Check:
-   - Is $	ext{Offset} < 	ext{Bounds}$?
+   - Is $\text{Offset} < \text{Bounds}$?
    - $3328 < 3072$ is **FALSE**.
 4. **Result:** Hardware MMU raises a **Segmentation Fault** (bounds violation trap).
 
 ### Translation 4: Virtual Address `0x2A00` (Stack)
 1. Convert to 14-bit binary:
-   $$	ext{0x2A00} = \mathbf{10}\;1010\;0000\;0000_2$$
+   $$\text{0x2A00} = \mathbf{10}\;1010\;0000\;0000_2$$
 2. Identify fields:
-   - $	ext{Segment ID} = \mathbf{10}$ (Stack Segment)
-   - $	ext{Offset} = 1010\;0000\;0000_2 = 2560$
+   - $\text{Segment ID} = \mathbf{10}$ (Stack Segment)
+   - $\text{Offset} = 1010\;0000\;0000_2 = 2560$
 3. Negative Growth Calculation:
    - Growth is negative ($1$). Max segment size $= 4096$.
-   $$	ext{Negative Offset} = 	ext{Offset} - 	ext{Max Segment Size} = 2560 - 4096 = -1536$$
+   $$\text{Negative Offset} = \text{Offset} - \text{Max Segment Size} = 2560 - 4096 = -1536$$
 4. Bounds Check:
-   - Is $|	ext{Negative Offset}| \le 	ext{Bounds}$?
+   - Is $|\text{Negative Offset}| \le \text{Bounds}$?
    - $|-1536| = 1536 \le 2048 \implies$ **Valid stack access**.
 5. Compute Physical Address:
-   $$	ext{PA} = 	ext{Base} + 	ext{Negative Offset} = 28672 + (-1536) = \mathbf{27136} \quad (	ext{0x6A00})$$
+   $$\text{PA} = \text{Base} + \text{Negative Offset} = 28672 + (-1536) = \mathbf{27136} \quad (\text{0x6A00})$$
 
 ---
 
@@ -99,11 +99,11 @@ We trace the following sequence of operations:
 5. $P_2$ frees its memory
 
 ### Step 1: $P_1$ requests 7 KB
-- Smallest power of two $\ge 7\,	ext{KB}$ is **8 KB**.
+- Smallest power of two $\ge 7\,\text{KB}$ is **8 KB**.
 - Initial state: One free block of 64 KB `[0x0000 - 0xFFFF]`.
-- Split 64 KB $	o$ two 32 KB blocks: `[0x0000 - 0x7FFF]` and `[0x8000 - 0xFFFF]`.
-- Split 32 KB `[0x0000]` $	o$ two 16 KB blocks: `[0x0000 - 0x3FFF]` and `[0x4000 - 0x7FFF]`.
-- Split 16 KB `[0x0000]` $	o$ two 8 KB blocks: `[0x0000 - 0x1FFF]` and `[0x2000 - 0x3FFF]`.
+- Split 64 KB $\to$ two 32 KB blocks: `[0x0000 - 0x7FFF]` and `[0x8000 - 0xFFFF]`.
+- Split 32 KB `[0x0000]` $\to$ two 16 KB blocks: `[0x0000 - 0x3FFF]` and `[0x4000 - 0x7FFF]`.
+- Split 16 KB `[0x0000]` $\to$ two 8 KB blocks: `[0x0000 - 0x1FFF]` and `[0x2000 - 0x3FFF]`.
 - **Allocate `[0x0000 - 0x1FFF]` to $P_1$.**
 - Free lists:
   - 8 KB: `[0x2000]`
@@ -111,7 +111,7 @@ We trace the following sequence of operations:
   - 32 KB: `[0x8000]`
 
 ### Step 2: $P_2$ requests 15 KB
-- Smallest power of two $\ge 15\,	ext{KB}$ is **16 KB**.
+- Smallest power of two $\ge 15\,\text{KB}$ is **16 KB**.
 - The 16 KB free list contains `[0x4000 - 0x7FFF]`.
 - **Allocate `[0x4000 - 0x7FFF]` to $P_2$ directly!**
 - Free lists:
@@ -119,15 +119,15 @@ We trace the following sequence of operations:
   - 32 KB: `[0x8000]`
 
 ### Step 3: $P_3$ requests 8 KB
-- Smallest power of two $\ge 8\,	ext{KB}$ is **8 KB**.
+- Smallest power of two $\ge 8\,\text{KB}$ is **8 KB**.
 - The 8 KB free list contains `[0x2000 - 0x3FFF]`.
 - **Allocate `[0x2000 - 0x3FFF]` to $P_3$ directly!**
 - Free lists:
   - 32 KB: `[0x8000]`
 
 ### Step 4: $P_1$ frees memory (`[0x0000 - 0x1FFF]`, size 8 KB)
-- $P_1$ address $= 	ext{0x0000}$.
-- Buddy address $= 	ext{0x0000} \oplus 	ext{0x2000} = \mathbf{	ext{0x2000}}$.
+- $P_1$ address $= \text{0x0000}$.
+- Buddy address $= \text{0x0000} \oplus \text{0x2000} = \mathbf{\text{0x2000}}$.
 - Is buddy `0x2000` free? **No**, it is currently allocated to $P_3$!
 - **Cannot coalesce.** Block `[0x0000 - 0x1FFF]` is added to the 8 KB free list.
 - Free lists:
@@ -135,8 +135,8 @@ We trace the following sequence of operations:
   - 32 KB: `[0x8000]`
 
 ### Step 5: $P_2$ frees memory (`[0x4000 - 0x7FFF]`, size 16 KB)
-- $P_2$ address $= 	ext{0x4000}$.
-- Buddy address $= 	ext{0x4000} \oplus 	ext{0x4000} = \mathbf{	ext{0x0000}}$.
+- $P_2$ address $= \text{0x4000}$.
+- Buddy address $= \text{0x4000} \oplus \text{0x4000} = \mathbf{\text{0x0000}}$.
 - Is buddy `0x0000` (16 KB) free? **No**, because half of it (`0x2000`) is still held by $P_3$!
 - **Cannot coalesce.** Block `[0x4000 - 0x7FFF]` is added to the 16 KB free list.
 - Free lists:

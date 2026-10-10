@@ -111,6 +111,41 @@ If the system crashes before `TxE`, the transaction is discarded. Because the me
 
 ---
 
+## Finite Journal Sizing and the Journal Superblock
+
+The journal cannot grow infinitely on disk. It is implemented as a **Circular Log** managed by a **Journal Superblock**:
+- The **Journal Superblock** sits at the head of the journal partition and records the current circular pointers: `head` (oldest uncheckpointed transaction) and `tail` (next free slot).
+- Once a transaction is successfully checkpointed into its permanent in-place structures, the file system advances `head` in the Journal Superblock to free that circular log segment for future transactions.
+
+---
+
+## Tricky Case: The Block Reuse Dilemma and Revoke Records
+
+Course lectures explicitly highlight a subtle, insidious crash scenario that occurs during Metadata (Ordered) Journaling when storage blocks are freed and immediately reassigned:
+
+### The Problem Scenario:
+1. An application deletes directory `/foo`, which frees data block `1000`. The directory deletion is logged in the journal (marking block 1000 free in bitmap $B$ and removing the directory inode), but **not yet checkpointed**.
+2. Immediately afterward, another process creates file `/bar` and appends data. The block allocator reuses free block `1000` to store `/bar`'s user data.
+3. Because Ordered Journaling writes user data *directly* to disk, block `1000` is overwritten with `/bar`'s file contents.
+4. **The System Crashes!**
+5. **The Fatal Replay Bug:** During recovery, the file system replays the uncheckpointed log. When replaying the earlier transaction deleting directory `/foo`, the recovery code replays the stale directory block write for block `1000`—**overwriting `/bar`'s valid user data with stale directory entries!**
+
+```
+Block Reuse Race Timeline:
+T1: Delete dir /foo (Block 1000 freed in log)  -----------------> Journal Logged
+T2: Create file /bar (Reuses Block 1000 for data) -------------> Disk Overwritten!
+=== SYSTEM CRASH ===
+Recovery Replay: Replays T1 dir block 1000 write ---------------> OVERWRITES /bar data!
+```
+
+### The Solution: Revoke Records
+Modern journaling systems (e.g., Linux `jbd2` in ext3/ext4) solve this using **Revoke Records**:
+- When directory `/foo` is deleted, the file system writes a `revoke` record for block `1000` into the journal.
+- During recovery replay, the journal scanner inspects all revoke records *before* replaying writes.
+- If a block is marked revoked in the journal, the recovery engine **aborts and skips** any prior replayed writes targeting block `1000`, preserving the newly written user data!
+
+---
+
 ## Important Properties and Guarantees
 
 - **Bounded Recovery Time Principle:** Journal recovery time depends strictly on the size of the *journal* (a few megabytes), completely independent of total disk partition capacity.

@@ -115,6 +115,100 @@ Operating systems bridge the gap between general-purpose kernel abstractions (e.
   - **Character Devices:** Provide sequential streams of unbuffered bytes (keyboards, serial ports, mice).
   - **Network Devices:** Socket-based packet stream interfaces.
 
+### Hardware Communication: Port I/O vs. Memory-Mapped I/O (MMIO)
+CPUs interact with device registers via two hardware mechanisms:
+1. **Port-Mapped I/O (PMIO):** The CPU architecture provides a separate, dedicated 16-bit I/O address space accessed strictly through specialized privileged instructions (`inb`, `outb`, `insl`, `outsl` on x86).
+2. **Memory-Mapped I/O (MMIO):** Device registers are mapped directly into standard physical memory address space. The CPU reads and writes device registers using ordinary memory instructions (`mov`, `ldr`, `str`), with caching disabled for those pages via the Page Table entry.
+
+---
+
+## Detailed Hardware Case Study: The IDE Device Driver (xv6)
+
+Course lectures detail the canonical **IDE (Integrated Drive Electronics / ATA)** disk controller and its concrete implementation in MIT's **xv6** educational kernel.
+
+### The IDE Hardware Register Architecture
+An IDE controller exposes two primary blocks of I/O ports on the x86 bus:
+
+```
+IDE Controller Port Map:
+Control Port:
+  0x3F6 : Device Control Register
+          Bit 1 (E): Interrupt Enable (E = 0 enables interrupts, E = 1 disables)
+          Bit 2 (R): Software Reset
+
+Command / Status Ports (0x1F0 - 0x1F7):
+  0x1F0 : Data Port (16-bit / 32-bit reads and writes)
+  0x1F1 : Error Register (Read: error status when ERR=1) / Features (Write)
+  0x1F2 : Sector Count Register (Number of 512-byte sectors to transfer)
+  0x1F3 : LBA Low (Sector address bits 0 - 7)
+  0x1F4 : LBA Mid (Sector address bits 8 - 15)
+  0x1F5 : LBA High (Sector address bits 16 - 23)
+  0x1F6 : Device / Head Register:
+          Bits 0-3: LBA bits 24 - 27
+          Bit 4: Drive Select (0 = Master, 1 = Slave)
+          Bits 5-7: Fixed mode bits (0xE0 for LBA mode)
+  0x1F7 : Status Register (Read) / Command Register (Write)
+          Status Flags:
+            Bit 7 (BSY)  : Drive Busy executing command
+            Bit 6 (DRDY) : Drive Ready to accept commands
+            Bit 3 (DRQ)  : Data Request (buffer ready for transfer)
+            Bit 0 (ERR)  : Error occurred
+          Commands:
+            0x20 : Read Sectors (with retry)
+            0x30 : Write Sectors (with retry)
+```
+
+### The 5-Step IDE Driver Protocol
+To perform a disk I/O operation:
+1. **Wait for Drive Ready:** Read Status register (`0x1F7`) repeatedly until `BSY == 0` and `DRDY == 1`.
+2. **Load Command Parameters:** Write sector count to `0x1F2`, write 28-bit Logical Block Address (LBA) across registers `0x1F3` through `0x1F6`, and enable interrupts via `0x3F6`.
+3. **Issue Command:** Write `0x20` (Read) or `0x30` (Write) to Command register `0x1F7`.
+4. **Data Transfer:**
+   - *For Writes:* Wait until `DRQ` bit is set, then transfer data bytes into Data register `0x1F0` using `outsl()`.
+   - *For Reads:* Sleep and yield CPU to another process; wait for hardware interrupt.
+5. **Interrupt Handling (`ide_intr`):** When the disk finishes reading/writing, it raises hardware IRQ 14. The kernel's `ide_intr()` executes: checks `ERR` bit, reads data from `0x1F0` into memory using `insl()` (for reads), marks buffer complete, and wakes the waiting process.
+
+### The xv6 Implementation Walkthrough
+
+```c
+// 1. Waiting for drive to become ready
+static int ide_wait_ready(void) {
+    int r;
+    while (((r = inb(0x1F7)) & IDE_BSY) || !(r & IDE_DRDY))
+        ; // Spin until drive is ready and not busy
+    return 0;
+}
+
+// 2. Starting an I/O request
+static void ide_start_request(struct buf *b) {
+    ide_wait_ready();
+    outb(0x3F6, 0);                 // Generate interrupt upon completion (E=0)
+    outb(0x1F2, 1);                 // Transfer 1 sector (512 bytes)
+    outb(0x1F3, b->sector & 0xFF);         // LBA bits 0-7
+    outb(0x1F4, (b->sector >> 8) & 0xFF);  // LBA bits 8-15
+    outb(0x1F5, (b->sector >> 16) & 0xFF); // LBA bits 16-23
+    outb(0x1F6, 0xE0 | ((b->dev & 1) << 4) | ((b->sector >> 24) & 0x0F));
+
+    if (b->flags & B_DIRTY) {       // Write operation
+        outb(0x1F7, 0x30);          // CMD_WRITE
+        outsl(0x1F0, b->data, 512/4); // Transfer 512 bytes (128 32-bit words)
+    } else {                        // Read operation
+        outb(0x1F7, 0x20);          // CMD_READ (Interrupt will read data)
+    }
+}
+
+// 3. Servicing the completion interrupt
+void ide_intr(void) {
+    struct buf *b = ide_queue;
+    if (!(b->flags & B_DIRTY)) {    // Read completion
+        insl(0x1F0, b->data, 512/4); // Copy 512 bytes from port 0x1F0 into buffer
+    }
+    b->flags |= B_VALID;
+    b->flags &= ~B_DIRTY;
+    wakeup(b);                      // Wake up process waiting on I/O
+}
+```
+
 ---
 
 ## Important Properties and Guarantees

@@ -7,11 +7,6 @@ order: 46
 
 # Chaitin's Graph Coloring Register Allocation Algorithm
 
-> 📖 **Reading Order:** Step 46 of 55 | **Module 5: Register Allocation**  
-> ◄ **Previous:** [[Linear Scan Register Allocation Algorithm]] | ► **Next:** [[Linear Scan Register Allocation Step-by-Step Example]]
-
----
-
 ## The Problem and Earlier Tools
 
 **Chaitin's Algorithm** (IBM 1981, 1982) is the foundational graph-coloring register allocation algorithm used in production ahead-of-time optimizing compilers (such as GCC and LLVM).
@@ -178,3 +173,10 @@ Frequently tested on final examinations via hand-simulation of Chaitin's Graph C
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 444–531).
 - **Textbook / Papers:** Chaitin, "Register Allocation & Spilling via Graph Coloring", ACM SIGPLAN Notices 1982; Briggs et al., "Improvements to Graph Coloring Register Allocation", ACM TOPLAS 1994.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 46 of 55 | **Module 5: Register Allocation**  
+> ◄ **Previous:** [[Linear Scan Register Allocation Algorithm]] | ► **Next:** [[Linear Scan Register Allocation Step-by-Step Example]]

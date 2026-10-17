@@ -7,9 +7,6 @@ order: 15
 
 # Covariance and Correlation
 
-> 📖 **Reading Order:** Step 15 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Joint and Marginal Distributions]] | ► **Next:** [[Law of the Unconscious Statistician (LOTUS)]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Covariance and Correlation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -177,3 +174,10 @@ because the cross-term in the bivariate Gaussian exponent vanishes when $\rho = 
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 13, pages 40–43)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_8.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 7, Sections 7.1–7.3)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 15 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Joint and Marginal Distributions]] | ► **Next:** [[Law of the Unconscious Statistician (LOTUS)]]

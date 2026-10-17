@@ -7,11 +7,6 @@ order: 42
 
 # Paging Architecture and Linear Page Tables
 
-> 📖 **Reading Order:** Step 42 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Problem — Segmentation Address Translation and Buddy Memory Allocation]] | ► **Next:** [[Translation Lookaside Buffers and Hardware Caching]]
-
----
-
 ## Starting Point and the Problem
 
 As demonstrated in [[Segmentation and External Fragmentation]], dividing memory into variable-sized logical segments (Code, Heap, Stack) solves internal void waste but introduces crippling **external fragmentation**. Free memory becomes divided into irregularly sized holes. When no single contiguous hole is large enough for a new segment, allocation fails—even when total free memory is abundant.
@@ -184,3 +179,10 @@ Core exam topics include:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 18 (Slides 112–128).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 18 (Paging: Introduction).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 42 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Problem — Segmentation Address Translation and Buddy Memory Allocation]] | ► **Next:** [[Translation Lookaside Buffers and Hardware Caching]]

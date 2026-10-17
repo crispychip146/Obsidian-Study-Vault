@@ -7,9 +7,6 @@ order: 78
 
 # Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg
 
-> 📖 **Reading Order:** Step 78 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]] | ► **Next:** [[Stochastic Process]]
----
 ## Problem
 
 A bioinformatics researcher evaluates $m = 10$ genes to determine whether their expression levels differ between cancer patients and healthy controls. The $10$ independent hypothesis tests produce the following ordered $p$-values:
@@ -193,3 +190,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 78 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]] | ► **Next:** [[Stochastic Process]]

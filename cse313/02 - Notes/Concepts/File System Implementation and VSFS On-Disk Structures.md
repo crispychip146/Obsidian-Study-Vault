@@ -7,11 +7,6 @@ order: 58
 
 # File System Implementation and VSFS On-Disk Structures
 
-> 📖 **Reading Order:** Step 58 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[File and Directory Abstractions and POSIX File API]] | ► **Next:** [[Locality and the Berkeley Fast File System (FFS)]]
-
----
-
 ## Starting Point and the Problem
 
 In [[File and Directory Abstractions and POSIX File API]], we established the high-level concepts of files, inodes, and directories.
@@ -169,3 +164,10 @@ Consistently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 40 (Slides 320–337).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 40 (File System Implementation).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 58 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[File and Directory Abstractions and POSIX File API]] | ► **Next:** [[Locality and the Berkeley Fast File System (FFS)]]

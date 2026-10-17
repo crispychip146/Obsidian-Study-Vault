@@ -6,10 +6,6 @@ order: 17
 ---
 # Problem — CPU Scheduling Algorithm Simulation and Gantt Chart
 
-> 📖 **Reading Order:** Step 17 of 68 | **Module 3:** CPU Scheduling  
-> ◄ **Previous:** [[Comprehensive CPU Scheduling Simulation Example]] | ► **Next:** [[Race Conditions and Critical-Section Problem]]
-
----
 ## Problem
 
 A multiprogrammed operating system has a single CPU core and five processes arriving in the ready queue. The arrival times, CPU burst times, and process priorities are listed below:
@@ -332,3 +328,10 @@ Appears frequently in university midterm and final examinations as a multi-part 
   - Algorithms: [[Batch Scheduling Algorithms]], [[Interactive Scheduling Algorithms]]
   - Formula: [[Scheduling Metrics and Burst Estimation Formulas]]
   - Example: [[Comprehensive CPU Scheduling Simulation Example]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 17 of 68 | **Module 3:** CPU Scheduling  
+> ◄ **Previous:** [[Comprehensive CPU Scheduling Simulation Example]] | ► **Next:** [[Race Conditions and Critical-Section Problem]]

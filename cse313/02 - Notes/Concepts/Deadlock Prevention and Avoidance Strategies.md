@@ -6,10 +6,6 @@ order: 28
 ---
 # Deadlock Prevention and Avoidance Strategies
 
-> 📖 **Reading Order:** Step 28 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Resource Allocation Graphs and Deadlock Modeling]] | ► **Next:** [[Banker's Algorithm]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q1c, 2019 Q3c, 2021 Q1c, 2021 Q3a)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
 >
@@ -145,5 +141,10 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 ## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 25–27, 32–37: Resource Trajectories, Safe and Unsafe States, Deadlock Prevention Methods).
-- **Previous Topic:** [[Resource Allocation Graphs and Deadlock Modeling]] (Step 27).
-- **Next Topic:** [[Banker's Algorithm]] (Step 29).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 28 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Resource Allocation Graphs and Deadlock Modeling]] | ► **Next:** [[Banker's Algorithm]]

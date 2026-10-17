@@ -7,11 +7,6 @@ order: 59
 
 # Locality and the Berkeley Fast File System (FFS)
 
-> 📖 **Reading Order:** Step 59 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[File System Implementation and VSFS On-Disk Structures]] | ► **Next:** [[Crash Consistency, FSCK, and Write-Ahead Journaling]]
-
----
-
 ## Starting Point and the Problem
 
 The original UNIX file system treated the storage disk as an oblivious random-access memory array:
@@ -153,3 +148,10 @@ High exam prominence:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 41 (Slides 338–351).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 41 (Locality and The Fast File System).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 59 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[File System Implementation and VSFS On-Disk Structures]] | ► **Next:** [[Crash Consistency, FSCK, and Write-Ahead Journaling]]

@@ -7,11 +7,6 @@ order: 63
 
 # LFS Segment Allocation and Imap Checkpoint Example
 
-> 📖 **Reading Order:** Step 63 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[VSFS Inode Block Indexing and Journaling Crash Recovery Example]] | ► **Next:** [[Problem — File System Inode Capacity and Journaling Recovery]]
-
----
-
 ## Background and Problem Setup
 
 In [[Log-Structured File Systems (LFS) and Segment Cleaning]], we learned that LFS never overwrites disk blocks in place. Instead, it writes all file updates, moving inodes, and inode map (`imap`) pieces sequentially into large segments.
@@ -116,3 +111,10 @@ The LFS segment cleaner:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 43 (Slides 378–396).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 43 (Log-structured File Systems).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 63 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[VSFS Inode Block Indexing and Journaling Crash Recovery Example]] | ► **Next:** [[Problem — File System Inode Capacity and Journaling Recovery]]

@@ -7,9 +7,6 @@ order: 26
 
 # Conditional Probability and Independence
 
-> 📖 **Reading Order:** Step 26 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Problem — Expected Number of Local Maxima in Random Permutations]] | ► **Next:** [[Simpson's Paradox]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Probability and Independence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -209,3 +206,10 @@ For inversion of conditioning, see [[Law of Total Probability and Bayes' Rule]];
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 4, pages 10–12)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_3.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 2: Conditional Probability)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 26 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Problem — Expected Number of Local Maxima in Random Permutations]] | ► **Next:** [[Simpson's Paradox]]

@@ -7,11 +7,6 @@ order: 10
 
 # Breadth-First Search Algorithm
 
-> 📖 **Reading Order:** Step 10 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Uninformed Search Strategies]] | ► **Next:** [[Uniform-Cost Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 When searching a state space with no heuristic guidance, we need a systematic way to guarantee discovering a solution if one exists. If an algorithm dives deeply down a single infinite branch (like naive DFS), it may never return, even if a shallow goal exists just one step from the start. **Breadth-First Search (BFS)** solves this by exploring all states level by level, guaranteeing that the shallowest goal is expanded first.
@@ -150,4 +145,5 @@ In BFS, we apply the goal test when a node is **generated**, rather than when it
 
 ## Navigation
 
-◄ **Previous:** [[Uninformed Search Strategies]] | ► **Next:** [[Uniform-Cost Search Algorithm]]
+> 📖 **Reading Order:** Step 10 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Uninformed Search Strategies]] | ► **Next:** [[Uniform-Cost Search Algorithm]]

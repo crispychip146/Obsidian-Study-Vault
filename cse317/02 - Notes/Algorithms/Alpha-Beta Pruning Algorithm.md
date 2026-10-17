@@ -7,11 +7,6 @@ order: 30
 
 # Alpha-Beta Pruning Algorithm
 
-> 📖 **Reading Order:** Step 30 of 43 | **Module 6:** Adversarial Search & Game Playing  
-> ◄ **Previous:** [[Minimax Algorithm]] | ► **Next:** [[Evaluation Functions and Cutting Off Search]]
-
----
-
 ## Starting Point and the Problem
 
 As shown in [[Minimax Algorithm]], pure Minimax requires $O(b^m)$ time, making complete search intractable for real games like Chess ($35^{80}$). However, large portions of the game tree are completely irrelevant to the final decision. If we have already discovered a move that guarantees us a score of $+5$, and exploring the first child of an alternative move reveals that the opponent can force our score down to $-10$, we can **immediately stop evaluating that alternative move**! Exploring the remaining children cannot change our choice. Pruning these dead branches is achieved by **Alpha-Beta Pruning**.
@@ -151,4 +146,5 @@ With optimal move ordering, Alpha-Beta pruning reduces the effective branching f
 
 ## Navigation
 
-◄ **Previous:** [[Minimax Algorithm]] | ► **Next:** [[Evaluation Functions and Cutting Off Search]]
+> 📖 **Reading Order:** Step 30 of 43 | **Module 6:** Adversarial Search & Game Playing  
+> ◄ **Previous:** [[Minimax Algorithm]] | ► **Next:** [[Evaluation Functions and Cutting Off Search]]

@@ -7,9 +7,6 @@ order: 48
 
 # Estimator Consistency and Convergence
 
-> 📖 **Reading Order:** Step 48 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Bias-Variance Decomposition]] | ► **Next:** [[Confidence Intervals and Confidence Sets]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Estimator Consistency and Convergence, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -237,3 +234,10 @@ Exam questions often test:
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 48 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Bias-Variance Decomposition]] | ► **Next:** [[Confidence Intervals and Confidence Sets]]

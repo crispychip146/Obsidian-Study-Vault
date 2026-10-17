@@ -7,11 +7,6 @@ order: 9
 
 # Problem — Desk Calculator SDD and Annotated Parse Tree
 
-> 📖 **Reading Order:** Step 09 of 55 | **Module 1:** Syntax-Directed Translation  
-> ◄ **Previous:** [[Infix to Postfix and Prefix SDT Translation Example]] | ► **Next:** [[Intermediate Representations and Three-Address Code]]
-
----
-
 ## Problem
 
 A compiler frontend engineer is designing an extended arithmetic calculator module that supports addition (`+`) and right-associative exponentiation (`^`). The language syntax and semantics are formalized by the following Syntax-Directed Definition (SDD):
@@ -280,3 +275,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 7–22).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.1 (Syntax-Directed Definitions) & Exercises 5.1.1.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 09 of 55 | **Module 1:** Syntax-Directed Translation  
+> ◄ **Previous:** [[Infix to Postfix and Prefix SDT Translation Example]] | ► **Next:** [[Intermediate Representations and Three-Address Code]]

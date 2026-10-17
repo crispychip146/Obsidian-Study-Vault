@@ -7,11 +7,6 @@ order: 17
 
 # Backpatching Control-Flow Code Generation Algorithm
 
-> 📖 **Reading Order:** Step 17 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Backpatching in Intermediate Code Generation]] | ► **Next:** [[Array Reference and Boolean Control-Flow TAC Generation Example]]
-
----
-
 ## The Problem and Earlier Tools
 
 The **Backpatching Algorithm** generates intermediate Three-Address Code (represented as quadruples or tuples indexed by integers called **quads**) for boolean expressions and control-flow statements in a **single pass**.
@@ -250,3 +245,10 @@ Frequently tested on final examinations via hand-simulation of Backpatching Cont
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 186–193).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.7 (Backpatching).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 17 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Backpatching in Intermediate Code Generation]] | ► **Next:** [[Array Reference and Boolean Control-Flow TAC Generation Example]]

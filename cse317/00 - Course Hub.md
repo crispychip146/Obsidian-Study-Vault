@@ -73,14 +73,14 @@ Read these notes in strict chronological order to build cumulative mastery from 
 # Sources & Course Materials
 
 - Primary Lecture Slides: `cse317/01 - Sources/Lectures/MMi/`
-  - [[01 - Sources/Lectures/MMi/Chap1-IntroAI.ppt|Chap1-IntroAI.ppt]] & [[01 - Sources/Lectures/MMi/AIHistory.ppt|AIHistory.ppt]]
-  - [[01 - Sources/Lectures/MMi/Chap2-IntAgent.pptx|Chap2-IntAgent.pptx]]
-  - [[01 - Sources/Lectures/MMi/learning_agents_elaborate_presentation.pptx|learning_agents_elaborate_presentation.pptx]]
-  - [[01 - Sources/Lectures/MMi/Agentic_AI_Complete_Presentation.pptx|Agentic_AI_Complete_Presentation.pptx]]
-  - [[01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]] & [[01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]]
-  - [[01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]] & [[01 - Sources/Lectures/MMi/A-starSearch.ppt|A-starSearch.ppt]]
-  - [[01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] & [[01 - Sources/Lectures/MMi/Genetic Algorithm.ppt|Genetic Algorithm.ppt]]
-  - [[01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]]
-  - [[01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]]
+  - [[cse317/01 - Sources/Lectures/MMi/Chap1-IntroAI.ppt|Chap1-IntroAI.ppt]] & [[cse317/01 - Sources/Lectures/MMi/AIHistory.ppt|AIHistory.ppt]]
+  - [[cse317/01 - Sources/Lectures/MMi/Chap2-IntAgent.pptx|Chap2-IntAgent.pptx]]
+  - [[cse317/01 - Sources/Lectures/MMi/learning_agents_elaborate_presentation.pptx|learning_agents_elaborate_presentation.pptx]]
+  - [[cse317/01 - Sources/Lectures/MMi/Agentic_AI_Complete_Presentation.pptx|Agentic_AI_Complete_Presentation.pptx]]
+  - [[cse317/01 - Sources/Lectures/MMi/Chap3-ProbSol.ppt|Chap3-ProbSol.ppt]] & [[cse317/01 - Sources/Lectures/MMi/UnInformedSearch.ppt|UnInformedSearch.ppt]]
+  - [[cse317/01 - Sources/Lectures/MMi/Chap4-InformedSearch.ppt|Chap4-InformedSearch.ppt]] & [[cse317/01 - Sources/Lectures/MMi/A-starSearch.ppt|A-starSearch.ppt]]
+  - [[cse317/01 - Sources/Lectures/MMi/Chap4-LocalSearch.ppt|Chap4-LocalSearch.ppt]] & [[cse317/01 - Sources/Lectures/MMi/Genetic Algorithm.ppt|Genetic Algorithm.ppt]]
+  - [[cse317/01 - Sources/Lectures/MMi/Chap5-AdvSearch.ppt|Chap5-AdvSearch.ppt]]
+  - [[cse317/01 - Sources/Lectures/MMi/CSP.pptx|CSP.pptx]]
 - Authoritative Textbook:
-  - [[01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition) — Stuart Russell & Peter Norvig]]
+  - [[cse317/01 - Sources/Lectures/MMi/Artificial Intelligence A Modern Approach 3rd Edition.pdf|Artificial Intelligence: A Modern Approach (3rd Edition) — Stuart Russell & Peter Norvig]]

@@ -7,11 +7,6 @@ order: 6
 
 # Bottom-Up Evaluation of L-Attributed SDDs
 
-> 📖 **Reading Order:** Step 06 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** [[Eliminating Left Recursion from SDTs]] | ► **Next:** [[Arithmetic Expression Desk Calculator SDD Example]]
-
----
-
 ## The Problem and Earlier Tools
 
 Most industry-standard compiler front-ends (such as Yacc, Bison, and CUP) are **Bottom-Up LALR(1) Parsers**.
@@ -234,3 +229,10 @@ Frequently tested on final examinations via hand-simulation of Bottom-Up Evaluat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 76–80).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.5.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 06 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** [[Eliminating Left Recursion from SDTs]] | ► **Next:** [[Arithmetic Expression Desk Calculator SDD Example]]

@@ -7,11 +7,6 @@ order: 33
 
 # Constraint Satisfaction Problems
 
-> 📖 **Reading Order:** Step 33 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[Minimax and Alpha-Beta Game Tree Pruning Example]] | ► **Next:** [[Constraint Propagation and Arc Consistency]]
-
----
-
 ## Starting Point and the Problem
 
 In standard search (such as BFS, UCS, or A*), states are treated as atomic, indivisible black boxes: the search algorithm evaluates whether a state is a goal, but has no visibility into its internal structure. Consequently, search algorithms cannot infer why a path failed or exploit general-purpose heuristics across diverse domains. In contrast, many real-world problems—such as university course timetabling, circuit routing, puzzle solving (Sudoku, Cryptarithmetic), and factory scheduling—have states defined by a factored set of variables that must satisfy specific relational restrictions. **Constraint Satisfaction Problems (CSPs)** exploit this factored representation.
@@ -130,4 +125,5 @@ For binary CSPs, the problem can be visualized as a **Constraint Graph**:
 
 ## Navigation
 
-◄ **Previous:** [[Minimax and Alpha-Beta Game Tree Pruning Example]] | ► **Next:** [[Constraint Propagation and Arc Consistency]]
+> 📖 **Reading Order:** Step 33 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[Minimax and Alpha-Beta Game Tree Pruning Example]] | ► **Next:** [[Constraint Propagation and Arc Consistency]]

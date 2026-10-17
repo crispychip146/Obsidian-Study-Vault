@@ -7,9 +7,6 @@ order: 73
 
 # Multiple Testing and False Discovery Rate
 
-> 📖 **Reading Order:** Step 73 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Permutation Test Algorithm]] | ► **Next:** [[Benjamini-Hochberg Procedure Algorithm]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Multiple Testing and False Discovery Rate, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -219,3 +216,10 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 73 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Permutation Test Algorithm]] | ► **Next:** [[Benjamini-Hochberg Procedure Algorithm]]

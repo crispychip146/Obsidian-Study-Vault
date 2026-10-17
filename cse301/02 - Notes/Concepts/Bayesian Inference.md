@@ -7,9 +7,6 @@ order: 60
 
 # Bayesian Inference
 
-> 📖 **Reading Order:** Step 60 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]] | ► **Next:** [[Maximum A Posteriori (MAP) Estimation]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Bayesian Inference, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -211,3 +208,10 @@ In examinations, expect to:
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 60 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]] | ► **Next:** [[Maximum A Posteriori (MAP) Estimation]]

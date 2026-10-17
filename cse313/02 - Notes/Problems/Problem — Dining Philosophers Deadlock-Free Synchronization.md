@@ -6,10 +6,6 @@ order: 25
 ---
 # Problem — Dining Philosophers Deadlock-Free Synchronization
 
-> 📖 **Reading Order:** Step 25 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Producer-Consumer Semaphore Implementation Example]] | ► **Next:** [[Deadlock Fundamentals and Coffman Conditions]]
-
----
 ## Problem
 
 Consider the classic Dining Philosophers problem where five philosophers ($P_0, P_1, P_2, P_3, P_4$) sit around a circular table. Between each pair of philosophers is a single chopstick ($C_0, C_1, C_2, C_3, C_4$). A philosopher needs two chopsticks to eat:
@@ -222,3 +218,10 @@ Appears frequently in university midterm and final examinations as a multi-part 
   - Concept: [[Race Conditions and Critical-Section Problem]], [[Semaphores and Synchronization Primitives]]
   - Algorithm: [[Classic Synchronization Solutions]]
   - Example: [[Producer-Consumer Semaphore Implementation Example]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 25 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Producer-Consumer Semaphore Implementation Example]] | ► **Next:** [[Deadlock Fundamentals and Coffman Conditions]]

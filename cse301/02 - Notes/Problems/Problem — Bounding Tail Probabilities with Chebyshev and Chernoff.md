@@ -7,9 +7,6 @@ order: 41
 
 # Problem — Bounding Tail Probabilities with Chebyshev and Chernoff
 
-> 📖 **Reading Order:** Step 41 of 103 | **Module 4:** Probability Bounds and Inequalities  
-> ◄ **Previous:** [[Comparison of Probability Bounds Example]] | ► **Next:** [[Law of Large Numbers]]
----
 ## Problem
 
 A high-frequency network switch processes incoming packets. The number of packets arriving in a 1-millisecond window follows a Poisson distribution with mean $\lambda = 20$:
@@ -176,3 +173,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17 & 18, pages 54–59)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf` (Problem 2)
 - **Question ID:** `Q-CSE301-016`
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 41 of 103 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Comparison of Probability Bounds Example]] | ► **Next:** [[Law of Large Numbers]]

@@ -7,11 +7,6 @@ order: 34
 
 # Constraint Propagation and Arc Consistency
 
-> 📖 **Reading Order:** Step 34 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[Constraint Satisfaction Problems]] | ► **Next:** [[AC-3 Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 In standard search, an agent can only discover that a branch fails by searching down the tree until a dead end is reached. In a CSP, however, variables are interconnected by explicit mathematical constraints. If assigning a value to variable $X_i$ leaves variable $X_j$ with no legal values, we should deduce that failure immediately without searching! Using constraints to systematically prune unviable values from variable domains is called **Constraint Propagation**.
@@ -107,4 +102,5 @@ Enforcing arc consistency across an entire network requires checking **both dire
 
 ## Navigation
 
-◄ **Previous:** [[Constraint Satisfaction Problems]] | ► **Next:** [[AC-3 Algorithm]]
+> 📖 **Reading Order:** Step 34 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[Constraint Satisfaction Problems]] | ► **Next:** [[AC-3 Algorithm]]

@@ -7,11 +7,6 @@ order: 8
 
 # Infix to Postfix and Prefix SDT Translation Example
 
-> 📖 **Reading Order:** Step 08 of 55 | **Module 1:** Syntax-Directed Translation  
-> ◄ **Previous:** [[Arithmetic Expression Desk Calculator SDD Example]] | ► **Next:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]]
-
----
-
 ## Problem
 
 Demonstrate and trace the compiler execution of Infix to Postfix and Prefix SDT Translation Example.
@@ -263,3 +258,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 48–62).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.4 (Syntax-Directed Translation Schemes).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 08 of 55 | **Module 1:** Syntax-Directed Translation  
+> ◄ **Previous:** [[Arithmetic Expression Desk Calculator SDD Example]] | ► **Next:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]]

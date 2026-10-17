@@ -7,9 +7,6 @@ order: 61
 
 # Maximum A Posteriori (MAP) Estimation
 
-> 📖 **Reading Order:** Step 61 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Bayesian Inference]] | ► **Next:** [[Credible Intervals]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum A Posteriori (MAP) Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -205,3 +202,10 @@ In exam problems, expect to:
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 61 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Bayesian Inference]] | ► **Next:** [[Credible Intervals]]

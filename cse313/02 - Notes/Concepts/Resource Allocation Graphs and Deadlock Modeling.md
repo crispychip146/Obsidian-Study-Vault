@@ -6,10 +6,6 @@ order: 27
 ---
 # Resource Allocation Graphs and Deadlock Modeling
 
-> 📖 **Reading Order:** Step 27 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Deadlock Fundamentals and Coffman Conditions]] | ► **Next:** [[Deadlock Prevention and Avoidance Strategies]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2018 Q2b, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
 >
@@ -165,5 +161,10 @@ The cycle dissolved completely!
 ## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 10–13, 16–17: Deadlock Modeling, Resource Allocation Graphs, Cycle Analysis).
-- **Previous Topic:** [[Deadlock Fundamentals and Coffman Conditions]] (Step 26).
-- **Next Topic:** [[Deadlock Prevention and Avoidance Strategies]] (Step 28).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 27 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Deadlock Fundamentals and Coffman Conditions]] | ► **Next:** [[Deadlock Prevention and Avoidance Strategies]]

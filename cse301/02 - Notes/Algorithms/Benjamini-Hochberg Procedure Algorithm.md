@@ -7,9 +7,6 @@ order: 74
 
 # Benjamini-Hochberg Procedure Algorithm
 
-> 📖 **Reading Order:** Step 74 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Multiple Testing and False Discovery Rate]] | ► **Next:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]
----
 ## The Problem and Earlier Tools
 
 The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
@@ -180,3 +177,10 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 74 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Multiple Testing and False Discovery Rate]] | ► **Next:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]]

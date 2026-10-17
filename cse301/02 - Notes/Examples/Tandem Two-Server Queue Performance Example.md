@@ -7,9 +7,6 @@ order: 101
 
 # Tandem Two-Server Queue Performance Example
 
-> 📖 **Reading Order:** Step 101 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Shoe Shine Shop Queueing Model Example]] | ► **Next:** [[Problem — M-M-1 Queue Performance Metrics Calculation]]
----
 ## Problem
 
 An e-commerce order processing pipeline consists of two sequential processing stages in series:
@@ -156,3 +153,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 101 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Shoe Shine Shop Queueing Model Example]] | ► **Next:** [[Problem — M-M-1 Queue Performance Metrics Calculation]]

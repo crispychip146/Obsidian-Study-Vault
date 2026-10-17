@@ -7,9 +7,6 @@ order: 94
 
 # Little's Law
 
-> 📖 **Reading Order:** Step 94 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Queueing Systems and Kendall Notation]] | ► **Next:** [[PASTA Property and Inspection Paradox]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Little's Law, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -171,3 +168,10 @@ At any random instant, an overhead drone will count an average of **6 cars** in 
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 94 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Queueing Systems and Kendall Notation]] | ► **Next:** [[PASTA Property and Inspection Paradox]]

@@ -7,9 +7,6 @@ order: 102
 
 # Problem — M-M-1 Queue Performance Metrics Calculation
 
-> 📖 **Reading Order:** Step 102 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Tandem Two-Server Queue Performance Example]] | ► **Next:** [[Problem — Finite Capacity Queue Loss and Effective Throughput]]
----
 ## Problem
 
 An internet edge router receives incoming network packets according to a Poisson process at an average arrival rate of $\lambda = 800$ packets per second. The router's transmission interface processes packets with exponentially distributed transmission times at an average service rate of $\mu = 1000$ packets per second. The buffer capacity is effectively unlimited.
@@ -179,3 +176,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 102 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Tandem Two-Server Queue Performance Example]] | ► **Next:** [[Problem — Finite Capacity Queue Loss and Effective Throughput]]

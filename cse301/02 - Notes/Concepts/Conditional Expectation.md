@@ -7,9 +7,6 @@ order: 28
 
 # Conditional Expectation
 
-> 📖 **Reading Order:** Step 28 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Simpson's Paradox]] | ► **Next:** [[Law of Total Probability and Bayes' Rule]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Conditional Expectation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -170,3 +167,10 @@ Since the second term is non-negative and is the only term containing $g(X)$, it
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 9: Conditional Expectation)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 28 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Simpson's Paradox]] | ► **Next:** [[Law of Total Probability and Bayes' Rule]]

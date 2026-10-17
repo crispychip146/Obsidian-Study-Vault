@@ -7,9 +7,6 @@ order: 43
 
 # Central Limit Theorem
 
-> 📖 **Reading Order:** Step 43 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
-> ◄ **Previous:** [[Law of Large Numbers]] | ► **Next:** [[Normal Approximation to Binomial and Poisson Example]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Central Limit Theorem, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -183,3 +180,10 @@ $\blacksquare$
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 20–21, pages 61–63)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 10.5: Central Limit Theorem)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 43 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Law of Large Numbers]] | ► **Next:** [[Normal Approximation to Binomial and Poisson Example]]

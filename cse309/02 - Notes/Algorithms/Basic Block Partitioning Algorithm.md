@@ -7,11 +7,6 @@ order: 34
 
 # Basic Block Partitioning Algorithm
 
-> 📖 **Reading Order:** Step 34 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[Basic Blocks and Control Flow Graphs]] | ► **Next:** [[Liveness and Next-Use Analysis within Basic Blocks]]
-
----
-
 ## The Problem and Earlier Tools
 
 Before a compiler can apply code generation, instruction scheduling, or local register allocation, it must break down arbitrary Three-Address Code (TAC) into straight-line sequences with no internal branches.
@@ -260,3 +255,10 @@ Frequently tested on final examinations via hand-simulation of Basic Block Parti
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 323–328).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.4.1 (Basic Blocks).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 34 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[Basic Blocks and Control Flow Graphs]] | ► **Next:** [[Liveness and Next-Use Analysis within Basic Blocks]]

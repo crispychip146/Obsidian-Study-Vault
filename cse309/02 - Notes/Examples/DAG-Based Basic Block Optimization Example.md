@@ -7,11 +7,6 @@ order: 40
 
 # DAG-Based Basic Block Optimization Example
 
-> 📖 **Reading Order:** Step 40 of 55 | **Module 4:** Code Generation  
-> ◄ **Previous:** [[Basic Block Partitioning and Next-Use Computation Example]] | ► **Next:** [[Problem — Basic Block Partitioning and Next-Use Table]]
-
----
-
 ## Problem
 
 Consider the following basic block containing redundant computations and array references:
@@ -185,3 +180,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 335–347).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.5, Example 8.10.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 40 of 55 | **Module 4:** Code Generation  
+> ◄ **Previous:** [[Basic Block Partitioning and Next-Use Computation Example]] | ► **Next:** [[Problem — Basic Block Partitioning and Next-Use Table]]

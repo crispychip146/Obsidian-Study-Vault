@@ -6,10 +6,6 @@ order: 14
 ---
 # Interactive Scheduling Algorithms
 
-> 📖 **Reading Order:** Step 14 of 68 | **Module 3:** CPU Scheduling  
-> ◄ **Previous:** [[Batch Scheduling Algorithms]] | ► **Next:** [[Scheduling Metrics and Burst Estimation Formulas]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4b, 2018 Q3b, 2018 Q4b, 2018 Q4c, 2019 Q1a, 2020 Q1a, 2020 Q4c, 2021 Q2a)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -245,3 +241,10 @@ $O(n)$ space for priority queue headers and ready lists.
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 25–48)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4.3: Scheduling in Interactive Systems)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 14 of 68 | **Module 3:** CPU Scheduling  
+> ◄ **Previous:** [[Batch Scheduling Algorithms]] | ► **Next:** [[Scheduling Metrics and Burst Estimation Formulas]]

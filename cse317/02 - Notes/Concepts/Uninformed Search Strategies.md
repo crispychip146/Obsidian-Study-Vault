@@ -7,11 +7,6 @@ order: 9
 
 # Uninformed Search Strategies
 
-> 📖 **Reading Order:** Step 09 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Problem-Solving Agents and State Space Formulation]] | ► **Next:** [[Breadth-First Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 When an agent searches a state space, it needs a strategy to determine the order in which nodes on the frontier are expanded. In many domains, the agent has no information about the number of steps or the path cost from the current state to the goal; it only knows how to generate successors and test whether a state is a goal. Such techniques are called **Uninformed Search Strategies** (or *Blind Search*). The central problem is evaluating and comparing these strategies across formal criteria.
@@ -123,4 +118,5 @@ Memory, not time, is the true bottleneck of breadth-first search. While an algor
 
 ## Navigation
 
-◄ **Previous:** [[Problem-Solving Agents and State Space Formulation]] | ► **Next:** [[Breadth-First Search Algorithm]]
+> 📖 **Reading Order:** Step 09 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Problem-Solving Agents and State Space Formulation]] | ► **Next:** [[Breadth-First Search Algorithm]]

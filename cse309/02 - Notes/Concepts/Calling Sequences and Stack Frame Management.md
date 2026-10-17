@@ -7,11 +7,6 @@ order: 22
 
 # Calling Sequences and Stack Frame Management
 
-> 📖 **Reading Order:** Step 22 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Run-Time Storage Organization and Activation Records]] | ► **Next:** [[Non-Local Variable Access in Static and Dynamic Scopes]]
-
----
-
 ## Starting Point and the Problem
 
 In any software ecosystem, a function written in C must be able to call a function compiled from Rust, C++, or raw assembly language. How can two independent pieces of code communicate reliably without clobbering each other's hardware registers or misinterpreting stack data?
@@ -227,3 +222,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 222–230).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.2.2–7.2.4 (Calling Sequences).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 22 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Run-Time Storage Organization and Activation Records]] | ► **Next:** [[Non-Local Variable Access in Static and Dynamic Scopes]]

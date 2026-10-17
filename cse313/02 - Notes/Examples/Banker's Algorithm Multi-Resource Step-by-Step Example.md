@@ -6,10 +6,6 @@ order: 31
 ---
 # Banker's Algorithm Multi-Resource Step-by-Step Example
 
-> 📖 **Reading Order:** Step 31 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Deadlock Detection and Recovery Algorithms]] | ► **Next:** [[Resource Allocation Graph Cycle Detection Example]]
-
----
 ## Problem
 
 *(Directly derived from course simulation lecture notes: `Notes on algorithm simulation.pdf`)*
@@ -160,3 +156,10 @@ Extract the generic algorithmic pattern: initialize tracking vectors, simulate e
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
 - Silberschatz et al., *Operating System Concepts* (10th Edition)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 31 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Deadlock Detection and Recovery Algorithms]] | ► **Next:** [[Resource Allocation Graph Cycle Detection Example]]

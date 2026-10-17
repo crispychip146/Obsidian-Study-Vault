@@ -6,10 +6,6 @@ order: 21
 ---
 # Monitors and Condition Variables
 
-> 📖 **Reading Order:** Step 21 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Semaphores and Synchronization Primitives]] | ► **Next:** [[Message Passing and IPC Models]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q3c)**
 > **Frequency:** ⭐⭐⭐ **Critical Conceptual Trap in Concurrency Design**
 >
@@ -193,5 +189,10 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 43–52: Monitors, Condition Variables, Hoare vs Mesa Semantics).
-- **Previous Topic:** [[Semaphores and Synchronization Primitives]] (Step 20).
-- **Next Topic:** [[Message Passing and IPC Models]] (Step 22).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 21 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Semaphores and Synchronization Primitives]] | ► **Next:** [[Message Passing and IPC Models]]

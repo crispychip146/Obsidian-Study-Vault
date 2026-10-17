@@ -7,11 +7,6 @@ order: 51
 
 # Principal Sources of Code Optimization
 
-> 📖 **Reading Order:** Step 51 of 55 | **Module 6: Machine-Independent Optimization**  
-> ◄ **Previous:** [[Problem — Chaitin Graph Coloring Register Allocation]] | ► **Next:** [[Global Common Subexpression Elimination and Copy Propagation]]
-
----
-
 ## Starting Point and the Problem
 
 High-level programming languages encourage abstraction, modularity, and clean software engineering (e.g., multi-dimensional arrays, objects, encapsulation). However, when a front end naively translates each high-level construct independently into Three-Address Code, it generates massive runtime overhead:
@@ -144,3 +139,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 9 (Slides 532–540).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 9.1.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 51 of 55 | **Module 6: Machine-Independent Optimization**  
+> ◄ **Previous:** [[Problem — Chaitin Graph Coloring Register Allocation]] | ► **Next:** [[Global Common Subexpression Elimination and Copy Propagation]]

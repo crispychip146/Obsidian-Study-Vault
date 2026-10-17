@@ -7,9 +7,6 @@ order: 8
 
 # Random Variables and Probability Distributions
 
-> 📖 **Reading Order:** Step 08 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Newton-Pepys Dice Problem Example]] | ► **Next:** [[Discrete Probability Distributions]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Random Variables and Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -193,3 +190,10 @@ For distributions of functions of random variables, see [[Law of the Unconscious
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 6 & 10, pages 17–19, 30–32)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_4.pdf` & `6.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapters 3 & 5)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 08 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Newton-Pepys Dice Problem Example]] | ► **Next:** [[Discrete Probability Distributions]]

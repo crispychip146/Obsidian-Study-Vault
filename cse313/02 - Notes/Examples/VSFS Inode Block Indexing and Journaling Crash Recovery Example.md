@@ -7,11 +7,6 @@ order: 62
 
 # VSFS Inode Block Indexing and Journaling Crash Recovery Example
 
-> 📖 **Reading Order:** Step 62 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[Log-Structured File Systems (LFS) and Segment Cleaning]] | ► **Next:** [[LFS Segment Allocation and Imap Checkpoint Example]]
-
----
-
 ## Background and Problem Setup
 
 This example works through two essential mechanics of persistent file systems:
@@ -129,3 +124,10 @@ Journal State:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 40 & 42.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 40 & 42.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 62 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[Log-Structured File Systems (LFS) and Segment Cleaning]] | ► **Next:** [[LFS Segment Allocation and Imap Checkpoint Example]]

@@ -7,11 +7,6 @@ order: 28
 
 # Adversarial Search and Two-Player Games
 
-> 📖 **Reading Order:** Step 28 of 43 | **Module 6:** Adversarial Search & Game Playing  
-> ◄ **Previous:** [[8-Queens Problem Local Search and Genetic Algorithm Example]] | ► **Next:** [[Minimax Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 In standard search problems (such as navigation or 8-puzzle), the agent is the sole actor in a passive world. The agent computes a path to a goal and executes it without interference. However, in competitive multi-agent environments—such as Chess, Checkers, Go, or competitive economic bidding—another autonomous entity with conflicting goals actively works to defeat the agent. The future state does not depend solely on our choices, but also on the counter-moves of an opponent. This is the domain of **Adversarial Search** (or *Game Theory*).
@@ -101,4 +96,5 @@ The state space forms a **Game Tree**:
 
 ## Navigation
 
-◄ **Previous:** [[8-Queens Problem Local Search and Genetic Algorithm Example]] | ► **Next:** [[Minimax Algorithm]]
+> 📖 **Reading Order:** Step 28 of 43 | **Module 6:** Adversarial Search & Game Playing  
+> ◄ **Previous:** [[8-Queens Problem Local Search and Genetic Algorithm Example]] | ► **Next:** [[Minimax Algorithm]]

@@ -158,19 +158,19 @@ Read these notes in strict chronological order to build cumulative mastery from 
 
 # Knowledge Maps
 
-- [[cse301/03 - Maps/Topic Map|Topic Map]]
-- [[cse301/03 - Maps/Dependency Map|Dependency Map]]
-- [[cse301/03 - Maps/Exam Intelligence/Markov Chains Exam Intelligence|Markov Chains Exam Intelligence]]
+- [[cse301/03 - Maps/Topic Map.md|Topic Map]]
+- [[cse301/03 - Maps/Dependency Map.md|Dependency Map]]
+- [[cse301/03 - Maps/Exam Intelligence/Markov Chains Exam Intelligence.md|Markov Chains Exam Intelligence]]
 
 ---
 
 # Testing & Question Bank
 
-- [[cse301/05 - Testing/Question Bank/Question Bank|Question Bank]] (Cataloging Problems Q-CSE301-001 through Q-CSE301-018)
+- [[cse301/05 - Testing/Question Bank/Question Bank.md|Question Bank]] (Cataloging Problems Q-CSE301-001 through Q-CSE301-018)
 
 ---
 
 # Revision
 
-- [[cse301/04 - Revision/Quick Revision — Markov Chains|Quick Revision — Markov Chains]]
+- [[cse301/04 - Revision/Quick Revision — Markov Chains.md|Quick Revision — Markov Chains]]
 

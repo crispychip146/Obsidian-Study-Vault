@@ -7,11 +7,6 @@ order: 25
 
 # Local Beam Search Algorithm
 
-> 📖 **Reading Order:** Step 25 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
-> ◄ **Previous:** [[Simulated Annealing Algorithm]] | ► **Next:** [[Genetic Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Single-state local search algorithms (hill-climbing, simulated annealing) track only one state at a time. While random-restart hill-climbing runs multiple searches, those runs are completely independent: search #5 learns nothing from search #1. If one search path discovers a highly promising ridge, that information is not shared with the other searches. We need an algorithm that maintains multiple candidate solutions and shares information among them. That algorithm is **Local Beam Search**.
@@ -98,4 +93,5 @@ Standard local beam search can suffer from a lack of diversity: if one peak is s
 
 ## Navigation
 
-◄ **Previous:** [[Simulated Annealing Algorithm]] | ► **Next:** [[Genetic Algorithm]]
+> 📖 **Reading Order:** Step 25 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
+> ◄ **Previous:** [[Simulated Annealing Algorithm]] | ► **Next:** [[Genetic Algorithm]]

@@ -7,9 +7,6 @@ order: 52
 
 # Berger-Wolpert Confidence Set Puzzle Example
 
-> 📖 **Reading Order:** Step 52 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Bernoulli Parameter Estimation and Confidence Interval Example]] | ► **Next:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]]
----
 ## Problem
 
 Let $\theta$ be an unknown, fixed real number. Let $X_1, X_2$ be independent random variables with:
@@ -143,3 +140,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 52 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Bernoulli Parameter Estimation and Confidence Interval Example]] | ► **Next:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]]

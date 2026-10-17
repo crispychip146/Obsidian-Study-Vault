@@ -101,24 +101,24 @@ embedded systems, IoT, and real-time operating systems.
 
 # Sources
 
-- [[01 - Sources/Lectures]]
-- [[01 - Sources/Tutorials]]
-- [[01 - Sources/Textbooks]]
-- [[01 - Sources/Assignments]]
-- [[01 - Sources/Exams]]
-- [[01 - Sources/References]]
+- `01 - Sources/Lectures/` *(To be populated upon course source intake)*
+- `01 - Sources/Tutorials/`
+- `01 - Sources/Textbooks/`
+- `01 - Sources/Assignments/`
+- `01 - Sources/Exams/`
+- `01 - Sources/References/`
 
 ---
 
 # Knowledge Map
 
-- [[03 - Maps/Topic Map]]
-- [[03 - Maps/Dependency Map]]
+- *Topic Map* *(To be generated after notes creation)*
+- *Dependency Map* *(To be generated after notes creation)*
 
 ---
 
 # Revision
 
-- [[04 - Revision/Quick Revision]]
-- [[04 - Revision/Important Questions]]
-- [[04 - Revision/Exam Checklist]]
+- *Quick Revision* *(To be generated after notes creation)*
+- *Important Questions* *(To be generated after notes creation)*
+- *Exam Checklist* *(To be generated after notes creation)*

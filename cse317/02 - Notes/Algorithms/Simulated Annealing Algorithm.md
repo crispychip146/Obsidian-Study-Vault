@@ -7,11 +7,6 @@ order: 24
 
 # Simulated Annealing Algorithm
 
-> 📖 **Reading Order:** Step 24 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
-> ◄ **Previous:** [[Hill-Climbing Search Algorithm]] | ► **Next:** [[Local Beam Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 As established in [[Hill-Climbing Search Algorithm]], standard hill-climbing gets trapped in local maxima because it strictly refuses to take any step that decreases the objective function. Conversely, a purely random walk is complete but hopelessly inefficient. We need an algorithm that combines the **efficiency of hill-climbing** with the **ability to escape local maxima by occasionally accepting downhill moves in a controlled manner**. That algorithm is **Simulated Annealing** (Kirkpatrick et al., 1983).
@@ -131,4 +126,5 @@ If the temperature schedule $T(t)$ cools sufficiently slowly (specifically, at a
 
 ## Navigation
 
-◄ **Previous:** [[Hill-Climbing Search Algorithm]] | ► **Next:** [[Local Beam Search Algorithm]]
+> 📖 **Reading Order:** Step 24 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
+> ◄ **Previous:** [[Hill-Climbing Search Algorithm]] | ► **Next:** [[Local Beam Search Algorithm]]

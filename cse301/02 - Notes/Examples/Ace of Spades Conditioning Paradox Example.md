@@ -7,11 +7,6 @@ order: 33
 
 # Ace of Spades Conditioning Paradox Example
 
-> 📖 **Reading Order:** Step 33 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Monty Hall Problem Example]] | ► **Next:** [[Random Number of Random Variables Sum Example]]
-
----
-
 ## Problem
 
 A player is dealt a 2-card hand uniformly at random from a standard, shuffled 52-card deck.
@@ -144,3 +139,10 @@ Because two-ace hands are **twice as likely to survive the condition** "contains
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 5 (pp. 17–18)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 2.4: Conditioning on Specific Information)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 33 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Monty Hall Problem Example]] | ► **Next:** [[Random Number of Random Variables Sum Example]]

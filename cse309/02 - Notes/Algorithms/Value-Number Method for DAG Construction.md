@@ -7,11 +7,6 @@ order: 11
 
 # Value-Number Method for DAG Construction
 
-> 📖 **Reading Order:** Step 11 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Intermediate Representations and Three-Address Code]] | ► **Next:** [[Type Expressions and Storage Layout]]
-
----
-
 ## The Problem and Earlier Tools
 
 Consider what happens when a programmer writes:
@@ -310,3 +305,10 @@ Frequently tested on final examinations via hand-simulation of Value-Number Meth
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 93–101).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.1 (Directed Acyclic Graphs for Expressions).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 11 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Intermediate Representations and Three-Address Code]] | ► **Next:** [[Type Expressions and Storage Layout]]

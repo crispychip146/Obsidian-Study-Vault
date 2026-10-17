@@ -7,11 +7,6 @@ order: 1
 
 # Syntax-Directed Definitions and Translation Schemes
 
-> 📖 **Reading Order:** Step 01 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** *Start of Course* | ► **Next:** [[Synthesized and Inherited Attributes]]
-
----
-
 ## Starting Point and the Problem
 
 To understand why Syntax-Directed Translation exists, you have to realize the profound limitation of a parser: **A parser is blind to meaning.**
@@ -271,3 +266,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 6–30).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Chapter 5, Sections 5.1 & 5.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 01 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** *Start of Course* | ► **Next:** [[Synthesized and Inherited Attributes]]

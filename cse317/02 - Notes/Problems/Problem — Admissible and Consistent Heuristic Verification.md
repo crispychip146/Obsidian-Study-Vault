@@ -7,11 +7,6 @@ order: 41
 
 # Problem — Admissible and Consistent Heuristic Verification
 
-> 📖 **Reading Order:** Step 41 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
-> ◄ **Previous:** [[Problem — Search Strategy Completeness and Complexity Analysis]] | ► **Next:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]]
-
----
-
 ## Problem
 
 Consider a state space search graph where all step costs are non-negative ($c(n, a, n') \ge 0$). Let $h^*(n)$ denote the true optimal cost from node $n$ to the goal.
@@ -173,4 +168,5 @@ In this counterexample, $f(A) = g(A) + h(A) = 0 + 2 = 2$, but for successor $B$,
 
 ## Navigation
 
-◄ **Previous:** [[Problem — Search Strategy Completeness and Complexity Analysis]] | ► **Next:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]]
+> 📖 **Reading Order:** Step 41 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
+> ◄ **Previous:** [[Problem — Search Strategy Completeness and Complexity Analysis]] | ► **Next:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]]

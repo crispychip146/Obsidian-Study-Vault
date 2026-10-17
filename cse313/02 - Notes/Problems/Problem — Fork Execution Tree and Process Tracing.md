@@ -6,10 +6,6 @@ order: 11
 ---
 # Problem — Fork Execution Tree and Process Tracing
 
-> 📖 **Reading Order:** Step 11 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Process Forking and Zombie Orphan Example]] | ► **Next:** [[CPU Scheduling Principles and Criteria]]
-
----
 ## Problem
 
 Analyze the following four POSIX C code snippets and answer the corresponding tracing questions:
@@ -268,3 +264,10 @@ Appears frequently in university midterm and final examinations as a multi-part 
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 22–28)
 - **Question ID:** `Q-CSE313-001`
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 11 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Process Forking and Zombie Orphan Example]] | ► **Next:** [[CPU Scheduling Principles and Criteria]]

@@ -7,9 +7,6 @@ order: 30
 
 # Adam's Law (Law of Total Expectation)
 
-> 📖 **Reading Order:** Step 30 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Law of Total Probability and Bayes' Rule]] | ► **Next:** [[Eve's Law (Law of Total Variance)]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Adam's Law (Law of Total Expectation), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -131,3 +128,10 @@ $$\mathbb{E}\left[ \sum_{i=1}^N X_i \right] = \mathbb{E}[N] \mathbb{E}[X]$$
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 9.2: Law of Total Expectation)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 30 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Law of Total Probability and Bayes' Rule]] | ► **Next:** [[Eve's Law (Law of Total Variance)]]

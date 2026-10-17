@@ -7,11 +7,6 @@ order: 7
 
 # Agentic AI and Autonomous Systems
 
-> 📖 **Reading Order:** Step 07 of 43 | **Module 2:** Intelligent Agents & Architectures  
-> ◄ **Previous:** [[Learning Agents]] | ► **Next:** [[Problem-Solving Agents and State Space Formulation]]
-
----
-
 ## Starting Point and the Problem
 
 Traditional Artificial Intelligence and modern generative foundation models (such as LLMs) operate primarily in a single-turn, passive paradigm: a user provides a prompt, and the model outputs text or an image. While impressive, these systems cannot independently accomplish long-horizon tasks—such as conducting research, debugging a multi-file software codebase, or booking complex travel itineraries. They lack continuous environmental perception, autonomous planning, iterative error correction, and external tool execution. **Agentic AI** represents the paradigm shift from passive predictive models to autonomous task-execution systems.
@@ -156,4 +151,5 @@ In complex production workflows, a single monolithic agent is often replaced by 
 
 ## Navigation
 
-◄ **Previous:** [[Learning Agents]] | ► **Next:** [[Problem-Solving Agents and State Space Formulation]]
+> 📖 **Reading Order:** Step 07 of 43 | **Module 2:** Intelligent Agents & Architectures  
+> ◄ **Previous:** [[Learning Agents]] | ► **Next:** [[Problem-Solving Agents and State Space Formulation]]

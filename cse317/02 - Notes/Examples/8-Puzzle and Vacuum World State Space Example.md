@@ -7,11 +7,6 @@ order: 15
 
 # 8-Puzzle and Vacuum World State Space Example
 
-> 📖 **Reading Order:** Step 15 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Bidirectional Search Algorithm]] | ► **Next:** [[Heuristic Functions and Properties]]
-
----
-
 ## Starting Point and the Problem
 
 To understand how abstract state space concepts translate into concrete implementations, we examine two classic benchmark AI toy problems: the **Vacuum Cleaner World** and the **8-Puzzle**. We formulate their 5-tuple state space definitions and calculate their exact state space sizes.
@@ -107,4 +102,5 @@ The 8-puzzle consists of a $3 \times 3$ board with 8 numbered sliding tiles and 
 
 ## Navigation
 
-◄ **Previous:** [[Bidirectional Search Algorithm]] | ► **Next:** [[Heuristic Functions and Properties]]
+> 📖 **Reading Order:** Step 15 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Bidirectional Search Algorithm]] | ► **Next:** [[Heuristic Functions and Properties]]

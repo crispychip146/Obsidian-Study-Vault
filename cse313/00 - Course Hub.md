@@ -115,7 +115,7 @@ The notes are derived with strict traceability from the following primary course
 
 ## 🎯 Testing & Practice
 
-- **Question Bank:** [[cse313/05 - Testing/Question Bank/Question Bank|Question Bank]]
+- **Question Bank:** [[cse313/05 - Testing/Question Bank/Question Bank.md|Question Bank]]
   - `Q-CSE313-001`: [[Problem — Fork Execution Tree and Process Tracing]]
   - `Q-CSE313-002`: [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
   - `Q-CSE313-003`: [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
@@ -131,5 +131,5 @@ The notes are derived with strict traceability from the following primary course
 
 ## 🗺️ Visual Maps & Navigation
 
-- **Topic Map:** [[cse313/03 - Maps/Topic Map|Topic Map]]
-- **Dependency Map:** [[cse313/03 - Maps/Dependency Map|Dependency Map]]
+- **Topic Map:** [[cse313/03 - Maps/Topic Map.md|Topic Map]]
+- **Dependency Map:** [[cse313/03 - Maps/Dependency Map.md|Dependency Map]]

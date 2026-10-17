@@ -7,9 +7,6 @@ order: 59
 
 # Problem — Sample Variance Bias and Bessel's Correction Derivation
 
-> 📖 **Reading Order:** Step 59 of 103 | **Module 7:** Parametric Inference  
-> ◄ **Previous:** [[Discrete and Continuous Parameter MLE Reference Examples]] | ► **Next:** [[Bayesian Inference]]
----
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) random sample from any probability distribution with finite population mean $\mu = E[X_i]$ and finite population variance $\sigma^2 = \text{Var}(X_i) > 0$.
@@ -187,3 +184,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 59 of 103 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Discrete and Continuous Parameter MLE Reference Examples]] | ► **Next:** [[Bayesian Inference]]

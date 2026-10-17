@@ -7,9 +7,6 @@ order: 50
 
 # Normal-Based Large-Sample Confidence Interval
 
-> 📖 **Reading Order:** Step 50 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Confidence Intervals and Confidence Sets]] | ► **Next:** [[Bernoulli Parameter Estimation and Confidence Interval Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Normal-Based Large-Sample Confidence Interval, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -142,3 +139,10 @@ We conclude with $95\%$ confidence that the true population proportion lies betw
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 50 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Confidence Intervals and Confidence Sets]] | ► **Next:** [[Bernoulli Parameter Estimation and Confidence Interval Example]]

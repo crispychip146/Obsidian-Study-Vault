@@ -7,9 +7,6 @@ order: 40
 
 # Comparison of Probability Bounds Example
 
-> 📖 **Reading Order:** Step 40 of 103 | **Module 4:** Probability Bounds and Inequalities  
-> ◄ **Previous:** [[Cauchy-Schwarz and Jensen Inequalities]] | ► **Next:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]
----
 ## Problem
 
 Suppose a fair coin is flipped $n = 100$ times independently. Let $X$ denote the total number of heads observed:
@@ -131,3 +128,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17 & 18, pages 54–59)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 10: Inequalities)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 40 of 103 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Cauchy-Schwarz and Jensen Inequalities]] | ► **Next:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]]

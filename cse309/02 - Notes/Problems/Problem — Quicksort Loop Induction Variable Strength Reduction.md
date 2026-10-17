@@ -7,11 +7,6 @@ order: 55
 
 # Problem — Quicksort Loop Induction Variable Strength Reduction
 
-> 📖 **Reading Order:** Step 55 of 55 | **Module 6:** Machine-Independent Optimization  
-> ◄ **Previous:** [[Quicksort Partition Loop Complete Optimization Example]] | ► **Next:** *End of Course*
-
----
-
 ## Problem
 
 Consider the following basic block $B$ representing the inner step of an array traversal loop:
@@ -198,3 +193,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 9 (Slides 558–566).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 9.1.3 & 9.1.4.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 55 of 55 | **Module 6:** Machine-Independent Optimization  
+> ◄ **Previous:** [[Quicksort Partition Loop Complete Optimization Example]] | ► **Next:** *End of Course*

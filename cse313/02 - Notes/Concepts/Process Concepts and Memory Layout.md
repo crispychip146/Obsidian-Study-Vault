@@ -6,10 +6,6 @@ order: 4
 ---
 # Process Concepts and Memory Layout
 
-> 📖 **Reading Order:** Step 04 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Computer Booting and Hardware Abstractions]] | ► **Next:** [[Process Lifecycle and State Transitions]]
-
----
 ## Starting Point and the Problem
 
 On storage media, a computer program is merely an inert, passive sequence of bytes: compiled machine code instructions and static data constants stored inside an ELF or PE binary file.
@@ -116,3 +112,10 @@ Consider running two separate terminal windows each executing `./my_program`:
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 1–7)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2: Processes and Threads (Section 2.1)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 04 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Computer Booting and Hardware Abstractions]] | ► **Next:** [[Process Lifecycle and State Transitions]]

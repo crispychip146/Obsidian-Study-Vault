@@ -7,11 +7,6 @@ order: 22
 
 # Expected Absolute Distance of Random Variables Example
 
-> 📖 **Reading Order:** Step 22 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Uniform Distribution on the Unit Disk Example]] | ► **Next:** [[Exponential Distribution Memorylessness Example]]
-
----
-
 ## Problem
 
 1. **Uniform Case:** Let $X, Y \overset{\text{i.i.d.}}{\sim} \operatorname{Unif}(0, 1)$ be two independent standard uniform random variables. Calculate the expected absolute difference $\mathbb{E}[|X - Y|]$.
@@ -157,3 +152,10 @@ $$\boxed{\mathbb{E}[|Z_1 - Z_2|] = \frac{2}{\sqrt{\pi}} \approx 1.1284 \quad \te
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 17 (pp. 70–71)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 7.2: LOTUS for Several Variables)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 22 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Uniform Distribution on the Unit Disk Example]] | ► **Next:** [[Exponential Distribution Memorylessness Example]]

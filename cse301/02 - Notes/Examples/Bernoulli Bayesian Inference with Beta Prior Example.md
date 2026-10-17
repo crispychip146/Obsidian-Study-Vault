@@ -7,9 +7,6 @@ order: 65
 
 # Bernoulli Bayesian Inference with Beta Prior Example
 
-> 📖 **Reading Order:** Step 65 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Normal-Normal Conjugate Updating Formula]] | ► **Next:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]
----
 ## Problem
 
 A clinical trial tests a new drug on $n = 20$ patients, observing $s = 14$ successful recoveries and $6$ non-recoveries. Let $p \in (0, 1)$ denote the true recovery probability.
@@ -132,3 +129,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 65 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Normal-Normal Conjugate Updating Formula]] | ► **Next:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]]

@@ -7,11 +7,6 @@ order: 20
 
 # Problem — Backpatching Boolean Expression Translation
 
-> 📖 **Reading Order:** Step 20 of 55 | **Module 2:** Intermediate Code Generation  
-> ◄ **Previous:** [[Problem — Array Reference Three-Address Code Generation]] | ► **Next:** [[Run-Time Storage Organization and Activation Records]]
-
----
-
 ## Problem
 
 A compiler frontend parses the following conditional statement with mixed boolean operators:
@@ -294,3 +289,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 186–193).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.7, Example 6.20.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 20 of 55 | **Module 2:** Intermediate Code Generation  
+> ◄ **Previous:** [[Problem — Array Reference Three-Address Code Generation]] | ► **Next:** [[Run-Time Storage Organization and Activation Records]]

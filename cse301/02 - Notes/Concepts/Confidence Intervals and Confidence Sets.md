@@ -7,9 +7,6 @@ order: 49
 
 # Confidence Intervals and Confidence Sets
 
-> 📖 **Reading Order:** Step 49 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Estimator Consistency and Convergence]] | ► **Next:** [[Normal-Based Large-Sample Confidence Interval]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Confidence Intervals and Confidence Sets, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -209,3 +206,10 @@ Common exam questions include:
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 49 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Estimator Consistency and Convergence]] | ► **Next:** [[Normal-Based Large-Sample Confidence Interval]]

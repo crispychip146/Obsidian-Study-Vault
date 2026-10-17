@@ -7,11 +7,6 @@ order: 43
 
 # Live Ranges and Live Intervals in Register Allocation
 
-> 📖 **Reading Order:** Step 43 of 55 | **Module 5: Register Allocation**  
-> ◄ **Previous:** [[Problem — DAG Optimization of Basic Block with Array Store]] | ► **Next:** [[Register Interference Graphs and Graph Coloring Principles]]
-
----
-
 ## Starting Point and the Problem
 
 In high-level languages, programs can contain hundreds or thousands of variables and temporaries. However, physical microprocessors typically possess only a modest number of general-purpose hardware registers (e.g., 16 in x86-64, 32 in ARM64 or RISC-V).
@@ -158,3 +153,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 366–390).
 - **Textbook / Papers:** Poletto & Sarkar, "Linear Scan Register Allocation", ACM TOPLAS 1999; Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.8.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 43 of 55 | **Module 5: Register Allocation**  
+> ◄ **Previous:** [[Problem — DAG Optimization of Basic Block with Array Store]] | ► **Next:** [[Register Interference Graphs and Graph Coloring Principles]]

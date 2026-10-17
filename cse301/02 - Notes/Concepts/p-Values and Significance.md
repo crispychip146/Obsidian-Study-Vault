@@ -7,9 +7,6 @@ order: 69
 
 # p-Values and Significance
 
-> 📖 **Reading Order:** Step 69 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Hypothesis Testing Framework]] | ► **Next:** [[Wald Test Statistic]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to p-Values and Significance, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -194,3 +191,10 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 69 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Hypothesis Testing Framework]] | ► **Next:** [[Wald Test Statistic]]

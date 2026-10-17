@@ -7,11 +7,6 @@ order: 35
 
 # Address Space Abstraction and Hardware Relocation
 
-> 📖 **Reading Order:** Step 35 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Problem — Resource Allocation Graph Reduction and Cycle Detection]] | ► **Next:** [[Memory API and Allocation Safety]]
-
----
-
 ## Starting Point and the Problem
 
 In the early eras of computing, computers had no memory virtualization. Physical memory was exposed directly to the running program. When a program executed `mov 0x1000, %eax`, it fetched data from byte `0x1000` on the physical RAM bus.
@@ -238,3 +233,10 @@ Tested frequently in Operating Systems midterms and finals through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 13 & 15 (Slides 2–61).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 13 (The Abstraction: Address Spaces) and Chapter 15 (Mechanism: Address Translation).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 35 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Problem — Resource Allocation Graph Reduction and Cycle Detection]] | ► **Next:** [[Memory API and Allocation Safety]]

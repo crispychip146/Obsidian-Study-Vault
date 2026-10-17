@@ -7,11 +7,6 @@ order: 1
 
 # Definition and Foundations of Artificial Intelligence
 
-> 📖 **Reading Order:** Step 01 of 43 | **Module 1:** AI Foundations & History  
-> ◄ **Previous:** *Start of Course* | ► **Next:** [[Intelligent Agents and Rationality]]
-
----
-
 ## Starting Point and the Problem
 
 For centuries, philosophers, mathematicians, and engineers pondered whether a machine could possess an artificial mind. Early mechanical automata could calculate arithmetic tables or play fixed music rolls, but they lacked adaptability: they could neither perceive novel surroundings nor make autonomous, rational judgments. The central challenge of Artificial Intelligence (AI) is to understand the computational mechanisms underlying intelligence and to construct artificial entities capable of perceiving, reasoning, learning, and acting effectively in complex, dynamic environments.
@@ -203,4 +198,5 @@ Common examination topics include:
 
 ## Navigation
 
-◄ **Previous:** *Start of Course* | ► **Next:** [[Intelligent Agents and Rationality]]
+> 📖 **Reading Order:** Step 01 of 43 | **Module 1:** AI Foundations & History  
+> ◄ **Previous:** *Start of Course* | ► **Next:** [[Intelligent Agents and Rationality]]

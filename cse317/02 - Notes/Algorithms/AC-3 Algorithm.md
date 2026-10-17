@@ -7,11 +7,6 @@ order: 35
 
 # AC-3 Algorithm
 
-> 📖 **Reading Order:** Step 35 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[Constraint Propagation and Arc Consistency]] | ► **Next:** [[Backtracking Search for CSPs Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 As defined in [[Constraint Propagation and Arc Consistency]], enforcing arc consistency requires verifying that every value in domain $D_i$ has a valid supporting value in domain $D_j$. However, if deleting a value from $D_i$ causes a domain reduction, that reduction may break the arc consistency of *other* variables connected to $X_i$! We need an algorithm that systematically propagates domain reductions until the entire network reaches a fixed point of arc consistency. That algorithm is **AC-3** (Mackworth, 1977).
@@ -142,4 +137,5 @@ Let $c$ be the number of binary constraints (edges in constraint graph), and $d$
 
 ## Navigation
 
-◄ **Previous:** [[Constraint Propagation and Arc Consistency]] | ► **Next:** [[Backtracking Search for CSPs Algorithm]]
+> 📖 **Reading Order:** Step 35 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[Constraint Propagation and Arc Consistency]] | ► **Next:** [[Backtracking Search for CSPs Algorithm]]

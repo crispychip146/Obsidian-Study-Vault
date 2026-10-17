@@ -7,9 +7,6 @@ order: 80
 
 # Markov Chain
 
-> 📖 **Reading Order:** Step 80 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Stochastic Process]] | ► **Next:** [[Classification of States in Markov Chains]]
----
 ## Starting Point and the Problem
 
 1. **Tractable Modeling of Sequential Dependency:** Modeling systems where full memory creates an exponential state explosion ($|S|^n$). The Markov property collapses this history into the current state alone.
@@ -172,3 +169,10 @@ In CSE301 examinations:
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 2–7)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.1, pp. 193–197)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 80 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Stochastic Process]] | ► **Next:** [[Classification of States in Markov Chains]]

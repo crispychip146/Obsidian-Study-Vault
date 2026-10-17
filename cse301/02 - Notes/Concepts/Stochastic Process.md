@@ -7,9 +7,6 @@ order: 79
 
 # Stochastic Process
 
-> 📖 **Reading Order:** Step 79 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]] | ► **Next:** [[Markov Chain]]
----
 ## Starting Point and the Problem
 
 - **Overcoming Static Probability:** Classical probability models static outcomes. Real-world systems require modeling temporal dependencies, long-term trends, and sequential transitions.
@@ -143,3 +140,10 @@ In CSE301 examinations:
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 2–3)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.1, pp. 193–194)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 79 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]] | ► **Next:** [[Markov Chain]]

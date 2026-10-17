@@ -7,11 +7,6 @@ order: 21
 
 # Run-Time Storage Organization and Activation Records
 
-> 📖 **Reading Order:** Step 21 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Problem — Backpatching Boolean Expression Translation]] | ► **Next:** [[Calling Sequences and Stack Frame Management]]
-
----
-
 ## Starting Point and the Problem
 
 When you launch an executable binary in an operating system (e.g., typing `./a.out` in Linux or double-clicking an `.exe` in Windows), the OS kernel does not simply dump bytes into RAM. It constructs a **Virtual Memory Space** (typically 4GB on 32-bit architectures or 256TB on 64-bit architectures) managed by hardware page tables:
@@ -202,3 +197,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 202–221).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.1 (Storage Organization) & Section 7.2 (Stack Allocation of Space).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 21 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Problem — Backpatching Boolean Expression Translation]] | ► **Next:** [[Calling Sequences and Stack Frame Management]]

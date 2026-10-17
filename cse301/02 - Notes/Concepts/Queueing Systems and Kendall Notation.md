@@ -7,9 +7,6 @@ order: 93
 
 # Queueing Systems and Kendall Notation
 
-> 📖 **Reading Order:** Step 93 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Problem — Identification of Communicating Classes and Absorbing States]] | ► **Next:** [[Little's Law]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Queueing Systems and Kendall Notation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -199,3 +196,10 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 93 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Problem — Identification of Communicating Classes and Absorbing States]] | ► **Next:** [[Little's Law]]

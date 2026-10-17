@@ -7,11 +7,6 @@ order: 37
 
 # Segmentation and External Fragmentation
 
-> 📖 **Reading Order:** Step 37 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Memory API and Allocation Safety]] | ► **Next:** [[Free-Space Management and Allocation Policies]]
-
----
-
 ## Starting Point and the Problem
 
 As demonstrated in [[Address Space Abstraction and Hardware Relocation]], pure **Base-and-Bounds** relocation forces the entire virtual address space of a process to be placed contiguously into physical RAM.
@@ -195,3 +190,10 @@ Commonly tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 16 (Slides 62–78).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 16 (Segmentation).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 37 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Memory API and Allocation Safety]] | ► **Next:** [[Free-Space Management and Allocation Policies]]

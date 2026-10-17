@@ -7,11 +7,6 @@ order: 11
 
 # Uniform-Cost Search Algorithm
 
-> 📖 **Reading Order:** Step 11 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Breadth-First Search Algorithm]] | ► **Next:** [[Depth-First Search and Depth-Limited Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Breadth-First Search finds the solution with the fewest number of steps. However, in most real-world problems—such as routing a delivery vehicle or optimizing network packets—different actions incur different costs (fuel, distance, time, monetary expense). A path with 3 short steps might cost $3 \times 1 = 3$, while a direct 1-step path costs $10$. BFS would mistakenly select the expensive 1-step path. We require an algorithm that finds the path with the minimum total cost $g(n)$, regardless of step count.
@@ -162,4 +157,5 @@ UCS introduces two non-negotiable design requirements:
 
 ## Navigation
 
-◄ **Previous:** [[Breadth-First Search Algorithm]] | ► **Next:** [[Depth-First Search and Depth-Limited Search Algorithm]]
+> 📖 **Reading Order:** Step 11 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Breadth-First Search Algorithm]] | ► **Next:** [[Depth-First Search and Depth-Limited Search Algorithm]]

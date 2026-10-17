@@ -7,9 +7,6 @@ order: 51
 
 # Bernoulli Parameter Estimation and Confidence Interval Example
 
-> 📖 **Reading Order:** Step 51 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Normal-Based Large-Sample Confidence Interval]] | ► **Next:** [[Berger-Wolpert Confidence Set Puzzle Example]]
----
 ## Problem
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} \text{Bernoulli}(p)$ be independent random trials with unknown success probability $p \in (0, 1)$.
@@ -141,3 +138,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 51 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Normal-Based Large-Sample Confidence Interval]] | ► **Next:** [[Berger-Wolpert Confidence Set Puzzle Example]]

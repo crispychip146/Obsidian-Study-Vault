@@ -7,11 +7,6 @@ order: 43
 
 # Translation Lookaside Buffers and Hardware Caching
 
-> 📖 **Reading Order:** Step 43 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Paging Architecture and Linear Page Tables]] | ► **Next:** [[Multi-Level Page Tables and Advanced Address Translation]]
-
----
-
 ## Starting Point and the Problem
 
 As established in [[Paging Architecture and Linear Page Tables]], paging provides clean memory virtualization with zero external fragmentation, but it imposes a severe performance tax:
@@ -189,3 +184,10 @@ Frequently tested via:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 19 (Slides 129–145).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 19 (Paging: Faster Translations (TLBs)).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 43 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Paging Architecture and Linear Page Tables]] | ► **Next:** [[Multi-Level Page Tables and Advanced Address Translation]]

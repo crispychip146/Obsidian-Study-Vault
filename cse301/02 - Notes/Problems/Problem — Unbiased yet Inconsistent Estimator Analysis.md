@@ -7,9 +7,6 @@ order: 53
 
 # Problem — Unbiased yet Inconsistent Estimator Analysis
 
-> 📖 **Reading Order:** Step 53 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Berger-Wolpert Confidence Set Puzzle Example]] | ► **Next:** [[Maximum Likelihood Estimation]]
----
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a population distribution with unknown mean $\mu$ and known finite variance $\sigma^2 > 0$.
@@ -185,3 +182,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 53 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Berger-Wolpert Confidence Set Puzzle Example]] | ► **Next:** [[Maximum Likelihood Estimation]]

@@ -7,11 +7,6 @@ order: 32
 
 # Minimax and Alpha-Beta Game Tree Pruning Example
 
-> 📖 **Reading Order:** Step 32 of 43 | **Module 6:** Adversarial Search & Game Playing  
-> ◄ **Previous:** [[Evaluation Functions and Cutting Off Search]] | ► **Next:** [[Constraint Satisfaction Problems]]
-
----
-
 ## Starting Point and the Problem
 
 To solidify understanding of Minimax and Alpha-Beta pruning, we execute a complete, step-by-step trace on a concrete 3-ply game tree with numeric terminal values, explicitly showing all $[\alpha, \beta]$ updates and pruned branches.
@@ -122,4 +117,5 @@ $$\text{Value}(A) = \max(\text{Value}(B), \text{Value}(C)) = \max(2, 4) = \mathb
 
 ## Navigation
 
-◄ **Previous:** [[Evaluation Functions and Cutting Off Search]] | ► **Next:** [[Constraint Satisfaction Problems]]
+> 📖 **Reading Order:** Step 32 of 43 | **Module 6:** Adversarial Search & Game Playing  
+> ◄ **Previous:** [[Evaluation Functions and Cutting Off Search]] | ► **Next:** [[Constraint Satisfaction Problems]]

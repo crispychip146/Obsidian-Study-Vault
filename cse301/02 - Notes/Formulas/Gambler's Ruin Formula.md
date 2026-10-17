@@ -7,9 +7,6 @@ order: 84
 
 # Gambler's Ruin Formula
 
-> 📖 **Reading Order:** Step 84 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Chapman-Kolmogorov Equations]] | ► **Next:** [[Weather Forecasting Markov Chain Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Gambler's Ruin Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -186,3 +183,10 @@ Even though Patty starts with only $33.3\%$ of the money ($5/15$), her $60\%$ ed
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 30–36)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.5.1, pp. 230–234)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 84 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Chapman-Kolmogorov Equations]] | ► **Next:** [[Weather Forecasting Markov Chain Example]]

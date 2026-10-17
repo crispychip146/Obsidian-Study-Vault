@@ -7,11 +7,6 @@ order: 7
 
 # Arithmetic Expression Desk Calculator SDD Example
 
-> 📖 **Reading Order:** Step 07 of 55 | **Module 1:** Syntax-Directed Translation  
-> ◄ **Previous:** [[Bottom-Up Evaluation of L-Attributed SDDs]] | ► **Next:** [[Infix to Postfix and Prefix SDT Translation Example]]
-
----
-
 ## Problem
 
 Imagine building an interactive mathematical calculator or an interpreter for a language like Python or C. When a user enters:
@@ -271,3 +266,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 7, 8, 10, 21, 22).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.1 (Example 5.3), Section 5.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 07 of 55 | **Module 1:** Syntax-Directed Translation  
+> ◄ **Previous:** [[Bottom-Up Evaluation of L-Attributed SDDs]] | ► **Next:** [[Infix to Postfix and Prefix SDT Translation Example]]

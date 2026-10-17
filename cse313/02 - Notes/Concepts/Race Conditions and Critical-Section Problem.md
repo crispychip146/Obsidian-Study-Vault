@@ -6,10 +6,6 @@ order: 18
 ---
 # Race Conditions and Critical-Section Problem
 
-> 📖 **Reading Order:** Step 18 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]] | ► **Next:** [[Peterson's Algorithm and Hardware Mutual Exclusion]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q2a, 2019 Q2c)**
 > **Frequency:** ⭐⭐⭐⭐ **Foundational Theory of Concurrency**
 >
@@ -162,4 +158,10 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 3–15: Interprocess Communication, Race Conditions, Critical Regions, Strict Alternation).
-- **Next Topic:** [[Peterson's Algorithm and Hardware Mutual Exclusion]] (Step 19).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 18 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]] | ► **Next:** [[Peterson's Algorithm and Hardware Mutual Exclusion]]

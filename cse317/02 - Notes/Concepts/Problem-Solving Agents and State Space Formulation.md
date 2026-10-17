@@ -7,11 +7,6 @@ order: 8
 
 # Problem-Solving Agents and State Space Formulation
 
-> 📖 **Reading Order:** Step 08 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Agentic AI and Autonomous Systems]] | ► **Next:** [[Uninformed Search Strategies]]
-
----
-
 ## Starting Point and the Problem
 
 Reflex agents act based solely on immediate percepts or internal state mappings. However, when an agent must solve a complex task—such as navigating a road network from Arad to Bucharest or arranging tiles in an 8-puzzle—no single immediate reflex action is guaranteed to lead to the goal. The agent cannot simply react; it must consider a sequence of actions that form a path to a desirable state. To do this, an agent must formulate a **goal**, formulate a well-defined **problem**, and perform **search** before executing any physical action.
@@ -171,4 +166,5 @@ function GRAPH-SEARCH(problem):
 
 ## Navigation
 
-◄ **Previous:** [[Agentic AI and Autonomous Systems]] | ► **Next:** [[Uninformed Search Strategies]]
+> 📖 **Reading Order:** Step 08 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Agentic AI and Autonomous Systems]] | ► **Next:** [[Uninformed Search Strategies]]

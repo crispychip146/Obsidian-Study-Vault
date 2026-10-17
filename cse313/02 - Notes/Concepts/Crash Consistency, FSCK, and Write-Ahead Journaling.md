@@ -7,11 +7,6 @@ order: 60
 
 # Crash Consistency, FSCK, and Write-Ahead Journaling
 
-> 📖 **Reading Order:** Step 60 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[Locality and the Berkeley Fast File System (FFS)]] | ► **Next:** [[Log-Structured File Systems (LFS) and Segment Cleaning]]
-
----
-
 ## Starting Point and the Problem
 
 Storage drives operate in discrete, atomic sector writes (typically 512 bytes or 4 KB). However, high-level file system operations are **multi-block transitions**.
@@ -193,3 +188,10 @@ Extremely high examination prominence:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 42 (Slides 352–377).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 42 (Crash Consistency: FSCK and Journaling).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 60 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[Locality and the Berkeley Fast File System (FFS)]] | ► **Next:** [[Log-Structured File Systems (LFS) and Segment Cleaning]]

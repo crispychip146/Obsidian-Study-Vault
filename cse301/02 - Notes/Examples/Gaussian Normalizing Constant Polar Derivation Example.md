@@ -7,11 +7,6 @@ order: 20
 
 # Gaussian Normalizing Constant Polar Derivation Example
 
-> 📖 **Reading Order:** Step 20 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Poisson Triplet Birthday Collisions Example]] | ► **Next:** [[Uniform Distribution on the Unit Disk Example]]
-
----
-
 ## Problem
 
 Prove that the total area under the Gaussian bell curve kernel $e^{-z^2/2}$ over the entire real line is $\sqrt{2\pi}$:
@@ -151,3 +146,10 @@ The difficulty in 1D is that $e^{-z^2/2}$ has rotational symmetry in the 2D plan
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 13 (pp. 53–54)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 5.4: Normal Distribution)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 20 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Poisson Triplet Birthday Collisions Example]] | ► **Next:** [[Uniform Distribution on the Unit Disk Example]]

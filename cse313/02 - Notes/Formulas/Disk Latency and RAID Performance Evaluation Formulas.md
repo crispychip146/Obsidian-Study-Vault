@@ -7,11 +7,6 @@ order: 54
 
 # Disk Latency and RAID Performance Evaluation Formulas
 
-> 📖 **Reading Order:** Step 54 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[RAID Architectures and Redundancy Models]] | ► **Next:** [[Disk Scheduling Simulation and RAID Small-Write Example]]
-
----
-
 ## Starting Point and Need
 
 Rigorous analysis of storage systems requires mathematical models to evaluate:
@@ -148,3 +143,10 @@ Frequently tested in Operating Systems exams via:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 37 & 38.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 37 & 38.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 54 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[RAID Architectures and Redundancy Models]] | ► **Next:** [[Disk Scheduling Simulation and RAID Small-Write Example]]

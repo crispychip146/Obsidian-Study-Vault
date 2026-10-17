@@ -6,10 +6,6 @@ order: 22
 ---
 # Message Passing and IPC Models
 
-> 📖 **Reading Order:** Step 22 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Monitors and Condition Variables]] | ► **Next:** [[Classic Synchronization Solutions]]
-
----
 ## Starting Point and the Problem
 
 Shared-memory synchronization primitives (mutexes, semaphores, monitors) assume that all communicating threads share a single, unified physical address space.
@@ -158,5 +154,10 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 53–60: Message Passing, Addressing, Buffering, Pipes and Network Sockets).
-- **Previous Topic:** [[Monitors and Condition Variables]] (Step 21).
-- **Next Topic:** [[Classic Synchronization Solutions]] (Step 23).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 22 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Monitors and Condition Variables]] | ► **Next:** [[Classic Synchronization Solutions]]

@@ -7,9 +7,6 @@ order: 75
 
 # Mendel's Peas Chi-Square Goodness-of-Fit Example
 
-> 📖 **Reading Order:** Step 75 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Benjamini-Hochberg Procedure Algorithm]] | ► **Next:** [[Toy Permutation Test Example]]
----
 ## Problem
 
 In his historic 1865 genetics experiments on dihybrid inheritance, Gregor Mendel crossed pea plants and predicted four progeny phenotypes based on his Law of Independent Assortment:
@@ -148,3 +145,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 75 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Benjamini-Hochberg Procedure Algorithm]] | ► **Next:** [[Toy Permutation Test Example]]

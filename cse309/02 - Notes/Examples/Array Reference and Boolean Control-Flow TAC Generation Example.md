@@ -7,11 +7,6 @@ order: 18
 
 # Array Reference and Boolean Control-Flow TAC Generation Example
 
-> 📖 **Reading Order:** Step 18 of 55 | **Module 2:** Intermediate Code Generation  
-> ◄ **Previous:** [[Backpatching Control-Flow Code Generation Algorithm]] | ► **Next:** [[Problem — Array Reference Three-Address Code Generation]]
-
----
-
 ## Problem
 
 Consider the classic searching and filtering loop found in systems programming:
@@ -258,3 +253,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 102–117, 146–175).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.2 (Representations of Intermediate Code), Section 6.7 (Backpatching).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 18 of 55 | **Module 2:** Intermediate Code Generation  
+> ◄ **Previous:** [[Backpatching Control-Flow Code Generation Algorithm]] | ► **Next:** [[Problem — Array Reference Three-Address Code Generation]]

@@ -7,11 +7,6 @@ order: 45
 
 # Linear Scan Register Allocation Algorithm
 
-> 📖 **Reading Order:** Step 45 of 55 | **Module 5: Register Allocation**  
-> ◄ **Previous:** [[Register Interference Graphs and Graph Coloring Principles]] | ► **Next:** [[Chaitin's Graph Coloring Register Allocation Algorithm]]
-
----
-
 ## The Problem and Earlier Tools
 
 While graph coloring produces near-optimal register allocation, building the interference graph takes $O(V^2)$ time and graph coloring is NP-hard. In **Just-In-Time (JIT) compilers** (such as Java JVM HotSpot C1, JavaScript V8, and .NET Core CLR), compilation occurs during program execution. Spending milliseconds on complex graph coloring introduces noticeable latency.
@@ -196,3 +191,10 @@ Frequently tested on final examinations via hand-simulation of Linear Scan Regis
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 391–425).
 - **Textbook / Papers:** Poletto & Sarkar, "Linear Scan Register Allocation", ACM TOPLAS 1999.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 45 of 55 | **Module 5: Register Allocation**  
+> ◄ **Previous:** [[Register Interference Graphs and Graph Coloring Principles]] | ► **Next:** [[Chaitin's Graph Coloring Register Allocation Algorithm]]

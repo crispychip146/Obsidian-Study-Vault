@@ -7,11 +7,6 @@ order: 43
 
 # Problem — CSP Arc Consistency and Backtracking Trace
 
-> 📖 **Reading Order:** Step 43 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
-> ◄ **Previous:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]] | ► **Next:** *End of Course*
-
----
-
 ## Problem
 
 Consider a Constraint Satisfaction Problem with 3 variables $X, Y, Z$ with domains:
@@ -160,4 +155,5 @@ Zero search or backtracking was required!
 
 ## Navigation
 
-◄ **Previous:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]] | ► **Next:** *End of Course*
+> 📖 **Reading Order:** Step 43 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
+> ◄ **Previous:** [[Problem — Alpha-Beta Pruning Trace and Node Evaluation]] | ► **Next:** *End of Course*

@@ -6,10 +6,6 @@ order: 30
 ---
 # Deadlock Detection and Recovery Algorithms
 
-> 📖 **Reading Order:** Step 30 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Banker's Algorithm]] | ► **Next:** [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3c, 2019 Q3b, 2020 Q3a, 2020 Q3c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 3 exam years, repeated!)**
 >
@@ -150,7 +146,7 @@ Regularly examined through Gantt chart simulations, state trace matrices, and de
 - [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
 
 ---
-## Sources
+## Detection Algorithm Implementations
 
 When each resource class has only one instance, the Resource Allocation Graph can be analyzed using a Depth-First Search (DFS) cycle-detection algorithm with backtracking.
 
@@ -201,7 +197,13 @@ Conclusion:
    Any UNMARKED processes are CURRENTLY DEADLOCKED!
 ```
 
----
+## Sources
+
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 16–24: Deadlock Detection with One and Multiple Resources, Recovery Methods) and `Notes on algorithm simulation.pdf`.
-- **Previous Topic:** [[Banker's Algorithm]] (Step 29).
-- **Next Topic:** [[Banker's Algorithm Multi-Resource Step-by-Step Example]] (Step 31).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 30 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Banker's Algorithm]] | ► **Next:** [[Banker's Algorithm Multi-Resource Step-by-Step Example]]

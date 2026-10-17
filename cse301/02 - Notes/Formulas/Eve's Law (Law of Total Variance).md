@@ -7,9 +7,6 @@ order: 31
 
 # Eve's Law (Law of Total Variance)
 
-> 📖 **Reading Order:** Step 31 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Adam's Law (Law of Total Expectation)]] | ► **Next:** [[Monty Hall Problem Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Eve's Law (Law of Total Variance), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -143,3 +140,10 @@ Let $S_N = \sum_{i=1}^N X_i$, where $N$ is a random variable, and $X_i$ are i.i.
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 9.3: Law of Total Variance)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 31 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Adam's Law (Law of Total Expectation)]] | ► **Next:** [[Monty Hall Problem Example]]

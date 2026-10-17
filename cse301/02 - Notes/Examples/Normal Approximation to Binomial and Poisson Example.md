@@ -7,9 +7,6 @@ order: 44
 
 # Normal Approximation to Binomial and Poisson Example
 
-> 📖 **Reading Order:** Step 44 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
-> ◄ **Previous:** [[Central Limit Theorem]] | ► **Next:** [[Problem — CLT Implications for the Weak Law of Large Numbers]]
----
 ## Problem
 
 The [[Central Limit Theorem]] allows us to approximate complicated discrete probability sums with simple standard normal CDF evaluations $\Phi(z)$.
@@ -133,3 +130,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 20–21, pages 61–63)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 10.5: CLT Examples)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 44 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Central Limit Theorem]] | ► **Next:** [[Problem — CLT Implications for the Weak Law of Large Numbers]]

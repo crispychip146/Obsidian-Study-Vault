@@ -7,11 +7,6 @@ order: 47
 
 # Linear Scan Register Allocation Step-by-Step Example
 
-> 📖 **Reading Order:** Step 47 of 55 | **Module 5:** Register Allocation  
-> ◄ **Previous:** [[Chaitin's Graph Coloring Register Allocation Algorithm]] | ► **Next:** [[Chaitin's Graph Coloring Register Allocation Example]]
-
----
-
 ## Problem
 
 We trace the exact register allocation example presented in the KMS lecture slides (Slides 368–425).
@@ -179,3 +174,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 368–425).
 - **Textbook / Papers:** Poletto & Sarkar, "Linear Scan Register Allocation", ACM TOPLAS 1999.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 47 of 55 | **Module 5:** Register Allocation  
+> ◄ **Previous:** [[Chaitin's Graph Coloring Register Allocation Algorithm]] | ► **Next:** [[Chaitin's Graph Coloring Register Allocation Example]]

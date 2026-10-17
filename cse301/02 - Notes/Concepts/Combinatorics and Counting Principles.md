@@ -7,9 +7,6 @@ order: 1
 
 # Combinatorics and Counting Principles
 
-> 📖 **Reading Order:** Step 01 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** *Start of Course* | ► **Next:** [[Probability Axioms and Naive Probability]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Combinatorics and Counting Principles, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -171,3 +168,10 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 - [[cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf]] (Lectures 1–2: Counting & Story Proofs)
 - [[cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf]] (Chapter 1: Probability and Counting)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 01 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** *Start of Course* | ► **Next:** [[Probability Axioms and Naive Probability]]

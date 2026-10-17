@@ -7,11 +7,6 @@ order: 38
 
 # Peephole Optimization Techniques
 
-> 📖 **Reading Order:** Step 38 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[A Simple Code Generator Algorithm]] | ► **Next:** [[Basic Block Partitioning and Next-Use Computation Example]]
-
----
-
 ## Starting Point and the Problem
 
 **Peephole Optimization** is a simple yet remarkably effective post-code-generation technique. It examines a short sliding window of consecutive target assembly instructions (called the **peephole**, typically 2 to 4 instructions wide) and replaces inefficient patterns with shorter, faster instruction sequences.
@@ -182,3 +177,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 359–363).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.7.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 38 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[A Simple Code Generator Algorithm]] | ► **Next:** [[Basic Block Partitioning and Next-Use Computation Example]]

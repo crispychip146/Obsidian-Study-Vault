@@ -6,10 +6,6 @@ order: 6
 ---
 # Process Control Block and Context Switching
 
-> 📖 **Reading Order:** Step 06 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Process Lifecycle and State Transitions]] | ► **Next:** [[Process Creation and Termination Operations]]
-
----
 ## Starting Point and the Problem
 
 To create the illusion of simultaneous execution (multitasking) on a uniprocessor or multi-core machine, the CPU scheduler must frequently suspend a running process and assign the CPU core to another process.
@@ -153,3 +149,10 @@ Context switch costs fall into two categories:
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 8–10, 16–21)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.3: Process Implementation)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 06 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Process Lifecycle and State Transitions]] | ► **Next:** [[Process Creation and Termination Operations]]

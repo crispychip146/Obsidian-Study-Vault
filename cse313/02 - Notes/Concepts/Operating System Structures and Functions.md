@@ -6,10 +6,6 @@ order: 1
 ---
 # Operating System Structures and Functions
 
-> 📖 **Reading Order:** Step 01 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
-> ◄ **Previous:** *Start of Course* | ► **Next:** [[Dual-Mode Operation and System Calls]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2019 Q2d, 2020 Q4c)**
 > **Frequency:** ⭐⭐⭐ **Recurring Architectural Comparison**
 >
@@ -163,3 +159,10 @@ Consider two applications running concurrently: a web browser downloading an ima
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 1–6, 11–12)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 1: Introduction (Sections 1.1–1.7)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 01 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
+> ◄ **Previous:** *Start of Course* | ► **Next:** [[Dual-Mode Operation and System Calls]]

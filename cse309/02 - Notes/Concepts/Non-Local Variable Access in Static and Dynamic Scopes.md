@@ -7,11 +7,6 @@ order: 23
 
 # Non-Local Variable Access in Static and Dynamic Scopes
 
-> 📖 **Reading Order:** Step 23 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Calling Sequences and Stack Frame Management]] | ► **Next:** [[Heap Memory Management and Allocation Strategies]]
-
----
-
 ## Starting Point and the Problem
 
 In block-structured programming languages (such as Pascal, Ada, Python, JavaScript, and GNU C), functions can be nested within other functions to arbitrary depths:
@@ -259,3 +254,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 211–228).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.3 (Access to Nonlocal Data on the Stack).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 23 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Calling Sequences and Stack Frame Management]] | ► **Next:** [[Heap Memory Management and Allocation Strategies]]

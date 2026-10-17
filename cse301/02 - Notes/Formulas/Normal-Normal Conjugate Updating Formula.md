@@ -7,9 +7,6 @@ order: 64
 
 # Normal-Normal Conjugate Updating Formula
 
-> 📖 **Reading Order:** Step 64 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Beta-Binomial Conjugate Updating Formula]] | ► **Next:** [[Bernoulli Bayesian Inference with Beta Prior Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Normal-Normal Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -170,3 +167,10 @@ Notice how the data pulled the estimate from $100$ up to $103.89$, but the prior
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 64 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Beta-Binomial Conjugate Updating Formula]] | ► **Next:** [[Bernoulli Bayesian Inference with Beta Prior Example]]

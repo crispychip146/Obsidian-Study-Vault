@@ -6,10 +6,6 @@ order: 10
 ---
 # Process Forking and Zombie Orphan Example
 
-> 📖 **Reading Order:** Step 10 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[CPU Multiprogramming Utilization Formula]] | ► **Next:** [[Problem — Fork Execution Tree and Process Tracing]]
-
----
 ## Problem
 
 Understanding process creation, variable isolation, and process termination in UNIX requires analyzing real POSIX C implementations.
@@ -212,3 +208,10 @@ Extract the generic algorithmic pattern: initialize tracking vectors, simulate e
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
 - Silberschatz et al., *Operating System Concepts* (10th Edition)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 10 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[CPU Multiprogramming Utilization Formula]] | ► **Next:** [[Problem — Fork Execution Tree and Process Tracing]]

@@ -7,11 +7,6 @@ order: 12
 
 # Type Expressions and Storage Layout
 
-> 📖 **Reading Order:** Step 12 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Value-Number Method for DAG Construction]] | ► **Next:** [[Multi-Dimensional Array Addressing Formulas]]
-
----
-
 ## Starting Point and the Problem
 
 To the central processing unit (CPU) and random-access memory (RAM), memory is nothing more than a giant, undifferentiated, linear sequence of raw bytes addressed from `0x00000000` to `0xFFFFFFFF`:
@@ -291,3 +286,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 118–137).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.3 (Types and Declarations).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 12 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Value-Number Method for DAG Construction]] | ► **Next:** [[Multi-Dimensional Array Addressing Formulas]]

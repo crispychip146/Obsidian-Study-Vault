@@ -7,9 +7,6 @@ order: 86
 
 # Higher-Order State Weather Prediction Example
 
-> 📖 **Reading Order:** Step 86 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Weather Forecasting Markov Chain Example]] | ► **Next:** [[Hardy-Weinberg Law Markov Chain Example]]
----
 ## Problem
 
 Suppose whether it rains today depends on the weather conditions of the **past two days**:
@@ -176,3 +173,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 16–18)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.4, pp. 195–196; Example 4.12, pp. 212–213)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 86 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Weather Forecasting Markov Chain Example]] | ► **Next:** [[Hardy-Weinberg Law Markov Chain Example]]

@@ -7,11 +7,6 @@ order: 54
 
 # Quicksort Partition Loop Complete Optimization Example
 
-> 📖 **Reading Order:** Step 54 of 55 | **Module 6:** Machine-Independent Optimization  
-> ◄ **Previous:** [[Loop Optimizations and Strength Reduction]] | ► **Next:** [[Problem — Quicksort Loop Induction Variable Strength Reduction]]
-
----
-
 ## Problem
 
 Demonstrate and trace the compiler execution of Quicksort Partition Loop Complete Optimization Example.
@@ -197,3 +192,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 9 (Slides 538–565).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 9.1, Figures 9.3–9.10.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 54 of 55 | **Module 6:** Machine-Independent Optimization  
+> ◄ **Previous:** [[Loop Optimizations and Strength Reduction]] | ► **Next:** [[Problem — Quicksort Loop Induction Variable Strength Reduction]]

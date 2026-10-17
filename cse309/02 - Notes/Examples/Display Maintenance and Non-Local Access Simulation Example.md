@@ -7,11 +7,6 @@ order: 29
 
 # Display Maintenance and Non-Local Access Simulation Example
 
-> 📖 **Reading Order:** Step 29 of 55 | **Module 3:** Run-Time Environments  
-> ◄ **Previous:** [[Copying Garbage Collection Algorithm]] | ► **Next:** [[Garbage Collection Trace and Compaction Example]]
-
----
-
 ## Problem
 
 Consider a program written in a block-structured language with nested procedure declarations:
@@ -205,3 +200,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 223–229).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.3.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 29 of 55 | **Module 3:** Run-Time Environments  
+> ◄ **Previous:** [[Copying Garbage Collection Algorithm]] | ► **Next:** [[Garbage Collection Trace and Compaction Example]]

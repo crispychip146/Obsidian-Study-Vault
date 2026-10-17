@@ -6,10 +6,6 @@ order: 2
 ---
 # Dual-Mode Operation and System Calls
 
-> 📖 **Reading Order:** Step 02 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
-> ◄ **Previous:** [[Operating System Structures and Functions]] | ► **Next:** [[Computer Booting and Hardware Abstractions]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1c, 2019 Q4a, 2021 Q3b)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, repeated!)**
 >
@@ -173,3 +169,10 @@ See related modules for microarchitectural implementation details.
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 13–28)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 1 (Section 1.4: Hardware Review, Section 1.6: System Calls)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 02 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
+> ◄ **Previous:** [[Operating System Structures and Functions]] | ► **Next:** [[Computer Booting and Hardware Abstractions]]

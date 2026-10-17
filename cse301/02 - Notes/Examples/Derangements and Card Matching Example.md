@@ -7,9 +7,6 @@ order: 5
 
 # Derangements and Card Matching Example
 
-> 📖 **Reading Order:** Step 05 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Birthday Problem and Collisions Example]] | ► **Next:** [[Problem — Birthday Collisions and Approximation]]
----
 ## Problem
 
 Consider the classic **de Montmort Matching Problem** (also known as the Hat Check Problem or Secret Santa Problem):
@@ -157,3 +154,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 3, pages 7–9)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_2.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 1.6 & Example 1.6.4)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 05 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Birthday Problem and Collisions Example]] | ► **Next:** [[Problem — Birthday Collisions and Approximation]]

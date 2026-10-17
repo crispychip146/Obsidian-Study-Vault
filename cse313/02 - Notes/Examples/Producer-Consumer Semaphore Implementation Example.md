@@ -6,10 +6,6 @@ order: 24
 ---
 # Producer-Consumer Semaphore Implementation Example
 
-> 📖 **Reading Order:** Step 24 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Classic Synchronization Solutions]] | ► **Next:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]]
-
----
 ## Problem
 
 Consider a concurrent system with:
@@ -205,3 +201,10 @@ Extract the generic algorithmic pattern: initialize tracking vectors, simulate e
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
 - Silberschatz et al., *Operating System Concepts* (10th Edition)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 24 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Classic Synchronization Solutions]] | ► **Next:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]]

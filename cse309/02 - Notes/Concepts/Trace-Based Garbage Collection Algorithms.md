@@ -7,11 +7,6 @@ order: 26
 
 # Trace-Based Garbage Collection Algorithms
 
-> 📖 **Reading Order:** Step 26 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Garbage Collection Fundamentals and Reference Counting]] | ► **Next:** [[Mark-and-Sweep Garbage Collection Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Unlike reference counting, which attempts to detect when objects become unreachable at every assignment, **Trace-Based Garbage Collectors** run periodically (e.g., when the heap is exhausted). 
@@ -165,3 +160,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 266–293).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.6.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 26 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Garbage Collection Fundamentals and Reference Counting]] | ► **Next:** [[Mark-and-Sweep Garbage Collection Algorithm]]

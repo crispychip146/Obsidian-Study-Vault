@@ -7,11 +7,6 @@ order: 49
 
 # Problem — Linear Scan Register Allocation Simulation
 
-> 📖 **Reading Order:** Step 49 of 55 | **Module 5:** Register Allocation  
-> ◄ **Previous:** [[Chaitin's Graph Coloring Register Allocation Example]] | ► **Next:** [[Problem — Chaitin Graph Coloring Register Allocation]]
-
----
-
 ## Problem
 
 A Just-In-Time compiler computes the following set of live intervals for 6 variables:
@@ -211,3 +206,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 391–425).
 - **Textbook / Papers:** Poletto & Sarkar, "Linear Scan Register Allocation", ACM TOPLAS 1999.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 49 of 55 | **Module 5:** Register Allocation  
+> ◄ **Previous:** [[Chaitin's Graph Coloring Register Allocation Example]] | ► **Next:** [[Problem — Chaitin Graph Coloring Register Allocation]]

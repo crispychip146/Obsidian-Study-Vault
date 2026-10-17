@@ -7,11 +7,6 @@ order: 41
 
 # Problem — Segmentation Address Translation and Buddy Memory Allocation
 
-> 📖 **Reading Order:** Step 41 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Segmentation Translation and Buddy Allocation Example]] | ► **Next:** [[Paging Architecture and Linear Page Tables]]
-
----
-
 ## Problem Statement
 
 ### Catalog Identifier: `Q-CSE313-006`
@@ -168,3 +163,10 @@ Initial Pool: 128 KB `[0x00000 - 0x1FFFF]`.
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 16 & 17.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 16 & 17.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 41 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Segmentation Translation and Buddy Allocation Example]] | ► **Next:** [[Paging Architecture and Linear Page Tables]]

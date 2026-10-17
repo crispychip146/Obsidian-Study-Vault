@@ -7,9 +7,6 @@ order: 62
 
 # Credible Intervals
 
-> 📖 **Reading Order:** Step 62 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Maximum A Posteriori (MAP) Estimation]] | ► **Next:** [[Beta-Binomial Conjugate Updating Formula]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Credible Intervals, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -165,3 +162,10 @@ In exam problems, expect to:
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 62 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Maximum A Posteriori (MAP) Estimation]] | ► **Next:** [[Beta-Binomial Conjugate Updating Formula]]

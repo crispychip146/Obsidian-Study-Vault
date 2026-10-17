@@ -7,11 +7,6 @@ order: 20
 
 # Memory-Bounded Heuristic Search Algorithms
 
-> 📖 **Reading Order:** Step 20 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
-> ◄ **Previous:** [[Optimality of A-Star Search]] | ► **Next:** [[Romania Travel Routing A-Star Search Example]]
-
----
-
 ## Starting Point and the Problem
 
 As proven in [[A-Star Search Algorithm]], A* search expands all nodes with $f(n) < C^*$ and stores them in memory. In large search spaces, A* quickly exhausts available RAM within minutes. To solve problems with massive state spaces (e.g., 15-puzzle with $10^{13}$ states, or 24-puzzle), we require algorithms that preserve heuristic guidance while strictly bounding memory consumption.
@@ -118,4 +113,5 @@ While IDA* and RBFS use too little memory ($O(bd)$) and waste time regenerating 
 
 ## Navigation
 
-◄ **Previous:** [[Optimality of A-Star Search]] | ► **Next:** [[Romania Travel Routing A-Star Search Example]]
+> 📖 **Reading Order:** Step 20 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
+> ◄ **Previous:** [[Optimality of A-Star Search]] | ► **Next:** [[Romania Travel Routing A-Star Search Example]]

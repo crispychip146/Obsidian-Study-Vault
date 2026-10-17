@@ -7,11 +7,6 @@ order: 31
 
 # Evaluation Functions and Cutting Off Search
 
-> 📖 **Reading Order:** Step 31 of 43 | **Module 6:** Adversarial Search & Game Playing  
-> ◄ **Previous:** [[Alpha-Beta Pruning Algorithm]] | ► **Next:** [[Minimax and Alpha-Beta Game Tree Pruning Example]]
-
----
-
 ## Starting Point and the Problem
 
 Even with the optimal $O(b^{m/2})$ speedup of Alpha-Beta pruning, searching to the terminal depth of complex games remains impossible within human turn-time limits (e.g., Chess with $m \approx 80$). Shannon (1950) proposed the solution implemented by all competitive game-playing engines: **cut off the search at a fixed depth $d$ and apply a heuristic evaluation function** to estimate the win probability of non-terminal states.
@@ -93,4 +88,5 @@ Evaluating a state in the middle of a violent exchange (e.g., right after our qu
 
 ## Navigation
 
-◄ **Previous:** [[Alpha-Beta Pruning Algorithm]] | ► **Next:** [[Minimax and Alpha-Beta Game Tree Pruning Example]]
+> 📖 **Reading Order:** Step 31 of 43 | **Module 6:** Adversarial Search & Game Playing  
+> ◄ **Previous:** [[Alpha-Beta Pruning Algorithm]] | ► **Next:** [[Minimax and Alpha-Beta Game Tree Pruning Example]]

@@ -7,11 +7,6 @@ order: 31
 
 # Problem — Activation Record and Display Table Tracing
 
-> 📖 **Reading Order:** Step 31 of 55 | **Module 3:** Run-Time Environments  
-> ◄ **Previous:** [[Garbage Collection Trace and Compaction Example]] | ► **Next:** [[Code Generation Issues and Target Machine Architecture]]
-
----
-
 ## Problem
 
 Consider the following recursive, mutually invoking Pascal program featuring nested procedure declarations:
@@ -254,3 +249,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 211–229).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.3 (Access to Nonlocal Data on the Stack).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 31 of 55 | **Module 3:** Run-Time Environments  
+> ◄ **Previous:** [[Garbage Collection Trace and Compaction Example]] | ► **Next:** [[Code Generation Issues and Target Machine Architecture]]

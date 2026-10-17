@@ -7,11 +7,6 @@ order: 36
 
 # DAG Construction and Local Optimization of Basic Blocks
 
-> 📖 **Reading Order:** Step 36 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[Liveness and Next-Use Analysis within Basic Blocks]] | ► **Next:** [[A Simple Code Generator Algorithm]]
-
----
-
 ## The Problem and Earlier Tools
 
 In [[Value-Number Method for DAG Construction]], we saw how a DAG eliminates common subexpressions within single mathematical expressions where variables are immutable.
@@ -210,3 +205,10 @@ Frequently tested on final examinations via hand-simulation of DAG Construction 
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 335–347).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.5 (Optimization of Basic Blocks).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 36 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[Liveness and Next-Use Analysis within Basic Blocks]] | ► **Next:** [[A Simple Code Generator Algorithm]]

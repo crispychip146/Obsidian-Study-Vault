@@ -7,11 +7,6 @@ order: 35
 
 # Liveness and Next-Use Analysis within Basic Blocks
 
-> 📖 **Reading Order:** Step 35 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[Basic Block Partitioning Algorithm]] | ► **Next:** [[DAG Construction and Local Optimization of Basic Blocks]]
-
----
-
 ## Starting Point and the Problem
 
 Imagine you are the compiler generating machine code for a CPU with only 4 physical registers ($R_0, R_1, R_2, R_3$).
@@ -168,3 +163,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 332–334).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.4.2 (Next-Use Information).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 35 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[Basic Block Partitioning Algorithm]] | ► **Next:** [[DAG Construction and Local Optimization of Basic Blocks]]

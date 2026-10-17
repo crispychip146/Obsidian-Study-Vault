@@ -7,11 +7,6 @@ order: 18
 
 # A-Star Search Algorithm
 
-> 📖 **Reading Order:** Step 18 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
-> ◄ **Previous:** [[Greedy Best-First Search Algorithm]] | ► **Next:** [[Optimality of A-Star Search]]
-
----
-
 ## Starting Point and the Problem
 
 We have observed two contrasting search strategies:
@@ -147,4 +142,5 @@ def A_STAR_SEARCH(problem, h):
 
 ## Navigation
 
-◄ **Previous:** [[Greedy Best-First Search Algorithm]] | ► **Next:** [[Optimality of A-Star Search]]
+> 📖 **Reading Order:** Step 18 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
+> ◄ **Previous:** [[Greedy Best-First Search Algorithm]] | ► **Next:** [[Optimality of A-Star Search]]

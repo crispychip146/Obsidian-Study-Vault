@@ -6,10 +6,6 @@ order: 34
 ---
 # Problem — Resource Allocation Graph Reduction and Cycle Detection
 
-> 📖 **Reading Order:** Step 34 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Problem — Banker's Algorithm Safe State and Request Granting]] | ► **Next:** [[Address Space Abstraction and Hardware Relocation]]
-
----
 ## Problem
 
 This problem evaluates deadlock detection using two standard techniques: Depth-First Search (DFS) cycle tracing for single-instance graphs, and graph reduction for multi-instance graphs.
@@ -237,3 +233,10 @@ Appears frequently in university midterm and final examinations as a multi-part 
   - Concept: [[Resource Allocation Graphs and Deadlock Modeling]], [[Deadlock Prevention and Avoidance Strategies]]
   - Algorithm: [[Deadlock Detection and Recovery Algorithms]]
   - Example: [[Resource Allocation Graph Cycle Detection Example]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 34 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Problem — Banker's Algorithm Safe State and Request Granting]] | ► **Next:** [[Address Space Abstraction and Hardware Relocation]]

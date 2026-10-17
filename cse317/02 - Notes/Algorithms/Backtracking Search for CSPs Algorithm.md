@@ -7,11 +7,6 @@ order: 36
 
 # Backtracking Search for CSPs Algorithm
 
-> 📖 **Reading Order:** Step 36 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[AC-3 Algorithm]] | ► **Next:** [[CSP Search Heuristics and Inference]]
-
----
-
 ## Starting Point and the Problem
 
 While constraint propagation (like AC-3) prunes large numbers of inconsistent values, it does not always reduce all domains to singletons. In many CSPs, after AC-3 runs, domains still contain multiple values. To find a concrete solution, the agent must perform search. If we used standard BFS, the branching factor at the top level would be $n \cdot d$, at the next level $(n-1) \cdot d$, generating $n! \cdot d^n$ leaves. However, in CSPs, **variable assignment is commutative**: assigning $X_1 = \text{Red}$ then $X_2 = \text{Blue}$ reaches the exact same state as assigning $X_2 = \text{Blue}$ then $X_1 = \text{Red}$. We only need to consider assigning **one single variable at each depth of the tree**! This depth-first search strategy is called **Backtracking Search**.
@@ -112,4 +107,5 @@ def BACKTRACK(assignment, csp):
 
 ## Navigation
 
-◄ **Previous:** [[AC-3 Algorithm]] | ► **Next:** [[CSP Search Heuristics and Inference]]
+> 📖 **Reading Order:** Step 36 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[AC-3 Algorithm]] | ► **Next:** [[CSP Search Heuristics and Inference]]

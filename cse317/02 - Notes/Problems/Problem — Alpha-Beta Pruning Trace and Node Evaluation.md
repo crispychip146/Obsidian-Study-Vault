@@ -7,11 +7,6 @@ order: 42
 
 # Problem — Alpha-Beta Pruning Trace and Node Evaluation
 
-> 📖 **Reading Order:** Step 42 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
-> ◄ **Previous:** [[Problem — Admissible and Consistent Heuristic Verification]] | ► **Next:** [[Problem — CSP Arc Consistency and Backtracking Trace]]
-
----
-
 ## Problem
 
 A 2-player zero-sum game tree is shown below. MAX moves at the root (Node A), followed by MIN (Nodes B and C), followed by MAX (Nodes D, E, F, G). The terminal leaf utility values are given from left to right.
@@ -182,4 +177,5 @@ The final root value with Alpha-Beta pruning is $\mathbf{8}$ (move to C), which 
 
 ## Navigation
 
-◄ **Previous:** [[Problem — Admissible and Consistent Heuristic Verification]] | ► **Next:** [[Problem — CSP Arc Consistency and Backtracking Trace]]
+> 📖 **Reading Order:** Step 42 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
+> ◄ **Previous:** [[Problem — Admissible and Consistent Heuristic Verification]] | ► **Next:** [[Problem — CSP Arc Consistency and Backtracking Trace]]

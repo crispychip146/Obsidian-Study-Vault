@@ -7,9 +7,6 @@ order: 6
 
 # Problem — Birthday Collisions and Approximation
 
-> 📖 **Reading Order:** Step 06 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Derangements and Card Matching Example]] | ► **Next:** [[Newton-Pepys Dice Problem Example]]
----
 ## Problem
 
 Suppose $k$ distinct keys are inserted uniformly and independently at random into a hash table with $m$ buckets (numbered $1, 2, \dots, m$).
@@ -173,3 +170,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 2, pages 4–6)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf` (Problem 1)
 - **Question ID:** `Q-CSE301-013`
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 06 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Derangements and Card Matching Example]] | ► **Next:** [[Newton-Pepys Dice Problem Example]]

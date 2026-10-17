@@ -7,11 +7,6 @@ order: 14
 
 # Bidirectional Search Algorithm
 
-> 📖 **Reading Order:** Step 14 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Iterative Deepening Search Algorithm]] | ► **Next:** [[8-Puzzle and Vacuum World State Space Example]]
-
----
-
 ## Starting Point and the Problem
 
 Standard search algorithms explore forward from the initial state toward the goal. For a problem with branching factor $b$ and goal depth $d$, forward search requires $O(b^d)$ time. As $d$ grows, $b^d$ explodes combinatorially. If we know the exact goal state in advance, an intuitive question arises: why not search simultaneously forward from the initial state and backward from the goal state?
@@ -104,4 +99,5 @@ While theoretically attractive, bidirectional search faces significant practical
 
 ## Navigation
 
-◄ **Previous:** [[Iterative Deepening Search Algorithm]] | ► **Next:** [[8-Puzzle and Vacuum World State Space Example]]
+> 📖 **Reading Order:** Step 14 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Iterative Deepening Search Algorithm]] | ► **Next:** [[8-Puzzle and Vacuum World State Space Example]]

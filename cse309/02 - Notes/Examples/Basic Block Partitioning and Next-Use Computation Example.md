@@ -7,11 +7,6 @@ order: 39
 
 # Basic Block Partitioning and Next-Use Computation Example
 
-> 📖 **Reading Order:** Step 39 of 55 | **Module 4:** Code Generation  
-> ◄ **Previous:** [[Peephole Optimization Techniques]] | ► **Next:** [[DAG-Based Basic Block Optimization Example]]
-
----
-
 ## Problem
 
 Given the following sequence of Three-Address Code instructions:
@@ -200,3 +195,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 323–334).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.4.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 39 of 55 | **Module 4:** Code Generation  
+> ◄ **Previous:** [[Peephole Optimization Techniques]] | ► **Next:** [[DAG-Based Basic Block Optimization Example]]

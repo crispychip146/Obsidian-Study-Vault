@@ -7,9 +7,6 @@ order: 9
 
 # Discrete Probability Distributions
 
-> 📖 **Reading Order:** Step 09 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Random Variables and Probability Distributions]] | ► **Next:** [[Multinomial Distribution]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Discrete Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -221,3 +218,10 @@ Verified immediately using [[Moment Generating Functions]]: $M_{X_1+X_2}(t) = M_
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 6–9, pages 17–29)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_4.pdf` & `5.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapters 3 & 4)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 09 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Random Variables and Probability Distributions]] | ► **Next:** [[Multinomial Distribution]]

@@ -7,9 +7,6 @@ order: 100
 
 # Shoe Shine Shop Queueing Model Example
 
-> 📖 **Reading Order:** Step 100 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Jackson Networks and Tandem Queues]] | ► **Next:** [[Tandem Two-Server Queue Performance Example]]
----
 ## Problem
 
 A shoe shine shop has two chairs, each staffed by a dedicated server:
@@ -187,3 +184,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 100 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Jackson Networks and Tandem Queues]] | ► **Next:** [[Tandem Two-Server Queue Performance Example]]

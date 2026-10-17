@@ -7,9 +7,6 @@ order: 34
 
 # Random Number of Random Variables Sum Example
 
-> 📖 **Reading Order:** Step 34 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Ace of Spades Conditioning Paradox Example]] | ► **Next:** [[Problem — Compound Random Sum via Adam and Eve's Laws]]
----
 ## Problem
 
 In computer systems, network modeling, and e-commerce, cumulative workloads often involve a **random number of random quantities**:
@@ -142,3 +139,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 16, pages 50–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 9.3: Example 9.3.2)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 34 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Ace of Spades Conditioning Paradox Example]] | ► **Next:** [[Problem — Compound Random Sum via Adam and Eve's Laws]]

@@ -7,11 +7,6 @@ order: 37
 
 # CSP Search Heuristics and Inference
 
-> 📖 **Reading Order:** Step 37 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[Backtracking Search for CSPs Algorithm]] | ► **Next:** [[Min-Conflicts Algorithm for CSPs]]
-
----
-
 ## Starting Point and the Problem
 
 Plain backtracking search (choosing variables and values arbitrarily) is still fundamentally a blind search. On realistic problems with dozens or hundreds of variables, naive backtracking experiences combinatorial explosion. To make backtracking search blazingly fast, we enhance it with three domain-independent heuristic decisions:
@@ -98,4 +93,5 @@ Rather than running inference only at the beginning, we interleave inference at 
 
 ## Navigation
 
-◄ **Previous:** [[Backtracking Search for CSPs Algorithm]] | ► **Next:** [[Min-Conflicts Algorithm for CSPs]]
+> 📖 **Reading Order:** Step 37 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[Backtracking Search for CSPs Algorithm]] | ► **Next:** [[Min-Conflicts Algorithm for CSPs]]

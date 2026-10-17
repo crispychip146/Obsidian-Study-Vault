@@ -7,11 +7,6 @@ order: 24
 
 # Heap Memory Management and Allocation Strategies
 
-> 📖 **Reading Order:** Step 24 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Non-Local Variable Access in Static and Dynamic Scopes]] | ► **Next:** [[Garbage Collection Fundamentals and Reference Counting]]
-
----
-
 ## Starting Point and the Problem
 
 In any long-running application—such as a database engine, a web server, or a 3D game engine—objects are constantly instantiated and destroyed across days or months:
@@ -248,3 +243,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 231–245).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.4 (Heap Management).
 - **Knuth, D. E.:** *The Art of Computer Programming*, Vol. 1: Fundamental Algorithms (Boundary Tag Method).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 24 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Non-Local Variable Access in Static and Dynamic Scopes]] | ► **Next:** [[Garbage Collection Fundamentals and Reference Counting]]

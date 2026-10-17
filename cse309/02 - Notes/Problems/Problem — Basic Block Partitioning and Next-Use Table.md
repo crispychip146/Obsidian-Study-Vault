@@ -7,11 +7,6 @@ order: 41
 
 # Problem — Basic Block Partitioning and Next-Use Table
 
-> 📖 **Reading Order:** Step 41 of 55 | **Module 4:** Code Generation  
-> ◄ **Previous:** [[DAG-Based Basic Block Optimization Example]] | ► **Next:** [[Problem — DAG Optimization of Basic Block with Array Store]]
-
----
-
 ## Problem
 
 Given the following intermediate code fragment:
@@ -210,3 +205,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 323–334).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.4.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 41 of 55 | **Module 4:** Code Generation  
+> ◄ **Previous:** [[DAG-Based Basic Block Optimization Example]] | ► **Next:** [[Problem — DAG Optimization of Basic Block with Array Store]]

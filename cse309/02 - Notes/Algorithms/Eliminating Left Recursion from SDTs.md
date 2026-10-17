@@ -7,11 +7,6 @@ order: 5
 
 # Eliminating Left Recursion from SDTs
 
-> 📖 **Reading Order:** Step 05 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** [[Abstract Syntax Tree Construction with SDDs]] | ► **Next:** [[Bottom-Up Evaluation of L-Attributed SDDs]]
-
----
-
 ## The Problem and Earlier Tools
 
 Top-down parsers (LL(1) and recursive-descent) cannot parse **left-recursive** grammars. If a production contains $A \longrightarrow A \alpha$, a top-down parser attempting to expand $A$ will call $A$ again without consuming any input tokens, entering an **infinite recursive loop**.
@@ -269,3 +264,10 @@ Frequently tested on final examinations via hand-simulation of Eliminating Left 
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 63–71).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.4.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 05 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** [[Abstract Syntax Tree Construction with SDDs]] | ► **Next:** [[Bottom-Up Evaluation of L-Attributed SDDs]]

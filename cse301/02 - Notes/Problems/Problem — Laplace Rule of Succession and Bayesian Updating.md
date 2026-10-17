@@ -7,9 +7,6 @@ order: 67
 
 # Problem — Laplace Rule of Succession and Bayesian Updating
 
-> 📖 **Reading Order:** Step 67 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]] | ► **Next:** [[Hypothesis Testing Framework]]
----
 ## Problem
 
 An automated safety verification framework evaluates an autonomous vehicle control module across $n = 5$ independent critical road simulation tests. All $5$ tests pass without incident ($s = 5$ successes, $0$ failures). Let $p \in [0, 1]$ be the unknown true probability of passing a critical test.
@@ -184,3 +181,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 67 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Two Binomial Distributions Comparison via Bayesian Simulation Example]] | ► **Next:** [[Hypothesis Testing Framework]]

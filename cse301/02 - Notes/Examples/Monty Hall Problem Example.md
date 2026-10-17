@@ -7,9 +7,6 @@ order: 32
 
 # Monty Hall Problem Example
 
-> 📖 **Reading Order:** Step 32 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Eve's Law (Law of Total Variance)]] | ► **Next:** [[Ace of Spades Conditioning Paradox Example]]
----
 ## Problem
 
 On a game show, you are presented with three closed doors ($1, 2, 3$):
@@ -136,3 +133,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 5, pages 15–16)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_3.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 2.4: Monty Hall)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 32 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Eve's Law (Law of Total Variance)]] | ► **Next:** [[Ace of Spades Conditioning Paradox Example]]

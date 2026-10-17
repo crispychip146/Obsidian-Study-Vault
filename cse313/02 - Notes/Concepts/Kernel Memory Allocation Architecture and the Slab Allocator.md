@@ -7,11 +7,6 @@ order: 65
 
 # Kernel Memory Allocation Architecture and the Slab Allocator
 
-> 📖 **Reading Order:** Step 65 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
-> ◄ **Previous:** [[Problem — File System Inode Capacity and Journaling Recovery]] | ► **Next:** [[Multiprocessor Operating System Architectures]]
-
----
-
 ## Starting Point and the Problem
 
 In user space, memory allocation via `malloc()` operates under forgiving constraints: if memory is low, the process can sleep or block while the virtual memory manager swaps pages out to disk.
@@ -153,3 +148,10 @@ Frequently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Kernel Allocators (Slides 397–413).
 - **Reference:** Jeff Bonwick, *The Slab Allocator: An Object-Caching Kernel Memory Allocator*, USENIX Summer 1994 Technical Conference.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 65 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
+> ◄ **Previous:** [[Problem — File System Inode Capacity and Journaling Recovery]] | ► **Next:** [[Multiprocessor Operating System Architectures]]

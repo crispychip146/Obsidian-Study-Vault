@@ -7,11 +7,6 @@ order: 53
 
 # RAID Architectures and Redundancy Models
 
-> 📖 **Reading Order:** Step 53 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[Disk Arm Scheduling Algorithms]] | ► **Next:** [[Disk Latency and RAID Performance Evaluation Formulas]]
-
----
-
 ## Starting Point and the Problem
 
 Single hard drives suffer from three inescapable limitations:
@@ -169,3 +164,10 @@ Frequently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 38 (Slides 278–294).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 38 (Redundant Arrays of Inexpensive Disks (RAIDs)).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 53 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[Disk Arm Scheduling Algorithms]] | ► **Next:** [[Disk Latency and RAID Performance Evaluation Formulas]]

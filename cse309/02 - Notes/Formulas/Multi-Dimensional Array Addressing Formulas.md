@@ -7,11 +7,6 @@ order: 13
 
 # Multi-Dimensional Array Addressing Formulas
 
-> 📖 **Reading Order:** Step 13 of 55 | **Module 2:** Intermediate Code Generation  
-> ◄ **Previous:** [[Type Expressions and Storage Layout]] | ► **Next:** [[Translation of Expressions and Array References]]
-
----
-
 ## The Question and Earlier Knowledge
 
 How does a compiler map high-dimensional array references (such as `A[i][j]` or `A[i][j][k]`) down into linear physical byte memory addresses, and how can the emitted Three-Address Code compute these offsets using minimum runtime instructions?
@@ -176,3 +171,10 @@ Verified against manual memory walk: Row 0 spans 1000-1011 (12 bytes), A[1][0] a
 
 - [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]] (Lecture 16, Slides 3–11)
 - Alfred V. Aho, Monica S. Lam, Ravi Sethi, Jeffrey D. Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Edition), Section 6.4.3.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 13 of 55 | **Module 2:** Intermediate Code Generation  
+> ◄ **Previous:** [[Type Expressions and Storage Layout]] | ► **Next:** [[Translation of Expressions and Array References]]

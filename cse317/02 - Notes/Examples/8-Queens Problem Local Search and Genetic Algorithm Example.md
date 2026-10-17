@@ -7,11 +7,6 @@ order: 27
 
 # 8-Queens Problem Local Search and Genetic Algorithm Example
 
-> 📖 **Reading Order:** Step 27 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
-> ◄ **Previous:** [[Genetic Algorithm]] | ► **Next:** [[Adversarial Search and Two-Player Games]]
-
----
-
 ## Starting Point and the Problem
 
 The **8-Queens Problem** requires placing 8 chess queens on an $8 \times 8$ chessboard such that no two queens attack each other (no two queens share the same row, column, or diagonal). We examine how this classic benchmark is solved using **Steepest-Ascent Hill-Climbing** and **Genetic Algorithms**.
@@ -119,4 +114,5 @@ This mutated child is evaluated for fitness and added to the next generation.
 
 ## Navigation
 
-◄ **Previous:** [[Genetic Algorithm]] | ► **Next:** [[Adversarial Search and Two-Player Games]]
+> 📖 **Reading Order:** Step 27 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
+> ◄ **Previous:** [[Genetic Algorithm]] | ► **Next:** [[Adversarial Search and Two-Player Games]]

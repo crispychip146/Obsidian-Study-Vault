@@ -7,11 +7,6 @@ order: 21
 
 # Romania Travel Routing A-Star Search Example
 
-> 📖 **Reading Order:** Step 21 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
-> ◄ **Previous:** [[Memory-Bounded Heuristic Search Algorithms]] | ► **Next:** [[Local Search and Optimization Landscape]]
-
----
-
 ## Starting Point and the Problem
 
 To demonstrate how A* search operates and compare it against Greedy Best-First Search, we analyze the classic navigation problem from Russell & Norvig: finding the optimal driving route from **Arad** to **Bucharest** on a simplified Romanian road map.
@@ -146,4 +141,5 @@ Notice that A* discovered the route through Pitesti ($418$), while Greedy Best-F
 
 ## Navigation
 
-◄ **Previous:** [[Memory-Bounded Heuristic Search Algorithms]] | ► **Next:** [[Local Search and Optimization Landscape]]
+> 📖 **Reading Order:** Step 21 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
+> ◄ **Previous:** [[Memory-Bounded Heuristic Search Algorithms]] | ► **Next:** [[Local Search and Optimization Landscape]]

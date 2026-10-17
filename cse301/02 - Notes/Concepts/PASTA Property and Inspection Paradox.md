@@ -7,9 +7,6 @@ order: 95
 
 # PASTA Property and Inspection Paradox
 
-> 📖 **Reading Order:** Step 95 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Little's Law]] | ► **Next:** [[M-M-1 Queue]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to PASTA Property and Inspection Paradox, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -180,3 +177,10 @@ In CSE301 examinations:
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 95 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Little's Law]] | ► **Next:** [[M-M-1 Queue]]

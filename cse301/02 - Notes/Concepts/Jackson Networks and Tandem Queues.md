@@ -7,9 +7,6 @@ order: 99
 
 # Jackson Networks and Tandem Queues
 
-> 📖 **Reading Order:** Step 99 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Finite Capacity M-M-1-N Queue]] | ► **Next:** [[Shoe Shine Shop Queueing Model Example]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Jackson Networks and Tandem Queues, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -218,3 +215,10 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 99 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Finite Capacity M-M-1-N Queue]] | ► **Next:** [[Shoe Shine Shop Queueing Model Example]]

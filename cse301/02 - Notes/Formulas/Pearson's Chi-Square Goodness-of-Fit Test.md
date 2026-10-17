@@ -7,9 +7,6 @@ order: 71
 
 # Pearson's Chi-Square Goodness-of-Fit Test
 
-> 📖 **Reading Order:** Step 71 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Wald Test Statistic]] | ► **Next:** [[Permutation Test Algorithm]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Pearson's Chi-Square Goodness-of-Fit Test, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -149,3 +146,10 @@ Since $V = 2.8 < 11.07$, we **fail to reject $H_0$**. The die is consistent with
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 71 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Wald Test Statistic]] | ► **Next:** [[Permutation Test Algorithm]]

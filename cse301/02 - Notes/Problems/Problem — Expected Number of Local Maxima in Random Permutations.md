@@ -7,11 +7,6 @@ order: 25
 
 # Problem — Expected Number of Local Maxima in Random Permutations
 
-> 📖 **Reading Order:** Step 25 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Problem — Indicator Variables for Distinct Birthday Counts]] | ► **Next:** [[Conditional Probability and Independence]]
-
----
-
 ## Problem
 
 Let $a_1, a_2, \dots, a_n$ be a random permutation of the numbers $\{1, 2, \dots, n\}$ where $n \ge 2$, chosen uniformly at random from all $n!$ possible permutations.
@@ -166,3 +161,10 @@ The formula matches the exact enumeration.
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 10 (pp. 41–42)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Chapter 4: Indicator Random Variables)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 25 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Problem — Indicator Variables for Distinct Birthday Counts]] | ► **Next:** [[Conditional Probability and Independence]]

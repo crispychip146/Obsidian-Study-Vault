@@ -6,10 +6,6 @@ order: 16
 ---
 # Comprehensive CPU Scheduling Simulation Example
 
-> 📖 **Reading Order:** Step 16 of 68 | **Module 3:** CPU Scheduling  
-> ◄ **Previous:** [[Scheduling Metrics and Burst Estimation Formulas]] | ► **Next:** [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]
-
----
 ## Problem
 
 Consider a workload of 4 processes arriving at different times with varying CPU burst durations:
@@ -215,3 +211,10 @@ Extract the generic algorithmic pattern: initialize tracking vectors, simulate e
 
 - Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition)
 - Silberschatz et al., *Operating System Concepts* (10th Edition)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 16 of 68 | **Module 3:** CPU Scheduling  
+> ◄ **Previous:** [[Scheduling Metrics and Burst Estimation Formulas]] | ► **Next:** [[Problem — CPU Scheduling Algorithm Simulation and Gantt Chart]]

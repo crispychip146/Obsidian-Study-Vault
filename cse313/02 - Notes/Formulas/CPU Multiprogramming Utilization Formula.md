@@ -6,10 +6,6 @@ order: 9
 ---
 # CPU Multiprogramming Utilization Formula
 
-> 📖 **Reading Order:** Step 09 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Threads and Multithreading Models]] | ► **Next:** [[Process Forking and Zombie Orphan Example]]
-
----
 ## The Question and Earlier Knowledge
 
 How much CPU computing capacity is actively utilized when $n$ independent processes are loaded concurrently into main memory, and what fraction of CPU time is wasted idling during I/O waits?
@@ -141,3 +137,10 @@ This formula guides physical memory capacity planning in operating systems:
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 16–21)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.4: Modeling Multiprogramming)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 09 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Threads and Multithreading Models]] | ► **Next:** [[Process Forking and Zombie Orphan Example]]

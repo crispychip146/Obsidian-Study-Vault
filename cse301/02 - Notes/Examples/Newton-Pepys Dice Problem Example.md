@@ -7,11 +7,6 @@ order: 7
 
 # Newton-Pepys Dice Problem Example
 
-> 📖 **Reading Order:** Step 07 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Problem — Birthday Collisions and Approximation]] | ► **Next:** [[Random Variables and Probability Distributions]]
-
----
-
 ## Problem
 
 In 1693, Samuel Pepys wrote to Sir Isaac Newton posing a famous gambling puzzle:
@@ -147,3 +142,10 @@ Why does the probability strictly decrease as the number of dice increases, even
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 4 (pp. 13–14)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 3.8: Newton-Pepys Problem)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 07 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Problem — Birthday Collisions and Approximation]] | ► **Next:** [[Random Variables and Probability Distributions]]

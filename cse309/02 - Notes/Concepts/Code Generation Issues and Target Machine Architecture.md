@@ -7,11 +7,6 @@ order: 32
 
 # Code Generation Issues and Target Machine Architecture
 
-> 📖 **Reading Order:** Step 32 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[Problem — Activation Record and Display Table Tracing]] | ► **Next:** [[Basic Blocks and Control Flow Graphs]]
-
----
-
 ## Starting Point and the Problem
 
 The final phase in a compiler is the **Code Generator**. It takes as input the optimized intermediate representation (Three-Address Code, AST, or DAG) along with symbol table information, and maps it into semantically equivalent, efficient **target machine code** (assembly or machine code).
@@ -159,3 +154,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 296–321).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.1 & 8.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 32 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[Problem — Activation Record and Display Table Tracing]] | ► **Next:** [[Basic Blocks and Control Flow Graphs]]

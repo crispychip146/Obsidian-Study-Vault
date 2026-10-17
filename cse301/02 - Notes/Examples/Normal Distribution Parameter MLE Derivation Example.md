@@ -7,9 +7,6 @@ order: 56
 
 # Normal Distribution Parameter MLE Derivation Example
 
-> 📖 **Reading Order:** Step 56 of 103 | **Module 7:** Parametric Inference  
-> ◄ **Previous:** [[Likelihood and Score Equations]] | ► **Next:** [[Uniform Distribution Non-Regular MLE Example]]
----
 ## Problem
 
 Let $X_1, X_2, \dots, X_n \overset{\text{iid}}{\sim} N(\mu, \sigma^2)$ be a sample of size $n$ from a normal distribution with unknown mean $\mu \in (-\infty, \infty)$ and unknown variance $\sigma^2 > 0$.
@@ -133,3 +130,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
 - [[cse301/01 - Sources/Lectures/MLE.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 56 of 103 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Likelihood and Score Equations]] | ► **Next:** [[Uniform Distribution Non-Regular MLE Example]]

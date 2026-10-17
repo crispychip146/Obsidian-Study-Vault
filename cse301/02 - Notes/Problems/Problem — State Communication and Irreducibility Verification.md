@@ -7,9 +7,6 @@ order: 91
 
 # Problem — State Communication and Irreducibility Verification
 
-> 📖 **Reading Order:** Step 91 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Problem — Rain Prediction Two Days Ahead]] | ► **Next:** [[Problem — Identification of Communicating Classes and Absorbing States]]
----
 ## Problem
 
 Consider a three-state [[Markov Chain]] with state space $S = \{0, 1, 2\}$ and transition probability matrix:
@@ -187,3 +184,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 14)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–204)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 91 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Rain Prediction Two Days Ahead]] | ► **Next:** [[Problem — Identification of Communicating Classes and Absorbing States]]

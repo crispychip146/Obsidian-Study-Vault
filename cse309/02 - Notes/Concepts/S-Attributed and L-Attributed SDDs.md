@@ -7,11 +7,6 @@ order: 3
 
 # S-Attributed and L-Attributed SDDs
 
-> 📖 **Reading Order:** Step 03 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** [[Synthesized and Inherited Attributes]] | ► **Next:** [[Abstract Syntax Tree Construction with SDDs]]
-
----
-
 ## Starting Point and the Problem
 
 In theoretical computer science, you can define attributes however you like. But in real-world compiler engineering, you face a brutal practical constraint:
@@ -227,3 +222,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 31–40).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 03 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** [[Synthesized and Inherited Attributes]] | ► **Next:** [[Abstract Syntax Tree Construction with SDDs]]

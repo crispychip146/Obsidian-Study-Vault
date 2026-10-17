@@ -7,9 +7,6 @@ order: 83
 
 # Chapman-Kolmogorov Equations
 
-> 📖 **Reading Order:** Step 83 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Stationary and Limiting Distributions in Markov Chains]] | ► **Next:** [[Gambler's Ruin Formula]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Chapman-Kolmogorov Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -158,3 +155,10 @@ Thus, $P_{00}^4 = 0.5749$.
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 7–10)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.2, pp. 197–202)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 83 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Stationary and Limiting Distributions in Markov Chains]] | ► **Next:** [[Gambler's Ruin Formula]]

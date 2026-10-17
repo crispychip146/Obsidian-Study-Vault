@@ -7,11 +7,6 @@ order: 3
 
 # PEAS Framework
 
-> 📖 **Reading Order:** Step 03 of 43 | **Module 2:** Intelligent Agents & Architectures  
-> ◄ **Previous:** [[Intelligent Agents and Rationality]] | ► **Next:** [[Environment Characterization in AI]]
-
----
-
 ## Starting Point and the Problem
 
 Before designing an intelligent agent, an engineer or researcher must formally specify the operational environment and task requirements. Without a rigorous specification, it is impossible to evaluate whether an agent is rational or whether its hardware (sensors and actuators) is sufficient. The **PEAS framework** provides the standard, structured methodology to specify an agent's task environment.
@@ -134,4 +129,5 @@ Typical exam problems ask students to:
 
 ## Navigation
 
-◄ **Previous:** [[Intelligent Agents and Rationality]] | ► **Next:** [[Environment Characterization in AI]]
+> 📖 **Reading Order:** Step 03 of 43 | **Module 2:** Intelligent Agents & Architectures  
+> ◄ **Previous:** [[Intelligent Agents and Rationality]] | ► **Next:** [[Environment Characterization in AI]]

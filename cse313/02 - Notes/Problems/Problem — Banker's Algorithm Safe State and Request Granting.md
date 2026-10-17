@@ -6,10 +6,6 @@ order: 33
 ---
 # Problem — Banker's Algorithm Safe State and Request Granting
 
-> 📖 **Reading Order:** Step 33 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Resource Allocation Graph Cycle Detection Example]] | ► **Next:** [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]
-
----
 ## Problem
 
 Consider a system with **5 processes** ($P_0, P_1, P_2, P_3, P_4$) and **4 resource types** ($A, B, C, D$).  
@@ -218,3 +214,10 @@ Appears frequently in university midterm and final examinations as a multi-part 
   - Concept: [[Deadlock Fundamentals and Coffman Conditions]], [[Deadlock Prevention and Avoidance Strategies]]
   - Algorithm: [[Banker's Algorithm]]
   - Example: [[Banker's Algorithm Multi-Resource Step-by-Step Example]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 33 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Resource Allocation Graph Cycle Detection Example]] | ► **Next:** [[Problem — Resource Allocation Graph Reduction and Cycle Detection]]

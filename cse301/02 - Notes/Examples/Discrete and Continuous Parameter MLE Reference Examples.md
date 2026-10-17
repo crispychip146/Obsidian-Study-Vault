@@ -7,9 +7,6 @@ order: 58
 
 # Discrete and Continuous Parameter MLE Reference Examples
 
-> 📖 **Reading Order:** Step 58 of 103 | **Module 7:** Parametric Inference  
-> ◄ **Previous:** [[Uniform Distribution Non-Regular MLE Example]] | ► **Next:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]
----
 ## Problem
 
 Solve the probability and statistical problem: Discrete and Continuous Parameter MLE Reference Examples.
@@ -202,3 +199,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/MLE.pdf]]
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 58 of 103 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Uniform Distribution Non-Regular MLE Example]] | ► **Next:** [[Problem — Sample Variance Bias and Bessel's Correction Derivation]]

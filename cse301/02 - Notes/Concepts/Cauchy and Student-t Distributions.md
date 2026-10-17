@@ -7,11 +7,6 @@ order: 12
 
 # Cauchy and Student-t Distributions
 
-> 📖 **Reading Order:** Step 12 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Continuous Probability Distributions]] | ► **Next:** [[St. Petersburg Paradox]]
-
----
-
 ## Starting Point and the Problem
 
 Standard continuous distributions like the [[Continuous Probability Distributions|Gaussian (Normal)]] distribution have exponentially decaying tails ($e^{-x^2/2}$), meaning extreme outliers are vanishingly rare, and all moments (mean, variance, skewness) exist and are finite.
@@ -155,3 +150,10 @@ In CSE 301, questions involving Cauchy and Student's $t$ test:
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 13, 17]]
 - [[cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf|Lecture Notes Complete: Lecture 21 (p. 63, Misc Distributions)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 7.5: Cauchy Distribution)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 12 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Continuous Probability Distributions]] | ► **Next:** [[St. Petersburg Paradox]]

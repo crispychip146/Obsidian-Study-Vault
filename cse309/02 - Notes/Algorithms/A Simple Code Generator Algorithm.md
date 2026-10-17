@@ -7,11 +7,6 @@ order: 37
 
 # A Simple Code Generator Algorithm
 
-> 📖 **Reading Order:** Step 37 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[DAG Construction and Local Optimization of Basic Blocks]] | ► **Next:** [[Peephole Optimization Techniques]]
-
----
-
 ## The Problem and Earlier Tools
 
 The Dragon Book defines a classic, robust code generation algorithm that translates a basic block of Three-Address Code into machine instructions statement-by-statement. 
@@ -155,3 +150,10 @@ Frequently tested on final examinations via hand-simulation of A Simple Code Gen
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 348–358).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.6.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 37 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[DAG Construction and Local Optimization of Basic Blocks]] | ► **Next:** [[Peephole Optimization Techniques]]

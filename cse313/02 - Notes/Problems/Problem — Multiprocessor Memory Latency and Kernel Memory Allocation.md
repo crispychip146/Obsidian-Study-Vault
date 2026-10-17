@@ -7,11 +7,6 @@ order: 68
 
 # Problem — Multiprocessor Memory Latency and Kernel Memory Allocation
 
-> 📖 **Reading Order:** Step 68 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
-> ◄ **Previous:** [[Linux System Architecture and Remote Procedure Calls (RPC)]] | ► **Next:** *End of Course*
-
----
-
 ## Problem Statement
 
 ### Catalog Identifier: `Q-CSE313-010`
@@ -114,3 +109,10 @@ Object Size $= 840\,\text{bytes}$. Page Size $= 4096\,\text{bytes}$.
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Kernel Allocators & Multiprocessors.
 - **Textbook:** Tanenbaum & Bos, *Modern Operating Systems (3rd/4th Ed.)*, Chapters 8 & 10.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 68 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
+> ◄ **Previous:** [[Linux System Architecture and Remote Procedure Calls (RPC)]] | ► **Next:** *End of Course*

@@ -6,10 +6,6 @@ order: 13
 ---
 # Batch Scheduling Algorithms
 
-> 📖 **Reading Order:** Step 13 of 68 | **Module 3:** CPU Scheduling  
-> ◄ **Previous:** [[CPU Scheduling Principles and Criteria]] | ► **Next:** [[Interactive Scheduling Algorithms]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2017 Q4b, 2017 Q4c, 2019 Q1a, 2019 Q1b, 2020 Q2a, 2021 Q2b, 2021 Q2c, 2021 Q2d)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -242,3 +238,10 @@ $O(n)$ space for ready queue descriptors and timeline structures.
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 13–24)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4.2: Scheduling in Batch Systems)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 13 of 68 | **Module 3:** CPU Scheduling  
+> ◄ **Previous:** [[CPU Scheduling Principles and Criteria]] | ► **Next:** [[Interactive Scheduling Algorithms]]

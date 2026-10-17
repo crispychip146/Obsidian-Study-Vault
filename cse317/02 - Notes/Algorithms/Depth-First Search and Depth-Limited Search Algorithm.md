@@ -7,11 +7,6 @@ order: 12
 
 # Depth-First Search and Depth-Limited Search Algorithm
 
-> 📖 **Reading Order:** Step 12 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Uniform-Cost Search Algorithm]] | ► **Next:** [[Iterative Deepening Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 As demonstrated in [[Uninformed Search Strategies]], Breadth-First Search and Uniform-Cost Search are crippled by exponential memory requirements ($O(b^d)$). On realistic problems, memory runs out within minutes. We need an alternative search strategy whose memory footprint grows **linearly** with depth, allowing deep exploration without running out of RAM. This is achieved by **Depth-First Search (DFS)**.
@@ -162,4 +157,5 @@ If $m \gg d$ (e.g., a shallow goal at $d=3$, but the graph has branches of depth
 
 ## Navigation
 
-◄ **Previous:** [[Uniform-Cost Search Algorithm]] | ► **Next:** [[Iterative Deepening Search Algorithm]]
+> 📖 **Reading Order:** Step 12 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Uniform-Cost Search Algorithm]] | ► **Next:** [[Iterative Deepening Search Algorithm]]

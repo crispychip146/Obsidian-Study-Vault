@@ -7,11 +7,6 @@ order: 15
 
 # Control Flow Translation and Boolean Expressions
 
-> 📖 **Reading Order:** Step 15 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Translation of Expressions and Array References]] | ► **Next:** [[Backpatching in Intermediate Code Generation]]
-
----
-
 ## Starting Point and the Problem
 
 In high-level languages, boolean expressions have two completely distinct runtime objectives:
@@ -255,3 +250,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 154–185).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.6 (Control Flow).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 15 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Translation of Expressions and Array References]] | ► **Next:** [[Backpatching in Intermediate Code Generation]]

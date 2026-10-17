@@ -7,11 +7,6 @@ order: 14
 
 # Translation of Expressions and Array References
 
-> 📖 **Reading Order:** Step 14 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Multi-Dimensional Array Addressing Formulas]] | ► **Next:** [[Control Flow Translation and Boolean Expressions]]
-
----
-
 ## Starting Point and the Problem
 
 Consider a typical high-level language assignment involving multi-dimensional arrays:
@@ -204,3 +199,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 138–153).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.4 (Expressions) & Section 6.5 (Type Checking).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 14 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Multi-Dimensional Array Addressing Formulas]] | ► **Next:** [[Control Flow Translation and Boolean Expressions]]

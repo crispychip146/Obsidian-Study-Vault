@@ -7,11 +7,6 @@ order: 55
 
 # Disk Scheduling Simulation and RAID Small-Write Example
 
-> 📖 **Reading Order:** Step 55 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[Disk Latency and RAID Performance Evaluation Formulas]] | ► **Next:** [[Problem — Disk Arm Scheduling and RAID Performance Analysis]]
-
----
-
 ## Background and Problem Setup
 
 This example works through two practical storage engineering problems:
@@ -138,3 +133,10 @@ $$\begin{array}{r@{\quad}l}
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 37 & 38.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 37 & 38.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 55 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[Disk Latency and RAID Performance Evaluation Formulas]] | ► **Next:** [[Problem — Disk Arm Scheduling and RAID Performance Analysis]]

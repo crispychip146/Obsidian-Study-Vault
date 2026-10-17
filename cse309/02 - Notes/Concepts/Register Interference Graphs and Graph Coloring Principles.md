@@ -7,11 +7,6 @@ order: 44
 
 # Register Interference Graphs and Graph Coloring Principles
 
-> 📖 **Reading Order:** Step 44 of 55 | **Module 5: Register Allocation**  
-> ◄ **Previous:** [[Live Ranges and Live Intervals in Register Allocation]] | ► **Next:** [[Linear Scan Register Allocation Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Modern CPUs (like x86-64 or ARM64) possess only 16 to 32 general-purpose hardware registers. Yet, a complex function in C, C++, or Java might declare dozens of local variables and generate hundreds of intermediate compiler temporaries:
@@ -181,3 +176,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.8 (Register Allocation and Assignment).
 - **Chaitin, G. J., et al.:** *Register Allocation via Coloring*, Computer Languages, Vol. 6, 1981.
 - **Kempe, A. B.:** *How to Colour a Map with Four Colours*, Nature, 1879.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 44 of 55 | **Module 5: Register Allocation**  
+> ◄ **Previous:** [[Live Ranges and Live Intervals in Register Allocation]] | ► **Next:** [[Linear Scan Register Allocation Algorithm]]

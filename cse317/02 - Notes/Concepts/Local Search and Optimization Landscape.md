@@ -7,11 +7,6 @@ order: 22
 
 # Local Search and Optimization Landscape
 
-> 📖 **Reading Order:** Step 22 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
-> ◄ **Previous:** [[Romania Travel Routing A-Star Search Example]] | ► **Next:** [[Hill-Climbing Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 In systematic search algorithms (such as BFS, UCS, and A*), the path to the goal is the primary output—for example, the sequence of driving turns from Arad to Bucharest. The algorithms systematically maintain frontiers of paths in memory. However, in many critical engineering and AI problems—such as integrated circuit (VLSI) layout, factory production scheduling, network routing, or the 8-Queens problem—the path used to reach the solution is completely irrelevant. Only the **final configuration** of the system matters. In such domains, systematically storing paths in memory is wasteful. **Local Search Algorithms** operate using a complete-state formulation, modifying a single current state (or a small set of states) without retaining the search history.
@@ -106,4 +101,5 @@ Unlike incremental formulations where a state starts empty and pieces are added 
 
 ## Navigation
 
-◄ **Previous:** [[Romania Travel Routing A-Star Search Example]] | ► **Next:** [[Hill-Climbing Search Algorithm]]
+> 📖 **Reading Order:** Step 22 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
+> ◄ **Previous:** [[Romania Travel Routing A-Star Search Example]] | ► **Next:** [[Hill-Climbing Search Algorithm]]

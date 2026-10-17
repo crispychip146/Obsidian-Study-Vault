@@ -7,11 +7,6 @@ order: 26
 
 # Genetic Algorithm
 
-> 📖 **Reading Order:** Step 26 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
-> ◄ **Previous:** [[Local Beam Search Algorithm]] | ► **Next:** [[8-Queens Problem Local Search and Genetic Algorithm Example]]
-
----
-
 ## Starting Point and the Problem
 
 Stochastic beam search selects promising candidates probabilistically. However, generating new states purely by mutating a single parent neglects a powerful mechanism found in biological nature: sexual reproduction and recombination. In biology, complex organisms evolve by combining successful genetic traits from two distinct parent individuals. **Genetic Algorithms (GAs)** (John Holland, 1975; David Goldberg, 1989) model optimization after natural selection, genetics, and recombination.
@@ -140,4 +135,5 @@ John Holland formalized this through the **Schema Theorem**:
 
 ## Navigation
 
-◄ **Previous:** [[Local Beam Search Algorithm]] | ► **Next:** [[8-Queens Problem Local Search and Genetic Algorithm Example]]
+> 📖 **Reading Order:** Step 26 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
+> ◄ **Previous:** [[Local Beam Search Algorithm]] | ► **Next:** [[8-Queens Problem Local Search and Genetic Algorithm Example]]

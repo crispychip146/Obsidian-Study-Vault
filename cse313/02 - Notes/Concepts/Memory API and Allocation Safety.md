@@ -7,11 +7,6 @@ order: 36
 
 # Memory API and Allocation Safety
 
-> 📖 **Reading Order:** Step 36 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Address Space Abstraction and Hardware Relocation]] | ► **Next:** [[Segmentation and External Fragmentation]]
-
----
-
 ## Starting Point and the Problem
 
 In C programs, memory is managed across three regions:
@@ -196,3 +191,10 @@ Frequently tested in exams via:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 14 (Slides 21–42).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 14 (Interlude: Memory API).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 36 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Address Space Abstraction and Hardware Relocation]] | ► **Next:** [[Segmentation and External Fragmentation]]

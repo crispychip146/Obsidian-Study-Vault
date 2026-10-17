@@ -7,11 +7,6 @@ order: 39
 
 # Segregated Free Lists and Binary Buddy Allocation
 
-> 📖 **Reading Order:** Step 39 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Free-Space Management and Allocation Policies]] | ► **Next:** [[Segmentation Translation and Buddy Allocation Example]]
-
----
-
 ## The Problem and Earlier Tools
 
 As established in [[Free-Space Management and Allocation Policies]], general-purpose free-list policies (First-Fit, Best-Fit) suffer from two major drawbacks:
@@ -164,3 +159,10 @@ Consistently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 17 (Slides 100–111) & Kernel Allocator Slides (Slides 397–413).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 17 (Free-Space Management).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 39 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Free-Space Management and Allocation Policies]] | ► **Next:** [[Segmentation Translation and Buddy Allocation Example]]

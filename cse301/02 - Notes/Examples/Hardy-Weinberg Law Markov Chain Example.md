@@ -7,9 +7,6 @@ order: 87
 
 # Hardy-Weinberg Law Markov Chain Example
 
-> 📖 **Reading Order:** Step 87 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Higher-Order State Weather Prediction Example]] | ► **Next:** [[Problem — Patty and Max Gambler's Ruin]]
----
 ## Problem
 
 In population genetics, consider a gene with two alleles, $A$ and $a$. An individual's genotype consists of a pair of these genes: $AA$, $aa$, or $Aa$.
@@ -207,3 +204,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 25–29)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.14, pp. 215–217)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 87 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Higher-Order State Weather Prediction Example]] | ► **Next:** [[Problem — Patty and Max Gambler's Ruin]]

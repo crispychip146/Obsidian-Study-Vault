@@ -7,11 +7,6 @@ order: 19
 
 # Poisson Triplet Birthday Collisions Example
 
-> 📖 **Reading Order:** Step 19 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Linearity of Expectation and Indicator Random Variables Example]] | ► **Next:** [[Gaussian Normalizing Constant Polar Derivation Example]]
-
----
-
 ## Problem
 
 In a group of $n$ people, what is the approximate probability that **at least three people share the exact same birthday** (a 3-way or triplet collision)? 
@@ -138,3 +133,10 @@ However, because the individual probability $p = 1/365^2 \approx 7.5 \times 10^{
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 11 (pp. 46–47)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 4.6: Poisson Approximation)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 19 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Linearity of Expectation and Indicator Random Variables Example]] | ► **Next:** [[Gaussian Normalizing Constant Polar Derivation Example]]

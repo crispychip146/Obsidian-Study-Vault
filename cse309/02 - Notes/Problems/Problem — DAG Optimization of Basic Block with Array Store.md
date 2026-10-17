@@ -7,11 +7,6 @@ order: 42
 
 # Problem — DAG Optimization of Basic Block with Array Store
 
-> 📖 **Reading Order:** Step 42 of 55 | **Module 4:** Code Generation  
-> ◄ **Previous:** [[Problem — Basic Block Partitioning and Next-Use Table]] | ► **Next:** [[Live Ranges and Live Intervals in Register Allocation]]
-
----
-
 ## Problem
 
 Consider the following basic block containing array operations:
@@ -187,3 +182,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 341–343).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.5.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 42 of 55 | **Module 4:** Code Generation  
+> ◄ **Previous:** [[Problem — Basic Block Partitioning and Next-Use Table]] | ► **Next:** [[Live Ranges and Live Intervals in Register Allocation]]

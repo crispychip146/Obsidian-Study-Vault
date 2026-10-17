@@ -7,11 +7,6 @@ order: 2
 
 # Synthesized and Inherited Attributes
 
-> 📖 **Reading Order:** Step 02 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** [[Syntax-Directed Definitions and Translation Schemes]] | ► **Next:** [[S-Attributed and L-Attributed SDDs]]
-
----
-
 ## Starting Point and the Problem
 
 To truly feel why we have two distinct types of attributes, consider how information naturally flows in any human hierarchy—such as a large organization:
@@ -179,3 +174,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 11–24).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.1 (Synthesized and Inherited Attributes).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 02 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** [[Syntax-Directed Definitions and Translation Schemes]] | ► **Next:** [[S-Attributed and L-Attributed SDDs]]

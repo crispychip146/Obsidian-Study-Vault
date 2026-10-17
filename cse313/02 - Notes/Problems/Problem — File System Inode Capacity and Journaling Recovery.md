@@ -7,11 +7,6 @@ order: 64
 
 # Problem — File System Inode Capacity and Journaling Recovery
 
-> 📖 **Reading Order:** Step 64 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[LFS Segment Allocation and Imap Checkpoint Example]] | ► **Next:** [[Kernel Memory Allocation Architecture and the Slab Allocator]]
-
----
-
 ## Problem Statement
 
 ### Catalog Identifier: `Q-CSE313-009`
@@ -137,3 +132,10 @@ $$\text{Max Size} = 20\,\text{KB} + 2\,\text{MB} + 512\,\text{MB} + 256\,\text{G
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 40 & 42.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 40 & 42.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 64 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[LFS Segment Allocation and Imap Checkpoint Example]] | ► **Next:** [[Kernel Memory Allocation Architecture and the Slab Allocator]]

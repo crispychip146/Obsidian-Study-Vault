@@ -7,11 +7,6 @@ order: 25
 
 # Garbage Collection Fundamentals and Reference Counting
 
-> 📖 **Reading Order:** Step 25 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Heap Memory Management and Allocation Strategies]] | ► **Next:** [[Trace-Based Garbage Collection Algorithms]]
-
----
-
 ## Starting Point and the Problem
 
 For decades, systems languages like C and C++ placed complete responsibility for heap memory in the hands of the programmer via manual primitives: `malloc()` / `free()` or `new` / `delete`.
@@ -233,3 +228,10 @@ To conquer cyclic leaks and eliminate pointer assignment overhead, modern runtim
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 253–265).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.5 (Introduction to Garbage Collection).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 25 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Heap Memory Management and Allocation Strategies]] | ► **Next:** [[Trace-Based Garbage Collection Algorithms]]

@@ -7,9 +7,6 @@ order: 92
 
 # Problem — Identification of Communicating Classes and Absorbing States
 
-> 📖 **Reading Order:** Step 92 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Problem — State Communication and Irreducibility Verification]] | ► **Next:** [[Queueing Systems and Kendall Notation]]
----
 ## Problem
 
 Consider a discrete-time [[Markov Chain]] with four states $S = \{0, 1, 2, 3\}$ and transition probability matrix:
@@ -193,3 +190,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 15)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–206)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 92 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — State Communication and Irreducibility Verification]] | ► **Next:** [[Queueing Systems and Kendall Notation]]

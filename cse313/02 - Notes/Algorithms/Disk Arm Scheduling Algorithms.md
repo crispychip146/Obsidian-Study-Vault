@@ -7,11 +7,6 @@ order: 52
 
 # Disk Arm Scheduling Algorithms
 
-> 📖 **Reading Order:** Step 52 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[Hard Disk Drive Architecture and Mechanical Latency]] | ► **Next:** [[RAID Architectures and Redundancy Models]]
-
----
-
 ## Starting Point and Earlier Tools
 
 As established in [[Hard Disk Drive Architecture and Mechanical Latency]], mechanical seek time ($4 - 10\,\text{ms}$) dominates hard disk latency.
@@ -158,3 +153,10 @@ Appears in virtually every Operating Systems final examination:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 37 (Slides 266–277).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 37 (Hard Disk Drives).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 52 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[Hard Disk Drive Architecture and Mechanical Latency]] | ► **Next:** [[RAID Architectures and Redundancy Models]]

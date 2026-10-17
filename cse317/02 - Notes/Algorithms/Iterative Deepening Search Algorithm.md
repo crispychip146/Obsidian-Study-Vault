@@ -7,11 +7,6 @@ order: 13
 
 # Iterative Deepening Search Algorithm
 
-> 📖 **Reading Order:** Step 13 of 43 | **Module 3:** Problem Solving & Uninformed Search  
-> ◄ **Previous:** [[Depth-First Search and Depth-Limited Search Algorithm]] | ► **Next:** [[Bidirectional Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 We face a classic engineering dilemma in search:
@@ -140,4 +135,5 @@ Iterative Deepening Search is universally preferred over BFS for large, uninform
 
 ## Navigation
 
-◄ **Previous:** [[Depth-First Search and Depth-Limited Search Algorithm]] | ► **Next:** [[Bidirectional Search Algorithm]]
+> 📖 **Reading Order:** Step 13 of 43 | **Module 3:** Problem Solving & Uninformed Search  
+> ◄ **Previous:** [[Depth-First Search and Depth-Limited Search Algorithm]] | ► **Next:** [[Bidirectional Search Algorithm]]

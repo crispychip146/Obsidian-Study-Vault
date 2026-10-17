@@ -7,11 +7,6 @@ order: 56
 
 # Problem — Disk Arm Scheduling and RAID Performance Analysis
 
-> 📖 **Reading Order:** Step 56 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[Disk Scheduling Simulation and RAID Small-Write Example]] | ► **Next:** [[File and Directory Abstractions and POSIX File API]]
-
----
-
 ## Problem Statement
 
 ### Catalog Identifier: `Q-CSE313-008`
@@ -135,3 +130,10 @@ $$\text{Storage Efficiency} = \frac{4}{5} \times 100\% = \mathbf{80.0\%}.$$
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 37 & 38.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 37 & 38.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 56 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[Disk Scheduling Simulation and RAID Small-Write Example]] | ► **Next:** [[File and Directory Abstractions and POSIX File API]]

@@ -7,11 +7,6 @@ order: 21
 
 # Uniform Distribution on the Unit Disk Example
 
-> 📖 **Reading Order:** Step 21 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Gaussian Normalizing Constant Polar Derivation Example]] | ► **Next:** [[Expected Absolute Distance of Random Variables Example]]
-
----
-
 ## Problem
 
 A point $(X, Y)$ is selected uniformly at random from the 2D unit disk:
@@ -157,3 +152,10 @@ Conditioning on $X = x$ slices the 2D circular cylinder by a vertical plane at $
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 16 (pp. 68–69)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 7.1: Joint Distributions and Non-rectangular Domains)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 21 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Gaussian Normalizing Constant Polar Derivation Example]] | ► **Next:** [[Expected Absolute Distance of Random Variables Example]]

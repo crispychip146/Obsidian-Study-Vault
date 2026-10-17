@@ -7,9 +7,6 @@ order: 77
 
 # Problem — Comparing Prediction Algorithms via Paired Wald Test
 
-> 📖 **Reading Order:** Step 77 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Toy Permutation Test Example]] | ► **Next:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
----
 ## Problem
 
 A machine learning team compares two image classification models, Algorithm 1 and Algorithm 2.
@@ -192,3 +189,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 77 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Toy Permutation Test Example]] | ► **Next:** [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]

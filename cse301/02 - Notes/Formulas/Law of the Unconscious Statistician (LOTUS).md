@@ -7,9 +7,6 @@ order: 16
 
 # Law of the Unconscious Statistician (LOTUS)
 
-> 📖 **Reading Order:** Step 16 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Covariance and Correlation]] | ► **Next:** [[Moment Generating Functions]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Law of the Unconscious Statistician (LOTUS), and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -139,3 +136,10 @@ For detailed indicator and expectation applications, see:
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 6 & 10, pages 18, 31)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_4.pdf` & `6.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 4.1 & Section 7.2)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 16 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Covariance and Correlation]] | ► **Next:** [[Moment Generating Functions]]

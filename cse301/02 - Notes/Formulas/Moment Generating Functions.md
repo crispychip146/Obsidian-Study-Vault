@@ -7,9 +7,6 @@ order: 17
 
 # Moment Generating Functions
 
-> 📖 **Reading Order:** Step 17 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Law of the Unconscious Statistician (LOTUS)]] | ► **Next:** [[Linearity of Expectation and Indicator Random Variables Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Moment Generating Functions, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -163,3 +160,10 @@ For asymptotic convergence proofs and exponential tail bounds using MGFs, see:
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 15, pages 47–49)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_9.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 6: MGFs)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 17 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Law of the Unconscious Statistician (LOTUS)]] | ► **Next:** [[Linearity of Expectation and Indicator Random Variables Example]]

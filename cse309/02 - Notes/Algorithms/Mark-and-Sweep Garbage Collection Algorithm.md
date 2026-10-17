@@ -7,11 +7,6 @@ order: 27
 
 # Mark-and-Sweep Garbage Collection Algorithm
 
-> 📖 **Reading Order:** Step 27 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Trace-Based Garbage Collection Algorithms]] | ► **Next:** [[Copying Garbage Collection Algorithm]]
-
----
-
 ## The Problem and Earlier Tools
 
 In 1960, John McCarthy invented the **Mark-and-Sweep** algorithm for the Lisp programming language, introducing the world's first automatic trace-based garbage collector.
@@ -233,3 +228,10 @@ Frequently tested on final examinations via hand-simulation of Mark-and-Sweep Ga
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 270–278).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.6.1 (Mark-and-Sweep Garbage Collection).
 - **McCarthy, J.:** *Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I*, Communications of the ACM, 1960.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 27 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Trace-Based Garbage Collection Algorithms]] | ► **Next:** [[Copying Garbage Collection Algorithm]]

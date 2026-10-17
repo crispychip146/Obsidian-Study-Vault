@@ -7,9 +7,6 @@ order: 23
 
 # Exponential Distribution Memorylessness Example
 
-> 📖 **Reading Order:** Step 23 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Expected Absolute Distance of Random Variables Example]] | ► **Next:** [[Problem — Indicator Variables for Distinct Birthday Counts]]
----
 ## Problem
 
 Let $T \sim \operatorname{Exp}(\lambda)$ represent the lifetime of an electronic component (or service time at a server), with rate parameter $\lambda > 0$.
@@ -135,3 +132,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 12, pages 36–39)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_7.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 5.3: Exponential Distribution)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 23 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Expected Absolute Distance of Random Variables Example]] | ► **Next:** [[Problem — Indicator Variables for Distinct Birthday Counts]]

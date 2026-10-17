@@ -7,11 +7,6 @@ order: 38
 
 # Free-Space Management and Allocation Policies
 
-> 📖 **Reading Order:** Step 38 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Segmentation and External Fragmentation]] | ► **Next:** [[Segregated Free Lists and Binary Buddy Allocation]]
-
----
-
 ## Starting Point and Earlier Tools
 
 When an operating system manages variable-sized memory allocations—such as physical memory segments under [[Segmentation and External Fragmentation]], or dynamic user allocations via `malloc()` and `free()`—it faces the challenge of **free-space management**.
@@ -154,3 +149,10 @@ Regularly tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 17 (Slides 79–99).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 17 (Free-Space Management).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 38 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Segmentation and External Fragmentation]] | ► **Next:** [[Segregated Free Lists and Binary Buddy Allocation]]

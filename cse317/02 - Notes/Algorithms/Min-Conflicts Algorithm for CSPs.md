@@ -7,11 +7,6 @@ order: 38
 
 # Min-Conflicts Algorithm for CSPs
 
-> 📖 **Reading Order:** Step 38 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[CSP Search Heuristics and Inference]] | ► **Next:** [[Australia Map Coloring CSP Example]]
-
----
-
 ## Starting Point and the Problem
 
 Backtracking search explores partial assignments systematically. However, for massive CSPs (such as the million-queens problem or large-scale satellite scheduling), backtracking search is too slow. As introduced in [[Local Search and Optimization Landscape]], local search algorithms operate on **complete assignments**, repairing conflicts iteratively. For CSPs, this is achieved by the **Min-Conflicts Algorithm** (Minton et al., 1992).
@@ -120,4 +115,5 @@ The Min-Conflicts heuristic exhibits extraordinary performance on dense, uniform
 
 ## Navigation
 
-◄ **Previous:** [[CSP Search Heuristics and Inference]] | ► **Next:** [[Australia Map Coloring CSP Example]]
+> 📖 **Reading Order:** Step 38 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[CSP Search Heuristics and Inference]] | ► **Next:** [[Australia Map Coloring CSP Example]]

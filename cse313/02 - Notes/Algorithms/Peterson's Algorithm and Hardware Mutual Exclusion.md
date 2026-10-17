@@ -6,10 +6,6 @@ order: 19
 ---
 # Peterson's Algorithm and Hardware Mutual Exclusion
 
-> 📖 **Reading Order:** Step 19 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Race Conditions and Critical-Section Problem]] | ► **Next:** [[Semaphores and Synchronization Primitives]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2018 Q1b, 2018 Q1c, 2019 Q2a, 2019 Q2c, 2021 Q4a)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared 4 out of 5 recent exam years)**
 >
@@ -249,5 +245,10 @@ Regularly examined through Gantt chart simulations, state trace matrices, and de
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 16–28: Peterson's Solution, The TSL Instruction, The Priority Inversion Problem).
-- **Previous Topic:** [[Race Conditions and Critical-Section Problem]] (Step 18).
-- **Next Topic:** [[Semaphores and Synchronization Primitives]] (Step 20).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 19 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Race Conditions and Critical-Section Problem]] | ► **Next:** [[Semaphores and Synchronization Primitives]]

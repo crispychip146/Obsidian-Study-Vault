@@ -7,9 +7,6 @@ order: 63
 
 # Beta-Binomial Conjugate Updating Formula
 
-> 📖 **Reading Order:** Step 63 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Credible Intervals]] | ► **Next:** [[Normal-Normal Conjugate Updating Formula]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Beta-Binomial Conjugate Updating Formula, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -148,3 +145,10 @@ This is the historic **Laplace's Rule of Succession** (e.g., if the sun has rise
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 63 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Credible Intervals]] | ► **Next:** [[Normal-Normal Conjugate Updating Formula]]

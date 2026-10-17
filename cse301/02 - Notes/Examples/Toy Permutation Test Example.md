@@ -7,9 +7,6 @@ order: 76
 
 # Toy Permutation Test Example
 
-> 📖 **Reading Order:** Step 76 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]] | ► **Next:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]
----
 ## Problem
 
 Consider a tiny dataset consisting of two samples:
@@ -126,3 +123,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 76 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Mendel's Peas Chi-Square Goodness-of-Fit Example]] | ► **Next:** [[Problem — Comparing Prediction Algorithms via Paired Wald Test]]

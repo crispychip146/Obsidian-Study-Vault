@@ -7,11 +7,6 @@ order: 10
 
 # Multinomial Distribution
 
-> 📖 **Reading Order:** Step 10 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Discrete Probability Distributions]] | ► **Next:** [[Continuous Probability Distributions]]
-
----
-
 ## Starting Point and the Problem
 
 The [[Discrete Probability Distributions|Binomial Distribution]] models the count of successes in $n$ independent trials where each trial has only two mutually exclusive outcomes: success (with probability $p$) and failure (with probability $1 - p$).
@@ -189,3 +184,10 @@ In CSE 301 examinations, questions on the Multinomial Distribution assess:
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 17 (p. 72)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 3.7: Multinomial Distribution)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 10 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Discrete Probability Distributions]] | ► **Next:** [[Continuous Probability Distributions]]

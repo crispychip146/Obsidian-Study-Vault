@@ -7,11 +7,6 @@ order: 53
 
 # Loop Optimizations and Strength Reduction
 
-> 📖 **Reading Order:** Step 53 of 55 | **Module 6: Machine-Independent Optimization**  
-> ◄ **Previous:** [[Global Common Subexpression Elimination and Copy Propagation]] | ► **Next:** [[Quicksort Partition Loop Complete Optimization Example]]
-
----
-
 ## Starting Point and the Problem
 
 In computer systems, the empirical **90/10 Rule** states:
@@ -154,3 +149,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 9 (Slides 558–565).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 9.1.3 (Loop Invariant Code Motion) & Section 9.1.4 (Induction Variables and Strength Reduction).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 53 of 55 | **Module 6: Machine-Independent Optimization**  
+> ◄ **Previous:** [[Global Common Subexpression Elimination and Copy Propagation]] | ► **Next:** [[Quicksort Partition Loop Complete Optimization Example]]

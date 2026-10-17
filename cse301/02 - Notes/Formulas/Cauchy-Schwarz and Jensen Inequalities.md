@@ -7,9 +7,6 @@ order: 39
 
 # Cauchy-Schwarz and Jensen Inequalities
 
-> 📖 **Reading Order:** Step 39 of 103 | **Module 4:** Probability Bounds and Inequalities  
-> ◄ **Previous:** [[Chernoff Bound]] | ► **Next:** [[Comparison of Probability Bounds Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Cauchy-Schwarz and Jensen Inequalities, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -221,3 +218,10 @@ For complete bounds comparisons across distributions, see [[Comparison of Probab
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 18, pages 57–59)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 10.3: Jensen and Cauchy-Schwarz)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 39 of 103 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Chernoff Bound]] | ► **Next:** [[Comparison of Probability Bounds Example]]

@@ -7,9 +7,6 @@ order: 2
 
 # Probability Axioms and Naive Probability
 
-> 📖 **Reading Order:** Step 02 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Combinatorics and Counting Principles]] | ► **Next:** [[Inclusion-Exclusion Principle]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Probability Axioms and Naive Probability, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -193,3 +190,10 @@ From the three axioms, all foundational properties of probability follow deducti
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 1–3, pages 1–9)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf` and `2.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 1, Sections 1.2–1.6)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 02 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Combinatorics and Counting Principles]] | ► **Next:** [[Inclusion-Exclusion Principle]]

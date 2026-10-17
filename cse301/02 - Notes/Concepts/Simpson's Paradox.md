@@ -7,11 +7,6 @@ order: 27
 
 # Simpson's Paradox
 
-> 📖 **Reading Order:** Step 27 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Conditional Probability and Independence]] | ► **Next:** [[Conditional Expectation]]
-
----
-
 ## Starting Point and the Problem
 
 When comparing two treatments, algorithms, or decision-makers, intuition suggests that if Option $A$ outperforms Option $B$ across every distinct category of a population, then Option $A$ must also outperform Option $B$ when all categories are pooled together.
@@ -171,3 +166,10 @@ In CSE 301 examinations, questions on Simpson's Paradox typically test:
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 6 (pp. 22–24, CT-syllabus)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 2.3: Simpson's Paradox)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 27 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Conditional Probability and Independence]] | ► **Next:** [[Conditional Expectation]]

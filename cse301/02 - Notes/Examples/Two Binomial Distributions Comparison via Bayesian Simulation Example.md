@@ -7,9 +7,6 @@ order: 66
 
 # Two Binomial Distributions Comparison via Bayesian Simulation Example
 
-> 📖 **Reading Order:** Step 66 of 103 | **Module 8:** Bayesian Inference  
-> ◄ **Previous:** [[Bernoulli Bayesian Inference with Beta Prior Example]] | ► **Next:** [[Problem — Laplace Rule of Succession and Bayesian Updating]]
----
 ## Problem
 
 A clinical trial evaluates an experimental drug against a standard control treatment:
@@ -153,3 +150,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Bayesian_Inference.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 66 of 103 | **Module 8:** Bayesian Inference  
+> ◄ **Previous:** [[Bernoulli Bayesian Inference with Beta Prior Example]] | ► **Next:** [[Problem — Laplace Rule of Succession and Bayesian Updating]]

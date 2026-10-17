@@ -7,11 +7,6 @@ order: 13
 
 # St. Petersburg Paradox
 
-> 📖 **Reading Order:** Step 13 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Cauchy and Student-t Distributions]] | ► **Next:** [[Joint and Marginal Distributions]]
-
----
-
 ## Starting Point and the Problem
 
 Classical decision theory and expected value calculations suggest that a rational decision-maker should be willing to pay any entrance fee strictly less than the expected payoff of a game:
@@ -160,3 +155,10 @@ In CSE 301, questions involving the St. Petersburg Paradox typically assess:
 
 - [[cse301/01 - Sources/Lectures/HT Final Note - Suchi.pdf|HT Final Note: Lecture 10–11 (pp. 42–43)]]
 - [[cse301/01 - Sources/Lectures/ITP.pdf|Textbook: Introduction to Probability (Blitzstein & Hwang, Section 4.3: St. Petersburg Paradox)]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 13 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Cauchy and Student-t Distributions]] | ► **Next:** [[Joint and Marginal Distributions]]

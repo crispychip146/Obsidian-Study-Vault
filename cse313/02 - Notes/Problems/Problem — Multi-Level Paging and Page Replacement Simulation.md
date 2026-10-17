@@ -7,11 +7,6 @@ order: 49
 
 # Problem — Multi-Level Paging and Page Replacement Simulation
 
-> 📖 **Reading Order:** Step 49 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Two-Level Page Table Translation and Clock Replacement Example]] | ► **Next:** [[IO System Architecture and Direct Memory Access]]
-
----
-
 ## Problem Statement
 
 ### Catalog Identifier: `Q-CSE313-007`
@@ -179,3 +174,10 @@ Reference String: `1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 3, 6` (
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 20 & 22.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 20 & 22.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 49 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Two-Level Page Table Translation and Clock Replacement Example]] | ► **Next:** [[IO System Architecture and Direct Memory Access]]

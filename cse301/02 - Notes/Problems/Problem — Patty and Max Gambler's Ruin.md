@@ -7,9 +7,6 @@ order: 88
 
 # Problem — Patty and Max Gambler's Ruin
 
-> 📖 **Reading Order:** Step 88 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Hardy-Weinberg Law Markov Chain Example]] | ► **Next:** [[Problem — Four-Day Weather Forecast]]
----
 ## Problem
 
 Patty and Max flip pennies in successive independent rounds. On each flip, Patty wins with probability $p = 0.6$ and loses with probability $q = 1 - p = 0.4$. 
@@ -171,3 +168,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 36)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.22, pp. 233–234)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 88 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Hardy-Weinberg Law Markov Chain Example]] | ► **Next:** [[Problem — Four-Day Weather Forecast]]

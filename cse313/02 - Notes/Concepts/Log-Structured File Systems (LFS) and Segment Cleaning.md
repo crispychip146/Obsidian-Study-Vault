@@ -7,11 +7,6 @@ order: 61
 
 # Log-Structured File Systems (LFS) and Segment Cleaning
 
-> 📖 **Reading Order:** Step 61 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[Crash Consistency, FSCK, and Write-Ahead Journaling]] | ► **Next:** [[VSFS Inode Block Indexing and Journaling Crash Recovery Example]]
-
----
-
 ## Starting Point and the Problem
 
 In the early 1990s, Mendel Rosenblum and John Ousterhout observed two fundamental technology trends:
@@ -148,3 +143,10 @@ Frequently tested in advanced Operating Systems exams through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 43 (Slides 378–396).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 43 (Log-structured File Systems).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 61 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[Crash Consistency, FSCK, and Write-Ahead Journaling]] | ► **Next:** [[VSFS Inode Block Indexing and Journaling Crash Recovery Example]]

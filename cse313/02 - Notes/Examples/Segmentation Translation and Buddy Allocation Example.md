@@ -7,11 +7,6 @@ order: 40
 
 # Segmentation Translation and Buddy Allocation Example
 
-> 📖 **Reading Order:** Step 40 of 68 | **Module 6: Virtual Memory Foundations**  
-> ◄ **Previous:** [[Segregated Free Lists and Binary Buddy Allocation]] | ► **Next:** [[Problem — Segmentation Address Translation and Buddy Memory Allocation]]
-
----
-
 ## Background and Problem Setup
 
 This example works through two classic numerical exam problems in memory virtualization:
@@ -165,3 +160,10 @@ We trace the following sequence of operations:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 16 & 17.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 16 & 17.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 40 of 68 | **Module 6: Virtual Memory Foundations**  
+> ◄ **Previous:** [[Segregated Free Lists and Binary Buddy Allocation]] | ► **Next:** [[Problem — Segmentation Address Translation and Buddy Memory Allocation]]

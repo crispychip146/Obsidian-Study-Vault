@@ -7,9 +7,6 @@ order: 54
 
 # Maximum Likelihood Estimation
 
-> 📖 **Reading Order:** Step 54 of 103 | **Module 7:** Parametric Inference  
-> ◄ **Previous:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]] | ► **Next:** [[Likelihood and Score Equations]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Maximum Likelihood Estimation, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -237,3 +234,10 @@ MLE is one of the most heavily tested topics in computing and data science exami
 
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
 - [[cse301/01 - Sources/Lectures/MLE.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 54 of 103 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Problem — Unbiased yet Inconsistent Estimator Analysis]] | ► **Next:** [[Likelihood and Score Equations]]

@@ -6,10 +6,6 @@ order: 7
 ---
 # Process Creation and Termination Operations
 
-> 📖 **Reading Order:** Step 07 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Process Control Block and Context Switching]] | ► **Next:** [[Threads and Multithreading Models]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1b, 2018 Q2c, 2018 Q4a, 2020 Q4b)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years, verbatim repeated!)**
 >
@@ -207,3 +203,10 @@ classDiagram
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 9–10, 22–28)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.1: Process Creation, Section 2.1.2: Process Termination)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 07 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Process Control Block and Context Switching]] | ► **Next:** [[Threads and Multithreading Models]]

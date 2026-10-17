@@ -7,11 +7,6 @@ order: 45
 
 # Swapping Mechanisms and Page Fault Handling
 
-> 📖 **Reading Order:** Step 45 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Multi-Level Page Tables and Advanced Address Translation]] | ► **Next:** [[Page Replacement Policies and the Clock Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 All virtual memory techniques explored so far—Base and Bounds, Segmentation, and Paging—assume that every active page of a process resides in physical RAM.
@@ -142,3 +137,10 @@ Key examination topics include:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 21 (Slides 176–186).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 21 (Beyond Physical Memory: Mechanisms).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 45 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Multi-Level Page Tables and Advanced Address Translation]] | ► **Next:** [[Page Replacement Policies and the Clock Algorithm]]

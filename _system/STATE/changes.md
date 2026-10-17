@@ -35,12 +35,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-029 | 2026-10-06 | cse309/02 - Notes/ | cse309 | User formatting error & inconsistency request | fix | Resolved formatting inconsistencies and structural corruption across all 55 notes in CSE 309: collapsed 100% of consecutive dividers (`---`), stripped 4,500+ lines of duplicate stacked headers and injected boilerplate blocks from all 24 Concept and 11 Algorithm notes; relocated trapped walkthroughs/traces into `## Example` (Basic Block Partitioning loop trace, Value-Numbering execution trace, Left-Recursion elimination desk calculator trace, Synthesized & Inherited type declaration walkthrough, Control Flow boolean code generator walkthrough, Liveness 3-instruction trace, Target Code generation trace, and Expressions/Arrays Horner trace); fixed reading order banners to uniform two-digit format (`Step 01` to `Step 55`), corrected Step 05 banner typo (`Step 55 of 55` -> `Step 05 of 55`), ensured proper boundary markers (`*Start of Course*` and `*End of Course*`); replaced erroneous cross-module boilerplate links in Related Concepts, Prerequisites, and Problems with accurate module links; and confirmed 100% valid bidirectional navigation and zero broken wikilinks. |
 | CHG-030 | 2026-10-07 | cse313/ | cse313 | CSE313_KRV_Merged.pdf & OSTEP | create | Expanded CSE 313 learning system from 34 to 68 steps covering Modules 6 through 10: created 34 new knowledge notes (18 concepts, 4 algorithms, 2 formulas, 5 worked examples, 5 solved problem notes Q-CSE313-006 to 010) spanning Address Spaces, Memory API, Base & Bounds, Segmentation, Free-Space Management, Segregated Lists & Binary Buddy Allocation, Paging, TLB, Multi-Level Page Tables, Swapping Mechanisms & Watermarks, Page Replacement Policies & Clock Algorithm, AMAT/EAT formulas, IO Architecture & DMA, Hard Disk Geometry & Mechanical Latency, Disk Arm Scheduling (FCFS, SSTF, SCAN, C-LOOK), RAID 0/1/4/5 Architectures & small-write parity update, File & Directory POSIX API, VSFS On-Disk Structures & Multi-Level Indexing, Berkeley FFS Locality & Cylinder Groups, Crash Consistency & Write-Ahead Journaling (Data vs Ordered), Log-Structured File Systems (LFS) & Segment Cleaning, Kernel Memory Allocators & Jeff Bonwick's Slab Allocator, Multiprocessor Architectures (UMA/NUMA, SMP, MESI protocol), and Linux RPC; updated reading banners across all 68 notes to uniform bidirectional navigation, and updated Course Hub, Topic Map, Dependency Map, Question Bank, and State registries. |
 | CHG-031 | 2026-10-12 | cse301/01 - Sources/Lectures/ | cse301 | User push request | add | Added and registered new course source 'CSE301_Class_Notes.pdf' (IRK Class Notes adapted from Rifah Tasnia Islam, Lectures 1 to 13) as pending source SRC-CSE301-011 |
-
-
-
-
-
-
+| CHG-032 | 2026-10-17 | */02 - Notes/ | cse301, cse309, cse313, cse317 | User navigation relocation & link audit request | update | Relocated reading order navigation system from top banner down to bottom under '## Navigation' across all 269 notes; audited all wikilinks vault-wide and fixed broken links across course hubs, maps, question banks, and notes |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -49,3 +44,16 @@ This file tracks meaningful changes made to the knowledge base.
 - **Created Notes:** 43 comprehensive notes created across `Concepts/` (17 notes), `Algorithms/` (17 notes), `Examples/` (5 notes), and `Problems/` (4 notes).
 - **Course Hub:** Rebuilt `cse317/00 - Course Hub.md` with an 8-Module Master Sequential Reading Roadmap (Steps 01 to 43).
 - **Verification:** Verified 100% frontmatter compliance, zero syntax errors, matching LaTeX math delimiters, zero unresolved wikilinks, and zero spelling/typographical errors.
+
+### 2026-10-17 — Vault-Wide Navigation Relocation and Link Integrity Verification
+
+- **Task Overview:** Relocated the reading order and sequential bidirectional navigation system from the top of every note (below `# Title`) to the bottom of the note (below `## Sources`, under a standardized `## Navigation` section) across all 269 notes in the vault (`cse301`: 103 notes, `cse309`: 55 notes, `cse313`: 68 notes, `cse317`: 43 notes).
+- **Top Cleanup:** Cleanly removed top navigation banners and immediate divider lines across all 269 notes, leaving the note `# Title` immediately followed by intro content or exam intelligence.
+- **Bottom Standardization:** Standardized all footers to end with `--- \n\n ## Navigation \n\n > 📖 **Reading Order:** Step XX of YY | **Module M:** ... \n > ◄ **Previous:** ... | ► **Next:** ...`, eliminating duplicate headings in `cse317` and redundant bullets in `cse313`.
+- **Link Auditing & Repair:** Conducted a comprehensive vault-wide audit of all wikilinks and markdown links:
+  - Repaired 14 source links in `cse317/00 - Course Hub.md` missing course prefix.
+  - Repaired 5 solved exam note links in `cse313/03 - Maps/Exam Intelligence/Operating Systems Final Exam Intelligence (2017-2021).md`.
+  - Repaired 18 table wikilinks in `cse301/05 - Testing/Question Bank/Question Bank.md`.
+  - Repaired course map and revision links in `cse301`, `cse309`, and `cse313` course hubs.
+  - Cleaned non-existent directory wikilinks in placeholder `cse315/00 - Course Hub.md`.
+- **Verification Result:** Zero broken wikilinks across all notes, maps, question banks, and course hubs in the entire vault.

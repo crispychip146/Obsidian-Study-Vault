@@ -7,9 +7,6 @@ order: 18
 
 # Linearity of Expectation and Indicator Random Variables Example
 
-> 📖 **Reading Order:** Step 18 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Moment Generating Functions]] | ► **Next:** [[Poisson Triplet Birthday Collisions Example]]
----
 ## Problem
 
 The **Fundamental Bridge** between probability and expectation is the **indicator random variable**:
@@ -134,3 +131,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 8, pages 23–25)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_5.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 4.2 & Section 4.3)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 18 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Moment Generating Functions]] | ► **Next:** [[Poisson Triplet Birthday Collisions Example]]

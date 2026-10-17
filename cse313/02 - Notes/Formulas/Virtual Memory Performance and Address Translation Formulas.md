@@ -7,11 +7,6 @@ order: 47
 
 # Virtual Memory Performance and Address Translation Formulas
 
-> 📖 **Reading Order:** Step 47 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Page Replacement Policies and the Clock Algorithm]] | ► **Next:** [[Two-Level Page Table Translation and Clock Replacement Example]]
-
----
-
 ## Starting Point and Need
 
 Evaluating virtual memory architectures requires rigorous mathematical formulas to quantify:
@@ -141,3 +136,10 @@ Regularly tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 18, 19, 21, 22.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 18–22.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 47 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Page Replacement Policies and the Clock Algorithm]] | ► **Next:** [[Two-Level Page Table Translation and Clock Replacement Example]]

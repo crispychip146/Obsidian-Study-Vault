@@ -7,9 +7,6 @@ order: 14
 
 # Joint and Marginal Distributions
 
-> 📖 **Reading Order:** Step 14 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[St. Petersburg Paradox]] | ► **Next:** [[Covariance and Correlation]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Joint and Marginal Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -195,3 +192,10 @@ To compute the expected value of a function $g(X, Y)$ of two random variables wi
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 13, pages 40–43)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_8.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapter 7: Joint Distributions)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 14 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[St. Petersburg Paradox]] | ► **Next:** [[Covariance and Correlation]]

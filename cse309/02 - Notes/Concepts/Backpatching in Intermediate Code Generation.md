@@ -7,11 +7,6 @@ order: 16
 
 # Backpatching in Intermediate Code Generation
 
-> 📖 **Reading Order:** Step 16 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Control Flow Translation and Boolean Expressions]] | ► **Next:** [[Backpatching Control-Flow Code Generation Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Compilers require formal semantic translations to bridge the gap between abstract syntax trees and concrete target machine instructions.
@@ -189,3 +184,10 @@ How can a single-pass compiler emit a branch instruction when it has no idea whe
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 186–193).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.7 (Backpatching).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 16 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Control Flow Translation and Boolean Expressions]] | ► **Next:** [[Backpatching Control-Flow Code Generation Algorithm]]

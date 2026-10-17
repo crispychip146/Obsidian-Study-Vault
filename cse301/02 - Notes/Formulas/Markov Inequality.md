@@ -7,9 +7,6 @@ order: 36
 
 # Markov Inequality
 
-> 📖 **Reading Order:** Step 36 of 103 | **Module 4:** Probability Bounds and Inequalities  
-> ◄ **Previous:** [[Problem — Compound Random Sum via Adam and Eve's Laws]] | ► **Next:** [[Chebyshev Inequality]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Markov Inequality, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -141,3 +138,10 @@ For a concrete comparison of how this bound compares against second-moment ([[Ch
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 17, pages 54–56)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 10.1: Inequalities)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 36 of 103 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Problem — Compound Random Sum via Adam and Eve's Laws]] | ► **Next:** [[Chebyshev Inequality]]

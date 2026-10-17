@@ -7,11 +7,6 @@ order: 57
 
 # File and Directory Abstractions and POSIX File API
 
-> 📖 **Reading Order:** Step 57 of 68 | **Module 9: File Systems & Persistence**  
-> ◄ **Previous:** [[Problem — Disk Arm Scheduling and RAID Performance Analysis]] | ► **Next:** [[File System Implementation and VSFS On-Disk Structures]]
-
----
-
 ## Starting Point and the Problem
 
 Storage hardware (Hard Disks, SSDs, RAID arrays) exposes storage as a flat, linear array of 512-byte or 4 KB blocks, referenced strictly by integer physical sector numbers.
@@ -166,3 +161,10 @@ Frequently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 39 (Slides 295–319).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 39 (Interlude: Files and Directories).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 57 of 68 | **Module 9: File Systems & Persistence**  
+> ◄ **Previous:** [[Problem — Disk Arm Scheduling and RAID Performance Analysis]] | ► **Next:** [[File System Implementation and VSFS On-Disk Structures]]

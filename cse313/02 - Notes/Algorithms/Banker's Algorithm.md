@@ -6,10 +6,6 @@ order: 29
 ---
 # Banker's Algorithm
 
-> 📖 **Reading Order:** Step 29 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Deadlock Prevention and Avoidance Strategies]] | ► **Next:** [[Deadlock Detection and Recovery Algorithms]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3a, 2019 Q3a, 2020 Q3b, 2021 Q1a, 2021 Q3a)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -182,7 +178,7 @@ Regularly examined through Gantt chart simulations, state trace matrices, and de
 - [[Problem — Banker's Algorithm Safe State and Request Granting]]
 
 ---
-## Sources
+## Resource-Request Algorithm
 
 When a running process $P_i$ issues a new resource request vector $Request_i$:
 
@@ -217,7 +213,13 @@ flowchart TD
    - **If Safe:** The actual resources are granted, and $P_i$ continues.
    - **If Unsafe:** The OS undoes the tentative modifications (restores old $A, CA_i, R_i$) and forces $P_i$ to wait.
 
----
+## Sources
+
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 28–31: Banker's Algorithm for Single and Multiple Resources) and `Notes on algorithm simulation.pdf`.
-- **Previous Topic:** [[Deadlock Prevention and Avoidance Strategies]] (Step 28).
-- **Next Topic:** [[Deadlock Detection and Recovery Algorithms]] (Step 30).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 29 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Deadlock Prevention and Avoidance Strategies]] | ► **Next:** [[Deadlock Detection and Recovery Algorithms]]

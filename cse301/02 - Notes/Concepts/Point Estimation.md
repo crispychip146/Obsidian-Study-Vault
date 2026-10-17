@@ -7,9 +7,6 @@ order: 46
 
 # Point Estimation
 
-> 📖 **Reading Order:** Step 46 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Problem — CLT Implications for the Weak Law of Large Numbers]] | ► **Next:** [[Bias-Variance Decomposition]]
----
 ## Starting Point and the Problem
 
 In the real world, we rarely or never observe an entire population:
@@ -187,3 +184,10 @@ In exam problems, you will typically be asked to:
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 46 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Problem — CLT Implications for the Weak Law of Large Numbers]] | ► **Next:** [[Bias-Variance Decomposition]]

@@ -7,9 +7,6 @@ order: 81
 
 # Classification of States in Markov Chains
 
-> 📖 **Reading Order:** Step 81 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Markov Chain]] | ► **Next:** [[Stationary and Limiting Distributions in Markov Chains]]
----
 ## Starting Point and the Problem
 
 - **Decomposing Complex Systems:** Real-world Markov chains with thousands of states can be decomposed into smaller, self-contained sub-chains (communicating classes) that can be analyzed independently.
@@ -204,3 +201,10 @@ In CSE301 examinations:
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 11–15, 23–24)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.3, pp. 202–211)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 81 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Markov Chain]] | ► **Next:** [[Stationary and Limiting Distributions in Markov Chains]]

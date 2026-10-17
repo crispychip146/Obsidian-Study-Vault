@@ -7,11 +7,6 @@ order: 19
 
 # Problem — Array Reference Three-Address Code Generation
 
-> 📖 **Reading Order:** Step 19 of 55 | **Module 2:** Intermediate Code Generation  
-> ◄ **Previous:** [[Array Reference and Boolean Control-Flow TAC Generation Example]] | ► **Next:** [[Problem — Backpatching Boolean Expression Translation]]
-
----
-
 ## Problem
 
 A high-performance computing library defines a 3-dimensional data cube in C syntax as:
@@ -244,3 +239,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 146–152).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.4.3 (Addresses of Array Elements) & Section 6.2 (Quadruples/Triples).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 19 of 55 | **Module 2:** Intermediate Code Generation  
+> ◄ **Previous:** [[Array Reference and Boolean Control-Flow TAC Generation Example]] | ► **Next:** [[Problem — Backpatching Boolean Expression Translation]]

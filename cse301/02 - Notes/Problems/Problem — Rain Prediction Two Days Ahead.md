@@ -7,9 +7,6 @@ order: 90
 
 # Problem — Rain Prediction Two Days Ahead
 
-> 📖 **Reading Order:** Step 90 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Problem — Four-Day Weather Forecast]] | ► **Next:** [[Problem — State Communication and Irreducibility Verification]]
----
 ## Problem
 
 Suppose whether it rains on any given day depends on the weather conditions of the previous two days:
@@ -172,3 +169,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 16–18)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.12, pp. 212–213)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 90 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Four-Day Weather Forecast]] | ► **Next:** [[Problem — State Communication and Irreducibility Verification]]

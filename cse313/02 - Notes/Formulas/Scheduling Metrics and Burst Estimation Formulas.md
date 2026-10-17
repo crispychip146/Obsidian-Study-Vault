@@ -6,10 +6,6 @@ order: 15
 ---
 # Scheduling Metrics and Burst Estimation Formulas
 
-> 📖 **Reading Order:** Step 15 of 68 | **Module 3:** CPU Scheduling  
-> ◄ **Previous:** [[Interactive Scheduling Algorithms]] | ► **Next:** [[Comprehensive CPU Scheduling Simulation Example]]
-
----
 ## The Question and Earlier Knowledge
 
 How can an operating system quantitatively measure scheduling performance across different algorithms, and how can a scheduler estimate future CPU burst lengths when future bursts cannot be known in advance?
@@ -137,3 +133,10 @@ Notice how the prediction smoothly adjusts from $10 \to 8 \to 6$, and then climb
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 13–24)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4.2)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 15 of 68 | **Module 3:** CPU Scheduling  
+> ◄ **Previous:** [[Interactive Scheduling Algorithms]] | ► **Next:** [[Comprehensive CPU Scheduling Simulation Example]]

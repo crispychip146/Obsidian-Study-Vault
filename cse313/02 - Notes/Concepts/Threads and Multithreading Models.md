@@ -6,10 +6,6 @@ order: 8
 ---
 # Threads and Multithreading Models
 
-> 📖 **Reading Order:** Step 08 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Process Creation and Termination Operations]] | ► **Next:** [[CPU Multiprogramming Utilization Formula]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1d, 2019 Q4b, 2019 Q4c, 2020 Q1c, 2020 Q2c, 2021 Q1b, 2021 Q3c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
 >
@@ -194,3 +190,10 @@ See related modules for microarchitectural implementation details.
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 29–42)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.2: Threads)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 08 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Process Creation and Termination Operations]] | ► **Next:** [[CPU Multiprogramming Utilization Formula]]

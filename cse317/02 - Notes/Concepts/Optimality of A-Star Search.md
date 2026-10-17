@@ -7,11 +7,6 @@ order: 19
 
 # Optimality of A-Star Search
 
-> 📖 **Reading Order:** Step 19 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
-> ◄ **Previous:** [[A-Star Search Algorithm]] | ► **Next:** [[Memory-Bounded Heuristic Search Algorithms]]
-
----
-
 ## Starting Point and the Problem
 
 A* search is celebrated throughout artificial intelligence because it guarantees discovering the cheapest possible path to a goal while aggressively pruning suboptimal branches. However, this optimality guarantee is not accidental: it depends on strict mathematical properties of the heuristic function $h(n)$. We must rigorously prove why A* is optimal under Tree Search (with an admissible heuristic) and under Graph Search (with a consistent heuristic).
@@ -124,4 +119,5 @@ A* search can be visualized as expanding concentric **$f$-contours**:
 
 ## Navigation
 
-◄ **Previous:** [[A-Star Search Algorithm]] | ► **Next:** [[Memory-Bounded Heuristic Search Algorithms]]
+> 📖 **Reading Order:** Step 19 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
+> ◄ **Previous:** [[A-Star Search Algorithm]] | ► **Next:** [[Memory-Bounded Heuristic Search Algorithms]]

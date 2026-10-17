@@ -6,10 +6,6 @@ order: 5
 ---
 # Process Lifecycle and State Transitions
 
-> 📖 **Reading Order:** Step 05 of 68 | **Module 2:** Processes & Threads  
-> ◄ **Previous:** [[Process Concepts and Memory Layout]] | ► **Next:** [[Process Control Block and Context Switching]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q3b, 2018 Q1a, 2020 Q4a)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Appeared across 3 exam years, verbatim repeated!)**
 >
@@ -168,3 +164,10 @@ See related modules for microarchitectural implementation details.
 
 - **Lectures:** `cse313/01 - Sources/Lectures/2. ProcessAndThread-week2-RRR.pdf` (Slides 11–15)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.1.2: Process States)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 05 of 68 | **Module 2:** Processes & Threads  
+> ◄ **Previous:** [[Process Concepts and Memory Layout]] | ► **Next:** [[Process Control Block and Context Switching]]

@@ -7,9 +7,6 @@ order: 4
 
 # Birthday Problem and Collisions Example
 
-> 📖 **Reading Order:** Step 04 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Inclusion-Exclusion Principle]] | ► **Next:** [[Derangements and Card Matching Example]]
----
 ## Problem
 
 Consider a group of $k$ individuals gathered in a room. Assuming:
@@ -144,3 +141,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 2, pages 4–6)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_1.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 1.4: Birthday Problem)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 04 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Inclusion-Exclusion Principle]] | ► **Next:** [[Derangements and Card Matching Example]]

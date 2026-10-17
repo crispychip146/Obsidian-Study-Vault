@@ -7,9 +7,6 @@ order: 11
 
 # Continuous Probability Distributions
 
-> 📖 **Reading Order:** Step 11 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Multinomial Distribution]] | ► **Next:** [[Cauchy and Student-t Distributions]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Continuous Probability Distributions, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -227,3 +224,10 @@ For Bayesian prior applications, see [[Beta-Binomial Conjugate Updating Formula]
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 10–12, pages 30–39)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_6.pdf` & `7.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Chapters 5, 6, 8)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 11 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Multinomial Distribution]] | ► **Next:** [[Cauchy and Student-t Distributions]]

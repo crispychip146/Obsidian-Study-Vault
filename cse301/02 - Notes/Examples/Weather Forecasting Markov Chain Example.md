@@ -7,9 +7,6 @@ order: 85
 
 # Weather Forecasting Markov Chain Example
 
-> 📖 **Reading Order:** Step 85 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Gambler's Ruin Formula]] | ► **Next:** [[Higher-Order State Weather Prediction Example]]
----
 ## Problem
 
 Suppose that the chance of rain tomorrow depends only on whether it is raining today and not on previous days' weather:
@@ -158,3 +155,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 5, 10, 21–22)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.1, p. 194; Example 4.11, p. 212)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 85 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Gambler's Ruin Formula]] | ► **Next:** [[Higher-Order State Weather Prediction Example]]

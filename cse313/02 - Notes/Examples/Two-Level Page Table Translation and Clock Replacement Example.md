@@ -7,11 +7,6 @@ order: 48
 
 # Two-Level Page Table Translation and Clock Replacement Example
 
-> 📖 **Reading Order:** Step 48 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Virtual Memory Performance and Address Translation Formulas]] | ► **Next:** [[Problem — Multi-Level Paging and Page Replacement Simulation]]
-
----
-
 ## Background and Problem Setup
 
 This example works through two central mechanisms in memory virtualization:
@@ -137,3 +132,10 @@ Decimal:     PD Index = 2        PT Index = 3        Offset = 2748
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 20 & 22.
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapters 20 & 22.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 48 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Virtual Memory Performance and Address Translation Formulas]] | ► **Next:** [[Problem — Multi-Level Paging and Page Replacement Simulation]]

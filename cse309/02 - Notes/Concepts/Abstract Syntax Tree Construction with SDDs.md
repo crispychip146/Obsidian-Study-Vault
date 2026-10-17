@@ -7,11 +7,6 @@ order: 4
 
 # Abstract Syntax Tree Construction with SDDs
 
-> 📖 **Reading Order:** Step 04 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** [[S-Attributed and L-Attributed SDDs]] | ► **Next:** [[Eliminating Left Recursion from SDTs]]
-
----
-
 ## Starting Point and the Problem
 
 To appreciate why Abstract Syntax Trees exist, you have to look at the sheer, ridiculous waste of a **Concrete Parse Tree**.
@@ -238,3 +233,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 5 (Slides 41–47).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 5.3.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 04 of 55 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** [[S-Attributed and L-Attributed SDDs]] | ► **Next:** [[Eliminating Left Recursion from SDTs]]

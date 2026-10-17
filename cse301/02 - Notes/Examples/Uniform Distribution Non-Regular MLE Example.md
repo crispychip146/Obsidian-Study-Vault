@@ -7,9 +7,6 @@ order: 57
 
 # Uniform Distribution Non-Regular MLE Example
 
-> 📖 **Reading Order:** Step 57 of 103 | **Module 7:** Parametric Inference  
-> ◄ **Previous:** [[Normal Distribution Parameter MLE Derivation Example]] | ► **Next:** [[Discrete and Continuous Parameter MLE Reference Examples]]
----
 ## Problem
 
 Let $X_1, X_2, \dots, X_n$ be an independent and identically distributed (i.i.d.) sample from a continuous uniform distribution on the interval $[0, \theta]$:
@@ -156,3 +153,10 @@ Extract the reusable problem-solving pattern: define random variables, write dow
 
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
 - [[cse301/01 - Sources/Lectures/MLE.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 57 of 103 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Normal Distribution Parameter MLE Derivation Example]] | ► **Next:** [[Discrete and Continuous Parameter MLE Reference Examples]]

@@ -7,11 +7,6 @@ order: 46
 
 # Page Replacement Policies and the Clock Algorithm
 
-> 📖 **Reading Order:** Step 46 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Swapping Mechanisms and Page Fault Handling]] | ► **Next:** [[Virtual Memory Performance and Address Translation Formulas]]
-
----
-
 ## Starting Point and the Problem
 
 When a page fault occurs and physical memory contains no free frames, the operating system must choose a **victim page** to evict to disk.
@@ -188,3 +183,10 @@ Extremely high exam frequency:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 22 (Slides 187–208).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 22 (Beyond Physical Memory: Policies).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 46 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Swapping Mechanisms and Page Fault Handling]] | ► **Next:** [[Virtual Memory Performance and Address Translation Formulas]]

@@ -7,11 +7,6 @@ order: 48
 
 # Chaitin's Graph Coloring Register Allocation Example
 
-> 📖 **Reading Order:** Step 48 of 55 | **Module 5:** Register Allocation  
-> ◄ **Previous:** [[Linear Scan Register Allocation Step-by-Step Example]] | ► **Next:** [[Problem — Linear Scan Register Allocation Simulation]]
-
----
-
 ## Problem
 
 We trace the exact Register Interference Graph (RIG) and execution of Chaitin's Algorithm presented in the KMS lecture slides (Slides 444–528).
@@ -191,3 +186,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 444–528).
 - **Textbook / Papers:** Chaitin, "Register Allocation & Spilling via Graph Coloring", ACM SIGPLAN 1982.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 48 of 55 | **Module 5:** Register Allocation  
+> ◄ **Previous:** [[Linear Scan Register Allocation Step-by-Step Example]] | ► **Next:** [[Problem — Linear Scan Register Allocation Simulation]]

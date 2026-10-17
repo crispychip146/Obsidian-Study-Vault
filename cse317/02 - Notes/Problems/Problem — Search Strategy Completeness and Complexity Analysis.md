@@ -7,11 +7,6 @@ order: 40
 
 # Problem — Search Strategy Completeness and Complexity Analysis
 
-> 📖 **Reading Order:** Step 40 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
-> ◄ **Previous:** [[Australia Map Coloring CSP Example]] | ► **Next:** [[Problem — Admissible and Consistent Heuristic Verification]]
-
----
-
 ## Problem
 
 A state space has a uniform branching factor $b = 4$. The shallowest goal is located at depth $d = 5$, and the maximum depth of the state space is $m = 12$. Every action incurs a uniform step cost of $c = 1$.
@@ -158,4 +153,5 @@ The ratio $1.332$ perfectly matches the theoretical formula $\frac{b}{b-1} = \fr
 
 ## Navigation
 
-◄ **Previous:** [[Australia Map Coloring CSP Example]] | ► **Next:** [[Problem — Admissible and Consistent Heuristic Verification]]
+> 📖 **Reading Order:** Step 40 of 43 | **Module 8:** Exam Problems & Rigorous Proofs  
+> ◄ **Previous:** [[Australia Map Coloring CSP Example]] | ► **Next:** [[Problem — Admissible and Consistent Heuristic Verification]]

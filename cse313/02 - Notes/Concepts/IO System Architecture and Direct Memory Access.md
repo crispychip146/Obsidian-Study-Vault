@@ -7,11 +7,6 @@ order: 50
 
 # IO System Architecture and Direct Memory Access
 
-> 📖 **Reading Order:** Step 50 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[Problem — Multi-Level Paging and Page Replacement Simulation]] | ► **Next:** [[Hard Disk Drive Architecture and Mechanical Latency]]
-
----
-
 ## Starting Point and the Problem
 
 A computer system cannot merely compute; it must interact with the outside world. It must read keystrokes, display graphics, transmit packets across networks, and read/write persistent data to storage drives.
@@ -259,3 +254,10 @@ Common exam questions include:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 36 (Slides 209–250).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 36 (I/O Devices).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 50 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[Problem — Multi-Level Paging and Page Replacement Simulation]] | ► **Next:** [[Hard Disk Drive Architecture and Mechanical Latency]]

@@ -7,11 +7,6 @@ order: 16
 
 # Heuristic Functions and Properties
 
-> 📖 **Reading Order:** Step 16 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
-> ◄ **Previous:** [[8-Puzzle and Vacuum World State Space Example]] | ► **Next:** [[Greedy Best-First Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Uninformed search algorithms (BFS, UCS, DFS) explore blindly, with no intuition regarding which unexpanded branch lies physically or conceptually closer to the goal. Consequently, they expand massive numbers of irrelevant states. If an agent had domain-specific knowledge—an estimate of the remaining cost from any state to the goal—it could prioritize exploring promising directions. This domain knowledge is formalized as a **Heuristic Function** $h(n)$.
@@ -167,4 +162,5 @@ $h_{\text{composite}}$ is guaranteed to be admissible, consistent (if components
 
 ## Navigation
 
-◄ **Previous:** [[8-Puzzle and Vacuum World State Space Example]] | ► **Next:** [[Greedy Best-First Search Algorithm]]
+> 📖 **Reading Order:** Step 16 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
+> ◄ **Previous:** [[8-Puzzle and Vacuum World State Space Example]] | ► **Next:** [[Greedy Best-First Search Algorithm]]

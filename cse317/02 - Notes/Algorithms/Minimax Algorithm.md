@@ -7,11 +7,6 @@ order: 29
 
 # Minimax Algorithm
 
-> 📖 **Reading Order:** Step 29 of 43 | **Module 6:** Adversarial Search & Game Playing  
-> ◄ **Previous:** [[Adversarial Search and Two-Player Games]] | ► **Next:** [[Alpha-Beta Pruning Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Given a game tree with terminal payoffs, how should MAX choose an action at the root? MAX cannot simply pick the branch with the highest possible terminal value, because MIN controls the intervening turns and will actively choose actions that block high payoffs. MAX must determine the **optimal strategy against an optimal opponent**. This optimal decision is computed by the **Minimax Algorithm** (John von Neumann, 1928).
@@ -146,4 +141,5 @@ If the opponent makes a mistake, Minimax will achieve a payoff *greater than or 
 
 ## Navigation
 
-◄ **Previous:** [[Adversarial Search and Two-Player Games]] | ► **Next:** [[Alpha-Beta Pruning Algorithm]]
+> 📖 **Reading Order:** Step 29 of 43 | **Module 6:** Adversarial Search & Game Playing  
+> ◄ **Previous:** [[Adversarial Search and Two-Player Games]] | ► **Next:** [[Alpha-Beta Pruning Algorithm]]

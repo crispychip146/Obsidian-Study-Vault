@@ -7,11 +7,6 @@ order: 50
 
 # Problem — Chaitin Graph Coloring Register Allocation
 
-> 📖 **Reading Order:** Step 50 of 55 | **Module 5:** Register Allocation  
-> ◄ **Previous:** [[Problem — Linear Scan Register Allocation Simulation]] | ► **Next:** [[Principal Sources of Code Optimization]]
-
----
-
 ## Problem
 
 Consider the following Register Interference Graph (RIG) for 5 variables $\{ u, v, w, x, y \}$ in a compiler back-end:
@@ -213,3 +208,10 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Register Allocation (Slides 444–531).
 - **Textbook / Papers:** Chaitin et al., 1981; Briggs et al., "Improvements to Graph Coloring Register Allocation", ACM TOPLAS 1994.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 50 of 55 | **Module 5:** Register Allocation  
+> ◄ **Previous:** [[Problem — Linear Scan Register Allocation Simulation]] | ► **Next:** [[Principal Sources of Code Optimization]]

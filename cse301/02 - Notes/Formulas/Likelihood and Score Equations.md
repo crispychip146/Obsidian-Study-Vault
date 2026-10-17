@@ -7,9 +7,6 @@ order: 55
 
 # Likelihood and Score Equations
 
-> 📖 **Reading Order:** Step 55 of 103 | **Module 7:** Parametric Inference  
-> ◄ **Previous:** [[Maximum Likelihood Estimation]] | ► **Next:** [[Normal Distribution Parameter MLE Derivation Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Likelihood and Score Equations, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -152,3 +149,10 @@ Let $X_1, \dots, X_n \sim \text{Poisson}(\lambda)$, where $f(x; \lambda) = \frac
 
 - [[cse301/01 - Sources/Lectures/CSE301_Maximum_Likelihood_Estimators__MLE_.pdf]]
 - [[cse301/01 - Sources/Lectures/MLE.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 55 of 103 | **Module 7:** Parametric Inference  
+> ◄ **Previous:** [[Maximum Likelihood Estimation]] | ► **Next:** [[Normal Distribution Parameter MLE Derivation Example]]

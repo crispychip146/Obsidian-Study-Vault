@@ -7,11 +7,6 @@ order: 2
 
 # Intelligent Agents and Rationality
 
-> 📖 **Reading Order:** Step 02 of 43 | **Module 2:** Intelligent Agents & Architectures  
-> ◄ **Previous:** [[Definition and Foundations of Artificial Intelligence]] | ► **Next:** [[PEAS Framework]]
-
----
-
 ## Starting Point and the Problem
 
 In classical computing, software processes static inputs to generate static outputs without ongoing awareness of the external world. However, automated systems—from robotic vacuum cleaners to medical diagnosis tools—operate within dynamic, evolving environments. Such systems continuously observe external states and execute actions that modify those states. To analyze and design such systems, AI unifies them under the abstraction of an **agent**. The fundamental challenge is: how do we mathematically define and design an agent whose actions are provably or measurably *rational*?
@@ -173,4 +168,5 @@ Frequently examined concepts include:
 
 ## Navigation
 
-◄ **Previous:** [[Definition and Foundations of Artificial Intelligence]] | ► **Next:** [[PEAS Framework]]
+> 📖 **Reading Order:** Step 02 of 43 | **Module 2:** Intelligent Agents & Architectures  
+> ◄ **Previous:** [[Definition and Foundations of Artificial Intelligence]] | ► **Next:** [[PEAS Framework]]

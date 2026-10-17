@@ -7,11 +7,6 @@ order: 51
 
 # Hard Disk Drive Architecture and Mechanical Latency
 
-> 📖 **Reading Order:** Step 51 of 68 | **Module 8: I/O Hardware & Storage Systems**  
-> ◄ **Previous:** [[IO System Architecture and Direct Memory Access]] | ► **Next:** [[Disk Arm Scheduling Algorithms]]
-
----
-
 ## Starting Point and the Problem
 
 Operating systems rely on **persistent storage** to preserve files across power cycles and system reboots. For over six decades, the primary persistent storage medium has been the **Magnetic Hard Disk Drive (HDD)**.
@@ -155,3 +150,10 @@ Consistently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 37 (Slides 251–277).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 37 (Hard Disk Drives).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 51 of 68 | **Module 8: I/O Hardware & Storage Systems**  
+> ◄ **Previous:** [[IO System Architecture and Direct Memory Access]] | ► **Next:** [[Disk Arm Scheduling Algorithms]]

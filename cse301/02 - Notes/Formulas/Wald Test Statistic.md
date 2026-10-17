@@ -7,9 +7,6 @@ order: 70
 
 # Wald Test Statistic
 
-> 📖 **Reading Order:** Step 70 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[p-Values and Significance]] | ► **Next:** [[Pearson's Chi-Square Goodness-of-Fit Test]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Wald Test Statistic, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -168,3 +165,10 @@ We test $H_0: p_1 - p_2 = 0$ versus $H_1: p_1 - p_2 \ne 0$ at $\alpha = 0.05$.
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 70 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[p-Values and Significance]] | ► **Next:** [[Pearson's Chi-Square Goodness-of-Fit Test]]

@@ -7,9 +7,6 @@ order: 24
 
 # Problem — Indicator Variables for Distinct Birthday Counts
 
-> 📖 **Reading Order:** Step 24 of 103 | **Module 2:** Random Variables and Distributions  
-> ◄ **Previous:** [[Exponential Distribution Memorylessness Example]] | ► **Next:** [[Problem — Expected Number of Local Maxima in Random Permutations]]
----
 ## Problem
 
 Consider $k$ individuals whose birthdays are independent and uniformly distributed across $n$ days of the year (where $n = 365$). Let $D$ be the random variable representing the number of distinct days that are the birthday of at least one person in the group.
@@ -186,3 +183,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 8 & 13, pages 23–25, 40–43)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_5.pdf` & `8.pdf`
 - **Question ID:** `Q-CSE301-014`
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 24 of 103 | **Module 2:** Random Variables and Distributions  
+> ◄ **Previous:** [[Exponential Distribution Memorylessness Example]] | ► **Next:** [[Problem — Expected Number of Local Maxima in Random Permutations]]

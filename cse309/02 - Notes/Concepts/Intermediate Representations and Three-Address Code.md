@@ -7,11 +7,6 @@ order: 10
 
 # Intermediate Representations and Three-Address Code
 
-> 📖 **Reading Order:** Step 10 of 55 | **Module 2: Intermediate Code Generation**  
-> ◄ **Previous:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]] | ► **Next:** [[Value-Number Method for DAG Construction]]
-
----
-
 ## Starting Point and the Problem
 
 To appreciate why Intermediate Representations (IR) exist, imagine life without them.
@@ -288,3 +283,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 6 (Slides 82–117).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 6.1 & 6.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 10 of 55 | **Module 2: Intermediate Code Generation**  
+> ◄ **Previous:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]] | ► **Next:** [[Value-Number Method for DAG Construction]]

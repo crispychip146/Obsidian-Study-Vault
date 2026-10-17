@@ -7,11 +7,6 @@ order: 33
 
 # Basic Blocks and Control Flow Graphs
 
-> 📖 **Reading Order:** Step 33 of 55 | **Module 4: Code Generation**  
-> ◄ **Previous:** [[Code Generation Issues and Target Machine Architecture]] | ► **Next:** [[Basic Block Partitioning Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 Optimizing an entire program all at once is computationally intractable. Compilers therefore partition intermediate code into discrete, straight-line units of execution called **Basic Blocks**.
@@ -157,3 +152,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 8 (Slides 322–331).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 8.4.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 33 of 55 | **Module 4: Code Generation**  
+> ◄ **Previous:** [[Code Generation Issues and Target Machine Architecture]] | ► **Next:** [[Basic Block Partitioning Algorithm]]

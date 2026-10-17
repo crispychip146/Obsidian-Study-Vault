@@ -7,11 +7,6 @@ order: 5
 
 # Agent Architectures
 
-> 📖 **Reading Order:** Step 05 of 43 | **Module 2:** Intelligent Agents & Architectures  
-> ◄ **Previous:** [[Environment Characterization in AI]] | ► **Next:** [[Learning Agents]]
-
----
-
 ## Starting Point and the Problem
 
 An agent's behavior is dictated by its **agent program**, which translates sensory percepts into actions. A naive agent could attempt to store a massive lookup table mapping every conceivable percept sequence to an action. However, as established in [[Intelligent Agents and Rationality]], this lookup table grows exponentially ($|P|^T$) and is impossible to store or learn. Therefore, we must design structured software architectures that compress the logic into manageable, generalizable computational models.
@@ -235,4 +230,5 @@ Goals alone provide only a binary distinction between success and failure (goal 
 
 ## Navigation
 
-◄ **Previous:** [[Environment Characterization in AI]] | ► **Next:** [[Learning Agents]]
+> 📖 **Reading Order:** Step 05 of 43 | **Module 2:** Intelligent Agents & Architectures  
+> ◄ **Previous:** [[Environment Characterization in AI]] | ► **Next:** [[Learning Agents]]

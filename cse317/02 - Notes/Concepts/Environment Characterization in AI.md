@@ -7,11 +7,6 @@ order: 4
 
 # Environment Characterization in AI
 
-> 📖 **Reading Order:** Step 04 of 43 | **Module 2:** Intelligent Agents & Architectures  
-> ◄ **Previous:** [[PEAS Framework]] | ► **Next:** [[Agent Architectures]]
-
----
-
 ## Starting Point and the Problem
 
 The internal design of an intelligent agent depends entirely on the nature of the environment in which it operates. An algorithm designed for a game of chess will completely fail when applied to an automated taxi on a rain-slicked highway. To select appropriate algorithms (e.g., search trees, Markov Decision Processes, game theory, or reinforcement learning), we must rigorously categorize environments across formal dimensions.
@@ -139,4 +134,5 @@ An environment is formally characterized along seven principal dimensions:
 
 ## Navigation
 
-◄ **Previous:** [[PEAS Framework]] | ► **Next:** [[Agent Architectures]]
+> 📖 **Reading Order:** Step 04 of 43 | **Module 2:** Intelligent Agents & Architectures  
+> ◄ **Previous:** [[PEAS Framework]] | ► **Next:** [[Agent Architectures]]

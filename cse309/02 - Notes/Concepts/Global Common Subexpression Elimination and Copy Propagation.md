@@ -7,11 +7,6 @@ order: 52
 
 # Global Common Subexpression Elimination and Copy Propagation
 
-> 📖 **Reading Order:** Step 52 of 55 | **Module 6: Machine-Independent Optimization**  
-> ◄ **Previous:** [[Principal Sources of Code Optimization]] | ► **Next:** [[Loop Optimizations and Strength Reduction]]
-
----
-
 ## Starting Point and the Problem
 
 An occurrence of an expression $E$ (e.g., $x + y$) at statement $s$ is a **Global Common Subexpression** if:
@@ -158,3 +153,10 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 9 (Slides 541–557).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 9.1.1 & 9.1.2.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 52 of 55 | **Module 6: Machine-Independent Optimization**  
+> ◄ **Previous:** [[Principal Sources of Code Optimization]] | ► **Next:** [[Loop Optimizations and Strength Reduction]]

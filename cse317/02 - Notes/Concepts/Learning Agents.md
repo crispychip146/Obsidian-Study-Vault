@@ -7,11 +7,6 @@ order: 6
 
 # Learning Agents
 
-> 📖 **Reading Order:** Step 06 of 43 | **Module 2:** Intelligent Agents & Architectures  
-> ◄ **Previous:** [[Agent Architectures]] | ► **Next:** [[Agentic AI and Autonomous Systems]]
-
----
-
 ## Starting Point and the Problem
 
 Static agents (whether reflex, goal-based, or utility-based) rely on models and rules designed into them by human engineers. If the environment undergoes structural changes or if the problem space is too vast for human programmers to anticipate every state, static agents fail. To achieve true autonomy, an agent must be capable of analyzing its own behavior, diagnosing errors, and updating its internal mechanisms without external intervention.
@@ -152,4 +147,5 @@ It is structured into four distinct functional components:
 
 ## Navigation
 
-◄ **Previous:** [[Agent Architectures]] | ► **Next:** [[Agentic AI and Autonomous Systems]]
+> 📖 **Reading Order:** Step 06 of 43 | **Module 2:** Intelligent Agents & Architectures  
+> ◄ **Previous:** [[Agent Architectures]] | ► **Next:** [[Agentic AI and Autonomous Systems]]

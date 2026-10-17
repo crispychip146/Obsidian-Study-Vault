@@ -7,11 +7,6 @@ order: 67
 
 # Linux System Architecture and Remote Procedure Calls (RPC)
 
-> 📖 **Reading Order:** Step 67 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
-> ◄ **Previous:** [[Multiprocessor Operating System Architectures]] | ► **Next:** [[Problem — Multiprocessor Memory Latency and Kernel Memory Allocation]]
-
----
-
 ## Linux System Architecture Layers
 
 As presented in Tanenbaum's Modern Operating Systems (slides 428–435), the modern Linux operating system is structured into five hierarchical layers:
@@ -201,3 +196,10 @@ Frequently tested in Operating Systems and Distributed Systems exams:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Tanenbaum Linux & RPC (Slides 428–445).
 - **Textbook:** Tanenbaum & Bos, *Modern Operating Systems (3rd/4th Ed.)*, Chapter 10 (UNIX and Linux).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 67 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
+> ◄ **Previous:** [[Multiprocessor Operating System Architectures]] | ► **Next:** [[Problem — Multiprocessor Memory Latency and Kernel Memory Allocation]]

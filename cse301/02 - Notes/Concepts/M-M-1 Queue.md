@@ -7,9 +7,6 @@ order: 96
 
 # M-M-1 Queue
 
-> 📖 **Reading Order:** Step 96 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[PASTA Property and Inspection Paradox]] | ► **Next:** [[M-M-1 Performance Formulas]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to M-M-1 Queue, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -242,3 +239,10 @@ Tested regularly in CSE 301 midterms and finals through derivations, numerical p
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 96 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[PASTA Property and Inspection Paradox]] | ► **Next:** [[M-M-1 Performance Formulas]]

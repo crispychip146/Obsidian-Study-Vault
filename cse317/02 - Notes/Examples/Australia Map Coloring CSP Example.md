@@ -7,11 +7,6 @@ order: 39
 
 # Australia Map Coloring CSP Example
 
-> 📖 **Reading Order:** Step 39 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
-> ◄ **Previous:** [[Min-Conflicts Algorithm for CSPs]] | ► **Next:** [[Problem — Search Strategy Completeness and Complexity Analysis]]
-
----
-
 ## Starting Point and the Problem
 
 To demonstrate how CSP algorithms operate in practice, we examine the principal benchmark problem from Russell & Norvig: coloring the map of **Australia** using three colors ($\{\text{Red}, \text{Green}, \text{Blue}\}$) such that no two neighboring territories share the same color.
@@ -128,4 +123,5 @@ Notice that with MRV and Degree heuristics, the search progressed directly to th
 
 ## Navigation
 
-◄ **Previous:** [[Min-Conflicts Algorithm for CSPs]] | ► **Next:** [[Problem — Search Strategy Completeness and Complexity Analysis]]
+> 📖 **Reading Order:** Step 39 of 43 | **Module 7:** Constraint Satisfaction Problems (CSPs)  
+> ◄ **Previous:** [[Min-Conflicts Algorithm for CSPs]] | ► **Next:** [[Problem — Search Strategy Completeness and Complexity Analysis]]

@@ -6,10 +6,6 @@ order: 26
 ---
 # Deadlock Fundamentals and Coffman Conditions
 
-> 📖 **Reading Order:** Step 26 of 68 | **Module 5:** Deadlocks  
-> ◄ **Previous:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]] | ► **Next:** [[Resource Allocation Graphs and Deadlock Modeling]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2a, 2017 Q2b, 2018 Q2b, 2019 Q3c, 2020 Q1b, 2021 Q1c)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across all 5 exam years!)**
 >
@@ -142,5 +138,10 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 ## Sources
 
 - **Source Material:** `5. Deadlocks-week6-7-RRR.pdf` (Slides 1–15, 38–41: Resources, Conditions for Deadlocks, Ostrich Algorithm, Livelock, Starvation).
-- **Previous Topic:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]] (Step 25).
-- **Next Topic:** [[Resource Allocation Graphs and Deadlock Modeling]] (Step 27).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 26 of 68 | **Module 5:** Deadlocks  
+> ◄ **Previous:** [[Problem — Dining Philosophers Deadlock-Free Synchronization]] | ► **Next:** [[Resource Allocation Graphs and Deadlock Modeling]]

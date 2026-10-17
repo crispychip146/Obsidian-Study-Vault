@@ -7,9 +7,6 @@ order: 89
 
 # Problem — Four-Day Weather Forecast
 
-> 📖 **Reading Order:** Step 89 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Problem — Patty and Max Gambler's Ruin]] | ► **Next:** [[Problem — Rain Prediction Two Days Ahead]]
----
 ## Problem
 
 Consider a two-state [[Markov Chain]] modeling weather, with states $0$ (Rain) and $1$ (No Rain). The one-step transition probability matrix is:
@@ -179,3 +176,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slide 10)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Example 4.11, p. 212)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 89 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Problem — Patty and Max Gambler's Ruin]] | ► **Next:** [[Problem — Rain Prediction Two Days Ahead]]

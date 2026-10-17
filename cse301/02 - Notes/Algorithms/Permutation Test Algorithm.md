@@ -7,9 +7,6 @@ order: 72
 
 # Permutation Test Algorithm
 
-> 📖 **Reading Order:** Step 72 of 103 | **Module 9:** Hypothesis Testing  
-> ◄ **Previous:** [[Pearson's Chi-Square Goodness-of-Fit Test]] | ► **Next:** [[Multiple Testing and False Discovery Rate]]
----
 ## The Problem and Earlier Tools
 
 The **Permutation Test** (also known as a randomization test) is a non-parametric, exact statistical method for testing whether two independent samples originate from the same underlying probability distribution ($H_0: F_X = F_Y$).
@@ -184,3 +181,10 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Hypothesis_Test.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 72 of 103 | **Module 9:** Hypothesis Testing  
+> ◄ **Previous:** [[Pearson's Chi-Square Goodness-of-Fit Test]] | ► **Next:** [[Multiple Testing and False Discovery Rate]]

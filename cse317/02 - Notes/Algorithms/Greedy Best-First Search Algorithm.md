@@ -7,11 +7,6 @@ order: 17
 
 # Greedy Best-First Search Algorithm
 
-> 📖 **Reading Order:** Step 17 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
-> ◄ **Previous:** [[Heuristic Functions and Properties]] | ► **Next:** [[A-Star Search Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 When searching a large state space, we want to reach the goal as quickly as possible. An intuitive human approach is to always take the action that appears to get us closest to the destination right now. **Greedy Best-First Search** formalizes this pure heuristic greed.
@@ -123,4 +118,5 @@ However, with a high-quality heuristic, the practical execution time is often dr
 
 ## Navigation
 
-◄ **Previous:** [[Heuristic Functions and Properties]] | ► **Next:** [[A-Star Search Algorithm]]
+> 📖 **Reading Order:** Step 17 of 43 | **Module 4:** Informed (Heuristic) Search & A* Search  
+> ◄ **Previous:** [[Heuristic Functions and Properties]] | ► **Next:** [[A-Star Search Algorithm]]

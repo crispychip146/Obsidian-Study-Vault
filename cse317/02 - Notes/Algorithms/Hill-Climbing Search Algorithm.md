@@ -7,11 +7,6 @@ order: 23
 
 # Hill-Climbing Search Algorithm
 
-> 📖 **Reading Order:** Step 23 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
-> ◄ **Previous:** [[Local Search and Optimization Landscape]] | ► **Next:** [[Simulated Annealing Algorithm]]
-
----
-
 ## Starting Point and the Problem
 
 When optimizing a function without maintaining a search tree, the most natural greedy instinct is: *"Look at all immediate neighbors, pick the one that gives the highest increase in value, and move there. Repeat until no neighbor is better."* This intuitive strategy is known as **Hill-Climbing Search** (or *Steepest-Ascent Hill-Climbing*).
@@ -127,4 +122,5 @@ The expected number of restarts required to find the global optimum is $\frac{1}
 
 ## Navigation
 
-◄ **Previous:** [[Local Search and Optimization Landscape]] | ► **Next:** [[Simulated Annealing Algorithm]]
+> 📖 **Reading Order:** Step 23 of 43 | **Module 5:** Local Search, Optimization & Genetic Algorithms  
+> ◄ **Previous:** [[Local Search and Optimization Landscape]] | ► **Next:** [[Simulated Annealing Algorithm]]

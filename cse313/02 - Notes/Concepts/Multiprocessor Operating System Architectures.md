@@ -7,11 +7,6 @@ order: 66
 
 # Multiprocessor Operating System Architectures
 
-> 📖 **Reading Order:** Step 66 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
-> ◄ **Previous:** [[Kernel Memory Allocation Architecture and the Slab Allocator]] | ► **Next:** [[Linux System Architecture and Remote Procedure Calls (RPC)]]
-
----
-
 ## Starting Point and the Problem
 
 Single-processor systems reached a physical frequency wall in the mid-2000s: increasing CPU clock frequencies beyond 4 GHz generated unsustainable heat dissipation (the Power Wall). To increase computational performance, hardware manufacturers transitioned to **Multicore and Multiprocessor Systems**.
@@ -216,3 +211,10 @@ Frequently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Tanenbaum Multiprocessors (Slides 414–427).
 - **Textbook:** Tanenbaum & Bos, *Modern Operating Systems (3rd/4th Ed.)*, Chapter 8 (Multiple Processor Systems).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 66 of 68 | **Module 10: Advanced Kernel Systems & Multiprocessors**  
+> ◄ **Previous:** [[Kernel Memory Allocation Architecture and the Slab Allocator]] | ► **Next:** [[Linux System Architecture and Remote Procedure Calls (RPC)]]

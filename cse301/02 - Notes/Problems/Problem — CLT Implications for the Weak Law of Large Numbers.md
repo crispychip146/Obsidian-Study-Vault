@@ -7,9 +7,6 @@ order: 45
 
 # Problem — CLT Implications for the Weak Law of Large Numbers
 
-> 📖 **Reading Order:** Step 45 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
-> ◄ **Previous:** [[Normal Approximation to Binomial and Poisson Example]] | ► **Next:** [[Point Estimation]]
----
 ## Problem
 
 A polling agency wants to estimate the true proportion $p$ of users who prefer a new user interface over the old one. They survey $n$ independent users, modeling their responses as $X_1, X_2, \dots, X_n \overset{\text{i.i.d.}}{\sim} \operatorname{Bern}(p)$.
@@ -178,3 +175,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 17, 20, 21, pages 54–63)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf` (Problem 3 & 4)
 - **Question ID:** `Q-CSE301-017`
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 45 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Normal Approximation to Binomial and Poisson Example]] | ► **Next:** [[Point Estimation]]

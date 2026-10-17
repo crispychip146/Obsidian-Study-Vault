@@ -172,7 +172,7 @@ Follow this 55-step sequential roadmap for complete conceptual mastery and exam 
 
 # Knowledge Navigation & Revision
 
-- **Knowledge Organization:** [[cse309/03 - Maps/Topic Map|Topic Map]]
-- **Dependency Flow:** [[cse309/03 - Maps/Dependency Map|Dependency Map]]
-- **Rapid Revision:** [[cse309/04 - Revision/Quick Revision|Quick Revision Reference Sheet]]
-- **Problem Bank:** [[cse309/05 - Testing/Question Bank/Question Bank|Question Bank]]
+- **Knowledge Organization:** [[cse309/03 - Maps/Topic Map.md|Topic Map]]
+- **Dependency Flow:** [[cse309/03 - Maps/Dependency Map.md|Dependency Map]]
+- **Rapid Revision:** [[cse309/04 - Revision/Quick Revision.md|Quick Revision Reference Sheet]]
+- **Problem Bank:** [[cse309/05 - Testing/Question Bank/Question Bank.md|Question Bank]]

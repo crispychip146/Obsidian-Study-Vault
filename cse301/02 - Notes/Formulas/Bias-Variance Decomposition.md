@@ -7,9 +7,6 @@ order: 47
 
 # Bias-Variance Decomposition
 
-> 📖 **Reading Order:** Step 47 of 103 | **Module 6:** Statistical Inference  
-> ◄ **Previous:** [[Point Estimation]] | ► **Next:** [[Estimator Consistency and Convergence]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Bias-Variance Decomposition, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -146,3 +143,10 @@ Even though $\tilde{\sigma}^2$ is biased, it has strictly **lower MSE** than the
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/Point Estimation and Confidence Intervals.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 47 of 103 | **Module 6:** Statistical Inference  
+> ◄ **Previous:** [[Point Estimation]] | ► **Next:** [[Estimator Consistency and Convergence]]

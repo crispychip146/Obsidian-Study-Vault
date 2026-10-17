@@ -7,9 +7,6 @@ order: 97
 
 # M-M-1 Performance Formulas
 
-> 📖 **Reading Order:** Step 97 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[M-M-1 Queue]] | ► **Next:** [[Finite Capacity M-M-1-N Queue]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs M-M-1 Performance Formulas, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -139,3 +136,10 @@ A web server handles $\lambda = 40$ requests/sec with capacity $\mu = 50$ reques
 ## Sources
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 97 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[M-M-1 Queue]] | ► **Next:** [[Finite Capacity M-M-1-N Queue]]

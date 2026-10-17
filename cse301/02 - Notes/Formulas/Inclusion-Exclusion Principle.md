@@ -7,9 +7,6 @@ order: 3
 
 # Inclusion-Exclusion Principle
 
-> 📖 **Reading Order:** Step 03 of 103 | **Module 1:** Counting and Discrete Probability  
-> ◄ **Previous:** [[Probability Axioms and Naive Probability]] | ► **Next:** [[Birthday Problem and Collisions Example]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Inclusion-Exclusion Principle, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -140,3 +137,10 @@ For the complete standalone worked analysis and variations, see [[Derangements a
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 3, pages 7–9)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_2.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 1.6: Inclusion-Exclusion)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 03 of 103 | **Module 1:** Counting and Discrete Probability  
+> ◄ **Previous:** [[Probability Axioms and Naive Probability]] | ► **Next:** [[Birthday Problem and Collisions Example]]

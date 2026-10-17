@@ -7,11 +7,6 @@ order: 44
 
 # Multi-Level Page Tables and Advanced Address Translation
 
-> 📖 **Reading Order:** Step 44 of 68 | **Module 7: Paging & Virtual Memory Systems**  
-> ◄ **Previous:** [[Translation Lookaside Buffers and Hardware Caching]] | ► **Next:** [[Swapping Mechanisms and Page Fault Handling]]
-
----
-
 ## Starting Point and the Problem
 
 In [[Paging Architecture and Linear Page Tables]], we saw that a linear page table for a 32-bit address space with 4 KB pages consumes **4 MB of physical RAM per process**. For 100 processes, that requires 400 MB of memory just to track translations.
@@ -160,3 +155,10 @@ Frequently tested through:
 
 - **Lecture Slides:** [[cse313/01 - Sources/Lectures/CSE313_KRV_Merged.pdf|CSE313_KRV_Merged.pdf]], Chapter 20 (Slides 146–175).
 - **Textbook:** Arpaci-Dusseau & Arpaci-Dusseau, *Operating Systems: Three Easy Pieces (OSTEP)*, Chapter 20 (Paging: Smaller Tables).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 44 of 68 | **Module 7: Paging & Virtual Memory Systems**  
+> ◄ **Previous:** [[Translation Lookaside Buffers and Hardware Caching]] | ► **Next:** [[Swapping Mechanisms and Page Fault Handling]]

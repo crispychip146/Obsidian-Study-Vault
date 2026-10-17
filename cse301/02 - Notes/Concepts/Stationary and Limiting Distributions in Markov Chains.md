@@ -7,9 +7,6 @@ order: 82
 
 # Stationary and Limiting Distributions in Markov Chains
 
-> 📖 **Reading Order:** Step 82 of 103 | **Module 10:** Stochastic Processes  
-> ◄ **Previous:** [[Classification of States in Markov Chains]] | ► **Next:** [[Chapman-Kolmogorov Equations]]
----
 ## Starting Point and the Problem
 
 - **Predicting Steady-State Performance:** In queuing models, web browsing (PageRank), and computer systems, we need to know the steady-state load, average buffer occupancy, or server utilization without simulating infinitely many individual transitions.
@@ -209,3 +206,10 @@ In CSE301 examinations:
 
 - [[cse301/01 - Sources/Lectures/Markov_Chain.pdf]] (Slides 19–24, 28–29)
 - [[cse301/01 - Sources/Textbooks/Sheldon M. Ross book Markov Chain Chapter.pdf]] (Section 4.4, pp. 211–224)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 82 of 103 | **Module 10:** Stochastic Processes  
+> ◄ **Previous:** [[Classification of States in Markov Chains]] | ► **Next:** [[Chapman-Kolmogorov Equations]]

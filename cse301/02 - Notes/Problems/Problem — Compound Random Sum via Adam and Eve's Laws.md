@@ -7,9 +7,6 @@ order: 35
 
 # Problem — Compound Random Sum via Adam and Eve's Laws
 
-> 📖 **Reading Order:** Step 35 of 103 | **Module 3:** Conditional Probability and Conditioning  
-> ◄ **Previous:** [[Random Number of Random Variables Sum Example]] | ► **Next:** [[Markov Inequality]]
----
 ## Problem
 
 A distributed database cluster receives a random number $N$ of write transactions per second, where $N \sim \operatorname{Bin}(m, p)$ with $m = 200$ client threads and transmission probability $p = 0.4$.
@@ -181,3 +178,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 15 & 16, pages 47–53)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_10.pdf`
 - **Question ID:** `Q-CSE301-015`
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 35 of 103 | **Module 3:** Conditional Probability and Conditioning  
+> ◄ **Previous:** [[Random Number of Random Variables Sum Example]] | ► **Next:** [[Markov Inequality]]

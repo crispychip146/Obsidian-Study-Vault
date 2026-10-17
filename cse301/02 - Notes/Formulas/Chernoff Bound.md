@@ -7,9 +7,6 @@ order: 38
 
 # Chernoff Bound
 
-> 📖 **Reading Order:** Step 38 of 103 | **Module 4:** Probability Bounds and Inequalities  
-> ◄ **Previous:** [[Chebyshev Inequality]] | ► **Next:** [[Cauchy-Schwarz and Jensen Inequalities]]
----
 ## The Question and Earlier Knowledge
 
 What analytical relationship or closed-form expectation governs Chernoff Bound, and how can we compute it directly from constituent probability terms? In complex probability models, calculating probabilities or moments directly is often intractable without decomposing expectations across conditioning partitions or inequalities.
@@ -139,3 +136,10 @@ $$P(\lvert Z \rvert \ge c) \le 2e^{-c^2 / 2}$$
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lecture 18, pages 57–59)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 10.2: Chernoff Bounds)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 38 of 103 | **Module 4:** Probability Bounds and Inequalities  
+> ◄ **Previous:** [[Chebyshev Inequality]] | ► **Next:** [[Cauchy-Schwarz and Jensen Inequalities]]

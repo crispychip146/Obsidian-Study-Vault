@@ -6,10 +6,6 @@ order: 20
 ---
 # Semaphores and Synchronization Primitives
 
-> 📖 **Reading Order:** Step 20 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Peterson's Algorithm and Hardware Mutual Exclusion]] | ► **Next:** [[Monitors and Condition Variables]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2b, 2018 Q2a, 2018 Q3a, 2020 Q2b)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared across 4 exam years!)**
 >
@@ -160,5 +156,10 @@ Frequently examined through conceptual comparison questions, trace diagrams, and
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 29–42: Sleep and Wakeup, The Lost Wakeup Problem, Semaphores, Mutexes in Pthreads).
-- **Previous Topic:** [[Peterson's Algorithm and Hardware Mutual Exclusion]] (Step 19).
-- **Next Topic:** [[Monitors and Condition Variables]] (Step 21).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 20 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Peterson's Algorithm and Hardware Mutual Exclusion]] | ► **Next:** [[Monitors and Condition Variables]]

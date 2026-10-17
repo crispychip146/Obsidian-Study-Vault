@@ -7,9 +7,6 @@ order: 42
 
 # Law of Large Numbers
 
-> 📖 **Reading Order:** Step 42 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
-> ◄ **Previous:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]] | ► **Next:** [[Central Limit Theorem]]
----
 ## Starting Point and the Problem
 
 Probability and statistical inference model uncertainty in physical and computer systems. When analyzing stochastic phenomena related to Law of Large Numbers, naive counting or deterministic approximations fail. We establish a formal mathematical foundation to quantify outcomes and evaluate expectations rigorously.
@@ -180,3 +177,10 @@ $$\bar{X}_n \xrightarrow{\text{a.s.}} \mu$$
 - **Lectures:** `cse301/01 - Sources/Lectures/Lecture_Notes_Complete.pdf` (Lectures 19–20, pages 60–62)
 - **Practice Sets:** `cse301/01 - Sources/Lectures/strategic_practice_and_homework_11.pdf`
 - **Textbook:** Blitzstein & Hwang, *Introduction to Probability* (Section 10.4: Law of Large Numbers)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 42 of 103 | **Module 5:** Convergence of Random Variables and Asymptotics  
+> ◄ **Previous:** [[Problem — Bounding Tail Probabilities with Chebyshev and Chernoff]] | ► **Next:** [[Central Limit Theorem]]

@@ -7,9 +7,6 @@ order: 103
 
 # Problem — Finite Capacity Queue Loss and Effective Throughput
 
-> 📖 **Reading Order:** Step 103 of 103 | **Module 11:** Queuing Theory  
-> ◄ **Previous:** [[Problem — M-M-1 Queue Performance Metrics Calculation]] | ► **Next:** *End of Course*
----
 ## Problem
 
 A cloud microservice endpoint handles incoming API requests using a single database worker thread.
@@ -203,3 +200,10 @@ Standard BUET CSE 301 final exam question testing probability bounds, Markov cha
 ## Source
 
 - [[cse301/01 - Sources/Lectures/CSE301_Queueing_Theory.pdf]]
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 103 of 103 | **Module 11:** Queuing Theory  
+> ◄ **Previous:** [[Problem — M-M-1 Queue Performance Metrics Calculation]] | ► **Next:** *End of Course*

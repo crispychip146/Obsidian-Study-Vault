@@ -6,10 +6,6 @@ order: 23
 ---
 # Classic Synchronization Solutions
 
-> 📖 **Reading Order:** Step 23 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
-> ◄ **Previous:** [[Message Passing and IPC Models]] | ► **Next:** [[Producer-Consumer Semaphore Implementation Example]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q2b, 2017 Q2c, 2018 Q3a, 2019 Q2b, 2020 Q1b, 2020 Q2b, 2021 Q4b)**
 > **Frequency:** ⭐⭐⭐⭐⭐ **100% Core Recurrence (Appeared 5 out of 5 recent exam years)**
 >
@@ -365,5 +361,10 @@ Regularly examined through Gantt chart simulations, state trace matrices, and de
 ## Sources
 
 - **Source Material:** `4. IPC-week-4-5-RRR.pptx` (Slides 35–52: Producer-Consumer with Semaphores, Dining Philosophers, Readers and Writers, Sleeping Barber Problem).
-- **Previous Topic:** [[Message Passing and IPC Models]] (Step 22).
-- **Next Topic:** [[Producer-Consumer Semaphore Implementation Example]] (Step 24).
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 23 of 68 | **Module 4:** Inter-Process Communication & Synchronization  
+> ◄ **Previous:** [[Message Passing and IPC Models]] | ► **Next:** [[Producer-Consumer Semaphore Implementation Example]]

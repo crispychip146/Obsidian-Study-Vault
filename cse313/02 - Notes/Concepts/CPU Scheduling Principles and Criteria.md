@@ -6,10 +6,6 @@ order: 12
 ---
 # CPU Scheduling Principles and Criteria
 
-> 📖 **Reading Order:** Step 12 of 68 | **Module 3:** CPU Scheduling  
-> ◄ **Previous:** [[Problem — Fork Execution Tree and Process Tracing]] | ► **Next:** [[Batch Scheduling Algorithms]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q4a, 2020 Q2a)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Tested with Burst Diagram Analysis)**
 >
@@ -143,3 +139,10 @@ See related modules for microarchitectural implementation details.
 
 - **Lectures:** `cse313/01 - Sources/Lectures/3. Scheduling-week-3-RRR.pdf` (Slides 1–14)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 2 (Section 2.4: Scheduling)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 12 of 68 | **Module 3:** CPU Scheduling  
+> ◄ **Previous:** [[Problem — Fork Execution Tree and Process Tracing]] | ► **Next:** [[Batch Scheduling Algorithms]]

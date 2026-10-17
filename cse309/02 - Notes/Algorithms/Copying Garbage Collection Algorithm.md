@@ -7,11 +7,6 @@ order: 28
 
 # Copying Garbage Collection Algorithm
 
-> 📖 **Reading Order:** Step 28 of 55 | **Module 3: Run-Time Environments**  
-> ◄ **Previous:** [[Mark-and-Sweep Garbage Collection Algorithm]] | ► **Next:** [[Display Maintenance and Non-Local Access Simulation Example]]
-
----
-
 ## The Problem and Earlier Tools
 
 In 1969, Robert R. Fenichel and Jerome C. Yochelson introduced the revolutionary concept of **Semispace Copying Garbage Collection**:
@@ -258,3 +253,10 @@ Frequently tested on final examinations via hand-simulation of Copying Garbage C
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 285–293).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.6.3 (Copying Collectors).
 - **Cheney, C. J.:** *A Nonrecursive List Compacting Algorithm*, Communications of the ACM, Vol. 13, No. 11, 1970.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 28 of 55 | **Module 3: Run-Time Environments**  
+> ◄ **Previous:** [[Mark-and-Sweep Garbage Collection Algorithm]] | ► **Next:** [[Display Maintenance and Non-Local Access Simulation Example]]

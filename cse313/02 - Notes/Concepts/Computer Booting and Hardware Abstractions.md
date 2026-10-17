@@ -6,10 +6,6 @@ order: 3
 ---
 # Computer Booting and Hardware Abstractions
 
-> 📖 **Reading Order:** Step 03 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
-> ◄ **Previous:** [[Dual-Mode Operation and System Calls]] | ► **Next:** [[Process Concepts and Memory Layout]]
-
----
 > [!IMPORTANT] 🎯 **Exam Frequency & Intelligence (Appeared in 2017 Q1a, 2021 Q3d)**
 > **Frequency:** ⭐⭐⭐⭐ **High Recurrence (Repeated Verbatim in 2017 and 2021!)**
 >
@@ -241,3 +237,10 @@ An array of function pointers stored in kernel memory. When interrupt line $k$ t
 
 - **Lectures:** `cse313/01 - Sources/Lectures/1. Introduction-week1-RRR-2026.pdf` (Slides 7–10, 29–36)
 - **Textbook:** Andrew S. Tanenbaum & Herbert Bos, *Modern Operating Systems* (4th Edition), Chapter 1 (Section 1.3: Hardware Overview, Section 1.5: Booting)
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 03 of 68 | **Module 1:** OS Architecture & Kernel Fundamentals  
+> ◄ **Previous:** [[Dual-Mode Operation and System Calls]] | ► **Next:** [[Process Concepts and Memory Layout]]

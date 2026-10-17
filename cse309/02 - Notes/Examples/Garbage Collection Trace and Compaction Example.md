@@ -7,11 +7,6 @@ order: 30
 
 # Garbage Collection Trace and Compaction Example
 
-> 📖 **Reading Order:** Step 30 of 55 | **Module 3:** Run-Time Environments  
-> ◄ **Previous:** [[Display Maintenance and Non-Local Access Simulation Example]] | ► **Next:** [[Problem — Activation Record and Display Table Tracing]]
-
----
-
 ## Problem
 
 Consider a program executing with a heap of 100 memory units. The heap currently contains 6 allocated objects:
@@ -171,3 +166,10 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 - **Lecture Slides:** [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]], Chapter 7 (Slides 270–293).
 - **Textbook:** Aho, Lam, Sethi, Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Ed.), Section 7.6.
+
+---
+
+## Navigation
+
+> 📖 **Reading Order:** Step 30 of 55 | **Module 3:** Run-Time Environments  
+> ◄ **Previous:** [[Display Maintenance and Non-Local Access Simulation Example]] | ► **Next:** [[Problem — Activation Record and Display Table Tracing]]

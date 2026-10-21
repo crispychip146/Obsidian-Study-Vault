@@ -19,7 +19,7 @@ We will:
 1. Transform the grammar into an LL(1) compliant form by eliminating left recursion.
 2. Construct the complete two-dimensional LL(1) predictive parsing table $M$.
 3. Trace the non-recursive table-driven engine step-by-step on the input sentence:
-   $$\mathbf{id} + \mathbf{id} * \mathbf{id} \; \$$$
+   $$\mathbf{id} + \mathbf{id} * \mathbf{id} \; \text{\$}$$
 
 ---
 
@@ -73,7 +73,7 @@ We apply the table construction rules:
 
 ### The Completed LL(1) Parsing Table $M$
 
-| Nonterminal | $\mathbf{id}$ | $+$ | $*$ | $($ | $)$ | $\$$ |
+| Nonterminal | $\mathbf{id}$ | $+$ | $*$ | $($ | $)$ | `$` |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **$E$** | $E \to T E'$ | | | $E \to T E'$ | `synch` | `synch` |
 | **$E'$** | | $E' \to + T E'$ | | | $E' \to \epsilon$ | $E' \to \epsilon$ |
@@ -87,7 +87,7 @@ We apply the table construction rules:
 
 ## Step 4: Step-by-Step Table-Driven Parser Simulation
 
-Input String: $\mathbf{id} + \mathbf{id} * \mathbf{id} \; \$$  
+Input String: $\mathbf{id} + \mathbf{id} * \mathbf{id}$ `$`  
 Stack is initialized to: `[$, E]` (left is bottom, right is top).
 
 | Step | Matched Prefix | Parsing Stack | Input Buffer | Action Taken |
@@ -108,7 +108,7 @@ Stack is initialized to: `[$, E]` (left is bottom, right is top).
 | **14** | `id + id *` | `$ E' T' id` | `id $` | **Match $\mathbf{id}$!** Pop $\mathbf{id}$, advance input |
 | **15** | `id + id * id` | `$ E' T'` | `$` | $M[T', \$]$: pop $T'$, push $\epsilon$ |
 | **16** | `id + id * id` | `$ E'` | `$` | $M[E', \$]$: pop $E'$, push $\epsilon$ |
-| **17** | `id + id * id` | `$` | `$` | **Match $\$$ on $\$$ $\implies$ ACCEPT!** |
+| **17** | `id + id * id` | `$` | `$` | **Match `$` on `$` $\implies$ ACCEPT!** |
 
 ---
 

@@ -122,7 +122,7 @@ In the table below:
 - $r_p$ denotes **Reduce by production rule $(p)$**.
 - `acc` denotes **Accept**.
 
-| State | $\mathbf{id}$ | $+$ | $*$ | $($ | $)$ | $\$$ | $E$ | $T$ | $F$ |
+| State | $\mathbf{id}$ | $+$ | $*$ | $($ | $)$ | `$` | $E$ | $T$ | $F$ |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **0** | $s_5$ | | | $s_4$ | | | 1 | 2 | 3 |
 | **1** | | $s_6$ | | | | `acc` | | | |
@@ -137,13 +137,13 @@ In the table below:
 | **10** | | $r_3$ | $r_3$ | | $r_3$ | $r_3$ | | | |
 | **11** | | $r_5$ | $r_5$ | | $r_5$ | $r_5$ | | | |
 
-*Conflict Inspection:* Notice state 2 contains $[E \to T \cdot]$ (calling for reduce on $\text{FOLLOW}(E) = \{+, ), \$\}$) and $[T \to T \cdot * F]$ (calling for shift on $*$). Because $*$ is NOT in $\text{FOLLOW}(E)$, the shift action lands in column $*$ while the reduce actions land in columns $+$, $)$, and $\$$. **There are zero collisions**, proving the grammar is **SLR(1)**!
+*Conflict Inspection:* Notice state 2 contains $[E \to T \cdot]$ (calling for reduce on $\text{FOLLOW}(E) = \{+, ), \$\}$) and $[T \to T \cdot * F]$ (calling for shift on $*$). Because $*$ is NOT in $\text{FOLLOW}(E)$, the shift action lands in column $*$ while the reduce actions land in columns $+$, $)$, and `$`. **There are zero collisions**, proving the grammar is **SLR(1)**!
 
 ---
 
 ## Step 4: Step-by-Step LR Parsing Simulation
 
-Input String: $\mathbf{id} * \mathbf{id} + \mathbf{id} \; \$$  
+Input String: $\mathbf{id} * \mathbf{id} + \mathbf{id}$ `$`  
 Initial State Stack: `[0]`  
 Initial Symbol Stack: `[$]`
 

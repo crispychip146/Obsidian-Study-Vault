@@ -30,21 +30,21 @@ where $\{S, B, C, D, E, F\}$ are nonterminals, $\{a, b, c, f, g, h\}$ are termin
 ---
 
 ### Question 2: LL(1) Parsing Table Construction and Verification
-1. Construct the complete two-dimensional predictive parsing table $M[A, t]$ for all nonterminals $A$ and terminals $t \in \{a, b, c, f, g, h, \$\}$. Include `synch` entries for error recovery.
+1. Construct the complete two-dimensional predictive parsing table $M[A, t]$ for all nonterminals $A$ and terminals $t \in \{a, b, c, f, g, h, \text{\$}\}$. Include `synch` entries for error recovery.
 2. Based strictly on the constructed table, determine whether grammar $G$ is **LL(1)**. State the precise formal condition.
 
 ---
 
 ### Question 3: Step-by-Step Parser Execution Trace
 Trace the execution of the table-driven LL(1) parsing algorithm on the valid input string:
-$$w = a \; c \; b \; g \; f \; h \; \$$$
+$$w = a \; c \; b \; g \; f \; h \; \text{\$}$$
 Present the trace in a standard 5-column table: Step, Matched Prefix, Parsing Stack (top on right), Current Input, and Action Taken.
 
 ---
 
 ### Question 4: Panic-Mode Error Recovery Trace
 Demonstrate panic-mode error recovery using the table's `synch` entries when presented with the syntactically invalid input:
-$$w_{\text{err}} = a \; c \; g \; f \; h \; \$$$
+$$w_{\text{err}} = a \; c \; g \; f \; h \; \text{\$}$$
 Explain what error is reported and how the parser recovers to successfully finish analyzing the remainder of the sentence.
 
 ---
@@ -128,7 +128,7 @@ Applying the construction algorithm:
 
 ### Constructed Parsing Table $M$
 
-| Nonterminal | $a$ | $b$ | $c$ | $f$ | $g$ | $h$ | $\$$ |
+| Nonterminal | $a$ | $b$ | $c$ | $f$ | $g$ | $h$ | `$` |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **$S$** | $S \to a B D h$ | | | | | | `synch` |
 | **$B$** | | | $B \to c C$ | `synch` | `synch` | `synch` | |
@@ -162,13 +162,13 @@ Stack initialized to `[$, S]`.
 | **11** | `a c b g` | `$ h F` | `f h $` | $M[F, f]$: pop $F$, push $f$ |
 | **12** | `a c b g` | `$ h f` | `f h $` | **Match $f$!** Pop $f$, advance input |
 | **13** | `a c b g f` | `$ h` | `h $` | **Match $h$!** Pop $h$, advance input |
-| **14** | `a c b g f h` | `$` | `$` | **Match $\$$ on $\$$ $\implies$ ACCEPT!** |
+| **14** | `a c b g f h` | `$` | `$` | **Match `$` on `$` $\implies$ ACCEPT!** |
 
 ---
 
 ### Part 4: Panic-Mode Error Recovery Trace on `a c g f h $`
 
-Input: $w_{\text{err}} = a \; c \; g \; f \; h \; \$$ (token `b` is missing!).
+Input: $w_{\text{err}} = a \; c \; g \; f \; h$ `$` (token `b` is missing!).
 
 1. Steps 1 through 4 execute identically to Part 3, matching `a c`.
 2. At Step 5:

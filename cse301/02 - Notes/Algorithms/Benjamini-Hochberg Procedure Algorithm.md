@@ -2,12 +2,22 @@
 type: algorithm
 course: cse301
 status: active
-order: 74 --- # Benjamini-Hochberg Procedure Algorithm ## The Problem and Earlier Tools The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
+order: 74
+---
+
+# Benjamini-Hochberg Procedure Algorithm
+
+## The Problem and Earlier Tools
+
+The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
+
 It ensures that the expected proportion of false positives among all declared discoveries does not exceed a user-specified threshold $q \in (0, 1)$ (typically $q = 0.05$):
 $$\text{FDR} = E\left[\frac{V}{\max(R, 1)}\right] \le \frac{m_0}{m} q \le q$$
 
 It solves the excessive conservatism of the classical [[Multiple Testing and False Discovery Rate|Bonferroni correction]], dramatically increasing statistical power to detect real effects in large-scale data science and bioinformatics experiments.
+
 ---
+
 ## Developing the Core Idea
 
 Rather than comparing every $p$-value against a fixed, brutally small threshold $\alpha/m$ (as Bonferroni does), the BH procedure compares ordered $p$-values against a **linearly increasing threshold**:
@@ -19,22 +29,24 @@ $$\ell_i = \frac{i}{m} q, \quad i = 1, 2, \dots, m$$
 - The largest $p$-value ($i = m$) is compared against $q$.
 
 By finding the largest index $k$ where the data still fall below the threshold line, the algorithm safely rejects **all** hypotheses up to rank $k$.
+
 ---
+
 ## Inputs
 
-- Ranked empirical test statistics, p-values, or sample arrays.
+- $m$ raw $p$-values: $P_1, P_2, \dots, P_m$ from individual hypothesis tests.
+- Target False Discovery Rate level $q \in (0, 1)$ (commonly $0.05$).
 
 ---
 
 ## Outputs
 
-- Decision vector: rejected null hypotheses or permutation p-value.
+- Set of rejected null hypotheses $\{H_{(1)}, H_{(2)}, \dots, H_{(k)}\}$ controlling $\text{FDR} \le q$.
+- Crossing rank threshold index $k^*$.
 
 ---
 
 ## How It Works
-
-### How It Works
 
 1. **Sort:** Order the $m$ raw $p$-values from smallest to largest:
    $$P_{(1)} \le P_{(2)} \le \dots \le P_{(m)}$$
@@ -50,16 +62,8 @@ By finding the largest index $k$ where the data still fall below the threshold l
      Even if some intermediate $P_{(j)} > \ell_j$ for $j < k$, the procedure still rejects $H_{(j)}$ because $k$ acts as a global step-up anchor!
 
 ---
-### Related Concepts
 
-- [[Multiple Testing and False Discovery Rate]]
-- [[p-Values and Significance]]
-- [[Hypothesis Testing Framework]]
-- [[Problem — Multiple Testing Correction with Bonferroni and Benjamini-Hochberg]]
----
 ## Pseudocode
-
-### Pseudocode
 
 ```python
 def benjamini_hochberg(p_values, q=0.05):
@@ -89,7 +93,9 @@ def benjamini_hochberg(p_values, q=0.05):
             
     return rejected, k_star + 1
 ```
+
 ---
+
 ## Example
 
 ### Worked Example: 10 Tests Comparison
@@ -114,36 +120,41 @@ Suppose $m = 10$ hypothesis tests yield the following ordered $p$-values with ta
 - **Benjamini-Hochberg:** The largest index satisfying $P_{(i)} \le \frac{i}{10}(0.05)$ is **$k = 5$** (since $0.01220 \le 0.0250$). 
   Therefore, we reject hypotheses **1, 2, 3, 4, and 5**! Total discoveries = **5**.
 - **Result:** The BH procedure safely uncovered **more than double** the number of legitimate discoveries while rigorously bounding the False Discovery Rate at $\le 5\%$.
+
 ---
+
 ## Complexity
 
 - **Time Complexity:** $O(m \log m)$ dominated by sorting the $m$ $p$-values. The subsequent linear scan is $O(m)$.
 - **Space Complexity:** $O(m)$ to store sorted indices and threshold comparisons.
----
-## Properties
 
-### Properties and Guarantees
+---
+
+## Properties and Guarantees
 
 1. **Exact FDR Bound:** Under independence of test statistics (or positive regression dependency PRDS), Benjamini and Hochberg proved that:
    $$\text{FDR} = E\left[\frac{V}{R}\right] = \frac{m_0}{m} q \le q$$
 2. **Monotonicity:** Any hypothesis rejected by Bonferroni is guaranteed to also be rejected by Benjamini-Hochberg ($R_{\text{Bonferroni}} \subseteq R_{\text{BH}}$).
+
 ---
+
 ## Limitations
 
-- Exact permutation calculation requires evaluating $\binom{N}{n}$ combinations, becoming intractable for large $N$ (requiring Monte Carlo sampling).
+- Guarantees FDR control strictly under independent test statistics or Positive Regression Dependency (PRDS); for general arbitrary dependence structures, the more conservative Benjamini-Yekutieli (BY) modification is required.
+- Does not bound Family-Wise Error Rate (FWER); if even one false discovery is impermissible, Bonferroni must be used.
 
 ---
 
 ## Common Mistakes
 
 - Confusing Family-Wise Error Rate (FWER) with False Discovery Rate (FDR).
-- Permuting non-exchangeable data under heterogeneous variances.
+- Forgetting that the step-up rule rejects *all* hypotheses up to rank $k$, even if individual $P_{(j)} > \ell_j$ for some $j < k$.
 
 ---
 
 ## Exam Relevance
 
-Appears on CSE 301 examinations testing multiple comparisons or non-parametric statistical hypothesis testing.
+Appears frequently on CSE 301 examinations testing multiple hypothesis testing, comparing discovery rates between Bonferroni and Benjamini-Hochberg on genomic or algorithmic benchmark datasets.
 
 ---
 
@@ -151,12 +162,14 @@ Appears on CSE 301 examinations testing multiple comparisons or non-parametric s
 
 - [[Hypothesis Testing Framework]]
 - [[Multiple Testing and False Discovery Rate]]
+- [[p-Values and Significance]]
 
 ---
 
 ## Prerequisites
 
 - [[Hypothesis Testing Framework]]
+- [[Multiple Testing and False Discovery Rate]]
 
 ---
 

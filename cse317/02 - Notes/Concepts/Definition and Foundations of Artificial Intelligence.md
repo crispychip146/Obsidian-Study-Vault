@@ -151,10 +151,8 @@ To pass the comprehensive Total Turing Test, an AI must demonstrate capabilities
 
 ## Important Properties and Why They Hold
 
-- **Rationality $
-eq$ Omniscience:** Omniscience requires knowing the actual outcome of an action in advance (impossible in non-deterministic environments). Rationality requires maximizing *expected* performance given available historical percepts and prior knowledge.
-- **Rationality $
-eq$ Perfection:** Rationality is about choosing the best decision under uncertainty, not guaranteeing that an unexpected external event won't cause failure.
+- **Rationality $\neq$ Omniscience:** Omniscience requires knowing the actual outcome of an action in advance (impossible in non-deterministic environments). Rationality requires maximizing *expected* performance given available historical percepts and prior knowledge.
+- **Rationality $\neq$ Perfection:** Rationality is about choosing the best decision under uncertainty, not guaranteeing that an unexpected external event won't cause failure.
 
 ---
 

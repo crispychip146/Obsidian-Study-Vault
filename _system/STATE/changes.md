@@ -37,6 +37,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-031 | 2026-10-12 | cse301/01 - Sources/Lectures/ | cse301 | User push request | add | Added and registered new course source 'CSE301_Class_Notes.pdf' (IRK Class Notes adapted from Rifah Tasnia Islam, Lectures 1 to 13) as pending source SRC-CSE301-011 |
 | CHG-032 | 2026-10-17 | */02 - Notes/ | cse301, cse309, cse313, cse317 | User navigation relocation & link audit request | update | Relocated reading order navigation system from top banner down to bottom under '## Navigation' across all 269 notes; audited all wikilinks vault-wide and fixed broken links across course hubs, maps, question banks, and notes |
 | CHG-033 | 2026-10-21 | cse309/ | cse309 | Rumi Sir Merged.pdf | create | Created complete 21-step Part I learning system (Compiler Architecture, Lexical Analysis, Top-Down LL(1) and Bottom-Up SLR(1) parsing): 11 concepts, 4 algorithms, 1 formula, 3 worked examples, 3 solved problem notes (Q-CSE309-010 to 012); renumbered and integrated existing Part II notes to form a unified 10-module, 76-step curriculum with navigation at the bottom; updated Course Hub, Topic Map, Dependency Map, Question Bank, and State files |
+| CHG-034 | 2026-10-22 | Vault-wide | cse301, cse309, cse317, STATE | User formatting audit request | fix | Audited vault-wide formatting and link integrity: restored corrupted cse301 Question Bank (18 questions), fixed smushed frontmatter and duplicate headings in Benjamini-Hochberg note, eliminated MathJax delimiter clashes ($\$$ and \$$$) in LL(1) and SLR(1) notes, fixed newline-broken $\neq$ in AI definitions, escaped table cell pipes in STATE files, and verified 0 broken wikilinks |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -66,3 +67,15 @@ This file tracks meaningful changes made to the knowledge base.
 - **Curriculum Integration:** Renumbered and updated all 55 existing Part II notes (`order: 22` to `76`, `Step XX of 76`, Modules 5–10) and connected Step 21 to Step 22, yielding an end-to-end 76-step compiler curriculum.
 - **Maps & Testing:** Rebuilt `cse309/00 - Course Hub.md`, `cse309/03 - Maps/Topic Map.md`, `cse309/03 - Maps/Dependency Map.md`, and `cse309/05 - Testing/Question Bank/Question Bank.md`.
 - **Navigation Standard:** Positioned reading order navigation strictly at the bottom of each note under `## Navigation`.
+ 
+### 2026-10-22 — Vault-Wide Formatting and Link Integrity Audit & Repair
+
+- **Task Overview:** Comprehensive audit across all 290 knowledge notes, maps, question banks, and system state files for syntax errors, formatting inconsistencies, LaTeX delimiter balance, table alignment, and broken wikilinks.
+- **Corrupted Question Bank Restored:** Completely rebuilt `cse301/05 - Testing/Question Bank/Question Bank.md`, restoring all 18 fully solved problems (`Q-CSE301-001` to `Q-CSE301-018`) with complete problem profiles and key insights, eliminating 104 empty `[[]]` tokens.
+- **Frontmatter & Heading Cleanup:** Fixed smushed frontmatter in `Benjamini-Hochberg Procedure Algorithm.md` (where `# Title` was trapped in `order: 74`), removed duplicate `## How It Works` and `## Pseudocode` subheaders, and corrected copy-pasted `## Limitations` text.
+- **LaTeX Math Delimiter Repairs:**
+  - Resolved `\$$$` and `\$$` sequence collisions in `LL(1) Parser Construction and Simulation Example.md`, `SLR(1) Automaton and Parsing Table Construction Example.md`, and `Problem — LL(1) Grammar Verification and Parsing Table Construction.md` by using clean code formatting (`` `$` ``) and `\text{\$}`.
+  - Repaired broken `$\neq$` split across newlines (`$\n eq$`) in `Definition and Foundations of Artificial Intelligence.md`.
+- **Markdown Table Integrity:** Escaped unescaped pipes (`\|`) in mathematical expressions (`P(A\|B)`, `E[E[Y\|X]]`, `\|J\|=r`, `\|X-Y\|`, `if (a < b \|\| c < d)`) across `_system/STATE/notes.md` and `_system/STATE/questions.md`, ensuring all table rows match header column counts.
+- **Wikilink Integrity:** Added missing `cse301/` course prefixes to all 110 source references in `_system/STATE/notes.md`, `_system/STATE/sources.md`, and `_system/STATE/questions.md`. Fixed escaped pipe syntax inside wikilinks (`[[path|alias]]`).
+- **Audit Verification:** Verified 0 broken wikilinks across all 4,299 course wikilinks, 0 broken markdown links, 0 unclosed code/math blocks, and 100% gap-free sequential bidirectional navigation chains across all 4 courses.

@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 23
+order: 44
 ---
 
 # Non-Local Variable Access in Static and Dynamic Scopes
@@ -259,5 +259,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 23 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 44 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Calling Sequences and Stack Frame Management]] | ► **Next:** [[Heap Memory Management and Allocation Strategies]]

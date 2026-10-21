@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 35
+order: 56
 ---
 
 # Liveness and Next-Use Analysis within Basic Blocks
@@ -168,5 +168,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 35 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 56 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Basic Block Partitioning Algorithm]] | ► **Next:** [[DAG Construction and Local Optimization of Basic Blocks]]

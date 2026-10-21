@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 24
+order: 45
 ---
 
 # Heap Memory Management and Allocation Strategies
@@ -248,5 +248,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 24 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 45 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Non-Local Variable Access in Static and Dynamic Scopes]] | ► **Next:** [[Garbage Collection Fundamentals and Reference Counting]]

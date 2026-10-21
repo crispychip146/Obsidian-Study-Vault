@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 2
+order: 23
 ---
 
 # Synthesized and Inherited Attributes
@@ -179,5 +179,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 02 of 55 | **Module 1: Syntax-Directed Translation**  
+> 📖 **Reading Order:** Step 23 of 76 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[Syntax-Directed Definitions and Translation Schemes]] | ► **Next:** [[S-Attributed and L-Attributed SDDs]]

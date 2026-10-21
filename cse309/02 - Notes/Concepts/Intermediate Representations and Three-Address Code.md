@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 10
+order: 31
 ---
 
 # Intermediate Representations and Three-Address Code
@@ -288,5 +288,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 10 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 31 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]] | ► **Next:** [[Value-Number Method for DAG Construction]]

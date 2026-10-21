@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 5
+order: 26
 ---
 
 # Eliminating Left Recursion from SDTs
@@ -269,5 +269,5 @@ Frequently tested on final examinations via hand-simulation of Eliminating Left 
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 05 of 55 | **Module 1: Syntax-Directed Translation**  
+> 📖 **Reading Order:** Step 26 of 76 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[Abstract Syntax Tree Construction with SDDs]] | ► **Next:** [[Bottom-Up Evaluation of L-Attributed SDDs]]

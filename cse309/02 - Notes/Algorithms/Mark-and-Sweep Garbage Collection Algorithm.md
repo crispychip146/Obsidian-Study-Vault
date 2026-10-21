@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 27
+order: 48
 ---
 
 # Mark-and-Sweep Garbage Collection Algorithm
@@ -233,5 +233,5 @@ Frequently tested on final examinations via hand-simulation of Mark-and-Sweep Ga
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 27 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 48 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Trace-Based Garbage Collection Algorithms]] | ► **Next:** [[Copying Garbage Collection Algorithm]]

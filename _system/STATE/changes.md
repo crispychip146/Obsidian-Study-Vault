@@ -36,6 +36,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-030 | 2026-10-07 | cse313/ | cse313 | CSE313_KRV_Merged.pdf & OSTEP | create | Expanded CSE 313 learning system from 34 to 68 steps covering Modules 6 through 10: created 34 new knowledge notes (18 concepts, 4 algorithms, 2 formulas, 5 worked examples, 5 solved problem notes Q-CSE313-006 to 010) spanning Address Spaces, Memory API, Base & Bounds, Segmentation, Free-Space Management, Segregated Lists & Binary Buddy Allocation, Paging, TLB, Multi-Level Page Tables, Swapping Mechanisms & Watermarks, Page Replacement Policies & Clock Algorithm, AMAT/EAT formulas, IO Architecture & DMA, Hard Disk Geometry & Mechanical Latency, Disk Arm Scheduling (FCFS, SSTF, SCAN, C-LOOK), RAID 0/1/4/5 Architectures & small-write parity update, File & Directory POSIX API, VSFS On-Disk Structures & Multi-Level Indexing, Berkeley FFS Locality & Cylinder Groups, Crash Consistency & Write-Ahead Journaling (Data vs Ordered), Log-Structured File Systems (LFS) & Segment Cleaning, Kernel Memory Allocators & Jeff Bonwick's Slab Allocator, Multiprocessor Architectures (UMA/NUMA, SMP, MESI protocol), and Linux RPC; updated reading banners across all 68 notes to uniform bidirectional navigation, and updated Course Hub, Topic Map, Dependency Map, Question Bank, and State registries. |
 | CHG-031 | 2026-10-12 | cse301/01 - Sources/Lectures/ | cse301 | User push request | add | Added and registered new course source 'CSE301_Class_Notes.pdf' (IRK Class Notes adapted from Rifah Tasnia Islam, Lectures 1 to 13) as pending source SRC-CSE301-011 |
 | CHG-032 | 2026-10-17 | */02 - Notes/ | cse301, cse309, cse313, cse317 | User navigation relocation & link audit request | update | Relocated reading order navigation system from top banner down to bottom under '## Navigation' across all 269 notes; audited all wikilinks vault-wide and fixed broken links across course hubs, maps, question banks, and notes |
+| CHG-033 | 2026-10-21 | cse309/ | cse309 | Rumi Sir Merged.pdf | create | Created complete 21-step Part I learning system (Compiler Architecture, Lexical Analysis, Top-Down LL(1) and Bottom-Up SLR(1) parsing): 11 concepts, 4 algorithms, 1 formula, 3 worked examples, 3 solved problem notes (Q-CSE309-010 to 012); renumbered and integrated existing Part II notes to form a unified 10-module, 76-step curriculum with navigation at the bottom; updated Course Hub, Topic Map, Dependency Map, Question Bank, and State files |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -57,3 +58,11 @@ This file tracks meaningful changes made to the knowledge base.
   - Repaired course map and revision links in `cse301`, `cse309`, and `cse313` course hubs.
   - Cleaned non-existent directory wikilinks in placeholder `cse315/00 - Course Hub.md`.
 - **Verification Result:** Zero broken wikilinks across all notes, maps, question banks, and course hubs in the entire vault.
+ 
+### 2026-10-21 — CSE 309 Part I (Rumi Sir Merged.pdf) Complete Integration
+
+- **Source Material:** `cse309/01 - Sources/Lectures/Rumi Sir Merged.pdf` (727 slides by Ahmed Mahir Sultan Rumi, BUET, covering Chapters 1, 3, 4 of the Dragon Book).
+- **Created Notes:** 21 comprehensive guided-development notes across `Concepts/` (11 notes), `Algorithms/` (4 notes), `Formulas/` (1 note), `Examples/` (3 notes), and `Problems/` (3 notes: `Q-CSE309-010`, `Q-CSE309-011`, `Q-CSE309-012`).
+- **Curriculum Integration:** Renumbered and updated all 55 existing Part II notes (`order: 22` to `76`, `Step XX of 76`, Modules 5–10) and connected Step 21 to Step 22, yielding an end-to-end 76-step compiler curriculum.
+- **Maps & Testing:** Rebuilt `cse309/00 - Course Hub.md`, `cse309/03 - Maps/Topic Map.md`, `cse309/03 - Maps/Dependency Map.md`, and `cse309/05 - Testing/Question Bank/Question Bank.md`.
+- **Navigation Standard:** Positioned reading order navigation strictly at the bottom of each note under `## Navigation`.

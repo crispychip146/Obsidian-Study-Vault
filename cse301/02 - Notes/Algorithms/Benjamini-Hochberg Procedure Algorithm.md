@@ -2,15 +2,7 @@
 type: algorithm
 course: cse301
 status: active
-order: 74
----
-
-# Benjamini-Hochberg Procedure Algorithm
-
-## The Problem and Earlier Tools
-
-The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
-
+order: 74 --- # Benjamini-Hochberg Procedure Algorithm ## The Problem and Earlier Tools The **Benjamini-Hochberg (BH) Procedure** is an algorithmic method for controlling the **False Discovery Rate (FDR)** when performing $m$ simultaneous statistical hypothesis tests.
 It ensures that the expected proportion of false positives among all declared discoveries does not exceed a user-specified threshold $q \in (0, 1)$ (typically $q = 0.05$):
 $$\text{FDR} = E\left[\frac{V}{\max(R, 1)}\right] \le \frac{m_0}{m} q \le q$$
 

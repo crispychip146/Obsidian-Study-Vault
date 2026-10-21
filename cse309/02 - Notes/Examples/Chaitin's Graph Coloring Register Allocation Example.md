@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 48
+order: 69
 ---
 
 # Chaitin's Graph Coloring Register Allocation Example
@@ -191,5 +191,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 48 of 55 | **Module 5:** Register Allocation  
+> 📖 **Reading Order:** Step 69 of 76 | **Module 9:** Register Allocation  
 > ◄ **Previous:** [[Linear Scan Register Allocation Step-by-Step Example]] | ► **Next:** [[Problem — Linear Scan Register Allocation Simulation]]

@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 6
+order: 27
 ---
 
 # Bottom-Up Evaluation of L-Attributed SDDs
@@ -234,5 +234,5 @@ Frequently tested on final examinations via hand-simulation of Bottom-Up Evaluat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 06 of 55 | **Module 1: Syntax-Directed Translation**  
+> 📖 **Reading Order:** Step 27 of 76 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[Eliminating Left Recursion from SDTs]] | ► **Next:** [[Arithmetic Expression Desk Calculator SDD Example]]

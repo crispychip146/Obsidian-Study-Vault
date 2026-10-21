@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 20
+order: 41
 ---
 
 # Problem — Backpatching Boolean Expression Translation
@@ -294,5 +294,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 20 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 41 of 76 | **Module 6:** Intermediate Code Generation  
 > ◄ **Previous:** [[Problem — Array Reference Three-Address Code Generation]] | ► **Next:** [[Run-Time Storage Organization and Activation Records]]

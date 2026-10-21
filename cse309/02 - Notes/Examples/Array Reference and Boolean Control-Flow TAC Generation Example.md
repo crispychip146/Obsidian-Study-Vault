@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 18
+order: 39
 ---
 
 # Array Reference and Boolean Control-Flow TAC Generation Example
@@ -258,5 +258,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 18 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 39 of 76 | **Module 6:** Intermediate Code Generation  
 > ◄ **Previous:** [[Backpatching Control-Flow Code Generation Algorithm]] | ► **Next:** [[Problem — Array Reference Three-Address Code Generation]]

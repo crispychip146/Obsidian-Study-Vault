@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 17
+order: 38
 ---
 
 # Backpatching Control-Flow Code Generation Algorithm
@@ -250,5 +250,5 @@ Frequently tested on final examinations via hand-simulation of Backpatching Cont
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 17 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 38 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Backpatching in Intermediate Code Generation]] | ► **Next:** [[Array Reference and Boolean Control-Flow TAC Generation Example]]

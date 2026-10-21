@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 31
+order: 52
 ---
 
 # Problem — Activation Record and Display Table Tracing
@@ -254,5 +254,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 31 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 52 of 76 | **Module 7:** Run-Time Environments  
 > ◄ **Previous:** [[Garbage Collection Trace and Compaction Example]] | ► **Next:** [[Code Generation Issues and Target Machine Architecture]]

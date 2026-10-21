@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 19
+order: 40
 ---
 
 # Problem — Array Reference Three-Address Code Generation
@@ -244,5 +244,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 19 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 40 of 76 | **Module 6:** Intermediate Code Generation  
 > ◄ **Previous:** [[Array Reference and Boolean Control-Flow TAC Generation Example]] | ► **Next:** [[Problem — Backpatching Boolean Expression Translation]]

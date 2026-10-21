@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 44
+order: 65
 ---
 
 # Register Interference Graphs and Graph Coloring Principles
@@ -181,5 +181,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 44 of 55 | **Module 5: Register Allocation**  
+> 📖 **Reading Order:** Step 65 of 76 | **Module 5: Register Allocation**  
 > ◄ **Previous:** [[Live Ranges and Live Intervals in Register Allocation]] | ► **Next:** [[Linear Scan Register Allocation Algorithm]]

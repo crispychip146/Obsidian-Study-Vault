@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 21
+order: 42
 ---
 
 # Run-Time Storage Organization and Activation Records
@@ -202,5 +202,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 21 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 42 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Problem — Backpatching Boolean Expression Translation]] | ► **Next:** [[Calling Sequences and Stack Frame Management]]

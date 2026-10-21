@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 53
+order: 74
 ---
 
 # Loop Optimizations and Strength Reduction
@@ -154,5 +154,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 53 of 55 | **Module 6: Machine-Independent Optimization**  
+> 📖 **Reading Order:** Step 74 of 76 | **Module 6: Machine-Independent Optimization**  
 > ◄ **Previous:** [[Global Common Subexpression Elimination and Copy Propagation]] | ► **Next:** [[Quicksort Partition Loop Complete Optimization Example]]

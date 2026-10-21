@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 38
+order: 59
 ---
 
 # Peephole Optimization Techniques
@@ -182,5 +182,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 38 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 59 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[A Simple Code Generator Algorithm]] | ► **Next:** [[Basic Block Partitioning and Next-Use Computation Example]]

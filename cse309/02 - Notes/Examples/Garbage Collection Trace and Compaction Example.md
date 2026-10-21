@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 30
+order: 51
 ---
 
 # Garbage Collection Trace and Compaction Example
@@ -171,5 +171,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 30 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 51 of 76 | **Module 7:** Run-Time Environments  
 > ◄ **Previous:** [[Display Maintenance and Non-Local Access Simulation Example]] | ► **Next:** [[Problem — Activation Record and Display Table Tracing]]

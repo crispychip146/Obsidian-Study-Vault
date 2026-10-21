@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 40
+order: 61
 ---
 
 # DAG-Based Basic Block Optimization Example
@@ -185,5 +185,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 40 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 61 of 76 | **Module 8:** Code Generation  
 > ◄ **Previous:** [[Basic Block Partitioning and Next-Use Computation Example]] | ► **Next:** [[Problem — Basic Block Partitioning and Next-Use Table]]

@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 33
+order: 54
 ---
 
 # Basic Blocks and Control Flow Graphs
@@ -157,5 +157,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 33 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 54 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Code Generation Issues and Target Machine Architecture]] | ► **Next:** [[Basic Block Partitioning Algorithm]]

@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 4
+order: 25
 ---
 
 # Abstract Syntax Tree Construction with SDDs
@@ -238,5 +238,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 04 of 55 | **Module 1: Syntax-Directed Translation**  
+> 📖 **Reading Order:** Step 25 of 76 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[S-Attributed and L-Attributed SDDs]] | ► **Next:** [[Eliminating Left Recursion from SDTs]]

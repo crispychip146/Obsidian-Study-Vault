@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 22
+order: 43
 ---
 
 # Calling Sequences and Stack Frame Management
@@ -227,5 +227,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 22 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 43 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Run-Time Storage Organization and Activation Records]] | ► **Next:** [[Non-Local Variable Access in Static and Dynamic Scopes]]

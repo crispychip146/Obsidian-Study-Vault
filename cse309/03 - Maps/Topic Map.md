@@ -1,12 +1,71 @@
-# CSE 309 — Topic Map (Part II: Synthesis & Back End)
+# CSE 309 — Topic Map (Complete Curriculum)
 
-This topic map organizes all knowledge notes derived from Part II of CSE 309 (Compilers), taught by Khaled Mahmud Shahriar (KMS), Department of CSE, BUET, and supported by the course textbook *Compilers: Principles, Techniques, & Tools* (2nd Edition) by Aho, Lam, Sethi, and Ullman (Chapters 5–9).
+This topic map organizes all knowledge notes across the complete curriculum of CSE 309 (Compilers), taught by Ahmed Mahir Sultan Rumi (AMR, Part I: Analysis / Front End) and Khaled Mahmud Shahriar (KMS, Part II: Synthesis / Back End), Department of CSE, BUET, and supported by the course textbook *Compilers: Principles, Techniques, & Tools* (2nd Edition) by Aho, Lam, Sethi, and Ullman (Chapters 1, 3–9).
 
 ---
 
-## 1. Syntax-Directed Translation (Chapter 5)
+## 1. Compiler Architecture & Language Processors (Chapter 1)
 
-### 1.1 Definitions, Attributes & Evaluation Order
+### 1.1 Language Processing System & Compiler Structure
+- **Core Concepts:**
+  - [[Language Processing System and Translators]] (Translators, Compilers vs Interpreters, Preprocessors, Assemblers, Linkers, Loaders, Hybrid systems like Java JVM)
+  - [[Structure and Phases of a Compiler]] (Analysis / Front End vs Synthesis / Back End, 6 core phases, Symbol Table management, Error detection and recovery)
+
+---
+
+## 2. Lexical Analysis (Chapter 3)
+
+### 2.1 Tokens, Buffering, Patterns & Lex Tool
+- **Core Concepts:**
+  - [[Lexical Analysis Fundamentals]] (Role of lexer, Tokens, Patterns, Lexemes, Stripping whitespace and comments, Line number tracking, Interface with syntax analyzer)
+  - [[Input Buffering and Sentinel Techniques]] (Two-buffer scheme, `lexemeBegin` and `forward` pointers, Double-lookahead overhead, Sentinels `eof` eliminating branch per character)
+  - [[Specification and Recognition of Tokens]] (Regular expressions, Strings and languages, Transition diagrams, State representation, Longest match / maximal munch rule)
+- **Algorithms:**
+  - [[Lexical Analyzer Generation with Lex]] (Structure of Lex program `%{%}`, Definitions, Rules `pattern {action}`, User code, DFA synthesis, `yylex()`, `yytext`, `yyleng`)
+- **Worked Examples:**
+  - [[Token Recognition and Lex Specification Example]] (Complete token specification for arithmetic and relational language, state transition walkthrough, Lex code generation)
+- **Problems & Practice:**
+  - [[Problem — Lexical Token Recognition and Buffer Simulation]] (`Q-CSE309-010`: Two-buffer pointer tracing, sentinel trigger, buffer reload simulation, token identification)
+
+---
+
+## 3. Syntax Analysis & Top-Down Parsing (Chapter 4)
+
+### 3.1 Grammars, Transformations, FIRST/FOLLOW & LL(1)
+- **Core Concepts:**
+  - [[Context-Free Grammars and Syntax Analysis]] (Formal 4-tuple $G = (V, T, P, S)$, Derivations, Parse trees, Ambiguity, Eliminating ambiguous constructs)
+  - [[Top-Down and Predictive Parsing]] (Recursive-descent parsing, Backtracking perils, Predictive parsing without backtracking, Transition diagram construction)
+- **Algorithms:**
+  - [[Elimination of Left Recursion and Left Factoring Algorithms]] (Immediate left recursion elimination, General algorithm for indirect left recursion, Left factoring common prefixes)
+  - [[LL(1) Parsing Table Construction and Execution Algorithm]] (Constructing table $M[A, a]$, LL(1) non-ambiguity condition, Stack-driven LL(1) table parser engine)
+- **Formulas:**
+  - [[FIRST and FOLLOW Sets Formulas]] (Formal definitions, inductive computation rules for FIRST($\alpha$) and FOLLOW($A$), handling $\epsilon$-productions, endmarker $\$ $)
+- **Worked Examples:**
+  - [[LL(1) Parser Construction and Simulation Example]] (Eliminating left recursion, computing FIRST and FOLLOW sets, building $M[A, a]$ table, step-by-step stack parse trace)
+- **Problems & Practice:**
+  - [[Problem — LL(1) Grammar Verification and Parsing Table Construction]] (`Q-CSE309-011`: Left recursion elimination, FIRST/FOLLOW calculation, parsing table construction, verifying LL(1) compliance)
+
+---
+
+## 4. Bottom-Up Parsing & LR Parsers (Chapter 4)
+
+### 4.1 Reductions, Shift-Reduce, LR(0) Automaton & SLR(1)
+- **Core Concepts:**
+  - [[Bottom-Up Parsing, Reductions, and Handles]] (Bottom-up philosophy, Rightmost derivation in reverse, Handle definition, Handle pruning, Viable prefixes)
+  - [[Shift-Reduce Parsing and Parsing Conflicts]] (Stack-based implementation, 4 actions: Shift, Reduce, Accept, Error, Shift/Reduce and Reduce/Reduce conflicts)
+  - [[LR(0) Items and the LR(0) Automaton]] (LR(0) item definition with dot $\cdot$, CLOSURE operation, GOTO operation, Canonical collection of LR(0) items DFA)
+- **Algorithms:**
+  - [[SLR(1) Parsing Table Construction and LR Parser Algorithm]] (Augmented grammar $S' \to S$, FOLLOW-directed reduction rules, ACTION and GOTO tables, Table-driven LR driver loop)
+- **Worked Examples:**
+  - [[SLR(1) Automaton and Parsing Table Construction Example]] (Building LR(0) DFA states, constructing SLR(1) table, stack simulation of input string)
+- **Problems & Practice:**
+  - [[Problem — SLR(1) Table Construction and Conflict Analysis]] (`Q-CSE309-012`: Augmented grammar, complete LR(0) item set generation, SLR(1) table population, detecting and diagnosing conflicts)
+
+---
+
+## 5. Syntax-Directed Translation (Chapter 5)
+
+### 5.1 Definitions, Attributes & Evaluation Order
 - **Core Concepts:**
   - [[Syntax-Directed Definitions and Translation Schemes]] (Declarative SDD vs imperative SDT, grammar attributes, dependency graphs, cycle detection, topological sort)
   - [[Synthesized and Inherited Attributes]] (Bottom-up synthesis vs top-down/left-to-right inheritance, terminal token constraints, scope propagation)
@@ -23,9 +82,9 @@ This topic map organizes all knowledge notes derived from Part II of CSE 309 (Co
 
 ---
 
-## 2. Intermediate-Code Generation (Chapter 6)
+## 6. Intermediate-Code Generation (Chapter 6)
 
-### 2.1 Representations, Declarations, Expressions & Control Flow
+### 6.1 Representations, Declarations, Expressions & Control Flow
 - **Core Concepts:**
   - [[Intermediate Representations and Three-Address Code]] (Why IR, modularity, retargetability, TAC instruction types, Quadruples, Triples, Indirect Triples, SSA form)
   - [[Type Expressions and Storage Layout]] (Basic types, array/record/pointer/function constructors, structural vs nominal equivalence, relative offsets, symbol table environment chaining)
@@ -45,9 +104,9 @@ This topic map organizes all knowledge notes derived from Part II of CSE 309 (Co
 
 ---
 
-## 3. Run-Time Environments (Chapter 7)
+## 7. Run-Time Environments (Chapter 7)
 
-### 3.1 Memory Layout, Stack Frames, Scoping & Garbage Collection
+### 7.1 Memory Layout, Stack Frames, Scoping & Garbage Collection
 - **Core Concepts:**
   - [[Run-Time Storage Organization and Activation Records]] (Code, Static, Heap, Stack layout; Activation trees; AR structure: parameters, return value, dynamic link, static link, machine status, locals, temporaries)
   - [[Calling Sequences and Stack Frame Management]] (Division of labor between caller and callee, frame pointer $fp$ vs stack pointer $sp$, handling closures on heap)
@@ -66,9 +125,9 @@ This topic map organizes all knowledge notes derived from Part II of CSE 309 (Co
 
 ---
 
-## 4. Code Generation (Chapter 8)
+## 8. Code Generation (Chapter 8)
 
-### 4.1 Target Architecture, Basic Blocks & Local Optimization
+### 8.1 Target Architecture, Basic Blocks & Local Optimization
 - **Core Concepts:**
   - [[Code Generation Issues and Target Machine Architecture]] (Instruction selection, register allocation/assignment, evaluation order, RISC machine model, instruction cost model)
   - [[Basic Blocks and Control Flow Graphs]] (Single-entry single-exit property, CFG edges, loop definitions, optimization hierarchy)
@@ -87,9 +146,9 @@ This topic map organizes all knowledge notes derived from Part II of CSE 309 (Co
 
 ---
 
-## 5. Register Allocation (Deep Dive)
+## 9. Register Allocation (Deep Dive)
 
-### 5.1 Linear Scan vs. Chaitin's Graph Coloring
+### 9.1 Linear Scan vs. Chaitin's Graph Coloring
 - **Core Concepts:**
   - [[Live Ranges and Live Intervals in Register Allocation]] (Live range definitions, 1D live intervals $[s, e]$, interference overlap, live range splitting)
   - [[Register Interference Graphs and Graph Coloring Principles]] (RIG definition, vertices, conflict edges, NP-completeness of $K$-coloring, Kempe's heuristic theorem)
@@ -105,9 +164,9 @@ This topic map organizes all knowledge notes derived from Part II of CSE 309 (Co
 
 ---
 
-## 6. Machine-Independent Optimization (Chapter 9)
+## 10. Machine-Independent Optimization (Chapter 9)
 
-### 6.1 Transformations, Common Subexpressions, Loops & Strength Reduction
+### 10.1 Transformations, Common Subexpressions, Loops & Strength Reduction
 - **Core Concepts:**
   - [[Principal Sources of Code Optimization]] (Criteria: safety, performance, compilation cost; redundancy causes; local vs global optimizations)
   - [[Global Common Subexpression Elimination and Copy Propagation]] (Available expressions, copy propagation rules, triggering dead code elimination, constant propagation/folding)

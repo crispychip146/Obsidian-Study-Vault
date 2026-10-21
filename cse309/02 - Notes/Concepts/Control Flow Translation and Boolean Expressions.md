@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 15
+order: 36
 ---
 
 # Control Flow Translation and Boolean Expressions
@@ -255,5 +255,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 15 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 36 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Translation of Expressions and Array References]] | ► **Next:** [[Backpatching in Intermediate Code Generation]]

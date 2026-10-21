@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 39
+order: 60
 ---
 
 # Basic Block Partitioning and Next-Use Computation Example
@@ -200,5 +200,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 39 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 60 of 76 | **Module 8:** Code Generation  
 > ◄ **Previous:** [[Peephole Optimization Techniques]] | ► **Next:** [[DAG-Based Basic Block Optimization Example]]

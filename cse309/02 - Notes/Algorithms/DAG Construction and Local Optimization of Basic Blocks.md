@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 36
+order: 57
 ---
 
 # DAG Construction and Local Optimization of Basic Blocks
@@ -210,5 +210,5 @@ Frequently tested on final examinations via hand-simulation of DAG Construction 
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 36 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 57 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Liveness and Next-Use Analysis within Basic Blocks]] | ► **Next:** [[A Simple Code Generator Algorithm]]

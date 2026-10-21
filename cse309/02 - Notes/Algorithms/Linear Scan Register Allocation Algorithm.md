@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 45
+order: 66
 ---
 
 # Linear Scan Register Allocation Algorithm
@@ -196,5 +196,5 @@ Frequently tested on final examinations via hand-simulation of Linear Scan Regis
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 45 of 55 | **Module 5: Register Allocation**  
+> 📖 **Reading Order:** Step 66 of 76 | **Module 5: Register Allocation**  
 > ◄ **Previous:** [[Register Interference Graphs and Graph Coloring Principles]] | ► **Next:** [[Chaitin's Graph Coloring Register Allocation Algorithm]]

@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 37
+order: 58
 ---
 
 # A Simple Code Generator Algorithm
@@ -155,5 +155,5 @@ Frequently tested on final examinations via hand-simulation of A Simple Code Gen
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 37 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 58 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[DAG Construction and Local Optimization of Basic Blocks]] | ► **Next:** [[Peephole Optimization Techniques]]

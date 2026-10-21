@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 55
+order: 76
 ---
 
 # Problem — Quicksort Loop Induction Variable Strength Reduction
@@ -198,5 +198,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 55 of 55 | **Module 6:** Machine-Independent Optimization  
+> 📖 **Reading Order:** Step 76 of 76 | **Module 10:** Machine-Independent Optimization  
 > ◄ **Previous:** [[Quicksort Partition Loop Complete Optimization Example]] | ► **Next:** *End of Course*

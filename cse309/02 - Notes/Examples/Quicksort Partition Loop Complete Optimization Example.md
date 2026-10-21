@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 54
+order: 75
 ---
 
 # Quicksort Partition Loop Complete Optimization Example
@@ -197,5 +197,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 54 of 55 | **Module 6:** Machine-Independent Optimization  
+> 📖 **Reading Order:** Step 75 of 76 | **Module 10:** Machine-Independent Optimization  
 > ◄ **Previous:** [[Loop Optimizations and Strength Reduction]] | ► **Next:** [[Problem — Quicksort Loop Induction Variable Strength Reduction]]

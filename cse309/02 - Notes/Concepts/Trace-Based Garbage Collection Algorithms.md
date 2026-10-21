@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 26
+order: 47
 ---
 
 # Trace-Based Garbage Collection Algorithms
@@ -165,5 +165,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 26 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 47 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Garbage Collection Fundamentals and Reference Counting]] | ► **Next:** [[Mark-and-Sweep Garbage Collection Algorithm]]

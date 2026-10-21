@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 29
+order: 50
 ---
 
 # Display Maintenance and Non-Local Access Simulation Example
@@ -205,5 +205,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 29 of 55 | **Module 3:** Run-Time Environments  
+> 📖 **Reading Order:** Step 50 of 76 | **Module 7:** Run-Time Environments  
 > ◄ **Previous:** [[Copying Garbage Collection Algorithm]] | ► **Next:** [[Garbage Collection Trace and Compaction Example]]

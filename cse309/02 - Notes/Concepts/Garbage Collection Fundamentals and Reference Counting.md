@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 25
+order: 46
 ---
 
 # Garbage Collection Fundamentals and Reference Counting
@@ -233,5 +233,5 @@ To conquer cyclic leaks and eliminate pointer assignment overhead, modern runtim
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 25 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 46 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Heap Memory Management and Allocation Strategies]] | ► **Next:** [[Trace-Based Garbage Collection Algorithms]]

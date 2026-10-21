@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 9
+order: 30
 ---
 
 # Problem — Desk Calculator SDD and Annotated Parse Tree
@@ -280,5 +280,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 09 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 30 of 76 | **Module 5:** Syntax-Directed Translation  
 > ◄ **Previous:** [[Infix to Postfix and Prefix SDT Translation Example]] | ► **Next:** [[Intermediate Representations and Three-Address Code]]

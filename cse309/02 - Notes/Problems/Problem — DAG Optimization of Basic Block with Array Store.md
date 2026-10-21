@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 42
+order: 63
 ---
 
 # Problem — DAG Optimization of Basic Block with Array Store
@@ -187,5 +187,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 42 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 63 of 76 | **Module 8:** Code Generation  
 > ◄ **Previous:** [[Problem — Basic Block Partitioning and Next-Use Table]] | ► **Next:** [[Live Ranges and Live Intervals in Register Allocation]]

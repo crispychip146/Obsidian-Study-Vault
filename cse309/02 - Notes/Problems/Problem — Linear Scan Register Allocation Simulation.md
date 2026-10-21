@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 49
+order: 70
 ---
 
 # Problem — Linear Scan Register Allocation Simulation
@@ -211,5 +211,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 49 of 55 | **Module 5:** Register Allocation  
+> 📖 **Reading Order:** Step 70 of 76 | **Module 9:** Register Allocation  
 > ◄ **Previous:** [[Chaitin's Graph Coloring Register Allocation Example]] | ► **Next:** [[Problem — Chaitin Graph Coloring Register Allocation]]

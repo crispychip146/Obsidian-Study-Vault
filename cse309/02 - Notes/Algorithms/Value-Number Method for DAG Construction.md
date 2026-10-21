@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 11
+order: 32
 ---
 
 # Value-Number Method for DAG Construction
@@ -310,5 +310,5 @@ Frequently tested on final examinations via hand-simulation of Value-Number Meth
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 11 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 32 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Intermediate Representations and Three-Address Code]] | ► **Next:** [[Type Expressions and Storage Layout]]

@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 41
+order: 62
 ---
 
 # Problem — Basic Block Partitioning and Next-Use Table
@@ -210,5 +210,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 41 of 55 | **Module 4:** Code Generation  
+> 📖 **Reading Order:** Step 62 of 76 | **Module 8:** Code Generation  
 > ◄ **Previous:** [[DAG-Based Basic Block Optimization Example]] | ► **Next:** [[Problem — DAG Optimization of Basic Block with Array Store]]

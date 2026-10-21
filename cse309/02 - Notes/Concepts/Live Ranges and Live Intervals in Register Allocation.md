@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 43
+order: 64
 ---
 
 # Live Ranges and Live Intervals in Register Allocation
@@ -158,5 +158,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 43 of 55 | **Module 5: Register Allocation**  
+> 📖 **Reading Order:** Step 64 of 76 | **Module 5: Register Allocation**  
 > ◄ **Previous:** [[Problem — DAG Optimization of Basic Block with Array Store]] | ► **Next:** [[Register Interference Graphs and Graph Coloring Principles]]

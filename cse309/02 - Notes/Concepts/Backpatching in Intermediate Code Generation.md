@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 16
+order: 37
 ---
 
 # Backpatching in Intermediate Code Generation
@@ -189,5 +189,5 @@ How can a single-pass compiler emit a branch instruction when it has no idea whe
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 16 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 37 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Control Flow Translation and Boolean Expressions]] | ► **Next:** [[Backpatching Control-Flow Code Generation Algorithm]]

@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 32
+order: 53
 ---
 
 # Code Generation Issues and Target Machine Architecture
@@ -159,5 +159,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 32 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 53 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Problem — Activation Record and Display Table Tracing]] | ► **Next:** [[Basic Blocks and Control Flow Graphs]]

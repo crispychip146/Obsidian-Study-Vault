@@ -2,7 +2,7 @@
 type: problem
 course: cse309
 status: active
-order: 50
+order: 71
 ---
 
 # Problem — Chaitin Graph Coloring Register Allocation
@@ -213,5 +213,5 @@ Standard BUET CSE 309 final examination problem testing syllabus Chapter 5, 6, 7
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 50 of 55 | **Module 5:** Register Allocation  
+> 📖 **Reading Order:** Step 71 of 76 | **Module 9:** Register Allocation  
 > ◄ **Previous:** [[Problem — Linear Scan Register Allocation Simulation]] | ► **Next:** [[Principal Sources of Code Optimization]]

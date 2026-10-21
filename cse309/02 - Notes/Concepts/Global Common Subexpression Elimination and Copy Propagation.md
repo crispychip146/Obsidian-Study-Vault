@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 52
+order: 73
 ---
 
 # Global Common Subexpression Elimination and Copy Propagation
@@ -158,5 +158,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 52 of 55 | **Module 6: Machine-Independent Optimization**  
+> 📖 **Reading Order:** Step 73 of 76 | **Module 6: Machine-Independent Optimization**  
 > ◄ **Previous:** [[Principal Sources of Code Optimization]] | ► **Next:** [[Loop Optimizations and Strength Reduction]]

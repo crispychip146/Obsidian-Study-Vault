@@ -2,7 +2,7 @@
 type: formula
 course: cse309
 status: active
-order: 13
+order: 34
 ---
 
 # Multi-Dimensional Array Addressing Formulas
@@ -176,5 +176,5 @@ Verified against manual memory walk: Row 0 spans 1000-1011 (12 bytes), A[1][0] a
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 13 of 55 | **Module 2:** Intermediate Code Generation  
+> 📖 **Reading Order:** Step 34 of 76 | **Module 6:** Intermediate Code Generation  
 > ◄ **Previous:** [[Type Expressions and Storage Layout]] | ► **Next:** [[Translation of Expressions and Array References]]

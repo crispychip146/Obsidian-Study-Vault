@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 1
+order: 22
 ---
 
 # Syntax-Directed Definitions and Translation Schemes
@@ -271,5 +271,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 01 of 55 | **Module 1: Syntax-Directed Translation**  
-> ◄ **Previous:** *Start of Course* | ► **Next:** [[Synthesized and Inherited Attributes]]
+> 📖 **Reading Order:** Step 22 of 76 | **Module 1: Syntax-Directed Translation**  
+> ◄ **Previous:** [[Problem — SLR(1) Table Construction and Conflict Analysis]] | ► **Next:** [[Synthesized and Inherited Attributes]]

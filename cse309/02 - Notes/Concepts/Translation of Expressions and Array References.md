@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 14
+order: 35
 ---
 
 # Translation of Expressions and Array References
@@ -204,5 +204,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 14 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 35 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Multi-Dimensional Array Addressing Formulas]] | ► **Next:** [[Control Flow Translation and Boolean Expressions]]

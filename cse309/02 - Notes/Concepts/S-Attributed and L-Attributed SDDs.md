@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 3
+order: 24
 ---
 
 # S-Attributed and L-Attributed SDDs
@@ -227,5 +227,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 03 of 55 | **Module 1: Syntax-Directed Translation**  
+> 📖 **Reading Order:** Step 24 of 76 | **Module 1: Syntax-Directed Translation**  
 > ◄ **Previous:** [[Synthesized and Inherited Attributes]] | ► **Next:** [[Abstract Syntax Tree Construction with SDDs]]

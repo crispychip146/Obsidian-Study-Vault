@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 34
+order: 55
 ---
 
 # Basic Block Partitioning Algorithm
@@ -260,5 +260,5 @@ Frequently tested on final examinations via hand-simulation of Basic Block Parti
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 34 of 55 | **Module 4: Code Generation**  
+> 📖 **Reading Order:** Step 55 of 76 | **Module 4: Code Generation**  
 > ◄ **Previous:** [[Basic Blocks and Control Flow Graphs]] | ► **Next:** [[Liveness and Next-Use Analysis within Basic Blocks]]

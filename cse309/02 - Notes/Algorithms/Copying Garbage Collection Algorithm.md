@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 28
+order: 49
 ---
 
 # Copying Garbage Collection Algorithm
@@ -258,5 +258,5 @@ Frequently tested on final examinations via hand-simulation of Copying Garbage C
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 28 of 55 | **Module 3: Run-Time Environments**  
+> 📖 **Reading Order:** Step 49 of 76 | **Module 3: Run-Time Environments**  
 > ◄ **Previous:** [[Mark-and-Sweep Garbage Collection Algorithm]] | ► **Next:** [[Display Maintenance and Non-Local Access Simulation Example]]

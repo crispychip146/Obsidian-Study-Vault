@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 12
+order: 33
 ---
 
 # Type Expressions and Storage Layout
@@ -291,5 +291,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 12 of 55 | **Module 2: Intermediate Code Generation**  
+> 📖 **Reading Order:** Step 33 of 76 | **Module 2: Intermediate Code Generation**  
 > ◄ **Previous:** [[Value-Number Method for DAG Construction]] | ► **Next:** [[Multi-Dimensional Array Addressing Formulas]]

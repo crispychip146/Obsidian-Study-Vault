@@ -2,7 +2,7 @@
 type: concept
 course: cse309
 status: active
-order: 51
+order: 72
 ---
 
 # Principal Sources of Code Optimization
@@ -144,5 +144,5 @@ Tested regularly in compiler examinations via syntax-directed translation proofs
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 51 of 55 | **Module 6: Machine-Independent Optimization**  
+> 📖 **Reading Order:** Step 72 of 76 | **Module 6: Machine-Independent Optimization**  
 > ◄ **Previous:** [[Problem — Chaitin Graph Coloring Register Allocation]] | ► **Next:** [[Global Common Subexpression Elimination and Copy Propagation]]

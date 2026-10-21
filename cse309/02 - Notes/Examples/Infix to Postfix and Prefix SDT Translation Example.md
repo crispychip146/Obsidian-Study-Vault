@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 8
+order: 29
 ---
 
 # Infix to Postfix and Prefix SDT Translation Example
@@ -263,5 +263,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 08 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 29 of 76 | **Module 5:** Syntax-Directed Translation  
 > ◄ **Previous:** [[Arithmetic Expression Desk Calculator SDD Example]] | ► **Next:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]]

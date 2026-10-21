@@ -2,7 +2,7 @@
 type: example
 course: cse309
 status: active
-order: 7
+order: 28
 ---
 
 # Arithmetic Expression Desk Calculator SDD Example
@@ -271,5 +271,5 @@ Extract the general procedure: parse/partition input, construct intermediate dat
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 07 of 55 | **Module 1:** Syntax-Directed Translation  
+> 📖 **Reading Order:** Step 28 of 76 | **Module 5:** Syntax-Directed Translation  
 > ◄ **Previous:** [[Bottom-Up Evaluation of L-Attributed SDDs]] | ► **Next:** [[Infix to Postfix and Prefix SDT Translation Example]]

@@ -2,7 +2,7 @@
 type: algorithm
 course: cse309
 status: active
-order: 46
+order: 67
 ---
 
 # Chaitin's Graph Coloring Register Allocation Algorithm
@@ -178,5 +178,5 @@ Frequently tested on final examinations via hand-simulation of Chaitin's Graph C
 
 ## Navigation
 
-> 📖 **Reading Order:** Step 46 of 55 | **Module 5: Register Allocation**  
+> 📖 **Reading Order:** Step 67 of 76 | **Module 5: Register Allocation**  
 > ◄ **Previous:** [[Linear Scan Register Allocation Algorithm]] | ► **Next:** [[Linear Scan Register Allocation Step-by-Step Example]]

@@ -12,89 +12,136 @@ Compiler structure, lexical analysis, syntax analysis, syntax-directed translati
 
 ---
 
-# Master Reading Order Roadmap (Part II: Synthesis & Back End)
+# Master Reading Order Roadmap (Complete 76-Step Curriculum)
 
-Follow this 55-step sequential roadmap for complete conceptual mastery and exam readiness:
+Follow this 76-step sequential roadmap for complete conceptual mastery and exam readiness:
 
-### Module 1: Syntax-Directed Translation (Chapter 5)
-- [ ] **Step 01:** [[Syntax-Directed Definitions and Translation Schemes]] *(Concept)*
-- [ ] **Step 02:** [[Synthesized and Inherited Attributes]] *(Concept)*
-- [ ] **Step 03:** [[S-Attributed and L-Attributed SDDs]] *(Concept)*
-- [ ] **Step 04:** [[Abstract Syntax Tree Construction with SDDs]] *(Concept)*
-- [ ] **Step 05:** [[Eliminating Left Recursion from SDTs]] *(Algorithm)*
-- [ ] **Step 06:** [[Bottom-Up Evaluation of L-Attributed SDDs]] *(Algorithm)*
-- [ ] **Step 07:** [[Arithmetic Expression Desk Calculator SDD Example]] *(Example)*
-- [ ] **Step 08:** [[Infix to Postfix and Prefix SDT Translation Example]] *(Example)*
-- [ ] **Step 09:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]] *(Problem `Q-CSE309-001`)*
+### Module 1: Compiler Architecture & Language Processors
+- [ ] **Step 01:** [[Language Processing System and Translators]] *(Concept)*
+- [ ] **Step 02:** [[Structure and Phases of a Compiler]] *(Concept)*
 
-### Module 2: Intermediate Code Generation (Chapter 6)
-- [ ] **Step 10:** [[Intermediate Representations and Three-Address Code]] *(Concept)*
-- [ ] **Step 11:** [[Value-Number Method for DAG Construction]] *(Algorithm)*
-- [ ] **Step 12:** [[Type Expressions and Storage Layout]] *(Concept)*
-- [ ] **Step 13:** [[Multi-Dimensional Array Addressing Formulas]] *(Formula)*
-- [ ] **Step 14:** [[Translation of Expressions and Array References]] *(Concept)*
-- [ ] **Step 15:** [[Control Flow Translation and Boolean Expressions]] *(Concept)*
-- [ ] **Step 16:** [[Backpatching in Intermediate Code Generation]] *(Concept)*
-- [ ] **Step 17:** [[Backpatching Control-Flow Code Generation Algorithm]] *(Algorithm)*
-- [ ] **Step 18:** [[Array Reference and Boolean Control-Flow TAC Generation Example]] *(Example)*
-- [ ] **Step 19:** [[Problem — Array Reference Three-Address Code Generation]] *(Problem `Q-CSE309-002`)*
-- [ ] **Step 20:** [[Problem — Backpatching Boolean Expression Translation]] *(Problem `Q-CSE309-003`)*
+### Module 2: Lexical Analysis
+- [ ] **Step 03:** [[Lexical Analysis Fundamentals]] *(Concept)*
+- [ ] **Step 04:** [[Input Buffering and Sentinel Techniques]] *(Concept)*
+- [ ] **Step 05:** [[Specification and Recognition of Tokens]] *(Concept)*
+- [ ] **Step 06:** [[Lexical Analyzer Generation with Lex]] *(Algorithm)*
+- [ ] **Step 07:** [[Token Recognition and Lex Specification Example]] *(Example)*
+- [ ] **Step 08:** [[Problem — Lexical Token Recognition and Buffer Simulation]] *(Problem `Q-CSE309-010`)*
 
-### Module 3: Run-Time Environments (Chapter 7)
-- [ ] **Step 21:** [[Run-Time Storage Organization and Activation Records]] *(Concept)*
-- [ ] **Step 22:** [[Calling Sequences and Stack Frame Management]] *(Concept)*
-- [ ] **Step 23:** [[Non-Local Variable Access in Static and Dynamic Scopes]] *(Concept)*
-- [ ] **Step 24:** [[Heap Memory Management and Allocation Strategies]] *(Concept)*
-- [ ] **Step 25:** [[Garbage Collection Fundamentals and Reference Counting]] *(Concept)*
-- [ ] **Step 26:** [[Trace-Based Garbage Collection Algorithms]] *(Concept)*
-- [ ] **Step 27:** [[Mark-and-Sweep Garbage Collection Algorithm]] *(Algorithm)*
-- [ ] **Step 28:** [[Copying Garbage Collection Algorithm]] *(Algorithm)*
-- [ ] **Step 29:** [[Display Maintenance and Non-Local Access Simulation Example]] *(Example)*
-- [ ] **Step 30:** [[Garbage Collection Trace and Compaction Example]] *(Example)*
-- [ ] **Step 31:** [[Problem — Activation Record and Display Table Tracing]] *(Problem `Q-CSE309-004`)*
+### Module 3: Syntax Analysis & Top-Down Parsing
+- [ ] **Step 09:** [[Context-Free Grammars and Syntax Analysis]] *(Concept)*
+- [ ] **Step 10:** [[Elimination of Left Recursion and Left Factoring Algorithms]] *(Algorithm)*
+- [ ] **Step 11:** [[FIRST and FOLLOW Sets Formulas]] *(Formula)*
+- [ ] **Step 12:** [[Top-Down and Predictive Parsing]] *(Concept)*
+- [ ] **Step 13:** [[LL(1) Parsing Table Construction and Execution Algorithm]] *(Algorithm)*
+- [ ] **Step 14:** [[LL(1) Parser Construction and Simulation Example]] *(Example)*
+- [ ] **Step 15:** [[Problem — LL(1) Grammar Verification and Parsing Table Construction]] *(Problem `Q-CSE309-011`)*
 
-### Module 4: Code Generation (Chapter 8)
-- [ ] **Step 32:** [[Code Generation Issues and Target Machine Architecture]] *(Concept)*
-- [ ] **Step 33:** [[Basic Blocks and Control Flow Graphs]] *(Concept)*
-- [ ] **Step 34:** [[Basic Block Partitioning Algorithm]] *(Algorithm)*
-- [ ] **Step 35:** [[Liveness and Next-Use Analysis within Basic Blocks]] *(Concept)*
-- [ ] **Step 36:** [[DAG Construction and Local Optimization of Basic Blocks]] *(Algorithm)*
-- [ ] **Step 37:** [[A Simple Code Generator Algorithm]] *(Algorithm)*
-- [ ] **Step 38:** [[Peephole Optimization Techniques]] *(Concept)*
-- [ ] **Step 39:** [[Basic Block Partitioning and Next-Use Computation Example]] *(Example)*
-- [ ] **Step 40:** [[DAG-Based Basic Block Optimization Example]] *(Example)*
-- [ ] **Step 41:** [[Problem — Basic Block Partitioning and Next-Use Table]] *(Problem `Q-CSE309-005`)*
-- [ ] **Step 42:** [[Problem — DAG Optimization of Basic Block with Array Store]] *(Problem `Q-CSE309-006`)*
+### Module 4: Bottom-Up Parsing & LR Parsers
+- [ ] **Step 16:** [[Bottom-Up Parsing, Reductions, and Handles]] *(Concept)*
+- [ ] **Step 17:** [[Shift-Reduce Parsing and Parsing Conflicts]] *(Concept)*
+- [ ] **Step 18:** [[LR(0) Items and the LR(0) Automaton]] *(Concept)*
+- [ ] **Step 19:** [[SLR(1) Parsing Table Construction and LR Parser Algorithm]] *(Algorithm)*
+- [ ] **Step 20:** [[SLR(1) Automaton and Parsing Table Construction Example]] *(Example)*
+- [ ] **Step 21:** [[Problem — SLR(1) Table Construction and Conflict Analysis]] *(Problem `Q-CSE309-012`)*
 
-### Module 5: Register Allocation (Deep Dive)
-- [ ] **Step 43:** [[Live Ranges and Live Intervals in Register Allocation]] *(Concept)*
-- [ ] **Step 44:** [[Register Interference Graphs and Graph Coloring Principles]] *(Concept)*
-- [ ] **Step 45:** [[Linear Scan Register Allocation Algorithm]] *(Algorithm)*
-- [ ] **Step 46:** [[Chaitin's Graph Coloring Register Allocation Algorithm]] *(Algorithm)*
-- [ ] **Step 47:** [[Linear Scan Register Allocation Step-by-Step Example]] *(Example)*
-- [ ] **Step 48:** [[Chaitin's Graph Coloring Register Allocation Example]] *(Example)*
-- [ ] **Step 49:** [[Problem — Linear Scan Register Allocation Simulation]] *(Problem `Q-CSE309-007`)*
-- [ ] **Step 50:** [[Problem — Chaitin Graph Coloring Register Allocation]] *(Problem `Q-CSE309-008`)*
+### Module 5: Syntax-Directed Translation (Chapter 5)
+- [ ] **Step 22:** [[Syntax-Directed Definitions and Translation Schemes]] *(Concept)*
+- [ ] **Step 23:** [[Synthesized and Inherited Attributes]] *(Concept)*
+- [ ] **Step 24:** [[S-Attributed and L-Attributed SDDs]] *(Concept)*
+- [ ] **Step 25:** [[Abstract Syntax Tree Construction with SDDs]] *(Concept)*
+- [ ] **Step 26:** [[Eliminating Left Recursion from SDTs]] *(Algorithm)*
+- [ ] **Step 27:** [[Bottom-Up Evaluation of L-Attributed SDDs]] *(Algorithm)*
+- [ ] **Step 28:** [[Arithmetic Expression Desk Calculator SDD Example]] *(Example)*
+- [ ] **Step 29:** [[Infix to Postfix and Prefix SDT Translation Example]] *(Example)*
+- [ ] **Step 30:** [[Problem — Desk Calculator SDD and Annotated Parse Tree]] *(Problem `Q-CSE309-001`)*
 
-### Module 6: Machine-Independent Optimization (Chapter 9)
-- [ ] **Step 51:** [[Principal Sources of Code Optimization]] *(Concept)*
-- [ ] **Step 52:** [[Global Common Subexpression Elimination and Copy Propagation]] *(Concept)*
-- [ ] **Step 53:** [[Loop Optimizations and Strength Reduction]] *(Concept)*
-- [ ] **Step 54:** [[Quicksort Partition Loop Complete Optimization Example]] *(Example)*
-- [ ] **Step 55:** [[Problem — Quicksort Loop Induction Variable Strength Reduction]] *(Problem `Q-CSE309-009`)*
+### Module 6: Intermediate Code Generation (Chapter 6)
+- [ ] **Step 31:** [[Intermediate Representations and Three-Address Code]] *(Concept)*
+- [ ] **Step 32:** [[Value-Number Method for DAG Construction]] *(Algorithm)*
+- [ ] **Step 33:** [[Type Expressions and Storage Layout]] *(Concept)*
+- [ ] **Step 34:** [[Multi-Dimensional Array Addressing Formulas]] *(Formula)*
+- [ ] **Step 35:** [[Translation of Expressions and Array References]] *(Concept)*
+- [ ] **Step 36:** [[Control Flow Translation and Boolean Expressions]] *(Concept)*
+- [ ] **Step 37:** [[Backpatching in Intermediate Code Generation]] *(Concept)*
+- [ ] **Step 38:** [[Backpatching Control-Flow Code Generation Algorithm]] *(Algorithm)*
+- [ ] **Step 39:** [[Array Reference and Boolean Control-Flow TAC Generation Example]] *(Example)*
+- [ ] **Step 40:** [[Problem — Array Reference Three-Address Code Generation]] *(Problem `Q-CSE309-002`)*
+- [ ] **Step 41:** [[Problem — Backpatching Boolean Expression Translation]] *(Problem `Q-CSE309-003`)*
+
+### Module 7: Run-Time Environments (Chapter 7)
+- [ ] **Step 42:** [[Run-Time Storage Organization and Activation Records]] *(Concept)*
+- [ ] **Step 43:** [[Calling Sequences and Stack Frame Management]] *(Concept)*
+- [ ] **Step 44:** [[Non-Local Variable Access in Static and Dynamic Scopes]] *(Concept)*
+- [ ] **Step 45:** [[Heap Memory Management and Allocation Strategies]] *(Concept)*
+- [ ] **Step 46:** [[Garbage Collection Fundamentals and Reference Counting]] *(Concept)*
+- [ ] **Step 47:** [[Trace-Based Garbage Collection Algorithms]] *(Concept)*
+- [ ] **Step 48:** [[Mark-and-Sweep Garbage Collection Algorithm]] *(Algorithm)*
+- [ ] **Step 49:** [[Copying Garbage Collection Algorithm]] *(Algorithm)*
+- [ ] **Step 50:** [[Display Maintenance and Non-Local Access Simulation Example]] *(Example)*
+- [ ] **Step 51:** [[Garbage Collection Trace and Compaction Example]] *(Example)*
+- [ ] **Step 52:** [[Problem — Activation Record and Display Table Tracing]] *(Problem `Q-CSE309-004`)*
+
+### Module 8: Code Generation (Chapter 8)
+- [ ] **Step 53:** [[Code Generation Issues and Target Machine Architecture]] *(Concept)*
+- [ ] **Step 54:** [[Basic Blocks and Control Flow Graphs]] *(Concept)*
+- [ ] **Step 55:** [[Basic Block Partitioning Algorithm]] *(Algorithm)*
+- [ ] **Step 56:** [[Liveness and Next-Use Analysis within Basic Blocks]] *(Concept)*
+- [ ] **Step 57:** [[DAG Construction and Local Optimization of Basic Blocks]] *(Algorithm)*
+- [ ] **Step 58:** [[A Simple Code Generator Algorithm]] *(Algorithm)*
+- [ ] **Step 59:** [[Peephole Optimization Techniques]] *(Concept)*
+- [ ] **Step 60:** [[Basic Block Partitioning and Next-Use Computation Example]] *(Example)*
+- [ ] **Step 61:** [[DAG-Based Basic Block Optimization Example]] *(Example)*
+- [ ] **Step 62:** [[Problem — Basic Block Partitioning and Next-Use Table]] *(Problem `Q-CSE309-005`)*
+- [ ] **Step 63:** [[Problem — DAG Optimization of Basic Block with Array Store]] *(Problem `Q-CSE309-006`)*
+
+### Module 9: Register Allocation (Deep Dive)
+- [ ] **Step 64:** [[Live Ranges and Live Intervals in Register Allocation]] *(Concept)*
+- [ ] **Step 65:** [[Register Interference Graphs and Graph Coloring Principles]] *(Concept)*
+- [ ] **Step 66:** [[Linear Scan Register Allocation Algorithm]] *(Algorithm)*
+- [ ] **Step 67:** [[Chaitin's Graph Coloring Register Allocation Algorithm]] *(Algorithm)*
+- [ ] **Step 68:** [[Linear Scan Register Allocation Step-by-Step Example]] *(Example)*
+- [ ] **Step 69:** [[Chaitin's Graph Coloring Register Allocation Example]] *(Example)*
+- [ ] **Step 70:** [[Problem — Linear Scan Register Allocation Simulation]] *(Problem `Q-CSE309-007`)*
+- [ ] **Step 71:** [[Problem — Chaitin Graph Coloring Register Allocation]] *(Problem `Q-CSE309-008`)*
+
+### Module 10: Machine-Independent Optimization (Chapter 9)
+- [ ] **Step 72:** [[Principal Sources of Code Optimization]] *(Concept)*
+- [ ] **Step 73:** [[Global Common Subexpression Elimination and Copy Propagation]] *(Concept)*
+- [ ] **Step 74:** [[Loop Optimizations and Strength Reduction]] *(Concept)*
+- [ ] **Step 75:** [[Quicksort Partition Loop Complete Optimization Example]] *(Example)*
+- [ ] **Step 76:** [[Problem — Quicksort Loop Induction Variable Strength Reduction]] *(Problem `Q-CSE309-009`)*
 
 ---
 
 # Syllabus & Knowledge Graph Mapping
 
-## 1. Compiler Fundamentals
-*(To be populated upon receipt of Part I material)*
+## 1. Compiler Architecture & Language Processors
+- [[Language Processing System and Translators]]
+- [[Structure and Phases of a Compiler]]
 
 ## 2. Lexical Analysis
-*(To be populated upon receipt of Part I material)*
+- [[Lexical Analysis Fundamentals]]
+- [[Input Buffering and Sentinel Techniques]]
+- [[Specification and Recognition of Tokens]]
+- [[Lexical Analyzer Generation with Lex]]
+- [[Token Recognition and Lex Specification Example]]
+- [[Problem — Lexical Token Recognition and Buffer Simulation]]
 
 ## 3. Syntax Analysis
-*(To be populated upon receipt of Part I material)*
+- [[Context-Free Grammars and Syntax Analysis]]
+- [[Elimination of Left Recursion and Left Factoring Algorithms]]
+- [[FIRST and FOLLOW Sets Formulas]]
+- [[Top-Down and Predictive Parsing]]
+- [[LL(1) Parsing Table Construction and Execution Algorithm]]
+- [[LL(1) Parser Construction and Simulation Example]]
+- [[Problem — LL(1) Grammar Verification and Parsing Table Construction]]
+- [[Bottom-Up Parsing, Reductions, and Handles]]
+- [[Shift-Reduce Parsing and Parsing Conflicts]]
+- [[LR(0) Items and the LR(0) Automaton]]
+- [[SLR(1) Parsing Table Construction and LR Parser Algorithm]]
+- [[SLR(1) Automaton and Parsing Table Construction Example]]
+- [[Problem — SLR(1) Table Construction and Conflict Analysis]]
 
 ## 4. Syntax-Directed Translation
 - [[Syntax-Directed Definitions and Translation Schemes]]
@@ -165,6 +212,7 @@ Follow this 55-step sequential roadmap for complete conceptual mastery and exam 
 
 # Sources & Course Materials
 
+- [[cse309/01 - Sources/Lectures/Rumi Sir Merged.pdf|Rumi Sir Merged.pdf]] (Lectures by Ahmed Mahir Sultan Rumi, Part I, covering Chapters 1, 3, 4: Compiler Architecture, Lexical Analysis, Top-Down and Bottom-Up Syntax Analysis)
 - [[cse309/01 - Sources/Lectures/KMS Merged.pdf|KMS Merged.pdf]] (Lectures by Khaled Mahmud Shahriar, Part II, covering Chapters 5–9 and Register Allocation)
 - **Course Textbook:** Alfred V. Aho, Monica S. Lam, Ravi Sethi, Jeffrey D. Ullman, *Compilers: Principles, Techniques, & Tools* (2nd Edition), Pearson/Addison Wesley, 2007.
 

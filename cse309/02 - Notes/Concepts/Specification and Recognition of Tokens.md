@@ -174,6 +174,69 @@ Handling unsigned integers, floating-point decimals, and scientific exponential 
 
 ---
 
+## Programmatic Implementation of Transition Diagrams
+
+How are transition diagrams translated into production code? A transition diagram is mechanically converted into a state machine function (e.g., `getRelop()`) using an integer `state` variable and a `switch-case` construct:
+
+```cpp
+TOKEN getRelop() {
+    int state = 0;
+    char c;
+    while (true) {
+        switch (state) {
+            case 0:
+                c = nextchar();
+                if (c == '<')      state = 1;
+                else if (c == '=') state = 5;
+                else if (c == '>') state = 6;
+                else fail(); // Not a relop; reset pointer and try next diagram
+                break;
+            case 1:
+                c = nextchar();
+                if (c == '=') return TOKEN(RELOP, LE);      // State 2 (no retraction)
+                else if (c == '>') return TOKEN(RELOP, NE); // State 3 (no retraction)
+                else {
+                    retract();                              // State 4* (retract 1 char)
+                    return TOKEN(RELOP, LT);
+                }
+            case 6:
+                c = nextchar();
+                if (c == '=') return TOKEN(RELOP, GE);      // State 7 (no retraction)
+                else {
+                    retract();                              // State 8* (retract 1 char)
+                    return TOKEN(RELOP, GT);
+                }
+            // Additional states ...
+        }
+    }
+}
+```
+
+### The Function of `fail()` and Pointer Resetting
+If the current character cannot transition from state 0 to any valid edge in `getRelop()`, the scanner invokes `fail()`:
+1. `fail()` resets the `forward` pointer back to `lexemeBegin`:
+   $$\text{forward} = \text{lexemeBegin}$$
+2. The scanner then activates the *next* candidate transition diagram (e.g., trying identifiers or numbers).
+3. If all candidate transition diagrams fail to match, `fail()` invokes lexical error recovery (e.g., character skipping in panic mode).
+
+---
+
+## Architectural Strategies for Orchestrating Multiple Transition Diagrams
+
+In a full compiler, the lexical analyzer must recognize dozens of token types (identifiers, numbers, relational operators, arithmetic operators, keywords). There are three fundamental architectural strategies to organize these diagrams:
+
+1. **Sequential Trial:**
+   - The scanner attempts transition diagrams one by one (e.g., first test `relop`, if `fail()` then test `id`, if `fail()` then test `number`).
+   - *Limitation:* Inefficient; requires repeatedly resetting the `forward` pointer back to `lexemeBegin` and re-reading characters from the buffer.
+2. **Parallel Trial:**
+   - The scanner feeds the current input character simultaneously into multiple active transition diagrams, tracking which ones remain in valid states.
+   - *Limitation:* Requires maintaining multiple active state threads or bitmaps.
+3. **Combined Single Transition Diagram (Standard / Lex Approach):**
+   - The compiler merges all individual transition diagrams into a single, unified Deterministic Finite Automaton (DFA) with a single shared start state.
+   - Because no two token patterns in the merged DFA have conflicting transitions from the start state (or conflicts are resolved via maximal munch and priority rules), the scanner reads each character **strictly once** without resetting pointers.
+
+---
+
 ## Important Properties and Guarantees
 
 - **Maximal Munch Property:** When navigating transition diagrams, scanners greedily consume characters as long as transitions exist to find the longest matching lexeme (e.g., recognizing `==` rather than two separate `=` tokens).

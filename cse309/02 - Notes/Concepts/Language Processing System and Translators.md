@@ -75,7 +75,10 @@ flowchart LR
 Modern runtime environments (such as Java JVM and .NET CLR) combine compilation and interpretation to achieve both portability and high execution performance:
 1. **Source to Bytecode:** A compiler (e.g., `javac`) translates high-level source code into an intermediate, architecture-neutral bytecode representation (`.class` files).
 2. **Virtual Machine Interpretation:** The Java Virtual Machine (JVM) interprets the bytecode, allowing identical binary files to run across diverse hardware architectures ("Write Once, Run Anywhere").
-3. **Just-In-Time (JIT) Compilation:** To eliminate the speed penalty of pure interpretation, modern JVMs (such as HotSpot or JRockit) monitor running code. Frequently executed loops and methods ("hot spots") are dynamically compiled into native machine code directly at runtime. Subsequent invocations execute native CPU instructions at full silicon speed.
+3. **Just-In-Time (JIT) Compilation (e.g., Oracle JRockit / HotSpot):**
+   - **Initial JIT Translation:** When a bytecode method is first invoked, the JIT compiles bytecode into native machine instructions on the fly and executes them directly. To keep application startup fast, initial JIT compilation is unoptimized.
+   - **Sampler-Thread Profiling:** In production JVMs like JRockit, a dedicated background **sampler thread** continuously monitors active threads to identify frequently executed code paths ("hot methods").
+   - **Adaptive Background Optimization:** Methods flagged as hot are earmarked for deep compiler optimization in the background. Subsequent calls to these hot methods jump directly to the heavily optimized native instructions, delivering C/C++ native execution speeds while preserving portability.
 
 ---
 
@@ -83,15 +86,53 @@ Modern runtime environments (such as Java JVM and .NET CLR) combine compilation 
 
 ### 1. The Preprocessor
 Before syntactic analysis begins, the preprocessor transforms the raw source stream:
-- **Macro Definition and Expansion:** Replaces symbolic macros (e.g., `#define PI 3.14159` or parameterized macros `#define RADTODEG(x) ((x) * 57.29578)`) with raw replacement text.
+- **Macro Definition and Expansion:** Replaces symbolic macros (e.g., `#define PI 3.14159` or parameterized macros `#define RADTODEG(x) ((x) * 57.29578)`) with raw replacement text. Parameterized macros must use strict parentheses around arguments to avoid operator precedence bugs.
 - **File Inclusion:** Copies entire header files directly into the source text (e.g., `#include <stdio.h>`).
 - **Rational Preprocessing / Language Extensions:** Augments older or simpler languages with advanced control flow structures (e.g., macro preprocessors converting Ratfor into Fortran).
-- **Conditional Compilation:** Filters out code blocks based on preprocessor conditions (e.g., `#ifdef DEBUG ... #endif`).
+- **Conditional Compilation (`#if` versus `if`):**
+  Directives like `#if`, `#ifdef`, `#ifndef`, `#elif`, `#else`, and `#endif` selectively include or exclude source code blocks prior to compilation:
+
+  | Characteristic | Preprocessor Directive (`#if`) | Programming Language Statement (`if`) |
+  |---|---|---|
+  | **Evaluation Time** | Evaluated at **preprocessor time** (compile time). | Evaluated at **runtime** by the CPU. |
+  | **Functionality** | Decides **whether code reaches the compiler** at all. | Decides **which already-compiled branch executes**. |
+  | **Binary Impact** | False branch is stripped completely; zero bytes in binary. | Both branches are compiled into the binary executable. |
+  | **Typical Use** | Cross-platform builds, feature toggles, debug flags. | Dynamic program logic based on user input / state. |
+
+  *Platform-Targeting Example:*
+  ```c
+  #ifdef _unix_
+      #include <unistd.h>      /* Compiled only when targeting Unix systems */
+  #elif defined _WIN32
+      #include <windows.h>     /* Compiled only when targeting 32/64-bit Windows */
+  #endif
+
+  #define DEBUG 1
+  #if DEBUG
+      printf("Debug mode enabled\n"); /* Stripped entirely if DEBUG is 0 */
+  #endif
+  ```
 
 ### 2. The Assembler
-Compilers frequently emit assembly language rather than raw binary because assembly is easier to produce, debug, and inspect. The **assembler** translates mnemonic assembly instructions (such as `MOV`, `ADD`, `JMP`) into binary machine language.
-- The output of the assembler is **Relocatable Machine Code** (object files like `.o` or `.obj`).
-- "Relocatable" means memory addresses are not fixed; the code assumes a base address of zero and contains relocation tables indicating which bytes must be modified when placed into actual memory.
+Compilers frequently emit assembly language rather than raw binary. Why maintain an explicit assembler step in the compiler pipeline?
+1. **Mechanical Translation:** Assembly languages have 1-to-1 correspondences with hardware opcodes. The translation is purely mechanical, table-driven, and straightforward to parse.
+2. **Modularity and Separation of Concerns:** Isolating binary instruction encoding into the assembler frees the compiler backend to focus on instruction selection and register allocation, without hardcoding machine-specific byte formats.
+
+#### Relocatable Machine Code and the Relocation Process
+The output of the assembler is **Relocatable Machine Code** (object files like `.o` or `.obj`).
+- Because a compiler does not know where an operating system will load a program in physical RAM, instructions are assembled starting at relative base address `0` (or `1`).
+- **Relocation** is the process of assigning load addresses for position-dependent code and data, adjusting internal branch targets and pointer addresses to reflect assigned locations.
+
+```mermaid
+flowchart LR
+    A["Compiled SUBR<br/>Base: 1<br/>Jump ST: loc 13 -> 5"] -->|Linker places at 120| B["Linked Executable<br/>Base: 120<br/>Jump ST: loc 133 -> 125"]
+    B -->|Loader places in RAM at 300| C["Loaded in RAM<br/>Base: 300<br/>Jump ST: loc 313 -> 305"]
+```
+
+*Concrete Relocation Trace (Knuth's Model):*
+1. **At Assembly Time:** Subroutine `SUBR` is compiled starting at relative location $1$. Location $13$ contains a jump instruction targeting statement `ST` at relative location $5$.
+2. **At Link Time:** When linked with external modules, `SUBR` is assigned base location $120$. The jump instruction moves to location $133$ ($120 + 13$), and its target address is relocated to point to location $125$ ($120 + 5$).
+3. **At Load Time:** When loaded into primary memory for execution, the OS assigns base address $300$. The jump instruction is relocated to location $313$ ($300 + 13$), and its target is updated to $305$ ($300 + 5$).
 
 ### 3. Linker versus Loader
 

@@ -38,6 +38,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-032 | 2026-10-17 | */02 - Notes/ | cse301, cse309, cse313, cse317 | User navigation relocation & link audit request | update | Relocated reading order navigation system from top banner down to bottom under '## Navigation' across all 269 notes; audited all wikilinks vault-wide and fixed broken links across course hubs, maps, question banks, and notes |
 | CHG-033 | 2026-10-21 | cse309/ | cse309 | Rumi Sir Merged.pdf | create | Created complete 21-step Part I learning system (Compiler Architecture, Lexical Analysis, Top-Down LL(1) and Bottom-Up SLR(1) parsing): 11 concepts, 4 algorithms, 1 formula, 3 worked examples, 3 solved problem notes (Q-CSE309-010 to 012); renumbered and integrated existing Part II notes to form a unified 10-module, 76-step curriculum with navigation at the bottom; updated Course Hub, Topic Map, Dependency Map, Question Bank, and State files |
 | CHG-034 | 2026-10-22 | Vault-wide | cse301, cse309, cse317, STATE | User formatting audit request | fix | Audited vault-wide formatting and link integrity: restored corrupted cse301 Question Bank (18 questions), fixed smushed frontmatter and duplicate headings in Benjamini-Hochberg note, eliminated MathJax delimiter clashes ($\$$ and \$$$) in LL(1) and SLR(1) notes, fixed newline-broken $\neq$ in AI definitions, escaped table cell pipes in STATE files, and verified 0 broken wikilinks |
+| CHG-035 | 2026-10-22 | cse309/ | cse309 | Rumi Sir Merged.pdf full topic audit | enrich | Deeply enriched Part I knowledge notes to achieve 100% granular slide coverage: added JRockit JIT profiling (sampler thread & hot methods), preprocessor #if vs if deep-dive and OS targeting, Knuth MIX relocatable machine code step-by-step trace, assembler pipeline rationale, complete AI compiler initiatives (Meta LLM Compiler, Cummins et al., feedback loops, LLM4Decompile), transition diagram C++ architecture (getRelop, fail, retract, and combining strategies), recursive-descent code architecture (match, for-loop procedure, and epsilon-production selection rules), and the 4 canonical syntax error recovery modes (panic-mode, phrase-level, error productions, global correction) with the viable-prefix property |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -79,3 +80,30 @@ This file tracks meaningful changes made to the knowledge base.
 - **Markdown Table Integrity:** Escaped unescaped pipes (`\|`) in mathematical expressions (`P(A\|B)`, `E[E[Y\|X]]`, `\|J\|=r`, `\|X-Y\|`, `if (a < b \|\| c < d)`) across `_system/STATE/notes.md` and `_system/STATE/questions.md`, ensuring all table rows match header column counts.
 - **Wikilink Integrity:** Added missing `cse301/` course prefixes to all 110 source references in `_system/STATE/notes.md`, `_system/STATE/sources.md`, and `_system/STATE/questions.md`. Fixed escaped pipe syntax inside wikilinks (`[[path|alias]]`).
 - **Audit Verification:** Verified 0 broken wikilinks across all 4,299 course wikilinks, 0 broken markdown links, 0 unclosed code/math blocks, and 100% gap-free sequential bidirectional navigation chains across all 4 courses.
+
+### 2026-10-22 — CSE 309 Granular Topic Audit & Lecture Enrichment (Rumi Sir Merged.pdf)
+
+- **Source Material:** `cse309/01 - Sources/Lectures/Rumi Sir Merged.pdf` (727 slides / 390 distinct frames across 5 decks).
+- **Task Overview:** Comprehensive audit comparing every slide topic, code snippet, and architectural model from the slides against the 21 Part I notes in `cse309`.
+- **Enriched Topics:**
+  1. `Language Processing System and Translators.md` (Step 01):
+     - Added JRockit JVM JIT multi-tiered compilation mechanics (initial unoptimized compilation for quick startup, background sampler-thread profiling of active threads, and adaptive native optimization of hot methods).
+     - Added dedicated preprocessor conditional compilation breakdown (`#if` preprocessor-time condition deciding whether code reaches the compiler vs `if` runtime condition deciding execution, with `_WIN32` and `_unix_` platform-targeting examples).
+     - Added Assembler pipeline rationale (why maintain an explicit assembler step) and Knuth's concrete MIX relocatable machine code address relocation trace across assembly, link, and load times (locations 1 -> 120 -> 300).
+  2. `Structure and Phases of a Compiler.md` (Step 02):
+     - Added Data-Flow Analysis Engines under Compiler Construction Tools.
+     - Deepened Section 2 on AI in Compiler Design with four major modern initiatives from slides 121–128: Cummins et al. LLVM transformer optimization, Meta LLM Compiler (546B tokens of LLVM IR/assembly on 7B/13B models), Compiler-Generated Feedback loops (`LLM proposes -> Compiler verifies -> Feedback -> Retry`), and LLM4Decompile (1.3B–33B models for binary-to-C decompilation).
+  3. `Specification and Recognition of Tokens.md` (Step 05):
+     - Added programmatic C++ architecture of transition diagrams: `getRelop()` simulation using `switch-case`, `nextchar()`, `retract()`, and `fail()`.
+     - Explained the role of `fail()`: resetting `forward = lexemeBegin` to permit trial of alternative diagrams.
+     - Detailed the three architectural choices for orchestrating multiple diagrams (Sequential trial, Parallel trial, and Combined Single Transition Diagram DFA).
+  4. `Context-Free Grammars and Syntax Analysis.md` (Step 09):
+     - Added dedicated Section on Syntax Error Handling and Recovery Strategies: classification of programming errors (Lexical, Syntactic, Semantic, Logical) with slide examples.
+     - Formulated the Viable-Prefix Property (early error detection guarantee shared by LL and LR parsers).
+     - Detailed the four canonical syntax error recovery strategies: Panic-Mode Recovery, Phrase-Level Recovery, Error Productions, and Global Correction (minimum edit distance).
+  5. `Top-Down and Predictive Parsing.md` (Step 12):
+     - Added the programmatic code architecture of recursive-descent predictive parsers: the `match(terminal)` procedure, procedural structure, and concrete C code implementation for `stmt -> for ( optexpr ; optexpr ; optexpr ) stmt`.
+     - Formalized the decision rule for $\epsilon$-productions: using $\epsilon$ when lookahead is in $\text{FOLLOW}(A)$.
+  6. `Course Hub.md`:
+     - Cleaned wikilink targets for Topic Map, Dependency Map, Quick Revision, and Question Bank.
+- **Verification:** 100% gap-free reading chain, 0 broken wikilinks, balanced LaTeX math blocks.

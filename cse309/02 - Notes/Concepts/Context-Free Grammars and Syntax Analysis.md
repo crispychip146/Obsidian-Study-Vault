@@ -164,6 +164,53 @@ $$\begin{aligned}
 
 ---
 
+## Syntax Error Handling and Recovery Strategies
+
+Few programming languages are designed with error handling in mind; error recovery is largely left to the ingenuity of the compiler engineer. 
+
+### 1. Classification of Programming Errors
+Errors occur at distinct layers of the compiler pipeline:
+- **Lexical Errors:** Character-level anomalies (e.g., misspelled identifiers like `elipsesize`, unclosed string literals).
+- **Syntactic Errors:** Grammatical rule violations (e.g., misplaced semicolons, unbalanced braces `{}`, or a `case` label appearing outside an enclosing `switch`).
+- **Semantic Errors:** Type and scope violations (e.g., returning an integer from a function with return type `void`, or calling an uninitialized function pointer).
+- **Logical Errors:** Flaws in algorithm reasoning that produce valid syntax and semantics but unintended runtime behavior (e.g., writing `if (x = 5)` instead of `if (x == 5)` in C).
+
+### 2. Goals of the Parser Error Handler
+1. Report the location and nature of each error clearly and accurately.
+2. Recover from each error quickly enough to diagnose subsequent genuine errors.
+3. Introduce zero overhead to the processing of syntactically correct programs.
+
+### 3. The Viable-Prefix Property
+Both **LL** (predictive) and **LR** (bottom-up) parsers possess the **viable-prefix property**:
+- The parser detects an error **at the earliest possible left-to-right moment**—specifically, as soon as it sees a prefix of the input token stream that cannot be completed to form any valid sentence in the language.
+- The parser never consumes a single token past the point where a syntax error becomes inescapable.
+
+### 4. The Four Canonical Syntax Error Recovery Strategies
+
+```mermaid
+flowchart TD
+    EH["Syntax Error Detected"] --> PM["1. Panic-Mode Recovery<br/>(Skip tokens until synchronizer)"]
+    EH --> PL["2. Phrase-Level Recovery<br/>(Local string replacement/insertion)"]
+    EH --> EP["3. Error Productions<br/>(Augment grammar with common bugs)"]
+    EH --> GC["4. Global Correction<br/>(Algorithmic minimum edit distance)"]
+```
+
+1. **Panic-Mode Recovery:**
+   - The parser discards incoming tokens one at a time until it encounters a member of a pre-selected set of **synchronizing tokens** (typically delimiters like `;`, `}`, or `)`).
+   - Once a synchronizing token is found, the parser clears the current grammatical construct and resumes parsing.
+   - *Advantages:* Simplest to implement; guaranteed never to enter an infinite loop.
+2. **Phrase-Level Recovery:**
+   - The parser performs a local edit on the remaining input stream (e.g., replacing a comma with a semicolon, deleting an extraneous comma, or inserting a missing parenthesis).
+   - *Drawback:* Risky; incorrect repairs can cause confusing cascading errors or trigger infinite parser loops.
+3. **Error Productions:**
+   - The compiler writer anticipates common programmer errors and explicitly adds them as valid production rules in the grammar (e.g., adding $E \to E \; E$ to diagnose missing operators).
+   - When an error production is triggered, the parser prints a customized, highly specific error message and continues parsing smoothly.
+4. **Global Correction:**
+   - The parser finds the closest syntactically valid program to the erroneous source code by computing the **minimum edit distance** (minimum number of character insertions, deletions, and replacements).
+   - *Drawback:* Computationally expensive ($O(n^3)$ time complexity); impractical for large production codebases, but serves as a theoretical gold standard.
+
+---
+
 ## Important Properties and Guarantees
 
 - **Undecidability of Ambiguity:** There is no general algorithm that can inspect an arbitrary Context-Free Grammar and decide whether it is ambiguous. (Proved via reduction from the Post Correspondence Problem).

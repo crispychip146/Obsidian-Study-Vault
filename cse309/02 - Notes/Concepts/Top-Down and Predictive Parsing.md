@@ -53,6 +53,58 @@ Yes—if for every nonterminal $A$, the current lookahead token uniquely identif
 
 ---
 
+## Programmatic Architecture of Recursive-Descent Predictive Parsers
+
+A recursive-descent parser implements a Context-Free Grammar as a collection of recursive procedures:
+1. **One Procedure per Nonterminal:** For every nonterminal $A \in V$, there is a dedicated function `void A()`.
+2. **The `match(terminal)` Procedure:** Compares the current lookahead symbol with the expected terminal $t$. If they match, it advances to the next token; otherwise, it raises a syntax error:
+   ```c
+   void match(terminal t) {
+       if (lookahead == t) {
+           lookahead = nextTerminal();
+       } else {
+           reportSyntaxError("Unexpected token");
+       }
+   }
+   ```
+3. **Execution Pattern for Productions:**
+   If nonterminal $A$ expands to $X_1 X_2 \dots X_k$:
+   - For every terminal $X_i$: call `match(X_i)`.
+   - For every nonterminal $X_i$: call `X_i()`.
+
+### Concrete Example: Parsing a C `for` Loop
+Consider production:
+$$\text{stmt} \to \mathbf{for} \; ( \; \text{optexpr} \; ; \; \text{optexpr} \; ; \; \text{optexpr} \; ) \; \text{stmt}$$
+
+The procedure `stmt()` executes code matching the structure of the production body:
+```c
+void stmt() {
+    switch (lookahead) {
+        case FOR:
+            match(FOR);
+            match('(');
+            optexpr();
+            match(';');
+            optexpr();
+            match(';');
+            optexpr();
+            match(')');
+            stmt();
+            return;
+        // other statement cases (if, while, expr, etc.) ...
+        default:
+            reportSyntaxError("Expected statement");
+    }
+}
+```
+
+### When to Use $\epsilon$-Productions
+When should a procedure choose an $\epsilon$-production?
+- **Decision Rule:** A procedure for nonterminal $A$ uses an $\epsilon$-production ($A \to \epsilon$) as a default **if the lookahead symbol belongs to $\text{FOLLOW}(A)$** (or when no non-$\epsilon$ production matches).
+- **Execution:** In `optexpr()`, if the lookahead symbol is `;` (which is in $\text{FOLLOW}(\text{optexpr})$), the procedure simply returns **without consuming the `;`**, allowing the subsequent `match(';')` in `stmt()` to consume it!
+
+---
+
 ## What Does LL(1) Stand For?
 
 Predictive parsers operate on **LL(1)** grammars:

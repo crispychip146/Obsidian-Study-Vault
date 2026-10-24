@@ -47,11 +47,11 @@ flowchart TD
     P1 -->|Token Stream| P2["2. Syntax Analyzer (Parser)"]
     P2 -->|Syntax Tree| P3["3. Semantic Analyzer"]
     P3 -->|Decorated Syntax Tree| P4["4. Intermediate Code Generator"]
-    P4 -->|Intermediate Code (TAC)| P5["5. Machine-Independent Optimizer"]
+    P4 -->|"Intermediate Code (TAC)"| P5["5. Machine-Independent Optimizer"]
     P5 -->|Optimized Intermediate Code| P6["6. Code Generator"]
     P6 -->|Target Machine Code| ASM["Target Assembly / Machine Code"]
 
-    subgraph Cross-Cutting Utilities
+    subgraph CCU ["Cross-Cutting Utilities"]
         ST["Symbol-Table Manager"]
         EH["Error Handler"]
     end

@@ -66,8 +66,8 @@ sequenceDiagram
     Note over Kernel: 1. Duplicate Parent PCB<br/>2. Assign new PID (1001)<br/>3. Copy or mark pages Copy-On-Write (COW)<br/>4. Duplicate Open File Table descriptors
     Kernel-->>Parent: Returns Child PID (1001)
     Kernel-->>Child: Returns 0
-    Note over Parent: Executes: if (pid > 0) { wait(&status); }
-    Note over Child: Executes: if (pid == 0) { execve("/bin/ls", ...); }
+    Note over Parent: Executes: if (pid > 0) wait(&status)
+    Note over Child: Executes: if (pid == 0) execve("/bin/ls", ...)
     Child->>Kernel: execve("/bin/ls", ...)
     Note over Kernel: 5. Overwrite Child Address Space with /bin/ls<br/>6. Reset User Stack & PC to /bin/ls main()<br/>7. Keep PID (1001) unchanged!
     Kernel-->>Child: Starts executing /bin/ls

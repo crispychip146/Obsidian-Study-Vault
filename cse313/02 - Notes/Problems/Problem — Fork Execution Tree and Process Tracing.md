@@ -207,13 +207,13 @@ Let us trace step-by-step:
 ```mermaid
 flowchart TD
     P0["P0 executes: A = fork()"]
-    P0 -->|Child: A=0 (FALSE)| C1["C1: Short-circuit! Skips B. if=FALSE"]
-    P0 -->|Parent: A>0 (TRUE)| P0_eval["P0: Must evaluate B = fork()"]
+    P0 -->|"Child: A=0 (FALSE)"| C1["C1: Short-circuit! Skips B. if=FALSE"]
+    P0 -->|"Parent: A>0 (TRUE)"| P0_eval["P0: Must evaluate B = fork()"]
     
-    P0_eval -->|Child: B=0 (FALSE)| C2["C2: if=FALSE (skips body)"]
-    P0_eval -->|Parent: B>0 (TRUE)| P0_body["P0: if=TRUE (enters body)"]
+    P0_eval -->|"Child: B=0 (FALSE)"| C2["C2: if=FALSE (skips body)"]
+    P0_eval -->|"Parent: B>0 (TRUE)"| P0_body["P0: if=TRUE (enters body)"]
     
-    P0_body -->|fork() inside body| C3["C3 created inside body"]
+    P0_body -->|"fork() inside body"| C3["C3 created inside body"]
     P0_body --> P0_done["P0 reaches Done"]
     
     C1 --> Done1["Done (Printed by C1)"]

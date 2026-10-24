@@ -52,7 +52,7 @@ Algorithm Construct_LL1_Parsing_Table:
 
 ```mermaid
 flowchart TD
-    subgraph Non-Recursive Parser Architecture
+    subgraph NRPA ["Non-Recursive Parser Architecture"]
         INP["Input Buffer: a_1 a_2 ... a_i ... a_n $"]
         STK["Parsing Stack: $ S ... X"]
         DRV["Table-Driven Driver Program"]
@@ -61,7 +61,7 @@ flowchart TD
         
         INP -->|lookahead 'a'| DRV
         STK <-->|top symbol 'X'| DRV
-        TBL <-->|query M[X, a]| DRV
+        TBL <-->|"query M[X, a]"| DRV
         DRV --> OUT
     end
 ```

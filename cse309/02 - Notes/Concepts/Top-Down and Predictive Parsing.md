@@ -25,16 +25,16 @@ Input string: `c a d`
 
 ```mermaid
 flowchart TD
-    subgraph Attempt 1 (Guesses A -> ab)
+    subgraph A1_try ["Attempt 1 (Guesses A -> ab)"]
         A1["Root S"] --> C1["c (matches 'c')"]
         A1 --> NA1["A -> ab"]
         NA1 --> A11["a (matches 'a')"]
         NA1 --> B11["b (MISMATCH: expected 'b', found 'd'!)"]
     end
-    subgraph Backtracking
+    subgraph BT ["Backtracking"]
         F1["Failure! Roll back input pointer from 'd' to 'a'"]
     end
-    subgraph Attempt 2 (Selects A -> a)
+    subgraph A2_try ["Attempt 2 (Selects A -> a)"]
         A2["Root S"] --> C2["c (matches 'c')"]
         A2 --> NA2["A -> a"]
         NA2 --> A22["a (matches 'a')"]

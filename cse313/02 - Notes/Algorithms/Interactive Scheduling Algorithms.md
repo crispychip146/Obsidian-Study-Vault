@@ -81,7 +81,7 @@ The dominant interactive algorithms are:
 flowchart LR
     Head["Ready Queue Head (P1)"] -->|Dispatch| CPU["CPU Execution (Time Quantum q)"]
     CPU -->|Blocks for I/O| Blocked["I/O Wait Queue"]
-    CPU -->|Quantum Expires (Timer Interrupt)| Tail["Ready Queue Tail"]
+    CPU -->|"Quantum Expires (Timer Interrupt)"| Tail["Ready Queue Tail"]
     Tail --> Head
 ```
 

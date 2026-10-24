@@ -48,9 +48,7 @@ Students often confuse these two. Here is the intuitive way to feel the differen
 
 ```mermaid
 flowchart LR
-    SDD["Syntax-Directed Definition (SDD)<br/>THE ARCHITECT'S BLUEPRINT<br/>• Declarative<br/>• States WHAT must be true<br/>• Order is NOT specified"] 
-    -->|"Realized into an execution order"| 
-    SDT["Syntax-Directed Translation Scheme (SDT)<br/>THE BUILDER'S STEP-BY-STEP RECIPE<br/>• Imperative<br/>• States WHEN and HOW to execute<br/>• Order is STRICTLY left-to-right"]
+    SDD["Syntax-Directed Definition (SDD)<br/>THE ARCHITECT'S BLUEPRINT<br/>• Declarative<br/>• States WHAT must be true<br/>• Order is NOT specified"] -->|"Realized into an execution order"| SDT["Syntax-Directed Translation Scheme (SDT)<br/>THE BUILDER'S STEP-BY-STEP RECIPE<br/>• Imperative<br/>• States WHEN and HOW to execute<br/>• Order is STRICTLY left-to-right"]
 ```
 
 ### 1. Syntax-Directed Definition (SDD) = Declarative Blueprint

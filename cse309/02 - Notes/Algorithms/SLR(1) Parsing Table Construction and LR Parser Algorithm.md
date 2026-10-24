@@ -83,8 +83,8 @@ An LR parser operates with:
 flowchart TD
     INP["Input Buffer: a_1 ... a_i ... $"] -->|lookahead 'a'| DRV["LR Parser Engine"]
     STK["State Stack: s_0 s_1 ... s_m"] <-->|top state s_m| DRV
-    ACT["ACTION Table"] <-->|ACTION[s_m, a]| DRV
-    GTO["GOTO Table"] <-->|GOTO[s, A]| DRV
+    ACT["ACTION Table"] <-->|"ACTION[s_m, a]"| DRV
+    GTO["GOTO Table"] <-->|"GOTO[s, A]"| DRV
     DRV --> OUT["Output: Parse Tree / Reduction Sequence"]
 ```
 

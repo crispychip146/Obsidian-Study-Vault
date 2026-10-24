@@ -39,6 +39,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-033 | 2026-10-21 | cse309/ | cse309 | Rumi Sir Merged.pdf | create | Created complete 21-step Part I learning system (Compiler Architecture, Lexical Analysis, Top-Down LL(1) and Bottom-Up SLR(1) parsing): 11 concepts, 4 algorithms, 1 formula, 3 worked examples, 3 solved problem notes (Q-CSE309-010 to 012); renumbered and integrated existing Part II notes to form a unified 10-module, 76-step curriculum with navigation at the bottom; updated Course Hub, Topic Map, Dependency Map, Question Bank, and State files |
 | CHG-034 | 2026-10-22 | Vault-wide | cse301, cse309, cse317, STATE | User formatting audit request | fix | Audited vault-wide formatting and link integrity: restored corrupted cse301 Question Bank (18 questions), fixed smushed frontmatter and duplicate headings in Benjamini-Hochberg note, eliminated MathJax delimiter clashes ($\$$ and \$$$) in LL(1) and SLR(1) notes, fixed newline-broken $\neq$ in AI definitions, escaped table cell pipes in STATE files, and verified 0 broken wikilinks |
 | CHG-035 | 2026-10-22 | cse309/ | cse309 | Rumi Sir Merged.pdf full topic audit | enrich | Deeply enriched Part I knowledge notes to achieve 100% granular slide coverage: added JRockit JIT profiling (sampler thread & hot methods), preprocessor #if vs if deep-dive and OS targeting, Knuth MIX relocatable machine code step-by-step trace, assembler pipeline rationale, complete AI compiler initiatives (Meta LLM Compiler, Cummins et al., feedback loops, LLM4Decompile), transition diagram C++ architecture (getRelop, fail, retract, and combining strategies), recursive-descent code architecture (match, for-loop procedure, and epsilon-production selection rules), and the 4 canonical syntax error recovery modes (panic-mode, phrase-level, error productions, global correction) with the viable-prefix property |
+| CHG-036 | 2026-10-24 | cse309/, cse313/ | cse309, cse313 | User mermaid graph rendering error request | fix | Audited all 149 Mermaid diagrams across the vault using the official Mermaid AST parser: fixed 8 failing diagrams (unquoted square brackets in edge labels, unquoted parentheses in edge labels, multiline broken arrows, unquoted hyphenated subgraph IDs, and curly braces in sequence diagrams); verified 0 failing Mermaid diagrams vault-wide |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -107,3 +108,27 @@ This file tracks meaningful changes made to the knowledge base.
   6. `Course Hub.md`:
      - Cleaned wikilink targets for Topic Map, Dependency Map, Quick Revision, and Question Bank.
 - **Verification:** 100% gap-free reading chain, 0 broken wikilinks, balanced LaTeX math blocks.
+
+### 2026-10-24 — Vault-Wide Mermaid Diagram Rendering Audit & Repair
+
+- **Task Overview:** Comprehensive AST parsing audit across all 149 Mermaid diagrams in the vault using official `mermaid.parse()` in a Node.js/JSDOM runtime to detect and fix every graph rendering failure.
+- **Root Causes & Fixes Applied (8 Failed Graphs Resolved):**
+  1. `cse309/02 - Notes/Algorithms/LL(1) Parsing Table Construction and Execution Algorithm.md`:
+     - Fixed unquoted hyphenated subgraph title `subgraph Non-Recursive Parser Architecture` to `subgraph NRPA ["Non-Recursive Parser Architecture"]`.
+     - Quoted edge label `TBL <-->|"query M[X, a]"| DRV` to prevent square brackets from breaking node lexing.
+  2. `cse309/02 - Notes/Algorithms/SLR(1) Parsing Table Construction and LR Parser Algorithm.md`:
+     - Quoted edge labels containing square brackets: `ACT["ACTION Table"] <-->|"ACTION[s_m, a]"| DRV` and `GTO["GOTO Table"] <-->|"GOTO[s, A]"| DRV`.
+  3. `cse309/02 - Notes/Concepts/Structure and Phases of a Compiler.md`:
+     - Quoted edge label with parentheses: `P4 -->|"Intermediate Code (TAC)"| P5`.
+     - Named hyphenated subgraph: `subgraph CCU ["Cross-Cutting Utilities"]`.
+  4. `cse309/02 - Notes/Concepts/Syntax-Directed Definitions and Translation Schemes.md`:
+     - Fixed newline-broken connection arrow by merging `SDD[...] -->|"Realized into an execution order"| SDT[...]` onto a single statement.
+  5. `cse309/02 - Notes/Concepts/Top-Down and Predictive Parsing.md`:
+     - Named and quoted subgraphs containing spaces and `->` operators: `subgraph A1_try ["Attempt 1 (Guesses A -> ab)"]`, `subgraph BT ["Backtracking"]`, and `subgraph A2_try ["Attempt 2 (Selects A -> a)"]`.
+  6. `cse313/02 - Notes/Algorithms/Interactive Scheduling Algorithms.md`:
+     - Quoted edge label with parentheses: `CPU -->|"Quantum Expires (Timer Interrupt)"| Tail`.
+  7. `cse313/02 - Notes/Concepts/Process Creation and Termination Operations.md`:
+     - Removed curly braces `{}` inside sequence diagram `Note over Parent:` and `Note over Child:` directives.
+  8. `cse313/02 - Notes/Problems/Problem — Fork Execution Tree and Process Tracing.md`:
+     - Quoted edge labels containing parentheses and comparisons: `P0 -->|"Child: A=0 (FALSE)"| C1`, `P0 -->|"Parent: A>0 (TRUE)"| P0_eval`, `P0_eval -->|"Child: B=0 (FALSE)"| C2`, `P0_eval -->|"Parent: B>0 (TRUE)"| P0_body`, and `P0_body -->|"fork() inside body"| C3`.
+- **Verification Result:** Scanned all 149 Mermaid blocks vault-wide $\implies$ **0 failed diagrams** (100% render successfully).

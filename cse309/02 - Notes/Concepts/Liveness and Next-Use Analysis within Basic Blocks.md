@@ -97,14 +97,19 @@ For each instruction $i: x = y + z$, scanning from the last instruction of $B$ b
 
 ### The Final Annotated Instruction Stream
 
-| Line # | Instruction | Attached Liveness & Next-Use Metadata |
-| :---: | :---: | :--- |
-| **(1)** | `t1 = a * b` | $t_1$: Dead, Next-Use: none <br> $a$: Live, Next-Use: **(3)** <br> $b$: Live, Next-Use: none |
-| **(2)** | `t2 = t1 + c` | $t_2$: Dead, Next-Use: none <br> $t_1$: Live, Next-Use: **(2)** <br> $c$: Live, Next-Use: none |
-| **(3)** | `d = t2 * a` | $d$: Live, Next-Use: none <br> $t_2$: Live, Next-Use: **(3)** <br> $a$: Live, Next-Use: none |
+Because Step 1 attaches the symbol table state *before* updating it with the current instruction's definitions and uses, the metadata attached to instruction $i$ accurately describes the liveness and next-use status of variables **immediately AFTER instruction $i$ executes**.
 
-> [!NOTE] Compiler Decision from Metadata
-> Look at Line (2): $t_1$ is marked as having its next use at Line (2). Once Line (2) finishes executing, $t_1$'s physical register can be **immediately freed or reused** without storing $t_1$ to RAM, because $t_1$ is never read again!
+| Line # | Instruction | Attached Liveness & Next-Use Metadata (Status Immediately AFTER Instruction) |
+| :---: | :---: | :--- |
+| **(1)** | `t1 = a * b` | $t_1$: **Live**, Next-Use: **(2)** <br> $a$: **Live**, Next-Use: **(3)** <br> $b$: **Live**, Next-Use: **none** |
+| **(2)** | `t2 = t1 + c` | $t_2$: **Live**, Next-Use: **(3)** <br> $t_1$: **Dead**, Next-Use: **none** <br> $c$: **Live**, Next-Use: **none** |
+| **(3)** | `d = t2 * a` | $d$: **Live**, Next-Use: **none** <br> $t_2$: **Dead**, Next-Use: **none** <br> $a$: **Live**, Next-Use: **none** |
+
+> [!NOTE] How Code Generation Uses This Metadata
+> During forward target code generation:
+> 1. **After Line (1):** $t_1$ is marked **Live, Next-Use: (2)**. The compiler knows $t_1$ must remain in a machine register because statement (2) requires it.
+> 2. **After Line (2):** $t_1$ is marked **Dead, Next-Use: none**. The compiler immediately frees $t_1$'s physical register without generating a store instruction to RAM, because $t_1$ is never read again. Simultaneously, $t_2$ is marked **Live, Next-Use: (3)** and is kept in a register.
+> 3. **After Line (3):** $t_2$ is marked **Dead, Next-Use: none** and its register is freed. Variable $d$ is **Live, Next-Use: none** (live at block exit), signaling that $d$ must be written back to memory before leaving the basic block.
 
 ---
 

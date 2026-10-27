@@ -40,6 +40,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-034 | 2026-10-22 | Vault-wide | cse301, cse309, cse317, STATE | User formatting audit request | fix | Audited vault-wide formatting and link integrity: restored corrupted cse301 Question Bank (18 questions), fixed smushed frontmatter and duplicate headings in Benjamini-Hochberg note, eliminated MathJax delimiter clashes ($\$$ and \$$$) in LL(1) and SLR(1) notes, fixed newline-broken $\neq$ in AI definitions, escaped table cell pipes in STATE files, and verified 0 broken wikilinks |
 | CHG-035 | 2026-10-22 | cse309/ | cse309 | Rumi Sir Merged.pdf full topic audit | enrich | Deeply enriched Part I knowledge notes to achieve 100% granular slide coverage: added JRockit JIT profiling (sampler thread & hot methods), preprocessor #if vs if deep-dive and OS targeting, Knuth MIX relocatable machine code step-by-step trace, assembler pipeline rationale, complete AI compiler initiatives (Meta LLM Compiler, Cummins et al., feedback loops, LLM4Decompile), transition diagram C++ architecture (getRelop, fail, retract, and combining strategies), recursive-descent code architecture (match, for-loop procedure, and epsilon-production selection rules), and the 4 canonical syntax error recovery modes (panic-mode, phrase-level, error productions, global correction) with the viable-prefix property |
 | CHG-036 | 2026-10-24 | cse309/, cse313/ | cse309, cse313 | User mermaid graph rendering error request | fix | Audited all 149 Mermaid diagrams across the vault using the official Mermaid AST parser: fixed 8 failing diagrams (unquoted square brackets in edge labels, unquoted parentheses in edge labels, multiline broken arrows, unquoted hyphenated subgraph IDs, and curly braces in sequence diagrams); verified 0 failing Mermaid diagrams vault-wide |
+| CHG-037 | 2026-10-27 | cse309/02 - Notes/Concepts/ | cse309 | User liveness & next-use instruction stream clarification request | fix | Corrected post-instruction boundary metadata and explanation in Liveness and Next-Use Analysis within Basic Blocks (Step 56) to adhere strictly to the Dragon Book §8.4.2 backward scan algorithm |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -132,3 +133,13 @@ This file tracks meaningful changes made to the knowledge base.
   8. `cse313/02 - Notes/Problems/Problem — Fork Execution Tree and Process Tracing.md`:
      - Quoted edge labels containing parentheses and comparisons: `P0 -->|"Child: A=0 (FALSE)"| C1`, `P0 -->|"Parent: A>0 (TRUE)"| P0_eval`, `P0_eval -->|"Child: B=0 (FALSE)"| C2`, `P0_eval -->|"Parent: B>0 (TRUE)"| P0_body`, and `P0_body -->|"fork() inside body"| C3`.
 - **Verification Result:** Scanned all 149 Mermaid blocks vault-wide $\implies$ **0 failed diagrams** (100% render successfully).
+
+### 2026-10-27 — Liveness & Next-Use Analysis Metadata Table Correction
+
+- **Task Overview:** Corrected the annotated instruction stream table and accompanying code generation explanations in `cse309/02 - Notes/Concepts/Liveness and Next-Use Analysis within Basic Blocks.md` (Step 56).
+- **Core Problem:** The previous table incorrectly listed pre-update/killed variable statuses on the instruction definitions, leading to contradiction with the standard Dragon Book (§8.4.2) / KMS lecture slide 333 convention where metadata attached to instruction $i$ reflects variable liveness and next-use **immediately AFTER instruction $i$ executes**.
+- **Fixes Applied:**
+  - Updated Line (1) `t1 = a * b` metadata: $t_1$: **Live**, Next-Use: **(2)**; $a$: **Live**, Next-Use: **(3)**; $b$: **Live**, Next-Use: **none**.
+  - Updated Line (2) `t2 = t1 + c` metadata: $t_2$: **Live**, Next-Use: **(3)**; $t_1$: **Dead**, Next-Use: **none**; $c$: **Live**, Next-Use: **none**.
+  - Updated Line (3) `d = t2 * a` metadata: $d$: **Live**, Next-Use: **none**; $t_2$: **Dead**, Next-Use: **none**; $a$: **Live**, Next-Use: **none**.
+  - Added explicit code generation decision guidance explaining how the post-instruction status instructs the target code generator to keep temporaries in registers while alive and immediately free/reassign their physical registers upon death without emitting redundant RAM stores.

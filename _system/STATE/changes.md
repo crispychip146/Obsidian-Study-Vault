@@ -41,6 +41,7 @@ This file tracks meaningful changes made to the knowledge base.
 | CHG-035 | 2026-10-22 | cse309/ | cse309 | Rumi Sir Merged.pdf full topic audit | enrich | Deeply enriched Part I knowledge notes to achieve 100% granular slide coverage: added JRockit JIT profiling (sampler thread & hot methods), preprocessor #if vs if deep-dive and OS targeting, Knuth MIX relocatable machine code step-by-step trace, assembler pipeline rationale, complete AI compiler initiatives (Meta LLM Compiler, Cummins et al., feedback loops, LLM4Decompile), transition diagram C++ architecture (getRelop, fail, retract, and combining strategies), recursive-descent code architecture (match, for-loop procedure, and epsilon-production selection rules), and the 4 canonical syntax error recovery modes (panic-mode, phrase-level, error productions, global correction) with the viable-prefix property |
 | CHG-036 | 2026-10-24 | cse309/, cse313/ | cse309, cse313 | User mermaid graph rendering error request | fix | Audited all 149 Mermaid diagrams across the vault using the official Mermaid AST parser: fixed 8 failing diagrams (unquoted square brackets in edge labels, unquoted parentheses in edge labels, multiline broken arrows, unquoted hyphenated subgraph IDs, and curly braces in sequence diagrams); verified 0 failing Mermaid diagrams vault-wide |
 | CHG-037 | 2026-10-27 | cse309/02 - Notes/Concepts/ | cse309 | User liveness & next-use instruction stream clarification request | fix | Corrected post-instruction boundary metadata and explanation in Liveness and Next-Use Analysis within Basic Blocks (Step 56) to adhere strictly to the Dragon Book §8.4.2 backward scan algorithm |
+| CHG-038 | 2026-10-27 | cse309/02 - Notes/Algorithms/ | cse309 | User code generation algorithm explanation & simulation request | enrich | Enriched A Simple Code Generator Algorithm (Step 58) with comprehensive getReg scoring logic, 4 descriptor update rules, and full 5-instruction step-by-step simulation trace with register and address descriptors |
 
 ### 2026-10-10 — CSE 317 Complete Lecture Slide Note Generation
 
@@ -143,3 +144,13 @@ This file tracks meaningful changes made to the knowledge base.
   - Updated Line (2) `t2 = t1 + c` metadata: $t_2$: **Live**, Next-Use: **(3)**; $t_1$: **Dead**, Next-Use: **none**; $c$: **Live**, Next-Use: **none**.
   - Updated Line (3) `d = t2 * a` metadata: $d$: **Live**, Next-Use: **none**; $t_2$: **Dead**, Next-Use: **none**; $a$: **Live**, Next-Use: **none**.
   - Added explicit code generation decision guidance explaining how the post-instruction status instructs the target code generator to keep temporaries in registers while alive and immediately free/reassign their physical registers upon death without emitting redundant RAM stores.
+
+### 2026-10-27 — Simple Code Generator Algorithm Enrichment & Simulation Trace
+
+- **Task Overview:** Substantially enriched `cse309/02 - Notes/Algorithms/A Simple Code Generator Algorithm.md` (Step 58) to provide complete intuitive foundations, formal `getReg(I)` operand/result allocation rules, descriptor management rules (Rule 1 Load, Rule 2 Store, Rule 3 Operation, Rule 4 Copy aliasing), and an exhaustive 5-statement TAC simulation trace based on Dragon Book §8.6 and KMS lecture slides 349–355.
+- **Content Added:**
+  - `getReg(I)` allocation heuristic: scoring occupied registers by number of necessary spills to select minimum-cost register.
+  - Zero-cost copy statement execution: aliasing destination and source inside register descriptors without generating `MOV` assembly instructions.
+  - Full step-by-step simulation of `t = a - b`, `u = a - c`, `v = t + u`, `a = d`, `d = v + u` using 3 registers ($R_1, R_2, R_3$), tracking Register Descriptors and Address Descriptors after every single statement.
+  - End-of-block register flushing logic for live user variables ($a$ and $d$) versus dead temporaries ($u$ and $v$).
+
